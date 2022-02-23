@@ -203,7 +203,7 @@
 
       <footer class="br-footer">
         <div class="footer-left">
-          <div class="mg-b-2">Copyright &copy; 2017. Derechos reservados a JLM.</div>
+          <div class="mg-b-2">Copyright &copy; 2022 Derechos reservados a JLM.</div>
           <div>Jose Luis Mondragon y CIA.</div>
         </div>
         <div class="footer-right d-flex align-items-center">

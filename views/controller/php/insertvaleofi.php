@@ -63,8 +63,38 @@
                 echo "1";
             }
     //Condición donde elimina usuario
-    }
+    }else if($opcion === 'actualiza'){
+        $codigo_1 = $_POST['codigo_1'];
+        $descripcion_1 = $_POST['descripcion_1'];
+        $salida = $_POST['salida'];
+        $costo = $_POST['costo'];
+        $total = $_POST['total'];
+        $observa = $_POST['observa'];
+        $id_kax = $_POST['id_kax'];
+        $refe_1 = $_POST['refe_1'];
 
+            if (edicion($codigo_1,$descripcion_1,$salida,$costo,$total,$observa,$id_kax,$refe_1,$conexion)){
+                echo "0";
+                $usuario='PRUEBAS';
+                histcambio($usuario,$codigo_1,$salida,$costo,$total,$refe_1,$id_kax,$conexion);
+            }else{
+                echo "1";
+            }
+    //Condición donde elimina usuario
+    }else if($opcion === 'eliminar'){
+        $id_kax = $_POST['id_kax'];
+        $refe_1 = $_POST['refe_1'];
+        $codigo_1 = $_POST['codigo_1'];
+    
+            if (eliminar($id_kax,$conexion)){
+                echo "0";
+                $realizo = 'ELIMINA ARTICULO DE VALE DE OFICINA';
+                $usuario='PRUEBAS';
+                histdelete($usuario,$realizo,$id_kax,$codigo_1,$refe_1,$conexion);
+            }else{
+                echo "1";
+            }
+    }
 
 //FUNCIONES-----------------------------------------------------------------------------------
 
@@ -99,7 +129,6 @@ function actualizar ($codigo_1,$descripcion_1,$salida,$observa,$id_kax,$conexion
     }
     cerrar($conexion);
 }
-
 //funcion para actualizar el registro desde la vista previa del vale de oficina
 function cambio ($fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$conexion){
     $query="UPDATE kardex SET fecha='$fecha', refe_3='$refe_3', status='$status', proveedor_cliente='$proveedor_cliente' WHERE refe_1 = '$refe_1'";
@@ -111,10 +140,8 @@ function cambio ($fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$conexion){
     cerrar($conexion);
 }
 
-
-//funcion para actualizar el registro
-function eliminar ($id_cliente,$conexion){
-    $query="UPDATE clientes SET estado='1' WHERE id_cliente= '$id_cliente'";
+function edicion ($codigo_1,$descripcion_1,$salida,$costo,$total,$observa,$id_kax,$refe_1,$conexion){
+    $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1', salida='$salida', costo='$costo', total='$total', observa='$observa' WHERE id_kax = '$id_kax'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -122,6 +149,17 @@ function eliminar ($id_cliente,$conexion){
     }
     cerrar($conexion);
 }
+//funcion para actualizar el registro
+function eliminar ($id_kax,$conexion){
+    $query="UPDATE kardex SET estado='1' WHERE id_kax= '$id_kax'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
 
 //funcion para registra cambios
 function historial($usuario,$refe_1,$codigo_1,$conexion){
@@ -137,24 +175,35 @@ function historial($usuario,$refe_1,$codigo_1,$conexion){
 //funciones para guardar el historico
 function histedith($usuario,$fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$conexion){
     ini_set('date.timezone','America/Mexico_City');
-    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'EDITA INFORMACIÓN DE VALE DE OFICINA', '$refe_1' ' FECHA:' '$fecha'  ' TIPO: '  ' $refe_3' ' status:' ' $status' ' SOLICITANTE:' ' $proveedor_cliente' ,'$fecha')";
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'EDITA INFORMACIÓN DE VALE DE OFICINA', '$refe_1' ' FECHA:' '$fecha'  ' TIPO: '  ' $refe_3' ' status:' ' $status' ' SOLICITANTE:' ' $proveedor_cliente' ,'$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
         return false;
     }
 }
-function histdelete($usuario,$realizo,$id_cliente,$nombre,$conexion){
+function histcambio($usuario,$codigo_1,$salida,$costo,$total,$refe_1,$id_kax,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', ' ID:' '$id_cliente' ' NOMBRE:' ' $nombre' ,'$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'EDITA ARTUCULO VALE OFICINA', 'ID: ' '$id_kax ' '$refe_1' ' CODIGO:' '$codigo_1'  ' SALIDA: '  ' $salida' ' COSTO:' ' $costo' ' TOTAL:' ' $total' ,'$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
         return false;
     }
 }
+function histdelete($usuario,$realizo,$id_kax,$codigo_1,$refe_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'VALE FOLIO:' '$refe_1' ' ID:' '$id_kax' ' CODIGO:' ' $codigo_1' ,'$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 //funcion para cerrar laa conexion
 function cerrar($conexion){
     mysqli_close($conexion);

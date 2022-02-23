@@ -153,7 +153,7 @@ include ("../controller/conexion.php");
         </div><!-- br-pagebody -->
       <footer class="br-footer">
         <div class="footer-left">
-        <div class="mg-b-2">Copyright &copy; 2017. Derechos reservados a JLM.</div>
+        <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
           <div>Jose Luis Mondragon y CIA.</div>
         </div>
         <div class="footer-right d-flex align-items-center">
@@ -235,7 +235,7 @@ include ("../controller/conexion.php");
                     customClass: 'swal-wide',
                     confirmButtonText: '<span style="color: white;"><a class="a-alert" href="newarticul">¿Deseas agregar otro articulo?</a></span>',
                     confirmButtonAriaLabel: 'Thumbs up, great!',
-                    cancelButtonText: '<a  class="a-alert" href="articulos"><span style="color: white;">Cerrar</span></a>',
+                    cancelButtonText: '<a  class="a-alert" href="articulos.php"><span style="color: white;">Cerrar</span></a>',
                     cancelButtonAriaLabel: 'Thumbs down'
                         // timer: 2900
                 });

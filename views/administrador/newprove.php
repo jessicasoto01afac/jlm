@@ -319,7 +319,7 @@ include ("../controller/conexion.php");
                     customClass: 'swal-wide',
                     confirmButtonText: '<span style="color: white;"><a class="a-alert" href="newarticul">¿Deseas agregar otro articulo?</a></span>',
                     confirmButtonAriaLabel: 'Thumbs up, great!',
-                    cancelButtonText: '<a  class="a-alert" href="provedores"><span style="color: white;">Cerrar</span></a>',
+                    cancelButtonText: '<a  class="a-alert" href="provedores.php"><span style="color: white;">Cerrar</span></a>',
                     cancelButtonAriaLabel: 'Thumbs down'
                         // timer: 2900
                 });

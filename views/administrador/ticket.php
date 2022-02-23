@@ -12,7 +12,7 @@ include ("../controller/conexion.php");
     <!-- Meta -->
     <meta name="author" content="Jessica Soto">
 
-    <title>JLM|Agregar Cliente</title>
+    <title>JLM|Levantar ticket</title>
 
     <!--  css -->
     <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -61,70 +61,108 @@ include ("../controller/conexion.php");
   include('header.php');
 ?>
     <!-- ########## START: MAIN PANEL ########## -->
-    <div class="br-mainpanel">
+<div class="br-mainpanel">
     <div class="br-pageheader pd-y-15 pd-l-20">
         <nav class="breadcrumb pd-0 mg-0 tx-12">
-          <a class="breadcrumb-item" href="../administrador/clientes.php">Clientes</a>
-          <span class="breadcrumb-item active">Alta de Clientes</span>
+          <a class="breadcrumb-item" href="../administrador/soporte.php">Soporte Tecnico</a>
+          <span class="breadcrumb-item active">Levantar ticket</span>
         </nav>
-      </div><!-- br-pageheader -->
-      <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-        <h4 class="tx-gray-800 mg-b-5">ALTA DE CLIENTES</h4>
-      </div>
-        <div class="br-pagebody">
+    </div><!-- br-pageheader -->
+
+    <div class="br-pagebody">
           <div class="br-section-wrapper">
-              <form id="cientes-alt" method="POST">
-                <div class="row mg-b-25">
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <label class="form-control-label label2">Codigo:<span class="tx-danger">*</span></label>
-                      <input onkeyup="mayus(this);" class="form-control inputalta" type="number" name="clicodgo" id="clicodgo" placeholder="Ingresar Codigo">
-                    </div>
-                  </div><!-- col-4 -->
-                  <div class="col-lg-8">
-                    <div class="form-group">
-                      <label class="form-control-label label2">Nombre: <span class="tx-danger">*</span></label>
-                      <input onkeyup="mayus(this);" class="form-control inputalta" type="text" name="cliennom" id="cliennom" placeholder="Ingresa los Nombre">
-                    </div>
-                  </div><!-- col-4 -->
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <label class="form-control-label label2">RFC <span class="tx-danger">*</span></label>
-                      <input onkeyup="mayus(this);" class="form-control inputalta" type="text" name="clierfc" id="clierfc" placeholder="ingresar el RFC">
-                    </div>
-                  </div><!-- col-4 -->
-                  <div class="col-lg-4">
-                    <div class="form-group mg-b-10-force">
-                      <label class="form-control-label label2">Correo: <span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="cliencorr" id="cliencorr" placeholder="ingresa@hotmail.com">
-                    </div>
-                  </div><!-- col-8 -->
+          <div class="pd-x-20 pd-sm-x-10 pd-t-20 pd-sm-t-10">
+        <h4 class="tx-gray-800 mg-b-5">LEVANTAR TICKET</h4>
+      </div>
+              <form id="ticket-alt" method="POST">
+       <div class="row mg-t-20">
+            <div class="col-xl-12">
+              <div class="form-layout form-layout-4">
+                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Datos del ticket</h6>
+                <p class="mg-b-30 tx-gray-600">Recuerda enviarnos todos los datos necesarios para la resolución del ticket.</p>
+                <div class="row">
+                  <label class="col-sm-4 form-control-label">Asunto: <span class="tx-danger">*</span></label>
+                  <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <select id="asunto" class="form-control select2" data-placeholder="SELECCIONE ASUNTO">
+                        <option value="">SELECCIONE ASUNTO</option>
+                        <option value="FALLA">FALLA</option>
+                        <option value="ERROR">ERROR</option>
+                        <option value="REQUISICIÓN">REQUISICIÓN</option>
+                    </select>
+                  </div>
                 </div><!-- row -->
-                <div class="form-layout-footer">
-                  <button type="button" class="btn btn-info" style="background-color:#1774D8; font-size 14px;" onclick="addclient()">ACEPTAR</button>
+                <div class="row mg-t-20">
+                  <label class="col-sm-4 form-control-label">Modulo: <span class="tx-danger">*</span></label>
+                  <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <select id="modutick" class="form-control select2" data-placeholder="SELECCIONE MODULO">
+                        <option value="">SELECCIONE MODULO</option>
+                        <option value="DASHBOARD">DASHBOARD</option>
+                        <option value="ACCESOS">ACCESOS</option>
+                        <option value="ARTICULOS">ARTICULOS</option>
+                        <option value="TRANSFORMACIÓN">TRANSFORMACIÓN</option>
+                        <option value="CLIENTES">CLIENTES</option>
+                        <option value="PROVEEDORES">PROVEEDORES</option>
+                        <option value="PRODUCCIÓN">PRODUCCIÓN</option>
+                        <option value="MEMOS">MEMOS</option>
+                        <option value="VALE DE OFICIA">VALE DE OFICIA</option>
+                        <option value="PEDIDOS">PEDIDOS</option>
+                        <option value="COMPRAS">COMPRAS</option>
+                        <option value="EXISTENCIA">EXISTENCIA</option>
+                        <option value="MOVIMIENTOS">MOVIMIENTOS</option>
+                        <option value="REPORTES">REPORTES</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mg-t-20">
+                  <label class="col-sm-4 form-control-label">Prioridad: <span class="tx-danger">*</span></label>
+                  <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <select id="prioridad" class="form-control select2" data-placeholder="SELECCIONE PRIORIDAD">
+                        <option value="">SELECCIONE PRIORIDAD</option>
+                        <option value="ALTA">ALTA</option>
+                        <option value="BAJA">BAJA</option>
+                        <option value="MEDIA">MEDIA</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mg-t-20">
+                  <label class="col-sm-4 form-control-label">Mensaje: <span class="tx-danger">*</span></label>
+                  <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <textarea rows="3" class="form-control" placeholder="INGRESE LA DESCRIPCIÓN"></textarea>
+                  </div>
+                </div>
+                <div class="row mg-t-20">
+                    <label class="col-sm-4 form-control-label">Adjunto Evidencias: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-12 mg-sm-t-0">   
+                           <label class="custom-file">
+                                <input type="file" class="custom-file-input">
+                                <span class="custom-file-control custom-file-control-inverse"></span> 
+                           </label>
+                        </div><!-- col -->
+                </div>
+                <div class="row mg-t-20">
+                    <label class="col-sm-4 form-control-label">Adjunto Evidencias 2:</label>
+                        <div class="col-sm-8 mg-t-12 mg-sm-t-0">   
+                           <label class="custom-file">
+                                <input type="file" class="custom-file-input">
+                                <span class="custom-file-control custom-file-control-inverse"></span> 
+                           </label>
+                        </div><!-- col -->
+                </div>
+                <div class="row mg-t-20">
+                  <label class="col-sm-4 form-control-label">Nombre: <span class="tx-danger">*</span></label>
+                  <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <input type="text" class="form-control" placeholder="Ingresa tu nombre">
+                  </div>
+                </div>
+                <div class="form-layout-footer mg-t-30">
+                  <button class="btn btn-info">Guardar Ticket</button>
+                  <button class="btn btn-secondary">Cancelar</button>
                 </div><!-- form-layout-footer -->
-              </form>
-              <br>
-                <div style="display:none;" id="dubliclie" name="dubliclie" class="alert alert-warning" role="alert">
-                  <div class="d-flex align-items-center justify-content-start">
-                    <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
-                    <span><strong>Advertencia!</strong> El cliente ya existe ó el codigo a usar ya se ncuentra registrado</span>
-                  </div><!-- d-flex -->
-                </div><!-- alert --> 
-                <div style="display:none;" id="vacioscli" name="vacioscli" class="alert alert-info" role="alert">
-                  <div class="d-flex align-items-center justify-content-start">
-                    <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
-                    <span><strong>Advertencia!</strong> Llenar todos los campos</span>
-                  </div><!-- d-flex -->
-                </div><!-- alert --> 
-                <div style="display:none;" id="errcli" name="errcli" class="alert alert-danger" role="alert">
-                  <div class="d-flex align-items-center justify-content-start">
-                    <i class="icon ion-ios-close alert-icon tx-24"></i>
-                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un ticket</span>
-                  </div><!-- d-flex -->
-                </div><!-- alert --> 
-          </div>
-        </div><!-- br-pagebody -->
+              </div><!-- form-layout -->
+            </div><!-- col-6 -->
+        </div><!-- col-6 -->
+        </div><!-- col-6 -->
+        </div><!-- col-6 -->
       <footer class="br-footer">
         <div class="footer-left">
         <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>

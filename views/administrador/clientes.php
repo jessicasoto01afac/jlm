@@ -51,7 +51,7 @@ include('header.php');
       </div><!-- br-pagebody -->
       <footer class="br-footer">
         <div class="footer-left">
-        <div class="mg-b-2">Copyright &copy; 2017. Derechos reservados a JLM.</div>
+        <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
           <div>Jose Luis Mondragon y CIA.</div>
         </div>
         <div class="footer-right d-flex align-items-center">
@@ -92,7 +92,7 @@ include('header.php');
 
                 id_per = "este es la person" //indentificacion de la person
                 
-                html += "<tr><td>" + obj.data[U].id_cliente + "</td><td>" + obj.data[U].codigo_clie + "</td><td>" + obj.data[U].nombre + "</td><td>" + obj.data[U].rfc +"</td><td>" + "<a onclick='clienedith()' style='cursor:pointer;' title='Editar' class='btn btn-primary btn-icon' data-toggle='modal' data-target='#modal-editclient'><div><i style='color:white;' class='fa fa-pencil-square-o'></i></div></a>  <a onclick='deletart()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletecli'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";            
+                html += "<tr><td>" + obj.data[U].id_cliente + "</td><td>" + obj.data[U].codigo_clie + "</td><td>" + obj.data[U].nombre + "</td><td>" + obj.data[U].rfc +"</td><td>" + "<a onclick='clienedith()' style='cursor:pointer;' title='Editar' class='btn btn-primary btn-icon' data-toggle='modal' data-target='#modal-editclient'><div><i style='color:white;' class='fa fa-pencil-square-o'></i></div></a>  <a onclick='deletclient()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletecli'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";            
         }
         html += '</div></tbody></table></div></div>';
         $("#listartic").html(html);

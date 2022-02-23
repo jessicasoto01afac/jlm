@@ -96,7 +96,7 @@ function saveusuedit(){
                 showConfirmButton: false,
                 timer: 1500
             });
-            setTimeout("location.href = 'usuarios';", 1500);
+            setTimeout("location.href = 'usuarios.php';", 1500);
           }else if (respuesta == 2) {
             document.getElementById('edthdubli').style.display='';
             setTimeout(function(){
@@ -161,7 +161,7 @@ function savedelusu(){
           showConfirmButton: false,
           timer: 1500
         });
-          setTimeout("location.href = 'usuarios';", 1500);
+          setTimeout("location.href = 'usuarios.php';", 1500);
       }else{
           document.getElementById('delerr').style.display='';
           setTimeout(function(){
@@ -259,7 +259,7 @@ function savearedith(){
               showConfirmButton: false,
               timer: 1500
           });
-          setTimeout("location.href = 'articulos';", 1500);
+          setTimeout("location.href = 'articulos.php';", 1500);
         }else if (respuesta == 2) {
           document.getElementById('edthdubli').style.display='';
           setTimeout(function(){
@@ -282,7 +282,7 @@ function deletart(){
       var id_art = "";
       id_art += $(this).find('td:eq(0)').html(); //Toma el id de la persona 
       document.getElementById('del_art').value=id_art;
-     // alert(id_art);
+      //alert(id_art);
       $.ajax({
           url: '../controller/php/conarticulos.php',
           type: 'POST'
@@ -394,7 +394,7 @@ function savecliedith(){
   var email = document.getElementById('editcorrc').value;
   var id_cliente = document.getElementById('id_cli').value;
   var datos= 'codigo_clie=' + codigo_clie + '&nombre=' + nombre + '&rfc=' + rfc + '&email=' + email + '&id_cliente=' + id_cliente +'&opcion=actualizar';
-  alert(datos);
+  //alert(datos);
 
   if (document.getElementById('edicocli').value == '' || document.getElementById('edithnom').value == '' || document.getElementById('editrfc').value == '' || document.getElementById('editcorrc').value == '') { 
       document.getElementById('edthclivacios').style.display='';
@@ -433,7 +433,7 @@ function savecliedith(){
     }
 }
 //FUNCION QUE TRAE LOS DATOS PARA ELIMINAR AL CLIENTE
-function deletart(){
+function deletclient(){
   $("#datacliente tr").on('click', function() {
       var del_clie = "";
       del_clie += $(this).find('td:eq(0)').html(); //Toma el id de la persona 
@@ -462,10 +462,10 @@ function deletart(){
 //FUNCION QUE GUARDA ELIMINAR CLIENTE
 function savedecli(){
   var id_cliente = document.getElementById('del_clie').value;
-  alert(id_cliente);
+  //alert(id_cliente);
   var nombre= document.getElementById('decli').value;
   var datos= 'id_cliente=' + id_cliente + '&nombre=' + nombre + '&opcion=eliminar';
-  alert(datos);
+  //alert(datos);
     $.ajax({
       type:"POST",
       url:"../controller/php/insertclient.php",
@@ -603,7 +603,7 @@ function saveprovedith(){
   var id_prov = document.getElementById('id_prov').value;
 
   var datos= 'codigo_pro=' + codigo_pro + '&nom_pro=' + nom_pro + '&domi_fisc=' + domi_fisc + '&condi_pago=' + condi_pago + '&cont_1=' + cont_1 + '&tel_c1=' + tel_c1 + '&tel_c2=' + tel_c2 + '&email_c1=' + email_c1 + '&email_c2=' + email_c2 + '&cont_2=' + cont_2 + '&tel_c3=' + tel_c3 + '&tel_c4=' + tel_c4 + '&email_c3=' + email_c3 + '&email_c4=' + email_c4 + '&obser_prov=' + obser_prov + '&id_prov=' + id_prov +'&opcion=actualizar';
-  alert(datos);
+  //alert(datos);
 
   if (document.getElementById('editcodigo_pro').value == '' || document.getElementById('editnom_pro').value == '' || document.getElementById('edithdomi_fisc').value == '' || document.getElementById('editcondi_pago').value == '' || document.getElementById('editcondi_pago').value == ''|| document.getElementById('edtcont_1').value == '' || document.getElementById('edthtel_c1').value == '') { 
       document.getElementById('edthprovacios').style.display='';
@@ -672,7 +672,7 @@ function savedeprov(){
   //alert(id_prov);
   var nom_pro= document.getElementById('deprov').value;
   var datos= 'id_prov=' + id_prov + '&nom_pro=' + nom_pro + '&opcion=eliminar';
-  alert(datos);
+  //alert(datos);
     $.ajax({
       type:"POST",
       url:"../controller/php/insertprove.php",

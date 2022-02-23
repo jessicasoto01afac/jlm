@@ -309,13 +309,13 @@ function infvale(){
     for (U = 0; U < res.length; U++) {  
       if (obj.data[U].refe_1 == id_vofi){
         x++;
-        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvo();' class='nav-link' data-toggle='modal' data-target='#modal-editavo'>Editar</a><a href='' class='nav-link'>Eliminar</a><a class='nav-link'>Surtir</a>" + "</td></tr>";            
+        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a><a class='nav-link'>Surtir</a>" + "</td></tr>";            
       }  
     }
     html += '</div></tbody></table></div></div>';
     $("#listvaleofi1").html(html);
     'use strict';
-    $('#datavaofi1').DataTable({
+    $('#datainfvo').DataTable({
         responsive: true,
         language: {
           searchPlaceholder: 'Buscar...',
@@ -413,7 +413,7 @@ function savevofic(){
 
 //FUNCION QUE ACTIVA LOS INPUTS DEPENDIENTO DE TIPO DE VALE VISTA PREVIA
 function masarticvo(){
- alert("entro el vale");
+ //alert("entro el vale");
  tipo = document.getElementById("inftipevo").value;
  precio = document.getElementById("precio");
  total = document.getElementById("total");
@@ -429,7 +429,7 @@ function masarticvo(){
 
 //FUNCION PARA AGREAGR ARTICULO A UN VALE DE OFICINA YA CREADO VUISTA PREVIA
 function addartivo(){
-  alert("entra");
+  //alert("entra");
   var refe_1 = document.getElementById('fvofi').innerHTML; //FOLIO DEL VALE
   var fecha = document.getElementById('infecvo').value; 
   var refe_3 = document.getElementById('inftipevo').value;
@@ -446,7 +446,7 @@ function addartivo(){
 
   var datos= 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&costo=' + costo + '&total=' + total + '&ubicacion=' + ubicacion + '&opcion=registrar';
   //var datos =$('#personal-ext').serialize();
-  alert(datos);
+  //alert(datos);
 if (document.getElementById('fvofi').value == '' || document.getElementById('infecvo').value == '' || document.getElementById('inftipevo').value == '' || proveedor_cliente == '' || document.getElementById('vcodigo1').value == '' || document.getElementById('vdescrip1').value == '' || document.getElementById('vcantidad1').value == ''|| document.getElementById('vprecio1').value == '') { 
   //alert("vacios");
   document.getElementById('edthvovacios1').style.display=''
@@ -478,7 +478,7 @@ if (document.getElementById('fvofi').value == '' || document.getElementById('inf
         for (U = 0; U < res.length; U++) {  
           if (obj.data[U].refe_1 == refe_1){
             x++;
-            html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvo();' class='nav-link' data-toggle='modal' data-target='#modal-editavo'>Editar</a><a href='' class='nav-link'>Eliminar</a><a class='nav-link'>Surtir</a>" + "</td></tr>";            
+            html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a><a class='nav-link' >Surtir</a>" + "</td></tr>";            
           }  
         }
         html += '</div></tbody></table></div></div>';
@@ -525,4 +525,235 @@ function agtotalvo(){
   precio1 = document.getElementById("vprecio1").value;
   total1 = document.getElementById("vtotal1");
   total1.value= cantidad1 * precio1;
+}
+
+//funcion para activar edición de articulos en vista previa de vale de oficina
+function editvoinf1(){
+//alert("edit articulo infovale");
+  document.getElementById('openedivoinf').style.display="none";
+  document.getElementById('closeditvoinf').style.display="";
+  document.getElementById('edicovoinf').disabled= false;
+  document.getElementById('vprecioinf').disabled= false;
+  document.getElementById('infobsere').disabled= false;
+  document.getElementById('edithdesvoinf').disabled= false;
+  document.getElementById('editcavoinf').disabled= false;
+  document.getElementById('voguardarinf').style.display="";
+  document.getElementById('editdepinf').disabled= false;
+  document.getElementById('vtotalinf').disabled= false;
+
+}
+//funcion para cerrar edición de articulos en vista previa de vale de oficina
+function closedthvoinf1(){
+  //alert("cerrar articulo info vale");
+      document.getElementById('openedivoinf').style.display="";
+      document.getElementById('closeditvoinf').style.display="none";
+      document.getElementById('edicovoinf').disabled= true;
+      document.getElementById('vprecioinf').disabled= true;
+      document.getElementById('edithdesvoinf').disabled= true;
+      document.getElementById('infobsere').disabled= true;
+      document.getElementById('editcavoinf').disabled= true;
+      document.getElementById('voguardarinf').style.display="none";
+      document.getElementById('editdepinf').disabled= true;
+      document.getElementById('vtotalinf').disabled= true;
+
+}
+//FUNCION PARA QUE TRAIGA LA INFOMACION DE LA PERSONA EN LISTA DE USUARIOS
+function editarvoinf(){;
+  //trae los input dependiendo si es venta o interno
+  tipo = document.getElementById("inftipevo").value;
+  precio = document.getElementById("precioinf");
+  total = document.getElementById("totalinf");
+  if (tipo == 'INTERNO') {
+     //alert(tipo);
+     precio.style.display = 'none';
+     total.style.display = 'none';
+  }if (tipo == 'VENTA') {
+   // alert(tipo);
+     total.style.display = '';
+     precio.style.display = '';
+  }
+  //alert("entra editar articulo");
+  $("#infvaofi1 tr").on('click', function() {
+      var valofi1 = "";
+      valofi1 += $(this).find('td:eq(0)').html(); //Toma el id de la persona 
+      document.getElementById('id_voin').value=valofi1
+      //alert(valofi1);
+      $.ajax({
+          url: '../controller/php/valeofi.php',
+          type: 'POST'
+      }).done(function(respuesta) {
+          obj = JSON.parse(respuesta);
+          var res = obj.data;
+          var x = 0;
+          for (U = 0; U < res.length; U++) { 
+              if (obj.data[U].id_kax == valofi1){
+                  datos = 
+                  obj.data[U].codigo_1 + '*' +
+                  obj.data[U].descripcion_1 + '*' +
+                  obj.data[U].salida + '*' +
+                  obj.data[U].ubicacion + '*' +
+                  obj.data[U].costo + '*' +
+                  obj.data[U].total;    
+                  var d = datos.split("*");   
+                  $("#modal-editavoinf #edicovoinf").val(d[0]);   
+                  $("#modal-editavoinf #edithdesvoinf").val(d[1]);            
+                  $("#modal-editavoinf #editcavoinf").val(d[2]);
+                  $("#modal-editavoinf #editdepinf1").val(d[3]);
+                  $("#modal-editavoinf #vprecioinf").val(d[4]);
+                  $("#modal-editavoinf #vtotalinf").val(d[5]);
+              }
+          }
+      });
+  }) 
+}
+//FUNCION PARA AGREGAR TOTAL EN EDICIÓN EN VISTA PREVIA VALE DE OFICINA
+function totalvoinfe(){
+  cantidad1 = document.getElementById("editcavoinf").value;
+  precio1 = document.getElementById("vprecioinf").value;
+  total1 = document.getElementById("vtotalinf");
+  total1.value= cantidad1 * precio1;
+}
+//FUNCION QUE GUARDA LA EDICIÓN DE VALES DE OFICINA EN INFORMACION DE VALE DE OFICINA
+function savecamvo(){
+  var codigo_1 = document.getElementById('edicovoinf').value;
+  var descripcion_1 = document.getElementById('edithdesvoinf').value;
+  var salida = document.getElementById('editcavoinf').value;
+  var costo = document.getElementById('vprecioinf').value;
+  var total = document.getElementById('vtotalinf').value;
+  var observa = document.getElementById('infobsere').value;
+  var id_kax = document.getElementById('id_voin').value;
+  var refe_1 = document.getElementById('fvofi').innerHTML;
+  
+  var datos= 'codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&salida=' + salida + '&costo=' + costo + '&total=' + total + '&observa=' + observa + '&id_kax=' + id_kax + '&refe_1=' + refe_1 + '&opcion=actualiza';
+  //alert(datos);
+
+  if (document.getElementById('edicovoinf').value == '' || document.getElementById('edithdesvoinf').value == '' || document.getElementById('editcavoinf').value == '' || document.getElementById('vprecioinf').value == '' || document.getElementById('vtotalinf').value == '') { 
+      document.getElementById('edthvovaciosin').style.display='';
+      setTimeout(function(){
+        document.getElementById('edthvovaciosin').style.display='none';
+      }, 2000);
+        return;
+    } else {
+      $.ajax({
+        type:"POST",
+        url:"../controller/php/insertvaleofi.php",
+        data:datos
+      }).done(function(respuesta){
+        if (respuesta==0){
+          Swal.fire({
+              type: 'success',
+              text: 'Se actualizo de forma correcta',
+              showConfirmButton: false,
+              timer: 1500
+          });
+        }else if (respuesta == 2) {
+          document.getElementById('edthdvoblinf').style.display='';
+          setTimeout(function(){
+            document.getElementById('edthdvoblinf').style.display='none';
+          }, 1000);
+          //alert("datos repetidos");
+        }else{
+          document.getElementById('edthvoerrinf').style.display='';
+          setTimeout(function(){
+            document.getElementById('edthvoerrinf').style.display='none';
+          }, 2000);
+        }
+      });
+
+    }
+}
+//FUNCION PARA QUE TRAIGA LA INFOMACION DE EL ARTICULO EN VALE DE OFICINA INFO
+function delartvoinf(){;
+  //alert("entra ELIMINAR articulo");
+  $("#infvaofi1 tr").on('click', function() {
+      var valofi1 = "";
+      valofi1 += $(this).find('td:eq(0)').html(); //Toma el id de la persona 
+      document.getElementById('del_artvo').value=valofi1
+      //alert(valofi1);
+      $.ajax({
+          url: '../controller/php/valeofi.php',
+          type: 'POST'
+      }).done(function(respuesta) {
+          obj = JSON.parse(respuesta);
+          var res = obj.data;
+          var x = 0;
+          for (U = 0; U < res.length; U++) { 
+              if (obj.data[U].id_kax == valofi1){
+                  datos = 
+                  obj.data[U].codigo_1 ;    
+                  var d = datos.split("*");   
+                  $("#modal-deleteartvo #deartvo").val(d[0]);
+              }
+          }
+      });
+  }) 
+}
+//FUNCION QUE GUARDA LA ELIMINACION DEL ARTICULOS DE VALE DE OFICINA
+function savedelarvo(){
+  var id_kax = document.getElementById('del_artvo').value;
+  var refe_1 = document.getElementById('fvofi').innerHTML;
+  var codigo_1 = document.getElementById('deartvo').value;
+  var datos= 'id_kax=' + id_kax + '&refe_1=' + refe_1 + '&codigo_1=' + codigo_1 + '&opcion=eliminar';
+  //alert(datos);
+      $.ajax({
+        type:"POST",
+        url:"../controller/php/insertvaleofi.php",
+        data:datos
+      }).done(function(respuesta){
+        if (respuesta==0){
+          Swal.fire({
+              type: 'success',
+              text: 'Se actualizo de forma correcta',
+              showConfirmButton: false,
+              timer: 1500
+              
+          });
+          $('#modal-deleteartvo').modal('hide');
+          
+
+          $.ajax({
+            url: '../controller/php/valeofi.php',
+            type: 'POST'
+          }).done(function(resp) {
+            obj = JSON.parse(resp);
+            var res = obj.data;
+            var x = 0;
+            html = '<div class="table-wrapper"><table style="width:100%" id="infvaofi1" name="infvaofi1" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+            for (U = 0; U < res.length; U++) {  
+              if (obj.data[U].refe_1 == refe_1){
+                x++;
+                html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a><a class='nav-link' >Surtir</a>" + "</td></tr>";            
+              }  
+            }
+            html += '</div></tbody></table></div></div>';
+            $("#listvaleofi1").html(html);
+            'use strict';
+            $('#datavaofi1').DataTable({
+                responsive: true,
+                language: {
+                  searchPlaceholder: 'Buscar...',
+                  sSearch: '',
+                  lengthMenu: 'mostrando _MENU_ paginas',
+                  sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                  sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                  sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+                  oPaginate: {
+                        sFirst: 'Primero',
+                        sLast: 'Último',
+                        sNext: 'Siguiente',
+                        sPrevious: 'Anterior',
+                    },
+                }
+            
+            });
+          })
+        }else{
+          document.getElementById('delerarvoinf').style.display='';
+          setTimeout(function(){
+            document.getElementById('delerarvoinf').style.display='none';
+          }, 2000);
+        }
+      });
+
+    
 }

@@ -1,4 +1,5 @@
  
+
      <!-- Bracket CSS -->
      <link rel="stylesheet" href="../template/css/bracket.css">
  
@@ -36,12 +37,9 @@
        </div><!-- menu-item -->
      </a><!-- br-menu-link -->
      <ul class="br-menu-sub nav flex-column">
-       <li class="nav-item"><a href="navigation.html" class="nav-link">Agregar orden</a></li>
-       <li class="nav-item"><a href="navigation.html" class="nav-link">Agregar memo</a></li>
-       <li class="nav-item"><a href="navigation.html" class="nav-link">Agregar vale de oficina</a></li>
-       <li class="nav-item"><a href="navigation-layouts.html" class="nav-link">Lista de producción</a></li>
-       <li class="nav-item"><a href="navigation-layouts.html" class="nav-link">Lista de memos</a></li>
-       <li class="nav-item"><a href="vale_oficina" class="nav-link">Lista de vales</a></li>
+       <li class="nav-item"><a href="navigation-layouts.html" class="nav-link">Producción</a></li>
+       <li class="nav-item"><a href="navigation-layouts.html" class="nav-link">Memos</a></li>
+       <li class="nav-item"><a href="../administrador/vale_oficina.php" class="nav-link">Vales de oficina</a></li>
      </ul>
      <a href="#" class="br-menu-link">
        <div class="br-menu-item">
@@ -52,7 +50,7 @@
      </a><!-- br-menu-link -->
      <ul class="br-menu-sub nav flex-column">
        <li class="nav-item"><a href="../administrador/pedidos.php" class="nav-link">Agregar pedidos</a></li>
-       <li class="nav-item"><a href="../administrador/pedidos.php" class="nav-link">Lista de pedidos</a></li>
+       <li class="nav-item"><a href="../administrador/listpedido.php" class="nav-link">Lista de pedidos</a></li>
      </ul>
      <a href="#" class="br-menu-link">
        <div class="br-menu-item">
@@ -86,13 +84,21 @@
      <ul class="br-menu-sub nav flex-column">
        <li class="nav-item"><a href="form-elements.html" class="nav-link">Falta de material</a></li>
        <li class="nav-item"><a href="form-layouts.html" class="nav-link">ventas mensuales</a></li>
-       <li class="nav-item"><a href="hcambios.php" class="nav-link">Historial de Cambios</a></li>
+       <li class="nav-item"><a href="../administrador/hcambios.php" class="nav-link">Historial de Cambios</a></li>
      </ul>
      
      <a href="sitemap.html" class="br-menu-link">
        <div class="br-menu-item">
          <i class="menu-item-icon icon ion-ios-list-outline tx-22"></i>
          <span class="menu-item-label">Manual</span>
+       </div><!-- menu-item -->
+     </a><!-- br-menu-link -->
+
+
+   <a href="./soporte.php" class="br-menu-link">
+       <div class="br-menu-item">
+         <i class="menu-item-icon icon ion-help-buoy tx-22"></i>
+         <span class="menu-item-label">Soporte Tecnico</span>
        </div><!-- menu-item -->
      </a><!-- br-menu-link -->
    </div><!-- br-sideleft-menu -->

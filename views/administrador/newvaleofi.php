@@ -348,7 +348,7 @@
       });
 
 $(document).ready(function(){
-$('#busccodigo').load('select/buscar.php');
+$('#busccodigo').load('./select/buscar.php');
 });
     </script>
 

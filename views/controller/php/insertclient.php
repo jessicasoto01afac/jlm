@@ -104,7 +104,7 @@ function eliminar ($id_cliente,$conexion){
 function historial($usuario,$codigo_clie,$nombre,$rfc,$email,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN NUEVO CLIENTE', ' CODIGO:'' $codigo_clie ' ' NOMBRE:' ' $nombre' ' RFC:' ' $rfc' ' CORREO:' '$email' ,'$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN NUEVO CLIENTE', ' CODIGO:' ' $codigo_clie ' ' NOMBRE:' ' $nombre' ' RFC:' ' $rfc' ' CORREO:' '$email' ,'$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

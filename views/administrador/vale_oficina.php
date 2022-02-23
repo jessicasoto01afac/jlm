@@ -80,7 +80,7 @@ include('header.php');
             <div  style="float: right;">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <button onclick="editvaleof()" id="openedivo1" title="Dar clic para editar" type="button" class="btn btn-secondary btn btn-warning"><i class="fa fa-edit"></i></button>
-                <button onclick="closedithvo()" id="closevoed" type="button" style="display:none;" class="btn btn-secondary btn-danger"><i class="fa fa-times"></i></button>
+                <button onclick="closedithvo()" id="closevoed" title="Dar clic para cerrar edición" type="button" style="display:none;" class="btn btn-secondary btn-danger"><i class="fa fa-times"></i></button>
               </div>
             </div><!-- col-5 -->
           <div class="br-section-wrapper">
@@ -209,7 +209,7 @@ include('header.php');
 
                 id_per = "este es la person" //indentificacion de la person
                 
-                html += "<tr><td>" + x + "</td><td>" + obj.data[U].refe_1 + "</td><td>" + obj.data[U].fecha + "</td><td>" + obj.data[U].proveedor_cliente + "</td><td>" + obj.data[U].status +"</td><td>" + "<a onclick='infvale()' style='cursor:pointer;' title='Editardsddd' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='deletart()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletecli'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";            
+                html += "<tr><td>" + x + "</td><td>" + obj.data[U].refe_1 + "</td><td>" + obj.data[U].fecha + "</td><td>" + obj.data[U].proveedor_cliente + "</td><td>" + obj.data[U].status +"</td><td>" + "<a onclick='infvale()' style='cursor:pointer;' title='Editar Articulo' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='deletart()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletecli'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";            
         }
         html += '</div></tbody></table></div></div>';
         $("#listvale_ofi").html(html);

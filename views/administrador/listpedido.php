@@ -6,30 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="../template/img/logo.png"/>
 
-    <!-- Twitter -->
-    <meta name="twitter:site" content="@themepixels">
-    <meta name="twitter:creator" content="@themepixels">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Bracket">
-    <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
-    <meta name="twitter:image" content="http://themepixels.me/bracket/img/bracket-social.png">
-
-    <!-- Facebook -->
-    <meta property="og:url" content="http://themepixels.me/bracket">
-    <meta property="og:title" content="Bracket">
-    <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
-
-    <meta property="og:image" content="http://themepixels.me/bracket/img/bracket-social.png">
-    <meta property="og:image:secure_url" content="http://themepixels.me/bracket/img/bracket-social.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="600">
 
     <!-- Meta -->
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
 
-    <title>JLM|Usuarios</title>
+    <title>JLM|Clientes</title>
 
     <!-- vendor css -->
     <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -55,16 +37,16 @@ include('header.php');
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="br-mainpanel">
       <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-        <h4 class="tx-gray-800 mg-b-5">USUARIOS</h4>
+        <h4 class="tx-gray-800 mg-b-5">Pedidos</h4>
       </div>
 
       <div class="br-pagebody">
         <div class="br-section-wrapper">
-          <a class="btn btn-primary" href="../administrador/newacces.php" style="float:right"><i class="fa fa-user-plus mg-r-10"></i>Agregar Usiario</a>
+          <a class="btn btn-primary" href="" style="float:right"><i class="fa fa-user-plus mg-r-10"></i>Agregar Pedido</a>
           <br>   
           <br> 
           <br> 
-            <div id="listusu">
+            <div id="lispedidos">
         </div><!-- br-section-wrapper -->
       </div><!-- br-pagebody -->
       <footer class="br-footer">
@@ -98,24 +80,24 @@ include('header.php');
     <?php include('../administrador/modal.php');?>
     <script>
        $.ajax({
-        url: '../controller/php/conusuarios.php',
+        url: '../controller/php/pedidoslist.php',
         type: 'POST'
       }).done(function(resp) {
         obj = JSON.parse(resp);
         var res = obj.data;
         var x = 0;
-        html = '<div class="table-wrapper"><table style="width:100%" id="datausuarios" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>NOMBRE</th><th style="width:100px;"><i></i>CORREO</th><th><i></i>USUARIO</th><th><i></i>PASSWORD</th><th><i></i>PRIVILEGIOS</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        html = '<div class="table-wrapper"><table style="width:100%" id="datacliente" name="datacliente" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>ID</th><th><i></i>NOMBRE DEL CLIENTE</th><th style="width:100px;"><i></i>RFC</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
         for (U = 0; U < res.length; U++) {  
                 x++;
 
                 id_per = "este es la person" //indentificacion de la person
                 
-                html += "<tr><td>" + obj.data[U].id_per + "</td><td>" + obj.data[U].usunom + " "+ obj.data[U].usuapell + "</td><td>" + obj.data[U].correo + "</td><td>" + obj.data[U].usuario + "</td><td>" + obj.data[U].password + "</td><td>" + obj.data[U].privilegios + "</td><td>" + "<a onclick='editar()' style='cursor:pointer;' title='Editar' class='btn btn-primary btn-icon' data-toggle='modal' data-target='#modal-editusu'><div><i style='color:white;' class='fa fa-pencil-square-o'></i></div></a>  <a onclick='deletusu()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deleteusu'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";            
+                html += "<tr><td>" + x + "</td><td>" + obj.data[U].refe_1 + "</td><td>" + obj.data[U].proveedor_cliente + "</td><td>" + obj.data[U].status +"</td><td>" + "<a onclick='clienedith()' style='cursor:pointer;' title='Editar' class='btn btn-primary btn-icon' data-toggle='modal' data-target='#modal-editclient'><div><i style='color:white;' class='fa fa-pencil-square-o'></i></div></a>  <a onclick='deletclient()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletecli'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";            
         }
         html += '</div></tbody></table></div></div>';
-        $("#listusu").html(html);
+        $("#lispedidos").html(html);
         'use strict';
-        $('#datausuarios').DataTable({
+        $('#datacliente').DataTable({
             responsive: true,
             language: {
               searchPlaceholder: 'Buscar...',
