@@ -49,7 +49,7 @@
        </div><!-- menu-item -->
      </a><!-- br-menu-link -->
      <ul class="br-menu-sub nav flex-column">
-       <li class="nav-item"><a href="../administrador/pedidos.php" class="nav-link">Agregar pedidos</a></li>
+       <li class="nav-item"><a href="../administrador/pedidos.php" class="nav-link">Agregar layout</a></li>
        <li class="nav-item"><a href="../administrador/listpedido.php" class="nav-link">Lista de pedidos</a></li>
      </ul>
      <a href="#" class="br-menu-link">

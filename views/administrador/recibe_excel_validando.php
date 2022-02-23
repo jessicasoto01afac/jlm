@@ -113,7 +113,7 @@ include ("../controller/conexion.php");
                         <div class='progress-bar progress-bar-success' style='width: 100%'></div>
                       </div>
                     </td>
-                    <td><span class='badge bg-green' style='color: #0b6a05; font-size:16px;'><i class='fa fa-check'></i></span></td>
+                    <td><span class='badge bg-green' style='color: #0b6a05; font-size:20px;'><i class='fa fa-check'></i></span></td>
                     <td>SE IMPORTA DE FORMA CORRECTA</td>
                   </tr>
                 ";
@@ -136,7 +136,7 @@ include ("../controller/conexion.php");
                         <div class='progress-bar progress-bar-danger' style='width: 100%; background-color: #c60868;'></div>
                       </div>
                     </td>
-                    <td><span class='badge bg-red' style='background-color: #c60868;font-size:16px;'><i class='fa fa-times'></i></span></td>
+                    <td><span class='badge bg-red' style='background-color: #c60868; font-size:16px;'><i class='fa fa-times'></i></span></td>
                     <td>VERIFICAR / EL ARTICULO DEL PEDIDO YA ESTA INGRESADO</td>
                   </tr>
                 ";
