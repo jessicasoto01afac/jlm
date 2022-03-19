@@ -305,34 +305,23 @@ function infvale(){
     obj = JSON.parse(resp);
     var res = obj.data;
     var x = 0;
-    html = '<div class="table-wrapper"><table style="width:100%" id="infvaofi1" name="infvaofi1" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+    html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvaofi1" name="infvaofi1" class="table display dataTable"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th style="width:20%;"><i></i>ESTATUS</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
     for (U = 0; U < res.length; U++) {  
       if (obj.data[U].refe_1 == id_vofi){
         x++;
-        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a><a class='nav-link'>Surtir</a>" + "</td></tr>";            
+        if (obj.data[U].status_2 == "PENDIENTE"){
+          estatus="<button onclick='surtirvof();' data-toggle='modal' data-target='#modal-surtirvof' type='button' title='Dar click para surtir' class='btn btn-info mg-b-10'>SURTIR</button>"
+        }else if (obj.data[U].status_2 == "SURTIDO") {
+          estatus="<span class='spandis'>SURTIDO</span>"
+
+        }else if (obj.data[U].status_2 == "SIN EXISTENCIAS")  {
+          estatus="<span class='sinexisten' style='font-size:12px'>SIN EXISTENCIA</span>"
+        }
+        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida + "</td><td>" + estatus +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
       }  
     }
     html += '</div></tbody></table></div></div>';
     $("#listvaleofi1").html(html);
-    'use strict';
-    $('#datainfvo').DataTable({
-        responsive: true,
-        language: {
-          searchPlaceholder: 'Buscar...',
-          sSearch: '',
-          lengthMenu: 'mostrando _MENU_ paginas',
-          sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
-          sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
-          sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
-          oPaginate: {
-                sFirst: 'Primero',
-                sLast: 'Último',
-                sNext: 'Siguiente',
-                sPrevious: 'Anterior',
-            },
-        }
-    
-    });
 })
 }) 
 }
@@ -373,7 +362,7 @@ function savevofic(){
   
 
   var datos= 'fecha=' + fecha + '&refe_3=' + refe_3 + '&status=' + status + '&refe_1=' + refe_1 + '&proveedor_cliente=' + proveedor_cliente + '&opcion=cambio';
-  alert(datos);
+  //alert(datos);
 
   if (document.getElementById('infecvo').value == '' || document.getElementById('inftipevo').value == '' || document.getElementById('infestavo').value == '' || document.getElementById('fvofi').value == '' || document.getElementById('infsolivo').value == '') { 
       document.getElementById('edthvoivacios').style.display='';
@@ -474,12 +463,20 @@ if (document.getElementById('fvofi').value == '' || document.getElementById('inf
         obj = JSON.parse(resp);
         var res = obj.data;
         var x = 0;
-        html = '<div class="table-wrapper"><table style="width:100%" id="infvaofi1" name="infvaofi1" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+        html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%" id="infvaofi1" name="infvaofi1" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ESTATUS</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
         for (U = 0; U < res.length; U++) {  
           if (obj.data[U].refe_1 == refe_1){
             x++;
-            html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a><a class='nav-link' >Surtir</a>" + "</td></tr>";            
-          }  
+            if (obj.data[U].status_2 == "PENDIENTE"){
+              estatus="<button onclick='surtirvof();' data-toggle='modal' data-target='#modal-surtirvof' type='button' title='Dar click para surtir' class='btn btn-info mg-b-10'>SURTIR</button>"
+            }else if (obj.data[U].status_2 == "SURTIDO") {
+              estatus="<span class='spandis'>SURTIDO</span>"
+    
+            }else if (obj.data[U].status_2 == "SIN EXISTENCIAS")  {
+              estatus="<span class='sinexisten'>SIN EXISTENCIA</span>"
+            }
+            html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida + "</td><td>" + estatus +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
+          }    
         }
         html += '</div></tbody></table></div></div>';
         $("#listvaleofi1").html(html);
@@ -718,11 +715,19 @@ function savedelarvo(){
             obj = JSON.parse(resp);
             var res = obj.data;
             var x = 0;
-            html = '<div class="table-wrapper"><table style="width:100%" id="infvaofi1" name="infvaofi1" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+            html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%" id="infvaofi1" name="infvaofi1" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ESTATUS</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
             for (U = 0; U < res.length; U++) {  
               if (obj.data[U].refe_1 == refe_1){
                 x++;
-                html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a><a class='nav-link' >Surtir</a>" + "</td></tr>";            
+                if (obj.data[U].status_2 == "PENDIENTE"){
+                  estatus="<button onclick='surtirvof();' data-toggle='modal' data-target='#modal-surtirvof' type='button' title='Dar click para surtir' class='btn btn-info mg-b-10'>SURTIR</button>"
+                }else if (obj.data[U].status_2 == "SURTIDO") {
+                  estatus="<span class='spandis'>SURTIDO</span>"
+        
+                }else if (obj.data[U].status_2 == "SIN EXISTENCIAS")  {
+                  estatus="<span class='sinexisten'>SIN EXISTENCIA</span>"
+                }
+                html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida + "</td><td>" + estatus +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
               }  
             }
             html += '</div></tbody></table></div></div>';
@@ -792,5 +797,136 @@ function savedevol(){
           }, 2500);
         }
     });
+
+}
+
+//FUNCION QUE GUARDA 
+function surtirvof(){
+  //alert("sie entro");
+  $("#infvaofi1 tr").on('click', function() {
+    var vaof12 = "";
+    vaof12 += $(this).find('td:eq(0)').html(); //Toma el id de la persona 
+    document.getElementById('id_surtvof').value=vaof12
+    //alert(valofi1);
+    $.ajax({
+        url: '../controller/php/valeofi.php',
+        type: 'POST'
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (U = 0; U < res.length; U++) { 
+            if (obj.data[U].id_kax == vaof12){
+                datos = 
+                obj.data[U].codigo_1 + '*' +
+                obj.data[U].descripcion_1 + '*' +
+                obj.data[U].salida;    
+                var d = datos.split("*");   
+                $("#modal-surtirvof #arsurvof").val(d[0]);   
+                $("#modal-surtirvof #edithsertg").val(d[1]);            
+                $("#modal-surtirvof #surtavoinf").val(d[2]);
+            }
+        }
+    });
+}) 
+}
+
+//FUNCION DE EDITAR SURTIR
+function survof(){
+  //alert("edit articulo infovale");
+  document.getElementById('arsurvof').disabled= false;
+  document.getElementById('surtirvof').style.display="none";
+  document.getElementById('closeditvoinf1').style.display="";
+  document.getElementById('voguardarsur').style.display="";
+  document.getElementById('edithdesvoinf').disabled= false;
+  document.getElementById('surtavoinf').disabled= false;
+  document.getElementById('surbsere').disabled= false;
+  document.getElementById('codigosur').disabled= false;
+}
+//FUNCION PARA CERRAR SURTIR
+function closesurvof(){
+  //alert("edit articulo infovale");
+  document.getElementById('arsurvof').disabled= true;
+  document.getElementById('surtirvof').style.display="";
+  document.getElementById('closeditvoinf1').style.display="none";
+  document.getElementById('edithdesvoinf').disabled= true;
+  document.getElementById('surtavoinf').disabled= true;
+  document.getElementById('surbsere').disabled= true;
+  document.getElementById('codigosur').disabled= true;
+}
+//FUNCION PARA MARCAR SIN EXISTENCIAS 
+function sinexisten(){
+  //alert("entro vales")
+  var id_kax = document.getElementById('id_surtvof').value;
+  var refe_1 = document.getElementById('fvofi').innerHTML;
+  var codigo_1 = document.getElementById('arsurvof').value;
+  var datos= 'id_kax=' + id_kax + '&refe_1=' + refe_1 + '&codigo_1=' + codigo_1 + '&opcion=sinexistencia';
+  //alert(datos);
+      $.ajax({
+        type:"POST",
+        url:"../controller/php/insertvaleofi.php",
+        data:datos
+      }).done(function(respuesta){
+        if (respuesta==0){
+          Swal.fire({
+              type: 'success',
+              text: 'Se actualizo de forma correcta',
+              showConfirmButton: false,
+              timer: 1500
+          });
+          $('#modal-surtirvof').modal('hide');
+          
+          $.ajax({
+            url: '../controller/php/valeofi.php',
+            type: 'POST'
+          }).done(function(resp) {
+            obj = JSON.parse(resp);
+            var res = obj.data;
+            var x = 0;
+            html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%" id="infvaofi1" name="infvaofi1" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ESTATUS</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+            for (U = 0; U < res.length; U++) {  
+              if (obj.data[U].refe_1 == refe_1){
+                x++;
+                if (obj.data[U].status_2 == "PENDIENTE"){
+                  estatus="<button onclick='surtirvof();' data-toggle='modal' data-target='#modal-surtirvof' type='button' title='Dar click para surtir' class='btn btn-info mg-b-10'>SURTIR</button>"
+                }else if (obj.data[U].status_2 == "SURTIDO") {
+                  estatus="<span class='spandis'>SURTIDO</span>"
+        
+                }else if (obj.data[U].status_2 == "SIN EXISTENCIAS")  {
+                  estatus="<span class='sinexisten'>SIN EXISTENCIA</span>"
+                }
+                html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida + "</td><td>" + estatus +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
+              }    
+            }
+            html += '</div></tbody></table></div></div>';
+            $("#listvaleofi1").html(html);
+            'use strict';
+            $('#datavaofi1').DataTable({
+                responsive: true,
+                language: {
+                  searchPlaceholder: 'Buscar...',
+                  sSearch: '',
+                  lengthMenu: 'mostrando _MENU_ paginas',
+                  sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                  sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                  sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+                  oPaginate: {
+                        sFirst: 'Primero',
+                        sLast: 'Último',
+                        sNext: 'Siguiente',
+                        sPrevious: 'Anterior',
+                    },
+                }
+            
+            });
+          })
+        }else{
+          document.getElementById('delerarvoinf').style.display='';
+          setTimeout(function(){
+            document.getElementById('delerarvoinf').style.display='none';
+          }, 2000);
+        }
+      });
+
 
 }

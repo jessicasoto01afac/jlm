@@ -21,6 +21,7 @@
     <link href="../template/lib/highlightjs/github.css" rel="stylesheet">
     <link href="../template/lib/datatables/jquery.dataTables.css" rel="stylesheet">
     <link href="../template/lib/select2/css/select2.min.css" rel="stylesheet">
+    <link href="../template/css/diseno.css" rel="stylesheet">
 
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
@@ -37,6 +38,9 @@ include('header.php');
 ?>
 <?php include('../administrador/modal.php');?>
 <!------------------------------- ########## LISTA DE VALES ########## -------------------------->
+<style>
+
+</style>
   <section class="content" id="lista">
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="br-mainpanel">
@@ -81,6 +85,7 @@ include('header.php');
               <div class="btn-group" role="group" aria-label="Basic example">
                 <button onclick="editvaleof()" id="openedivo1" title="Dar clic para editar" type="button" class="btn btn-secondary btn btn-warning"><i class="fa fa-edit"></i></button>
                 <button onclick="closedithvo()" id="closevoed" title="Dar clic para cerrar edición" type="button" style="display:none;" class="btn btn-secondary btn-danger"><i class="fa fa-times"></i></button>
+                <button title="Imprimir" type="button" class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
               </div>
             </div><!-- col-5 -->
           <div class="br-section-wrapper">
@@ -203,7 +208,7 @@ include('header.php');
         obj = JSON.parse(resp);
         var res = obj.data;
         var x = 0;
-        html = '<div class="table-wrapper"><table style="width:100%" id="datavaleofi" name="datavaleofi" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>FOLIO</th><th style="width:100px;"><i></i>FECHA</th><th><i></i>SOLICITANTE</th><th><i></i>ESTADO</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        html = '<div class="table-wrapper table-responsive"><table style="width:100%" id="datavaleofi" name="datavaleofi" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>FOLIO</th><th style="width:100px;"><i></i>FECHA</th><th><i></i>SOLICITANTE</th><th><i></i>ESTADO</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
         for (U = 0; U < res.length; U++) {  
                 x++;
 

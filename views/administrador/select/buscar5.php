@@ -5,7 +5,7 @@
       $articulo = mysqli_query($conexion,$sql);
     ?>
 
-			<select class="form-control select2-show-search" disabled="" data-placeholder="Choose one (with searchbox)" onchange="desarticvo()" id="edicovoinf" name="edicovoinf" type="text" data-live-search="true" style="width: 100%" >
+			<select class="form-control select2-show-search" disabled="" data-placeholder="Choose one (with searchbox)" onchange="desar()" id="arsurvof" name="arsurvof" type="text" data-live-search="true" style="width: 100%" >
 			<option value="0">CODIGO</option> 
 			<?php while($idpst = mysqli_fetch_row($articulo)):?>                      
 			<option value="<?php echo $idpst[0]?>"><?php echo $idpst[0]?></option>
@@ -15,10 +15,10 @@
 	<script type="text/javascript">
         		$(document).ready(function(){
 
-			$('#edicovoinf').change(function(){
+			$('#arsurvof').change(function(){
 				$.ajax({
 					type:"post",
-					data:'valor=' + $('#edicovoinf').val(),
+					data:'valor=' + $('#arsurvof').val(),
 					url:'session/',
 					success:function(r){
 					}
@@ -26,9 +26,9 @@
 			});
 		});
 //funcion para BUSCAR EL ARTICULO
-function desarticvo(){
+function desar(){
 //alert("eentraarticulo")
-var codivo = document.getElementById('edicovoinf').value; 
+var codivo = document.getElementById('arsurvof').value; 
 $.ajax({
           url: '../controller/php/conarticulos.php',
           type: 'POST'
@@ -44,8 +44,8 @@ $.ajax({
                   obj.data[D].artdescrip + '*' +
                   obj.data[D].artubicac;    
                   var o = datos.split("*");   
-                  $("#edithdesvoinf").val(o[1]);   
-                  $("#editdepinf1").val(o[2]); 
+                  $("#edithsertg").val(o[1]);   
+                 // $("#edithsertg").val(o[2]); 
 
               }
           }

@@ -105,7 +105,22 @@
             }else{
                 echo "1";
             }
+    //Condición donde marca sin exitencia
+    }else if($opcion === 'sinexistencia'){
+        $id_kax = $_POST['id_kax'];
+        $refe_1 = $_POST['refe_1'];
+        $codigo_1 = $_POST['codigo_1'];
+
+            if (sinexistencia($id_kax,$conexion)){
+                echo "0";
+                $realizo = 'MARCA ARTICULO SIN EXISTENCIA';
+                $usuario='PRUEBAS';
+                hisinexist($usuario,$realizo,$refe_1,$codigo_1,$conexion);
+            }else{
+                echo "1";
+            }
     }
+    
 
 
 //FUNCIONES-----------------------------------------------------------------------------------
@@ -161,6 +176,16 @@ function edicion ($codigo_1,$descripcion_1,$salida,$costo,$total,$observa,$id_ka
     }
     cerrar($conexion);
 }
+//función para surtir
+function sinexistencia ($id_kax,$conexion){
+    $query="UPDATE kardex SET status_2='SIN EXISTENCIAS', salida=0 WHERE id_kax = '$id_kax'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //funcion para actualizar el registro
 function eliminar ($id_kax,$conexion){
     $query="UPDATE kardex SET estado='1' WHERE id_kax= '$id_kax'";
@@ -181,7 +206,7 @@ function deletevo ($refe_1,$conexion){
     }
     cerrar($conexion);
 }
-
+//-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
 function historial($usuario,$refe_1,$codigo_1,$conexion){
     ini_set('date.timezone','America/Mexico_City');
@@ -228,6 +253,16 @@ function histelimi($usuario,$realizo,$refe_1,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'FOLIO:' '$refe_1','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+function hisinexist($usuario,$realizo,$refe_1,$codigo_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'VALE DE OFICINA FOLIO:' '$refe_1' ' ARTICULO: ' '$codigo_1','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
