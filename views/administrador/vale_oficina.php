@@ -209,7 +209,7 @@ include('header.php');
 
                 id_per = "este es la person" //indentificacion de la person
                 
-                html += "<tr><td>" + x + "</td><td>" + obj.data[U].refe_1 + "</td><td>" + obj.data[U].fecha + "</td><td>" + obj.data[U].proveedor_cliente + "</td><td>" + obj.data[U].status +"</td><td>" + "<a onclick='infvale()' style='cursor:pointer;' title='Editar Articulo' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='deletart()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletecli'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";            
+                html += "<tr><td>" + x + "</td><td>" + obj.data[U].refe_1 + "</td><td>" + obj.data[U].fecha + "</td><td>" + obj.data[U].proveedor_cliente + "</td><td>" + obj.data[U].status +"</td><td>" + "<a onclick='infvale()' style='cursor:pointer;' title='Editar Articulo' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='deletvolis()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletevol'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";         
         }
         html += '</div></tbody></table></div></div>';
         $("#listvale_ofi").html(html);
@@ -269,3 +269,4 @@ include('header.php');
   </body>
 
 </html>
+

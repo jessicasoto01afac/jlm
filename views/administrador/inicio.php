@@ -1,29 +1,25 @@
 <!DOCTYPE html>
+<?php include ("../controller/conexion.php");
+
+$sen = "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='PEDIDO' GROUP BY refe_1) AS Total";
+$resultado = mysqli_query($conexion,$sen);
+$pedidos = mysqli_fetch_assoc($resultado); 
+
+$ped = "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='PEDIDO' GROUP BY refe_1) AS Total";
+$resulpe = mysqli_query($conexion,$ped);
+$pedtotal = mysqli_fetch_assoc($resulpe); 
+
+$pedfin = "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='PEDIDO' AND status='FINALIZADO' GROUP BY refe_1) AS Total";
+$resulpefin = mysqli_query($conexion,$pedfin);
+$pedfinali = mysqli_fetch_assoc($resulpefin); 
+
+
+?>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-    <!-- Twitter -->
-    <meta name="twitter:site" content="@themepixels">
-    <meta name="twitter:creator" content="@themepixels">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Bracket">
-    <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
-    <meta name="twitter:image" content="http://themepixels.me/bracket/img/bracket-social.png">
-
-    <!-- Facebook -->
-    <meta property="og:url" content="http://themepixels.me/bracket">
-    <meta property="og:title" content="Bracket">
-    <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
-
-    <meta property="og:image" content="http://themepixels.me/bracket/img/bracket-social.png">
-    <meta property="og:image:secure_url" content="http://themepixels.me/bracket/img/bracket-social.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="600">
 
     <!-- Meta -->
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
@@ -64,7 +60,7 @@
                 <i class="ion ion-earth tx-60 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
                   <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total de pedidos</p>
-                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">1,975,224</p>
+                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1"><?php echo $pedidos['result']?></p>
                   <span class="tx-11 tx-roboto tx-white-6">24% higher yesterday</span>
                 </div>
               </div>
@@ -112,14 +108,14 @@
               <div class="row">
                 <div class="col-sm-6">
                   <h6 class="card-title tx-uppercase tx-12">PEDIDOS FINALIZADOS</h6>
-                  <p class="display-4 tx-medium tx-inverse mg-b-5 tx-lato">25%</p>
+                  <p class="display-4 tx-medium tx-inverse mg-b-5 tx-lato">19.20%</p>
                   <div class="progress mg-b-10">
-                    <div class="progress-bar bg-primary progress-bar-xs wd-30p" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-primary progress-bar-xs wd-<?php echo $pedfinali['result'] * 100 / $pedidos['result']?>p" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                   </div><!-- progress -->
-                  <p class="tx-16 lh-3 mg-b-0">Puedes visualizar todos los pedidos <a href="progress.html" target="blank">aqui</a>.</p>
+                  <p class="tx-16 lh-3 mg-b-0">Puedes visualizar todos los pedidos <a href="../administrador/listpedido.php" target="blank">aqui</a>.</p>
                 </div><!-- col-6 -->
                 <div class="col-sm-6 mg-t-20 mg-sm-t-0 d-flex align-items-center justify-content-center">
-                  <span class="peity-donut" data-peity='{ "fill": ["#0866C6", "#E9ECEF"],  "innerRadius": 60, "radius": 90 }'>30/100</span>
+                  <span class="peity-donut" style="font-size:20px" data-peity='{ "fill": ["#0866C6", "#E9ECEF"],  "innerRadius": 60, "radius": 90 }'><?php echo $pedfinali['result']?>/<?php echo $pedidos['result']?></span>
                 </div><!-- col-6 -->
               </div><!-- row -->
             </div><!-- card -->
@@ -131,7 +127,7 @@
                   <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">CLIENTES CON MAYOR DEMANDA</h6>
                   <p class="mg-b-0"><i class="icon ion-calendar mg-r-5"></i> From October 2017 - December 2017</p>
                 </div>
-                <a href="" class="btn btn-outline-info btn-oblong tx-11 tx-uppercase tx-mont tx-medium tx-spacing-1 pd-x-30 bd-2">Ver mas</a>
+                <a href="../administrador/listpedido.php" class="btn btn-outline-info btn-oblong tx-11 tx-uppercase tx-mont tx-medium tx-spacing-1 pd-x-30 bd-2">Ver mas</a>
               </div><!-- d-flex -->
 
               <table class="table table-valign-middle mg-b-0">

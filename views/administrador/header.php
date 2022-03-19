@@ -1,5 +1,4 @@
  
-
      <!-- Bracket CSS -->
      <link rel="stylesheet" href="../template/css/bracket.css">
  
@@ -28,6 +27,7 @@
        <li class="nav-item"><a href="buttons.html" class="nav-link">Transformación</a></li>
        <li class="nav-item"><a href="../administrador/clientes.php" class="nav-link">Clientes</a></li>
        <li class="nav-item"><a href="../administrador/provedores.php" class="nav-link">Proveedores</a></li>
+       <li class="nav-item"><a href="../administrador/artiprove.php" class="nav-link">Articulos Proveedor</a></li>
      </ul>
      <a href="#" class="br-menu-link">
        <div class="br-menu-item">

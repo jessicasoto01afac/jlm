@@ -193,6 +193,51 @@ include ("../controller/conexion.php");
                     </div>
                   </div><!-- col-6 -->
                   <div class="col-lg-12">
+                    <div class="form-group mg-b-4-force">
+                    <label style="font-size:16px;" class="form-control-label label2">CONTACTO 3<span class="tx-danger"></span></label>
+                    </div>
+                  </div><!-- col-8 -->
+                  <div class="col-lg-4">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="icon ion-person tx-16 lh-0 op-6"></i></span>
+                      <input onkeyup="mayus(this);" type="text" class="form-control" name="cont_3" id="cont_3" placeholder="Nombre de contacto 3">
+                    </div>
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-phone tx-16 lh-0 op-6"></i></span>
+                      <input onkeyup="mayus(this);" type="text" title="ingresar el telefono" name="tel_c5" id="tel_c5" class="form-control inputalta" placeholder="(999) 999-9999">
+                    </div>
+                  </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-4">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-phone tx-16 lh-0 op-6"></i></span>
+                      <input onkeyup="mayus(this);" type="text" class="form-control inputalta" name="tel_c6" id="tel_c6" placeholder="(999) 999-9999">
+                    </div>
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-envelope tx-16 lh-0 op-6"></i></span>
+                      <input type="text" class="form-control inputalta" name="email_c5" id="email_c5" placeholder="ingresar@correo">
+                    </div>
+                    </div>
+                  </div><!-- col-6 -->
+                  <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-envelope tx-16 lh-0 op-6"></i></span>
+                      <input type="text" class="form-control inputalta" name="email_c6" id="email_c6" placeholder="ingresar@correo">
+                    </div>
+                    </div>
+                  </div><!-- col-6 -->
+                  <div class="col-lg-12">
                     <div class="form-group">
                       <label class="form-control-label label2">OBSERBACIONES: <span class="tx-danger"></span></label>
                       <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="obser_prov" id="obser_prov" placeholder="Ingresa alguna observación"></textarea>
@@ -276,7 +321,7 @@ include ("../controller/conexion.php");
       });
 //agrega a base de datos de articulos
       function addProvee() {
-        alert("entra agregar proveedores");
+        //alert("entra agregar proveedores");
         var codigo_pro = document.getElementById('codigo_pro').value; 
         var nom_pro = document.getElementById('nom_pro').value;
         var domi_fisc = document.getElementById('domi_fisc').value;
@@ -291,9 +336,14 @@ include ("../controller/conexion.php");
         var tel_c4 = document.getElementById('tel_c4').value;
         var email_c3 = document.getElementById('email_c3').value;
         var email_c4 = document.getElementById('email_c4').value;
+        var cont_3 = document.getElementById('cont_3').value;
+        var tel_c5 = document.getElementById('tel_c5').value;
+        var tel_c6 = document.getElementById('tel_c6').value;
+        var email_c5 = document.getElementById('email_c5').value;
+        var email_c6 = document.getElementById('email_c6').value;
         var obser_prov = document.getElementById('obser_prov').value;
 
-        var datos= 'codigo_pro=' + codigo_pro + '&nom_pro=' + nom_pro + '&domi_fisc=' + domi_fisc + '&condi_pago=' + condi_pago + '&cont_1=' + cont_1 + '&tel_c1=' + tel_c1 + '&tel_c2=' + tel_c2 + '&email_c1=' + email_c1 + '&email_c2=' + email_c2 + '&cont_2=' + cont_2 + '&tel_c3=' + tel_c3 + '&tel_c4=' + tel_c4 + '&email_c3=' + email_c3 + '&email_c4=' + email_c4 + '&obser_prov=' + obser_prov +  '&opcion=registrar';
+        var datos= 'codigo_pro=' + codigo_pro + '&nom_pro=' + nom_pro + '&domi_fisc=' + domi_fisc + '&condi_pago=' + condi_pago + '&cont_1=' + cont_1 + '&tel_c1=' + tel_c1 + '&tel_c2=' + tel_c2 + '&email_c1=' + email_c1 + '&email_c2=' + email_c2 + '&cont_2=' + cont_2 + '&tel_c3=' + tel_c3 + '&tel_c4=' + tel_c4 + '&email_c3=' + email_c3 + '&email_c4=' + email_c4 + '&cont_3=' + cont_3 + '&tel_c5=' + tel_c5 + '&tel_c6=' + tel_c6 + '&email_c5=' + email_c5 + '&email_c6=' + email_c6 + '&obser_prov=' + obser_prov +  '&opcion=registrar';
         //alert(datos);
         if (document.getElementById('codigo_pro').value == '' || document.getElementById('nom_pro').value == '' || document.getElementById('domi_fisc').value == '' || document.getElementById('condi_pago').value == '' || document.getElementById('cont_1').value == '' || document.getElementById('tel_c1').value == '' || document.getElementById('email_c1').value == '' ) {
           document.getElementById('vaciosprov').style.display=''

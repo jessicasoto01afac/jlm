@@ -80,7 +80,7 @@
             }else{
                 echo "1";
             }
-    //Condición donde elimina usuario
+    //Condición donde elimina articulo de vale de oficina
     }else if($opcion === 'eliminar'){
         $id_kax = $_POST['id_kax'];
         $refe_1 = $_POST['refe_1'];
@@ -94,7 +94,19 @@
             }else{
                 echo "1";
             }
+    //Condición donde elimina vale de oficina
+    }else if($opcion === 'deletevolis'){
+        $refe_1 = $_POST['refe_1'];
+            if (deletevo($refe_1,$conexion)){
+                echo "0";
+                $realizo = 'ELIMINA VALE DE OFICINA';
+                $usuario='PRUEBAS';
+                histelimi($usuario,$realizo,$refe_1,$conexion);
+            }else{
+                echo "1";
+            }
     }
+
 
 //FUNCIONES-----------------------------------------------------------------------------------
 
@@ -159,7 +171,16 @@ function eliminar ($id_kax,$conexion){
     }
     cerrar($conexion);
 }
-
+//funcion para eliminar vale de oficina
+function deletevo ($refe_1,$conexion){
+    $query="UPDATE kardex SET estado='1' WHERE refe_1= '$refe_1' AND tipo='VALE_OFICINA' ";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 
 //funcion para registra cambios
 function historial($usuario,$refe_1,$codigo_1,$conexion){
@@ -203,7 +224,16 @@ function histdelete($usuario,$realizo,$id_kax,$codigo_1,$refe_1,$conexion){
         return false;
     }
 }
-
+function histelimi($usuario,$realizo,$refe_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'FOLIO:' '$refe_1','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
 //funcion para cerrar laa conexion
 function cerrar($conexion){
     mysqli_close($conexion);

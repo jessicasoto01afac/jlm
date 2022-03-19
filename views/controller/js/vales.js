@@ -755,5 +755,42 @@ function savedelarvo(){
         }
       });
 
-    
+}
+
+//FUNCION QUE TOMAR EL FOLIO DE EL VALE DE OFIINA
+function deletvolis(){
+  $("#datavaleofi tr").on('click', function() {
+      var id_vale = "";
+      id_vale += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
+      document.getElementById('devaofi').value=id_vale;
+      //alert(id_vale)
+  }) 
+}
+
+//FUNCION QUE GUARDA LA ELIMINACIÓN DE VALE DE OFICINA
+function savedevol(){
+  var refe_1= document.getElementById('devaofi').value;
+  var datos= 'refe_1=' + refe_1 + '&opcion=deletevolis';
+  //alert(datos);
+    $.ajax({
+      type:"POST",
+      url:"../controller/php/insertvaleofi.php",
+      data:datos
+    }).done(function(respuesta){
+      if (respuesta==0){
+        Swal.fire({
+          type: 'success',
+          text: 'SE ELIMINO DE FORMA CORRECTA',
+          showConfirmButton: false,
+          timer: 1500
+        });
+          setTimeout("location.href = 'vale_oficina.php';", 1500);
+      }else{
+          document.getElementById('delerrvo').style.display='';
+          setTimeout(function(){
+            document.getElementById('delerrvo').style.display='none';
+          }, 2500);
+        }
+    });
+
 }

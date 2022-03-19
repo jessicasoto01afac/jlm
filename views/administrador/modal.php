@@ -507,6 +507,52 @@
                     </div>
                     </div>
                   </div><!-- col-6 -->
+                  <!-- contacto3 -->
+                  <div class="col-lg-12">
+                    <div class="form-group mg-b-4-force">
+                    <label style="font-size:16px;" disabled="" class="form-control-label label2">CONTACTO 3<span class="tx-danger"></span></label>
+                    </div>
+                  </div><!-- col-8 -->
+                  <div class="col-lg-4">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="icon ion-person tx-16 lh-0 op-6"></i></span>
+                      <input onkeyup="mayus(this);" disabled="" type="text" class="form-control" name="edithcont_3" id="edithcont_3" placeholder="Nombre de contacto 3">
+                    </div>
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-phone tx-16 lh-0 op-6"></i></span>
+                      <input onkeyup="mayus(this);" disabled="" type="text" title="ingresar el telefono" name="edithtel_c5" id="edithtel_c5" class="form-control inputalta" placeholder="(999) 999-9999">
+                    </div>
+                  </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-4">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-phone tx-16 lh-0 op-6"></i></span>
+                      <input onkeyup="mayus(this);" disabled="" type="text" class="form-control inputalta" name="edithtel_c6" id="edithtel_c6" placeholder="(999) 999-9999">
+                    </div>
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-envelope tx-16 lh-0 op-6"></i></span>
+                      <input type="text" disabled="" class="form-control inputalta" name="edithemail_c5" id="edithemail_c5" placeholder="ingresar@correo">
+                    </div>
+                    </div>
+                  </div><!-- col-6 -->
+                  <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-envelope tx-16 lh-0 op-6"></i></span>
+                      <input type="text" disabled="" class="form-control inputalta" name="edithemail_c6" id="edithemail_c6" placeholder="ingresar@correo">
+                    </div>
+                    </div>
+                  </div><!-- col-6 -->
                   <div class="col-lg-12">
                     <div class="form-group">
                       <label class="form-control-label label2">OBSERBACIONES: <span class="tx-danger"></span></label>
@@ -845,8 +891,125 @@
               </div>
             </div><!-- modal-dialog -->
           </div><!-- modal -->
-
-
+          <!-- MODAL PARA ELIMINAR VALE DE OFICINA-->
+          <div class="modal fade" id='modal-deletevol'>
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content bd-0">
+                <div class="modal-header pd-x-20">
+                  <h4 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ELIMINAR</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body pd-20">
+                  <p class="mg-b-5">ESTAS SEGURO DE ELIMINAR AL VALE DE OFICINA?</p>
+                  <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="del_vof" id="del_vof">
+                  <input disabled="" class="form-control inputalta" type="text" name="devaofi" id="devaofi">
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <button type="button" onclick="savedevol()" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
+                  <br>
+                 
+                </div>
+                <div style="display:none;" id="delerrvo" name="delerrvo" class="alert alert-danger" role="alert">
+                    <div class="d-flex align-items-center justify-content-start">
+                      <i class="icon ion-ios-close alert-icon tx-24"></i>
+                      <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un ticket</span>
+                    </div><!-- d-flex -->
+                  </div><!-- alert --> 
+              </div>
+            </div><!-- modal-dialog -->
+          </div><!-- modal -->
+          <!-- MODAL PARA EDITAR ARTICULOS DE LISTA DE PEDIDOS-->
+        <div class="modal fade" id='modal-editpeinf'>
+          <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/"> 
+            <div class="modal-content bd-5" >
+              <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO DE PEDIDO</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form id="editvoinf" class="form-horizontal" action="" method="POST">
+                <div class="modal-body pd-25">
+                <a href="#" id="openedipeinf" style="float: right;font-size: 16px" class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="opeinpedf()" title="Dar clic para editar">
+                  <div><i class="fa fa-edit"></i></div>
+                </a>
+                <a href="#" id="closeditpeinf" style="float: right;font-size: 16px;display:none;" class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closeinpedf()" title="Dar clic para cerrar">
+                  <div><i class="fa fa-times"></i></div>
+                </a>
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_arpedid" id="id_arpedid">
+                <div class="row mg-b-25">
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label label2">CODIGO: <span class="tx-danger" >*</span></label>
+                      <div id="edipeinfinf"></div>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <div class="form-group">
+                      <label class="form-control-label label2">DESCRIPCIÓN: <span class="tx-danger">*</span></label>
+                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="text" name="edithdeped" id="edithdeped">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-control-label label2">CANTIDAD:<span class="tx-danger">*</span></label>
+                      <input disabled="" onkeyup="mayus(this);" onchange="totalvoinfe()" class="form-control inputalta" type="number" name="editcapeinf" id="editcapeinf">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-control-label label2">DEPARTAMENTO:<span class="tx-danger">*</span></label>
+                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" name="editdepinpe" id="editdepinpe">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-3" id="precioinf" style="display:;">
+                    <div class="form-group">
+                      <label class="form-control-label label2">$ PRECIO: <span class="tx-danger">*</span></label>
+                      <input disabled="" onkeyup="mayus(this);" onchange="totalvoinfe()" min="0" value="0" step="0.1" class="form-control inputalta" type="text" id="pprecioinf" name="pprecioinf" placeholder="Ingrese el precio">
+                    </div>
+                  </div><!-- col-6 -->
+                  <div class="col-lg-3" id="totalinf"  style="display:;">
+                    <div class="form-group mg-b-10-force">
+                      <label class="form-control-label label2">$ TOTAL: <span class="tx-danger">*</span></label>
+                      <input onkeyup="mayus(this);" class="form-control inputalta" value="0" type="number" min="0" max="4" id="vtotalinf" name="vtotalinf" readonly placeholder="Total">
+                    </div>
+                  </div><!-- col-6 -->
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <label class="form-control-label label2">OBSERVACIONES:</label>
+                      <textarea onkeyup="mayus(this);" disabled="" rows="2" class="form-control" name="infobserep" id="infobserep" placeholder="Ingresa alguna observación"></textarea>
+                    </div>
+                  </div><!-- col-4 -->
+                </div><!-- col-4 -->
+                </div>
+              </form> 
+                <div class="modal-footer">
+                  <button type="button" onclick="savecamvo()" id="voguardarinf" style="display:none;" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR CAMBIOS</button>
+                </div>
+                <br>
+                <div style="display:none;" id="edthdvoblinf" name="edthdvoblinf" class="alert alert-warning" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> El resgistro ya existe</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+                <div style="display:none;" id="edthvovaciosin" name="edthvovaciosin" class="alert alert-info" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> Llenar todos los campos</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+                <div style="display:none;" id="edthvoerrinf" name="edthvoerrinf" class="alert alert-danger" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un ticket</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+            </div>
+          </div><!-- modal-dialog -->
+        </div><!-- modal -->
     <script>
       
       $(function(){
@@ -870,8 +1033,11 @@
       $(document).ready(function(){
 $('#busccodigo').load('select/buscar2.php');
 $('#edicovinf').load('select/buscar3.php');
+$('#edipeinfinf').load('select/buscar4.php');
 
 });
 
     </script>
+
+
 

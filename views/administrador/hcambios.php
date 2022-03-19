@@ -85,7 +85,7 @@ table tr td {
         obj = JSON.parse(resp);
         var res = obj.data;
         var x = 0;
-        html = '<div class="table-wrapper"><table style="width:100%;" name="hicambios" id="hicambios" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>USUARIO</th><th style="width:100px;"><i></i>PROCESO</th><th><i></i>REGISTRO</th><th><i></i>FECHA</th></tr></thead><tbody>';
+        html = '<div class="table-wrapper"><table style="width:100%;" name="hicambios" id="hicambios" class="table display responsive nowrap dataTable no-footer dtr-inline" style="width:100%; display:block; overflow-x:auto; white-space:nowrap;"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>USUARIO</th><th style="width:100px;"><i></i>PROCESO</th><th><i></i>REGISTRO</th><th><i></i>FECHA</th></tr></thead><tbody>';
         for (V = 0; V < res.length; V++) {  
                 x++;
                 html += "<tr><td>" + obj.data[V].id_his + "</td><td>" + obj.data[V].id_usu + "</td><td>" + obj.data[V].proceso + "</td><td>" + obj.data[V].registro + "</td><td>" + obj.data[V].fecha + "</td></tr>";            
@@ -94,12 +94,21 @@ table tr td {
         $("#listhisc").html(html);
         'use strict';
         $('#hicambios').DataTable({
-            responsive: true,
-            language: {
-              searchPlaceholder: 'Buscar...',
-              sSearch: '',
-              lengthMenu: '_MENU_ items/page',
-            }
+           responsive: true,
+          language: {
+            searchPlaceholder: 'Buscar...',
+            sSearch: '',
+            lengthMenu: 'mostrando _MENU_ paginas',
+            sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+            sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+            sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+            oPaginate: {
+                  sFirst: 'Primero',
+                  sLast: 'Último',
+                  sNext: 'Siguiente',
+                  sPrevious: 'Anterior',
+              },
+          }
         });
     })
 

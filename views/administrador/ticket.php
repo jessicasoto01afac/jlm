@@ -110,6 +110,7 @@ include ("../controller/conexion.php");
                         <option value="EXISTENCIA">EXISTENCIA</option>
                         <option value="MOVIMIENTOS">MOVIMIENTOS</option>
                         <option value="REPORTES">REPORTES</option>
+                        <option value="REPORTES">ARTICULOS DE PROVEEDOR</option>
                     </select>
                   </div>
                 </div>
@@ -119,8 +120,8 @@ include ("../controller/conexion.php");
                     <select id="prioridad" class="form-control select2" data-placeholder="SELECCIONE PRIORIDAD">
                         <option value="">SELECCIONE PRIORIDAD</option>
                         <option value="ALTA">ALTA</option>
-                        <option value="BAJA">BAJA</option>
                         <option value="MEDIA">MEDIA</option>
+                        <option value="BAJA">BAJA</option>
                     </select>
                   </div>
                 </div>

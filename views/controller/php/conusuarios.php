@@ -1,7 +1,7 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT * FROM accesos where estado='0' ORDER BY id_per ASC";
+	$query = "SELECT * FROM  accesos where estado='0' ORDER BY id_per ASC";
 	$resultado = mysqli_query($conexion, $query);
 
 	if(!$resultado){

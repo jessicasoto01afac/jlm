@@ -506,6 +506,11 @@ function editprov(){
   document.getElementById('edithtel_c4').disabled= false;
   document.getElementById('edithemail_c3').disabled= false;
   document.getElementById('edithemail_c4').disabled= false;
+  document.getElementById('edithcont_3').disabled= false;
+  document.getElementById('edithtel_c5').disabled= false;
+  document.getElementById('edithtel_c6').disabled= false;
+  document.getElementById('edithemail_c5').disabled= false;
+  document.getElementById('edithemail_c6').disabled= false;
   document.getElementById('edithobser_prov').disabled= false;
   document.getElementById('provguardar').style.display="";
 }
@@ -527,6 +532,11 @@ function closedthpro(){
   document.getElementById('edithtel_c4').disabled= true;
   document.getElementById('edithemail_c3').disabled= true;
   document.getElementById('edithemail_c4').disabled= true;
+  document.getElementById('edithcont_3').disabled= true;
+  document.getElementById('edithtel_c5').disabled= true;
+  document.getElementById('edithtel_c6').disabled= true;
+  document.getElementById('edithemail_c5').disabled= true;
+  document.getElementById('edithemail_c6').disabled= true;
   document.getElementById('edithobser_prov').disabled= true;
   document.getElementById('clieguardar').style.display="none";
 }
@@ -561,6 +571,11 @@ function proveedith(){
                   obj.data[P].tel_c4 + '*' +
                   obj.data[P].email_c3 + '*' +
                   obj.data[P].email_c4 + '*' +
+                  obj.data[P].cont_3 + '*' +
+                  obj.data[P].tel_c5 + '*' +
+                  obj.data[P].tel_c6 + '*' +
+                  obj.data[P].email_c5 + '*' +
+                  obj.data[P].email_c6 + '*' +
                   obj.data[P].obser_prov;    
                   var d = datos.split("*");   
                   $("#modal-editprov #editcodigo_pro").val(d[0]);   
@@ -577,7 +592,12 @@ function proveedith(){
                   $("#modal-editprov #edithtel_c4").val(d[11]);
                   $("#modal-editprov #edithemail_c3").val(d[12]);
                   $("#modal-editprov #edithemail_c4").val(d[13]);
-                  $("#modal-editprov #edithobser_prov").val(d[14]);
+                  $("#modal-editprov #edithcont_3").val(d[14]);
+                  $("#modal-editprov #edithtel_c5").val(d[15]);
+                  $("#modal-editprov #edithtel_c6").val(d[16]);
+                  $("#modal-editprov #edithemail_c5").val(d[17]);
+                  $("#modal-editprov #edithemail_c6").val(d[18]);
+                  $("#modal-editprov #edithobser_prov").val(d[19]);
               }
           }
       });
@@ -599,10 +619,17 @@ function saveprovedith(){
   var tel_c4 = document.getElementById('edithtel_c4').value;
   var email_c3 = document.getElementById('edithemail_c3').value;
   var email_c4 = document.getElementById('edithemail_c4').value;
+ 
+  var cont_3 = document.getElementById('edithcont_3').value;
+  var tel_c5 = document.getElementById('edithtel_c5').value;
+  var tel_c6 = document.getElementById('edithtel_c6').value;
+  var email_c5 = document.getElementById('edithemail_c5').value;
+  var email_c6 = document.getElementById('edithemail_c6').value;
+  
   var obser_prov = document.getElementById('edithobser_prov').value;
   var id_prov = document.getElementById('id_prov').value;
 
-  var datos= 'codigo_pro=' + codigo_pro + '&nom_pro=' + nom_pro + '&domi_fisc=' + domi_fisc + '&condi_pago=' + condi_pago + '&cont_1=' + cont_1 + '&tel_c1=' + tel_c1 + '&tel_c2=' + tel_c2 + '&email_c1=' + email_c1 + '&email_c2=' + email_c2 + '&cont_2=' + cont_2 + '&tel_c3=' + tel_c3 + '&tel_c4=' + tel_c4 + '&email_c3=' + email_c3 + '&email_c4=' + email_c4 + '&obser_prov=' + obser_prov + '&id_prov=' + id_prov +'&opcion=actualizar';
+  var datos= 'codigo_pro=' + codigo_pro + '&nom_pro=' + nom_pro + '&domi_fisc=' + domi_fisc + '&condi_pago=' + condi_pago + '&cont_1=' + cont_1 + '&tel_c1=' + tel_c1 + '&tel_c2=' + tel_c2 + '&email_c1=' + email_c1 + '&email_c2=' + email_c2 + '&cont_2=' + cont_2 + '&tel_c3=' + tel_c3 + '&tel_c4=' + tel_c4 + '&email_c3=' + email_c3 + '&email_c4=' + email_c4 + '&cont_3=' + cont_3 + '&tel_c5=' + tel_c5 + '&tel_c6=' + tel_c6 + '&email_c5=' + email_c5 + '&email_c6=' + email_c6 + '&obser_prov=' + obser_prov + '&id_prov=' + id_prov +'&opcion=actualizar';
   //alert(datos);
 
   if (document.getElementById('editcodigo_pro').value == '' || document.getElementById('editnom_pro').value == '' || document.getElementById('edithdomi_fisc').value == '' || document.getElementById('editcondi_pago').value == '' || document.getElementById('editcondi_pago').value == ''|| document.getElementById('edtcont_1').value == '' || document.getElementById('edthtel_c1').value == '') { 

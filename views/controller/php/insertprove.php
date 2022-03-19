@@ -23,9 +23,13 @@
             $tel_c4 = $_POST['tel_c4'];
             $email_c3 = $_POST['email_c3'];
             $email_c4 = $_POST['email_c4'];
+            $cont_3 = $_POST['cont_3'];
+            $tel_c5 = $_POST['tel_c5'];
+            $tel_c6 = $_POST['tel_c6'];
+            $email_c5 = $_POST['email_c5'];
+            $email_c6 = $_POST['email_c6'];
             $obser_prov = $_POST['obser_prov'];
-
-            if (registrar($codigo_pro,$nom_pro,$domi_fisc,$condi_pago,$cont_1,$tel_c1,$tel_c2,$email_c1,$email_c2,$cont_2,$tel_c3,$tel_c4,$email_c3,$email_c4,$obser_prov,$conexion)){
+            if (registrar($codigo_pro,$nom_pro,$domi_fisc,$condi_pago,$cont_1,$tel_c1,$tel_c2,$email_c1,$email_c2,$cont_2,$tel_c3,$tel_c4,$email_c3,$email_c4,$cont_3,$tel_c5,$tel_c6,$email_c5,$email_c6,$obser_prov,$conexion)){
                 echo "0";
                 $usuario='PRUEBAS';
                 historial($usuario,$codigo_pro,$nom_pro,$conexion);
@@ -52,10 +56,17 @@
         $tel_c4 = $_POST['tel_c4'];
         $email_c3 = $_POST['email_c3'];
         $email_c4 = $_POST['email_c4'];
+        
+        $cont_3 = $_POST['cont_3'];
+        $tel_c5 = $_POST['tel_c5'];
+        $tel_c6 = $_POST['tel_c6'];
+        $email_c5 = $_POST['email_c5'];
+        $email_c6 = $_POST['email_c6'];
+        
         $obser_prov = $_POST['obser_prov'];
         $id_prov = $_POST['id_prov'];
 
-    if (actualizar($codigo_pro,$nom_pro,$domi_fisc,$condi_pago,$cont_1,$tel_c1,$tel_c2,$email_c1,$email_c2,$cont_2,$tel_c3,$tel_c4,$email_c3,$email_c4,$obser_prov,$id_prov,$conexion)){
+    if (actualizar($codigo_pro,$nom_pro,$domi_fisc,$condi_pago,$cont_1,$tel_c1,$tel_c2,$email_c1,$email_c2,$cont_2,$tel_c3,$tel_c4,$email_c3,$email_c4,$cont_3,$tel_c5,$tel_c6,$email_c5,$email_c6,$obser_prov,$id_prov,$conexion)){
         echo "0";
         $usuario='PRUEBAS';
         $realizo = 'ACTUALIZO DAT. DEL PROVEEDOR';
@@ -93,8 +104,8 @@ function comprobacion ($codigo_pro,$nom_pro,$conexion){
     $this->conexion->cerrar();
 }
 //funcion para guardar articulo
-function registrar ($codigo_pro,$nom_pro,$domi_fisc,$condi_pago,$cont_1,$tel_c1,$tel_c2,$email_c1,$email_c2,$cont_2,$tel_c3,$tel_c4,$email_c3,$email_c4,$obser_prov,$conexion){
-    $query="INSERT INTO proveedores VALUES(0,'$codigo_pro','$nom_pro','$domi_fisc','$condi_pago','$cont_1','$tel_c1','$tel_c2','$email_c1','$email_c2','$cont_2','$tel_c3','$tel_c4','$email_c3','$email_c4','$obser_prov',0)";
+function registrar ($codigo_pro,$nom_pro,$domi_fisc,$condi_pago,$cont_1,$tel_c1,$tel_c2,$email_c1,$email_c2,$cont_2,$tel_c3,$tel_c4,$email_c3,$email_c4,$cont_3,$tel_c5,$tel_c6,$email_c5,$email_c6,$obser_prov,$conexion){
+    $query="INSERT INTO proveedores VALUES(0,'$codigo_pro','$nom_pro','$domi_fisc','$condi_pago','$cont_1','$tel_c1','$tel_c2','$email_c1','$email_c2','$cont_2','$tel_c3','$tel_c4','$email_c3','$email_c4','$cont_3','$tel_c5','$tel_c6','$email_c5','$email_c6','$obser_prov',0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -103,8 +114,8 @@ function registrar ($codigo_pro,$nom_pro,$domi_fisc,$condi_pago,$cont_1,$tel_c1,
     $this->conexion->cerrar();
 }
 //funcion para actualizar el registro
-function actualizar ($codigo_pro,$nom_pro,$domi_fisc,$condi_pago,$cont_1,$tel_c1,$tel_c2,$email_c1,$email_c2,$cont_2,$tel_c3,$tel_c4,$email_c3,$email_c4,$obser_prov,$id_prov,$conexion){
-    $query="UPDATE proveedores SET codigo_pro='$codigo_pro', nom_pro='$nom_pro', domi_fisc='$domi_fisc', condi_pago='$condi_pago', cont_1='$cont_1', tel_c1='$tel_c1', tel_c2='$tel_c2', email_c1='$email_c1', email_c2='$email_c2', cont_2='$cont_2', tel_c3='$tel_c3', tel_c4='$tel_c4', email_c3='$email_c3', email_c4='$email_c4', obser_prov='$obser_prov' WHERE id_prov = '$id_prov'";
+function actualizar ($codigo_pro,$nom_pro,$domi_fisc,$condi_pago,$cont_1,$tel_c1,$tel_c2,$email_c1,$email_c2,$cont_2,$tel_c3,$tel_c4,$email_c3,$email_c4,$cont_3,$tel_c5,$tel_c6,$email_c5,$email_c6,$obser_prov,$id_prov,$conexion){
+    $query="UPDATE proveedores SET codigo_pro='$codigo_pro', nom_pro='$nom_pro', domi_fisc='$domi_fisc', condi_pago='$condi_pago', cont_1='$cont_1', tel_c1='$tel_c1', tel_c2='$tel_c2', email_c1='$email_c1', email_c2='$email_c2', cont_2='$cont_2', tel_c3='$tel_c3', tel_c4='$tel_c4', email_c3='$email_c3', email_c4='$email_c4',cont_3='$cont_3', tel_c5='$tel_c5', tel_c6='$tel_c6', email_c5='$email_c5', email_c6='$email_c6', obser_prov='$obser_prov' WHERE id_prov = '$id_prov'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
