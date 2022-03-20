@@ -1011,8 +1011,8 @@
           </div><!-- modal-dialog -->
         </div><!-- modal -->
 
-        <!-- MODAL PARA EDITAR CLIENTES-->
-<div class="modal fade" id='modal-surtirvof'>
+        <!-- MODAL PARA SURTIR ARTICULOS-->
+        <div class="modal fade" id='modal-surtirvof'>
           <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/"> 
             <div class="modal-content bd-5" >
               <div class="modal-header pd-y-20 pd-x-25">
@@ -1056,10 +1056,10 @@
                     </div>
                   </div><!-- col-4 -->
                   <div class="col-lg-4">
-                    <button type="button" title="Dar click para marcar surtir" onclick="" id="voguardarsur" style="" class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">CONFIRAR SURTIR</button>
+                    <button type="button" title="Dar click para marcar surtir" onclick="acsurtirvof()" id="voguardarsur1" style="" class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">CONFIRAR SURTIR</button>
                   </div>
                   <div class="col-lg-4">
-                    <button type="button" title="Dar click para marcar sin existencia" onclick="sinexisten()" id="voguardarsur" style="" class="btn btn-danger tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">SIN EXISTENCIAS</button>
+                    <button type="button" title="Dar click para marcar sin existencia" onclick="sinexisten()" id="voguardarsur2" style="" class="btn btn-danger tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">SIN EXISTENCIAS</button>
                   </div>
 
                 </div><!-- col-4 -->
@@ -1088,6 +1088,27 @@
             </div>
           </div><!-- modal-dialog -->
         </div><!-- modal -->
+
+        <!-- MODAL DE DETALLES NO SURTIDO-->
+        <div class="modal fade" id='modal-nosurtido'>
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body tx-center pd-y-20 pd-x-20">
+                <i class="icon icon ion-ios-close-outline tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_nosur" id="id_nosur">
+                  <h4 class="tx-danger mg-b-20">No fue surtido por falta de Existencia</h4>
+                  <label id="descar" name="descar" style="font-size:16px" for=""></label>
+                  <label style="font-size:25px" for="">Detalles del Articulo</label>
+                  <p class="mg-b-20 mg-x-20">
+                    <label style="font-size:16px" for="">Cantidad Solicitada:</label>
+                    <label style="font-size:16px" id="canreal" name="canreal" for=""></label>
+                  </p>
+                  <button type="button" onclick="closemodnosui()" class="btn btn-danger tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" aria-label="Close">Cerrar</button> 
+              </div><!-- modal-body -->
+            </div><!-- modal-content -->
+          </div><!-- modal-dialog -->
+        </div><!-- modal -->
+            
     <script>
       
       $(function(){

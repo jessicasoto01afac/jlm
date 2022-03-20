@@ -119,11 +119,27 @@
             }else{
                 echo "1";
             }
+    //Condición donde marca que se surtio
+    }else if($opcion === 'surtir'){
+        $id_kax = $_POST['id_kax'];
+        $refe_1 = $_POST['refe_1'];
+        $codigo_1 = $_POST['codigo_1'];
+        $cantidad = $_POST['cantidad'];
+        $descripcion = $_POST['descripcion'];
+
+            if (existencia($id_kax,$cantidad,$codigo_1,$descripcion,$conexion)){
+                echo "0";
+                $realizo = 'SURTE ARTICULO DE OFICINA';
+                $usuario='PRUEBAS';
+                hisexist($usuario,$realizo,$cantidad,$refe_1,$codigo_1,$conexion);
+            }else{
+                echo "1";
+            }
     }
     
 
 
-//FUNCIONES-----------------------------------------------------------------------------------
+//FUNCIONES-----------------------------------------------------------------------------------------------------------------------------------------
 
 //funcion de comprobación para ver si el vale ya se encuentra en la base
 function comprobacion ($refe_1,$codigo_1,$conexion){
@@ -179,6 +195,16 @@ function edicion ($codigo_1,$descripcion_1,$salida,$costo,$total,$observa,$id_ka
 //función para surtir
 function sinexistencia ($id_kax,$conexion){
     $query="UPDATE kardex SET status_2='SIN EXISTENCIAS', salida=0 WHERE id_kax = '$id_kax'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//función para surtir con existencias
+function existencia ($id_kax,$cantidad,$codigo_1,$descripcion,$conexion){
+    $query="UPDATE kardex SET status_2='SURTIDO', salida='$cantidad', codigo_1='$codigo_1', descripcion_1='$descripcion' WHERE id_kax = '$id_kax'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -269,6 +295,17 @@ function hisinexist($usuario,$realizo,$refe_1,$codigo_1,$conexion){
         return false;
     }
 }
+function hisexist($usuario,$realizo,$cantidad,$refe_1,$codigo_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'VALE DE OFICINA FOLIO:' '$refe_1' ' ARTICULO: ' '$codigo_1' ' CANTIDAD: ' '$cantidad' ,'$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 //funcion para cerrar laa conexion
 function cerrar($conexion){
     mysqli_close($conexion);
