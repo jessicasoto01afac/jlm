@@ -29,7 +29,7 @@ include ("../controller/conexion.php");
 
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
-    <link rel="stylesheet" href="../template/css/card.css">
+    <!-- <link rel="stylesheet" href="../template/css/card.css"> -->
   </head>
   <style>
   .swal-wide{

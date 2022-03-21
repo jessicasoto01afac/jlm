@@ -32,7 +32,7 @@ include ("../controller/conexion.php");
     <script src="../template/js/sweetalert2.all.min.js"></script>
     <script src="../controller/js/catalogos.js"></script>
     <!-- Bracket CSS -->
-    <link rel="stylesheet" href="../template/css/card.css">
+    <!-- <link rel="stylesheet" href="../template/css/card.css"> -->
   </head>
   <body>
   

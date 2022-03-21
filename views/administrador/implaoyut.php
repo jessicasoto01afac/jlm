@@ -26,7 +26,7 @@ unset($_SESSION['consulta']);
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" type="text/css" href="../css/style.css">
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
-  <link rel="stylesheet" type="text/css" href="../dist/css/card.css">
+  <!-- <link rel="stylesheet" type="text/css" href="../dist/css/card.css"> -->
   <link rel="stylesheet" type="text/css" href="../dist/css/contra.css">
   <script src="../dist/js/sweetalert2.all.min.js"></script>
   <link href="../dist/css/sweetalert2.min.css" type="text/css" rel="stylesheet">

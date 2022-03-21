@@ -154,7 +154,7 @@ function comprobacion ($refe_1,$codigo_1,$conexion){
 }
 //funcion para guardar el vale de oficina
 function registrar ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$costo,$total,$ubicacion,$conexion){
-    $query="INSERT INTO kardex VALUES(0,'$refe_1','NA','$refe_3','$fecha','$codigo_1','$descripcion_1','VALE_OFICINA','$proveedor_cliente','$ubicacion','$cantidad_real',0,'$salida',$costo,0,$total,'$observa','PENDIENTE','PENDIENTE','NO','NO',0)";
+    $query="INSERT INTO kardex VALUES(0,'$refe_1','NA','$refe_3','$fecha','$codigo_1','$descripcion_1','VALE_OFICINA','ARTICULO','$proveedor_cliente','$ubicacion','$cantidad_real',0,'$salida',$costo,0,$total,'$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

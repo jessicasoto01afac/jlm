@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../template/css/card.css">
+<!-- <link rel="stylesheet" href="../template/css/card.css"> -->
 <link href="../template/css/sweetalert2.min.css" type="text/css" rel="stylesheet">
 <script src="../template/js/sweetalert2.all.min.js"></script>
 

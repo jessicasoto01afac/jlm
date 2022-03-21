@@ -1,28 +1,38 @@
 <!DOCTYPE html>
+<?php include ("../controller/conexion.php");
+      $sql = "SELECT MAX(id_kax) + 1 AS id_memo FROM kardex where tipo ='VALE_OFICINA'";
+      $foliomemo = mysqli_query($conexion,$sql);
+      $folio = mysqli_fetch_row($foliomemo);
+
+
+      $sql = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $articulo = mysqli_query($conexion,$sql);
+    ?>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+
     <link rel="shortcut icon" href="../template/img/logo.png"/>
 
     <!-- Meta -->
     <meta name="author" content="Jessica Soto">
 
-    <title>JLM|Vales_oficina</title>
+    <title>JLM|Agregar Memos</title>
 
     <!-- vendor css -->
     <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../template/lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="../template/lib/datatables/jquery.dataTables.css" rel="stylesheet">
+    <link href="../template/lib/select2/css/select2.min.css" rel="stylesheet">
     <link href="../template/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
     <script type="text/javascript" language="javascript" src="../datas/jquery-3.js"></script>
-    <script type="text/javascript" language="javascript" src="../datas/jquery.js"></script>
     <script type="text/javascript" async="" src="../datas/ga.js"></script>
-    <link href="../template/lib/select2/css/select2.min.css" rel="stylesheet">
+    
     <script src="../template/js/sweetalert2.all.min.js"></script>
-
+    <script src="../template/lib/select2/js/select2.min.js"></script>
     <link href="../template/lib/highlightjs/github.css" rel="stylesheet">
     <link href="../template/lib/jquery.steps/jquery.steps.css" rel="stylesheet">
     <script src="../controller/js/vales.js"></script>
@@ -49,50 +59,52 @@
   <div class="br-mainpanel">
     <div class="br-pageheader pd-y-15 pd-l-20">
         <nav class="breadcrumb pd-0 mg-0 tx-12">
-          <a class="breadcrumb-item" href="../administrador/vale_oficina.php">Lista de vales</a>
-          <span class="breadcrumb-item active">Alta de Vale de Oficina</span>
+          <a class="breadcrumb-item" href="../administrador/memos.php">Lista de memos</a>
+          <span class="breadcrumb-item active">Alta de Memo</span>
         </nav>
       </div><!-- br-pageheader -->
       <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-        <h4 class="tx-gray-800 mg-b-5">ALTA DE VALE DE OFICINA</h4>
+        <h4 class="tx-gray-800 mg-b-5">ALTA DE MEMOS</h4>
       </div>
         <div class="br-pagebody">
         <div class="br-section-wrapper">
         
-          <div id="wizard2">
-            <h3>Cabezera del vale</h3>
+          <div id="wizard6">
+            <h3>Cabezera del memo</h3>
             <section>
             <form id="valeoficina" method="POST">
             <div class="row mg-b-25">
               <div class="col-lg-4">
                 <div class="form-group">
                   <label style="font-size:16px" class="form-control-label">FOLIO: <span class="tx-danger">*</span></label>
-                  <input onkeyup="mayus(this);" class="form-control" type="text" id="vfolio" name="vfolio" value="" placeholder="">
+                  <input onkeyup="mayus(this);" style="font-size:18px; color:#1F618D" readonly class="form-control" type="text" id="mfolio" name="mfolio" value="<?php echo $folio[0]?>" placeholder="">
                 </div><!-- form-group -->
               </div><!-- form-group -->
               <div class="col-lg-4">
                 <div class="form-group">
                   <label style="font-size:16px" class="form-control-label">FECHA: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="date" id="vfecha" name="vfecha" value="" placeholder="">
+                  <input class="form-control" type="date" id="mfecha" name="mfecha" value="" placeholder="">
                 </div><!-- form-group -->
               </div><!-- form-group -->
               <div class="col-lg-4">
                 <div class="form-group mg-b-10-force">
-                  <label style="font-size:16px"  class="form-control-label">TIPO DE VALE: <span class="tx-danger">*</span></label>
-                  <select class="form-control" onchange="tipevale()" id="vtipo" name="vtipo">
+                  <label style="font-size:16px"  class="form-control-label">TIPO DE MEMO: <span class="tx-danger">*</span></label>
+                  <select class="form-control" onchange="" id="mtipo" name="mtipo">
                     <option value="">SELECCIONA UNA OPCIÓN</option>
-                    <option value="INTERNO">INTERNO</option>
-                    <option value="VENTA">VENTA</option>
+                    <option value="INTERNO">TRASPASO</option>
+                    <option value="VENTA">TRANSFORMACIÓN</option>
                   </select>
                 </div>
               </div>
-              <div class="col-lg-6" id="personal" style="display:none;">
-                <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">NOMBRE DEL PERSONAL: <span class="tx-danger">*</span></label>
-                  <input onkeyup="mayus(this);" class="form-control" type="text" id="vprove" name="vprove" placeholder="Ingrese el Nombre">
-                </div>
+            
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label">PEDIDOS RELACIONADOS:</label>
+                  <div id="buscpedido"></div>
+                </div><!-- col-4 -->
               </div><!-- col-8 -->
-              <div class="col-lg-6" id="departamento" style="">
+
+              <div class="col-lg-4" id="departamento" style="">
                 <div class="form-group mg-b-10-force">
                   <label class="form-control-label">DEPARTAMENTO SOLICITANTE: <span class="tx-danger">*</span></label>
                   <select class="form-control" id="vdep" name="vdep">
@@ -109,50 +121,44 @@
                 </div>
               </div><!-- col-4 -->
             </section>
-            <h3>Agregar Articulos</h3>
+            <h3>Material para traspaso</h3>
             <section>
-            <p>INGRESE LOS ARTICULOS</p>
+            <p>INGRESE LOS ARTICULOS PARA TRASPASO</p>
             <div class="row mg-b-25">
             <div class="col-lg-3">
               <div class="form-group">
                 <label style="font-size:16px" class="form-control-label">CODIGO: <span class="tx-danger">*</span></label>
-                <div id="busccodigo"></div>
+                <div id="busccodimem"></div>
               </div><!-- form-group -->
             </div><!-- form-group -->
             <div class="col-lg-9">
               <div class="form-group">
                 <label style="font-size:16px" class="form-control-label">DESCRIPCIÓN: <span class="tx-danger">*</span></label>
-                <input onkeyup="mayus(this);" class="form-control" readonly name="vdescrip" id="vdescrip" placeholder="" type="text" required>
+                <input onkeyup="mayus(this);" class="form-control" readonly name="mdecriptr" id="mdecriptr" placeholder="" type="text" required>
               </div><!-- form-group -->
             </div><!-- form-group -->
             <div class="col-lg-3">
               <div class="form-group">
                 <label style="font-size:16px" class="form-control-label">CANTIDAD: <span class="tx-danger">*</span></label>
-                <input onkeyup="mayus(this);" class="form-control" name="vcantidad" id="vcantidad" placeholder="Ingrese la cantidad" type="number" required>
+                <input onkeyup="mayus(this);" class="form-control" name="memocantidad" id="memocantidad" placeholder="Ingrese la cantidad" type="number" required>
               </div><!-- form-group -->
             </div><!-- form-group -->
             <div class="col-lg-3">
               <div class="form-group">
                 <label style="font-size:16px" class="form-control-label">DEPARTAMENTO: <span class="tx-danger">*</span></label>
-                <input onkeyup="mayus(this);" class="form-control" name="vdepart" id="vdepart" placeholder="Departamento" readonly type="text" required>
+                <input onkeyup="mayus(this);" class="form-control" name="mdepart" id="mdepart" placeholder="Departamento" readonly type="text" required>
               </div><!-- form-group -->
             </div><!-- form-group -->
             <div class="col-lg-3" id="precio" style="display:none;">
                 <div class="form-group mg-b-10-force">
                   <label class="form-control-label">$ PRECIO: <span class="tx-danger">*</span></label>
-                  <input onkeyup="mayus(this);" onchange="totalvo()" min="0" value="0" step="0.1" class="form-control" type="text" id="vprecio" name="vprecio" placeholder="Ingrese el precio">
-                </div>
-            </div><!-- col-6 -->
-            <div class="col-lg-3" id="total" style="display:none;">
-                <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">$ TOTAL: <span class="tx-danger">*</span></label>
-                  <input onkeyup="mayus(this);" class="form-control" value="0" type="number" min="0" max="4" id="vtotal" name="vtotal" readonly placeholder="Total">
+                  <input onkeyup="mayus(this);" onchange="totalvo()" min="0" value="0" step="0.1" class="form-control" type="text" id="memprecio" name="memprecio" placeholder="Ingrese el precio">
                 </div>
             </div><!-- col-6 -->
             <div class="col-lg-12">
               <div class="form-group">
                 <label class="form-control-label label2">OBSERBACIONES: <span class="tx-danger"></span></label>
-                <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="observo" id="observo" placeholder="Ingresa alguna observación"></textarea>
+                <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="memobservo" id="memobservo" placeholder="Ingresa alguna observación"></textarea>
               </div>
             </div><!-- col-12 -->
             </form>
@@ -190,7 +196,83 @@
               <div id="listvaleofi">
               </div>
             </div><!-- col-12 -->
-            <a class="btn btn-primary" href="../administrador/vale_oficina.php"    style="float:right; color:white">FINALIZAR</a>
+            </section>
+
+            <h3>Material traspasado</h3>
+            <section>
+            <p>INGRESE LOS ARTICULOS TRASPASADOS</p>
+            <div class="row mg-b-25">
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label style="font-size:16px" class="form-control-label">CODIGO: <span class="tx-danger">*</span></label>
+                <div id="busccodigomem2"></div>
+              </div><!-- form-group -->
+            </div><!-- form-group -->
+            <div class="col-lg-9">
+              <div class="form-group">
+                <label style="font-size:16px" class="form-control-label">DESCRIPCIÓN: <span class="tx-danger">*</span></label>
+                <input onkeyup="mayus(this);" class="form-control" readonly name="medescrip2" id="medescrip2" placeholder="" type="text" required>
+              </div><!-- form-group -->
+            </div><!-- form-group -->
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label style="font-size:16px" class="form-control-label">CANTIDAD: <span class="tx-danger">*</span></label>
+                <input onkeyup="mayus(this);" class="form-control" name="mecantidad2" id="mecantidad2" placeholder="Ingrese la cantidad" type="number" required>
+              </div><!-- form-group -->
+            </div><!-- form-group -->
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label style="font-size:16px" class="form-control-label">DEPARTAMENTO: <span class="tx-danger">*</span></label>
+                <input onkeyup="mayus(this);" class="form-control" name="memdepart2" id="memdepart2" placeholder="Departamento" readonly type="text" required>
+              </div><!-- form-group -->
+            </div><!-- form-group -->
+            <div class="col-lg-3" id="precio" style="display:none;">
+                <div class="form-group mg-b-10-force">
+                  <label class="form-control-label">$ PRECIO: <span class="tx-danger">*</span></label>
+                  <input onkeyup="mayus(this);" onchange="totalvo()" min="0" value="0" step="0.1" class="form-control" type="text" id="memprecio2" name="memprecio2" placeholder="Ingrese el precio">
+                </div>
+            </div><!-- col-6 -->
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label class="form-control-label label2">OBSERBACIONES: <span class="tx-danger"></span></label>
+                <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="memobservo2" id="memobservo2" placeholder="Ingresa alguna observación"></textarea>
+              </div>
+            </div><!-- col-12 -->
+            </form>
+            <br> 
+          <br> 
+            <div class="form-layout-footer">
+              <button class="btn btn-primary" onclick="addvaleofi()">AGREGAR</button>
+            </div><!-- form-layout-footer -->
+            <div class="col-lg-12">
+              <br>
+              <div class="form-group">
+              <br>
+                <div style="display:none;" id="dublivo" name="dublivo" class="alert alert-warning" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> El resgistro ya existe</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+                <div style="display:none;" id="vaciosvo" name="vaciosvo" class="alert alert-info" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> Llenar todos los campos</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+                <div style="display:none;" id="errvo" name="errvo" class="alert alert-danger" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar coontactar a soporte tecnico o levantar un ticket</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+              </div>
+            </div><!-- col-12 -->
+            <div class="col-lg-12">
+              <div class="form-group">
+              <div id="listvaleofi">
+              </div>
+            </div><!-- col-12 -->
             </section>
           </div>
 
@@ -210,8 +292,9 @@
       </footer>
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
-
+    
     <script src="../template/lib/jquery/jquery.js"></script>
+    <script src="../template/lib/select2/js/select2.min.js"></script>
     <script src="../template/lib/popper.js/popper.js"></script>
     <script src="../template/lib/bootstrap/bootstrap.js"></script>
     <script src="../template/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
@@ -224,50 +307,18 @@
     <script src="../template/lib/datatables/jquery.dataTables.js"></script>
     <script src="../template/lib/datatables-responsive/dataTables.responsive.js"></script>
     <script src="../template/lib/parsleyjs/parsley.js"></script>
-    <script src="../template/lib/select2/js/select2.min.js"></script>
+    <script src="../template/lib/jquery-toggles/toggles.min.js"></script>
+    <script src="../template/lib/jquery.maskedinput/jquery.maskedinput.js"></script>
+    <script src="../template/lib/jt.timepicker/jquery.timepicker.js"></script>
+    <script src="../template/lib/spectrum/spectrum.js"></script>
+    <script src="../template/lib/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+    <script src="../template/lib/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
+    
     <?php include('../administrador/modal.php');?>
 
     <script src="../template/js/bracket.js"></script>
     <script>
-      document.getElementById('vfolio').value;
-      $.ajax({
-        url: '../controller/php/convaleoficin.php',
-        type: 'POST'
-      }).done(function(resp) {
-        obj = JSON.parse(resp);
-        var res = obj.data;
-        var x = 0;
-        html = '<div class="table-wrapper"><table style="width:100%" id="datavaofi1" name="datavaofi1" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
-        for (U = 0; U < res.length; U++) {  
-          if (obj.data[U].refe_1 == id_valeofi){
-            x++;
-              
-                html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].refe_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observ_val + "</td><td>" + "<a onclick='proveedith()' style='cursor:pointer;' title='Editar' class='btn btn-primary btn-icon' data-toggle='modal' data-target='#modal-editprov'><div><i style='color:white;' class='fa fa-pencil-square-o'></i></div></a>  <a onclick='deletprov()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deleprov'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";            
-          }
-                
-        }
-        html += '</div></tbody></table></div></div>';
-        $("#datavaofi1").html(html);
-        'use strict';
-        $('#datavaofi').DataTable({
-            responsive: true,
-            language: {
-              searchPlaceholder: 'Buscar...',
-              sSearch: '',
-              lengthMenu: 'mostrando _MENU_ paginas',
-              sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
-              sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
-              sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
-              oPaginate: {
-                    sFirst: 'Primero',
-                    sLast: 'Último',
-                    sNext: 'Siguiente',
-                    sPrevious: 'Anterior',
-                },
-            }
-        
-        });
-    })
+
     
       $(document).ready(function(){
         'use strict';
@@ -348,7 +399,12 @@
       });
 
 $(document).ready(function(){
-$('#busccodigo').load('./select/buscar.php');
+  $('#busccodimem').load('./select/buscarme.php');
+  $('#busccodigomem2').load('./select/buscarme2.php');
+  $('#buscpedido').load('./select/buspedi.php');
+  
+  
+  
 });
     </script>
 

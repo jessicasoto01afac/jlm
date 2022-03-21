@@ -38,7 +38,7 @@
      </a><!-- br-menu-link -->
      <ul class="br-menu-sub nav flex-column">
        <li class="nav-item"><a href="navigation-layouts.html" class="nav-link">Producción</a></li>
-       <li class="nav-item"><a href="navigation-layouts.html" class="nav-link">Memos</a></li>
+       <li class="nav-item"><a href="../administrador/memos.php" class="nav-link">Memos</a></li>
        <li class="nav-item"><a href="../administrador/vale_oficina.php" class="nav-link">Vales de oficina</a></li>
      </ul>
      <a href="#" class="br-menu-link">

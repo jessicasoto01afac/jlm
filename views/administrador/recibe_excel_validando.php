@@ -94,7 +94,7 @@ include ("../controller/conexion.php");
                 //No existe Registros Duplicados
                 if ( $ca_dupli->num_rows == 0 ) {
                   
-                  $insertarData = "INSERT INTO kardex VALUES(0,'$refe_1','0','0','$fecha','$codigo_1','$descripcion_1','PEDIDO','$proveedor_cliente','PENDIENTE','$cantidad_real','0','$salida','0','0','0','0','PENDIENTE','PENDIENTE','PENDIENTE','PENDIENTE','0')";
+                  $insertarData = "INSERT INTO kardex VALUES(0,'$refe_1','0','0','$fecha','$codigo_1','$descripcion_1','PEDIDO','ARTICULO','$proveedor_cliente','PENDIENTE','$cantidad_real','0','$salida','0','0','0','0','NA','PENDIENTE','PENDIENTE','PENDIENTE','PENDIENTE','0')";
                   mysqli_query($conexion, $insertarData);
                   
                   
