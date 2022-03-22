@@ -350,7 +350,7 @@ function autorizarm(){
     var status = 'AUTORIZADO';
     var folio = document.getElementById('folmemo').innerHTML; //FOLIO DEL MEMO
     var datos= 'folio=' + folio  + '&opcion=autorizarmem';
-    alert(datos);
+    //alert(datos);
   
     if (folio == '' ) { 
         Swal.fire({
@@ -398,7 +398,7 @@ function surtirme(){
     //alert("entra surtir ememo");
     var folio = document.getElementById('folmemo').innerHTML; //FOLIO DEL MEMO
     var datos= 'folio=' + folio  + '&opcion=surtirmem';
-    alert(datos);
+   // alert(datos);
   
     if (folio == '' ) { 
         Swal.fire({
@@ -443,10 +443,10 @@ function surtirme(){
 }
 //FUNCIÓN DE FINALIZAR MEMO 
 function finalimemo(){
-    alert("entra finalizar ememo");
+    //alert("entra finalizar ememo");
     var folio = document.getElementById('folmemo').innerHTML; //FOLIO DEL MEMO
     var datos= 'folio=' + folio  + '&opcion=finalmem';
-    alert(datos);
+    //alert(datos);
   
     if (folio == '' ) { 
         Swal.fire({

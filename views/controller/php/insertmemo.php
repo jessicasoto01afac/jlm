@@ -139,7 +139,7 @@ function registrar_2 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descr
 }
 //funcion para autorizar
 function autorizar ($folio,$conexion){
-    $query="UPDATE kardex SET status='AUTORIZADO' WHERE refe_1 = '$folio'";
+    $query="UPDATE kardex SET status='AUTORIZADO' WHERE refe_1 = '$folio' AND tipo='MEMO'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -149,7 +149,7 @@ function autorizar ($folio,$conexion){
 }
 //funcion para surtir
 function surtir ($folio,$conexion){
-    $query="UPDATE kardex SET status='SURTIDO' WHERE refe_1 = '$folio'";
+    $query="UPDATE kardex SET status='SURTIDO' WHERE refe_1 = '$folio' AND tipo='MEMO'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -159,7 +159,7 @@ function surtir ($folio,$conexion){
 }
 //funcion para finalizar
 function finalizar ($folio,$conexion){
-    $query="UPDATE kardex SET status='FINALIZADO' WHERE refe_1 = '$folio'";
+    $query="UPDATE kardex SET status='FINALIZADO' WHERE refe_1 = '$folio' AND tipo='MEMO'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

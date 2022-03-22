@@ -136,7 +136,14 @@ include('header.php');
                                             <option value="SURTIDO">SURTIDO</option>
                                             <option value="FINALIZADO">FINALIZADO</option>
                                             <option value="CANCELADO">CANCELADO</option>
+                                            <option value="AUTORIZADO">AUTORIZADO</option>
                                         </select>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                          <button id="btnautorizv" name="btnautorizv" type="button" style="display:none;" onclick="autorizarvo()" class="btn btn-info pd-x-30">Autorizar</button>
+                                          <button title="Dar click para liberar" id="btnliberarv" name="btnliberarv" type="button" style="display:none;" onclick="" class="btn btn-dark pd-x-25">Liberar</button>
+                                          <button id="btnsurtirv" name="btnsurtirv" type="button" style="display:none;" onclick="surtirvo()" class="btn btn-indigo pd-x-25">Surtir</button>
+                                          <button id="btnfinalizv" name="btnfinalizv" type="button" style="display:none;" onclick="finalivo()" class="btn btn-success pd-x-25">Finalizar</button>
+                                        </div>
                                     </div>
                                 </div><!-- col-4 -->
                                 <br>

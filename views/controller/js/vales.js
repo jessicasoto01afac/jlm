@@ -266,6 +266,11 @@ function savearvo(){
 //funcion para traer la informacion del vale
 function infvale(){
   //alert("entra vale");
+  var autorizar = document.getElementById('btnautorizv');
+  var liberar = document.getElementById('btnliberarv');
+  var surtir = document.getElementById('btnsurtirv');
+  var finalizado = document.getElementById('btnfinalizv');
+
   $("#datavaleofi tr").on('click', function() {
     var id_vofi = "";
     id_vofi += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
@@ -294,7 +299,18 @@ function infvale(){
               $("#detalles #inftipevo").val(o[1]);   
               $("#detalles #infsolivo").val(o[2]);
               $("#detalles #infestavo").val(o[3]);
-              
+
+              if (obj.data[D].status == 'PENDIENTE'){
+                autorizar.style.display = '';
+              }else if (obj.data[D].status == 'AUTORIZADO'){
+                surtir.style.display = '';
+                liberar.style.display = '';
+              }else if (obj.data[D].status == 'SURTIDO'){
+                finalizado.style.display = '';
+                liberar.style.display = '';
+              }else if (obj.data[D].status == 'FINALIZADO'){
+                liberar.style.display = '';
+              }
           }
       }
   });
@@ -310,12 +326,19 @@ function infvale(){
     for (U = 0; U < res.length; U++) {  
       if (obj.data[U].refe_1 == id_vofi){
         x++;
-        if (obj.data[U].status_2 == "PENDIENTE"){
+        if (obj.data[U].status_2 == "PENDIENTE" && obj.data[U].status == "PENDIENTE"){
+          estatus="<span title='Pendiente de autorizar' class=''>PENDIENTE</span>"
+        }else if (obj.data[U].status_2 == "PENDIENTE" && obj.data[U].status == "AUTORIZADO") {
           estatus="<button onclick='surtirvof();' data-toggle='modal' data-target='#modal-surtirvof' type='button' title='Dar click para surtir' class='btn btn-info mg-b-10'>SURTIR</button>"
-        }else if (obj.data[U].status_2 == "SURTIDO") {
+        }else if (obj.data[U].status_2 == "PENDIENTE" && obj.data[U].status == "FINALIZADO") {
+          estatus="<span title='Pendiente de autorizar' class=''>PENDIENTE</span>"
+        }else if (obj.data[U].status_2 == "PENDIENTE" && obj.data[U].status == "SURTIDO") {
+          estatus="<button onclick='surtirvof();' data-toggle='modal' data-target='#modal-surtirvof' type='button' title='Dar click para surtir' class='btn btn-info mg-b-10'>SURTIR</button>"
+        }else if (obj.data[U].status_2 == "SURTIDO" && obj.data[U].status == "AUTORIZADO") {
           estatus="<span title='Ya fue surtido' class='spandis'>SURTIDO</span>"
-
-        }else if (obj.data[U].status_2 == "SIN EXISTENCIAS")  {
+        }else if (obj.data[U].status_2 == "SURTIDO" && obj.data[U].status == "FINALIZADO") {
+          estatus="<span title='Ya fue surtido' class='spandis'>SURTIDO</span>"
+        }else if (obj.data[U].status_2 == "SIN EXISTENCIAS" && obj.data[U].status == "AUTORIZADO")  {
           estatus="<span title='Ver detalles' onclick='infonosur()' data-toggle='modal' data-target='#modal-nosurtido' class='sinexisten' style='font-size:12px;cursor: pointer;'>SIN EXISTENCIA</span>"
         }
         html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida + "</td><td>" + estatus +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
@@ -1040,4 +1063,149 @@ function infonosur(){
 
 function closemodnosui(){
   $('#modal-nosurtido').modal('hide');
+}
+
+//FUNCIÓN DE AUTORIZAR VALE 
+function autorizarvo(){
+  //alert("entra memo");
+  var folio = document.getElementById('fvofi').innerHTML; //FOLIO DEL MEMO
+  var datos= 'folio=' + folio  + '&opcion=autorizarval';
+  //alert(datos);
+
+  if (folio == '' ) { 
+      Swal.fire({
+          type: 'warning',
+          text: 'No hay folio ingresar',
+          showConfirmButton: false,
+          timer: 1500
+      });
+        return;
+    } else {
+      $.ajax({
+        type:"POST",
+        url:"../controller/php/insertvaleofi.php",
+        data:datos
+      }).done(function(respuesta){
+        if (respuesta==0){
+          Swal.fire({
+              type: 'success',
+              text: 'Se actualizo de forma correcta',
+              showConfirmButton: false,
+              timer: 1500
+          });
+          setTimeout("location.href = 'vale_oficina.php';", 1500);
+        }else if (respuesta == 2) {
+          Swal.fire({
+              type: 'warning',
+              text: 'ya esta duplicado',
+              showConfirmButton: false,
+              timer: 1500
+          });
+        }else{
+          Swal.fire({
+              type: 'error',
+              text: 'Error contactar a soporte tecnico',
+              showConfirmButton: false,
+              timer: 1500
+          });
+        }
+      });
+
+    }
+}
+//FUNCIÓN DE SURTIR MEMO 
+function surtirvo(){
+  //alert("entra surtir ememo");
+  var folio = document.getElementById('fvofi').innerHTML; //FOLIO DEL MEMO
+  var datos= 'folio=' + folio  + '&opcion=surtirval';
+ // alert(datos);
+
+  if (folio == '' ) { 
+      Swal.fire({
+          type: 'warning',
+          text: 'No hay folio',
+          showConfirmButton: false,
+          timer: 1500
+      });
+        return;
+    } else {
+      $.ajax({
+        type:"POST",
+        url:"../controller/php/insertvaleofi.php",
+        data:datos
+      }).done(function(respuesta){
+        if (respuesta==0){
+          Swal.fire({
+              type: 'success',
+              text: 'Se actualizo de forma correcta',
+              showConfirmButton: false,
+              timer: 1500
+          });
+          setTimeout("location.href = 'vale_oficina.php';", 1500);
+        }else if (respuesta == 2) {
+          Swal.fire({
+              type: 'warning',
+              text: 'ya esta duplicado',
+              showConfirmButton: false,
+              timer: 1500
+          });
+        }else{
+          Swal.fire({
+              type: 'error',
+              text: 'Error contactar a soporte tecnico',
+              showConfirmButton: false,
+              timer: 1500
+          });
+        }
+      });
+
+    }
+}
+//FUNCIÓN DE FINALIZAR MEMO 
+function finalivo(){
+  //alert("entra finalizar ememo");
+  var folio = document.getElementById('fvofi').innerHTML; //FOLIO DEL MEMO
+  var datos= 'folio=' + folio  + '&opcion=finalmem';
+  //alert(datos);
+
+  if (folio == '' ) { 
+      Swal.fire({
+          type: 'warning',
+          text: 'No hay folio',
+          showConfirmButton: false,
+          timer: 1500
+      });
+        return;
+    } else {
+      $.ajax({
+        type:"POST",
+        url:"../controller/php/insertvaleofi.php",
+        data:datos
+      }).done(function(respuesta){
+        if (respuesta==0){
+          Swal.fire({
+              type: 'success',
+              text: 'Se actualizo de forma correcta',
+              showConfirmButton: false,
+              timer: 1500
+          });
+          setTimeout("location.href = 'vale_oficina.php';", 1500);
+        }else if (respuesta == 2) {
+          Swal.fire({
+              type: 'warning',
+              text: 'ya esta duplicado',
+              showConfirmButton: false,
+              timer: 1500
+          });
+        }else{
+          Swal.fire({
+              type: 'error',
+              text: 'Error contactar a soporte tecnico',
+              showConfirmButton: false,
+              timer: 1500
+          });
+        }
+      });
+
+    }
 }

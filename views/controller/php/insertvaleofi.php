@@ -135,6 +135,35 @@
             }else{
                 echo "1";
             }
+    }else if($opcion === 'autorizarval'){
+        $folio = $_POST['folio'];
+            if (autorizar1($folio,$conexion)){
+                echo "0";
+                $usuario='PRUEBAS';
+                histaut($usuario,$folio,$conexion);
+            }else{
+                echo "1";
+            }
+     //Condición donde surte el memo
+    }else if($opcion === 'surtirval'){
+        $folio = $_POST['folio'];
+            if (surtir1($folio,$conexion)){
+                echo "0";
+                $usuario='PRUEBAS';
+                hisurtir($usuario,$folio,$conexion);
+            }else{
+                echo "1";
+            }
+    //condicion para finalizar el memo finalmem
+    }else if($opcion === 'finalmem'){
+        $folio = $_POST['folio'];
+            if (finalizar1 ($folio,$conexion)){
+                echo "0";
+                $usuario='PRUEBAS';
+                hisfinal($usuario,$folio,$conexion);
+            }else{
+                echo "1";
+            }
     }
     
 
@@ -232,6 +261,38 @@ function deletevo ($refe_1,$conexion){
     }
     cerrar($conexion);
 }
+
+//funcion para autorizar
+function autorizar1 ($folio,$conexion){
+    $query="UPDATE kardex SET status='AUTORIZADO' WHERE refe_1 = '$folio' AND tipo='VALE_OFICINA'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para surtir
+function surtir1 ($folio,$conexion){
+    $query="UPDATE kardex SET status='SURTIDO' WHERE refe_1 = '$folio' AND tipo='VALE_OFICINA'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para finalizar
+function finalizar1 ($folio,$conexion){
+    $query="UPDATE kardex SET status='FINALIZADO' WHERE refe_1 = '$folio' AND tipo='VALE_OFICINA'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
 function historial($usuario,$refe_1,$codigo_1,$conexion){
@@ -299,6 +360,40 @@ function hisexist($usuario,$realizo,$cantidad,$refe_1,$codigo_1,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'VALE DE OFICINA FOLIO:' '$refe_1' ' ARTICULO: ' '$codigo_1' ' CANTIDAD: ' '$cantidad' ,'$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//funciones para guardar el historico
+function histaut($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'AUTORIZA VALE DE OFICINA', 'FOLIO:' '$folio','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funciones para guardar el historico SURTIDO
+function hisurtir($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'SURTE VALE DE OFICINA', 'FOLIO:' '$folio','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funciones para guardar el historico FINALIZADO
+function hisfinal($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'FINALIZA VALE DE OFICINA', 'FOLIO:' '$folio','$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
