@@ -5,7 +5,7 @@
       $pedidos = mysqli_query($conexion,$sql);
     ?>
 
-			<select class="form-control select2-show-search" multiple data-placeholder="Elige un pedido relacionado" onchange="" id="pedidomem" name="pedidomem" type="text" data-live-search="true" style="width: 100%" >
+			<select class="form-control select2-show-search" multiple="multiple" data-placeholder="Elige un pedido relacionado" onchange="" id="pedidomem" name="pedidomem[]" type="text" data-live-search="true" style="width: 100%" >
 			<option value="0">Selecciona el pedido</option> 
 			<?php while($idped = mysqli_fetch_row($pedidos)):?>                      
 			<option value="<?php echo $idped[0]?>"><?php echo $idped[0]?></option>

@@ -25,7 +25,7 @@
 
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
-    <script src="../controller/js/vales.js"></script>
+    <script src="../controller/js/memos.js"></script>
 
   </head>
 
@@ -86,7 +86,7 @@ include('header.php');
   </section>
     <!-- ########## END: MAIN PANEL ########## -->
 <!------------------------------- ########## DETALLES DEL VALE ########## -------------------------->
-<section class="content" id="detalles" style="display: none;">
+<section class="content" id="detamemos" style="display: none;">
     <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel">
     <div class="br-pageheader pd-y-15 pd-l-20">
@@ -98,15 +98,15 @@ include('header.php');
         <div class="br-pagebody">
             <div  style="float: right;">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button onclick="editvaleof()" id="openedivo1" title="Dar clic para editar" type="button" class="btn btn-secondary btn btn-warning"><i class="fa fa-edit"></i></button>
-                <button onclick="closedithvo()" id="closevoed" title="Dar clic para cerrar edición" type="button" style="display:none;" class="btn btn-secondary btn-danger"><i class="fa fa-times"></i></button>
+                <button onclick="editvaleof()" id="openedimem1" title="Dar clic para editar" type="button" class="btn btn-secondary btn btn-warning"><i class="fa fa-edit"></i></button>
+                <button onclick="closedithvo()" id="closememo" title="Dar clic para cerrar edición" type="button" style="display:none;" class="btn btn-secondary btn-danger"><i class="fa fa-times"></i></button>
                 <button title="Imprimir" type="button" class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
               </div>
             </div><!-- col-5 -->
           <div class="br-section-wrapper">
 
-                <h6 class="">INFORMACIÓN DEL VALE</h6>
-                    <form id="info-valofi" method="POST">
+                <h6 class="">INFORMACIÓN DEL MEMO</h6>
+                    <form id="info-memo" method="POST">
                       
                         <div class="form-layout form-layout-2">
                           
@@ -117,42 +117,50 @@ include('header.php');
                                         <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="infid" id="infid">
                                         <label class="form-control-label">FOLIO: <span class="tx-danger">*</span></label>
                                         <!-- <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingresa el Folio"> -->
-                                        <label class="form-control-label" id="fvofi" name="fvofi" style="font-size: 24px;px; color:#14128F"></label>
+                                        <label class="form-control-label" id="folmemo" name="folmemo" style="font-size: 24px;px; color:#14128F"></label>
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-4 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
                                         <label class="form-control-label">Fecha: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly type="date" id="infecvo" name="infecvo" placeholder="Enter lastname">
+                                        <input class="form-control" readonly type="date" id="infecmem" name="infecmem" placeholder="Enter lastname">
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-4 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label mg-b-0-force">TIPO DE VALE: <span class="tx-danger">*</span></label>
-                                        <select id="inftipevo" disabled="" name="inftipevo" class="form-control" data-placeholder="Choose country">
+                                        <label class="form-control-label mg-b-0-force">TIPO DE MEMO: <span class="tx-danger">*</span></label>
+                                        <select id="intipomemo" disabled="" name="intipomemo" class="form-control" data-placeholder="Choose country">
                                             <option value="" selected>SELECCIONA UNA OPCIÓN</option>
-                                            <option value="INTERNO">INTERNO</option>
-                                            <option value="VENTA">VENTA</option>
+                                            <option value="TRASPASO">TRASPASO</option>
+                                            <option value="TRANSFORMACIÓN">TRANSFORMACIÓN</option>
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-8">
                                     <div class="form-group bd-t-0-force">
-                                        <label class="form-control-label">SOLICITANTE: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly id="infsolivo" name="infsolivo" type="text" name="address" placeholder="Enter address">
+                                        <label class="form-control-label">DEPARTAMENTO SOLICITANTE: <span class="tx-danger">*</span></label>
+                                        <input class="form-control" readonly id="infsolimem" name="infsolimem" type="text" name="address" placeholder="Enter address">
                                     </div>
                                 </div><!-- col-8 -->
                                 <div class="col-md-4">
                                     <div class="form-group mg-md-l--1 bd-t-0-force">
                                         <label class="form-control-label mg-b-0-force">ESTATUS: <span class="tx-danger">*</span></label>
-                                        <select id="infestavo" disabled="" name="infestavo" style="font-size:14px; color:#14128F" class="form-control">
+                                        <select id="infestamem" disabled="" name="infestamem" style="font-size:18px; color:#14128F" class="form-control">
                                             <option value="" selected>SELECCIONA UNA OPCIÓN</option>
                                             <option value="PENDIENTE">PENDIENTE</option>
                                             <option value="SURTIDO">SURTIDO</option>
                                             <option value="FINALIZADO">FINALIZADO</option>
                                             <option value="CANCELADO">CANCELADO</option>
+                                            <option value="AUTORIZADO">AUTORIZADO</option>
                                         </select>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                          <button id="btnautoriz" name="btnautoriz" type="button" style="display:none;" onclick="autorizarm()" class="btn btn-info pd-x-30">Autorizar</button>
+                                          <button title="Dar click para liberar" id="btnliberar" name="btnliberar" type="button" style="display:none;" onclick="" class="btn btn-dark pd-x-25">Liberar</button>
+                                          <button id="btnsurtir" name="btnsurtir" type="button" style="display:none;" onclick="surtirme()" class="btn btn-indigo pd-x-25">Surtir</button>
+                                          <button id="btnfinaliz" name="btnfinaliz" type="button" style="display:none;" onclick="finalimemo()" class="btn btn-success pd-x-25">Finalizar</button>
+                                        </div>
                                     </div>
+                                    
                                 </div><!-- col-4 -->
                                 <br>
                             </div><!-- row -->
@@ -181,13 +189,15 @@ include('header.php');
                             <div >
                               <button type="button" onclick="masarticvo()" data-toggle='modal' style="display:none; background-color: #009C28;" data-target='#modal-editavo1' onclick="" id="voagartic" class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i class="fa fa-plus"></i>  AGREGAR ARTICULO</button>
                             </div>
-                            <br>
-                            <h6 class="col-md-4 mg-t--1 mg-md-t-0">ARTICULOS</h6>
-                            <br> 
                             <div class="col-lg-12">
-                              <div id="listvaleofi1">
+                              <div id="listmemo1">
                               </div><!-- col-12 -->
-                           </div><!-- form-layout -->  
+                            </div><!-- form-layout -->
+                            <h5 id="trans" name="trans" style="text-align: center"></h5>  
+                            <div class="col-lg-12">
+                              <div id="listmemo2">
+                              </div><!-- col-12 -->
+                            </div><!-- form-layout -->  
                     </form>
                 </div>
 </div><!-- br-pagebody -->

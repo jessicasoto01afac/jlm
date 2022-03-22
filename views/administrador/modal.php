@@ -1108,6 +1108,170 @@
             </div><!-- modal-content -->
           </div><!-- modal-dialog -->
         </div><!-- modal -->
+  <!-- MODAL PARA EDITAR CLIENTES-->
+        <div class="modal fade" id='modal-editavo'>
+          <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/"> 
+            <div class="modal-content bd-5" >
+              <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form id="editcli" class="form-horizontal" action="" method="POST">
+                <div class="modal-body pd-25">
+                <a href="#" id="openedivo" style="float: right;font-size: 16px" class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editvo()" title="Dar clic para editar">
+                  <div><i class="fa fa-edit"></i></div>
+                </a>
+                <a href="#" id="closeditvo" style="float: right;font-size: 16px;display:none;" class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closedthvo()" title="Dar clic para cerrar">
+                  <div><i class="fa fa-times"></i></div>
+                </a>
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_vo" id="id_vo">
+                <div class="row mg-b-25">
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label label2">CODIGO: <span class="tx-danger" >*</span></label>
+                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number" name="edicovo" id="edicovo">
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <div class="form-group">
+                      <label class="form-control-label label2">DESCRIPCIÓN: <span class="tx-danger">*</span></label>
+                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="text" name="edithdesvo" id="edithdesvo">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label label2">CANTIDAD:<span class="tx-danger">*</span></label>
+                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number" name="editcavo" id="editcavo">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-8">
+                    <div class="form-group">
+                      <label class="form-control-label label2">OBSERVACIONES:<span class="tx-danger">*</span></label>
+                      <textarea onkeyup="mayus(this);" disabled="" rows="3" class="form-control" name="ediobservo" id="ediobservo" placeholder="Ingresa alguna observación"></textarea>
+                    </div>
+                  </div><!-- col-4 -->
+                </div><!-- col-4 -->
+                </div>
+              </form> 
+                <div class="modal-footer">
+                  <button type="button" onclick="savearvo()" id="voguardar" style="display:none;" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR CAMBIOS</button>
+                </div>
+                <br>
+                <div style="display:none;" id="edthdvobli" name="edthdvobli" class="alert alert-warning" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> El resgistro ya existe</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+                <div style="display:none;" id="edthvovacios" name="edthvovacios" class="alert alert-info" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> Llenar todos los campos</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+                <div style="display:none;" id="edthvoerr" name="edthvoerr" class="alert alert-danger" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un ticket</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+            </div>
+          </div><!-- modal-dialog -->
+        </div><!-- modal -->
+
+<!-- MODAL PARA EDITAR CLIENTES-->
+        <div class="modal fade" id='modal-editarmemo'>
+          <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/"> 
+            <div class="modal-content bd-5" >
+              <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO DEL MEMO</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form id="editvoinf" class="form-horizontal" action="" method="POST">
+                <div class="modal-body pd-25">
+                <a href="#" id="openedivoinf" style="float: right;font-size: 16px" class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editvoinf1()" title="Dar clic para editar">
+                  <div><i class="fa fa-edit"></i></div>
+                </a>
+                <a href="#" id="closeditvoinf" style="float: right;font-size: 16px;display:none;" class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closedthvoinf1()" title="Dar clic para cerrar">
+                  <div><i class="fa fa-times"></i></div>
+                </a>
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_voin" id="id_voin">
+                <div class="row mg-b-25">
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label label2">CODIGO: <span class="tx-danger" >*</span></label>
+                      <!-- <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number" name="edicovoinf" id="edicovoinf"> -->
+                      <div id="edicovinf"></div>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <div class="form-group">
+                      <label class="form-control-label label2">DESCRIPCIÓN: <span class="tx-danger">*</span></label>
+                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="text" name="edithdesvoinf" id="edithdesvoinf">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-control-label label2">CANTIDAD:<span class="tx-danger">*</span></label>
+                      <input disabled="" onkeyup="mayus(this);" onchange="totalvoinfe()" class="form-control inputalta" type="number" name="editcavoinf" id="editcavoinf">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-control-label label2">DEPARTAMENTO:<span class="tx-danger">*</span></label>
+                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" name="editdepinf1" id="editdepinf1">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-3" id="precioinf" style="display:none;">
+                    <div class="form-group">
+                      <label class="form-control-label label2">$ PRECIO: <span class="tx-danger">*</span></label>
+                      <input disabled="" onkeyup="mayus(this);" onchange="totalvoinfe()" min="0" value="0" step="0.1" class="form-control inputalta" type="text" id="vprecioinf" name="vprecioinf" placeholder="Ingrese el precio">
+                    </div>
+                  </div><!-- col-6 -->
+                  <div class="col-lg-3" id="totalinf"  style="display:none;">
+                    <div class="form-group mg-b-10-force">
+                      <label class="form-control-label label2">$ TOTAL: <span class="tx-danger">*</span></label>
+                      <input onkeyup="mayus(this);" class="form-control inputalta" value="0" type="number" min="0" max="4" id="vtotalinf" name="vtotalinf" readonly placeholder="Total">
+                    </div>
+                  </div><!-- col-6 -->
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <label class="form-control-label label2">OBSERVACIONES:</label>
+                      <textarea onkeyup="mayus(this);" disabled="" rows="2" class="form-control" name="infobsere" id="infobsere" placeholder="Ingresa alguna observación"></textarea>
+                    </div>
+                  </div><!-- col-4 -->
+                </div><!-- col-4 -->
+                </div>
+              </form> 
+                <div class="modal-footer">
+                  <button type="button" onclick="savecamvo()" id="voguardarinf" style="display:none;" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR CAMBIOS</button>
+                </div>
+                <br>
+                <div style="display:none;" id="edthdvoblinf" name="edthdvoblinf" class="alert alert-warning" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> El resgistro ya existe</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+                <div style="display:none;" id="edthvovaciosin" name="edthvovaciosin" class="alert alert-info" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> Llenar todos los campos</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+                <div style="display:none;" id="edthvoerrinf" name="edthvoerrinf" class="alert alert-danger" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un ticket</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+            </div>
+          </div><!-- modal-dialog -->
+        </div><!-- modal -->
             
     <script>
       

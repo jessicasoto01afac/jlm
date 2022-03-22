@@ -305,6 +305,7 @@ function infvale(){
     obj = JSON.parse(resp);
     var res = obj.data;
     var x = 0;
+    
     html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvaofi1" name="infvaofi1" class="table display dataTable"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th style="width:20%;"><i></i>ESTATUS</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
     for (U = 0; U < res.length; U++) {  
       if (obj.data[U].refe_1 == id_vofi){
@@ -883,7 +884,7 @@ function sinexisten(){
             obj = JSON.parse(resp);
             var res = obj.data;
             var x = 0;
-            html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%" id="infvaofi1" name="infvaofi1" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ESTATUS</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+            html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvaofi1" name="infvaofi1" class="table display dataTable"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th style="width:20%;"><i></i>ESTATUS</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
             for (U = 0; U < res.length; U++) {  
               if (obj.data[U].refe_1 == refe_1){
                 x++;
@@ -960,7 +961,8 @@ function acsurtirvof(){
             obj = JSON.parse(resp);
             var res = obj.data;
             var x = 0;
-            html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%" id="infvaofi1" name="infvaofi1" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ESTATUS</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+            
+            html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvaofi1" name="infvaofi1" class="table display dataTable"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th style="width:20%;"><i></i>ESTATUS</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
             for (U = 0; U < res.length; U++) {  
               if (obj.data[U].refe_1 == refe_1){
                 x++;

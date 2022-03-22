@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php include ("../controller/conexion.php");
-      $sql = "SELECT MAX(id_kax) + 1 AS id_memo FROM kardex where tipo ='VALE_OFICINA'";
+      $sql = "SELECT MAX(refe_1) + 1 AS id_memo FROM kardex where tipo ='MEMO'";
       $foliomemo = mysqli_query($conexion,$sql);
       $folio = mysqli_fetch_row($foliomemo);
 
@@ -35,7 +35,7 @@
     <script src="../template/lib/select2/js/select2.min.js"></script>
     <link href="../template/lib/highlightjs/github.css" rel="stylesheet">
     <link href="../template/lib/jquery.steps/jquery.steps.css" rel="stylesheet">
-    <script src="../controller/js/vales.js"></script>
+    <script src="../controller/js/memos.js"></script>
 
 
     
@@ -91,8 +91,8 @@
                   <label style="font-size:16px"  class="form-control-label">TIPO DE MEMO: <span class="tx-danger">*</span></label>
                   <select class="form-control" onchange="" id="mtipo" name="mtipo">
                     <option value="">SELECCIONA UNA OPCIÓN</option>
-                    <option value="INTERNO">TRASPASO</option>
-                    <option value="VENTA">TRANSFORMACIÓN</option>
+                    <option value="TRASPASO">TRASPASO</option>
+                    <option value="TRANSFORMACIÓN">TRANSFORMACIÓN</option>
                   </select>
                 </div>
               </div>
@@ -107,7 +107,7 @@
               <div class="col-lg-4" id="departamento" style="">
                 <div class="form-group mg-b-10-force">
                   <label class="form-control-label">DEPARTAMENTO SOLICITANTE: <span class="tx-danger">*</span></label>
-                  <select class="form-control" id="vdep" name="vdep">
+                  <select class="form-control" id="mdep" name="mdep">
                     <option value="">SELECCIONA UNA OPCIÓN</option>
                     <option value="ALMACEN">ALMACEN</option>
                     <option value="BODEGA">BODEGA</option>
@@ -123,7 +123,8 @@
             </section>
             <h3>Material para traspaso</h3>
             <section>
-            <p>INGRESE LOS ARTICULOS PARA TRASPASO</p>
+            <h5>INGRESE LOS ARTICULOS PARA TRASPASO</h5>
+            <br>
             <div class="row mg-b-25">
             <div class="col-lg-3">
               <div class="form-group">
@@ -149,12 +150,6 @@
                 <input onkeyup="mayus(this);" class="form-control" name="mdepart" id="mdepart" placeholder="Departamento" readonly type="text" required>
               </div><!-- form-group -->
             </div><!-- form-group -->
-            <div class="col-lg-3" id="precio" style="display:none;">
-                <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">$ PRECIO: <span class="tx-danger">*</span></label>
-                  <input onkeyup="mayus(this);" onchange="totalvo()" min="0" value="0" step="0.1" class="form-control" type="text" id="memprecio" name="memprecio" placeholder="Ingrese el precio">
-                </div>
-            </div><!-- col-6 -->
             <div class="col-lg-12">
               <div class="form-group">
                 <label class="form-control-label label2">OBSERBACIONES: <span class="tx-danger"></span></label>
@@ -165,7 +160,7 @@
             <br> 
           <br> 
             <div class="form-layout-footer">
-              <button class="btn btn-primary" onclick="addvaleofi()">AGREGAR</button>
+              <button class="btn btn-primary" onclick="addmemo()">AGREGAR</button>
             </div><!-- form-layout-footer -->
             <div class="col-lg-12">
               <br>
@@ -177,7 +172,7 @@
                     <span><strong>Advertencia!</strong> El resgistro ya existe</span>
                   </div><!-- d-flex -->
                 </div><!-- alert --> 
-                <div style="display:none;" id="vaciosvo" name="vaciosvo" class="alert alert-info" role="alert">
+                <div style="display:none;" id="vaciosme" name="vaciosme" class="alert alert-info" role="alert">
                   <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                     <span><strong>Advertencia!</strong> Llenar todos los campos</span>
@@ -193,14 +188,14 @@
             </div><!-- col-12 -->
             <div class="col-lg-12">
               <div class="form-group">
-              <div id="listvaleofi">
+              <div id="lismemotras">
               </div>
             </div><!-- col-12 -->
             </section>
 
             <h3>Material traspasado</h3>
             <section>
-            <p>INGRESE LOS ARTICULOS TRASPASADOS</p>
+            <h5>INGRESE LOS ARTICULOS TRASPASADOS</h5>
             <div class="row mg-b-25">
             <div class="col-lg-3">
               <div class="form-group">
@@ -226,12 +221,6 @@
                 <input onkeyup="mayus(this);" class="form-control" name="memdepart2" id="memdepart2" placeholder="Departamento" readonly type="text" required>
               </div><!-- form-group -->
             </div><!-- form-group -->
-            <div class="col-lg-3" id="precio" style="display:none;">
-                <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">$ PRECIO: <span class="tx-danger">*</span></label>
-                  <input onkeyup="mayus(this);" onchange="totalvo()" min="0" value="0" step="0.1" class="form-control" type="text" id="memprecio2" name="memprecio2" placeholder="Ingrese el precio">
-                </div>
-            </div><!-- col-6 -->
             <div class="col-lg-12">
               <div class="form-group">
                 <label class="form-control-label label2">OBSERBACIONES: <span class="tx-danger"></span></label>
@@ -242,25 +231,25 @@
             <br> 
           <br> 
             <div class="form-layout-footer">
-              <button class="btn btn-primary" onclick="addvaleofi()">AGREGAR</button>
+              <button class="btn btn-primary" onclick="addmemofin()">AGREGAR</button>
             </div><!-- form-layout-footer -->
             <div class="col-lg-12">
               <br>
               <div class="form-group">
               <br>
-                <div style="display:none;" id="dublivo" name="dublivo" class="alert alert-warning" role="alert">
+                <div style="display:none;" id="dublime2" name="dublime2" class="alert alert-warning" role="alert">
                   <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                     <span><strong>Advertencia!</strong> El resgistro ya existe</span>
                   </div><!-- d-flex -->
                 </div><!-- alert --> 
-                <div style="display:none;" id="vaciosvo" name="vaciosvo" class="alert alert-info" role="alert">
+                <div style="display:none;" id="vaciosme2" name="vaciosme2" class="alert alert-info" role="alert">
                   <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                     <span><strong>Advertencia!</strong> Llenar todos los campos</span>
                   </div><!-- d-flex -->
                 </div><!-- alert --> 
-                <div style="display:none;" id="errvo" name="errvo" class="alert alert-danger" role="alert">
+                <div style="display:none;" id="errme2" name="errme2" class="alert alert-danger" role="alert">
                   <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-close alert-icon tx-24"></i>
                     <span><strong>Advertencia!</strong>No se puedo guardar coontactar a soporte tecnico o levantar un ticket</span>
@@ -270,14 +259,12 @@
             </div><!-- col-12 -->
             <div class="col-lg-12">
               <div class="form-group">
-              <div id="listvaleofi">
+              <div id="listmemotra">
               </div>
             </div><!-- col-12 -->
+            <a class="btn btn-primary" href="../administrador/memos.php" style="float:right; color:white">FINALIZAR</a>
             </section>
           </div>
-
-          
-
                 </div><!-- br-pagebody -->
                 </div><!-- br-pagebody -->
                 <footer class="br-footer">
@@ -384,10 +371,16 @@
           headerTag: 'h3',
           bodyTag: 'section',
           autoFocus: true,
+          errorSteps:[],
+          next:'Siguiente',
+          previous:'Anterior',
+          finish:'Finalizar',
+          enableFinishButton: false,
+          loadingTemplate: '<span class="spinner"></span> #text#',
           titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
           cssClass: 'wizard wizard-style-2'
         });
-
+        
         $('#wizard7').steps({
           headerTag: 'h3',
           bodyTag: 'section',
@@ -396,16 +389,20 @@
           cssClass: 'wizard wizard-style-3'
         });
 
+        
+
+
       });
 
 $(document).ready(function(){
   $('#busccodimem').load('./select/buscarme.php');
   $('#busccodigomem2').load('./select/buscarme2.php');
   $('#buscpedido').load('./select/buspedi.php');
-  
-  
+
   
 });
+
+
     </script>
 
     

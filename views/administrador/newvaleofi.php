@@ -190,7 +190,7 @@
               <div id="listvaleofi">
               </div>
             </div><!-- col-12 -->
-            <a class="btn btn-primary" href="../administrador/vale_oficina.php"    style="float:right; color:white">FINALIZAR</a>
+            <a class="btn btn-primary" href="../administrador/vale_oficina.php" style="float:right; color:white">FINALIZAR</a>
             </section>
           </div>
 
