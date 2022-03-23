@@ -154,13 +154,23 @@
             }else{
                 echo "1";
             }
-    //condicion para finalizar el memo finalmem
+    //condicion para finalizar el vale de oficina   
     }else if($opcion === 'finalmem'){
         $folio = $_POST['folio'];
             if (finalizar1 ($folio,$conexion)){
                 echo "0";
                 $usuario='PRUEBAS';
                 hisfinal($usuario,$folio,$conexion);
+            }else{
+                echo "1";
+            }
+    //liberar vale de oficina
+    }else if($opcion === 'liberarvof'){
+        $valeof = $_POST['valeof'];
+            if (liberarvo ($valeof,$conexion)){
+                echo "0";
+                $usuario='PRUEBAS';
+                hisliber($usuario,$valeof,$conexion);
             }else{
                 echo "1";
             }
@@ -292,6 +302,17 @@ function finalizar1 ($folio,$conexion){
     }
     cerrar($conexion);
 }
+//funcion para LIBERAR vale
+function liberarvo ($valeof,$conexion){
+    $query="UPDATE kardex SET status='PENDIENTE' WHERE refe_1 = '$valeof' AND tipo='VALE_OFICINA'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+
+}
 
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
@@ -394,6 +415,17 @@ function hisfinal($usuario,$folio,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario', 'FINALIZA VALE DE OFICINA', 'FOLIO:' '$folio','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funciones para guardar el historico liberar
+function hisliber($usuario,$valeof,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'LIBERA VALE DE OFICINA', 'FOLIO:' '$valeof','$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

@@ -90,6 +90,25 @@
             }else{
                 echo "1";
             }
+    //Elimar memo
+    }else if($opcion === 'deletememo'){
+        $pedido = $_POST['pedido'];
+            if (elimemo ($pedido,$conexion)){
+                echo "0";
+                $usuario='PRUEBAS';
+                hisdelme($usuario,$pedido,$conexion); 
+            }else{
+                echo "1";
+            }
+    }else if($opcion === 'liberarmem'){
+        $memo = $_POST['memo'];
+            if (liberarmem ($memo,$conexion)){
+                echo "0";
+                $usuario='PRUEBAS';
+                hisliber($usuario,$memo,$conexion); 
+            }else{
+                echo "1";
+            }
     }
     
 
@@ -167,6 +186,27 @@ function finalizar ($folio,$conexion){
     }
     cerrar($conexion);
 }
+//funcion para elimar memo
+function elimemo ($pedido,$conexion){
+    $query="UPDATE kardex SET estado=1 WHERE refe_1 = '$pedido' AND tipo='MEMO'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para LIBERAR memo
+function liberarmem ($memo,$conexion){
+    $query="UPDATE kardex SET status='PENDIENTE' WHERE refe_1 = '$memo' AND tipo='MEMO'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+
+}
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
 function historial($usuario,$refe_1,$codigo_1,$conexion){
@@ -212,7 +252,28 @@ function hisfinal($usuario,$folio,$conexion){
         return false;
     }
 }
-
+//funciones para guardar eliminar
+function hisdelme($usuario,$pedido,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'ELIMINA MEMO', 'FOLIO:' '$pedido','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funciones para liberar memo
+function hisliber($usuario,$memo,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'LIBERA MEMO', 'FOLIO:' '$memo','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
 //funcion para cerrar laa conexion
 function cerrar($conexion){
     mysqli_close($conexion);

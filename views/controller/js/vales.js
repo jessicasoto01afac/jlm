@@ -270,6 +270,7 @@ function infvale(){
   var liberar = document.getElementById('btnliberarv');
   var surtir = document.getElementById('btnsurtirv');
   var finalizado = document.getElementById('btnfinalizv');
+  var autorizado = document.getElementById('openedivo1');
 
   $("#datavaleofi tr").on('click', function() {
     var id_vofi = "";
@@ -302,14 +303,18 @@ function infvale(){
 
               if (obj.data[D].status == 'PENDIENTE'){
                 autorizar.style.display = '';
+                autorizado.style.display='';
               }else if (obj.data[D].status == 'AUTORIZADO'){
                 surtir.style.display = '';
                 liberar.style.display = '';
-              }else if (obj.data[D].status == 'SURTIDO'){
+                autorizado.style.display='none';
+              }else if (obj.data[D].status == 'SURTIDO'){ 
                 finalizado.style.display = '';
                 liberar.style.display = '';
+                autorizado.style.display='';
               }else if (obj.data[D].status == 'FINALIZADO'){
                 liberar.style.display = '';
+                autorizado.style.display='';
               }
           }
       }
@@ -1208,4 +1213,31 @@ function finalivo(){
       });
 
     }
+}
+//FUNCIONES DE GUARDAR ELIMINAR
+function libervo(){
+  //alert("memos"); 
+  var valeof = document.getElementById('fvofi').innerHTML;
+  var datos= 'valeof=' + valeof + '&opcion=liberarvof';
+  //alert(datos);
+    $.ajax({
+      type:"POST",
+      url:"../controller/php/insertvaleofi.php",
+      data:datos
+    }).done(function(respuesta){
+      if (respuesta==0){
+        Swal.fire({
+          type: 'success',
+          text: 'SE LIBERO FORMA CORRECTA',
+          showConfirmButton: false,
+          timer: 1500
+        });
+          setTimeout("location.href = 'vale_oficina.php';", 1500);
+      }else{
+          document.getElementById('delerrvo').style.display='';
+          setTimeout(function(){
+            document.getElementById('delerrvo').style.display='none';
+          }, 2500);
+        }
+    });
 }

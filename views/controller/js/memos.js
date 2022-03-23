@@ -267,6 +267,8 @@ function infmemo(id_memo){
     var liberar = document.getElementById('btnliberar');
     var surtir = document.getElementById('btnsurtir');
     var finalizado = document.getElementById('btnfinaliz');
+    var editar = document.getElementById('openedimem1');
+    
 
     $.ajax({
         url: '../controller/php/memo1.php',
@@ -292,14 +294,18 @@ function infmemo(id_memo){
 
                 if (obj.data[D].status == 'PENDIENTE'){
                     autorizar.style.display = '';
+                    editar.style.display= ''
                 }else if (obj.data[D].status == 'AUTORIZADO'){
                     surtir.style.display = '';
                     liberar.style.display = '';
+                    editar.style.display= 'none'
                 }else if (obj.data[D].status == 'SURTIDO'){
                     finalizado.style.display = '';
                     liberar.style.display = '';
+                    editar.style.display= ''
                 }else if (obj.data[D].status == 'FINALIZADO'){
                     liberar.style.display = '';
+                    editar.style.display= ''
                 }
             }
         }
@@ -316,8 +322,8 @@ function infmemo(id_memo){
       for (U = 0; U < res.length; U++) {  
         if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION'){
           x++;
-        
-          html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo();' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
+        $id_memo=obj.data[U].id_kax;
+          html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
         }  
       }
       html += '</div></tbody></table></div></div>';
@@ -336,8 +342,8 @@ function infmemo(id_memo){
         for (U = 0; U < res.length; U++) {  
           if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMADO'){
             x++;
-            
-            html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo();' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
+            $id_memo=obj.data[U].id_kax;
+            html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
           }  
         }
         html += '</div></tbody></table></div></div>';
@@ -489,3 +495,97 @@ function finalimemo(){
   
       }
 }
+//FUNCION DE ELIMINAR MEMO
+function delememos(memos){
+  //alert(memos); 
+  document.getElementById('devamemo').value=memos;
+}
+//FUNCIONES DE GUARDAR ELIMINAR
+function savedemem(){
+  //alert("memos"); 
+  var pedido = document.getElementById('devamemo').value;
+  var datos= 'pedido=' + pedido + '&opcion=deletememo';
+  //alert(datos);
+    $.ajax({
+      type:"POST",
+      url:"../controller/php/insertmemo.php",
+      data:datos
+    }).done(function(respuesta){
+      if (respuesta==0){
+        Swal.fire({
+          type: 'success',
+          text: 'SE ELIMINO MEMO DE FORMA CORRECTA',
+          showConfirmButton: false,
+          timer: 1500
+        });
+          setTimeout("location.href = 'memos.php';", 1500);
+      }else{
+          document.getElementById('delerrvo').style.display='';
+          setTimeout(function(){
+            document.getElementById('delerrvo').style.display='none';
+          }, 2500);
+        }
+    });
+}
+
+//FUNCIONES DE GUARDAR ELIMINAR
+function liberarm(){
+  //alert("memos"); 
+  var memo = document.getElementById('folmemo').innerHTML;
+  var datos= 'memo=' + memo + '&opcion=liberarmem';
+  //alert(datos);
+    $.ajax({
+      type:"POST",
+      url:"../controller/php/insertmemo.php",
+      data:datos
+    }).done(function(respuesta){
+      if (respuesta==0){
+        Swal.fire({
+          type: 'success',
+          text: 'SE LIBERO FORMA CORRECTA',
+          showConfirmButton: false,
+          timer: 1500
+        });
+          setTimeout("location.href = 'memos.php';", 1500);
+      }else{
+          document.getElementById('delerrvo').style.display='';
+          setTimeout(function(){
+            document.getElementById('delerrvo').style.display='none';
+          }, 2500);
+        }
+    });
+}
+//FUNCION PARA EDITAR VALE DE OFICINA EN VISTA DE INFORMACION
+function editmemo(){
+  //alert("EDITAR memo");
+  var fecha = $("#infecmem").removeAttr("readonly");
+  document.getElementById('intipomemo').disabled= false;
+  document.getElementById('infsolimem').disabled= false;
+  document.getElementById('memedith').style.display="";
+  document.getElementById('memagartic').style.display="";
+  document.getElementById('closememo').style.display="";
+  document.getElementById('openedimem1').style.display="none";
+  
+}
+//FUNCION PARA CERRAR EDITAR VALE DE OFICINA EN VISTA DE INFORMACION
+function closedithvmem(){
+  //alert("cierra VALE");
+  var fecha1 = $("#infecmem").attr("readonly","readonly");
+  document.getElementById('intipomemo').disabled= true;
+  document.getElementById('infsolimem').disabled= true;
+  document.getElementById('memedith').style.display="none";
+  document.getElementById('memagartic').style.display="none";
+  document.getElementById('closememo').style.display="none";
+  document.getElementById('openedimem1').style.display="";
+}
+function editarmemo(d){
+//alert("entra");
+alert(d);
+
+}
+
+function editvoinf1(){
+  //alert("edit articulo infovale");
+
+  
+  }

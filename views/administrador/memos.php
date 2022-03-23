@@ -98,8 +98,8 @@ include('header.php');
         <div class="br-pagebody">
             <div  style="float: right;">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button onclick="editvaleof()" id="openedimem1" title="Dar clic para editar" type="button" class="btn btn-secondary btn btn-warning"><i class="fa fa-edit"></i></button>
-                <button onclick="closedithvo()" id="closememo" title="Dar clic para cerrar edición" type="button" style="display:none;" class="btn btn-secondary btn-danger"><i class="fa fa-times"></i></button>
+                <button onclick="editmemo()" id="openedimem1" name="openedimem1" title="Dar clic para editar" type="button" class="btn btn-secondary btn btn-warning"><i class="fa fa-edit"></i></button>
+                <button onclick="closedithvmem()" id="closememo" title="Dar clic para cerrar edición" type="button" style="display:none;" class="btn btn-secondary btn-danger"><i class="fa fa-times"></i></button>
                 <button title="Imprimir" type="button" class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
               </div>
             </div><!-- col-5 -->
@@ -155,7 +155,7 @@ include('header.php');
                                         </select>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                           <button id="btnautoriz" name="btnautoriz" type="button" style="display:none;" onclick="autorizarm()" class="btn btn-info pd-x-30">Autorizar</button>
-                                          <button title="Dar click para liberar" id="btnliberar" name="btnliberar" type="button" style="display:none;" onclick="" class="btn btn-dark pd-x-25">Liberar</button>
+                                          <button title="Dar click para liberar" id="btnliberar" name="btnliberar" type="button" style="display:none;" onclick="liberarm()" class="btn btn-dark pd-x-25">Liberar</button>
                                           <button id="btnsurtir" name="btnsurtir" type="button" style="display:none;" onclick="surtirme()" class="btn btn-indigo pd-x-25">Surtir</button>
                                           <button id="btnfinaliz" name="btnfinaliz" type="button" style="display:none;" onclick="finalimemo()" class="btn btn-success pd-x-25">Finalizar</button>
                                         </div>
@@ -165,10 +165,11 @@ include('header.php');
                                 <br>
                             </div><!-- row -->
                             <div class="modal-footer">
-                              <button type="button" onclick="savevofic()" id="voedith" style="display:none;" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR CAMBIOS</button>
-                            </div>
-                            <br>
-                            <div style="display:none;" id="edthvoiexi" name="edthvoiexi" class="alert alert-warning" role="alert">
+                              <button type="button" onclick="savevofic()" id="memedith" style="display:none;" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR CAMBIOS</button>
+                              <br>
+                           </div>
+                            
+                            <div style="display:none;" id="edthmemiexi" name="edthmemiexi" class="alert alert-warning" role="alert">
                               <div class="d-flex align-items-center justify-content-start">
                                 <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                                 <span><strong>Advertencia!</strong> El resgistro ya existe</span>
@@ -187,8 +188,9 @@ include('header.php');
                               </div><!-- d-flex -->
                             </div><!-- alert --> 
                             <div >
-                              <button type="button" onclick="masarticvo()" data-toggle='modal' style="display:none; background-color: #009C28;" data-target='#modal-editavo1' onclick="" id="voagartic" class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i class="fa fa-plus"></i>  AGREGAR ARTICULO</button>
+                              <button type="button" onclick="masarticvo()" data-toggle='modal' style="display:none; background-color: #009C28;" data-target='#modal-editavo1' onclick="" id="memagartic" class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i class="fa fa-plus"></i>  AGREGAR ARTICULO</button>
                             </div>
+                            <br>
                             <div class="col-lg-12">
                               <div id="listmemo1">
                               </div><!-- col-12 -->

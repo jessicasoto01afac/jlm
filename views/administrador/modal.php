@@ -1205,13 +1205,13 @@
                     <div class="form-group">
                       <label class="form-control-label label2">CODIGO: <span class="tx-danger" >*</span></label>
                       <!-- <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number" name="edicovoinf" id="edicovoinf"> -->
-                      <div id="edicovinf"></div>
+                      <div id="edimemo"></div>
                     </div>
                   </div>
                   <div class="col-lg-8">
                     <div class="form-group">
                       <label class="form-control-label label2">DESCRIPCIÓN: <span class="tx-danger">*</span></label>
-                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="text" name="edithdesvoinf" id="edithdesvoinf">
+                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="text" name="edithsertg" id="edithsertg">
                     </div>
                   </div><!-- col-4 -->
                   <div class="col-lg-3">
@@ -1272,6 +1272,35 @@
             </div>
           </div><!-- modal-dialog -->
         </div><!-- modal -->
+        <!-- MODAL PARA ELIMINAR MEMO-->
+        <div class="modal fade" id='modal-delmemo'>
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content bd-0">
+                <div class="modal-header pd-x-20">
+                  <h4 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ELIMINAR</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body pd-20">
+                  <p class="mg-b-5">ESTAS SEGURO DE ELIMINAR EL MEMO?</p>
+                  <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="del_mem" id="del_mem">
+                  <input disabled="" class="form-control inputalta" type="text" name="devamemo" id="devamemo">
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <button type="button" onclick="savedemem()" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
+                  <br>
+                 
+                </div>
+                <div style="display:none;" id="delerrvo" name="delerrvo" class="alert alert-danger" role="alert">
+                    <div class="d-flex align-items-center justify-content-start">
+                      <i class="icon ion-ios-close alert-icon tx-24"></i>
+                      <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un ticket</span>
+                    </div><!-- d-flex -->
+                  </div><!-- alert --> 
+              </div>
+            </div><!-- modal-dialog -->
+          </div><!-- modal -->
             
     <script>
       
@@ -1298,6 +1327,7 @@ $('#busccodigo').load('select/buscar2.php');
 $('#edicovinf').load('select/buscar3.php');
 $('#edipeinfinf').load('select/buscar4.php');
 $('#edicovinf1sur').load('select/buscar5.php');
+$('#edimemo').load('select/buscar5.php');
 
 
 });
