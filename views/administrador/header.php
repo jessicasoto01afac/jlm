@@ -71,7 +71,7 @@
        </div><!-- menu-item -->
      </a><!-- br-menu-link -->
      <ul class="br-menu-sub nav flex-column">
-       <li class="nav-item"><a href="chart-morris.html" class="nav-link">Existencias</a></li>
+       <li class="nav-item"><a href="inventario.php" class="nav-link">Inventario</a></li>
        <li class="nav-item"><a href="chart-flot.html" class="nav-link">Movimientos</a></li>
      </ul>
      <a href="#" class="br-menu-link">
