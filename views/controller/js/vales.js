@@ -327,7 +327,7 @@ function infvale(){
     var res = obj.data;
     var x = 0;
     
-    html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvaofi1" name="infvaofi1" class="table display dataTable"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th style="width:20%;"><i></i>ESTATUS</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+    html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvaofi1" name="infvaofi1" class="table display dataTable"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>CANTIDAD_SURTIDA</th><th style="width:20%;"><i></i>ESTATUS</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
     for (U = 0; U < res.length; U++) {  
       if (obj.data[U].refe_1 == id_vofi){
         x++;
@@ -346,7 +346,7 @@ function infvale(){
         }else if (obj.data[U].status_2 == "SIN EXISTENCIAS" && obj.data[U].status == "AUTORIZADO")  {
           estatus="<span title='Ver detalles' onclick='infonosur()' data-toggle='modal' data-target='#modal-nosurtido' class='sinexisten' style='font-size:12px;cursor: pointer;'>SIN EXISTENCIA</span>"
         }
-        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida + "</td><td>" + estatus +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
+        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + estatus +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
       }  
     }
     html += '</div></tbody></table></div></div>';
@@ -619,7 +619,8 @@ function editarvoinf(){;
                   obj.data[U].salida + '*' +
                   obj.data[U].ubicacion + '*' +
                   obj.data[U].costo + '*' +
-                  obj.data[U].total;    
+                  obj.data[U].total + '*' +
+                  obj.data[U].observa;    
                   var d = datos.split("*");   
                   $("#modal-editavoinf #edicovoinf").val(d[0]);   
                   $("#modal-editavoinf #edithdesvoinf").val(d[1]);            
@@ -627,6 +628,7 @@ function editarvoinf(){;
                   $("#modal-editavoinf #editdepinf1").val(d[3]);
                   $("#modal-editavoinf #vprecioinf").val(d[4]);
                   $("#modal-editavoinf #vtotalinf").val(d[5]);
+                  $("#modal-editavoinf #infobsere").val(d[6]);
               }
           }
       });
@@ -649,10 +651,15 @@ function savecamvo(){
   var observa = document.getElementById('infobsere').value;
   var id_kax = document.getElementById('id_voin').value;
   var refe_1 = document.getElementById('fvofi').innerHTML;
-  
-  var datos= 'codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&salida=' + salida + '&costo=' + costo + '&total=' + total + '&observa=' + observa + '&id_kax=' + id_kax + '&refe_1=' + refe_1 + '&opcion=actualiza';
-  //alert(datos);
 
+//CONDICIÓN PARA SABER SI SE SURTIO O NO HAY EXISTENCIAS EN LA EDICIÓN
+  if (salida > "0"){
+    var estatus2="SURTIDO";
+  }else if (salida == "0"){
+    var estatus2="SIN EXISTENCIAS";
+  }
+  var datos= 'codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&salida=' + salida + '&costo=' + costo + '&total=' + total + '&observa=' + observa + '&id_kax=' + id_kax + '&refe_1=' + refe_1 + '&estatus2=' + estatus2 + '&opcion=actualiza';
+  alert(datos);
   if (document.getElementById('edicovoinf').value == '' || document.getElementById('edithdesvoinf').value == '' || document.getElementById('editcavoinf').value == '' || document.getElementById('vprecioinf').value == '' || document.getElementById('vtotalinf').value == '') { 
       document.getElementById('edthvovaciosin').style.display='';
       setTimeout(function(){
@@ -670,8 +677,10 @@ function savecamvo(){
               type: 'success',
               text: 'Se actualizo de forma correcta',
               showConfirmButton: false,
-              timer: 1500
+              timer: 1500      
           });
+          reloout (); //llama a la función para actualizar la tabla
+          $('#modal-editavoinf').modal('hide'); //cierra el modal
         }else if (respuesta == 2) {
           document.getElementById('edthdvoblinf').style.display='';
           setTimeout(function(){
@@ -685,8 +694,57 @@ function savecamvo(){
           }, 2000);
         }
       });
-
     }
+}
+
+//FUNCION LLAMR DE NUEVO A LA TABLA 
+function reloout(){
+  let refe_1 = document.getElementById('fvofi').innerHTML;
+  $.ajax({
+    url: '../controller/php/valeofi.php',
+    type: 'POST'
+  }).done(function(resp) {
+    obj = JSON.parse(resp);
+    var res = obj.data;
+    var x = 0;
+    html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%" id="infvaofi1" name="infvaofi1" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ESTATUS</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+    for (U = 0; U < res.length; U++) {  
+      if (obj.data[U].refe_1 == refe_1){
+        x++;
+        if (obj.data[U].status_2 == "PENDIENTE"){
+          estatus="<button onclick='surtirvof();' data-toggle='modal' data-target='#modal-surtirvof' type='button' title='Dar click para surtir' class='btn btn-info mg-b-10'>SURTIR</button>"
+        }else if (obj.data[U].status_2 == "SURTIDO") {
+          estatus="<span class='spandis'>SURTIDO</span>"
+
+        }else if (obj.data[U].status_2 == "SIN EXISTENCIAS")  {
+          estatus="<span title='Ver detalles' onclick='infonosur()' data-toggle='modal' data-target='#modal-nosurtido' class='sinexisten' style='font-size:12px;cursor: pointer;'>SIN EXISTENCIA</span>"
+        }
+        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida + "</td><td>" + estatus +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
+      }  
+    }
+    html += '</div></tbody></table></div></div>';
+    $("#listvaleofi1").html(html);
+    'use strict';
+    $('#datavaofi1').DataTable({
+        responsive: true,
+        language: {
+          searchPlaceholder: 'Buscar...',
+          sSearch: '',
+          lengthMenu: 'mostrando _MENU_ paginas',
+          sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+          sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+          sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+          oPaginate: {
+                sFirst: 'Primero',
+                sLast: 'Último',
+                sNext: 'Siguiente',
+                sPrevious: 'Anterior',
+            },
+        }
+    
+    });
+  });
+  
 }
 //FUNCION PARA QUE TRAIGA LA INFOMACION DE EL ARTICULO EN VALE DE OFICINA INFO
 function delartvoinf(){;
