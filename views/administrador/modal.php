@@ -1211,37 +1211,25 @@
                   <div class="col-lg-8">
                     <div class="form-group">
                       <label class="form-control-label label2">DESCRIPCIÓN: <span class="tx-danger">*</span></label>
-                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="text" name="edithsertg" id="edithsertg">
+                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="text" name="edithmeades" id="edithmeades">
                     </div>
                   </div><!-- col-4 -->
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label class="form-control-label label2">CANTIDAD:<span class="tx-danger">*</span></label>
-                      <input disabled="" onkeyup="mayus(this);" onchange="totalvoinfe()" class="form-control inputalta" type="number" name="editcavoinf" id="editcavoinf">
+                      <input disabled="" onkeyup="mayus(this);" onchange="totalvoinfe()" class="form-control inputalta" type="number" name="editcameminf" id="editcameminf">
                     </div>
                   </div><!-- col-4 -->
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label class="form-control-label label2">DEPARTAMENTO:<span class="tx-danger">*</span></label>
-                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" name="editdepinf1" id="editdepinf1">
+                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" name="editdepinfme" id="editdepinfme">
                     </div>
                   </div><!-- col-4 -->
-                  <div class="col-lg-3" id="precioinf" style="display:none;">
-                    <div class="form-group">
-                      <label class="form-control-label label2">$ PRECIO: <span class="tx-danger">*</span></label>
-                      <input disabled="" onkeyup="mayus(this);" onchange="totalvoinfe()" min="0" value="0" step="0.1" class="form-control inputalta" type="text" id="vprecioinf" name="vprecioinf" placeholder="Ingrese el precio">
-                    </div>
-                  </div><!-- col-6 -->
-                  <div class="col-lg-3" id="totalinf"  style="display:none;">
-                    <div class="form-group mg-b-10-force">
-                      <label class="form-control-label label2">$ TOTAL: <span class="tx-danger">*</span></label>
-                      <input onkeyup="mayus(this);" class="form-control inputalta" value="0" type="number" min="0" max="4" id="vtotalinf" name="vtotalinf" readonly placeholder="Total">
-                    </div>
-                  </div><!-- col-6 -->
                   <div class="col-lg-12">
                     <div class="form-group">
                       <label class="form-control-label label2">OBSERVACIONES:</label>
-                      <textarea onkeyup="mayus(this);" disabled="" rows="2" class="form-control" name="infobsere" id="infobsere" placeholder="Ingresa alguna observación"></textarea>
+                      <textarea onkeyup="mayus(this);" disabled="" rows="2" class="form-control" name="infobsereme" id="infobsereme" placeholder="Ingresa alguna observación"></textarea>
                     </div>
                   </div><!-- col-4 -->
                 </div><!-- col-4 -->

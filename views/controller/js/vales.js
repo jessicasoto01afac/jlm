@@ -332,12 +332,14 @@ function infvale(){
       if (obj.data[U].refe_1 == id_vofi){
         x++;
         if (obj.data[U].status_2 == "PENDIENTE" && obj.data[U].status == "PENDIENTE"){
-          estatus="<span title='Pendiente de autorizar' class=''>PENDIENTE</span>"
+          estatus="<span title='Pendiente de autorizar' class=''>PENDIENTESSS</span>"
         }else if (obj.data[U].status_2 == "PENDIENTE" && obj.data[U].status == "AUTORIZADO") {
           estatus="<button onclick='surtirvof();' data-toggle='modal' data-target='#modal-surtirvof' type='button' title='Dar click para surtir' class='btn btn-info mg-b-10'>SURTIR</button>"
         }else if (obj.data[U].status_2 == "PENDIENTE" && obj.data[U].status == "FINALIZADO") {
           estatus="<span title='Pendiente de autorizar' class=''>PENDIENTE</span>"
         }else if (obj.data[U].status_2 == "PENDIENTE" && obj.data[U].status == "SURTIDO") {
+          estatus="<button onclick='surtirvof();' data-toggle='modal' data-target='#modal-surtirvof' type='button' title='Dar click para surtir' class='btn btn-info mg-b-10'>SURTIR</button>"
+        }else if (obj.data[U].status_2 == "PENDIENTE" && obj.data[U].status == "AUTORIZADO") {
           estatus="<button onclick='surtirvof();' data-toggle='modal' data-target='#modal-surtirvof' type='button' title='Dar click para surtir' class='btn btn-info mg-b-10'>SURTIR</button>"
         }else if (obj.data[U].status_2 == "SURTIDO" && obj.data[U].status == "AUTORIZADO") {
           estatus="<span title='Ya fue surtido' class='spandis'>SURTIDO</span>"
