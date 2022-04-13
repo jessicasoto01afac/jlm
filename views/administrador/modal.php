@@ -1097,8 +1097,8 @@
                 <i class="icon icon ion-ios-close-outline tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
                 <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_nosur" id="id_nosur">
                   <h4 class="tx-danger mg-b-20">No fue surtido por falta de Existencia</h4>
+                  <label style="font-size:25px" for="">Detalles del Articulo:</label>
                   <label id="descar" name="descar" style="font-size:16px" for=""></label>
-                  <label style="font-size:25px" for="">Detalles del Articulo</label>
                   <p class="mg-b-20 mg-x-20">
                     <label style="font-size:16px" for="">Cantidad Solicitada:</label>
                     <label style="font-size:16px" id="canreal" name="canreal" for=""></label>
@@ -1291,31 +1291,28 @@
           </div><!-- modal -->
             
     <script>
-      
-      $(function(){
-
-        // showing modal with effect
-        $('.modal-effect').on('click', function(){
-          var effect = $(this).attr('data-effect');
-          $('#modaldemo8').addClass(effect, function(){
-            $('#modaldemo8').modal('show');
-          });
-          return false;
+    $(function(){
+      // showing modal with effect
+      $('.modal-effect').on('click', function(){
+        var effect = $(this).attr('data-effect');
+        $('#modaldemo8').addClass(effect, function(){
+          $('#modaldemo8').modal('show');
         });
-
+        return false;
+        });
         // hide modal with effect
         $('#modaldemo8').on('hidden.bs.modal', function (e) {
           $(this).removeClass (function (index, className) {
-              return (className.match (/(^|\s)effect-\S+/g) || []).join(' ');
+            return (className.match (/(^|\s)effect-\S+/g) || []).join(' ');
           });
         });
       });
       $(document).ready(function(){
-$('#busccodigo').load('select/buscar2.php');
-$('#edicovinf').load('select/buscar3.php');
-$('#edipeinfinf').load('select/buscar4.php');
-$('#edicovinf1sur').load('select/buscar5.php');
-$('#edimemo').load('select/buscar5.php');
+        $('#busccodigo').load('select/buscar2.php');
+        $('#edicovinf').load('select/buscar3.php');
+        $('#edipeinfinf').load('select/buscar4.php');
+        $('#edicovinf1sur').load('select/buscar5.php');
+        $('#edimemo').load('select/buscar5.php');
 
 
 });

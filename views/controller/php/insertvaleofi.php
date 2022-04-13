@@ -41,6 +41,7 @@
         $observa = $_POST['observa'];
         $id_kax = $_POST['id_kax'];
         
+        
 
             if (actualizar($codigo_1,$descripcion_1,$salida,$observa,$id_kax,$conexion)){
                 echo "0";
@@ -72,8 +73,9 @@
         $observa = $_POST['observa'];
         $id_kax = $_POST['id_kax'];
         $refe_1 = $_POST['refe_1'];
+        $estatus2 = $_POST['estatus2'];
 
-            if (edicion($codigo_1,$descripcion_1,$salida,$costo,$total,$observa,$id_kax,$refe_1,$conexion)){
+            if (edicion($codigo_1,$descripcion_1,$salida,$costo,$total,$observa,$id_kax,$refe_1,$estatus2,$conexion)){
                 echo "0";
                 $usuario='PRUEBAS';
                 histcambio($usuario,$codigo_1,$salida,$costo,$total,$refe_1,$id_kax,$conexion);
@@ -222,8 +224,8 @@ function cambio ($fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$conexion){
     cerrar($conexion);
 }
 
-function edicion ($codigo_1,$descripcion_1,$salida,$costo,$total,$observa,$id_kax,$refe_1,$conexion){
-    $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1', salida='$salida', costo='$costo', total='$total', observa='$observa' WHERE id_kax = '$id_kax'";
+function edicion ($codigo_1,$descripcion_1,$salida,$costo,$total,$observa,$id_kax,$refe_1,$estatus2,$conexion){
+    $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1', salida='$salida', costo='$costo', total='$total', observa='$observa', status_2='$estatus2' WHERE id_kax = '$id_kax'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
