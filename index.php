@@ -70,10 +70,10 @@
                     <div class="formbg">
                         <div class="formbg-inner padding-horizontal--48">
                             <span class="padding-bottom--15">Iniciar sesion</span>
-                            <form id="stripe-login" id="formtec">
+                            <form action="controller/session.php" method="POST" id="stripe-login" id="formtec">
                                 <div class="field padding-bottom--24">
                                     <label for="text">Usuario</label>
-                                    <input type="text" name="tecn" pattern="[A-Z,a-z,0-9,_-,ñ,Ñ]{1,50}" required>
+                                    <input type="text" placeholder="Ingrese su usuario" name="usuario" pattern="[A-Z,a-z,0-9,_-,ñ,Ñ]{1,50}" required>
                                     <span class="help-block" id="error"></span>
                                 </div>
                                 <div class="field padding-bottom--24">
@@ -84,7 +84,7 @@
                                             <a href="#">Olvidaste tu contraseña?</a>
                                         </div>
                                     </div>
-                                    <input type="password" name="password">
+                                    <input type="password" placeholder="Ingrese su contraseña" name="password">
                                 </div>
                                 <!-- <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
                   <label for="checkbox">
@@ -119,14 +119,7 @@
 <script src="./controller/validation.js"></script>
 
 <script>
-$(document).ready(function() {
-    $(".sign-up").click(function() {
-        $(".reg").toggleClass("regopen");
-    });
-    $(".login1").click(function() {
-        $(".reg").removeClass("regopen");
-    });
-});
+
 </script>
 
 </html>

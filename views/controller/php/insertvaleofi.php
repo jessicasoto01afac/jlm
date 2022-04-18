@@ -1,5 +1,12 @@
 <?php 
-	include ('../conexion.php');
+    include ('../conexion.php');
+    session_start();
+
+$usuario=$_SESSION['username'];
+
+if(!isset($usuario)){
+  header("location: ./../../");
+}
     $opcion = $_POST["opcion"];
     $informacion = [];
 
@@ -24,7 +31,7 @@
             
             if (registrar($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$costo,$total,$ubicacion,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 historial($usuario,$refe_1,$codigo_1,$conexion);
             }else{
                 echo "1";
@@ -58,7 +65,7 @@
     
             if (cambio($fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 histedith($usuario,$fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$conexion);
             }else{
                 echo "1";
@@ -77,7 +84,7 @@
 
             if (edicion($codigo_1,$descripcion_1,$salida,$costo,$total,$observa,$id_kax,$refe_1,$estatus2,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+               // $usuario='PRUEBAS';
                 histcambio($usuario,$codigo_1,$salida,$costo,$total,$refe_1,$id_kax,$conexion);
             }else{
                 echo "1";
@@ -91,7 +98,7 @@
             if (eliminar($id_kax,$conexion)){
                 echo "0";
                 $realizo = 'ELIMINA ARTICULO DE VALE DE OFICINA';
-                $usuario='PRUEBAS';
+               // $usuario='PRUEBAS';
                 histdelete($usuario,$realizo,$id_kax,$codigo_1,$refe_1,$conexion);
             }else{
                 echo "1";
@@ -102,7 +109,7 @@
             if (deletevo($refe_1,$conexion)){
                 echo "0";
                 $realizo = 'ELIMINA VALE DE OFICINA';
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 histelimi($usuario,$realizo,$refe_1,$conexion);
             }else{
                 echo "1";
@@ -116,7 +123,7 @@
             if (sinexistencia($id_kax,$conexion)){
                 echo "0";
                 $realizo = 'MARCA ARTICULO SIN EXISTENCIA';
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 hisinexist($usuario,$realizo,$refe_1,$codigo_1,$conexion);
             }else{
                 echo "1";
@@ -132,7 +139,7 @@
             if (existencia($id_kax,$cantidad,$codigo_1,$descripcion,$conexion)){
                 echo "0";
                 $realizo = 'SURTE ARTICULO DE OFICINA';
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 hisexist($usuario,$realizo,$cantidad,$refe_1,$codigo_1,$conexion);
             }else{
                 echo "1";
@@ -151,7 +158,7 @@
         $folio = $_POST['folio'];
             if (surtir1($folio,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 hisurtir($usuario,$folio,$conexion);
             }else{
                 echo "1";
@@ -161,7 +168,7 @@
         $folio = $_POST['folio'];
             if (finalizar1 ($folio,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 hisfinal($usuario,$folio,$conexion);
             }else{
                 echo "1";
@@ -171,7 +178,7 @@
         $valeof = $_POST['valeof'];
             if (liberarvo ($valeof,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 hisliber($usuario,$valeof,$conexion);
             }else{
                 echo "1";

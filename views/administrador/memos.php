@@ -95,6 +95,10 @@ include('header.php');
           <span class="breadcrumb-item active">Info de memo</span>
         </nav>
     </div><!-- br-pageheader -->
+    <div style="float: right;">
+    <a href="../administrador/memos.php" id="closememo" title="Dar clic para cerrar" type="button" style="" class="btn btn-secondary"><i class="fa fa-times"></i></a>
+    </div>
+    <br>
         <div class="br-pagebody">
             <div  style="float: right;">
               <div class="btn-group" role="group" aria-label="Basic example">

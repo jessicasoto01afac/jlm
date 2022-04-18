@@ -1,5 +1,21 @@
- 
-     <!-- Bracket CSS -->
+<?php 
+include ("../controller/conexion.php");
+session_start();
+
+$usuario=$_SESSION['username'];
+
+if(!isset($usuario)){
+  header("location: ./../../");
+}
+//$id = $_SESSION['persona'];
+$sql = 
+       "SELECT id_per,usunom,usuapell FROM accesos WHERE usuario = '$usuario'";
+
+      $persona = mysqli_query($conexion,$sql);
+      $datos = mysqli_fetch_row($persona);
+?>
+    
+    <!-- Bracket CSS -->
      <link rel="stylesheet" href="../template/css/bracket.css">
  
  <!-- ########## START: LEFT PANEL ########## -->
@@ -265,7 +281,7 @@
        </div><!-- dropdown -->
        <div class="dropdown">
          <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-           <span class="logged-name hidden-md-down">Jessica Soto</span>
+           <span id="username" class="logged-name hidden-md-down"><?php echo $datos[1].' '.$datos[2]?></span>
            <img src="http://via.placeholder.com/64x64" class="wd-32 rounded-circle" alt="">
            <span class="square-10 bg-success"></span>
          </a>
@@ -276,7 +292,7 @@
              <li><a href=""><i class="icon ion-ios-download"></i> Descragas</a></li>
              <li><a href=""><i class="icon ion-ios-star"></i> Favoritos</a></li>
              <li><a href=""><i class="icon ion-ios-folder"></i> Collecciones</a></li>
-             <li><a href=""><i class="icon ion-power"></i> Cerrar sesión</a></li>
+             <li><a href="./../../controller/logout.php"><i class="icon ion-power"></i> Cerrar sesión</a></li>
            </ul>
          </div><!-- dropdown-menu -->
        </div><!-- dropdown -->

@@ -104,13 +104,13 @@ include('header.php');
         obj = JSON.parse(resp);
         var res = obj.data;
         var x = 0;
-        html = '<div class="table-wrapper"><table style="width:100%" id="datausuarios" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>NOMBRE</th><th style="width:100px;"><i></i>CORREO</th><th><i></i>USUARIO</th><th><i></i>PASSWORD</th><th><i></i>PRIVILEGIOS</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%; table-layout:" id="datausuarios" class="table display dataTable"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>NOMBRE</th><th style="width:100px;"><i></i>CORREO</th><th><i></i>USUARIO</th><th><i></i>PRIVILEGIOS</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
         for (U = 0; U < res.length; U++) {  
                 x++;
 
                 id_per = "este es la person" //indentificacion de la person
                 
-                html += "<tr><td>" + obj.data[U].id_per + "</td><td>" + obj.data[U].usunom + " "+ obj.data[U].usuapell + "</td><td>" + obj.data[U].correo + "</td><td>" + obj.data[U].usuario + "</td><td>" + obj.data[U].password + "</td><td>" + obj.data[U].privilegios + "</td><td>" + "<a onclick='editar()' style='cursor:pointer;' title='Editar' class='btn btn-primary btn-icon' data-toggle='modal' data-target='#modal-editusu'><div><i style='color:white;' class='fa fa-pencil-square-o'></i></div></a>  <a onclick='deletusu()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deleteusu'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";            
+                html += "<tr><td>" + obj.data[U].id_per + "</td><td>" + obj.data[U].usunom + " "+ obj.data[U].usuapell + "</td><td>" + obj.data[U].correo + "</td><td>" + obj.data[U].usuario + "</td><td>" + obj.data[U].privilegios + "</td><td>" + "<a onclick='editar()' style='cursor:pointer;' title='Editar' class='btn btn-primary btn-icon' data-toggle='modal' data-target='#modal-editusu'><div><i style='color:white;' class='fa fa-pencil-square-o'></i></div></a>  <a onclick='deletusu()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deleteusu'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";            
         }
         html += '</div></tbody></table></div></div>';
         $("#listusu").html(html);

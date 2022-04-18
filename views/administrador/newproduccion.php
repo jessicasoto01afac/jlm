@@ -21,7 +21,7 @@
     <!-- Meta -->
     <meta name="author" content="Jessica Soto">
 
-    <title>JLM|Agregar Memos</title>
+    <title>JLM|Agregar_vale_producción</title>
 
     <!-- vendor css -->
     <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -60,33 +60,33 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="../administrador/memos.php">Lista de memos</a>
-                <span class="breadcrumb-item active">Alta de Memo</span>
+                <a class="breadcrumb-item" href="../administrador/vale_produccion.php">Lista de vales de Producción</a>
+                <span class="breadcrumb-item active">Alta de Vale de Producción</span>
             </nav>
         </div><!-- br-pageheader -->
 
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5">ALTA DE MEMOS</h4>
+            <h4 class="tx-gray-800 mg-b-5">ALTA DE VALE DE PRODUCCIÓN</h4>
         </div>
         <div class="br-pagebody">
             <div style="float: right;">
-                <a href="../administrador/memos.php" id="closememo" title="Dar clic para cancelar el memo" type="button"
+                <a href="../administrador/vale_produccion.php" id="closememo" title="Dar clic para cancelar el memo" type="button"
                     style="" class="btn btn-secondary"><i class="fa fa-times"></i></a>
             </div>
             <div class="br-section-wrapper">
-                <div id="wizard6">
+                <div id="wizard5">
 
-                    <h3>Cabezera del memo</h3>
+                    <h3>Cabezera del vale de produccion</h3>
                     <section>
                         <form id="valeoficina" method="POST">
                             <div class="row mg-b-25">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label style="font-size:16px" class="form-control-label">FOLIO: <span
+                                        <label style="font-size:16px" class="form-control-label">ORDEN DE PRODUCCIÓN: <span
                                                 class="tx-danger">*</span></label>
-                                        <input onkeyup="mayus(this);" style="font-size:18px; color:#1F618D" readonly
-                                            class="form-control" type="text" id="mfolio" name="mfolio"
-                                            value="<?php echo $folio[0]?>" placeholder="">
+                                        <input onkeyup="mayus(this);" style="font-size:18px; color:#1F618D"
+                                            class="form-control" type="text" id="vpfolio" name="vpfolio"
+                                            value="" placeholder="">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
                                 <div class="col-lg-4">
@@ -99,23 +99,15 @@
                                 </div><!-- form-group -->
                                 <div class="col-lg-4">
                                     <div class="form-group mg-b-10-force">
-                                        <label style="font-size:16px" class="form-control-label">TIPO DE MEMO: <span
+                                        <label style="font-size:16px" class="form-control-label">TIPO DE VALE: <span
                                                 class="tx-danger">*</span></label>
                                         <select class="form-control" onchange="" id="mtipo" name="mtipo">
                                             <option value="">SELECCIONA UNA OPCIÓN</option>
-                                            <option value="TRASPASO">TRASPASO</option>
-                                            <option value="TRANSFORMACIÓN">TRANSFORMACIÓN</option>
+                                            <option value="NORMAL">NORMAL</option>
+                                            <option value="OPERADORA">OPERADORA</option>
                                         </select>
                                     </div>
                                 </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">PEDIDOS RELACIONADOS:</label>
-                                        <div id="buscpedido"></div>
-                                    </div><!-- col-4 -->
-                                </div><!-- col-8 -->
-
                                 <div class="col-lg-4" id="departamento" style="">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">DEPARTAMENTO SOLICITANTE: <span
@@ -133,6 +125,17 @@
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">PEDIDOS RELACIONADOS:</label>
+                                        <div id="buscpedido"></div>
+                                    </div><!-- col-4 -->
+                                </div><!-- col-8 -->
+                                <div class="col-lg-3">
+              <label class="ckbox">
+                <input type="checkbox" checked=""><span>URGENTE</span>
+              </label>
+            </div>
                     </section>
                     <h3>Material para traspaso</h3>
                     <section>

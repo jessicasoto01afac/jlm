@@ -339,6 +339,10 @@ function infvale(){
           estatus="<span title='Pendiente de autorizar' class=''>PENDIENTE</span>"
         }else if (obj.data[U].status_2 == "PENDIENTE" && obj.data[U].status == "SURTIDO") {
           estatus="<button onclick='surtirvof();' data-toggle='modal' data-target='#modal-surtirvof' type='button' title='Dar click para surtir' class='btn btn-info mg-b-10'>SURTIR</button>"
+        }else if (obj.data[U].status_2 == "SURTIDO" && obj.data[U].status == "SURTIDO") {
+          estatus="<span title='Ya fue surtido' class='spandis'>SURTIDO</span>"
+        }else if (obj.data[U].status_2 == "SIN EXISTENCIAS" && obj.data[U].status == "SURTIDO") {
+          estatus="<span title='Ver detalles' onclick='infonosur()' data-toggle='modal' data-target='#modal-nosurtido' class='sinexisten' style='font-size:12px;cursor: pointer;'>SIN EXISTENCIA</span>"
         }else if (obj.data[U].status_2 == "PENDIENTE" && obj.data[U].status == "AUTORIZADO") {
           estatus="<button onclick='surtirvof();' data-toggle='modal' data-target='#modal-surtirvof' type='button' title='Dar click para surtir' class='btn btn-info mg-b-10'>SURTIR</button>"
         }else if (obj.data[U].status_2 == "SURTIDO" && obj.data[U].status == "AUTORIZADO") {

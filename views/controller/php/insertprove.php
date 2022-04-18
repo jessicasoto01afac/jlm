@@ -1,5 +1,12 @@
 <?php 
-	include ('../conexion.php');
+    include ('../conexion.php');
+    session_start();
+
+$usuario=$_SESSION['username'];
+
+if(!isset($usuario)){
+  header("location: ./../../");
+}
     $opcion = $_POST["opcion"];
     $informacion = [];
 
@@ -31,7 +38,7 @@
             $obser_prov = $_POST['obser_prov'];
             if (registrar($codigo_pro,$nom_pro,$domi_fisc,$condi_pago,$cont_1,$tel_c1,$tel_c2,$email_c1,$email_c2,$cont_2,$tel_c3,$tel_c4,$email_c3,$email_c4,$cont_3,$tel_c5,$tel_c6,$email_c5,$email_c6,$obser_prov,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 historial($usuario,$codigo_pro,$nom_pro,$conexion);
             }else{
                 echo "1";
@@ -68,7 +75,7 @@
 
     if (actualizar($codigo_pro,$nom_pro,$domi_fisc,$condi_pago,$cont_1,$tel_c1,$tel_c2,$email_c1,$email_c2,$cont_2,$tel_c3,$tel_c4,$email_c3,$email_c4,$cont_3,$tel_c5,$tel_c6,$email_c5,$email_c6,$obser_prov,$id_prov,$conexion)){
         echo "0";
-        $usuario='PRUEBAS';
+        //$usuario='PRUEBAS';
         $realizo = 'ACTUALIZO DAT. DEL PROVEEDOR';
         histedith($usuario,$realizo,$codigo_pro,$nom_pro,$domi_fisc,$condi_pago,$cont_1,$id_prov,$conexion);
     }else{
@@ -82,7 +89,7 @@
         if (eliminar($id_prov,$conexion)){
             echo "0";
             $realizo = 'ELIMINA A PROVEEDOR';
-            $usuario='PRUEBAS';
+            //$usuario='PRUEBAS';
             histdelete($usuario,$realizo,$id_prov,$nom_pro,$conexion);
         }else{
             echo "1";

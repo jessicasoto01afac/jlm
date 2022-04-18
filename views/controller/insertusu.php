@@ -1,8 +1,15 @@
 <?php 
     include ('../controller/conexion.php');
+    session_start();
+
+$usuario1=$_SESSION['username'];
+
+if(!isset($usuario1)){
+  header("location: ./../../");
+}
     $opcion = $_POST["opcion"];
     $informacion = [];
-
+    
 //CONDICIONES------------------------------------------------------------------------------
 
     //Condición donde registra al usuario
@@ -14,12 +21,13 @@
 
         if (comprobacion ($usunom,$usuapell,$usuario,$conexion)){
             $correo = $_POST['correo'];
-            $password = $_POST['password'];
+            $contrasenia = $_POST['password'];
             $privilegios = $_POST['privilegios'];
+            $password=password_hash($contrasenia,PASSWORD_DEFAULT); //CIFRADO DE CONTRASEÑA
 
             if (registrar($usunom,$usuapell,$correo,$usuario,$password,$privilegios,$conexion)){
                 echo "0";
-                historial($usuario,$usunom,$usuapell,$password,$privilegios,$conexion);
+                historial($usuario1,$usuario,$usunom,$usuapell,$password,$privilegios,$conexion);
             }else{
                 echo "1";
             }
@@ -33,14 +41,16 @@
         $usuapell = $_POST['usuapell'];
         $correo = $_POST['correo'];        
         $usuario = $_POST['usuario'];
-        $password = $_POST['password'];
+        $contrasenia = $_POST['password'];
         $privilegios = $_POST['privilegios'];
         $id_per = $_POST['id_per'];
+        $password=password_hash($contrasenia,PASSWORD_DEFAULT); //CIFRADO DE CONTRASEÑA
+
 
             if (actualizar($usunom,$usuapell,$correo,$usuario,$password,$privilegios,$id_per,$conexion)){
                 echo "0";
                 $realizo = 'ACTUALIZO DAT. DEL USUARIO';
-                histedith($usuario,$realizo,$usunom,$usuapell,$password,$privilegios,$id_per,$conexion);
+                histedith($usuario1,$usuario,$realizo,$usunom,$usuapell,$password,$privilegios,$id_per,$conexion);
             }else{
                 echo "1";
             }
@@ -53,7 +63,7 @@
                 echo "0";
                 $realizo = 'ELIMINA A USUARIO';
                 $usuario='pruebas';
-                histdelete($usuario,$realizo,$id_per,$persona,$conexion);
+                histdelete($usuario1,$usuario,$realizo,$id_per,$persona,$conexion);
             }else{
                 echo "1";
             }
@@ -106,10 +116,10 @@
     }
 
     //funcion para registra cambios
-    function historial($usuario,$usunom,$usuapell,$password,$privilegios,$conexion){
+    function historial($usuario1,$usuario,$usunom,$usuapell,$password,$privilegios,$conexion){
         ini_set('date.timezone','America/Mexico_City');
         $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-        $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN NUEVO ACCESO','$usunom ' ' $usuapell' ' USUARIO:' ' $usuario' ' CONTASEÑA:' '$password' ' PRIVILEGIOS:' '$privilegios' ,'$fecha')";
+        $query = "INSERT INTO historial VALUES (0,'$usuario1','AGREGA UN NUEVO ACCESO','$usunom ' ' $usuapell' ' USUARIO:' ' $usuario' ' CONTASEÑA:' '$password' ' PRIVILEGIOS:' '$privilegios' ,'$fecha')";
         if(mysqli_query($conexion,$query)){
             return true;
         }else{
@@ -117,20 +127,20 @@
         }
     }
     //funciones para guardar el historico
-    function histedith($usuario,$realizo,$usunom,$usuapell,$password,$privilegios,$id_per,$conexion){
+    function histedith($usuario1,$usuario,$realizo,$usunom,$usuapell,$password,$privilegios,$id_per,$conexion){
         ini_set('date.timezone','America/Mexico_City');
         $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-        $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', ' ID:' '$id_per' ' $usunom '  ' $usuapell' ' USUARIO:' ' $usuario' ' CONTASEÑA:' '$password' ' PRIVILEGIOS:' '$privilegios','$fecha')";
+        $query = "INSERT INTO historial VALUES (0,'$usuario1', '$realizo', ' ID:' '$id_per' ' $usunom '  ' $usuapell' ' USUARIO:' ' $usuario' ' CONTASEÑA:' '$password' ' PRIVILEGIOS:' '$privilegios','$fecha')";
         if(mysqli_query($conexion,$query)){
             return true;
         }else{
             return false;
         }
     }
-    function histdelete($usuario,$realizo,$id_per,$persona,$conexion){
+    function histdelete($usuario1,$usuario,$realizo,$id_per,$persona,$conexion){
         ini_set('date.timezone','America/Mexico_City');
         $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-        $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', ' ID:' '$id_per' ' $persona' ,'$fecha')";
+        $query = "INSERT INTO historial VALUES (0,'$usuario1', '$realizo', ' ID:' '$id_per' ' $persona' ,'$fecha')";
         if(mysqli_query($conexion,$query)){
             return true;
         }else{

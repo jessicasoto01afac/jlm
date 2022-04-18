@@ -1,5 +1,13 @@
 <?php 
-	include ('../conexion.php');
+    include ('../conexion.php');
+    
+session_start();
+
+$usuario=$_SESSION['username'];
+
+if(!isset($usuario)){
+  header("location: ./../../");
+}
     $opcion = $_POST["opcion"];
     $informacion = [];
 
@@ -15,7 +23,7 @@
             $email = $_POST['email'];
             if (registrar($codigo_clie,$nombre,$rfc,$email,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 historial($usuario,$codigo_clie,$nombre,$rfc,$email,$conexion);
             }else{
                 echo "1";
@@ -34,7 +42,7 @@
 
             if (actualizar($codigo_clie,$nombre,$rfc,$email,$id_cliente,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 $realizo = 'ACTUALIZO DAT. DEL CLIENTE';
                 histedith($usuario,$realizo,$codigo_clie,$nombre,$rfc,$email,$id_cliente,$conexion);
             }else{
@@ -48,7 +56,7 @@
             if (eliminar($id_cliente,$conexion)){
                 echo "0";
                 $realizo = 'ELIMINA A USUARIO';
-                $usuario='PRUEBAS';
+               // $usuario='PRUEBAS';
                 histdelete($usuario,$realizo,$id_cliente,$nombre,$conexion);
             }else{
                 echo "1";

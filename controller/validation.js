@@ -1,4 +1,4 @@
-alert("entra validacion")
+//alert("entra validacion")
 $('document').ready(function() {
 
     var nameregex = /^[A-Z0-9_\.\-\+\*\/,a-z,ñ,Ñ]+$/;

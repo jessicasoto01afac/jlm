@@ -1,5 +1,12 @@
 <?php 
-	include ('../conexion.php');
+    include ('../conexion.php');
+    session_start();
+
+$usuario=$_SESSION['username'];
+
+if(!isset($usuario)){
+  header("location: ./../../");
+}
     $opcion = $_POST["opcion"];
     $informacion = [];
 
@@ -17,7 +24,7 @@
             $artgrupo = $_POST['artgrupo'];
             if (registrar($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$conexion)){
                 echo "0";
-                $usuario='pruebas';
+               // $usuario='pruebas';
                 historial($usuario,$artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$conexion);
             }else{
                 echo "1";
@@ -37,7 +44,7 @@
         if (actualizar($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$id_art,$conexion)){
             echo "0";
             $realizo = 'ACTUALIZO INFORMACION DEL ARTICULO';
-            $usuario='pruebas';
+           // $usuario='pruebas';
             histedith($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$id_art,$usuario,$realizo,$conexion);
         }else{
             echo "1";
@@ -48,7 +55,7 @@
         if (eliminar($id_art,$conexion)){
             echo "0";
             $realizo = 'ELIMINA A ARTICULO';
-            $usuario='pruebas';
+           // $usuario='pruebas';
             histdelete($usuario,$realizo,$id_art,$conexion);
         }else{
             echo "1";

@@ -1,5 +1,12 @@
 <?php 
-	include ('../conexion.php');
+    include ('../conexion.php');
+    session_start();
+
+$usuario=$_SESSION['username'];
+
+if(!isset($usuario)){
+  header("location: ./../../");
+}
     $opcion = $_POST["opcion"];
     $informacion = [];
 
@@ -24,7 +31,7 @@
             
             if (registrar($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$refe_2,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+               // $usuario='PRUEBAS';
                 historial($usuario,$refe_1,$codigo_1,$conexion);
             }else{
                 echo "1";
@@ -51,7 +58,7 @@
             
             if (registrar_2($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$refe_2,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 historial($usuario,$refe_1,$codigo_1,$conexion);
             }else{
                 echo "1";
@@ -65,7 +72,7 @@
         $folio = $_POST['folio'];
             if (autorizar($folio,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 histedith($usuario,$folio,$conexion);
             }else{
                 echo "1";
@@ -75,7 +82,7 @@
         $folio = $_POST['folio'];
             if (surtir($folio,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+               // $usuario='PRUEBAS';
                 hisurtir($usuario,$folio,$conexion);
             }else{
                 echo "1";
@@ -85,7 +92,7 @@
         $folio = $_POST['folio'];
             if (finalizar ($folio,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+               // $usuario='PRUEBAS';
                 hisfinal($usuario,$folio,$conexion);
             }else{
                 echo "1";
@@ -95,7 +102,7 @@
         $pedido = $_POST['pedido'];
             if (elimemo ($pedido,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+               // $usuario='PRUEBAS';
                 hisdelme($usuario,$pedido,$conexion); 
             }else{
                 echo "1";
@@ -104,7 +111,7 @@
         $memo = $_POST['memo'];
             if (liberarmem ($memo,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 hisliber($usuario,$memo,$conexion); 
             }else{
                 echo "1";
