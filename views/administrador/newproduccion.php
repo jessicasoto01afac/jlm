@@ -36,7 +36,7 @@
     <script src="../template/lib/select2/js/select2.min.js"></script>
     <link href="../template/lib/highlightjs/github.css" rel="stylesheet">
     <link href="../template/lib/jquery.steps/jquery.steps.css" rel="stylesheet">
-    <script src="../controller/js/memos.js"></script>
+    
 
 
 
@@ -70,8 +70,8 @@
         </div>
         <div class="br-pagebody">
             <div style="float: right;">
-                <a href="../administrador/vale_produccion.php" id="closememo" title="Dar clic para cancelar el memo" type="button"
-                    style="" class="btn btn-secondary"><i class="fa fa-times"></i></a>
+                <a href="../administrador/vale_produccion.php" id="closememo" title="Dar clic para cancelar el memo"
+                    type="button" style="" class="btn btn-secondary"><i class="fa fa-times"></i></a>
             </div>
             <div class="br-section-wrapper">
                 <div id="wizard5">
@@ -82,18 +82,18 @@
                             <div class="row mg-b-25">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label style="font-size:16px" class="form-control-label">ORDEN DE PRODUCCIÓN: <span
-                                                class="tx-danger">*</span></label>
+                                        <label style="font-size:16px" class="form-control-label">ORDEN DE PRODUCCIÓN:
+                                            <span class="tx-danger">*</span></label>
                                         <input onkeyup="mayus(this);" style="font-size:18px; color:#1F618D"
-                                            class="form-control" type="text" id="vpfolio" name="vpfolio"
-                                            value="" placeholder="">
+                                            class="form-control" type="text" id="vpfolio" name="vpfolio" value=""
+                                            placeholder="">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label style="font-size:16px" class="form-control-label">FECHA: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" type="date" id="mfecha" name="mfecha" value=""
+                                        <input class="form-control" type="date" id="vpfecha" name="vpfecha" value=""
                                             placeholder="">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
@@ -101,7 +101,7 @@
                                     <div class="form-group mg-b-10-force">
                                         <label style="font-size:16px" class="form-control-label">TIPO DE VALE: <span
                                                 class="tx-danger">*</span></label>
-                                        <select class="form-control" onchange="" id="mtipo" name="mtipo">
+                                        <select class="form-control" onchange="" id="vptipo" name="vptipo">
                                             <option value="">SELECCIONA UNA OPCIÓN</option>
                                             <option value="NORMAL">NORMAL</option>
                                             <option value="OPERADORA">OPERADORA</option>
@@ -112,7 +112,7 @@
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">DEPARTAMENTO SOLICITANTE: <span
                                                 class="tx-danger">*</span></label>
-                                        <select class="form-control" id="mdep" name="mdep">
+                                        <select class="form-control" id="vpdepsoli" name="vpdepsoli">
                                             <option value="">SELECCIONA UNA OPCIÓN</option>
                                             <option value="ALMACEN">ALMACEN</option>
                                             <option value="BODEGA">BODEGA</option>
@@ -125,21 +125,45 @@
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-lg-6">
+                                <div class="col-lg-4" id="depmaterial" style="">
+                                    <div class="form-group mg-b-10-force">
+                                        <label class="form-control-label">DEPARTAMENTO AL QUE SOLICITA: <span
+                                                class="tx-danger">*</span></label>
+                                        <select class="form-control" id="vpdepentr" name="vpdepentr">
+                                            <option value="">SELECCIONA UNA OPCIÓN</option>
+                                            <option value="ALMACEN">ALMACEN</option>
+                                            <option value="BODEGA">BODEGA</option>
+                                            <option value="COMPRAS">COMPRAS</option>
+                                            <option value="EMPAQUE">EMPAQUE</option>
+                                            <option value="OFICINA">OFICINA</option>
+                                            <option value="TALLER DE CORTE">TALLER DE CORTE</option>
+                                            <option value="TALLER DE MEDICIÓN">TALLER DE MEDICIÓN</option>
+                                            <option value="VENTAS">VENTAS</option>
+                                        </select>
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group mg-b-10-force">
+                                        <label style="font-size:16px" class="form-control-label">CARACTER DEL VALE:
+                                            <span class="tx-danger">*</span></label>
+                                        <select class="form-control" onchange="" id="vpcaracter" name="vpcaracter">
+                                            <option value="">SELECCIONA UNA OPCIÓN</option>
+                                            <option value="NORMAL">NORMAL</option>
+                                            <option value="URGENTE">URGENTE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="form-control-label">PEDIDOS RELACIONADOS:</label>
                                         <div id="buscpedido"></div>
                                     </div><!-- col-4 -->
                                 </div><!-- col-8 -->
-                                <div class="col-lg-3">
-              <label class="ckbox">
-                <input type="checkbox" checked=""><span>URGENTE</span>
-              </label>
-            </div>
+
                     </section>
                     <h3>Material para traspaso</h3>
                     <section>
-                        <h5>INGRESE LOS ARTICULOS PARA TRASPASO</h5>
+                        <h5>INGRESE EL PRODUCTO FINAL</h5>
                         <br>
                         <div class="row mg-b-25">
                             <div class="col-lg-3">
@@ -161,8 +185,8 @@
                                 <div class="form-group">
                                     <label style="font-size:16px" class="form-control-label">CANTIDAD: <span
                                             class="tx-danger">*</span></label>
-                                    <input onkeyup="mayus(this);" class="form-control" name="memocantidad"
-                                        id="memocantidad" placeholder="Ingrese la cantidad" type="number" required>
+                                    <input onkeyup="mayus(this);" class="form-control" name="vpcantidad" id="vpcantidad"
+                                        placeholder="Ingrese la cantidad" type="number" required>
                                 </div><!-- form-group -->
                             </div><!-- form-group -->
                             <div class="col-lg-3">
@@ -177,35 +201,35 @@
                                 <div class="form-group">
                                     <label class="form-control-label label2">OBSERBACIONES: <span
                                             class="tx-danger"></span></label>
-                                    <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="memobservo"
-                                        id="memobservo" placeholder="Ingresa alguna observación"></textarea>
+                                    <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="vpbservo"
+                                        id="vpbservo" placeholder="Ingresa alguna observación"></textarea>
                                 </div>
                             </div><!-- col-12 -->
                             </form>
                             <br>
                             <br>
                             <div class="form-layout-footer">
-                                <button class="btn btn-primary" onclick="addmemo()">AGREGAR</button>
+                                <button class="btn btn-primary" onclick="addvaleprodu()">AGREGAR</button>
                             </div><!-- form-layout-footer -->
                             <div class="col-lg-12">
                                 <br>
                                 <div class="form-group">
                                     <br>
-                                    <div style="display:none;" id="dublivo" name="dublivo" class="alert alert-warning"
+                                    <div style="display:none;" id="dublivp" name="dublivp" class="alert alert-warning"
                                         role="alert">
                                         <div class="d-flex align-items-center justify-content-start">
                                             <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                                             <span><strong>Advertencia!</strong> El resgistro ya existe</span>
                                         </div><!-- d-flex -->
                                     </div><!-- alert -->
-                                    <div style="display:none;" id="vaciosme" name="vaciosme" class="alert alert-info"
+                                    <div style="display:none;" id="vaciosvp" name="vaciosvp" class="alert alert-info"
                                         role="alert">
                                         <div class="d-flex align-items-center justify-content-start">
                                             <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                                             <span><strong>Advertencia!</strong> Llenar todos los campos</span>
                                         </div><!-- d-flex -->
                                     </div><!-- alert -->
-                                    <div style="display:none;" id="errvo" name="errvo" class="alert alert-danger"
+                                    <div style="display:none;" id="errvp" name="errvp" class="alert alert-danger"
                                         role="alert">
                                         <div class="d-flex align-items-center justify-content-start">
                                             <i class="icon ion-ios-close alert-icon tx-24"></i>
@@ -215,99 +239,24 @@
                                     </div><!-- alert -->
                                 </div>
                             </div><!-- col-12 -->
+                            <!-- <h5 style="text-align: center"></h5> -->
+                            <h5 class="tx-gray-700 mg-b-5" style="text-align:center">EXTENDIDO</h5>
                             <div class="col-lg-12">
-                                <div class="form-group">
-                                    <div id="lismemotras">
-                                    </div>
-                                </div><!-- col-12 -->
-                    </section>
-
-                    <h3>Material traspasado</h3>
-                    <section>
-                        <h5>INGRESE LOS ARTICULOS TRASPASADOS</h5>
-                        <div class="row mg-b-25">
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label style="font-size:16px" class="form-control-label">CODIGO: <span
-                                            class="tx-danger">*</span></label>
-                                    <div id="busccodigomem2"></div>
-                                </div><!-- form-group -->
-                            </div><!-- form-group -->
-                            <div class="col-lg-9">
-                                <div class="form-group">
-                                    <label style="font-size:16px" class="form-control-label">DESCRIPCIÓN: <span
-                                            class="tx-danger">*</span></label>
-                                    <input onkeyup="mayus(this);" class="form-control" readonly name="medescrip2"
-                                        id="medescrip2" placeholder="" type="text" required>
-                                </div><!-- form-group -->
-                            </div><!-- form-group -->
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label style="font-size:16px" class="form-control-label">CANTIDAD: <span
-                                            class="tx-danger">*</span></label>
-                                    <input onkeyup="mayus(this);" class="form-control" name="mecantidad2"
-                                        id="mecantidad2" placeholder="Ingrese la cantidad" type="number" required>
-                                </div><!-- form-group -->
-                            </div><!-- form-group -->
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label style="font-size:16px" class="form-control-label">DEPARTAMENTO: <span
-                                            class="tx-danger">*</span></label>
-                                    <input onkeyup="mayus(this);" class="form-control" name="memdepart2" id="memdepart2"
-                                        placeholder="Departamento" readonly type="text" required>
-                                </div><!-- form-group -->
-                            </div><!-- form-group -->
+                                <div id="listextent"></div><!-- col-12 -->
+                            </div><!-- form-layout -->
+                            <h5 class="tx-gray-700 mg-b-5" style="text-align:center">ETIQUETAS</h5>
                             <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label class="form-control-label label2">OBSERBACIONES: <span
-                                            class="tx-danger"></span></label>
-                                    <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="memobservo2"
-                                        id="memobservo2" placeholder="Ingresa alguna observación"></textarea>
-                                </div>
-                            </div><!-- col-12 -->
-                            </form>
-                            <br>
-                            <br>
-                            <div class="form-layout-footer">
-                                <button class="btn btn-primary" onclick="addmemofin()">AGREGAR</button>
-                            </div><!-- form-layout-footer -->
+                                <div id="listetiquetas"></div><!-- col-12 -->
+                            </div>
+                            <h5 class="tx-gray-700 mg-b-5" style="text-align:center">PRODUCTO TERMINAD</h5>
                             <div class="col-lg-12">
-                                <br>
-                                <div class="form-group">
-                                    <br>
-                                    <div style="display:none;" id="dublime2" name="dublime2" class="alert alert-warning"
-                                        role="alert">
-                                        <div class="d-flex align-items-center justify-content-start">
-                                            <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
-                                            <span><strong>Advertencia!</strong> El resgistro ya existe</span>
-                                        </div><!-- d-flex -->
-                                    </div><!-- alert -->
-                                    <div style="display:none;" id="vaciosme2" name="vaciosme2" class="alert alert-info"
-                                        role="alert">
-                                        <div class="d-flex align-items-center justify-content-start">
-                                            <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
-                                            <span><strong>Advertencia!</strong> Llenar todos los campos</span>
-                                        </div><!-- d-flex -->
-                                    </div><!-- alert -->
-                                    <div style="display:none;" id="errme2" name="errme2" class="alert alert-danger"
-                                        role="alert">
-                                        <div class="d-flex align-items-center justify-content-start">
-                                            <i class="icon ion-ios-close alert-icon tx-24"></i>
-                                            <span><strong>Advertencia!</strong>No se puedo guardar coontactar a soporte
-                                                tecnico o levantar un ticket</span>
-                                        </div><!-- d-flex -->
-                                    </div><!-- alert -->
-                                </div>
-                            </div><!-- col-12 -->
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <div id="listmemotra">
-                                    </div>
-                                </div><!-- col-12 -->
-                                <a class="btn btn-primary" href="../administrador/memos.php"
-                                    style="float:right; color:white">FINALIZAR</a>
+                                <div id="listproducfinal"></div><!-- col-12 -->
+                            </div>
                     </section>
                 </div>
+                <br>
+                <a class="btn btn-danger" href="../administrador/memos.php"
+                    style="float:right; color:white">CANCELAR</a>
             </div><!-- br-pagebody -->
         </div><!-- br-pagebody -->
         <footer class="br-footer">
@@ -344,111 +293,14 @@
     <script src="../template/lib/spectrum/spectrum.js"></script>
     <script src="../template/lib/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
     <script src="../template/lib/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
+    <script src="../controller/js/vale_produc.js"></script>
 
     <?php include('../administrador/modal.php');?>
 
     <script src="../template/js/bracket.js"></script>
     <script>
-    $(document).ready(function() {
-        'use strict';
-
-        $('#wizard2').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            enableFinishButton: false,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            onStepChanging: function(event, currentIndex, newIndex) {
-                if (currentIndex < newIndex) {
-                    // Step 1 form validation
-                    if (currentIndex === 0) {
-                        var fname = $('#vfolio').parsley();
-                        var lname = $('#vfecha').parsley();
-
-                        if (fname.isValid() && lname.isValid()) {
-                            return true;
-                        } else {
-                            fname.validate();
-                            lname.validate();
-                        }
-                    }
-
-                    // Step 2 form validation
-                    if (currentIndex === 1) {
-                        var email = $('#vcodigo').parsley();
-                        if (email.isValid()) {
-                            return true;
-                        } else {
-                            email.validate();
-                        }
-                    }
-                    // Always allow step back to the previous step even if the current step is not valid.
-                } else {
-                    return true;
-                }
-            }
-        });
-
-        $('#wizard3').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            stepsOrientation: 1
-        });
-
-        $('#wizard4').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            cssClass: 'wizard step-equal-width'
-        });
-
-        $('#wizard5').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            cssClass: 'wizard wizard-style-1'
-        });
-
-        $('#wizard6').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            errorSteps: [],
-            next: 'Siguiente',
-            previous: 'Anterior',
-            finish: 'Finalizar',
-            enableFinishButton: false,
-            loadingTemplate: '<span class="spinner"></span> #text#',
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            cssClass: 'wizard wizard-style-2'
-        });
-
-        $('#wizard7').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            cssClass: 'wizard wizard-style-3'
-        });
-
-
-
-
-    });
-
-    $(document).ready(function() {
-        $('#busccodimem').load('./select/buscarme.php');
-        $('#busccodigomem2').load('./select/buscarme2.php');
-        $('#buscpedido').load('./select/buspedi.php');
-
-
-    });
+        
     </script>
-
 
 </body>
 
