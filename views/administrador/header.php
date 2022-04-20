@@ -40,7 +40,7 @@ $sql =
      <ul class="br-menu-sub nav flex-column">
        <li class="nav-item"><a href="../administrador/usuarios.php" class="nav-link" >Accesos</a></li>
        <li class="nav-item"><a href="../administrador/articulos.php" class="nav-link">Articulos</a></li>
-       <li class="nav-item"><a href="buttons.html" class="nav-link">Transformación</a></li>
+       <li class="nav-item"><a href="../administrador/transformacion.php" class="nav-link">Transformación</a></li>
        <li class="nav-item"><a href="../administrador/clientes.php" class="nav-link">Clientes</a></li>
        <li class="nav-item"><a href="../administrador/provedores.php" class="nav-link">Proveedores</a></li>
        <li class="nav-item"><a href="../administrador/artiprove.php" class="nav-link">Articulos Proveedor</a></li>

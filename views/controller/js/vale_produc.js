@@ -95,9 +95,17 @@ $(document).ready(function() {
 
 
 });
-//LLMADO DE DATOS
+//LLAMADO DE DATOS
 function updatedvp() {
-    alert("entro el update");
+        //alert("entro el update");
+    //BORRA LA INFORMACIÓN DE PRODUCTO FINAL
+    document.getElementById('mcodigotr').value ="";
+    document.getElementById('mdecriptr').value ="";
+    document.getElementById('vpcantidad').value ="";
+    document.getElementById('vpcantidad').value ="";
+    document.getElementById('vpbservo').value ="";
+    document.getElementById('pedidomem').value ="";
+    //INFORMACION DE LAS TBLAS
     let id_valeproduc = document.getElementById('vpfolio').value;
     $.ajax({
       url: '../controller/php/convale_pro.php',
@@ -106,11 +114,12 @@ function updatedvp() {
       obj = JSON.parse(resp);
       let res = obj.data;
       let x = 0;
-      html = '<div class="table-wrapper"><table style="width:100%" id="lisextendid" name="lisextendid" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+      html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="produfinalvp" name="produfinalvp" class="table display dataTable"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
       for (U = 0; U < res.length; U++) {  
         if (obj.data[U].refe_1 == id_valeproduc && obj.data[U].tipo_ref =='EXTENDIDO'){
           x++;
-          html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
+          let id_valepro=obj.data[U].id_kax;
+          html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp(valprd);' class='nav-link' data-toggle='modal' data-target=''>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
         }  
       }
       html += '</div></tbody></table></div></div>';
@@ -143,12 +152,13 @@ function updatedvp() {
         obj = JSON.parse(resp);
     let res = obj.data;
     let x = 0;
-    html = '<div class="table-wrapper"><table style="width:100%" id="etiquetasvp" name="etiquetasvp" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+    html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="produfinalvp" name="produfinalvp" class="table display dataTable"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
     for (U = 0; U < res.length; U++) {  
       if (obj.data[U].refe_1 == id_valeproduc && obj.data[U].tipo_ref =='ETIQUETAS'){
         x++;
-        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
-      }  
+        let id_valepro=obj.data[U].id_kax;
+        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp(valprd);' class='nav-link' data-toggle='modal' data-target=''>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
+    }  
     }
     html += '</div></tbody></table></div></div>';
     $("#listetiquetas").html(html);
@@ -180,11 +190,13 @@ $.ajax({
     obj = JSON.parse(resp);
     let res = obj.data;
     let x = 0;
-    html = '<div class="table-wrapper"><table style="width:100%" id="produfinalvp" name="produfinalvp" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+    html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="produfinalvp" name="produfinalvp" class="table display dataTable"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
     for (U = 0; U < res.length; U++) {  
       if (obj.data[U].refe_1 == id_valeproduc && obj.data[U].tipo_ref =='PRODUCTO_TERMINADO'){
         x++;
-        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
+        valprd=obj.data[U].codigo_1;
+        //alert(id_valepro);
+        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp(valprd);' class='nav-link' data-toggle='modal' data-target=''>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
       }  
     }
     html += '</div></tbody></table></div></div>';
@@ -212,7 +224,7 @@ $.ajax({
 }
 //FUNCIÓN QUE SIRVE PARA AGREGAR UN ARTICULO AL VALE DE PRODUCCIÓN
 function addvaleprodu() {
-    alert("entro agregar vale de producción");
+    //alert("entro agregar vale de producción");
     let refe_1 = document.getElementById('vpfolio').value; 
     let fecha = document.getElementById('vpfecha').value; 
     let refe_2 = document.getElementById('vpdepsoli').value;
@@ -226,7 +238,7 @@ function addvaleprodu() {
     let ubicacion = document.getElementById('pedidomem').value;
     let datos= 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&opcion=registrar';
    
-    alert(datos);
+    //alert(datos);
 
     if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || codigo_1 == '' || descripcion_1 == '' || cantidad_real == '') { 
         document.getElementById('vaciosvp').style.display=''
@@ -247,6 +259,7 @@ function addvaleprodu() {
                   showConfirmButton: false,
                   timer: 1500
               });
+              
               updatedvp();
               }else if (respuesta == 2) {
                   document.getElementById('dublivp').style.display=''
@@ -263,4 +276,44 @@ function addvaleprodu() {
           })
         }
       
+}
+
+function editarinsvp(valprd){
+alert(valprd);
+}
+
+//LLAMADO DE DATOS
+function cancelar() {
+    alert("entra cancelar");
+    let refe_1 = document.getElementById('vpfolio').value;
+    let datos= 'refe_1=' + refe_1 + '&opcion=cancelar';
+    $.ajax({
+        type:"POST",
+        url:"../controller/php/insertvapro.php",
+        data:datos
+      }).done(function(respuesta){
+          if (respuesta==0){
+               Swal.fire({
+              type: 'success',
+              text: 'Se cancelelo de forma correcta',
+              showConfirmButton: false,
+              timer: 1500
+          });
+          setTimeout("location.href = 'vale_produccion.php';", 1500);
+
+          }else if (respuesta == 2) {
+              document.getElementById('dublivp').style.display=''
+              setTimeout(function(){
+                  document.getElementById('dublivp').style.display='none';
+              }, 1000);
+          //alert("datos repetidos");
+          }else{
+              document.getElementById('errvp').style.display=''
+              setTimeout(function(){
+                  document.getElementById('errvp').style.display='none';
+              }, 1000);
+          }
+      })
+    
+    
 }

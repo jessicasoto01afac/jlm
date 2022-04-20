@@ -267,7 +267,7 @@ include('header.php');
         <?php include('../administrador/modal.php');?>
         <script type="text/javascript">
         // TABLA INSPECTORES EXTERNOS//
-        var table = $('#example').DataTable({
+        let table = $('#example').DataTable({
 
             "language": {
                 "searchPlaceholder": "Buscar datos...",

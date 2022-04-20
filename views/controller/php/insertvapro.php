@@ -26,13 +26,12 @@ if(!isset($usuario)){
             $cantidad_real = $_POST['cantidad_real'];
             $salida = $_POST['salida'];
             $observa = $_POST['observa'];
-            $costo = $_POST['costo'];
-            $total = $_POST['total'];
             $ubicacion = $_POST['ubicacion'];
             
-            if (registrar($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$costo,$total,$ubicacion,$conexion)){
+            if (registrar($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion)){
                 echo "0";
-                //$usuario='PRUEBAS';
+                extendido($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
+                etiqueta($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
                 historial($usuario,$refe_1,$codigo_1,$conexion);
             }else{
                 echo "1";
@@ -41,15 +40,11 @@ if(!isset($usuario)){
 
             echo "2";
         }
-    //Condición donde actualiza vale de oficina
-    }else if($opcion === 'actualizar'){
-        $codigo_1 = $_POST['codigo_1'];
-        $descripcion_1 = $_POST['descripcion_1'];
-        $salida = $_POST['salida'];
-        $observa = $_POST['observa'];
-        $id_kax = $_POST['id_kax'];
+    //Condición donde cancela el vale de producción
+    }else if($opcion === 'cancelar'){
+        $refe_1 = $_POST['refe_1'];
         
-            if (actualizar($codigo_1,$descripcion_1,$salida,$observa,$id_kax,$conexion)){
+            if (cancelar($refe_1,$conexion)){
                 echo "0";
             }else{
                 echo "1";
@@ -73,14 +68,44 @@ function comprobacion ($refe_1,$codigo_1,$conexion){
     $this->conexion->cerrar();
 }
 //funcion para guardar el vale de oficina
-function registrar ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$costo,$total,$ubicacion,$conexion){
-    $query="INSERT INTO kardex VALUES(0,'$refe_1','NA','$refe_3','$fecha','$codigo_1','$descripcion_1','VALE_PRODUCCION','PRODUCTO_TERMINADO','$proveedor_cliente','$ubicacion','$cantidad_real',0,'$salida',$costo,0,$total,'$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0)";
+function registrar ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
+    $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','$refe_3','$fecha','$codigo_1','$descripcion_1','VALE_PRODUCCION','PRODUCTO_TERMINADO','$proveedor_cliente','$ubicacion','$cantidad_real',0,'$salida','0',0,'0','$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
         return false;
     }
     $this->conexion->cerrar();
+}
+//funcion para guardar el vale de oficina
+function extendido ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
+    $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha',concat((select id_extendido from transforma where id_articulo_final = '$codigo_1')),concat((select artdescrip from articulos where artcodigo = (select id_extendido from transforma where id_articulo_final = '$codigo_1'))),'VALE_PRODUCCION','EXTENDIDO','$proveedor_cliente','$ubicacion',concat((select $cantidad_real * hojas / divicion from transforma where id_articulo_final = '$codigo_1')),0,concat((select $cantidad_real * hojas / divicion from transforma where id_articulo_final = '$codigo_1')),'0',0,'0','','NA','PENDIENTE','PENDIENTE','NO','NO',0";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
+//funcion para guardar el vale de oficina
+function etiqueta ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
+    $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha',concat((select id_etiquetas from transforma where id_articulo_final = '$codigo_1')),concat((select artdescrip from articulos where artcodigo = (select id_etiquetas from transforma where id_articulo_final = '$codigo_1'))),'VALE_PRODUCCION','ETIQUETAS','$proveedor_cliente','$ubicacion','$cantidad_real',0,'$salida','0',0,'0','','NA','PENDIENTE','PENDIENTE','NO','NO',0";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
+//funcion para cancelar el registro
+function cancelar ($refe_1,$conexion){
+    $query="UPDATE kardex SET estado=2, status='CANCELADO', status_2='CANCELADO' WHERE refe_1 = '$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
 }
 //funcion para actualizar el registro
 function actualizar ($codigo_1,$descripcion_1,$salida,$observa,$id_kax,$conexion){
@@ -200,7 +225,7 @@ function liberarvo ($valeof,$conexion){
 function historial($usuario,$refe_1,$codigo_1,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE OFICINA', 'CODIGO:' ' $refe_1' ' ARTICULO:' ' $codigo_1','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE PRODUCCIÓN', 'CODIGO:' ' $refe_1' ' ARTICULO:' ' $codigo_1','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

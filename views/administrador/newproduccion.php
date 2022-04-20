@@ -70,7 +70,7 @@
         </div>
         <div class="br-pagebody">
             <div style="float: right;">
-                <a href="../administrador/vale_produccion.php" id="closememo" title="Dar clic para cancelar el memo"
+                <a href="../administrador/vale_produccion.php" id="closememo" onclick="cancelar();" title="Dar clic para cancelar el memo"
                     type="button" style="" class="btn btn-secondary"><i class="fa fa-times"></i></a>
             </div>
             <div class="br-section-wrapper">
@@ -248,14 +248,14 @@
                             <div class="col-lg-12">
                                 <div id="listetiquetas"></div><!-- col-12 -->
                             </div>
-                            <h5 class="tx-gray-700 mg-b-5" style="text-align:center">PRODUCTO TERMINAD</h5>
+                            <h5 class="tx-gray-700 mg-b-5" style="text-align:center">PRODUCTO TERMINADO</h5>
                             <div class="col-lg-12">
                                 <div id="listproducfinal"></div><!-- col-12 -->
                             </div>
                     </section>
                 </div>
                 <br>
-                <a class="btn btn-danger" href="../administrador/memos.php"
+                <a onclick="cancelar()" class="btn btn-danger" 
                     style="float:right; color:white">CANCELAR</a>
             </div><!-- br-pagebody -->
         </div><!-- br-pagebody -->
