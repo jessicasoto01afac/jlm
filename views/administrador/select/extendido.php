@@ -5,8 +5,8 @@
       $articulo = mysqli_query($conexion,$sql);
     ?>
 
-			<select class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" onchange="desarticvp()" id="vppcodigo" name="vppcodigo" type="text" data-live-search="true" style="width: 100%" >
-			<option value="0">CODIGO</option> 
+			<select class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" onchange="desarticvex()" id="vpcodigoext" name="vpcodigoext" type="text" data-live-search="true" style="width: 100%" >
+			<option value="0">CODIGO EXTENDIDO</option> 
 			<?php while($idpst = mysqli_fetch_row($articulo)):?>                      
 			<option value="<?php echo $idpst[0]?>"><?php echo $idpst[0]?></option>
 			<?php endwhile; ?>
@@ -14,13 +14,13 @@
 
 	<script type="text/javascript">
         		$(document).ready(function(){
-			$('#vppcodigo').select2();
+			$('#vpcodigoext').select2();
 
 
-			$('#vppcodigo').change(function(){
+			$('#vpcodigoext').change(function(){
 				$.ajax({
 					type:"post",
-					data:'valor=' + $('#vppcodigo').val(),
+					data:'valor=' + $('#vpcodigoext').val(),
 					url:'session/',
 					success:function(r){
 					}
@@ -28,9 +28,9 @@
 			});
 		});
 //funcion para BUSCAR EL ARTICULO
-function desarticvp(){
+function desarticvex(){
 //alert("eentraarticulo")
-var codivo = document.getElementById('vppcodigo').value; 
+var codivo = document.getElementById('vpcodigoext').value; 
 $.ajax({
           url: '../controller/php/conarticulos.php',
           type: 'POST'
@@ -46,7 +46,7 @@ $.ajax({
                   obj.data[D].artdescrip + '*' +
                   obj.data[D].artubicac;    
                   var o = datos.split("*");   
-                  $("#descripfin").val(o[1]);   
+                  $("#descripext").val(o[1]);   
                   //$("#vdepart").val(o[2]); 
 
               }

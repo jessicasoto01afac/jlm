@@ -721,3 +721,61 @@ function savedeprov(){
         }
     });
   }
+
+//--------------------------------TRANSFORMACIÓN---------------------------------------------------------------------
+//Funcion para habilitar los input de edición de usuarios
+function addtransform(){
+  //alert("entra transform");
+  let id_articulo_final = document.getElementById('vppcodigo').value;
+  let id_extendido = document.getElementById('vpcodigoext').value;
+  let id_etiquetas = document.getElementById('vpcodigoetiq').value;
+  let hojas = document.getElementById('artdescriphojas').value;
+  let divicion = document.getElementById('division').value;
+
+  let datos= 'id_articulo_final=' + id_articulo_final + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&opcion=registrar';
+  alert(datos);
+
+  if (id_articulo_final == '' || id_extendido == '' || id_etiquetas == '' || hojas == '' || divicion == '') {
+    document.getElementById('vaciosartras').style.display=''
+    setTimeout(function(){
+    document.getElementById('vaciosartras').style.display='none';
+  }, 1500);
+    return;
+  } else {
+    $.ajax({
+      type:"POST",
+      url:"../controller/php/insertransf.php",
+      data:datos
+    }).done(function(respuesta){
+      if (respuesta==0){
+        Swal.fire({
+              type: 'success',
+              title: 'JLM INFORMA',
+              text: 'LA TRANSFORMACIÓN SE AGREGO CORRECTAMENTE',
+              showCloseButton: false,
+              showCancelButton: true,
+              focusConfirm: false,
+              confirmButtonColor: "#1774D8",
+              customClass: 'swal-wide',
+              confirmButtonText: '<span style="color: white;"><a class="a-alert" href="vale_produccion">¿Deseas agregar otro articulo?</a></span>',
+              confirmButtonAriaLabel: 'Thumbs up, great!',
+              cancelButtonText: '<a  class="a-alert" href="articulos.php"><span style="color: white;">Cerrar</span></a>',
+              cancelButtonAriaLabel: 'Thumbs down'
+                  // timer: 2900
+          });
+      }else if (respuesta == 2) {
+        document.getElementById('dubliartras').style.display=''
+        setTimeout(function(){
+        document.getElementById('dubliartras').style.display='none';
+        }, 1000);
+      }else{
+        document.getElementById('errartras').style.display=''
+        setTimeout(function(){
+        document.getElementById('errartras').style.display='none';
+        }, 2000);
+      alert(respuesta);
+      }
+    });//FIN DE AJAX
+  }
+
+}
