@@ -1289,6 +1289,113 @@
               </div>
             </div><!-- modal-dialog -->
           </div><!-- modal -->
+          <!-- MODAL PARA EDITAR UISUARIOS-->
+        <div class="modal fade" id='modal-edithtrans'>
+          <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/"> 
+            <div class="modal-content bd-5" >
+              <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO DE TRANSFORMACIÓN</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form id="editusu" class="form-horizontal" action="" method="POST">
+                <div class="modal-body pd-25">
+                <a href="#" id="openeditras" style="float: right;font-size: 16px" class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editrasnf()" title="Dar clic para editar">
+                  <div><i class="fa fa-edit"></i></div>
+                </a>
+                <a href="#" id="closetras" style="float: right;font-size: 16px;display:none;" class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closetrans()" title="Dar clic para cerrar">
+                  <div><i class="fa fa-times"></i></div>
+                </a>
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_per" id="id_per">
+                <div class="row mg-b-25">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label label2">CODIGO ARTICULO FINAL: <span class="tx-danger" >*</span></label>
+                      <div id="edithfinal" name="edithfinal"></div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label label2">CODIGO ARTICULO EXTENDIDO:  <span class="tx-danger">*</span></label>
+                      <div id="edithextendido" name="edithextendido"></div>
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label label2">CODIGO DE ETIQUETAS<span class="tx-danger">*</span></label>
+                      <div id="edithetiquetas" name="edithetiquetas"></div>
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label label2">HOJAS<span class="tx-danger">*</span></label>
+                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="text" name="edithojas" id="edithojas">
+                    </div>
+                  </div><!-- col-4 -->
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label label2">DIVISIÓN<span class="tx-danger">*</span></label>
+                      <input disabled="" class="form-control inputalta" type="text" name="editdivision" id="editdivision">
+                    </div>
+                  </div><!-- col-4 -->
+                </div><!-- col-4 -->
+                </div>
+              </form> 
+                <div class="modal-footer">
+                  <button type="button" onclick="saveusuedit()" id="usuguardar" style="display:none;" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR CAMBIOS</button>
+                </div>
+                <br>
+                <div style="display:none;" id="edthdubli" name="edthdubli" class="alert alert-warning" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> El resgistro ya existe</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+                <div style="display:none;" id="edthvacios" name="edthvacios" class="alert alert-info" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> Llenar todos los campos</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+                <div style="display:none;" id="edtherr" name="edtherr" class="alert alert-danger" role="alert">
+                  <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un ticket</span>
+                  </div><!-- d-flex -->
+                </div><!-- alert --> 
+            </div>
+          </div><!-- modal-dialog -->
+        </div><!-- modal -->
+        <!-- modal eliminar articulo de ransformacion -->
+        <div class="modal fade" id='modal-deltransf'>
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content bd-0">
+                <div class="modal-header pd-x-20">
+                  <h4 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ELIMINAR</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body pd-20">
+                  <p class="mg-b-5">ESTAS SEGURO DE ELIMINAR EL MEMO?</p>
+                  <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="detrasfor" id="detrasfor">
+                  <input disabled="" class="form-control inputalta" type="text" name="artras_dele" id="artras_dele">
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <button type="button" onclick="savedemem()" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
+                  <br>
+                 
+                </div>
+                <div style="display:none;" id="delerrvo" name="delerrvo" class="alert alert-danger" role="alert">
+                    <div class="d-flex align-items-center justify-content-start">
+                      <i class="icon ion-ios-close alert-icon tx-24"></i>
+                      <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un ticket</span>
+                    </div><!-- d-flex -->
+                  </div><!-- alert --> 
+              </div>
+            </div><!-- modal-dialog -->
+          </div><!-- modal -->
             
     <script>
     $(function(){
@@ -1313,6 +1420,11 @@
         $('#edipeinfinf').load('select/buscar4.php');
         $('#edicovinf1sur').load('select/buscar5.php');
         $('#edimemo').load('select/buscar5.php');
+
+        $('#edithfinal').load('select/buscar5.php');
+        $('#edithextendido').load('select/buscar3.php');
+        $('#edithetiquetas').load('select/buscar4.php');
+
 
 
 });

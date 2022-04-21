@@ -13,7 +13,7 @@
 			ini_set('date.timezone','America/Mexico_City');
 			if ($data["estado"] == "0") {
 				$id_trans=$data["id_trans"];
-				$proceso = "<a onclick='infmemo($id_trans)' style='cursor:pointer;' title='Ver detalles de memo' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='delememos($id_trans)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-delmemo'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
+				$proceso = "<a onclick='infolistrans($id_trans)' style='cursor:pointer;' title='Ver detalles' class='btn btn-primary btn-icon' data-toggle='modal' data-target='#modal-edithtrans'><div><i style='color:white;' class='fa fa-pencil-square-o'></i></div></a>  <a onclick='deletransf($id_trans)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deltransf'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
 				$cursos[] = [ 
 					$contador,
 					$data["id_articulo_final"], 

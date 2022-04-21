@@ -733,7 +733,7 @@ function addtransform(){
   let divicion = document.getElementById('division').value;
 
   let datos= 'id_articulo_final=' + id_articulo_final + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&opcion=registrar';
-  alert(datos);
+  //alert(datos);
 
   if (id_articulo_final == '' || id_extendido == '' || id_etiquetas == '' || hojas == '' || divicion == '') {
     document.getElementById('vaciosartras').style.display=''
@@ -757,9 +757,9 @@ function addtransform(){
               focusConfirm: false,
               confirmButtonColor: "#1774D8",
               customClass: 'swal-wide',
-              confirmButtonText: '<span style="color: white;"><a class="a-alert" href="vale_produccion">¿Deseas agregar otro articulo?</a></span>',
+              confirmButtonText: '<span style="color: white;"><a class="a-alert" href="newtrasn.php">¿Deseas agregar otro articulo?</a></span>',
               confirmButtonAriaLabel: 'Thumbs up, great!',
-              cancelButtonText: '<a  class="a-alert" href="articulos.php"><span style="color: white;">Cerrar</span></a>',
+              cancelButtonText: '<a  class="a-alert" href="transformacion.php"><span style="color: white;">Cerrar</span></a>',
               cancelButtonAriaLabel: 'Thumbs down'
                   // timer: 2900
           });
@@ -779,3 +779,43 @@ function addtransform(){
   }
 
 }
+function infolistrans(id_transform){
+  //alert("dsdlsds");
+  //alert(id_transform);
+}
+//FUNCION DE EDITAR ARTICULO DE RASFORMACION
+function editrasnf(){
+  //alert("editusuarios");
+  document.getElementById('openeditras').style.display="none";
+  document.getElementById('closetras').style.display="";
+  document.getElementById('arsurvof').disabled= false;
+  
+  document.getElementById('editdivision').disabled= false;
+  document.getElementById('edithojas').disabled= false;
+}
+//FUNCION DE CERRAR EDICIÓN ARTICULO DE RASFORMACION
+function closetrans(){
+  //alert("cerrarusu");
+      document.getElementById('openeditras').style.display="";
+      document.getElementById('closetras').style.display="none";
+      document.getElementById('editdivision').disabled= true;
+      document.getElementById('edithojas').disabled= true;
+      document.getElementById('editcorre').disabled= true;
+      document.getElementById('editusu1').disabled= true;
+      document.getElementById('editcontra').disabled= true;
+      document.getElementById('editprivi').disabled= true;
+      document.getElementById('usuguardar').style.display="none";
+}
+//FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
+function deletransf(transf){
+  //alert(memos); 
+  document.getElementById('detrasfor').value=transf;
+  $("#transfomacion tr").on('click', function() {
+    var articulo_termin = "";
+    articulo_termin += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
+    document.getElementById('artras_dele').value=articulo_termin;
+    //alert(id_persona)
+    
+  }) 
+}
+

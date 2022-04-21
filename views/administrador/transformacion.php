@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php include ("../controller/conexion.php");
+
+    
+      $sql = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $articulo = mysqli_query($conexion,$sql);
+    ?>
 
 
 <html lang="es">
@@ -98,6 +104,7 @@ include('header.php');
         <script src="../controller/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="../controller/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
         <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+        <script src="../controller/js/catalogos.js"></script>
 
         <?php include('../administrador/modal.php');?>
         <script type="text/javascript">
