@@ -351,6 +351,10 @@ function infvale(){
           estatus="<span title='Ya fue surtido' class='spandis'>SURTIDO</span>"
         }else if (obj.data[U].status_2 == "SIN EXISTENCIAS" && obj.data[U].status == "AUTORIZADO")  {
           estatus="<span title='Ver detalles' onclick='infonosur()' data-toggle='modal' data-target='#modal-nosurtido' class='sinexisten' style='font-size:12px;cursor: pointer;'>SIN EXISTENCIA</span>"
+        }else if (obj.data[U].status_2 == "SIN EXISTENCIAS" && obj.data[U].status == "PENDIENTE")  {
+          estatus="<span title='Ver detalles' onclick='infonosur()' data-toggle='modal' data-target='#modal-nosurtido' class='sinexisten' style='font-size:12px;cursor: pointer;'>SIN EXISTENCIA</span>"
+        }else if (obj.data[U].status_2 == "SURTIDO" && obj.data[U].status == "PENDIENTE")  {
+          estatus="<span title='Ya fue surtido' class='spandis'>SURTIDO</span>"
         }
         html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + estatus +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf();' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
       }  
