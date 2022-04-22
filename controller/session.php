@@ -28,6 +28,11 @@ if (password_verify($clave, $passhash)){
         $_SESSION['persona']=$array;
         header("location: ../views/almacen/inicio.php");
     
+    }else if ($array['privilegios']=== 'VENTAS') {
+        $_SESSION['username']=$usuario;
+        $_SESSION['persona']=$array;
+        header("location: ../views/ventas/inicio.php");
+    
     }else{
         echo  $passhash ,$clave ;
     }
