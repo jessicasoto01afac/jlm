@@ -811,11 +811,35 @@ function deletransf(transf){
   //alert(memos); 
   document.getElementById('detrasfor').value=transf;
   $("#transfomacion tr").on('click', function() {
-    var articulo_termin = "";
+    let articulo_termin = "";
     articulo_termin += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
     document.getElementById('artras_dele').value=articulo_termin;
     //alert(id_persona)
-    
-  }) 
+  });
 }
 
+function savdeletransf(){
+  let id_transformacion = document.getElementById('detrasfor').value;
+  let datos= 'id_transformacion=' + id_transformacion + '&opcion=eliminar';
+    $.ajax({
+      type:"POST",
+      url:"../controller/php/insertransf.php",
+      data:datos
+    }).done(function(respuesta){
+      if (respuesta==0){
+        Swal.fire({
+          type: 'success',
+          text: 'SE ELIMINO DE FORMA CORRECTA',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }else{
+        document.getElementById('delerrartras').style.display=''
+        setTimeout(function(){
+        document.getElementById('delerrartras').style.display='none';
+        }, 2000);
+      alert(respuesta);
+      }
+    });//FIN DE AJAX
+
+}

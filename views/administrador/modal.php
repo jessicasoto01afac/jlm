@@ -1383,11 +1383,11 @@
                   <input disabled="" class="form-control inputalta" type="text" name="artras_dele" id="artras_dele">
                 </div>
                 <div class="modal-footer justify-content-center">
-                  <button type="button" onclick="savedemem()" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
+                  <button type="button" onclick="savdeletransf()" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
                   <br>
                  
                 </div>
-                <div style="display:none;" id="delerrvo" name="delerrvo" class="alert alert-danger" role="alert">
+                <div style="display:none;" id="delerrartras" name="delerrartras" class="alert alert-danger" role="alert">
                     <div class="d-flex align-items-center justify-content-start">
                       <i class="icon ion-ios-close alert-icon tx-24"></i>
                       <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un ticket</span>

@@ -51,12 +51,12 @@ if(!isset($usuario)){
         }
     //Condición donde elimina usuario
 }else if($opcion === 'eliminar'){
-    $id_art = $_POST['id_art'];
-        if (eliminar($id_art,$conexion)){
+    $id_transformacion = $_POST['id_transformacion'];
+        if (eliminar($id_transformacion,$conexion)){
             echo "0";
-            $realizo = 'ELIMINA A ARTICULO';
+            $realizo = 'ELIMINA A ARTICULO DE TRANSFORMACIÓN';
            // $usuario='pruebas';
-            histdelete($usuario,$realizo,$id_art,$conexion);
+            histdelete($usuario,$realizo,$id_transformacion,$conexion);
         }else{
             echo "1";
         }
@@ -96,9 +96,9 @@ function actualizar ($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$id_
     cerrar($conexion);
 }
 
-//funcion para actualizar el registro
-function eliminar ($id_art,$conexion){
-    $query="UPDATE articulos SET estado='1' WHERE id_art = '$id_art'";
+//funcion para eliminar el registro
+function eliminar ($id_transformacion,$conexion){
+    $query="UPDATE transforma SET estado='1' WHERE id_trans = '$id_transformacion'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -129,10 +129,10 @@ function histedith($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$id_ar
         return false;
     }
 }
-function histdelete($usuario,$realizo,$id_art,$conexion){
+function histdelete($usuario,$realizo,$id_transformacion,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', ' ID:' '$id_art' ,'$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', ' ID:' '$id_transformacion' ,'$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
