@@ -197,11 +197,8 @@ function closedthart(){
   document.getElementById('artguardar').style.display="none";
 }
 //Funcion que trae los datos al modal editar articulo
-function artedith(){
-  //alert("entra")
-  $("#arttable tr").on('click', function() {
-      var id_art = "";
-      id_art += $(this).find('td:eq(0)').html(); //Toma el id de la persona 
+function artedith(id_art){
+  //alert(id_art)
       document.getElementById('id_art').value=id_art;
       $.ajax({
           url: '../controller/php/conarticulos.php',
@@ -227,7 +224,7 @@ function artedith(){
               }
           }
       });
-  }) 
+ 
 }
 //Funcion que trae los datos al modal editar articulo
 function savearedith(){
@@ -277,12 +274,10 @@ function savearedith(){
     }
 }
 //FUNCION QUE TRAE LOS DATOS A  ELIMINAR A UN ARTICULO
-function deletart(){
-  $("#arttable tr").on('click', function() {
-      var id_art = "";
-      id_art += $(this).find('td:eq(0)').html(); //Toma el id de la persona 
+function deletart(id_art){
+  
       document.getElementById('del_art').value=id_art;
-      //alert(id_art);
+      alert(id_art);
       $.ajax({
           url: '../controller/php/conarticulos.php',
           type: 'POST'
@@ -302,7 +297,7 @@ function deletart(){
               }
           }
       });
-  }) 
+  
 }
 
 //FUNCION QUE GUARDA ELIMINAR ARTICULOS
@@ -779,9 +774,37 @@ function addtransform(){
   }
 
 }
+//FUNCION DONDE RECOLECTA LA INFORMACION DEL ARTICULO DE TRASFORMACION PARA EDITAR
 function infolistrans(id_transform){
-  //alert("dsdlsds");
   //alert(id_transform);
+  document.getElementById('id_arttras').value=id_transform
+  
+  $.ajax({
+    url: '../controller/php/contrasforma.php',
+    type: 'POST'
+}).done(function(respuesta) {
+    obj = JSON.parse(respuesta);
+    let res = obj.data;
+    let x = 0;
+    for (D = 0; D < res.length; D++) { 
+        if (obj.data[D].id_trans == id_transform ){
+           // alert(id_persona);
+            datos = 
+            obj.data[D].id_articulo_final+ '*' +
+            obj.data[D].id_extendido + '*' +
+            obj.data[D].id_etiquetas + '*' +
+            obj.data[D].hojas + '*' +
+            obj.data[D].divicion;  
+            let o = datos.split("*");   
+            $("#modal-edithtrans #edithartfin").val(o[0]);
+            $("#modal-edithtrans #edithartext").val(o[1]);
+            $("#modal-edithtrans #editharetq").val(o[2]);
+            $("#modal-edithtrans #edithojas").val(o[3]);  
+            $("#modal-edithtrans #editdivision").val(o[4]);    
+        }
+    }
+});
+
 }
 //FUNCION DE EDITAR ARTICULO DE RASFORMACION
 function editrasnf(){
@@ -789,9 +812,13 @@ function editrasnf(){
   document.getElementById('openeditras').style.display="none";
   document.getElementById('closetras').style.display="";
   document.getElementById('arsurvof').disabled= false;
-  
   document.getElementById('editdivision').disabled= false;
   document.getElementById('edithojas').disabled= false;
+  document.getElementById('edithartfin').disabled= false;
+  document.getElementById('edithartext').disabled= false;
+  document.getElementById('editharetq').disabled= false;
+  document.getElementById('traeguardar').style.display="";
+  
 }
 //FUNCION DE CERRAR EDICIÓN ARTICULO DE RASFORMACION
 function closetrans(){
@@ -800,11 +827,11 @@ function closetrans(){
       document.getElementById('closetras').style.display="none";
       document.getElementById('editdivision').disabled= true;
       document.getElementById('edithojas').disabled= true;
-      document.getElementById('editcorre').disabled= true;
-      document.getElementById('editusu1').disabled= true;
-      document.getElementById('editcontra').disabled= true;
-      document.getElementById('editprivi').disabled= true;
-      document.getElementById('usuguardar').style.display="none";
+      document.getElementById('edithartfin').disabled= true;
+      document.getElementById('edithartext').disabled= true;
+      document.getElementById('editharetq').disabled= true;
+
+      document.getElementById('traeguardar').style.display="none";
 }
 //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
 function deletransf(transf){
@@ -817,7 +844,7 @@ function deletransf(transf){
     //alert(id_persona)
   });
 }
-
+//FUNCIONQUE GUARDA LA ELIMINACION DE ARTICULO DE TRASFORMACIÓN
 function savdeletransf(){
   let id_transformacion = document.getElementById('detrasfor').value;
   let datos= 'id_transformacion=' + id_transformacion + '&opcion=eliminar';
@@ -831,8 +858,11 @@ function savdeletransf(){
           type: 'success',
           text: 'SE ELIMINO DE FORMA CORRECTA',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1000
         });
+        setTimeout("location.href = 'transformacion.php';", 1000);
+
+
       }else{
         document.getElementById('delerrartras').style.display=''
         setTimeout(function(){
@@ -841,5 +871,40 @@ function savdeletransf(){
       alert(respuesta);
       }
     });//FIN DE AJAX
+}
+
+//FUNCIONQUE GUARDA LA EDICIÓN DE ARTICULO DE TRASFORMACIÓN
+function savetraedit(){
+  //alert("ENTRA GUARDAR EDICIÓN");
+  let id_transformacion = document.getElementById('id_arttras').value;
+  let id_articulo_final  = document.getElementById('edithartfin').value;
+  let id_extendido = document.getElementById('edithartext').value;
+  let id_etiquetas = document.getElementById('editharetq').value;
+  let hojas = document.getElementById('edithojas').value;
+  let divicion = document.getElementById('editdivision').value;
+  let datos= 'id_transformacion=' + id_transformacion + '&id_articulo_final=' + id_articulo_final  + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&opcion=actualizara';
+//alert(datos);
+  $.ajax({
+    type:"POST",
+    url:"../controller/php/insertransf.php",
+    data:datos
+  }).done(function(respuesta){
+    if (respuesta==0){
+      Swal.fire({
+        type: 'success',
+        text: 'SE ACTUALIZO DE FORMA CORRECTA',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      setTimeout("location.href = 'transformacion.php';", 1000);
+    }else{
+      document.getElementById('delerrartras').style.display=''
+      setTimeout(function(){
+      document.getElementById('delerrartras').style.display='none';
+      }, 2000);
+    alert(respuesta);
+    }
+  });//FIN DE AJAX
 
 }
+

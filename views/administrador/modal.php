@@ -1,3 +1,15 @@
+<?php include ("../controller/conexion.php");
+
+    
+      $sql = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $articulo = mysqli_query($conexion,$sql);
+
+      $sql1 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $extendido = mysqli_query($conexion,$sql1);
+
+      $sql2 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $etiquetas = mysqli_query($conexion,$sql2);
+    ?>
 <!-- <link rel="stylesheet" href="../template/css/card.css"> -->
 <link href="../template/css/sweetalert2.min.css" type="text/css" rel="stylesheet">
 <script src="../template/js/sweetalert2.all.min.js"></script>
@@ -1307,43 +1319,58 @@
                 <a href="#" id="closetras" style="float: right;font-size: 16px;display:none;" class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closetrans()" title="Dar clic para cerrar">
                   <div><i class="fa fa-times"></i></div>
                 </a>
-                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_per" id="id_per">
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_arttras" id="id_arttras">
                 <div class="row mg-b-25">
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label label2">CODIGO ARTICULO FINAL: <span class="tx-danger" >*</span></label>
-                      <div id="edithfinal" name="edithfinal"></div>
+                      <select disabled="" class="form-control" id="edithartfin" name="edithartfin" type="text" data-live-search="true" style="width: 100%" >
+                        <option value="0">CODIGO</option> 
+                          <?php while($idpst = mysqli_fetch_row($articulo)):?>                      
+                            <option value="<?php echo $idpst[0]?>"><?php echo $idpst[0]?></option>
+                          <?php endwhile; ?>
+			                </select>
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label label2">CODIGO ARTICULO EXTENDIDO:  <span class="tx-danger">*</span></label>
-                      <div id="edithextendido" name="edithextendido"></div>
+                      <select disabled="" class="form-control" id="edithartext" name="edithartext" type="text" data-live-search="true" style="width: 100%" >
+			                  <option value="0">CODIGO</option> 
+			                    <?php while($ext = mysqli_fetch_row($extendido)):?>                      
+			                      <option value="<?php echo $ext[0]?>"><?php echo $ext[0]?></option>
+			                    <?php endwhile; ?>
+			                </select>
                     </div>
                   </div><!-- col-4 -->
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label label2">CODIGO DE ETIQUETAS<span class="tx-danger">*</span></label>
-                      <div id="edithetiquetas" name="edithetiquetas"></div>
+                      <select disabled="" class="form-control" id="editharetq" name="editharetq" type="text" data-live-search="true" style="width: 100%" >
+			                  <option value="0">CODIGO</option> 
+			                    <?php while($etqu = mysqli_fetch_row($etiquetas)):?>                      
+			                      <option value="<?php echo $etqu[0]?>"><?php echo $etqu[0]?></option>
+			                    <?php endwhile; ?>
+			                </select>
                     </div>
                   </div><!-- col-4 -->
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label label2">HOJAS<span class="tx-danger">*</span></label>
-                      <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="text" name="edithojas" id="edithojas">
+                      <input disabled="" class="form-control inputalta" type="number" name="edithojas" id="edithojas">
                     </div>
                   </div><!-- col-4 -->
                   <div class="col-lg-6">
                     <div class="form-group">
                       <label class="form-control-label label2">DIVISIÓN<span class="tx-danger">*</span></label>
-                      <input disabled="" class="form-control inputalta" type="text" name="editdivision" id="editdivision">
+                      <input disabled="" class="form-control inputalta" type="number" name="editdivision" id="editdivision">
                     </div>
                   </div><!-- col-4 -->
                 </div><!-- col-4 -->
                 </div>
               </form> 
                 <div class="modal-footer">
-                  <button type="button" onclick="saveusuedit()" id="usuguardar" style="display:none;" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR CAMBIOS</button>
+                  <button type="button" onclick="savetraedit()" id="traeguardar" style="display:none;" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR CAMBIOS</button>
                 </div>
                 <br>
                 <div style="display:none;" id="edthdubli" name="edthdubli" class="alert alert-warning" role="alert">
@@ -1421,9 +1448,7 @@
         $('#edicovinf1sur').load('select/buscar5.php');
         $('#edimemo').load('select/buscar5.php');
 
-        $('#edithfinal').load('select/buscar5.php');
-        $('#edithextendido').load('select/buscar3.php');
-        $('#edithetiquetas').load('select/buscar4.php');
+
 
 
 

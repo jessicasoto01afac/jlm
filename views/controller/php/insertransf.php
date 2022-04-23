@@ -35,17 +35,17 @@ if(!isset($usuario)){
         }
     //Condición donde actualiza usuario
     }else if($opcion === 'actualizara'){
-        $artcodigo = $_POST['artcodigo'];
-        $artdescrip = $_POST['artdescrip'];
-        $artubicac = $_POST['artubicac'];        
-        $artunidad = $_POST['artunidad'];
-        $artgrupo = $_POST['artgrupo'];
-        $id_art = $_POST['id_art'];
-        if (actualizar($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$id_art,$conexion)){
+        $id_transformacion = $_POST['id_transformacion'];
+        $id_articulo_final = $_POST['id_articulo_final'];
+        $id_extendido = $_POST['id_extendido'];        
+        $id_etiquetas = $_POST['id_etiquetas'];
+        $hojas = $_POST['hojas'];
+        $divicion = $_POST['divicion'];
+        if (actualizar($id_transformacion,$id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$conexion)){
             echo "0";
-            $realizo = 'ACTUALIZO INFORMACION DEL ARTICULO';
+            $realizo = 'ACTUALIZO INFORMACION DEL ARTICULO DE TRASFORMACIÓN';
            // $usuario='pruebas';
-            histedith($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$id_art,$usuario,$realizo,$conexion);
+            histedith($id_transformacion,$id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$usuario,$realizo,$conexion);
         }else{
             echo "1";
         }
@@ -86,8 +86,8 @@ function registrar ($id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divic
     $this->conexion->cerrar();
 }
 //funcion para actualizar el registro
-function actualizar ($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$id_art,$conexion){
-    $query="UPDATE articulos SET artcodigo='$artcodigo', artdescrip='$artdescrip', artubicac='$artubicac', artunidad='$artunidad', artgrupo='$artgrupo' WHERE id_art = '$id_art'";
+function actualizar ($id_transformacion,$id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$conexion){
+    $query="UPDATE transforma SET id_articulo_final='$id_articulo_final', id_extendido='$id_extendido', id_etiquetas='$id_etiquetas', hojas='$hojas', divicion='$divicion' WHERE id_trans = '$id_transformacion'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -119,10 +119,10 @@ function historial($usuario,$id_articulo_final,$id_extendido,$id_etiquetas,$hoja
     }
 }
 //funciones para guardar el historico
-function histedith($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$id_art,$usuario,$realizo,$conexion){
+function histedith($id_transformacion,$id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$usuario,$realizo,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', ' ID:' '$id_art' ' $artcodigo' ':'  ' $artdescrip' ' UBICACION:' ' $artubicac' ' UNIDAD:' '$artunidad' ' GRUPO:' '$artgrupo','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', ' ID:' '$id_transformacion' 'ARTICULO FINAL: ' ' $id_articulo_final' ':'  ' EXTENDIDO' ' $id_extendido' ' ETQUETAS' ' $id_etiquetas' ' HOJAS:' ' $hojas' ' DIVISION','$divicion')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

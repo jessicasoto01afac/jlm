@@ -40,7 +40,21 @@ include('header.php');
           <br>   
           <br> 
           <br> 
-            <div id="listartic">
+            <!-- <div id="listartic"> -->
+            <div class="rounded table-responsive">
+                    <table class="table display dataTable"
+                    name="arttable" id="arttable" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="width:5%;">ID</th>
+                                <th>CODIGO</th>
+                                <th>DESCRIPCIÓN</th>
+                                <th>UBICACION</th>
+                                <th>ACCIONES</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    </div>
         </div><!-- br-section-wrapper -->
       </div><!-- br-pagebody -->
       <footer class="br-footer">
@@ -55,6 +69,7 @@ include('header.php');
       </footer>
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
+
 
     <script src="../template/lib/jquery/jquery.js"></script>
     <script src="../template/lib/popper.js/popper.js"></script>
@@ -71,9 +86,35 @@ include('header.php');
     <script src="../controller/js/catalogos.js"></script>
     <script src="../template/js/bracket.js"></script>
 
+    <script src="../controller/datatables.net/js/jquery.dataTables.js"></script>
+        <script src="../controller/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="../controller/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+
     <?php include('../administrador/modal.php');?>
+    <script type="text/javascript">
+        // TABLA INSPECTORES EXTERNOS//
+        let table = $('#arttable').DataTable({
+
+            "language": {
+                "searchPlaceholder": "Buscar datos...",
+                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+            },
+            "order": [
+                [4, "DESC"]
+            ],
+            "ajax": "../controller/php/infarticulos.php",
+            "columnDefs": [{
+                //  "targets": -1,
+                // "data": null,
+                //"defaultContent": ""
+
+            }]
+        });
+        </script>
     <script>
-       $.ajax({
+      /* $.ajax({
         url: '../controller/php/conarticulos.php',
         type: 'POST'
     }).done(function(resp) {
@@ -96,7 +137,10 @@ include('header.php');
               lengthMenu: '_MENU_ items/page',
             }
         });
-    })
+    })*/
+
+
+    
 
     $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
     

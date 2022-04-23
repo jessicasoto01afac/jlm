@@ -2,8 +2,7 @@
 <?php include ("../controller/conexion.php");
 
     
-      $sql = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
-      $articulo = mysqli_query($conexion,$sql);
+   
     ?>
 
 
