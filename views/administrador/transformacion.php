@@ -26,6 +26,9 @@
     <link href="../template/lib/select2/css/select2.min.css" rel="stylesheet">
     <link href="../template/css/diseno.css" rel="stylesheet">
 
+<script src="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css"></script>
+<script src="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"></script>
+
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
 
@@ -126,6 +129,7 @@ include('header.php');
             }]
         });
         </script>
+
     </body>
 
 </html>

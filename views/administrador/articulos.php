@@ -33,6 +33,15 @@ include('header.php');
       <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
         <h4 class="tx-gray-800 mg-b-5">ARTICULOS</h4>
       </div>
+      <div style="float: right;">
+      <div class="col-lg-5 mg-t-20 mg-lg-t-0">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" id="exportexc" name="exportexc" class="btn btn-secondary active"><i class="fa fa-file-excel-o"></i></button>
+                <button type="button" class="btn btn-secondary"><i class="fa fa-print"></i></button>
+              </div>
+      </div><!-- col-5 -->
+      </div>
+      <br>
 
       <div class="br-pagebody">
         <div class="br-section-wrapper">
@@ -48,7 +57,7 @@ include('header.php');
                             <tr>
                                 <th style="width:5%;">ID</th>
                                 <th>CODIGO</th>
-                                <th>DESCRIPCIÓN</th>
+                                <th style="width:400px;">DESCRIPCIÓN</th>
                                 <th>UBICACION</th>
                                 <th>ACCIONES</th>
                             </tr>

@@ -13,104 +13,90 @@
     <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="./views/template/css/index.css" rel="stylesheet">
 
-    <!-- Bracket CSS -->
-    <link rel="stylesheet" href="../app/views/template/css/bracket.css">
+      <!-- Bracket CSS -->
+      <link rel="stylesheet" href="../app/views/template/css/bracket.css">
 
 </head>
 
 <body>
-    <div class="login-root">
-        <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
-            <div class="loginbackground box-background--white padding-top--64">
-                <div class="loginbackground-gridContainer">
-                    <div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
-                        <div class="box-root"
-                            style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
-                        </div>
-                    </div>
-                    <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
-                        <div class="box-root box-divider--light-all-2 animationLeftRight tans3s" style="flex-grow: 1;">
-                        </div>
-                    </div>
-                    <div class="box-root flex-flex" style="grid-area: 6 / start / auto / 2;">
-                        <div class="box-root box-background--blue800" style="flex-grow: 1;"></div>
-                    </div>
-                    <div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4;">
-                        <div class="box-root box-background--blue animationLeftRight" style="flex-grow: 1;"></div>
-                    </div>
-                    <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
-                        <div class="box-root box-background--gray100 animationLeftRight tans3s" style="flex-grow: 1;">
-                        </div>
-                    </div>
-                    <div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end;">
-                        <div class="box-root box-background--cyan200 animationRightLeft tans4s" style="flex-grow: 1;">
-                        </div>
-                    </div>
-                    <div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end;">
-                        <div class="box-root box-background--blue animationRightLeft" style="flex-grow: 1;"></div>
-                    </div>
-                    <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20;">
-                        <div class="box-root box-background--gray100 animationRightLeft tans4s" style="flex-grow: 1;">
-                        </div>
-                    </div>
-                    <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17;">
-                        <div class="box-root box-divider--light-all-2 animationRightLeft tans3s" style="flex-grow: 1;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
-                <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+  <div class="container">
+    <div class="forms-container">
+
+      <div class="signin-signup">
+              <div class="flex-flex flex-justifyContent--center">
                     <!-- <h1><a href="http://blog.stackfindover.com/" rel="dofollow">Stackfindover</a></h1> -->
 
-                    <img src="../jlm/views/template/img/logo.png" width="337.5" height="113" alt="">
+                    <img src="../jlm/views/template/img/logo.png" width="225" height="75.3" alt="">
 
                 </div>
-                <div class="formbg-outer">
-                    <div class="formbg">
-                        <div class="formbg-inner padding-horizontal--48">
-                            <span class="padding-bottom--15">Iniciar sesion</span>
-                            <form action="controller/session.php" method="POST" id="stripe-login" id="formtec">
-                                <div class="field padding-bottom--24">
-                                    <label for="text">Usuario</label>
-                                    <input type="text" placeholder="Ingrese su usuario" name="usuario" pattern="[A-Z,a-z,0-9,_-,ñ,Ñ]{1,50}" required>
-                                    <span class="help-block" id="error"></span>
-                                </div>
-                                <div class="field padding-bottom--24">
-                                    <div class="grid--50-50">
-                                        <label for="password" name="pass" class="form-control"
-                                            pattern="[A-Z,a-z,0-9,_-ñÑ]{1,50}" required>Contraseña</label>
-                                        <div class="reset-pass">
-                                            <a href="#">Olvidaste tu contraseña?</a>
-                                        </div>
-                                    </div>
-                                    <input type="password" placeholder="Ingrese su contraseña" name="password">
-                                </div>
-                                <!-- <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
-                  <label for="checkbox">
-                    <input type="checkbox" name="checkbox"> Stay signed in for a week
-                  </label>
-                </div> -->
-                                <div class="field padding-bottom--24">
-                                    <input type="submit" class="botton" value="Iniciar Sesion">
-                                </div>
-                                <!-- <div class="field">
-                  <a class="ssolink" href="#">Use single sign-on (Google) instead</a>
-                </div> -->
-                            </form>
-                        </div>
-                    </div>
-                    <div class="footer-link padding-top--24">
-                        <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
-                            <span><a href="http://www.jlmycia.com.mx">© JLM</a></span>
-                            <span><a href="#">Contact</a></span>
-                            <span><a href="#">Privacy & terms</a></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                
+        <form action="controller/session.php" method="POST" id="stripe-login" id="formtec" class="sign-in-form">
+          <h2 class="title">Iniciar sesión</h2>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <!-- <input type="text" placeholder="Usuario" name="Usuario" id="Usuario" /> -->
+            <input type="text" placeholder="Ingrese su usuario" name="usuario" id="Usuario" pattern="[A-Z,a-z,0-9,_-,ñ,Ñ]{1,50}" required>
+          </div>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <!-- <input type="text" placeholder="contraseña" name="Usuario" id="Usuario" /> -->
+            <input type="password" placeholder="Ingrese su contraseña" name="password">
+          </div>
+          <!-- <input type="button" value="Iniciar Sesión" class="btn solid" /> -->
+          <input type="submit" value="Iniciar Sesion" class="btn solid botton">
+          
+        </form>
+        <form action="#" class="sign-up-form">
+          <h2 class="title">Regístrate</h2>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Usuario" />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Email" />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Contraseña" />
+          </div>
+          <input type="submit" class="btn" value="Regístrate" />
+          <br>
+                <br>
+        </form>
+      </div>
     </div>
+
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+        <h2 style="color:white">JLM PROGRAMA DE PRODUCCIÓN</h2>
+        <br>
+          <h3 style="color:white">¿Olvidate tu contraseña?</h3>
+          <p style="color:white">
+            Has clik al siguiente botón para recuperar tu acceso !
+          </p>
+          <button class="btn transparent" id="sign-up-btn">
+            Recuperación
+          </button>
+        </div>
+        <!-- <img src="https://i.pinimg.com/originals/72/82/fe/7282fee6a0641482ab4391b9638ee46c.png" class="image" alt="" /> -->
+      </div>
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>¿Ya tienes una Cuenta?</h3>
+          <p>
+          Inicie sesión
+          </p>
+          <button class="btn transparent" id="sign-in-btn">
+            Iniciar Sesión
+          </button>
+        </div>
+        <!-- <img src="https://i.pinimg.com/originals/77/29/f4/7729f497f9d0188fa35d41db45232cca.png" class="image" alt="" /> -->
+      </div>
+    </div>
+  </div>
+
 </body>
 
 <script src="../lib/jquery/jquery.js"></script>
@@ -118,7 +104,19 @@
 <script src="../lib/bootstrap/bootstrap.js"></script>
 <script src="./controller/validation.js"></script>
 
+
 <script>
+   const sign_in_btn = document.querySelector("#sign-in-btn");
+const sign_up_btn = document.querySelector("#sign-up-btn");
+const container = document.querySelector(".container");
+
+sign_up_btn.addEventListener("click", () => {
+  container.classList.add("sign-up-mode");
+});
+
+sign_in_btn.addEventListener("click", () => {
+  container.classList.remove("sign-up-mode");
+});
 
 </script>
 

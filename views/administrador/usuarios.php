@@ -39,6 +39,9 @@
     <link href="../template/lib/highlightjs/github.css" rel="stylesheet">
     <link href="../template/lib/datatables/jquery.dataTables.css" rel="stylesheet">
     <link href="../template/lib/select2/css/select2.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/xlsx@0.16.9/dist/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/file-saverjs@latest/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/tableexport@latest/dist/js/tableexport.min.js"></script>
 
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
@@ -57,10 +60,19 @@ include('header.php');
       <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
         <h4 class="tx-gray-800 mg-b-5">USUARIOS</h4>
       </div>
+      <div style="float: right;">
+      <div class="col-lg-5 mg-t-20 mg-lg-t-0">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" id="exportexc" name="exportexc" class="btn btn-secondary active"><i class="fa fa-file-excel-o"></i></button>
+                <button type="button" class="btn btn-secondary"><i class="fa fa-print"></i></button>
+              </div>
+      </div><!-- col-5 -->
+      </div>
+      <br>
 
       <div class="br-pagebody">
         <div class="br-section-wrapper">
-          <a class="btn btn-primary" href="../administrador/newacces.php" style="float:right"><i class="fa fa-user-plus mg-r-10"></i>Agregar Usiario</a>
+          <a class="btn btn-primary" href="../administrador/newacces.php" style="float:right"><i class="fa fa-user-plus mg-r-10"></i>Agregar Usuario</a>
           <br>   
           <br> 
           <br> 
@@ -97,6 +109,7 @@ include('header.php');
 
     <?php include('../administrador/modal.php');?>
     <script>
+
        $.ajax({
         url: '../controller/php/conusuarios.php',
         type: 'POST'
@@ -104,7 +117,7 @@ include('header.php');
         obj = JSON.parse(resp);
         var res = obj.data;
         var x = 0;
-        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%; table-layout:" id="datausuarios" class="table display dataTable"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>NOMBRE</th><th style="width:100px;"><i></i>CORREO</th><th><i></i>USUARIO</th><th><i></i>PRIVILEGIOS</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%; table-layout:" id="datausuarios" name="datausuarios" class="table display dataTable"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>NOMBRE</th><th style="width:100px;"><i></i>CORREO</th><th><i></i>USUARIO</th><th><i></i>PRIVILEGIOS</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
         for (U = 0; U < res.length; U++) {  
                 x++;
 
@@ -130,10 +143,14 @@ include('header.php');
                     sNext: 'Siguiente',
                     sPrevious: 'Anterior',
                 },
+                dom: 'Bfrtip',
+                buttons: ['print']
             }
       });
     })
 
+
+   
     $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
     
       $(function(){
@@ -158,12 +175,8 @@ include('header.php');
         $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
 
       });
-
-      
-
     </script>
 
-    
   </body>
 
 </html>

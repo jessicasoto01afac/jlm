@@ -905,6 +905,10 @@ function savetraedit(){
     alert(respuesta);
     }
   });//FIN DE AJAX
+}
 
+function exportarusu(){
+
+  con
 }
 
