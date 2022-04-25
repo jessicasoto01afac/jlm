@@ -49,7 +49,8 @@ if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || co
           for (U = 0; U < res.length; U++) {  
             if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo_ref =='ARTICULO_TRANSFORMACION'){
               x++;
-              html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
+              $id_memo2=obj.data[U].id_kax;
+              html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo2);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
             }  
           }
           html += '</div></tbody></table></div></div>';
@@ -100,7 +101,8 @@ if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || co
           for (U = 0; U < res.length; U++) {  
             if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo_ref =='ARTICULO_TRANSFORMACION'){
               x++;
-              html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
+              $id_memo3=obj.data[U].id_kax;
+              html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo2($id_memo3);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
             }  
           }
     html += '</div></tbody></table></div></div>';
@@ -178,7 +180,8 @@ if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || co
           for (U = 0; U < res.length; U++) {  
             if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo_ref =='ARTICULO_TRANSFORMADO'){
               x++;
-              html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
+              $id_memo2=obj.data[U].id_kax;
+              html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo2);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
             }  
           }
           html += '</div></tbody></table></div></div>';
@@ -229,7 +232,8 @@ if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || co
           for (U = 0; U < res.length; U++) {  
             if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo_ref =='ARTICULO_TRANSFORMADO'){
               x++;
-              html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
+              $id_memo3=obj.data[U].id_kax;
+              html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo2($id_memo3);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
             }  
           }
     html += '</div></tbody></table></div></div>';
@@ -257,7 +261,7 @@ if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || co
 }
 //FUNCION QUE ABRE LOS DETALLES DEL MEMO
 function infmemo(id_memo){
-    //alert(id_memo);
+    alert(id_memo);
 
     $("#detamemos").toggle(250); //Muestra contenedor de detalles
     $("#lista").toggle("fast"); //Oculta lista
@@ -322,8 +326,8 @@ function infmemo(id_memo){
       for (U = 0; U < res.length; U++) {  
         if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION'){
           x++;
-        $id_memo=obj.data[U].id_kax;
-          html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
+        $id_memo2=obj.data[U].id_kax;
+          html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo2);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
         }  
       }
       html += '</div></tbody></table></div></div>';
@@ -342,8 +346,8 @@ function infmemo(id_memo){
         for (U = 0; U < res.length; U++) {  
           if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMADO'){
             x++;
-            $id_memo=obj.data[U].id_kax;
-            html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
+            $id_memo3=obj.data[U].id_kax;
+            html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo2($id_memo3);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
           }  
         }
         html += '</div></tbody></table></div></div>';
@@ -578,9 +582,10 @@ function closedithvmem(){
   document.getElementById('closememo').style.display="none";
   document.getElementById('openedimem1').style.display="";
 }
-function editarmemo(id_artimem){
+//FUCIÓN PARA LLENAR INFORMACIÓN DEL ARTICULO DE TRASFORMACION EN BOTON EDITAR MEMO
+function editarmemo(id_artimem1){
 //alert("entra");
-alert(id_artimem);
+alert(id_artimem1);
   //alert("entra editar articulo");
       //alert(valofi1);
       $.ajax({
@@ -591,7 +596,7 @@ alert(id_artimem);
           var res = obj.data;
           var x = 0;
           for (U = 0; U < res.length; U++) { 
-              if (obj.data[U].id_kax == id_artimem){
+              if (obj.data[U].id_kax == id_artimem1){
                   datos = 
                   obj.data[U].codigo_1 + '*' +
                   obj.data[U].descripcion_1 + '*' +
@@ -608,6 +613,37 @@ alert(id_artimem);
           }
       });
 }
+//FUCIÓN PARA LLENAR INFORMACIÓN DEL ARTICULO DE TRASPASO EN BOTON EDITAR MEMO
+function editarmemo2(id_artimem2){
+  //alert("entra");
+  alert(id_artimem2);
+    //alert("entra editar articulo");
+        //alert(valofi1);
+        $.ajax({
+            url: '../controller/php/memo1.php',
+            type: 'POST'
+        }).done(function(respuesta) {
+            obj = JSON.parse(respuesta);
+            var res = obj.data;
+            var x = 0;
+            for (U = 0; U < res.length; U++) { 
+                if (obj.data[U].id_kax == id_artimem2){
+                    datos = 
+                    obj.data[U].codigo_1 + '*' +
+                    obj.data[U].descripcion_1 + '*' +
+                    obj.data[U].salida + '*' +
+                    obj.data[U].ubicacion + '*' +
+                    obj.data[U].observa;    
+                    var d = datos.split("*");   
+                    $("#modal-editarmemo #arsurvof").val(d[0]);   
+                    $("#modal-editarmemo #edithmeades").val(d[1]);            
+                    $("#modal-editarmemo #editcameminf").val(d[2]);
+                    $("#modal-editarmemo #editdepinfme").val(d[3]);
+                    $("#modal-editarmemo #infobsereme").val(d[4]);
+                }
+            }
+        });
+  }
 
 function editvoinf1(){
   //alert("edit articulo infovale");
