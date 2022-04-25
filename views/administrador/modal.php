@@ -1193,7 +1193,7 @@
           </div><!-- modal-dialog -->
         </div><!-- modal -->
 
-<!-- MODAL PARA EDITAR CLIENTES-->
+<!-- MODAL PARA ARTICULOS DE  MEMO-->
         <div class="modal fade" id='modal-editarmemo'>
           <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/"> 
             <div class="modal-content bd-5" >
@@ -1205,13 +1205,13 @@
               </div>
               <form id="editvoinf" class="form-horizontal" action="" method="POST">
                 <div class="modal-body pd-25">
-                <a href="#" id="openedivoinf" style="float: right;font-size: 16px" class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editvoinf1()" title="Dar clic para editar">
+                <a href="#" id="openedimemarinf" style="float: right;font-size: 16px" class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editartmemoinf()" title="Dar clic para editar">
                   <div><i class="fa fa-edit"></i></div>
                 </a>
-                <a href="#" id="closeditvoinf" style="float: right;font-size: 16px;display:none;" class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closedthvoinf1()" title="Dar clic para cerrar">
+                <a href="#" id="closeditmemartinf" style="float: right;font-size: 16px;display:none;" class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closeditmeminf()" title="Dar clic para cerrar">
                   <div><i class="fa fa-times"></i></div>
                 </a>
-                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_voin" id="id_voin">
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_meminf" id="id_meminf">
                 <div class="row mg-b-25">
                   <div class="col-lg-4">
                     <div class="form-group">
@@ -1248,7 +1248,7 @@
                 </div>
               </form> 
                 <div class="modal-footer">
-                  <button type="button" onclick="savecamvo()" id="voguardarinf" style="display:none;" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR CAMBIOS</button>
+                  <button type="button" onclick="savecamvo()" id="memguardarinf" style="display:none;" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR CAMBIOS</button>
                 </div>
                 <br>
                 <div style="display:none;" id="edthdvoblinf" name="edthdvoblinf" class="alert alert-warning" role="alert">
@@ -1446,7 +1446,7 @@
         $('#edicovinf').load('select/buscar3.php');
         $('#edipeinfinf').load('select/buscar4.php');
         $('#edicovinf1sur').load('select/buscar5.php');
-        $('#edimemo').load('select/buscar5.php');
+        $('#edimemo').load('select/buscar6.php');
 
 
 
