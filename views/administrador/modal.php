@@ -1248,22 +1248,22 @@
                 </div>
               </form> 
                 <div class="modal-footer">
-                  <button type="button" onclick="savecamvo()" id="memguardarinf" style="display:none;" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR CAMBIOS</button>
+                  <button type="button" onclick="saveinfethmem()" id="memguardarinf" style="display:none;" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR CAMBIOS</button>
                 </div>
                 <br>
-                <div style="display:none;" id="edthdvoblinf" name="edthdvoblinf" class="alert alert-warning" role="alert">
+                <div style="display:none;" id="edthdmeminf" name="edthdmeminf" class="alert alert-warning" role="alert">
                   <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                     <span><strong>Advertencia!</strong> El resgistro ya existe</span>
                   </div><!-- d-flex -->
                 </div><!-- alert --> 
-                <div style="display:none;" id="edthvovaciosin" name="edthvovaciosin" class="alert alert-info" role="alert">
+                <div style="display:none;" id="edthmemaciosin" name="edthmemaciosin" class="alert alert-info" role="alert">
                   <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                     <span><strong>Advertencia!</strong> Llenar todos los campos</span>
                   </div><!-- d-flex -->
                 </div><!-- alert --> 
-                <div style="display:none;" id="edthvoerrinf" name="edthvoerrinf" class="alert alert-danger" role="alert">
+                <div style="display:none;" id="edthvoeredthmemerrinfrinf" name="edthmemerrinf" class="alert alert-danger" role="alert">
                   <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-close alert-icon tx-24"></i>
                     <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un ticket</span>
@@ -1418,6 +1418,34 @@
                     <div class="d-flex align-items-center justify-content-start">
                       <i class="icon ion-ios-close alert-icon tx-24"></i>
                       <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un ticket</span>
+                    </div><!-- d-flex -->
+                  </div><!-- alert --> 
+              </div>
+            </div><!-- modal-dialog -->
+          </div><!-- modal -->
+          <!-- MODAL PARA ELIMINAR ARTICULOS DE MEMO VISTA PREVIA-->
+        <div class="modal fade" id='modal-deleteartif'>
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content bd-0">
+                <div class="modal-header pd-x-20">
+                  <h4 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ELIMINAR ARTICULO</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body pd-20">
+                  <p class="mg-b-5">ESTAS SEGURO DE ELIMINAR EL ARTICULO DE ESTE MEMO?</p>
+                  <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="del_artmeminf" id="del_artmeminf">
+                  <input disabled="" class="form-control inputalta" type="text" name="deartmeinf" id="deartmeinf">
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <button type="button" onclick="savdelemeinf()" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
+                  <br>
+                </div>
+                <div style="display:none;" id="delerarmeinf" name="delerarmeinf" class="alert alert-danger" role="alert">
+                    <div class="d-flex align-items-center justify-content-start">
+                      <i class="icon ion-ios-close alert-icon tx-24"></i>
+                      <span><strong>Advertencia!</strong>No se puedo eliminar contactar a soporte tecnico o levantar un ticket</span>
                     </div><!-- d-flex -->
                   </div><!-- alert --> 
               </div>

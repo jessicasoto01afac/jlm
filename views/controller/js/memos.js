@@ -325,7 +325,7 @@ function infmemo(id_memo){
         if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo == 'MEMO'&& obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION'){
           x++;
         $id_memo2=obj.data[U].id_kax;
-          html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down responsive'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10 responsive'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo2);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
+          html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down responsive'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10 responsive'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo2);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartmeminf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartif'>Eliminar</a>" + "</td></tr>";            
         }  
       }
       html += '</div></tbody></table></div></div>';
@@ -345,7 +345,7 @@ function infmemo(id_memo){
           if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMADO'){
             x++;
             $id_memo3=obj.data[U].id_kax;
-            html += "<tr><td>" + x  + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo2($id_memo3);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";            
+            html += "<tr><td>" + x  + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo2($id_memo3);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartmeminf2();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartif'>Eliminar</a>" + "</td></tr>";            
           }  
         }
         html += '</div></tbody></table></div></div>';
@@ -586,7 +586,7 @@ function editarmemo(){
   $("#infvmemtras tr").on('click', function() {
     let id_armemin1 = "";
     id_armemin1 += $(this).find('td:eq(1)').html(); 
-    document.getElementById('id_meminf').innerHTML=id_armemin1;
+    document.getElementById('id_meminf').value=id_armemin1;
 //alert(id_armemin1);
       $.ajax({
           url: '../controller/php/memo1.php',
@@ -622,7 +622,7 @@ function editarmemo2(){
   $("#infvmemtras1 tr").on('click', function() {
     let id_armemin2 = "";
     id_armemin2 += $(this).find('td:eq(1)').html(); 
-    document.getElementById('id_meminf').innerHTML=id_armemin2;
+    document.getElementById('id_meminf').value=id_armemin2;
     //alert(id_armemin2);
         $.ajax({
             url: '../controller/php/memo1.php',
@@ -659,7 +659,7 @@ function editartmemoinf(){
   document.getElementById('editcameminf').disabled= false;
   document.getElementById('infobsereme').disabled= false;
   document.getElementById('arsurmem').disabled= false;
-  }
+}
 //FUNIÓN PARA CERRAR LA EDICIÓN EN ARTICULOS MEMO VISTA DE INFORMACIÓN
   function closeditmeminf(){
     //alert("edit articulo infovalesds");
@@ -669,4 +669,192 @@ function editartmemoinf(){
     document.getElementById('editcameminf').disabled= true;
     document.getElementById('infobsereme').disabled= true;
     document.getElementById('arsurmem').disabled= true;
+  }
+//FUNCION ACTUALIZA TABLAS DE MEMOS EN VISTA PREVIA
+function updatememo(){
+  let refe_1 = document.getElementById('folmemo').innerHTML;
+  $.ajax({
+    url: '../controller/php/memo1.php',
+    type: 'POST'
+  }).done(function(resp) {
+    obj = JSON.parse(resp);
+    var res = obj.data;
+    var x = 0;
+    
+    html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvmemtras" name="infvmemtras" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+    for (U = 0; U < res.length; U++) {  
+      if (obj.data[U].refe_1 == refe_1 && obj.data[U].tipo == 'MEMO'&& obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION'){
+        x++;
+      $id_memo2=obj.data[U].id_kax;
+        html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down responsive'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10 responsive'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo2);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartmeminf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartif'>Eliminar</a>" + "</td></tr>";            
+      }  
     }
+    html += '</div></tbody></table></div></div>';
+    $("#listmemo1").html(html);
+  });
+
+  $.ajax({
+      url: '../controller/php/memo1.php',
+      type: 'POST'
+    }).done(function(resp) {
+      obj = JSON.parse(resp);
+      var res = obj.data;
+      var x = 0;
+      
+      html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvmemtras1" name="infvmemtras1" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+      for (U = 0; U < res.length; U++) {  
+        if (obj.data[U].refe_1 == refe_1 && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMADO'){
+          x++;
+          $id_memo3=obj.data[U].id_kax;
+          html += "<tr><td>" + x  + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo2($id_memo3);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartmeminf2();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartif'>Eliminar</a>" + "</td></tr>";            
+        }  
+      }
+      html += '</div></tbody></table></div></div>';
+      $("#listmemo2").html(html);
+    });
+  
+}
+//FUNIÓN PARA GUARDAR LA EDICIÓN EN ARTICULOS MEMO VISTA DE INFORMACIÓN
+  function saveinfethmem(){
+    //alert("entra guardar cambios memeo");
+    let refe_1 = document.getElementById('folmemo').innerHTML;
+    let id_kax = document.getElementById('id_meminf').value;
+    let codigo_1 = document.getElementById('arsurmem').value;
+    let descripcion_1 = document.getElementById('edithmeades').value;
+    let salida = document.getElementById('editcameminf').value; 
+    let observa = document.getElementById('infobsereme').value; 
+
+    let datos= 'codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&salida=' + salida + '&observa=' + observa + '&id_kax=' + id_kax + '&refe_1=' + refe_1 + '&opcion=actualizainf';
+    alert(datos);
+    if (codigo_1 == '' || salida == '') { 
+      document.getElementById('edthmemaciosin').style.display='';
+      setTimeout(function(){
+        document.getElementById('edthmemaciosin').style.display='none';
+      }, 2000);
+        return;
+    } else {
+      $.ajax({
+        type:"POST",
+        url:"../controller/php/insertmemo.php",
+        data:datos
+      }).done(function(respuesta){
+        if (respuesta==0){
+          Swal.fire({
+              type: 'success',
+              text: 'Se actualizo de forma correcta',
+              showConfirmButton: false,
+              timer: 1500      
+          });
+          updatememo (); //llama a la función para actualizar la tabla
+          
+          $('#modal-editarmemo').modal('hide'); //cierra el modal
+          closeditmeminf();
+        }else if (respuesta == 2) {
+          document.getElementById('edthdmeminf').style.display='';
+          setTimeout(function(){
+            document.getElementById('edthdmeminf').style.display='none';
+          }, 1000);
+          //alert("datos repetidos");
+        }else{
+          document.getElementById('edthmemerrinf').style.display='';
+          setTimeout(function(){
+            document.getElementById('edthmemerrinf').style.display='none';
+          }, 2000);
+        }
+      });
+    }
+  }
+
+//FUNCION QUE TRAE EL CODIGO DE EL ARTICULO A ELIMINAR EN MEMO VISTA PREVIA
+function delartmeminf(){;
+  //alert("entra ELIMINAR articulo");
+  $("#infvmemtras tr").on('click', function() {
+      var memfi = "";
+      memfi += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
+      document.getElementById('del_artmeminf').value=memfi
+      //alert(memfi);
+      $.ajax({
+          url: '../controller/php/memo1.php',
+          type: 'POST'
+      }).done(function(respuesta) {
+          obj = JSON.parse(respuesta);
+          var res = obj.data;
+          var x = 0;
+          for (U = 0; U < res.length; U++) { 
+              if (obj.data[U].id_kax == memfi){
+                  datos = 
+                  obj.data[U].codigo_1 ;    
+                  var d = datos.split("*");   
+                  $("#modal-deleteartif #deartmeinf").val(d[0]);
+              }
+          }
+      });
+  }) 
+}
+//FUNCION QUE TRAE EL CODIGO DE EL ARTICULO A ELIMINAR EN MEMO VISTA PREVIA
+function delartmeminf2(){;
+  //alert("entra ELIMINAR articulo");
+  $("#infvmemtras1 tr").on('click', function() {
+      var memfi1 = "";
+      memfi1 += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
+      document.getElementById('del_artmeminf').value=memfi1
+      //alert(memfi1);
+      $.ajax({
+          url: '../controller/php/memo1.php',
+          type: 'POST'
+      }).done(function(respuesta) {
+          obj = JSON.parse(respuesta);
+          var res = obj.data;
+          var x = 0;
+          for (U = 0; U < res.length; U++) { 
+              if (obj.data[U].id_kax == memfi1){
+                  datos = 
+                  obj.data[U].codigo_1 ;    
+                  var d = datos.split("*");   
+                  $("#modal-deleteartif #deartmeinf").val(d[0]);
+              }
+          }
+      });
+  }) 
+}
+
+//FUNCION QUE GUARDA LA ELIMINACIÓN DEL MEMO
+function savdelemeinf(){;
+  //alert("entra ELIMINAR articulo");
+ let id_kax = document.getElementById('del_artmeminf').value;
+ let refe_1 = document.getElementById('folmemo').innerHTML;
+
+ let datos= '&id_kax=' + id_kax + '&refe_1=' + refe_1 + '&opcion=delinfarm';
+ alert(datos);
+ if (id_kax == '') { 
+   document.getElementById('edthmemaciosin').style.display='';
+   setTimeout(function(){
+     document.getElementById('edthmemaciosin').style.display='none';
+   }, 2000);
+     return;
+ } else {
+   $.ajax({
+     type:"POST",
+     url:"../controller/php/insertmemo.php",
+     data:datos
+   }).done(function(respuesta){
+     if (respuesta==0){
+       Swal.fire({
+           type: 'success',
+           text: 'Se elimino de forma correcta',
+           showConfirmButton: false,
+           timer: 1500      
+       });
+       updatememo (); //llama a la función para actualizar la tabla
+       
+       $('#modal-deleteartif').modal('hide'); //cierra el modal
+     }else{
+       document.getElementById('delerarmeinf').style.display='';
+       setTimeout(function(){
+         document.getElementById('delerarmeinf').style.display='none';
+       }, 2000);
+     }
+   });
+ }
+ 
+}

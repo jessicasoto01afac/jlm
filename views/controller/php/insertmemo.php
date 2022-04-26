@@ -116,6 +116,34 @@ if(!isset($usuario)){
             }else{
                 echo "1";
             }
+    }else if($opcion === 'actualizainf'){
+        $refe_1 = $_POST['refe_1'];
+        $id_kax = $_POST['id_kax'];
+        $codigo_1 = $_POST['codigo_1'];        
+        $descripcion_1 = $_POST['descripcion_1'];
+        $salida = $_POST['salida'];
+        $observa = $_POST['observa'];
+
+        if (actualizar($refe_1,$id_kax,$codigo_1,$descripcion_1,$salida,$observa,$conexion)){
+            echo "0";
+            $realizo = 'ACTUALIZO INFORMACION DEL ARTICULO';
+           // $usuario='pruebas';
+            histedithme($refe_1,$id_kax,$codigo_1,$descripcion_1,$salida,$observa,$usuario,$realizo,$conexion);
+        }else{
+            echo "1";
+        }
+    //Condición donde elimina usuario
+    }else if($opcion === 'delinfarm'){
+        $id_kax = $_POST['id_kax'];
+        $refe_1 = $_POST['refe_1'];
+        if (eliminarinf($id_kax,$refe_1,$conexion)){
+            echo "0";
+            $realizo = 'ELIMINACIÓN DE ARTICULO EN MEMO';
+       // $usuario='pruebas';
+            histdeinf($id_kax,$refe_1,$usuario,$realizo,$conexion);
+        }else{
+        echo "1";
+        }
     }
     
 
@@ -175,7 +203,7 @@ function autorizar ($folio,$conexion){
 }
 //funcion para surtir
 function surtir ($folio,$conexion){
-    $query="UPDATE kardex SET status='SURTIDO' WHERE refe_1 = '$folio' AND tipo='MEMO'";
+    $query="UPDATE kardex SET status='SURTIDO', status_2='SURTIDO' WHERE refe_1 = '$folio' AND tipo='MEMO'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -213,6 +241,26 @@ function liberarmem ($memo,$conexion){
     }
     cerrar($conexion);
 
+}
+///funcion para actualizar aticulo de memo en vista previa
+function actualizar ($refe_1,$id_kax,$codigo_1,$descripcion_1,$salida,$observa,$conexion){
+    $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1',salida='$salida',observa='$observa' WHERE refe_1 = '$refe_1' AND id_kax='$id_kax'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+///funcion para actualizar aticulo de memo en vista previa
+function eliminarinf ($id_kax,$refe_1,$conexion){
+    $query="UPDATE kardex SET estado=1 WHERE id_kax='$id_kax'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
 }
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
@@ -281,6 +329,30 @@ function hisliber($usuario,$memo,$conexion){
         return false;
     }
 }
+//funciones para guardar historial de guardad edicion de articulo vista previa memo
+function histedithme($refe_1,$id_kax,$codigo_1,$descripcion_1,$salida,$observa,$usuario,$realizo,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'FOLIO: ' '$refe_1' ' ID: ' '$id_kax ' 'CODIGO: ' '$codigo_1' ' SALIDA: ' '$salida' ' OBSERVACIONES ' '$observa','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function histdeinf($id_kax,$refe_1,$usuario,$realizo,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'FOLIO: ' '$refe_1' ' ID: ' '$id_kax' ,'$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
 //funcion para cerrar laa conexion
 function cerrar($conexion){
     mysqli_close($conexion);
