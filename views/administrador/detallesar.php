@@ -49,58 +49,36 @@ include('header.php');
             <h3 class="tx-gray-800 mg-b-5">INVENTARIO</h3>
         </div>
         <div class="col-sm-2 col-lg-12">
-            <div class="row row-sm mg-t-20">
-                <div class="row row-sm mg-t-20">
-                    <div class="col-lg-6">
-                        <div class="card shadow-base card-body pd-25 bd-0">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <h6 class="card-title tx-uppercase tx-12">Estadistica de las salidas</h6>
-                                    <p class="display-4 tx-medium tx-inverse mg-b-5 tx-lato">25%</p>
-                                    <div class="progress mg-b-10">
-                                        <div class="progress-bar bg-primary progress-bar-xs wd-30p" role="progressbar"
-                                            aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div><!-- progress -->
-                                    <p class="tx-12">Nulla consequat massa quis enim. Donec pede justo, fringilla vel...
-                                    </p>
-                                    <p class="tx-11 lh-3 mg-b-0">You can also use other progress variant found in <a
-                                            href="progress.html" target="blank">progress section</a>.</p>
-                                </div><!-- col-6 -->
-                                <div
-                                    class="col-sm-6 mg-t-20 mg-sm-t-0 d-flex align-items-center justify-content-center">
-                                    <span class="peity-donut"
-                                        data-peity='{ "fill": ["#0866C6", "#E9ECEF"],  "innerRadius": 60, "radius": 90 }'>30/100</span>
-                                </div><!-- col-6 -->
-                            </div><!-- row -->
-                        </div><!-- card -->
-                    </div><!-- col-6 -->
-                    <div class="col-lg-6 mg-t-30 mg-lg-t-0">
-                        <div class="card shadow-base card-body pd-25 bd-0">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <h6 class="card-title tx-uppercase tx-12 tx-inverse">Estadisticas de las entradas</h6>
-                                    <p class="display-4 tx-medium tx-inverse mg-b-5 tx-lato">45%</p>
-                                    <div class="progress mg-b-10">
-                                        <div class="progress-bar bg-info progress-bar-xs wd-45p" role="progressbar"
-                                            aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div><!-- progress -->
-                                    <p class="tx-12">Nulla consequat massa quis enim. Donec pede justo, fringilla vel...
-                                    </p>
-                                    <p class="tx-11 lh-3 mg-b-0">You can also use other progress variant found in <a
-                                            href="progress.html" class="tx-info" target="blank">progress section</a>.
-                                    </p>
-                                </div><!-- col-6 -->
-                                <div class="col-sm-6 mg-t-20 mg-sm-t-0 d-flex align-items-end justify-content-center">
-                                    <span class="peity-donut"
-                                        data-peity='{ "fill": ["#0866C6", "#E9ECEF"],  "innerRadius": 60, "radius": 90 }'>30/100</span>
-                                </div><!-- col-6 -->
-                            </div><!-- row -->
-                        </div><!-- card -->
-                    </div><!-- col-6 -->
+        <div class="col-sm-4 col-lg-12">
+            <div class="card shadow-base bd-0">
+              <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                <h6 class="card-title tx-uppercase tx-12 mg-b-0">ESTADISTICAS GENERALES</h6>
+                <span class="tx-12 tx-uppercase">February 2017</span>
+              </div><!-- card-header -->
+              <div class="card-body">
+                <p id="dellcodigo" name="dellcodigo" class="tx-sm tx-inverse tx-medium mg-b-0">CODIGO:</p>
+                <p id="dellubic" name="dellubic" class="tx-sm tx-inverse tx-medium mg-b-0">UBICACIÓN:</p>
+                <br>
+                <div class="row align-items-center">
+                  <div class="col-3 tx-14">ENTRADAS</div><!-- col-3 -->
+                  <div class="col-9">
+                    <div class="progress rounded-0 mg-b-0">
+                      <div class="progress-bar bg-indigo  wd-50p lh-3" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                    </div><!-- progress -->
+                  </div><!-- col-9 -->
                 </div><!-- row -->
-                <div class="col-sm-5 col-lg-11 mg-t-20 mg-sm-t-5">
-                </div><!-- col-4 -->
-            </div><!-- row -->
+                <div class="row align-items-center mg-t-5">
+                  <div class="col-3 tx-14">SALIDAS</div><!-- col-3 -->
+                  <div class="col-9">
+                    <div class="progress rounded-0 mg-b-0">
+                      <div class="progress-bar bg-blue wd-90p lh-3" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                    </div><!-- progress -->
+                  </div><!-- col-9 -->
+                </div><!-- row -->
+                <p class="tx-11 mg-b-0 mg-t-15">Notice: Lorem ipsum dolor sit amet.</p>
+              </div><!-- card-body -->
+            </div><!-- card -->
+          </div><!-- col-4 -->
             <br>
             <div style="float: right;">
                 <div class="col-lg-0 mg-t-20 mg-lg-t-0">
