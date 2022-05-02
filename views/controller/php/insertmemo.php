@@ -139,13 +139,74 @@ if(!isset($usuario)){
         if (eliminarinf($id_kax,$refe_1,$conexion)){
             echo "0";
             $realizo = 'ELIMINACIÓN DE ARTICULO EN MEMO';
-       // $usuario='pruebas';
+            // $usuario='pruebas';
             histdeinf($id_kax,$refe_1,$usuario,$realizo,$conexion);
         }else{
-        echo "1";
+            echo "1";
         }
-    }
+    }else if($opcion === 'registar3'){
+        $refe_1 = $_POST['refe_1'];
+        $codigo_1 = $_POST['codigo_1'];
+        $refe_3 = $_POST['refe_3'];
+        $fecha = $_POST['fecha'];
+        $proveedor_cliente = $_POST['proveedor_cliente'];
+        $descripcion_1 = $_POST['descripcion_1'];
+        $cantidad_real = $_POST['cantidad_real'];
+        $salida = $_POST['salida'];
+        $observa = $_POST['observa'];
+        $ubicacion = $_POST['ubicacion'];
+        $refe_2 = $_POST['refe_2'];
+        if (registrar_3($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$refe_2,$conexion)){
+            echo "0";
+            $realizo = 'AGREGA ARTICULO EN MEMO';
+            historial($usuario,$refe_1,$codigo_1,$conexion);
+        }else{
+            echo "1";
+        }
+    }else if($opcion === 'registar4'){
+        $refe_1 = $_POST['refe_1'];
+        $codigo_1 = $_POST['codigo_1'];
+        $refe_3 = $_POST['refe_3'];
+        $fecha = $_POST['fecha'];
+        $proveedor_cliente = $_POST['proveedor_cliente'];
+        $descripcion_1 = $_POST['descripcion_1'];
+        $cantidad_real = $_POST['cantidad_real'];
+        $salida = $_POST['salida'];
+        $observa = $_POST['observa'];
+        $ubicacion = $_POST['ubicacion'];
+        $refe_2 = $_POST['refe_2'];
+        if (registrar_4($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$refe_2,$conexion)){
+            echo "0";
+            $realizo = 'AGREGA ARTICULO EN MEMO';
+            historial($usuario,$refe_1,$codigo_1,$conexion);
+        }else{
+            echo "1";
+        }
+    }else if($opcion === 'cambiocab'){
+        $fecha = $_POST['fecha'];
+        $refe_3 = $_POST['refe_3'];
+        $status = $_POST['status'];
+        $refe_1 = $_POST['refe_1'];
+        $proveedor_cliente = $_POST['proveedor_cliente'];
     
+            if (cambio($fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$conexion)){
+                echo "0";
+                //$usuario='PRUEBAS';
+                histedith2($usuario,$fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$conexion);
+            }else{
+                echo "1";
+            }
+    //Condición donde elimina usuario
+    }else if($opcion === 'cancelar'){
+        $refe_1 = $_POST['refe_1'];
+        
+            if (cancelar($refe_1,$conexion)){
+                echo "0";
+            }else{
+                echo "1";
+            }
+    //Condición donde actualiza desde vista previa lka cabecera del vale de oficina
+    }
 
 //FUNCIONES-----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -171,7 +232,7 @@ function comprobacion2 ($refe_1,$codigo_1,$conexion){
     }
     $this->conexion->cerrar();
 }
-//funcion para guardar el vale de oficina
+//funcion para guardar el ARTICULO PARA TRASFORMACION EN LATA DE MEO 
 function registrar ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$refe_2,$conexion){
     $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','$refe_3','$fecha','$codigo_1','$descripcion_1','MEMO','ARTICULO_TRANSFORMACION','$proveedor_cliente','$ubicacion','$cantidad_real',0,'$salida',0,0,0,'$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0)";
     if(mysqli_query($conexion,$query)){
@@ -190,6 +251,46 @@ function registrar_2 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descr
         return false;
     }
     $this->conexion->cerrar();
+}
+//funcion para guardar el ARTICULO TRASFORMADO EN ALTA MEMO
+function registrar_3 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$refe_2,$conexion){
+    $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','$refe_3','$fecha','$codigo_1','$descripcion_1','MEMO','ARTICULO_TRANSFORMACION','$proveedor_cliente','$ubicacion','$cantidad_real',0,'$salida',0,0,0,'$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0)";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
+//funcion para guardar el ARTICULO TRASFORMADO EN ALTA MEMO
+function registrar_4 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$refe_2,$conexion){
+    $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','$refe_3','$fecha','$codigo_1','$descripcion_1','MEMO','ARTICULO_TRANSFORMADO','$proveedor_cliente','$ubicacion','$cantidad_real',0,'$salida',0,0,0,'$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0)";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
+//funcion para cancelar el registro
+function cancelar ($refe_1,$conexion){
+    $query="UPDATE kardex SET estado=2, status='CANCELADO', status_2='CANCELADO' WHERE refe_1 = '$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para actualizar la cabecera desde la vista previa del memo
+function cambio ($fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$conexion){
+    $query="UPDATE kardex SET fecha='$fecha', refe_3='$refe_3', status='$status', proveedor_cliente='$proveedor_cliente' WHERE refe_1 = '$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
 }
 //funcion para autorizar
 function autorizar ($folio,$conexion){
@@ -262,6 +363,7 @@ function eliminarinf ($id_kax,$refe_1,$conexion){
     }
     cerrar($conexion);
 }
+
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
 function historial($usuario,$refe_1,$codigo_1,$conexion){
@@ -279,6 +381,17 @@ function histedith($usuario,$folio,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario', 'AUTORIZA MEMO', 'FOLIO:' '$folio','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funciones para guardar el historico de la edicion de cabecra de memo
+function histedith2($usuario,$fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'EDITA INFORMACIÓN DE LA CABECERA DE MEMO', '$refe_1' ' FECHA:' '$fecha'  ' TIPO: '  ' $refe_3' ' status:' ' $status' ' SOLICITANTE:' ' $proveedor_cliente' ,'$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -352,11 +465,9 @@ function histdeinf($id_kax,$refe_1,$usuario,$realizo,$conexion){
     }
 }
 
-
 //funcion para cerrar laa conexion
 function cerrar($conexion){
     mysqli_close($conexion);
 }
-
 
 ?>

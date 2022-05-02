@@ -34,7 +34,7 @@ include ("../controller/conexion.php");
     <!-- Bracket CSS -->
     <!-- <link rel="stylesheet" href="../template/css/card.css"> -->
   </head>
-  <body>
+  <body class="collapsed-menu">
   
 
 <?php

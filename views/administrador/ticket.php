@@ -56,7 +56,7 @@ include ("../controller/conexion.php");
   color: white;
 }
 </style>
-  <body>
+<body class="collapsed-menu">
 <?php
   include('header.php');
 ?>

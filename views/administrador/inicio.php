@@ -39,7 +39,7 @@ $pedfinali = mysqli_fetch_assoc($resulpefin);
     <link rel="stylesheet" href="../template/css/bracket.css">
   </head>
 
-  <body>
+  <body class="collapsed-menu">
     <?php
 
     include('header.php');

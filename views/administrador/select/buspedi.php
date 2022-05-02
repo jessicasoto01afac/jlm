@@ -1,7 +1,7 @@
 <?php include ("../../controller/conexion.php");
 
     
-      $sql = "SELECT refe_1 FROM kardex where estado='0' AND tipo ='PEDIDO' GROUP BY refe_1 ORDER BY id_kax ASC";
+      $sql = "SELECT refe_1 FROM kardex where estado='0' AND tipo ='PEDIDO' AND status='PENDIENTE' GROUP BY refe_1 ORDER BY id_kax ASC";
       $pedidos = mysqli_query($conexion,$sql);
     ?>
 

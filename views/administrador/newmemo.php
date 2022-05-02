@@ -70,7 +70,7 @@
         </div>
         <div class="br-pagebody">
             <div style="float: right;">
-                <a href="../administrador/memos.php" id="closememo" title="Dar clic para cancelar el memo" type="button"
+                <a href="../administrador/memos.php" onclick="cancealmemo()" id="closememo" title="Dar clic para cancelar el memo" type="button"
                     style="" class="btn btn-secondary"><i class="fa fa-times"></i></a>
             </div>
             <div class="br-section-wrapper">
@@ -305,6 +305,8 @@
                                     style="float:right; color:white">FINALIZAR</a>
                     </section>
                 </div>
+                <br>
+                <a onclick="cancealmemo()" class="btn btn-danger" style="float:right; color:white">CANCELAR</a>
             </div><!-- br-pagebody -->
         </div><!-- br-pagebody -->
         <footer class="br-footer">

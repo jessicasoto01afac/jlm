@@ -26,9 +26,9 @@
     <link rel="stylesheet" href="../template/css/bracket.css">
   </head>
 
-  <body>
+  <body class="collapsed-menu">
 
-  <body>
+
       <style>
           .formulario__grupo-terminos,
 .formulario__mensaje,

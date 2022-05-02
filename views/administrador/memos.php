@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+
 <html lang="es">
 
 <head>
@@ -30,9 +32,9 @@
 
 </head>
 
-<body>
+<body class="collapsed-menu">
 
-    <body>
+ 
         <?php
 
 include('header.php');
@@ -57,8 +59,7 @@ include('header.php');
                         <br>
                         <br>
                         <div class="rounded table-responsive">
-                            <table class="table display dataTable"
-                                id="example" style="width:100%">
+                            <table class="table display dataTable" id="example" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th style="width:5%;">ID</th>
@@ -112,7 +113,7 @@ include('header.php');
                             <button onclick="editmemo()" id="openedimem1" name="openedimem1"
                                 title="Dar clic para editar" type="button" class="btn btn-secondary btn btn-warning"><i
                                     class="fa fa-edit"></i></button>
-                            <button onclick="closedithvmem()" id="closememo" title="Dar clic para cerrar edición"
+                            <button onclick="closedithvmem()" id="closememo1" title="Dar clic para cerrar edición"
                                 type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                     class="fa fa-times"></i></button>
                             <button title="Imprimir" type="button" class="btn btn-secondary"><i
@@ -152,7 +153,7 @@ include('header.php');
                                             <label class="form-control-label mg-b-0-force">TIPO DE MEMO: <span
                                                     class="tx-danger">*</span></label>
                                             <select id="intipomemo" disabled="" name="intipomemo" class="form-control"
-                                                data-placeholder="Choose country">
+                                                data-placeholder="Elige el tipo de memo">
                                                 <option value="" selected>SELECCIONA UNA OPCIÓN</option>
                                                 <option value="TRASPASO">TRASPASO</option>
                                                 <option value="TRANSFORMACIÓN">TRANSFORMACIÓN</option>
@@ -163,8 +164,22 @@ include('header.php');
                                         <div class="form-group bd-t-0-force">
                                             <label class="form-control-label">DEPARTAMENTO SOLICITANTE: <span
                                                     class="tx-danger">*</span></label>
-                                            <input class="form-control" readonly id="infsolimem" name="infsolimem"
-                                                type="text" name="address" placeholder="Enter address">
+                                            <!-- <input class="form-control" disabled="" id="infsolimem" name="infsolimem"
+                                                type="text" name="address"> -->
+                                            <select style="font-size:18px" class="form-control" disabled="" id="infsolimem" name="infsolimem">
+                                                <option value="">SELECCIONA UNA OPCIÓN</option>
+                                                <option value="ALMACEN">ALMACEN</option>
+                                                <option value="BODEGA">BODEGA</option>
+                                                <option value="COMPRAS">COMPRAS</option>
+                                                <option value="EMPAQUE">EMPAQUE</option>
+                                                <option value="OFICINA">OFICINA</option>
+                                                <option value="TALLER DE CORTE">TALLER DE CORTE</option>
+                                                <option value="TALLER DE MEDICIÓN">TALLER DE MEDICIÓN</option>
+                                                <option value="VENTAS">VENTAS</option>
+                                            </select>
+                                            <label class="form-control-label">PEDIDOS RELACIONADOS <span
+                                                    class="tx-danger">*</span></label>
+                                                    <input readonly style="color:#000773; font-size:18px" onkeyup="mayus(this);" class="form-control" name="memorefeped" id="memorefeped" placeholder="PEDIDOS RELACIONADOS" type="text" required="">
                                         </div>
                                     </div><!-- col-8 -->
                                     <div class="col-md-4">
@@ -200,27 +215,27 @@ include('header.php');
                                     <br>
                                 </div><!-- row -->
                                 <div class="modal-footer">
-                                    <button type="button" onclick="savevofic()" id="memedith" style="display:none;"
+                                    <button type="button" onclick="savecamem()" id="memedith" style="display:none;"
                                         class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
                                         CAMBIOS</button>
                                     <br>
                                 </div>
 
-                                <div style="display:none;" id="edthmemiexi" name="edthmemiexi"
+                                <div style="display:none;" id="edthmem1iexi" name="edthmem1iexi"
                                     class="alert alert-warning" role="alert">
                                     <div class="d-flex align-items-center justify-content-start">
                                         <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                                         <span><strong>Advertencia!</strong> El resgistro ya existe</span>
                                     </div><!-- d-flex -->
                                 </div><!-- alert -->
-                                <div style="display:none;" id="edthvoivacios" name="edthvoivacios"
+                                <div style="display:none;" id="edthmmvacios" name="edthmmvacios"
                                     class="alert alert-info" role="alert">
                                     <div class="d-flex align-items-center justify-content-start">
                                         <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                                         <span><strong>Advertencia!</strong> Llenar todos los campos</span>
                                     </div><!-- d-flex -->
                                 </div><!-- alert -->
-                                <div style="display:none;" id="edthvoierror" name="edthvoierror"
+                                <div style="display:none;" id="edthmmerror" name="edthmmerror"
                                     class="alert alert-danger" role="alert">
                                     <div class="d-flex align-items-center justify-content-start">
                                         <i class="icon ion-ios-close alert-icon tx-24"></i>
@@ -229,9 +244,9 @@ include('header.php');
                                     </div><!-- d-flex -->
                                 </div><!-- alert -->
                                 <div>
-                                    <button type="button" onclick="masarticvo()" data-toggle='modal'
-                                        style="display:none; background-color: #009C28;" data-target='#modal-editavo1'
-                                        onclick="" id="memagartic"
+                                    <button type="button" onclick="savetraspa()" data-toggle='modal'
+                                        style="display:none; background-color: #009C28;"
+                                        data-target='#modal-addartmeminf' id="memagartic"
                                         class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i
                                             class="fa fa-plus"></i> AGREGAR ARTICULO</button>
                                 </div>
@@ -240,6 +255,13 @@ include('header.php');
                                     <div id="listmemo1">
                                     </div><!-- col-12 -->
                                 </div><!-- form-layout -->
+                                <div>
+                                    <button type="button" data-toggle='modal'
+                                        style="display:none; background-color: #009C28;"
+                                        data-target='#modal-addartmeminf' onclick="savetrasfor()" id="memagartic2"
+                                        class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i
+                                            class="fa fa-plus"></i> AGREGAR ARTICULO</button>
+                                </div>
                                 <h5 id="trans" name="trans" style="text-align: center"></h5>
                                 <div class="col-lg-12">
                                     <div id="listmemo2">

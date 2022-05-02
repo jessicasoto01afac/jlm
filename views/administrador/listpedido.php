@@ -31,9 +31,8 @@
 
   </style>
 
-  <body>
+<body class="collapsed-menu">
 
-  <body>
   <?php
 
 include('header.php');

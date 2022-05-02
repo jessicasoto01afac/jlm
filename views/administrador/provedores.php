@@ -26,9 +26,9 @@
     <link rel="stylesheet" href="../template/css/bracket.css">
   </head>
 
-  <body>
+  <body class="collapsed-menu">
 
-  <body>
+
   <?php
 
 include('header.php');
