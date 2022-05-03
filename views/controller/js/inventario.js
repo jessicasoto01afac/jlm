@@ -1,23 +1,30 @@
-//FUNCION DONDE TRAE EL ID DEL CODIGO
+
 function opende(id_alert){
-alert(id_alert);
+    let codiid=id_alert;
+    alert(codiid);
+    $("#detalles").toggle(250); //Muestra contenedor de detalles
+$("#inventario").toggle("fast");
+
+
 
 $.ajax({
     url: '../controller/php/conarticulos.php',
     type: 'POST'
 }).done(function(respuesta) {
     obj = JSON.parse(respuesta);
-    var res = obj.data;
-    var x = 0;
+    let res = obj.data;
+    let x = 0;
     for (D = 0; D < res.length; D++) { 
-        if (obj.data[D].artcodigo == id_alert){
+        if (obj.data[D].artcodigo == codiid){
             datos = 
             obj.data[D].artcodigo + '*' +
             obj.data[D].artdescrip;    
-            var o = datos.split("*");   
-            //$("#noartdell").html(o[1]); 
+            let o = datos.split("*");   
+            $("#noartdell").html(o[1]); 
             alert(obj.data[D].artdescrip);
+           // document.getElementById('idartic').value=id_alert; 
         }
     }
 });
 }
+

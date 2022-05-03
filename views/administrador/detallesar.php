@@ -45,6 +45,8 @@ include('header.php');
 
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="br-mainpanel">
+
+        <input style="" id="idartic" name="idartic" type="text">
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
             <h3 id="noartdell" name="noartdell" class="tx-gray-800 mg-b-5"></h3>
         </div>
@@ -71,7 +73,7 @@ include('header.php');
                     <div class="card shadow-base bd-0">
                         <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
                             <h6 class="card-title tx-uppercase tx-12 mg-b-0">ESTADISTICAS GENERALES</h6>
-                            <span class="tx-12 tx-uppercase">February 2017</span>
+                            <span id="fecactual" name="fecactual" class="tx-12 tx-uppercase"></span>
                         </div><!-- card-header -->
                         <div class="card-body">
                             <br>
@@ -161,7 +163,7 @@ include('header.php');
     <script src="../template/lib/datatables/jquery.dataTables.js"></script>
     <script src="../template/lib/datatables-responsive/dataTables.responsive.js"></script>
     <script src="../template/lib/select2/js/select2.min.js"></script>
-    <script src="../controller/js/catalogos.js"></script>
+    <script src="../controller/js/inventario.js"></script>
     <script src="../template/js/bracket.js"></script>
 
     <script src="../controller/datatables.net/js/jquery.dataTables.js"></script>
@@ -194,9 +196,8 @@ include('header.php');
     let output = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') +
         '/' + date.getFullYear();
     //alert(output);
-    document.getElementById('mayor').innerHTML = output;
-    document.getElementById('menor').innerHTML = output;
-    document.getElementById('entradas').innerHTML = output;
+    document.getElementById('fecactual').innerHTML = output;
+
     </script>
 
     <?php include('../administrador/modal.php');?>

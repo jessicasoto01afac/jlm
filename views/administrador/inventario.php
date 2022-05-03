@@ -154,7 +154,7 @@ include('header.php');
         <script src="../template/lib/datatables/jquery.dataTables.js"></script>
         <script src="../template/lib/datatables-responsive/dataTables.responsive.js"></script>
         <script src="../template/lib/select2/js/select2.min.js"></script>
-        <script src="../controller/js/inventario.js"></script>
+        <script src="../controller/js/catalogos.js"></script>
         <script src="../template/js/bracket.js"></script>
 
         <script src="../controller/datatables.net/js/jquery.dataTables.js"></script>
@@ -271,7 +271,6 @@ document.getElementById('entradas').innerHTML=output;
         $(function() {
 
         });
-        
         </script>
 </body>
 
