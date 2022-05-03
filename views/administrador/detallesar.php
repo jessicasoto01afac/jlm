@@ -46,27 +46,28 @@ include('header.php');
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="br-mainpanel">
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h2 class="tx-gray-800 mg-b-5">INVENTARIO</h2>
+            <h3 id="noartdell" name="noartdell" class="tx-gray-800 mg-b-5"></h3>
         </div>
-        <div class="col-sm-2 col-lg-12">
+        <div class="col-sm-4 col-lg-12">
             <div class="row row-sm mg-t-20">
                 <div class="col-sm-6 col-lg-5">
                     <div class="bg-white rounded shadow-base overflow-hidden">
                         <div class="pd-x-20 pd-t-20 d-flex align-items-center">
                             <i class="ion ion-monitor tx-80 lh-0 tx-primary op-5"></i>
                             <div class="mg-l-20">
-                                <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase mg-b-10">Today's Visits</p>
+                                <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase mg-b-10">Existencia</p>
                                 <p class="tx-32 tx-inverse tx-lato tx-black mg-b-0 lh-1">1,975,224</p>
-                                <span class="tx-12 tx-roboto tx-gray-600">24% higher than yesterday</span>
+                                <span class="tx-14 tx-arial tx-gray-800">Stock inicial</span>
+                                <span class="tx-12 tx-roboto tx-gray-600">24% de uso en todos los articulo</span>
                             
                             </div>
                         </div>
-                        <div id="ch5" class="ht-60 tr-y-1">
+                        <div id="ch5" class="ht-60 tr-y-10">
                             <svg width="339" height="60"><g><path d="M0,30Q24.483333333333334,25.75,28.25,26.25C33.9,27,50.85,37.125,56.5,37.5S79.1,31.5,84.75,30S107.35,22.5,113,22.5S135.6,27.75,141.25,30S163.85,42.75,169.5,45S192.1,52.5,197.75,52.5S220.35,46.125,226,45S248.6,42.375,254.25,41.25S276.85,33.375,282.5,33.75S305.1,45.375,310.75,45Q314.51666666666665,44.75,339,30L339,60Q314.51666666666665,60,310.75,60C305.1,60,288.15,60,282.5,60S259.9,60,254.25,60S231.65,60,226,60S203.4,60,197.75,60S175.15,60,169.5,60S146.9,60,141.25,60S118.65,60,113,60S90.4,60,84.75,60S62.15,60,56.5,60S33.9,60,28.25,60Q24.483333333333334,60,0,60Z" class="area" fill="#0866C6"></path></g></svg>
                         </div>
                     </div>
                 </div><!-- col-4 -->
-                <div class="col-sm-4 col-lg-6">
+                <div class="col-sm-4 col-lg-7">
                     <div class="card shadow-base bd-0">
                         <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
                             <h6 class="card-title tx-uppercase tx-12 mg-b-0">ESTADISTICAS GENERALES</h6>
@@ -275,9 +276,9 @@ include('header.php');
 
     });
 
-    $(function() {
 
-    });
+
+
     </script>
 </body>
 

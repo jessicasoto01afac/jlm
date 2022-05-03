@@ -13,9 +13,10 @@
 			ini_set('date.timezone','America/Mexico_City');
 			if ($data["estado"] == "0") {
 				$id_trans=$data["id_art"];
+				$id_codigo=$data["id_articulos"];
 				$existencias=$data["stock_inicial"] + $data["SUMA"] - $data["RESTA"];
 				$solicitar ="PENDIENTE";
-				$proceso = "<a href='#' title='ver detalles' class='btn btn-outline-primary btn-icon rounded-circle mg-r-5'><div><i class='icon ion-share tx-20'></i></div></a>";	
+				$proceso = "<a href='detallesar.php' onclick='opende($id_codigo)' title='ver detalles' class='btn btn-outline-primary btn-icon rounded-circle mg-r-5'><div><i class='icon ion-share tx-20'></i></div></a>";	
 				$cursos[] = [ 
 					$contador,
 					$data["id_articulos"], 
@@ -26,14 +27,11 @@
 					$data["stock_inicial"],
 					$existencias,
 					$solicitar,
-					$data["costo"],
+					$data["costo"], 
 					$proceso
 				];
 			}
-		
-	
-		}
-				
+		}	
 	}
 					if(isset($cursos)&&!empty($cursos )){
 					$json_string = json_encode(array( 'data' => $cursos ));
@@ -43,4 +41,5 @@
 					}
 				mysqli_free_result($resultado);
 				mysqli_close($conexion);
+				
 ?>
