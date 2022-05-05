@@ -109,6 +109,13 @@ include ("../controller/conexion.php");
                         </div><!-- col-4 -->
                         <div class="col-lg-4">
                             <div class="form-group">
+                                <label class="form-control-label label2">Carton:<span
+                                        class="tx-danger">*</span></label>
+                                        <div id="bsccarton" name="bsccarton"></div>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
                                 <label class="form-control-label label2">Hojas: <span class="tx-danger">*</span></label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="artdescriphojas" id="artdescriphojas" placeholder="Ingresa el numero de hojas">
@@ -122,6 +129,7 @@ include ("../controller/conexion.php");
                                     name="division" id="division" placeholder="Ingresa la cantidad a dividir">
                             </div>
                         </div><!-- col-4 -->
+                        
 
                     </div><!-- row -->
                     <div class="form-layout-footer">
