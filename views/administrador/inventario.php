@@ -148,10 +148,16 @@ include('header.php');
     <!------------------------------- ########## DETALLES DEL VALE ########## -------------------------->
     <section class="content" id="datalles" style="display: none;">
         <div class="br-mainpanel">
+            <div class="br-pageheader pd-y-15 pd-l-20">
+                <nav class="breadcrumb pd-0 mg-0 tx-12">
+                    <a class="breadcrumb-item" href="../administrador/inventario.php">Inventario</a>
+                    <span class="breadcrumb-item active">Detalles del articulo</span>
+                </nav>
+            </div><!-- br-pageheader -->
 
             <input style="display: none;" id="idartic" name="idartic" type="text">
             <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-                <h3 id="noartdell" name="noartdell" class="tx-gray-800 mg-b-5"></h3>
+                <h4 id="noartdell" name="noartdell" class="tx-gray-800 mg-b-5"></h4>
             </div>
             <div class="col-sm-4 col-lg-12">
                 <div class="row row-sm mg-t-20">
@@ -161,9 +167,11 @@ include('header.php');
                                 <i class="ion ion-monitor tx-80 lh-0 tx-primary op-5"></i>
                                 <div class="mg-l-20">
                                     <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase mg-b-10">Existencia</p>
-                                    <p id="existe" name="existe" class="tx-32 tx-inverse tx-lato tx-black mg-b-0 lh-1"></p>
+                                    <p id="existe" name="existe" class="tx-32 tx-inverse tx-lato tx-black mg-b-0 lh-1">
+                                    </p>
                                     <span class="tx-18 tx-arial tx-gray-800">Stock inicial:</span>
-                                    <span id="stockini" name="stockini" class="tx-20 tx-roboto  tx-bold tx-gray-650"></span>
+                                    <span id="stockini" name="stockini"
+                                        class="tx-20 tx-roboto  tx-bold tx-gray-650"></span>
 
                                 </div>
                             </div>

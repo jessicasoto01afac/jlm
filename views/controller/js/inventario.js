@@ -13,7 +13,10 @@ $.ajax({
     var x = 0;
     for (D = 0; D < res.length; D++) { 
         if (obj.data[D].artcodigo == id_artic){
-            inventario= obj.data[D].stock_inicial - obj.data[D].RESTA  + obj.data[D].SUMA;
+            let suma = Number(obj.data[D].SUMA);
+            let resta=Number (obj.data[D].RESTA);
+            let inicio =Number(obj.data[D].stock_inicial);
+            inventario=  inicio + (suma - resta);
             document.getElementById('existe').innerHTML=inventario;
             datos = 
             obj.data[D].artcodigo + '*' +
@@ -26,6 +29,7 @@ $.ajax({
             $("#noartdell").html(o[1]);   
             $("#stockini").html(o[2]);
             //alert(obj.data[D].SUMA);
+            alert(obj.data[D].stock_inicial);
         }
     }
 });
