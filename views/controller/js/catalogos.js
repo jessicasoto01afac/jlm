@@ -719,13 +719,22 @@ function savedeprov(){
 
 //--------------------------------TRANSFORMACIÓN---------------------------------------------------------------------
 //Funcion para habilitar los input de edición de usuarios
-function addtransform(){
+function addtransform(){ //08052022 agregar
   //alert("entra transform");
   let id_articulo_final = document.getElementById('vppcodigo').value;
   let id_extendido = document.getElementById('vpcodigoext').value;
   let id_etiquetas = document.getElementById('vpcodigoetiq').value;
   let hojas = document.getElementById('artdescriphojas').value;
   let divicion = document.getElementById('division').value;
+
+  let Carton = document.getElementById('Carton').value;
+  let id_carton = document.getElementById('id_carton').value;
+  let div_carton = document.getElementById('div_carton').value;
+  let multi_carton = document.getElementById('multi_carton').value;
+  let cartonsillo = document.getElementById('cartonsillo').value;
+  let id_cortonsillo = document.getElementById('id_cortonsillo').value;
+  let div_cartonsillo = document.getElementById('div_cartonsillo').value;
+  let multi_cartonsillo = document.getElementById('multi_cartonsillo').value;
 
   let datos= 'id_articulo_final=' + id_articulo_final + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&opcion=registrar';
   //alert(datos);
@@ -910,5 +919,46 @@ function savetraedit(){
 function exportarusu(){
 
   con
+}
+
+function carton(){
+  //alert("entro el vale");
+  tipo = document.getElementById("cartonapl").value;
+  codigocart = document.getElementById("carton");
+  descricarton = document.getElementById("cartondes");
+  multicarton = document.getElementById("cartonmilt");
+
+  if (tipo == 'NO APLICA') {
+      //alert(tipo);
+      codigocart.style.display = 'none';
+      codigocart.style.value = '0';
+      descricarton.style.display = 'none';
+      descricarton.style.value = 'No aplica';
+      multicarton.style.display = 'none';
+    
+  }if (tipo == 'APLICA') {
+    codigocart.style.display = '';
+    descricarton.style.display = '';
+    multicarton.style.display = '';
+
+  }
+}
+function cartonsillo(){
+  //alert("entro el vale");
+  tipo = document.getElementById("cartaplic").value;
+  codigocarton = document.getElementById("cartonsillo");
+  multiplic = document.getElementById("cartonsillomilt");
+  multicarton = document.getElementById("cartonsillodes");
+  if (tipo == 'NO APLICA') {
+      //alert(tipo);
+      codigocarton.style.display = 'none';
+      codigocarton.style.value = '0';
+      multicarton.style.display = 'none';
+      multiplic.style.display = 'none';
+  }if (tipo == 'APLICA') {
+    codigocarton.style.display = '';
+    multiplic.style.display = '';
+    multicarton.style.display = '';
+  }
 }
 

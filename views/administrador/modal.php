@@ -1235,12 +1235,12 @@
             </div>
             <form id="editvoinf" class="form-horizontal" action="" method="POST">
                 <div class="modal-body pd-25">
-                    <a href="#" id="surtirvof" style="float: right;font-size: 16px"
+                    <a href="#" id="surtirvof" name="surtirvof" style="float: right;font-size: 16px"
                         class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="survof()"
                         title="Dar clic para editar">
                         <div><i class="fa fa-edit"></i></div>
                     </a>
-                    <a href="#" id="closeditvoinf1" style="float: right;font-size: 16px;display:none;"
+                    <a href="#" id="closeditvoinf4" name="closeditvoinf4" style="float: right;font-size: 16px;display:none;"
                         class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closesurvof()"
                         title="Dar clic para cerrar">
                         <div><i class="fa fa-times"></i></div>
@@ -1550,16 +1550,16 @@
                         title="Dar clic para cerrar">
                         <div><i class="fa fa-times"></i></div>
                     </a>
-                    <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_memtrass"
-                        id="id_memtrass">
+                    <input style="display:none;" disabled="" class="form-control inputalta" type="text"
+                        name="id_memtrass" id="id_memtrass">
                     <div class="row mg-b-25">
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label label2">CODIGO: <span
                                         class="tx-danger">*</span></label>
                                 <!--01052022 <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number" name="edicovoinf" id="edicovoinf"> -->
-                                <select disabled="" class="form-control" onchange="destrasmemalt()" id="coditrasal" name="coditrasal" type="text"
-                                    data-live-search="true" style="width: 100%">
+                                <select disabled="" class="form-control" onchange="destrasmemalt()" id="coditrasal"
+                                    name="coditrasal" type="text" data-live-search="true" style="width: 100%">
                                     <option value="0">CODIGO</option>
                                     <?php while($art3 = mysqli_fetch_row($articulo3)):?>
                                     <option value="<?php echo $art3[0]?>"><?php echo $art3[0]?></option>
@@ -1571,7 +1571,7 @@
                             <div class="form-group">
                                 <label style="font-size:16px" class="form-control-label">DESCRIPCIÓN: <span
                                         class="tx-danger">*</span></label>
-                                        <input onkeyup="mayus(this);" class="form-control" readonly name="mdestrasp"
+                                <input onkeyup="mayus(this);" class="form-control" readonly name="mdestrasp"
                                     id="mdestrasp" placeholder="" type="text" required>
                             </div><!-- form-group -->
                         </div><!-- form-group -->
@@ -1620,8 +1620,7 @@
                     <span><strong>Advertencia!</strong> Llenar todos los campos</span>
                 </div><!-- d-flex -->
             </div><!-- alert -->
-            <div style="display:none;" id="edthmmerinfr" name="edthmmerinfr" class="alert alert-danger"
-                role="alert">
+            <div style="display:none;" id="edthmmerinfr" name="edthmmerinfr" class="alert alert-danger" role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-close alert-icon tx-24"></i>
                     <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
@@ -1868,6 +1867,38 @@
         </div>
     </div><!-- modal-dialog -->
 </div><!-- modal -->
+<!-- MODAL PARA ELIMINAR ARTICULOS DE ALTA DE VALE DE OFICINA-->
+<div class="modal fade" id='modal-deletevalofi' name='modal-deletevalofi'>
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content bd-0">
+            <div class="modal-header pd-x-20">
+                <h4 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ELIMINAR ARTICULO DE ALTA DE VALE DE OFICINA
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pd-20">
+                <p class="mg-b-5">ESTAS SEGURO DE ELIMINAR EL ARTICULO DE ESTE VALE?</p>
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="del_artvoalt"
+                    id="del_artvoalt">
+                <input disabled="" class="form-control inputalta" type="text" name="deartvoal" id="deartvoal">
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" onclick="savdelevoal()"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
+                <br>
+            </div>
+            <div style="display:none;" id="delerarvoal" name="delerarvoal" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo eliminar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
 
 <!-- MODAL PARA AGREGAR ARTICULO EN TRASPASO DE MEMO EN VISTA PREVIA-->
 <div class="modal fade" id='modal-addartmeminf'>
@@ -1888,8 +1919,8 @@
                             <div class="form-group">
                                 <label style="font-size:16px" class="form-control-label">CODIGO: <span
                                         class="tx-danger">*</span></label>
-                                <select class="form-control" onchange="desartrasmem()" id="coditrasmem" name="coditrasmem" type="text"
-                                    data-live-search="true" style="width: 100%">
+                                <select class="form-control" onchange="desartrasmem()" id="coditrasmem"
+                                    name="coditrasmem" type="text" data-live-search="true" style="width: 100%">
                                     <option value="0">CODIGO</option>
                                     <?php while($art2 = mysqli_fetch_row($articulo2)):?>
                                     <option value="<?php echo $art2[0]?>"><?php echo $art2[0]?></option>
@@ -1954,7 +1985,8 @@
             <div class="modal-footer">
                 <button style="display:none;" type="button" onclick="addartimetras()" id="addtrasfor" name="addtrasfor"
                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">AGREGAR</button>
-                <button style="display:none;" type="button" onclick="addartimetrasps()" id="addtrasfor2" name="addtrasfor2"
+                <button style="display:none;" type="button" onclick="addartimetrasps()" id="addtrasfor2"
+                    name="addtrasfor2"
                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">AGREGAR</button>
             </div>
         </div>
@@ -1985,6 +2017,8 @@ $(document).ready(function() {
     $('#edicovinf1sur').load('select/buscar5.php');
     $('#edimemo').load('select/buscar6.php');
     $('#busccodigo2').load('select/buscar2.php');
+    $('#edicovinf2').load('select/buscar3.php');
+    
 
 
 

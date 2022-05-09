@@ -183,6 +183,26 @@ if(!isset($usuario)){
             }else{
                 echo "1";
             }
+    }else if($opcion === 'delinfarm'){
+        $id_kax = $_POST['id_kax'];
+        $refe_1 = $_POST['refe_1'];
+        if (eliminarart($id_kax,$refe_1,$conexion)){
+            echo "0";
+            $realizo = 'ELIMINACIÓN DE ARTICULO EN VALE DE OFICINA';
+            // $usuario='pruebas';
+            histdeinf($id_kax,$refe_1,$usuario,$realizo,$conexion);
+        }else{
+            echo "1";
+        }
+    }else if($opcion === 'cancelar'){
+        $refe_1 = $_POST['refe_1'];
+        
+            if (cancelar($refe_1,$conexion)){
+                echo "0";
+            }else{
+                echo "1";
+            }
+    //Condición donde actualiza desde vista previa lka cabecera del vale de oficina
     }
     
 
@@ -232,7 +252,7 @@ function cambio ($fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$conexion){
 }
 
 function edicion ($codigo_1,$descripcion_1,$salida,$costo,$total,$observa,$id_kax,$refe_1,$estatus2,$conexion){
-    $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1', salida='$salida', costo='$costo', total='$total', observa='$observa', status_2='$estatus2' WHERE id_kax = '$id_kax'";
+    $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1', cantidad_real='$salida', salida='$salida',costo='$costo', total='$total', observa='$observa' WHERE id_kax = '$id_kax'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -322,6 +342,27 @@ function liberarvo ($valeof,$conexion){
     cerrar($conexion);
 
 }
+///funcion para actualizar aticulo de vale de oficina en alta de vale
+function eliminarart ($id_kax,$refe_1,$conexion){
+    $query="UPDATE kardex SET estado=1 WHERE id_kax='$id_kax'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para cancelar el registro
+function cancelar ($refe_1,$conexion){
+    $query="UPDATE kardex SET estado=2, status='CANCELADO', status_2='CANCELADO' WHERE refe_1 = '$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
 
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
@@ -435,6 +476,16 @@ function hisliber($usuario,$valeof,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario', 'LIBERA VALE DE OFICINA', 'FOLIO:' '$valeof','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+function histdeinf($id_kax,$refe_1,$usuario,$realizo,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'FOLIO: ' '$refe_1' ' ID: ' '$id_kax' ,'$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

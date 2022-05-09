@@ -1,7 +1,7 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT *, concat((select SUM(salida) from kardex where codigo_1 = i.id_articulos)) AS RESTA, concat((select SUM(entrada) from kardex where codigo_1 = i.id_articulos)) AS SUMA FROM inventario i, articulos a where a.artcodigo=i.id_articulos ORDER BY a.id_art ASC";
+	$query = "SELECT *, concat((select SUM(salida) from kardex where codigo_1 = i.id_articulos)) AS RESTA, concat((select SUM(entrada) from kardex where codigo_1 = i.id_articulos)) AS SUMA, concat((SELECT count(salida) FROM kardex where codigo_1 = i.id_articulos and salida>0)) AS CUENTA_SALIDA, concat((SELECT count(entrada) FROM kardex where codigo_1 = i.id_articulos and entrada > 0)) AS CUENTA_ENTRADA FROM inventario i, articulos a where a.artcodigo=i.id_articulos ORDER BY a.id_art ASC";
 	$resultado = mysqli_query($conexion, $query);
 
 	if(!$resultado){

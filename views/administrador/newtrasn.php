@@ -1,6 +1,12 @@
 <!DOCTYPE html>
+
 <?php 
 include ("../controller/conexion.php");
+    $sql = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+    $articulo = mysqli_query($conexion,$sql);
+
+    $sql2 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+    $articulo2 = mysqli_query($conexion,$sql2);
 
 ?>
 <html lang="en">
@@ -29,21 +35,24 @@ include ("../controller/conexion.php");
     <!-- <link rel="stylesheet" href="../template/css/card.css"> -->
 </head>
 <style>
-  .swal-wide{
+.swal-wide {
     width: 500px !important;
     font-size: 16px !important;
-  }
-  .a-alert {
-  outline: none;
-  text-decoration: none;
-  padding: 2px 1px 0;
-  }
-  .a-alert:link {
-  color: white;
-  }
-  .a-alert:visited {
-  color: white;
-  }
+}
+
+.a-alert {
+    outline: none;
+    text-decoration: none;
+    padding: 2px 1px 0;
+}
+
+.a-alert:link {
+    color: white;
+}
+
+.a-alert:visited {
+    color: white;
+}
 </style>
 
 <body class="collapsed-menu">
@@ -83,7 +92,7 @@ include ("../controller/conexion.php");
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo articulo Extendido: <span
                                         class="tx-danger">*</span></label>
-                                    <div id="bscodigoext" name="bscodigoext"></div>
+                                <div id="bscodigoext" name="bscodigoext"></div>
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-8">
@@ -97,7 +106,7 @@ include ("../controller/conexion.php");
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo articulo Etiquetas: <span
                                         class="tx-danger">*</span></label>
-                                        <div id="bscodigoetiq" name="bscodigoetiq"></div>
+                                <div id="bscodigoetiq" name="bscodigoetiq"></div>
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-8">
@@ -109,16 +118,10 @@ include ("../controller/conexion.php");
                         </div><!-- col-4 -->
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label class="form-control-label label2">Carton:<span
-                                        class="tx-danger">*</span></label>
-                                        <div id="bsccarton" name="bsccarton"></div>
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-4">
-                            <div class="form-group">
                                 <label class="form-control-label label2">Hojas: <span class="tx-danger">*</span></label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
-                                    name="artdescriphojas" id="artdescriphojas" placeholder="Ingresa el numero de hojas">
+                                    name="artdescriphojas" id="artdescriphojas"
+                                    placeholder="Ingresa el numero de hojas">
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-4">
@@ -129,7 +132,92 @@ include ("../controller/conexion.php");
                                     name="division" id="division" placeholder="Ingresa la cantidad a dividir">
                             </div>
                         </div><!-- col-4 -->
-                        
+                        <br>
+                        <div class="col-lg-12">
+                            <h4 class="tx-primary">Articulos extra</h4>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="form-control-label label2">Cartón <span class="tx-danger">*</span></label>
+                                <select class="form-control select2" data-placeholder="Elija si aplioca o no"
+                                    onchange="carton()" id="cartonapl" name="cartonapl" type="text"
+                                    data-live-search="true" style="width: 100%">
+                                    <option value="0">SELECCIONE</option>
+                                    <option value="APLICA">APLICA</option>
+                                    <option value="NO APLICA">NO APLICA</option>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="carton" name="carton" style="display:none">
+                            <div class="form-group">
+                                <label class="form-control-label label2">Codigo de Carton:</label>
+                                <select onchange="carton()" class="form-control" data-placeholder="Seleccione"
+                                    id="codcarton" name="codcarton" type="text" data-live-search="true">
+                                    <option value="">CODIGO</option>
+                                    <?php while($idpst = mysqli_fetch_row($articulo)):?>
+                                    <option value="<?php echo $idpst[0]?>"><?php echo $idpst[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="cartondes" name="cartondes" style="display:none">
+                            <div class="form-group" style="display:none>
+                                <label class=" form-control-label label2">División carton</label>
+                                <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="descarton" id="descarton" placeholder="Ingresa">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="cartonmilt" name="cartonmilt" style="display:none">
+                            <div class="form-group" style="display:none>
+                                <label class=" form-control-label label2">multiplica carton</label>
+                                <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="multcarton" id="multcarton" placeholder="Ingresa">
+                            </div>
+                        </div><!-- col-3 -->
+                        <!-- caple -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="form-control-label label2">Cartonsillo <span
+                                        class="tx-danger">*</span></label>
+                                <select class="form-control select2-show-search"
+                                    data-placeholder="Elija si aplioca o no" onchange="cartonsillo()" id="cartaplic"
+                                    name="cartaplic" type="text" data-live-search="true" style="width: 100%">
+                                    <option value="0">SELECCIONE</option>
+                                    <option value="APLICA">APLICA</option>
+                                    <option value="NO APLICA">NO APLICA</option>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="cartonsillo" name="cartonsillo" style="display:none">
+                            <div class="form-group">
+                                <label class="form-control-label label2">Codigo de Cartonsillo:</label>
+                                <select onchange="" class="form-control" data-placeholder="Seleccione"
+                                    id="codcartonsillo" name="codcartonsillo" type="text" data-live-search="true">
+                                    <option value="">CODIGO</option>
+                                    <?php while($idpst2 = mysqli_fetch_row($articulo2)):?>
+                                    <option value="<?php echo $idpst2[0]?>"><?php echo $idpst2[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="cartonsillodes" name="cartonsillodes" style="display:none">
+                            <div class="form-group" style="display:none>
+                                <label class=" form-control-label label2">División cartonsillo</label>
+                                <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="descarton" id="descarton" placeholder="Ingresa">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="cartonsillomilt" name="cartonsillomilt" style="display:none">
+                            <div class="form-group" style="display:none>
+                                <label class=" form-control-label label2">multiplica cartonsillo</label>
+                                <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="multcarton" id="multcarton" placeholder="Ingresa">
+                            </div>
+                        </div><!-- col-3 -->
+                        <!-- caple -->
+
+
+
 
                     </div><!-- row -->
                     <div class="form-layout-footer">
@@ -187,14 +275,13 @@ include ("../controller/conexion.php");
     <script src="../template/js/bracket.js"></script>
     <script>
     //$('#Tcodigo1').select2();
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#bsfinal').load('select/final.php');
         $('#bscodigoetiq').load('select/etiquetas.php');
         $('#bscodigoext').load('select/extendido.php');
     });
-
     </script>
-    
+
 </body>
 
 </html>

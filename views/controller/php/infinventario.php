@@ -16,7 +16,7 @@
 				$id_codigo=$data["id_articulos"];
 				$existencias=$data["stock_inicial"] + $data["SUMA"] - $data["RESTA"];
 				$solicitar ="PENDIENTE";
-				$proceso = "<a onclick='opende($id_codigo)' title='ver detalles' class='btn btn-outline-primary btn-icon rounded-circle mg-r-5'><div><i class='icon ion-share tx-20 tx-white'></i></div></a>";	
+				$proceso = "<a onclick='opende($id_codigo)' title='ver detalles' style='hover:color:white' class='btn btn-outline-primary btn-icon rounded-circle mg-r-5'><div><i class='icon ion-share tx-20 tx-sm-bold tx-primary'></i></div></a>";	
 				$cursos[] = [ 
 					$contador,
 					$data["id_articulos"], 
