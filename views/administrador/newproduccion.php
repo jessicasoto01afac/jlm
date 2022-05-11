@@ -36,7 +36,7 @@
     <script src="../template/lib/select2/js/select2.min.js"></script>
     <link href="../template/lib/highlightjs/github.css" rel="stylesheet">
     <link href="../template/lib/jquery.steps/jquery.steps.css" rel="stylesheet">
-    
+
 
 
 
@@ -70,8 +70,9 @@
         </div>
         <div class="br-pagebody">
             <div style="float: right;">
-                <a href="../administrador/vale_produccion.php" id="closememo" onclick="cancelar();" title="Dar clic para cancelar el memo"
-                    type="button" style="" class="btn btn-secondary"><i class="fa fa-times"></i></a>
+                <a href="../administrador/vale_produccion.php" id="closememo" onclick="cancelar();"
+                    title="Dar clic para cancelar el memo" type="button" style="" class="btn btn-secondary"><i
+                        class="fa fa-times"></i></a>
             </div>
             <div class="br-section-wrapper">
                 <div id="wizard5">
@@ -163,7 +164,9 @@
                     </section>
                     <h3>Material para traspaso</h3>
                     <section>
+                    <a onclick="cancelar()" class="btn btn-indigo" style="float:right; color:white">Agregar articulo individual</a>
                         <h5>INGRESE EL PRODUCTO FINAL</h5>
+                        
                         <br>
                         <div class="row mg-b-25">
                             <div class="col-lg-3">
@@ -208,9 +211,15 @@
                             </form>
                             <br>
                             <br>
-                            <div class="form-layout-footer">
-                                <button class="btn btn-primary" onclick="addvaleprodu()">AGREGAR</button>
-                            </div><!-- form-layout-footer -->
+                            <div class="col-lg-12">
+                                <div class="form-layout-footer">
+                                    <button class="btn btn-primary" onclick="addvaleprodu()">AGREGAR</button>
+                                </div><!-- form-layout-footer -->
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+
                             <div class="col-lg-12">
                                 <br>
                                 <div class="form-group">
@@ -255,8 +264,7 @@
                     </section>
                 </div>
                 <br>
-                <a onclick="cancelar()" class="btn btn-danger" 
-                    style="float:right; color:white">CANCELAR</a>
+                <a onclick="cancelar()" class="btn btn-danger" style="float:right; color:white">CANCELAR</a>
             </div><!-- br-pagebody -->
         </div><!-- br-pagebody -->
         <footer class="br-footer">
@@ -299,7 +307,7 @@
 
     <script src="../template/js/bracket.js"></script>
     <script>
-        
+
     </script>
 
 </body>
