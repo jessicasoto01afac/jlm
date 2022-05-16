@@ -15,6 +15,21 @@
 
       $sql4 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
       $articulo3 = mysqli_query($conexion,$sql4);
+
+      $sql5 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $articuloedth = mysqli_query($conexion,$sql5);
+
+      $sql6 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $articuloedth1 = mysqli_query($conexion,$sql6);
+
+      $sql7 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $articuloedth2 = mysqli_query($conexion,$sql7);
+
+      $sql8 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $articuloedth3 = mysqli_query($conexion,$sql8);
+
+      $sql9 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $articuindv = mysqli_query($conexion,$sql9);
     ?>
 
 
@@ -1240,7 +1255,8 @@
                         title="Dar clic para editar">
                         <div><i class="fa fa-edit"></i></div>
                     </a>
-                    <a href="#" id="closeditvoinf4" name="closeditvoinf4" style="float: right;font-size: 16px;display:none;"
+                    <a href="#" id="closeditvoinf4" name="closeditvoinf4"
+                        style="float: right;font-size: 16px;display:none;"
                         class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closesurvof()"
                         title="Dar clic para cerrar">
                         <div><i class="fa fa-times"></i></div>
@@ -1674,7 +1690,7 @@
             </div>
             <form id="editusu" class="form-horizontal" action="" method="POST">
                 <div class="modal-body pd-25">
-                    <a href="#" id="openeditras" style="float: right;font-size: 16px"
+                    <a href="#" id="openeditrasfo" style="float: right;font-size: 16px"
                         class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editrasnf()"
                         title="Dar clic para editar">
                         <div><i class="fa fa-edit"></i></div>
@@ -1726,14 +1742,14 @@
                                 </select>
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-6">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label class="form-control-label label2">HOJAS<span class="tx-danger">*</span></label>
                                 <input disabled="" class="form-control inputalta" type="number" name="edithojas"
                                     id="edithojas">
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-6">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label class="form-control-label label2">DIVISIÓN<span
                                         class="tx-danger">*</span></label>
@@ -1741,6 +1757,160 @@
                                     id="editdivision">
                             </div>
                         </div><!-- col-4 -->
+                        <div class="col-lg-12">
+                            <label class="tx-indigo" style="font-size:20px" for="">ARTICULOS EXTRA</label>
+                        </div>
+                        <div class="col-lg-3" id="cartonedith" name="cartonedith" style="display:">
+                            <div class="form-group">
+                                <label class="form-control-label label2 tx-primary">Cartón</label>
+                                <select disabled="" class="form-control" data-placeholder="Elija si aplioca o no"
+                                    onchange="carton()" id="cartonedt" name="cartonedt" type="text"
+                                    data-live-search="true" style="width: 100%">
+                                    <option value="0">SELECCIONE</option>
+                                    <option value="APLICA">APLICA</option>
+                                    <option value="NO APLICA">NO APLICA</option>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="cartoned" name="cartoned" style="display:">
+                            <div class="form-group">
+                                <label class="form-control-label label2">Codigo de Carton:</label>
+                                <select disabled="" onchange="carton()" class="form-control"
+                                    data-placeholder="Seleccione" id="edthcarton" name="edthcarton" type="text"
+                                    data-live-search="true">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($ided = mysqli_fetch_row($articuloedth)):?>
+                                    <option value="<?php echo $ided[0]?>"><?php echo $ided[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="cartonedith" name="cartonedith" style="display:">
+                            <div class="form-group" style="display:">
+                                <label class=" form-control-label label2">División carton</label>
+                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="eddivcarton" id="eddivcarton" placeholder="Ingresa">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="cartonmilteed" name="cartonmilteed" style="display:">
+                            <div class="form-group" style="display:">
+                                <label class=" form-control-label label2">multiplica carton</label>
+                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="multcartonedt" id="multcartonedt" placeholder="Ingresa">
+                            </div>
+                        </div>
+                        <!-- cartonsillo -->
+                        <div class="col-lg-3" id="cartonsilloedith" name="cartonsilloedith" style="display:">
+                            <div class="form-group">
+                                <label class="form-control-label label2 tx-primary">Cartonsillo</label>
+                                <select disabled="" class="form-control" data-placeholder="Elija si aplioca o no"
+                                    onchange="" id="cartonsilledith" name="cartonsilledith" type="text"
+                                    data-live-search="true" style="width: 100%">
+                                    <option value="0">SELECCIONE</option>
+                                    <option value="APLICA">APLICA</option>
+                                    <option value="NO APLICA">NO APLICA</option>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="cartonsilloed" name="cartonsilloed" style="display:">
+                            <div class="form-group">
+                                <label class="form-control-label label2">Codigo de cartonsillo:</label>
+                                <select disabled="" onchange="" class="form-control" data-placeholder="Seleccione"
+                                    id="edthcartonsillo" name="edthcartonsillo" type="text" data-live-search="true">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($ided1 = mysqli_fetch_row($articuloedth1)):?>
+                                    <option value="<?php echo $ided1[0]?>"><?php echo $ided1[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="carnsillodvedith" name="carnsillodvedith" style="display:">
+                            <div class="form-group" style="display:">
+                                <label class=" form-control-label label2">División cartonsillo</label>
+                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="eddivcartonsillo" id="eddivcartonsillo" placeholder="Ingresa">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="cartonsillomilteed" name="cartonsillomilteed" style="display:">
+                            <div class="form-group" style="display:">
+                                <label class=" form-control-label label2">multiplica cartonsillo</label>
+                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="multcartonsilloedt" id="multcartonsilloedt" placeholder="Ingresa">
+                            </div>
+                        </div>
+
+                        <!-- caple -->
+                        <div class="col-lg-3" id="capleedithdv" name="capleedithdv" style="display:">
+                            <div class="form-group">
+                                <label class="form-control-label label2 tx-primary">Caple</label>
+                                <select disabled="" class="form-control" data-placeholder="Elija si aplioca o no"
+                                    onchange="" id="capleedith" name="capleedith" type="text" data-live-search="true"
+                                    style="width: 100%">
+                                    <option value="0">SELECCIONE</option>
+                                    <option value="APLICA">APLICA</option>
+                                    <option value="NO APLICA">NO APLICA</option>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="caplecoeth" name="cartonsilloed" style="display:">
+                            <div class="form-group">
+                                <label class="form-control-label label2">Codigo de caple:</label>
+                                <select disabled="" onchange="" class="form-control" data-placeholder="Seleccione"
+                                    id="edthcaplecod" name="edthcaplecod" type="text" data-live-search="true">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($ided2 = mysqli_fetch_row($articuloedth2)):?>
+                                    <option value="<?php echo $ided2[0]?>"><?php echo $ided2[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="capledvedith" name="capledvedith" style="display:">
+                            <div class="form-group" style="display:">
+                                <label class=" form-control-label label2">División caple</label>
+                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="eddivcaple" id="eddivcaple" placeholder="Ingresa">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="caplemilteed" name="caplemilteed" style="display:">
+                            <div class="form-group" style="display:">
+                                <label class=" form-control-label label2">multiplica caple</label>
+                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="multcapleedt" id="multcapleedt" placeholder="Ingresa">
+                            </div>
+                        </div>
+                        <!-- liston/cordon -->
+                        <div class="col-lg-3" id="listonarexedth" name="listonarexedth" style="display:">
+                            <div class="form-group">
+                                <label class="form-control-label label2 tx-primary">Listón/Cordon</label>
+                                <select disabled="" class="form-control" data-placeholder="Elija si aplioca o no"
+                                    onchange="liston()" id="listonaplicedt" name="listonaplicedt" type="text"
+                                    data-live-search="true" style="width: 100%">
+                                    <option value="0">SELECCIONE</option>
+                                    <option value="APLICA">APLICA</option>
+                                    <option value="NO APLICA">NO APLICA</option>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="listonedth" name="listonedth" style="display:">
+                            <div class="form-group">
+                                <label class="form-control-label label2">Codigo de listón:</label>
+                                <select disabled="" onchange="" class="form-control" data-placeholder="Seleccione"
+                                    id="codlistonedt" name="codlistonedt" type="text" data-live-search="true">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($ided3 = mysqli_fetch_row($articuloedth3)):?>
+                                    <option value="<?php echo $ided3[0]?>"><?php echo $ided3[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <!-- col-4 -->
+                        <div class="col-lg-3" id="listonmilt" name="listonmilt" style="display:">
+                            <div class="form-group" style="display:">
+                                <label class=" form-control-label label2">multiplica listón</label>
+                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="multlistonedt" id="multlistonedt" placeholder="Ingresa">
+                            </div>
+                        </div><!-- col-3 -->
                     </div><!-- col-4 -->
                 </div>
             </form>
@@ -1993,6 +2163,210 @@
     </div><!-- modal-dialog -->
 </div><!-- modal -->
 
+<!-- MODAL PARA AGREGAR ARTICULO INDIVIDUAL EN VALE DE PRODUCCIÓN 15052022-->
+<div class="modal fade" id='modal-artinviprod'>
+    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+        <div class="modal-content bd-5">
+            <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">AGREGAR ARTICULO</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="editcli" class="form-horizontal" action="" method="POST">
+                <div class="modal-body pd-25">
+                    <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_vip"
+                        id="id_vip">
+                    <div class="row mg-b-25">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">CODIGO:<span
+                                        class="tx-danger">*</span></label>
+                                <select class="form-control" onchange="indivudual()" id="codindiv" name="codindiv"
+                                    type="text" data-live-search="true" style="width: 100%">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($artin = mysqli_fetch_row($articuindv)):?>
+                                    <option value="<?php echo $artin[0]?>"><?php echo $artin[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-9">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">DESCRIPCIÓN: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control" readonly name="vindescrip"
+                                    id="vindescrip" placeholder="" type="text" required>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">CANTIDAD: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control" name="vincantid" id="vincantid"
+                                    placeholder="Ingrese la cantidad" type="number" required>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">DEPARTAMENTO: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control" name="vindepar" id="vindepar"
+                                    placeholder="Departamento" readonly type="text" required>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">POSICIÓN DEL ARTICULO: <span
+                                        class="tx-danger">*</span></label>
+                                <select class="form-control" data-placeholder="Elegir la posición del articulo" id="psiciont" name="psiciont" type="text" data-live-search="true" style="width: 100%">
+                                    <option value="0">SELECCIONE LA POSICIÓN DEL ARTICULO</option>
+                                    <option value="EXTENDIDO">EXTENDIDO</option>
+                                    <option value="ETIQUETAS">ETIQUETAS</option>
+                                    <option value="PRODUCTO_TERMINADO">PRODUCTO TERMINADO</option>
+                                </select>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label label2">OBSERBACIONES: <span
+                                        class="tx-danger"></span></label>
+                                <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="vinfbsertras"
+                                    id="vinfbsertras" placeholder="Ingresa alguna observación"></textarea>
+                            </div>
+                        </div><!-- col-12 -->
+                    </div><!-- col-4 -->
+                </div>
+            </form>
+            <div style="display:none;" id="edthvinbli1" name="edthvinbli1" class="alert alert-warning" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> El resgistro ya existe</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div style="display:none;" id="edthvaincios1" name="edthvaincios1" class="alert alert-info" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> Llenar todos los campos</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div style="display:none;" id="edthvinperr1" name="edthvinperr1" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div class="modal-footer">
+                <button style="display:;" type="button" onclick="addarinpro()" id="addarinpro" name="addarinpro"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">AGREGAR</button>
+            </div>
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<!-- MODAL PARA AGREGAR EDITAR ARTICULO-->
+<div class="modal fade" id='modal-editaddpro'>
+    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+        <div class="modal-content bd-5">
+            <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="editaddpro" class="form-horizontal" action="" method="POST">
+                <div class="modal-body pd-25">
+                    <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_vip"
+                        id="id_vip">
+                    <div class="row mg-b-25">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">CODIGO:<span
+                                        class="tx-danger">*</span></label>
+                                <select class="form-control" onchange="indivudual()" id="codedvpadd" name="codedvpadd"
+                                    type="text" data-live-search="true" style="width: 100%">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($artin = mysqli_fetch_row($articuindv)):?>
+                                    <option value="<?php echo $artin[0]?>"><?php echo $artin[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-9">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">DESCRIPCIÓN: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control" readonly name="edaddesvp"
+                                    id="edaddesvp" placeholder="" type="text" required>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">CANTIDAD: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control" name="vpedtcantid" id="vpedtcantid"
+                                    placeholder="Ingrese la cantidad" type="number" required>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">DEPARTAMENTO: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control" name="vpedthdepar" id="vpedthdepar"
+                                    placeholder="Departamento" readonly type="text" required>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">POSICIÓN DEL ARTICULO: <span
+                                        class="tx-danger">*</span></label>
+                                <select class="form-control" data-placeholder="Elegir la posición del articulo" id="psicivpadd" name="psicivpadd" type="text" data-live-search="true" style="width: 100%">
+                                    <option value="0">SELECCIONE LA POSICIÓN DEL ARTICULO</option>
+                                    <option value="EXTENDIDO">EXTENDIDO</option>
+                                    <option value="ETIQUETAS">ETIQUETAS</option>
+                                    <option value="PRODUCTO_TERMINADO">PRODUCTO TERMINADO</option>
+                                </select>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label label2">OBSERBACIONES: <span
+                                        class="tx-danger"></span></label>
+                                <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="vpobsadd"
+                                    id="vpobsadd" placeholder="Ingresa alguna observación"></textarea>
+                            </div>
+                        </div><!-- col-12 -->
+                    </div><!-- col-4 -->
+                </div>
+            </form>
+            <div style="display:none;" id="addyavp" name="addyavp" class="alert alert-warning" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> El resgistro ya existe</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div style="display:none;" id="addedthllesvp" name="addedthllesvp" class="alert alert-info" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> Llenar todos los campos</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div style="display:none;" id="erraddvpedt" name="erraddvpedt" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div class="modal-footer">
+                <button style="display:none;" type="button" onclick="edithaddvp()" id="updatevp" name="updatevp"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">EDITAR</button>
+            </div>
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
 <script>
 $(function() {
     // showing modal with effect
@@ -2018,7 +2392,7 @@ $(document).ready(function() {
     $('#edimemo').load('select/buscar6.php');
     $('#busccodigo2').load('select/buscar2.php');
     $('#edicovinf2').load('select/buscar3.php');
-    
+
 
 
 

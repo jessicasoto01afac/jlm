@@ -22,7 +22,23 @@ if(!isset($usuario)){
         if (comprobacion ($id_articulo_final,$id_extendido,$id_etiquetas,$conexion)){
             $hojas = $_POST['hojas'];
             $divicion = $_POST['divicion'];
-            if (registrar($id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$conexion)){
+            $carton = $_POST['carton'];
+            $id_carton = $_POST['id_carton'];
+            $div_carton = $_POST['div_carton'];
+            $multi_carton = $_POST['multi_carton'];
+            $cartonsillo = $_POST['cartonsillo'];
+            $id_cortonsillo = $_POST['id_cortonsillo'];
+            $div_cartonsillo = $_POST['div_cartonsillo'];
+            $multi_cartonsillo = $_POST['multi_cartonsillo'];
+            $caple = $_POST['caple'];
+
+            $id_caple = $_POST['id_caple'];
+            $div_caple = $_POST['div_caple'];
+            $multi_caple = $_POST['multi_caple'];
+            $liston_cordon = $_POST['liston_cordon'];
+            $id_cordliston = $_POST['id_cordliston'];
+            $multi_liston = $_POST['multi_liston'];
+            if (registrar($id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$carton,$id_carton,$div_carton,$multi_carton,$cartonsillo,$id_cortonsillo,$div_cartonsillo,$multi_cartonsillo,$caple,$id_caple,$div_caple,$multi_caple,$liston_cordon,$id_cordliston,$multi_liston,$conexion)){
                 echo "0";
                // $usuario='pruebas';
                 historial($usuario,$id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$conexion);
@@ -41,7 +57,23 @@ if(!isset($usuario)){
         $id_etiquetas = $_POST['id_etiquetas'];
         $hojas = $_POST['hojas'];
         $divicion = $_POST['divicion'];
-        if (actualizar($id_transformacion,$id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$conexion)){
+        $carton = $_POST['carton'];
+        $id_carton = $_POST['id_carton'];
+        $div_carton = $_POST['div_carton'];
+        $multi_carton = $_POST['multi_carton'];
+        $cartonsillo = $_POST['cartonsillo'];
+        $id_cortonsillo = $_POST['id_cortonsillo'];
+        $div_cartonsillo = $_POST['div_cartonsillo'];
+        $multi_cartonsillo = $_POST['multi_cartonsillo'];
+        $caple = $_POST['caple'];
+        $id_caple = $_POST['id_caple'];
+        $div_caple = $_POST['div_caple'];
+        $multi_caple = $_POST['multi_caple'];
+        $liston_cordon = $_POST['liston_cordon'];
+        $id_cordliston = $_POST['id_cordliston'];
+        $multi_liston = $_POST['multi_liston'];
+
+        if (actualizar($id_transformacion,$id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$carton,$id_carton,$div_carton,$multi_carton,$cartonsillo,$id_cortonsillo,$div_cartonsillo,$multi_cartonsillo,$caple,$id_caple,$div_caple,$multi_caple,$liston_cordon,$id_cordliston,$multi_liston,$conexion)){
             echo "0";
             $realizo = 'ACTUALIZO INFORMACION DEL ARTICULO DE TRASFORMACIÓN';
            // $usuario='pruebas';
@@ -76,8 +108,8 @@ function comprobacion ($id_articulo_final,$id_extendido,$id_etiquetas,$conexion)
     $this->conexion->cerrar();
 }
 //funcion para guardar articulo
-function registrar ($id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$conexion){
-    $query="INSERT INTO transforma VALUES(0,'$id_articulo_final','$id_extendido','$id_etiquetas','$hojas','$divicion', 0)";
+function registrar ($id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$carton,$id_carton,$div_carton,$multi_carton,$cartonsillo,$id_cortonsillo,$div_cartonsillo,$multi_cartonsillo,$caple,$id_caple,$div_caple,$multi_caple,$liston_cordon,$id_cordliston,$multi_liston,$conexion){
+    $query="INSERT INTO transforma VALUES(0,'$id_articulo_final','$id_extendido','$id_etiquetas','$hojas','$divicion','$carton','$id_carton','$div_carton','$multi_carton','$cartonsillo','$id_cortonsillo','$div_cartonsillo','$multi_cartonsillo','$caple','$id_caple','$div_caple','$multi_caple','$liston_cordon','$id_cordliston','$multi_liston',0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -86,8 +118,8 @@ function registrar ($id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divic
     $this->conexion->cerrar();
 }
 //funcion para actualizar el registro
-function actualizar ($id_transformacion,$id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$conexion){
-    $query="UPDATE transforma SET id_articulo_final='$id_articulo_final', id_extendido='$id_extendido', id_etiquetas='$id_etiquetas', hojas='$hojas', divicion='$divicion' WHERE id_trans = '$id_transformacion'";
+function actualizar ($id_transformacion,$id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$carton,$id_carton,$div_carton,$multi_carton,$cartonsillo,$id_cortonsillo,$div_cartonsillo,$multi_cartonsillo,$caple,$id_caple,$div_caple,$multi_caple,$liston_cordon,$id_cordliston,$multi_liston,$conexion){
+    $query="UPDATE transforma SET id_articulo_final='$id_articulo_final', id_extendido='$id_extendido', id_etiquetas='$id_etiquetas', hojas='$hojas', divicion='$divicion', carton='$carton', id_carton='$id_carton', div_carton='$div_carton', multi_carton='$multi_carton', cartonsillo='$cartonsillo', id_cortonsillo='$id_cortonsillo', div_cartonsillo='$div_cartonsillo', multi_cartonsillo='$multi_cartonsillo', caple='$caple', id_caple='$id_caple', div_caple='$div_caple', multi_caple='$multi_caple', liston_cordon='$liston_cordon', id_cordliston='$id_cordliston', multi_liston='$multi_liston' WHERE id_trans = '$id_transformacion'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

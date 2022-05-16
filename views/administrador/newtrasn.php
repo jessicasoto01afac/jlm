@@ -8,6 +8,14 @@ include ("../controller/conexion.php");
     $sql2 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
     $articulo2 = mysqli_query($conexion,$sql2);
 
+    $sql3 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+    $articulo3 = mysqli_query($conexion,$sql3);
+
+    $sql4 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+    $articulo4 = mysqli_query($conexion,$sql4);
+
+    
+
 ?>
 <html lang="en">
 
@@ -133,12 +141,19 @@ include ("../controller/conexion.php");
                             </div>
                         </div><!-- col-4 -->
                         <br>
+                        <br>
+                        <label class="ckbox">
+                            <input style="size:25px" onchange="artextra()" id="artxtra" name="artxtra"
+                                type="checkbox"><span class="tx-purple" style="font-size: 20px">Selecciona si tiene
+                                articulos extra esta trasfromación</span>
+                        </label>
                         <div class="col-lg-12">
-                            <h4 class="tx-primary">Articulos extra</h4>
+                            <h4 style="display:none" id="xtra" name="xtra" class="tx-primary">Articulos extra</h4>
                         </div><!-- col-4 -->
-                        <div class="col-lg-3">
+                        <div class="col-lg-3" id="cartontex" name="cartontex" style="display:none">
                             <div class="form-group">
-                                <label class="form-control-label label2">Cartón <span class="tx-danger">*</span></label>
+                                <label class="form-control-label label2 tx-primary"
+                                    style="font-size:20px">Cartón</label>
                                 <select class="form-control select2" data-placeholder="Elija si aplioca o no"
                                     onchange="carton()" id="cartonapl" name="cartonapl" type="text"
                                     data-live-search="true" style="width: 100%">
@@ -161,25 +176,25 @@ include ("../controller/conexion.php");
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-3" id="cartondes" name="cartondes" style="display:none">
-                            <div class="form-group" style="display:none>
+                            <div class="form-group" style="display:">
                                 <label class=" form-control-label label2">División carton</label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="descarton" id="descarton" placeholder="Ingresa">
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-3" id="cartonmilt" name="cartonmilt" style="display:none">
-                            <div class="form-group" style="display:none>
+                            <div class="form-group" style="display:">
                                 <label class=" form-control-label label2">multiplica carton</label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="multcarton" id="multcarton" placeholder="Ingresa">
                             </div>
                         </div><!-- col-3 -->
-                        <!-- caple -->
-                        <div class="col-lg-3">
+                        <!-- cartonsillo -->
+                        <div class="col-lg-3" id="cartonsitex" name="cartonsitex" style="display:none">
                             <div class="form-group">
-                                <label class="form-control-label label2">Cartonsillo <span
-                                        class="tx-danger">*</span></label>
-                                <select class="form-control select2-show-search"
+                                <label class="form-control-label label2 tx-primary" style="font-size:20px">Cartonsillo
+                                    <span class="tx-danger">*</span></label>
+                                <select class="form-control select2"
                                     data-placeholder="Elija si aplioca o no" onchange="cartonsillo()" id="cartaplic"
                                     name="cartaplic" type="text" data-live-search="true" style="width: 100%">
                                     <option value="0">SELECCIONE</option>
@@ -201,63 +216,132 @@ include ("../controller/conexion.php");
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-3" id="cartonsillodes" name="cartonsillodes" style="display:none">
-                            <div class="form-group" style="display:none>
-                                <label class=" form-control-label label2">División cartonsillo</label>
+                            <div class="form-group">
+                                <label class="form-control-label label2">División cartonsillo</label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
-                                    name="descarton" id="descarton" placeholder="Ingresa">
+                                    name="descartonsillo" id="descartonsillo" placeholder="Ingresa">
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-3" id="cartonsillomilt" name="cartonsillomilt" style="display:none">
-                            <div class="form-group" style="display:none>
+                            <div class="form-group" style="display:">
                                 <label class=" form-control-label label2">multiplica cartonsillo</label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
-                                    name="multcarton" id="multcarton" placeholder="Ingresa">
+                                    name="multcartonsillo" id="multcartonsillo" placeholder="Ingresa">
                             </div>
                         </div><!-- col-3 -->
                         <!-- caple -->
-
-
-
-
+                        <div class="col-lg-3" id="caplearex" name="caplearex" style="display:none">
+                            <div class="form-group">
+                                <label class="form-control-label label2 tx-primary" style="font-size:20px">Caple</label>
+                                <select class="form-control select2"
+                                    data-placeholder="Elija si aplioca o no" onchange="caple()" id="capleaplic"
+                                    name="capleaplic" type="text" data-live-search="true" style="width: 100%">
+                                    <option value="0">SELECCIONE</option>
+                                    <option value="APLICA">APLICA</option>
+                                    <option value="NO APLICA">NO APLICA</option>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="caple" name="caple" style="display:none">
+                            <div class="form-group">
+                                <label class="form-control-label label2">Codigo de Caple:</label>
+                                <select onchange="" class="form-control" data-placeholder="Seleccione" id="codcaple"
+                                    name="codcaple" type="text" data-live-search="true">
+                                    <option value="">CODIGO</option>
+                                    <?php while($idpst3 = mysqli_fetch_row($articulo3)):?>
+                                    <option value="<?php echo $idpst3[0]?>"><?php echo $idpst3[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="capledes" name="capledes" style="display:none">
+                            <div class="form-group" style="display:">
+                                <label class=" form-control-label label2">División caple</label>
+                                <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="descaple" id="descaple" placeholder="Ingresa">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="caplemilt" name="caplemilt" style="display:none">
+                            <div class="form-group" style="display:">
+                                <label class=" form-control-label label2">multiplica caple</label>
+                                <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="multcaple" id="multcaple" placeholder="Ingresa">
+                            </div>
+                        </div><!-- col-3 -->
+                        <!-- liston/cordon -->
+                        <div class="col-lg-3" id="listonarex" name="listonarex" style="display:none">
+                            <div class="form-group">
+                                <label class="form-control-label label2 tx-primary"
+                                    style="font-size:20px">Listón/Cordon</label>
+                                <select class="form-control select2"
+                                    data-placeholder="Elija si aplioca o no" onchange="liston()" id="listonaplic"
+                                    name="listonaplic" type="text" data-live-search="true" style="width: 100%">
+                                    <option value="0">SELECCIONE</option>
+                                    <option value="APLICA">APLICA</option>
+                                    <option value="NO APLICA">NO APLICA</option>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3" id="liston" name="liston" style="display:none">
+                            <div class="form-group">
+                                <label class="form-control-label label2">Codigo de listón:</label>
+                                <select onchange="" class="form-control" data-placeholder="Seleccione" id="codliston"
+                                    name="codliston" type="text" data-live-search="true">
+                                    <option value="">CODIGO</option>
+                                    <?php while($idpst4 = mysqli_fetch_row($articulo4)):?>
+                                    <option value="<?php echo $idpst4[0]?>"><?php echo $idpst4[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <!-- col-4 -->
+                        <div class="col-lg-3" id="listonmilt" name="listonmilt" style="display:none">
+                            <div class="form-group" style="display:">
+                                <label class=" form-control-label label2">multiplica listón</label>
+                                <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="multliston" id="multliston" placeholder="Ingresa">
+                            </div>
+                        </div><!-- col-3 -->
                     </div><!-- row -->
                     <div class="form-layout-footer">
                         <button type="button" class="btn btn-info" style="background-color:#1774D8; font-size 14px;"
                             onclick="addtransform()">AGREGAR</button>
                     </div><!-- form-layout-footer -->
-                </form>
-                <br>
-                <div style="display:none;" id="dubliartras" name="dubliartras" class="alert alert-warning" role="alert">
-                    <div class="d-flex align-items-center justify-content-start">
-                        <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
-                        <span><strong>Advertencia!</strong> El resgistro ya existe</span>
-                    </div><!-- d-flex -->
-                </div><!-- alert -->
-                <div style="display:none;" id="vaciosartras" name="vaciosartras" class="alert alert-info" role="alert">
-                    <div class="d-flex align-items-center justify-content-start">
-                        <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
-                        <span><strong>Advertencia!</strong> Llenar todos los campos</span>
-                    </div><!-- d-flex -->
-                </div><!-- alert -->
-                <div style="display:none;" id="errartras" name="errartras" class="alert alert-danger" role="alert">
-                    <div class="d-flex align-items-center justify-content-start">
-                        <i class="icon ion-ios-close alert-icon tx-24"></i>
-                        <span><strong>Advertencia!</strong>No se puedo guardar coontactar a soporte tecnico o levantar
-                            un ticket</span>
-                    </div><!-- d-flex -->
-                </div><!-- alert -->
-            </div>
-        </div><!-- br-pagebody -->
-        <footer class="br-footer">
-            <div class="footer-left">
-                <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
-                <div>Jose Luis Mondragon y CIA.</div>
-            </div>
-            <div class="footer-right d-flex align-items-center">
-                <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i
-                        class="fa fa-facebook tx-20"></i></a>
-                <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i class="fa fa-globe tx-20"></i></a>
-            </div>
-        </footer>
+            </div><!-- row -->
+            </form>
+            <br>
+            <div style="display:none;" id="dubliartras" name="dubliartras" class="alert alert-warning" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> El resgistro ya existe</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div style="display:none;" id="vaciosartras" name="vaciosartras" class="alert alert-info" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> Llenar todos los campos</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div style="display:none;" id="errartras" name="errartras" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar coontactar a soporte tecnico o levantar
+                        un ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        </div>
+    </div><!-- br-pagebody -->
+    <footer class="br-footer">
+        <div class="footer-left">
+            <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
+            <div>Jose Luis Mondragon y CIA.</div>
+        </div>
+        <div class="footer-right d-flex align-items-center">
+            <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i
+                    class="fa fa-facebook tx-20"></i></a>
+            <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i class="fa fa-globe tx-20"></i></a>
+        </div>
+    </footer>
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
     <script src="../template/lib/jquery/jquery.js"></script>

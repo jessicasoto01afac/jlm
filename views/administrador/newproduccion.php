@@ -38,10 +38,6 @@
     <link href="../template/lib/jquery.steps/jquery.steps.css" rel="stylesheet">
 
 
-
-
-
-
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
 </head>
@@ -76,7 +72,6 @@
             </div>
             <div class="br-section-wrapper">
                 <div id="wizard5">
-
                     <h3>Cabezera del vale de produccion</h3>
                     <section>
                         <form id="valeoficina" method="POST">
@@ -164,9 +159,9 @@
                     </section>
                     <h3>Material para traspaso</h3>
                     <section>
-                    <a onclick="cancelar()" class="btn btn-indigo" style="float:right; color:white">Agregar articulo individual</a>
+                        <a onclick="" class="btn btn-indigo" data-toggle="modal" data-target="#modal-artinviprod"
+                            style="float:right; color:white">Agregar articulo individual</a>
                         <h5>INGRESE EL PRODUCTO FINAL</h5>
-                        
                         <br>
                         <div class="row mg-b-25">
                             <div class="col-lg-3">
@@ -219,7 +214,6 @@
                             <br>
                             <br>
                             <br>
-
                             <div class="col-lg-12">
                                 <br>
                                 <div class="form-group">
@@ -307,6 +301,8 @@
 
     <script src="../template/js/bracket.js"></script>
     <script>
+
+
 
     </script>
 

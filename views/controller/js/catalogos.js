@@ -726,18 +726,63 @@ function addtransform(){ //08052022 agregar
   let id_etiquetas = document.getElementById('vpcodigoetiq').value;
   let hojas = document.getElementById('artdescriphojas').value;
   let divicion = document.getElementById('division').value;
+  let carton = document.getElementById('cartonapl').value;
+  let id_carton = document.getElementById('codcarton').value;
+  let div_carton = document.getElementById('descarton').value;
+  let multi_carton = document.getElementById('multcarton').value;
+  let cartonsillo = document.getElementById('cartaplic').value;
+  let id_cortonsillo = document.getElementById('codcartonsillo').value;
+  let div_cartonsillo = document.getElementById('descartonsillo').value;
+  let multi_cartonsillo = document.getElementById('multcartonsillo').value;
+  let caple = document.getElementById('capleaplic').value;
+  let id_caple = document.getElementById('codcaple').value;
+  let div_caple = document.getElementById('descaple').value;
+  let multi_caple = document.getElementById('multcaple').value;
+  let liston_cordon = document.getElementById('listonaplic').value;
+  let id_cordliston = document.getElementById('codliston').value;
+  let multi_liston = document.getElementById('multliston').value;
+  //Comprobar si esta esta seleccionado
+  if (carton=='NO APLICA'){
+    document.getElementById('cartonapl').value='NO APLICA';
+    id_carton=0;
+    div_carton=0;
+    multi_carton=0;
+  }else if (cartonsillo=='NO APLICA'){
+    document.getElementById('cartaplic').value='NO APLICA';
+    id_cortonsillo=0;
+    div_cartonsillo=0;
+    multi_cartonsillo=0;
+  }else if (caple=='NO APLICA'){
+    document.getElementById('capleaplic').value='NO APLICA';
+    id_caple=0;
+    div_caple=0;
+    multi_caple=0;
+  }else if (liston_cordon=='NO APLICA'){
+    document.getElementById('listonaplic').value='NO APLICA';
+    id_cordliston=0;
+    multi_liston=0;
+  }else if (carton==='0'){
+    document.getElementById('listonaplic').value='NO APLICA';
+    id_cordliston=0;
+    multi_liston=0;
+  }else if (cartonsillo==='0'){
+    document.getElementById('cartaplic').value='NO APLICA';
+    id_cortonsillo=0;
+    div_cartonsillo=0;
+    multi_cartonsillo=0;
+  }else if (caple==='0'){
+    document.getElementById('capleaplic').value='NO APLICA';
+    id_caple=0;
+    div_caple=0;
+    multi_caple=0;
+  }else if (liston_cordon==='0'){
+    document.getElementById('listonaplic').value='NO APLICA';
+    id_cordliston=0;
+    multi_liston=0;
+  }
 
-  let Carton = document.getElementById('Carton').value;
-  let id_carton = document.getElementById('id_carton').value;
-  let div_carton = document.getElementById('div_carton').value;
-  let multi_carton = document.getElementById('multi_carton').value;
-  let cartonsillo = document.getElementById('cartonsillo').value;
-  let id_cortonsillo = document.getElementById('id_cortonsillo').value;
-  let div_cartonsillo = document.getElementById('div_cartonsillo').value;
-  let multi_cartonsillo = document.getElementById('multi_cartonsillo').value;
-
-  let datos= 'id_articulo_final=' + id_articulo_final + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&opcion=registrar';
-  //alert(datos);
+  let datos= 'id_articulo_final=' + id_articulo_final + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&carton=' + carton + '&id_carton=' + id_carton + '&div_carton=' + div_carton + '&multi_carton=' + multi_carton + '&cartonsillo=' + cartonsillo + '&id_cortonsillo=' + id_cortonsillo + '&div_cartonsillo=' + div_cartonsillo + '&multi_cartonsillo=' + multi_cartonsillo + '&caple=' + caple + '&id_caple=' + id_caple + '&div_caple=' + div_caple + '&multi_caple=' + multi_caple + '&liston_cordon=' + liston_cordon + '&id_cordliston=' + id_cordliston + '&multi_liston=' + multi_liston + '&opcion=registrar';
+  alert(datos);
 
   if (id_articulo_final == '' || id_extendido == '' || id_etiquetas == '' || hojas == '' || divicion == '') {
     document.getElementById('vaciosartras').style.display=''
@@ -781,13 +826,12 @@ function addtransform(){ //08052022 agregar
       }
     });//FIN DE AJAX
   }
-
 }
+
 //FUNCION DONDE RECOLECTA LA INFORMACION DEL ARTICULO DE TRASFORMACION PARA EDITAR
 function infolistrans(id_transform){
   //alert(id_transform);
   document.getElementById('id_arttras').value=id_transform
-  
   $.ajax({
     url: '../controller/php/contrasforma.php',
     type: 'POST'
@@ -803,22 +847,75 @@ function infolistrans(id_transform){
             obj.data[D].id_extendido + '*' +
             obj.data[D].id_etiquetas + '*' +
             obj.data[D].hojas + '*' +
-            obj.data[D].divicion;  
+            obj.data[D].divicion + '*' +
+            obj.data[D].id_carton + '*' +
+            obj.data[D].div_carton + '*' +
+            obj.data[D].multi_carton + '*' +
+            obj.data[D].id_cortonsillo + '*' +
+            obj.data[D].div_cartonsillo + '*' +
+            obj.data[D].multi_cartonsillo + '*' +
+            obj.data[D].id_caple + '*' +
+            obj.data[D].div_caple + '*' +
+            obj.data[D].multi_caple + '*' +
+            obj.data[D].id_cordliston + '*' +
+            obj.data[D].multi_liston;  
             let o = datos.split("*");   
             $("#modal-edithtrans #edithartfin").val(o[0]);
             $("#modal-edithtrans #edithartext").val(o[1]);
             $("#modal-edithtrans #editharetq").val(o[2]);
             $("#modal-edithtrans #edithojas").val(o[3]);  
-            $("#modal-edithtrans #editdivision").val(o[4]);    
-        }
-    }
-});
-
+            $("#modal-edithtrans #editdivision").val(o[4]);
+            $("#modal-edithtrans #edthcarton").val(o[5]);
+            $("#modal-edithtrans #eddivcarton").val(o[6]);
+            $("#modal-edithtrans #multcartonedt").val(o[7]);
+            $("#modal-edithtrans #edthcartonsillo").val(o[8]);
+            $("#modal-edithtrans #eddivcartonsillo").val(o[9]);
+            $("#modal-edithtrans #multcartonsilloedt").val(o[10]);
+            $("#modal-edithtrans #edthcaplecod").val(o[11]);
+            $("#modal-edithtrans #eddivcaple").val(o[12]);
+            $("#modal-edithtrans #multcapleedt").val(o[13]);
+            $("#modal-edithtrans #codlistonedt").val(o[14]);
+            $("#modal-edithtrans #multlistonedt").val(o[15]);
+            //CARTON
+            if (obj.data[D].carton == "0" ){
+              document.getElementById('cartonedt').value="NO APLICA";
+            }else if (obj.data[D].carton == "NO APLICA"){
+              document.getElementById('cartonedt').value="NO APLICA";
+            }else if (obj.data[D].carton == "APLICA"){
+              document.getElementById('cartonedt').value="APLICA";
+            }
+            //CARTONSILLO
+            if (obj.data[D].cartonsillo == "0" ){
+              document.getElementById('cartonsilledith').value="NO APLICA";
+            }else if (obj.data[D].cartonsillo == "NO APLICA"){
+              document.getElementById('cartonsilledith').value="NO APLICA";
+            }else if (obj.data[D].cartonsillo == "APLICA"){
+              document.getElementById('cartonsilledith').value="APLICA";
+            }
+            //CAPLE
+            if (obj.data[D].caple == "0" ){
+              document.getElementById('capleedith').value="NO APLICA";
+            }else if (obj.data[D].caple == "NO APLICA"){
+              document.getElementById('capleedith').value="NO APLICA";
+            }else if (obj.data[D].caple == "APLICA"){
+              document.getElementById('capleedith').value="APLICA";
+            }
+            //LISTON/CORDON
+            if (obj.data[D].liston_cordon == "0" ){
+              document.getElementById('listonaplicedt').value="NO APLICA";
+            }else if (obj.data[D].liston_cordon == "NO APLICA"){
+              document.getElementById('listonaplicedt').value="NO APLICA";
+            }else if (obj.data[D].liston_cordon == "APLICA"){
+              document.getElementById('listonaplicedt').value="APLICA";
+            }
+          }
+      }
+   });
 }
 //FUNCION DE EDITAR ARTICULO DE RASFORMACION
 function editrasnf(){
   //alert("editusuarios");
-  document.getElementById('openeditras').style.display="none";
+  document.getElementById('openeditrasfo').style.display="none";
   document.getElementById('closetras').style.display="";
   document.getElementById('arsurvof').disabled= false;
   document.getElementById('editdivision').disabled= false;
@@ -827,20 +924,51 @@ function editrasnf(){
   document.getElementById('edithartext').disabled= false;
   document.getElementById('editharetq').disabled= false;
   document.getElementById('traeguardar').style.display="";
-  
+  //extra
+  document.getElementById('cartonedt').disabled= false;
+  document.getElementById('edthcarton').disabled= false;
+  document.getElementById('eddivcarton').disabled= false;
+  document.getElementById('multcartonedt').disabled= false;
+  document.getElementById('cartonsilledith').disabled= false;
+  document.getElementById('edthcartonsillo').disabled= false;
+  document.getElementById('eddivcartonsillo').disabled= false;
+  document.getElementById('multcartonsilloedt').disabled= false;
+  document.getElementById('capleedith').disabled= false;
+  document.getElementById('edthcaplecod').disabled= false;
+  document.getElementById('eddivcaple').disabled= false;
+  document.getElementById('multcapleedt').disabled= false;
+  document.getElementById('listonaplicedt').disabled= false;
+  document.getElementById('codlistonedt').disabled= false;
+  document.getElementById('multlistonedt').disabled= false;
+
 }
 //FUNCION DE CERRAR EDICIÓN ARTICULO DE RASFORMACION
 function closetrans(){
   //alert("cerrarusu");
-      document.getElementById('openeditras').style.display="";
-      document.getElementById('closetras').style.display="none";
-      document.getElementById('editdivision').disabled= true;
-      document.getElementById('edithojas').disabled= true;
-      document.getElementById('edithartfin').disabled= true;
-      document.getElementById('edithartext').disabled= true;
-      document.getElementById('editharetq').disabled= true;
-
-      document.getElementById('traeguardar').style.display="none";
+  document.getElementById('openeditrasfo').style.display="";
+  document.getElementById('closetras').style.display="none";
+  document.getElementById('editdivision').disabled= true;
+  document.getElementById('edithojas').disabled= true;
+  document.getElementById('edithartfin').disabled= true;
+  document.getElementById('edithartext').disabled= true;
+  document.getElementById('editharetq').disabled= true;
+  document.getElementById('traeguardar').style.display="none";
+  //extra cartonsilloedith
+  document.getElementById('cartonedt').disabled= true;
+  document.getElementById('edthcarton').disabled= true;
+  document.getElementById('eddivcarton').disabled= true;
+  document.getElementById('multcartonedt').disabled= true;
+  document.getElementById('cartonsilledith').disabled= true;
+  document.getElementById('edthcartonsillo').disabled= true;
+  document.getElementById('eddivcartonsillo').disabled= true;
+  document.getElementById('multcartonsilloedt').disabled= true;
+  document.getElementById('capleedith').disabled= true;
+  document.getElementById('edthcaplecod').disabled= true;
+  document.getElementById('eddivcaple').disabled= true;
+  document.getElementById('multcapleedt').disabled= true;
+  document.getElementById('listonaplicedt').disabled= true;
+  document.getElementById('codlistonedt').disabled= true;
+  document.getElementById('multlistonedt').disabled= true;
 }
 //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
 function deletransf(transf){
@@ -891,7 +1019,22 @@ function savetraedit(){
   let id_etiquetas = document.getElementById('editharetq').value;
   let hojas = document.getElementById('edithojas').value;
   let divicion = document.getElementById('editdivision').value;
-  let datos= 'id_transformacion=' + id_transformacion + '&id_articulo_final=' + id_articulo_final  + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&opcion=actualizara';
+  let carton = document.getElementById('cartonedt').value;
+  let id_carton = document.getElementById('edthcarton').value;
+  let div_carton = document.getElementById('eddivcarton').value;
+  let multi_carton = document.getElementById('multcartonedt').value;
+  let cartonsillo = document.getElementById('cartonsilledith').value;
+  let id_cortonsillo = document.getElementById('edthcartonsillo').value;
+  let div_cartonsillo = document.getElementById('eddivcartonsillo').value;
+  let multi_cartonsillo = document.getElementById('multcartonsilloedt').value;
+  let caple = document.getElementById('capleedith').value;
+  let id_caple = document.getElementById('edthcaplecod').value;
+  let div_caple = document.getElementById('eddivcaple').value;
+  let multi_caple = document.getElementById('multcapleedt').value;
+  let liston_cordon = document.getElementById('listonaplicedt').value;
+  let id_cordliston = document.getElementById('codlistonedt').value;
+  let multi_liston = document.getElementById('multlistonedt').value;
+  let datos= 'id_transformacion=' + id_transformacion + '&id_articulo_final=' + id_articulo_final  + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&carton=' + carton + '&id_carton=' + id_carton + '&div_carton=' + div_carton + '&multi_carton=' + multi_carton + '&cartonsillo=' + cartonsillo + '&id_cortonsillo=' + id_cortonsillo + '&div_cartonsillo=' + div_cartonsillo + '&multi_cartonsillo=' + multi_cartonsillo + '&caple=' + caple + '&id_caple=' + id_caple + '&div_caple=' + div_caple + '&multi_caple=' + multi_caple + '&liston_cordon=' + liston_cordon + '&id_cordliston=' + id_cordliston + '&multi_liston=' + multi_liston + '&opcion=actualizara';
 //alert(datos);
   $.ajax({
     type:"POST",
@@ -923,10 +1066,10 @@ function exportarusu(){
 
 function carton(){
   //alert("entro el vale");
-  tipo = document.getElementById("cartonapl").value;
-  codigocart = document.getElementById("carton");
-  descricarton = document.getElementById("cartondes");
-  multicarton = document.getElementById("cartonmilt");
+  let tipo = document.getElementById("cartonapl").value;
+  let codigocart = document.getElementById("carton");
+  let descricarton = document.getElementById("cartondes");
+  let multicarton = document.getElementById("cartonmilt");
 
   if (tipo == 'NO APLICA') {
       //alert(tipo);
@@ -945,20 +1088,80 @@ function carton(){
 }
 function cartonsillo(){
   //alert("entro el vale");
-  tipo = document.getElementById("cartaplic").value;
-  codigocarton = document.getElementById("cartonsillo");
-  multiplic = document.getElementById("cartonsillomilt");
-  multicarton = document.getElementById("cartonsillodes");
+  let tipo = document.getElementById("cartaplic").value;
+  let codigocartonsillo = document.getElementById("cartonsillo");
+  let multiplic = document.getElementById("cartonsillomilt");
+  let multicarton = document.getElementById("cartonsillodes");
   if (tipo == 'NO APLICA') {
       //alert(tipo);
-      codigocarton.style.display = 'none';
-      codigocarton.style.value = '0';
+      codigocartonsillo.style.display = 'none';
       multicarton.style.display = 'none';
       multiplic.style.display = 'none';
   }if (tipo == 'APLICA') {
-    codigocarton.style.display = '';
+    codigocartonsillo.style.display = '';
     multiplic.style.display = '';
     multicarton.style.display = '';
+  }
+}
+//funcion del Caple
+function caple(){
+  //alert("entro el vale");
+  let tipo = document.getElementById("capleaplic").value;
+  let codigocaple = document.getElementById("caple");
+  let multiplic = document.getElementById("caplemilt");
+  let multicaple = document.getElementById("capledes");
+  if (tipo == 'NO APLICA') {
+      //alert(tipo);
+      codigocaple.style.display = 'none';
+      codigocaple.style.value = '0';
+      multicaple.style.display = 'none';
+      multiplic.style.display = 'none';
+  }if (tipo == 'APLICA') {
+    codigocaple.style.display = '';
+    multiplic.style.display = '';
+    multicaple.style.display = '';
+  }
+}
+//funcion del liston
+function liston(){
+  //alert("entro el vale");
+  let tipo = document.getElementById("listonaplic").value;
+  let codigocaple = document.getElementById("liston");
+  let multiplic = document.getElementById("listonmilt");
+  if (tipo == 'NO APLICA') {
+      //alert(tipo);
+      codigocaple.style.display = 'none';
+      codigocaple.style.value = '0';
+      multiplic.style.display = 'none';
+  }if (tipo == 'APLICA') {
+    codigocaple.style.display = '';
+    multiplic.style.display = '';
+  }
+}
+
+//FUNCIÓN QUE ACTIVA LOS ARTUCULOS EXTRA
+function artextra(){
+  //alert("entra articulo extra");
+  let titulo = document.getElementById("xtra");
+  let selecarton = document.getElementById("cartontex");
+  let selecartonsillo = document.getElementById("cartonsitex");
+  let selecaple = document.getElementById("caplearex");
+  let seleliston = document.getElementById("listonarex");
+
+  if ($('#artxtra').is(':checked') ) {
+    //alert("seleccionado");
+    titulo.style.display = '';
+    selecarton.style.display = '';
+    selecartonsillo.style.display = '';
+    selecaple.style.display = '';
+    seleliston.style.display = '';
+  }else{
+    //alert("no seleccionado");
+    titulo.style.display = 'none';
+    selecarton.style.display = 'none';
+    selecartonsillo.style.display = 'none';
+    selecaple.style.display = 'none';
+    seleliston.style.display = 'none';
   }
 }
 

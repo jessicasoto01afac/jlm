@@ -220,8 +220,8 @@
                                     <div id="listvaleofi">
                                     </div>
                                 </div><!-- col-12 -->
-                                <a class="btn btn-primary" href="../administrador/vale_oficina.php"
-                                    style="float:right; color:white">FINALIZAR</a>
+                                <!-- <a class="btn btn-primary" href="../administrador/vale_oficina.php"
+                                    style="float:right; color:white">FINALIZAR</a> -->
                     </section>
                 </div>
                 <br>
@@ -315,8 +315,39 @@
             headerTag: 'h3',
             bodyTag: 'section',
             autoFocus: true,
-            enableFinishButton: false,
+            enableFinishButton: true,
             titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
+            labels: {
+            cancel: "Cancelar",
+            current: "current step:",
+            pagination: "Pagination",
+            finish: "Finalizar",
+            next: "Siguiente",
+            previous: "Anterior",
+            loading: "Cargando ..."
+        },
+        onFinished: function (event, currentIndex) {
+            //alert("Form submitted.");
+            var refe_1 = document.getElementById('vfolio').value; //FOLIO DEL VALE
+            var fecha = document.getElementById('vfecha').value; 
+            var refe_3 = document.getElementById('vtipo').value;
+            var proveedor_cliente = document.getElementById('vdep').value + document.getElementById('vprove').value ; 
+            if (document.getElementById('vfolio').value == '' || document.getElementById('vfecha').value == '' || document.getElementById('vtipo').value == '' || proveedor_cliente == '' ) { 
+        document.getElementById('vaciosvo').style.display=''
+        setTimeout(function(){
+            document.getElementById('vaciosvo').style.display='none';
+        }, 2000);
+          return;
+        } else {
+            Swal.fire({
+                type: 'success',
+                text: 'Se finaliza de forma correcta',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setTimeout("location.href = 'vale_oficina.php';", 1500);
+        }
+        },
             onStepChanging: function(event, currentIndex, newIndex) {
                 if (currentIndex < newIndex) {
                     // Step 1 form validation
