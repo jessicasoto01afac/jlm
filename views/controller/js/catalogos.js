@@ -747,36 +747,45 @@ function addtransform(){ //08052022 agregar
     id_carton=0;
     div_carton=0;
     multi_carton=0;
-  }else if (cartonsillo=='NO APLICA'){
-    document.getElementById('cartaplic').value='NO APLICA';
+  }
+  if (cartonsillo=='NO APLICA'){
+    cartonsillo.value='NO APLICA';
     id_cortonsillo=0;
     div_cartonsillo=0;
     multi_cartonsillo=0;
-  }else if (caple=='NO APLICA'){
-    document.getElementById('capleaplic').value='NO APLICA';
+  }
+  if (caple=='NO APLICA'){
+    caple.value='NO APLICA';
     id_caple=0;
     div_caple=0;
     multi_caple=0;
-  }else if (liston_cordon=='NO APLICA'){
-    document.getElementById('listonaplic').value='NO APLICA';
+  } 
+  if (liston_cordon=='NO APLICA'){
+    liston_cordon.value='NO APLICA';
     id_cordliston=0;
     multi_liston=0;
-  }else if (carton==='0'){
-    document.getElementById('listonaplic').value='NO APLICA';
-    id_cordliston=0;
-    multi_liston=0;
-  }else if (cartonsillo==='0'){
-    document.getElementById('cartaplic').value='NO APLICA';
+  } 
+
+  if (carton==0){
+    carton='NO APLICA';
+    id_carton=0;
+    div_carton=0;
+    multi_carton=0;
+  } 
+  if (cartonsillo==0){
+    cartonsillo='NO APLICA';
     id_cortonsillo=0;
     div_cartonsillo=0;
     multi_cartonsillo=0;
-  }else if (caple==='0'){
-    document.getElementById('capleaplic').value='NO APLICA';
+  } 
+  if (caple==0){
+    caple='NO APLICA';
     id_caple=0;
     div_caple=0;
     multi_caple=0;
-  }else if (liston_cordon==='0'){
-    document.getElementById('listonaplic').value='NO APLICA';
+  } 
+  if (liston_cordon==0){
+    liston_cordon='NO APLICA';
     id_cordliston=0;
     multi_liston=0;
   }

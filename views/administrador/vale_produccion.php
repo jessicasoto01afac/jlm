@@ -26,7 +26,7 @@
 
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
-    <script src="../controller/js/memos.js"></script>
+    <script src="../controller/js/vale_produc.js"></script>
 
 </head>
 
@@ -90,14 +90,14 @@ include('header.php');
         </section>
         <!-- ########## END: MAIN PANEL ########## -->
         <!------------------------------- ########## DETALLES DEL VALE ########## -------------------------->
-        <section class="content" id="detamemos" style="display: none;">
+        <section class="content" id="detaproduccion" style="display: none;">
             <!-- ########## START: MAIN PANEL ########## -->
             <div class="br-mainpanel">
                 <div class="br-pageheader pd-y-15 pd-l-20">
                     <nav class="breadcrumb pd-0 mg-0 tx-12">
                         <a class="breadcrumb-item" href="../administrador/vale_produccion.php">Lista de
-                            vale_prodicción</a>
-                        <span class="breadcrumb-item active">Info de memo</span>
+                            vale_producción</a>
+                        <span class="breadcrumb-item active">Info de vale de producción</span>
                     </nav>
                 </div><!-- br-pageheader -->
                 <div class="br-pagebody">
@@ -129,7 +129,7 @@ include('header.php');
                                             <label class="form-control-label">FOLIO: <span
                                                     class="tx-danger">*</span></label>
                                             <!-- <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingresa el Folio"> -->
-                                            <label class="form-control-label" id="folmemo" name="folmemo"
+                                            <label class="form-control-label" id="folprod" name="folprod"
                                                 style="font-size: 24px;px; color:#14128F"></label>
                                         </div>
                                     </div><!-- col-4 -->
@@ -137,30 +137,59 @@ include('header.php');
                                         <div class="form-group mg-md-l--1">
                                             <label class="form-control-label">Fecha: <span
                                                     class="tx-danger">*</span></label>
-                                            <input class="form-control" readonly type="date" id="infecmem"
-                                                name="infecmem" placeholder="Enter lastname">
+                                            <input class="form-control" readonly type="date" id="infecvpro"
+                                                name="infecvpro" placeholder="Enter lastname">
                                         </div>
                                     </div><!-- col-4 -->
                                     <div class="col-md-4 mg-t--1 mg-md-t-0">
                                         <div class="form-group mg-md-l--1">
-                                            <label class="form-control-label mg-b-0-force">TIPO DE MEMO: <span
+                                            <label class="form-control-label mg-b-0-force">TIPO DE VALE: <span
                                                     class="tx-danger">*</span></label>
-                                            <select id="intipomemo" disabled="" name="intipomemo" class="form-control"
+                                            <select id="inftipovpro" disabled="" name="inftipovpro" class="form-control"
                                                 data-placeholder="Choose country">
                                                 <option value="" selected>SELECCIONA UNA OPCIÓN</option>
-                                                <option value="TRASPASO">TRASPASO</option>
-                                                <option value="TRANSFORMACIÓN">TRANSFORMACIÓN</option>
+                                                <option value="NORMAL">NORMAL</option>
+                                                <option value="OPERADORA">OPERADORA</option>
                                             </select>
                                         </div>
                                     </div><!-- col-4 -->
-                                    <div class="col-md-8">
+                                    <div class="col-md-4">
                                         <div class="form-group bd-t-0-force">
                                             <label class="form-control-label">DEPARTAMENTO SOLICITANTE: <span
                                                     class="tx-danger">*</span></label>
                                             <input class="form-control" readonly id="infsolimem" name="infsolimem"
                                                 type="text" name="address" placeholder="Enter address">
                                         </div>
-                                    </div><!-- col-8 -->
+                                    </div><!-- col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group bd-t-0-force">
+                                            <label class="form-control-label">DEPARTAMENTO AL QUE SOLICITA: <span
+                                                    class="tx-danger">*</span></label>
+                                            <input class="form-control" readonly id="infdepsolicvp" name="infdepsolicvp"
+                                                type="text" name="address" placeholder="Enter address">
+                                        </div>
+                                    </div><!-- col-4 -->
+                                    <div class="col-md-4 mg-t--1 mg-md-t-0">
+                                        <div class="form-group mg-md-l--1">
+                                            <label class="form-control-label mg-b-0-force">CARACTER DEL VALE: <span
+                                                    class="tx-danger">*</span></label>
+                                            <select id="inftipovpro" disabled="" name="inftipovpro" class="form-control"
+                                                data-placeholder="Choose country">
+                                                <option value="" selected>SELECCIONA UNA OPCIÓN</option>
+                                                <option value="NORMAL">NORMAL</option>
+                                                <option value="OPERADORA">URGENTE</option>
+                                            </select>
+                                        </div>
+                                    </div><!-- col-4 -->
+                                    <div class="col-md-8">
+                                        <div class="form-group bd-t-0-force">
+                                            <label class="form-control-label">PEDIDOS RELACIONADOS:<span
+                                                    class="tx-danger">*</span></label>
+                                                    <input class="form-control" readonly id="infdepsolicvp" name="infdepsolicvp"
+                                                type="text" name="address" placeholder="Enter address">
+                                        </div>
+                                    </div><!-- col-4 -->
+
                                     <div class="col-md-4">
                                         <div class="form-group mg-md-l--1 bd-t-0-force">
                                             <label class="form-control-label mg-b-0-force">ESTATUS: <span

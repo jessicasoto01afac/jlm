@@ -559,3 +559,131 @@ function addarinpro(){
     })
     }
 }
+function valproduct(id_produc) {
+    //FUNCION QUE ABRE LOS DETALLES DEL MEMO EN ALTA DE MEMO
+    alert(id_produc);
+    $("#detaproduccion").toggle(250); //Muestra contenedor de detalles
+    $("#lista").toggle("fast"); //Oculta lista
+    document.getElementById('folprod').innerHTML=id_produc;
+
+    var autorizar = document.getElementById('btnautoriz');
+    var liberar = document.getElementById('btnliberar');
+    var surtir = document.getElementById('btnsurtir');
+    var finalizado = document.getElementById('btnfinaliz');
+    var editar = document.getElementById('openedimem1');
+    
+    
+    $.ajax({
+        url: '../controller/php/memo1.php',
+        type: 'POST'
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (D = 0; D < res.length; D++) { 
+            if (obj.data[D].refe_1 == id_produc){
+                datos = 
+                obj.data[D].fecha + '*' +
+                obj.data[D].refe_3 + '*' +
+                obj.data[D].proveedor_cliente + '*' +
+                obj.data[D].status + '*' +
+                obj.data[D].codigo_1 + '*' +
+                obj.data[D].refe_2;    
+                var o = datos.split("*");   
+                $("#infecmem").val(o[0]);   
+                $("#intipomemo").val(o[1]);   
+                $("#infsolimem").val(o[2]);
+                $("#infestamem").val(o[3]);
+                $("#trans").html(o[1]);
+                $("#memorefeped").val(o[5]);
+  
+                if (obj.data[D].status == 'PENDIENTE'){
+                    autorizar.style.display = '';
+                    editar.style.display= ''
+                }else if (obj.data[D].status == 'AUTORIZADO'){
+                    surtir.style.display = '';
+                    liberar.style.display = '';
+                    editar.style.display= 'none'
+                }else if (obj.data[D].status == 'SURTIDO'){
+                    finalizado.style.display = '';
+                    liberar.style.display = '';
+                    editar.style.display= 'none'
+                }else if (obj.data[D].status == 'FINALIZADO'){
+                    liberar.style.display = '';
+                    editar.style.display= 'none'
+                }
+            }
+        }
+    });
+    $.ajax({
+      url: '../controller/php/memo1.php',
+      type: 'POST'
+    }).done(function(resp) {
+      obj = JSON.parse(resp);
+      var res = obj.data;
+      var x = 0;
+      
+      html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvmemtras" name="infvmemtras" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+      for (U = 0; U < res.length; U++) {  
+        //estatus pendiente
+        if (obj.data[U].refe_1 == id_produc && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION' && obj.data[U].status == 'PENDIENTE'){
+          x++;
+          $id_memo2=obj.data[U].id_kax;
+          html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down responsive'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10 responsive'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo2);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartmeminf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartif'>Eliminar</a>" + "</td></tr>";            
+        //AUTORIZADO
+        } else if (obj.data[U].refe_1 == id_produc && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION' && obj.data[U].status == 'AUTORIZADO'){
+          x++;
+          $id_memo2=obj.data[U].id_kax;
+          html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down responsive'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10 responsive'><nav class='nav nav-style-1 flex-column'>" + "</td></tr>";            
+        //finalizado
+        }else if (obj.data[U].refe_1 == id_produc && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION' && obj.data[U].status == 'FINALIZADO'){
+          x++;
+          $id_memo2=obj.data[U].id_kax;
+          html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down responsive'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10 responsive'><nav class='nav nav-style-1 flex-column'>" + "</td></tr>";            
+        //SURTIDO
+        }else if (obj.data[U].refe_1 == id_produc && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION' && obj.data[U].status == 'SURTIDO'){
+          x++;
+          $id_memo2=obj.data[U].id_kax;
+          html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down responsive'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10 responsive'><nav class='nav nav-style-1 flex-column'>" + "</td></tr>";            
+        }
+      }
+      html += '</div></tbody></table></div></div>';
+      $("#listmemo1").html(html);
+    });
+  
+    $.ajax({
+        url: '../controller/php/memo1.php',
+        type: 'POST'
+      }).done(function(resp) {
+        obj = JSON.parse(resp);
+        var res = obj.data;
+        var x = 0;
+        
+        html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvmemtras1" name="infvmemtras1" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        for (U = 0; U < res.length; U++) {  
+          //estatus pendiente 2
+          if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMADO' && obj.data[U].status == 'PENDIENTE'){
+            x++;
+            $id_memo3=obj.data[U].id_kax;
+            html += "<tr><td>" + x  + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo2($id_memo3);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartmeminf2();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartif'>Eliminar</a>" + "</td></tr>";            
+          //AUTORIZADO 2
+          }else if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMADO' && obj.data[U].status == 'AUTORIZADO'){
+            x++;
+            $id_memo3=obj.data[U].id_kax;
+            html += "<tr><td>" + x  + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>" + "</td></tr>";            
+          //finalizado 2
+          }else if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMADO' && obj.data[U].status == 'FINALIZADO'){
+            x++;
+            $id_memo3=obj.data[U].id_kax;
+            html += "<tr><td>" + x  + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>" + "</td></tr>";            
+          //PENDIENTE 2
+          }else if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMADO' && obj.data[U].status == 'SURTIDO'){
+            x++;
+            $id_memo3=obj.data[U].id_kax;
+            html += "<tr><td>" + x  + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>" + "</td></tr>";            
+          }
+        }
+        html += '</div></tbody></table></div></div>';
+        $("#listmemo2").html(html);
+      });
+  }

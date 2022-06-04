@@ -157,7 +157,7 @@ include ("../controller/conexion.php");
                                 <select class="form-control select2" data-placeholder="Elija si aplioca o no"
                                     onchange="carton()" id="cartonapl" name="cartonapl" type="text"
                                     data-live-search="true" style="width: 100%">
-                                    <option value="0">SELECCIONE</option>
+                                    <option value="0" selected>SELECCIONE</option>
                                     <option value="APLICA">APLICA</option>
                                     <option value="NO APLICA">NO APLICA</option>
                                 </select>
@@ -168,7 +168,7 @@ include ("../controller/conexion.php");
                                 <label class="form-control-label label2">Codigo de Carton:</label>
                                 <select onchange="carton()" class="form-control" data-placeholder="Seleccione"
                                     id="codcarton" name="codcarton" type="text" data-live-search="true">
-                                    <option value="">CODIGO</option>
+                                    <option value="0" selected>CODIGO</option>
                                     <?php while($idpst = mysqli_fetch_row($articulo)):?>
                                     <option value="<?php echo $idpst[0]?>"><?php echo $idpst[0]?></option>
                                     <?php endwhile; ?>
@@ -197,7 +197,7 @@ include ("../controller/conexion.php");
                                 <select class="form-control select2"
                                     data-placeholder="Elija si aplioca o no" onchange="cartonsillo()" id="cartaplic"
                                     name="cartaplic" type="text" data-live-search="true" style="width: 100%">
-                                    <option value="0">SELECCIONE</option>
+                                    <option value="0" selected>SELECCIONE</option>
                                     <option value="APLICA">APLICA</option>
                                     <option value="NO APLICA">NO APLICA</option>
                                 </select>
@@ -208,7 +208,7 @@ include ("../controller/conexion.php");
                                 <label class="form-control-label label2">Codigo de Cartonsillo:</label>
                                 <select onchange="" class="form-control" data-placeholder="Seleccione"
                                     id="codcartonsillo" name="codcartonsillo" type="text" data-live-search="true">
-                                    <option value="">CODIGO</option>
+                                    <option value="0" selected>CODIGO</option>
                                     <?php while($idpst2 = mysqli_fetch_row($articulo2)):?>
                                     <option value="<?php echo $idpst2[0]?>"><?php echo $idpst2[0]?></option>
                                     <?php endwhile; ?>
@@ -236,7 +236,7 @@ include ("../controller/conexion.php");
                                 <select class="form-control select2"
                                     data-placeholder="Elija si aplioca o no" onchange="caple()" id="capleaplic"
                                     name="capleaplic" type="text" data-live-search="true" style="width: 100%">
-                                    <option value="0">SELECCIONE</option>
+                                    <option value="0" selected>SELECCIONE</option>
                                     <option value="APLICA">APLICA</option>
                                     <option value="NO APLICA">NO APLICA</option>
                                 </select>
@@ -247,7 +247,7 @@ include ("../controller/conexion.php");
                                 <label class="form-control-label label2">Codigo de Caple:</label>
                                 <select onchange="" class="form-control" data-placeholder="Seleccione" id="codcaple"
                                     name="codcaple" type="text" data-live-search="true">
-                                    <option value="">CODIGO</option>
+                                    <option value="0" selected>CODIGO</option>
                                     <?php while($idpst3 = mysqli_fetch_row($articulo3)):?>
                                     <option value="<?php echo $idpst3[0]?>"><?php echo $idpst3[0]?></option>
                                     <?php endwhile; ?>
@@ -276,7 +276,7 @@ include ("../controller/conexion.php");
                                 <select class="form-control select2"
                                     data-placeholder="Elija si aplioca o no" onchange="liston()" id="listonaplic"
                                     name="listonaplic" type="text" data-live-search="true" style="width: 100%">
-                                    <option value="0">SELECCIONE</option>
+                                    <option value="0" selected>SELECCIONE</option>
                                     <option value="APLICA">APLICA</option>
                                     <option value="NO APLICA">NO APLICA</option>
                                 </select>
@@ -287,7 +287,7 @@ include ("../controller/conexion.php");
                                 <label class="form-control-label label2">Codigo de listón:</label>
                                 <select onchange="" class="form-control" data-placeholder="Seleccione" id="codliston"
                                     name="codliston" type="text" data-live-search="true">
-                                    <option value="">CODIGO</option>
+                                    <option value="0" selected>CODIGO</option>
                                     <?php while($idpst4 = mysqli_fetch_row($articulo4)):?>
                                     <option value="<?php echo $idpst4[0]?>"><?php echo $idpst4[0]?></option>
                                     <?php endwhile; ?>

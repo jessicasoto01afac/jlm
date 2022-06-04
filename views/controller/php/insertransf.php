@@ -109,7 +109,7 @@ function comprobacion ($id_articulo_final,$id_extendido,$id_etiquetas,$conexion)
 }
 //funcion para guardar articulo
 function registrar ($id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$carton,$id_carton,$div_carton,$multi_carton,$cartonsillo,$id_cortonsillo,$div_cartonsillo,$multi_cartonsillo,$caple,$id_caple,$div_caple,$multi_caple,$liston_cordon,$id_cordliston,$multi_liston,$conexion){
-    $query="INSERT INTO transforma VALUES(0,'$id_articulo_final','$id_extendido','$id_etiquetas','$hojas','$divicion','$carton','$id_carton','$div_carton','$multi_carton','$cartonsillo','$id_cortonsillo','$div_cartonsillo','$multi_cartonsillo','$caple','$id_caple','$div_caple','$multi_caple','$liston_cordon','$id_cordliston','$multi_liston',0)";
+    $query="INSERT INTO transforma VALUES(0,'$id_articulo_final','$id_extendido','$id_etiquetas',$hojas,$divicion,'$carton','$id_carton',$div_carton,$multi_carton,'$cartonsillo','$id_cortonsillo',$div_cartonsillo,$multi_cartonsillo,'$caple','$id_caple',$div_caple,$multi_caple,'$liston_cordon','$id_cordliston',$multi_liston,0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
