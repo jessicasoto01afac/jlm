@@ -30,6 +30,9 @@
 
       $sql9 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
       $articuindv = mysqli_query($conexion,$sql9);
+
+      $sql10 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $artieditrnas = mysqli_query($conexion,$sql10);
     ?>
 
 
@@ -2219,7 +2222,9 @@
                             <div class="form-group">
                                 <label style="font-size:16px" class="form-control-label">POSICIÓN DEL ARTICULO: <span
                                         class="tx-danger">*</span></label>
-                                <select class="form-control" data-placeholder="Elegir la posición del articulo" id="psiciont" name="psiciont" type="text" data-live-search="true" style="width: 100%">
+                                <select class="form-control" data-placeholder="Elegir la posición del articulo"
+                                    id="psiciont" name="psiciont" type="text" data-live-search="true"
+                                    style="width: 100%">
                                     <option value="0">SELECCIONE LA POSICIÓN DEL ARTICULO</option>
                                     <option value="EXTENDIDO">EXTENDIDO</option>
                                     <option value="ETIQUETAS">ETIQUETAS</option>
@@ -2265,8 +2270,8 @@
     </div><!-- modal-dialog -->
 </div><!-- modal -->
 
-<!-- MODAL PARA AGREGAR EDITAR ARTICULO-->
-<div class="modal fade" id='modal-editaddpro'>
+<!-- MODAL PARA EDITAR ARTICULOS EXTENDIDOS EN ALTA DE VALE DE PRODUCCIÓN 04062022-->
+<div class="modal fade" id='modal-edithvpextendido'>
     <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
@@ -2275,20 +2280,31 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="editaddpro" class="form-horizontal" action="" method="POST">
+            <form id="edithvpextendido" class="form-horizontal" action="" method="POST">
                 <div class="modal-body pd-25">
-                    <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_vip"
-                        id="id_vip">
+                    <a href="#" id="openedithext" style="float: right;font-size: 16px"
+                        class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editarextalta()"
+                        title="Dar clic para editar">
+                        <div><i class="fa fa-edit"></i></div>
+                    </a>
+                    <a href="#" id="closedithext" style="float: right;font-size: 16px;display:none;"
+                        class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closeditextalta()"
+                        title="Dar clic para cerrar">
+                        <div><i class="fa fa-times"></i></div>
+                    </a>
+                    <input style="display:none;" disabled="" class="form-control inputalta" type="text"
+                        name="id_exedith" id="id_exedith">
                     <div class="row mg-b-25">
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label style="font-size:16px" class="form-control-label">CODIGO:<span
                                         class="tx-danger">*</span></label>
-                                <select class="form-control" onchange="indivudual()" id="codedvpadd" name="codedvpadd"
-                                    type="text" data-live-search="true" style="width: 100%">
+                                <select class="form-control" onchange="edithextnewvp()" id="cdnewvpedith"
+                                    name="cdnewvpedith" type="text" disabled data-live-search="true"
+                                    style="width: 100%">
                                     <option value="0">CODIGO</option>
-                                    <?php while($artin = mysqli_fetch_row($articuindv)):?>
-                                    <option value="<?php echo $artin[0]?>"><?php echo $artin[0]?></option>
+                                    <?php while($arttras = mysqli_fetch_row($artieditrnas)):?>
+                                    <option value="<?php echo $arttras[0]?>"><?php echo $arttras[0]?></option>
                                     <?php endwhile; ?>
                                 </select>
                             </div><!-- form-group -->
@@ -2297,32 +2313,34 @@
                             <div class="form-group">
                                 <label style="font-size:16px" class="form-control-label">DESCRIPCIÓN: <span
                                         class="tx-danger">*</span></label>
-                                <input onkeyup="mayus(this);" class="form-control" readonly name="edaddesvp"
-                                    id="edaddesvp" placeholder="" type="text" required>
+                                <input onkeyup="mayus(this);" class="form-control" readonly name="vpnewedithdes"
+                                    id="vpnewedithdes" placeholder="" type="text" required>
                             </div><!-- form-group -->
                         </div><!-- form-group -->
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label style="font-size:16px" class="form-control-label">CANTIDAD: <span
                                         class="tx-danger">*</span></label>
-                                <input onkeyup="mayus(this);" class="form-control" name="vpedtcantid" id="vpedtcantid"
-                                    placeholder="Ingrese la cantidad" type="number" required>
+                                <input onkeyup="mayus(this);" class="form-control" name="vpednewtcantid"
+                                    id="vpednewtcantid" placeholder="Ingrese la cantidad" disabled type="number"
+                                    required>
                             </div><!-- form-group -->
                         </div><!-- form-group -->
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label style="font-size:16px" class="form-control-label">DEPARTAMENTO: <span
                                         class="tx-danger">*</span></label>
-                                <input onkeyup="mayus(this);" class="form-control" name="vpedthdepar" id="vpedthdepar"
-                                    placeholder="Departamento" readonly type="text" required>
+                                <input onkeyup="mayus(this);" class="form-control" name="vpedthdeparnew"
+                                    id="vpedthdeparnew" placeholder="Departamento" readonly type="text" required>
                             </div><!-- form-group -->
                         </div><!-- form-group -->
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label style="font-size:16px" class="form-control-label">POSICIÓN DEL ARTICULO: <span
-                                        class="tx-danger">*</span></label>
-                                <select class="form-control" data-placeholder="Elegir la posición del articulo" id="psicivpadd" name="psicivpadd" type="text" data-live-search="true" style="width: 100%">
-                                    <option value="0">SELECCIONE LA POSICIÓN DEL ARTICULO</option>
+                                <label style="font-size:16px" class="form-control-label">POSICIÓN DEL ARTICULO:
+                                    <span class="tx-danger">*</span></label>
+                                <select class="form-control" data-placeholder="Elegir la posición del articulo"
+                                    id="posicionextnew" name="posicionextnew" type="text" disabled
+                                    data-live-search="true" style="width: 100%">
                                     <option value="EXTENDIDO">EXTENDIDO</option>
                                     <option value="ETIQUETAS">ETIQUETAS</option>
                                     <option value="PRODUCTO_TERMINADO">PRODUCTO TERMINADO</option>
@@ -2333,36 +2351,97 @@
                             <div class="form-group">
                                 <label class="form-control-label label2">OBSERBACIONES: <span
                                         class="tx-danger"></span></label>
-                                <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="vpobsadd"
-                                    id="vpobsadd" placeholder="Ingresa alguna observación"></textarea>
+                                <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="vpobsaddnew"
+                                    id="vpobsaddnew" disabled placeholder="Ingresa alguna observación"></textarea>
                             </div>
                         </div><!-- col-12 -->
                     </div><!-- col-4 -->
                 </div>
             </form>
-            <div style="display:none;" id="addyavp" name="addyavp" class="alert alert-warning" role="alert">
-                <div class="d-flex align-items-center justify-content-start">
-                    <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
-                    <span><strong>Advertencia!</strong> El resgistro ya existe</span>
-                </div><!-- d-flex -->
-            </div><!-- alert -->
-            <div style="display:none;" id="addedthllesvp" name="addedthllesvp" class="alert alert-info" role="alert">
+            <div class="modal-footer">
+                <button type="button" onclick="saveedithnewvp()" id="saveedithext" style="display:none;"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
+                    CAMBIOS</button>
+            </div>
+            <br>
+            <div style="display:none;" id="edithextnewlle" name="edithextnewlle" class="alert alert-info" role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                     <span><strong>Advertencia!</strong> Llenar todos los campos</span>
                 </div><!-- d-flex -->
             </div><!-- alert -->
-            <div style="display:none;" id="erraddvpedt" name="erraddvpedt" class="alert alert-danger" role="alert">
+            <div style="display:none;" id="erraetiqnew" name="erraetiqnew" class="alert alert-danger" role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-close alert-icon tx-24"></i>
                     <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
                         ticket</span>
                 </div><!-- d-flex -->
             </div><!-- alert -->
-            <div class="modal-footer">
-                <button style="display:none;" type="button" onclick="edithaddvp()" id="updatevp" name="updatevp"
-                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">EDITAR</button>
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<!-- MODAL PARA ELIMINAR ARTICULOS DE ALTA DE VALE DE PRODUCCION-->
+<div class="modal fade" id='modal-delearvpnew' name='modal-delearvpnew'>
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content bd-0">
+            <div class="modal-header pd-x-20">
+                <h4 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ELIMINAR ARTICULO DE ALTA DE PRODUCCCIÓN</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <div class="modal-body pd-20">
+                <p class="mg-b-5">ESTAS SEGURO DE ELIMINAR EL ARTICULO DE ESTE VALE DE PRODUCCIÓN?</p>
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="del_artvpnew"
+                    id="del_artvpnew">
+                <input disabled="" class="form-control inputalta" type="text" name="deartvpnew" id="deartvpnew">
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" onclick="savdelevpart()"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
+                <br>
+            </div>
+            <div style="display:none;" id="delerarvpnew" name="delerarvpnew" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo eliminar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<!-- MODAL PARA ELIMINAR MEMO-->
+<div class="modal fade" id='modal-deletevproduc'>
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content bd-0">
+            <div class="modal-header pd-x-20">
+                <h4 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ELIMINAR</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pd-20">
+                <p class="mg-b-5">ESTAS SEGURO DE ELIMINAR EL VALE DE PRODUCCIÓN?</p>
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="del_vproduct"
+                    id="del_vproduct">
+                <input disabled="" class="form-control inputalta" type="text" name="devaproduc" id="devaproduc">
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" onclick="savedeprodu()"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
+                <br>
+
+            </div>
+            <div style="display:none;" id="delerrvprv" name="delerrvprv" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
         </div>
     </div><!-- modal-dialog -->
 </div><!-- modal -->

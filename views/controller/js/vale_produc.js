@@ -162,7 +162,7 @@ function updatedvp() {
         if (obj.data[U].refe_1 == id_valeproduc && obj.data[U].tipo_ref =='EXTENDIDO'){
           x++;
           let id_valepro=obj.data[U].id_kax;
-          html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp(id_valepro);' class='nav-link' data-toggle='modal' data-target='#modal-editaddpro'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
+          html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp("+id_valepro+");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a class='nav-link' onclick='deletenewart("+id_valepro+");' data-toggle='modal' data-target='#modal-delearvpnew'>Eliminar</a>" + "</td></tr>";            
         }  
       }
       html += '</div></tbody></table></div></div>';
@@ -200,7 +200,7 @@ function updatedvp() {
       if (obj.data[U].refe_1 == id_valeproduc && obj.data[U].tipo_ref =='ETIQUETAS'){
         x++;
         let id_valepro=obj.data[U].id_kax;
-        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp(valprd);' class='nav-link' data-toggle='modal' data-target='#modal-editaddpro'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
+        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp("+id_valepro+");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart("+id_valepro+");'>Eliminar</a>" + "</td></tr>";            
     }  
     }
     html += '</div></tbody></table></div></div>';
@@ -237,9 +237,9 @@ $.ajax({
     for (U = 0; U < res.length; U++) {  
       if (obj.data[U].refe_1 == id_valeproduc && obj.data[U].tipo_ref =='PRODUCTO_TERMINADO'){
         x++;
-        valprd=obj.data[U].codigo_1;
+        valprd=obj.data[U].id_kax;
         //alert(id_valepro);
-        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp(valprd);' class='nav-link' data-toggle='modal' data-target='#modal-editaddpro'>Editar</a><a href='' class='nav-link'>Eliminar</a>" + "</td></tr>";            
+        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp("+valprd+");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart("+valprd+");'>Eliminar</a>" + "</td></tr>";            
       }  
     }
     html += '</div></tbody></table></div></div>';
@@ -265,7 +265,7 @@ $.ajax({
     });
 })
 }
-//FUNCIÓN QUE SIRVE PARA AGREGAR UN ARTICULO AL VALE DE PRODUCCIÓN 15052022
+//FUNCIÓN QUE SIRVE PARA AGREGAR UN ARTICULO AL VALE DE PRODUCCIÓN 05062022
 function addvaleprodu() {
     //alert("entro agregar vale de producción");
     let refe_1 = document.getElementById('vpfolio').value; 
@@ -280,7 +280,9 @@ function addvaleprodu() {
     let salida = document.getElementById('vpcantidad').value;
     let observa = document.getElementById('vpbservo').value;
     let ubicacion = document.getElementById('pedidomem').value;
-    let datos= 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&opcion=registrar';
+    let caracter = document.getElementById('vpcaracter').value;
+
+    let datos= 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&caracter=' + caracter + '&opcion=registrar';
 
     //alert(datos);
     if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || codigo_1 == '' || descripcion_1 == '' || cantidad_real == '') { 
@@ -438,14 +440,53 @@ function addvaleprodu() {
     }
     
 }
-
+//ABRIR EDITAR EXTENDIDO EN ALTA DE PRODUCCIÓN
 function editarinsvp(valprd){
-alert(valprd);
+    //alert(valprd);
+    document.getElementById('id_exedith').value=valprd;
+    $.ajax({
+        url: '../controller/php/convale_pro.php',
+        type: 'POST'
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (C = 0; C < res.length; C++) { 
+            if (obj.data[C].id_kax == valprd ){
+                //alert("entro");
+                document.getElementById('cdnewvpedith').value=obj.data[C].codigo_1;
+                document.getElementById('vpednewtcantid').value=obj.data[C].salida;
+                document.getElementById('vpobsaddnew').value=obj.data[C].observa;
+                document.getElementById('posicionextnew').value=obj.data[C].tipo_ref;
+            }
+        }
+   });
+   //informacion del articulos
+   $.ajax({
+        url: '../controller/php/conarticulos.php',
+        type: 'POST'
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (D = 0; D < res.length; D++) { 
+            if (obj.data[D].artcodigo == document.getElementById('cdnewvpedith').value){
+                // alert(id_persona);
+                datos = 
+                obj.data[D].artcodigo + '*' +
+                obj.data[D].artdescrip + '*' +
+                obj.data[D].artubicac;    
+                var o = datos.split("*");   
+                $("#vpnewedithdes").val(o[1]);   
+                $("#vpedthdeparnew").val(o[2]); 
+            }
+        }
+    });
 }
 
 //LLAMADO DE DATOS
 function cancelar() {
-    alert("entra cancelar");
+    //alert("entra cancelar");
     let refe_1 = document.getElementById('vpfolio').value;
     let datos= 'refe_1=' + refe_1 + '&opcion=cancelar';
     $.ajax({
@@ -477,9 +518,9 @@ function cancelar() {
       })
 }
 //cambio de descripcion articulo indivual
-function indivudual(){
+function edithextnewvp(){
     //alert("eentraarticulo")
-    let codivo = document.getElementById('codindiv').value; 
+    let codivo = document.getElementById('vpcodetiqnew').value; 
     $.ajax({
         url: '../controller/php/conarticulos.php',
         type: 'POST'
@@ -488,19 +529,20 @@ function indivudual(){
         var res = obj.data;
         var x = 0;
         for (D = 0; D < res.length; D++) { 
-            if (obj.data[D].artcodigo == codivo){
+            if (obj.data[D].artcodigo == document.getElementById('cdnewvpedith').value){
                 // alert(id_persona);
                 datos = 
                 obj.data[D].artcodigo + '*' +
                 obj.data[D].artdescrip + '*' +
                 obj.data[D].artubicac;    
                 var o = datos.split("*");   
-                $("#vindescrip").val(o[1]);   
-                $("#vindepar").val(o[2]); 
+                $("#vpnewedithdes").val(o[1]);   
+                $("#vpedthdeparnew").val(o[2]); 
             }
         }
     });
 }
+
 //cambio de descripcion articulo indivual
 function addarinpro(){
     //alert("entro agregar vale de producción");
@@ -559,22 +601,21 @@ function addarinpro(){
     })
     }
 }
+//funcion para ver la informacion de vale de producción
 function valproduct(id_produc) {
-    //FUNCION QUE ABRE LOS DETALLES DEL MEMO EN ALTA DE MEMO
     alert(id_produc);
     $("#detaproduccion").toggle(250); //Muestra contenedor de detalles
     $("#lista").toggle("fast"); //Oculta lista
     document.getElementById('folprod').innerHTML=id_produc;
-
-    var autorizar = document.getElementById('btnautoriz');
-    var liberar = document.getElementById('btnliberar');
-    var surtir = document.getElementById('btnsurtir');
-    var finalizado = document.getElementById('btnfinaliz');
-    var editar = document.getElementById('openedimem1');
+    var autorizar = document.getElementById('btnvpautoriz');
+    var liberar = document.getElementById('btnvpliberar');
+    var surtir = document.getElementById('btnvpsurtir');
+    var finalizado = document.getElementById('btnvpfinaliz');
+    var editar = document.getElementById('openedivpinf');
     
     
     $.ajax({
-        url: '../controller/php/memo1.php',
+        url: '../controller/php/convale_pro.php',
         type: 'POST'
     }).done(function(respuesta) {
         obj = JSON.parse(respuesta);
@@ -584,18 +625,18 @@ function valproduct(id_produc) {
             if (obj.data[D].refe_1 == id_produc){
                 datos = 
                 obj.data[D].fecha + '*' +
+                obj.data[D].refe_2 + '*' +
                 obj.data[D].refe_3 + '*' +
                 obj.data[D].proveedor_cliente + '*' +
-                obj.data[D].status + '*' +
+                obj.data[D].ubicacion + '*' +
                 obj.data[D].codigo_1 + '*' +
-                obj.data[D].refe_2;    
+                obj.data[D].ubicacion;    
                 var o = datos.split("*");   
-                $("#infecmem").val(o[0]);   
-                $("#intipomemo").val(o[1]);   
-                $("#infsolimem").val(o[2]);
-                $("#infestamem").val(o[3]);
-                $("#trans").html(o[1]);
-                $("#memorefeped").val(o[5]);
+                $("#infvpdate").val(o[0]);
+                $("#infvpdepat").val(o[1]);  
+                $("#infvptipo").val(o[2]);
+                $("#infvpsolicita").val(o[3]);
+                $("#infvppedidos").val(o[4]);
   
                 if (obj.data[D].status == 'PENDIENTE'){
                     autorizar.style.display = '';
@@ -687,3 +728,249 @@ function valproduct(id_produc) {
         $("#listmemo2").html(html);
       });
   }
+  //FUNIÓN PARA LIBERAR LA EDICIÓN EN ARTICULOS EXTENDIDOS EN ALTA DE VALE DE PRODUCCIÓN
+  function editarextalta(){
+  //alert("edit articulo infovalesds");
+  document.getElementById('closedithext').style.display="";
+  document.getElementById('openedithext').style.display="none";
+  document.getElementById('saveedithext').style.display="";
+  document.getElementById('cdnewvpedith').disabled= false;
+  document.getElementById('vpednewtcantid').disabled= false;
+  document.getElementById('posicionextnew').disabled= false;
+  document.getElementById('vpobsaddnew').disabled= false;
+  }
+  //FUNIÓN PARA CERRAR LA EDICIÓN EN ARTICULOS EXTENDIDOS EN ALTA DE VALE DE PRODUCCIÓN
+  function closeditextalta(){
+    //alert("edit articulo infovalesds");
+    document.getElementById('closedithext').style.display="none";
+    document.getElementById('openedithext').style.display="";
+    document.getElementById('saveedithext').style.display="none";
+    document.getElementById('cdnewvpedith').disabled= true;
+    document.getElementById('vpednewtcantid').disabled= true;
+    document.getElementById('posicionextnew').disabled= true;
+    document.getElementById('vpobsaddnew').disabled= true;
+  }
+  //FUNIÓN PARA GUARDAR LA EDICIÓN EN ARTICULOS MEMO ALTA TRASPASO 01052022
+function saveedithnewvp(){
+    //alert("entra guardar cambios valeproducción");
+    let id_kax = document.getElementById('id_exedith').value;
+    let codigo_1 = document.getElementById('cdnewvpedith').value;
+    let descripcion_1 = document.getElementById('vpnewedithdes').value;
+    let salida = document.getElementById('vpednewtcantid').value; 
+    let tipo_ref = document.getElementById('posicionextnew').value; 
+    let observa = document.getElementById('vpobsaddnew').value;
+    
+    if (tipo_ref=='EXTENDIDO'){
+        let datos= 'tipo_ref=' + tipo_ref + '&descripcion_1=' + descripcion_1 + '&salida=' + salida + '&observa=' + observa + '&id_kax=' + id_kax + '&codigo_1=' + codigo_1 + '&opcion=updateartnew';
+        //alert(datos);
+        if (codigo_1 == '' || salida == ''||tipo_ref == '') { 
+            document.getElementById('edithextnewlle').style.display='';
+            setTimeout(function(){
+              document.getElementById('edithextnewlle').style.display='none';
+            }, 2000);
+              return;
+          }else{
+            $.ajax({
+              type:"POST",
+              url:"../controller/php/insertvapro.php",
+              data:datos
+            }).done(function(respuesta){
+              if (respuesta==0){
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se actualizo de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500      
+                });
+                updatedvp();
+                closeditextalta();
+                $('#modal-edithvpextendido').modal('hide'); //cierra el modal
+              }else if (respuesta == 2) {
+                document.getElementById('edthdmminf').style.display='';
+                setTimeout(function(){
+                  document.getElementById('edthdmminf').style.display='none';
+                }, 1000);
+                //alert(respuesta);
+                //alert("datos repetidos");
+              }else{
+                document.getElementById('erraetiqnew').style.display='';
+                setTimeout(function(){
+                  document.getElementById('erraetiqnew').style.display='none';
+                }, 2000);
+                alert(respuesta);
+              }
+            });
+          }
+    }
+    if (tipo_ref=='ETIQUETAS'){
+        let datos= 'tipo_ref=' + tipo_ref + '&descripcion_1=' + descripcion_1 + '&salida=' + salida + '&observa=' + observa + '&id_kax=' + id_kax + '&codigo_1=' + codigo_1 + '&opcion=updateartnew';
+    //alert(datos);
+        if (codigo_1 == '' || salida == ''||tipo_ref == '') { 
+            document.getElementById('edithextnewlle').style.display='';
+            setTimeout(function(){
+              document.getElementById('edithextnewlle').style.display='none';
+            }, 2000);
+              return;
+          }else{
+            $.ajax({
+              type:"POST",
+              url:"../controller/php/insertvapro.php",
+              data:datos
+            }).done(function(respuesta){
+              if (respuesta==0){
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se actualizo de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500      
+                });
+                updatedvp();
+                closeditextalta();
+                $('#modal-edithvpextendido').modal('hide'); //cierra el modal
+               // $('#modal-editarmemoalta').modal('hide'); //cierra el modal
+              }else if (respuesta == 2) {
+                document.getElementById('edthdmminf').style.display='';
+                setTimeout(function(){
+                  document.getElementById('edthdmminf').style.display='none';
+                }, 1000);
+                //alert(respuesta);
+                //alert("datos repetidos");
+              }else{
+                document.getElementById('erraetiqnew').style.display='';
+                setTimeout(function(){
+                  document.getElementById('erraetiqnew').style.display='none';
+                }, 2000);
+                alert(respuesta);
+              }
+            });
+          }
+    }
+
+    if (tipo_ref=='PRODUCTO_TERMINADO'){
+        let datos= 'tipo_ref=' + tipo_ref + '&descripcion_1=' + descripcion_1 + '&salida=' + salida + '&observa=' + observa + '&id_kax=' + id_kax + '&codigo_1=' + codigo_1 + '&opcion=updateexten';
+    //alert(datos);
+        if (codigo_1 == '' || salida == ''||tipo_ref == '') { 
+            document.getElementById('edithextnewlle').style.display='';
+            setTimeout(function(){
+              document.getElementById('edithextnewlle').style.display='none';
+            }, 2000);
+              return;
+          }else{
+            $.ajax({
+              type:"POST",
+              url:"../controller/php/insertvapro.php",
+              data:datos
+            }).done(function(respuesta){
+              if (respuesta==0){
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se actualizo de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500      
+                });
+                updatedvp();
+                closeditextalta();
+                $('#modal-edithvpextendido').modal('hide'); //cierra el modal
+               // $('#modal-editarmemoalta').modal('hide'); //cierra el modal
+              }else if (respuesta == 2) {
+                document.getElementById('edthdmminf').style.display='';
+                setTimeout(function(){
+                  document.getElementById('edthdmminf').style.display='none';
+                }, 1000);
+                //alert(respuesta);
+                //alert("datos repetidos");
+              }else{
+                document.getElementById('erraetiqnew').style.display='';
+                setTimeout(function(){
+                  document.getElementById('erraetiqnew').style.display='none';
+                }, 2000);
+                //alert(respuesta);
+              }
+            });
+          }
+    }
+  }
+//LLAMA LA INFORMACIÓN PARA ELIMINAR ARTICULO EN ALTA DE PRODUCCIÓN
+function deletenewart(id_delete){
+    //alert(id_delete);
+    document.getElementById('id_exedith').value=id_delete;
+    $.ajax({
+        url: '../controller/php/convale_pro.php',
+        type: 'POST'
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (C = 0; C < res.length; C++) { 
+            if (obj.data[C].id_kax == id_delete ){
+                //alert("entro");
+                document.getElementById('deartvpnew').value=obj.data[C].codigo_1;
+            }
+        }
+   })
+}
+//GUARDA LA ELIMINACION POR ARTICULO EN ALTA DE PRODUCCION
+function savdelevpart(){
+    let id_kardex= document.getElementById('id_exedith').value;
+    let datos= 'id_kardex=' + id_kardex  + '&opcion=deleartnew';
+    //alert(datos);
+    $.ajax({
+        type:"POST",
+        url:"../controller/php/insertvapro.php",
+        data:datos
+    }).done(function(respuesta){
+        if (respuesta==0){
+          Swal.fire({
+              type: 'success',
+              text: 'Se elimino de forma correcta',
+              showConfirmButton: false,
+              timer: 1500      
+          });
+          updatedvp();
+          $('#modal-delearvpnew').modal('hide'); //cierra el modal
+         // $('#modal-editarmemoalta').modal('hide'); //cierra el modal
+        }else{
+          document.getElementById('delerarvpnew').style.display='';
+          setTimeout(function(){
+            document.getElementById('delerarvpnew').style.display='none';
+          }, 2000);
+          //alert(respuesta);
+        }
+    });
+}
+//LLAMA EL FOLIO DE VALE DE PRODUCCIÓN
+function delevpro(){
+    $("#example tr").on('click', function() {
+        var id_vale = "";
+        id_vale += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
+        document.getElementById('devaproduc').value=id_vale;
+        //alert(id_vale)
+    }) 
+}
+//GUARDAR LA ELIMINACION DE VALE DE PRODUCCIÓN
+function savedeprodu(){
+    //alert("entro guardar eliminar");
+    let folio= document.getElementById('devaproduc').value;
+    let datos= 'folio=' + folio  + '&opcion=deletevale';
+    //alert(datos);
+    $.ajax({
+        type:"POST",
+        url:"../controller/php/insertvapro.php",
+        data:datos
+    }).done(function(respuesta){
+        if (respuesta==0){
+            Swal.fire({
+              type: 'success',
+              text: 'Se elimino de forma correcta',
+              showConfirmButton: false,
+              timer: 1500      
+            });
+            setTimeout("location.href = 'vale_produccion.php';", 1500);
+        }else{
+            document.getElementById('delerrvprv').style.display='';
+            setTimeout(function(){
+              document.getElementById('delerrvprv').style.display='none';
+            }, 2000);
+        }
+    });
+}

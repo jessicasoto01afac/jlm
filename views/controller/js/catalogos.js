@@ -275,9 +275,8 @@ function savearedith(){
 }
 //FUNCION QUE TRAE LOS DATOS A  ELIMINAR A UN ARTICULO
 function deletart(id_art){
-  
       document.getElementById('del_art').value=id_art;
-      alert(id_art);
+      //alert(id_art);
       $.ajax({
           url: '../controller/php/conarticulos.php',
           type: 'POST'
@@ -297,7 +296,6 @@ function deletart(id_art){
               }
           }
       });
-  
 }
 
 //FUNCION QUE GUARDA ELIMINAR ARTICULOS
@@ -791,7 +789,7 @@ function addtransform(){ //08052022 agregar
   }
 
   let datos= 'id_articulo_final=' + id_articulo_final + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&carton=' + carton + '&id_carton=' + id_carton + '&div_carton=' + div_carton + '&multi_carton=' + multi_carton + '&cartonsillo=' + cartonsillo + '&id_cortonsillo=' + id_cortonsillo + '&div_cartonsillo=' + div_cartonsillo + '&multi_cartonsillo=' + multi_cartonsillo + '&caple=' + caple + '&id_caple=' + id_caple + '&div_caple=' + div_caple + '&multi_caple=' + multi_caple + '&liston_cordon=' + liston_cordon + '&id_cordliston=' + id_cordliston + '&multi_liston=' + multi_liston + '&opcion=registrar';
-  alert(datos);
+  //alert(datos);
 
   if (id_articulo_final == '' || id_extendido == '' || id_etiquetas == '' || hojas == '' || divicion == '') {
     document.getElementById('vaciosartras').style.display=''
