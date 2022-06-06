@@ -242,7 +242,7 @@ include('header.php');
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">RECIBIO: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly id="infvpsutio" name="infvpsutio"
+                                        <input class="form-control" readonly id="infvprecibio" name="infvprecibio"
                                             type="text" placeholder="Autoriza">
                                     </div>
                                 </div><!-- col-3 -->
@@ -250,7 +250,7 @@ include('header.php');
                                     <div class="form-group mg-md-l--1">
                                         <label class="form-control-label" style="font-size:14px">Fecha/Recibio: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly type="date" id="infvpdatesurt" name="infvpdatesurt"
+                                        <input class="form-control" readonly type="date" id="infvpdaterecibio" name="infvpdaterecibio"
                                             placeholder="Enter lastname">
                                     </div>
                                 </div><!-- col-3 -->

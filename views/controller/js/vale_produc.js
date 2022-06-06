@@ -615,7 +615,7 @@ function valproduct(id_produc) {
     
     
     $.ajax({
-        url: '../controller/php/convale_pro.php',
+        url: '../controller/php/infvale_produc.php',
         type: 'POST'
     }).done(function(respuesta) {
         obj = JSON.parse(respuesta);
@@ -629,15 +629,29 @@ function valproduct(id_produc) {
                 obj.data[D].refe_3 + '*' +
                 obj.data[D].proveedor_cliente + '*' +
                 obj.data[D].ubicacion + '*' +
-                obj.data[D].codigo_1 + '*' +
-                obj.data[D].ubicacion;    
+                obj.data[D].caracter_vale + '*' +
+                obj.data[D].id_person_creacion + '*' +
+                obj.data[D].id_person_autor + '*' +
+                obj.data[D].id_person_surtio + '*' +
+                obj.data[D].id_person_final + '*' +
+                obj.data[D].status + '*' +
+                obj.data[D].fecha_surtido + '*' +
+                obj.data[D].estado;    
                 var o = datos.split("*");   
                 $("#infvpdate").val(o[0]);
                 $("#infvpdepat").val(o[1]);  
                 $("#infvptipo").val(o[2]);
                 $("#infvpsolicita").val(o[3]);
                 $("#infvppedidos").val(o[4]);
-  
+                $("#infvpcaracter").val(o[5]);
+                $("#infvpformula").val(o[6]);
+                $("#infvpautoriza").val(o[7]);
+                $("#infvpsutio").val(o[8]);
+                $("#infvprecibio").val(o[9]);
+                $("#infvpestatus").val(o[10]);
+                $("#infvpdatesurt").val(o[11]);
+                
+
                 if (obj.data[D].status == 'PENDIENTE'){
                     autorizar.style.display = '';
                     editar.style.display= ''

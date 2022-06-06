@@ -319,7 +319,7 @@ function registrar ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,
 function poductividad ($refe_1,$caracter,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query="INSERT INTO productividad VALUES(0,'$refe_1','NA','$fecha','NA','','NA','','NA','','$caracter',0)";
+    $query="INSERT INTO productividad VALUES(0,'$refe_1','NA','$fecha','PENDIENTE','','PENDIENTE','','PENDIENTE','','$caracter',0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
