@@ -124,7 +124,7 @@ include('header.php');
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <input style="display:none;" disabled="" class="form-control inputalta"
-                                            type="text" name="infid" id="infid">
+                                            type="text" name="vpfolio" id="vpfolio">
                                         <label class="form-control-label" style="font-size:14px">Orden de Producción No:
                                             <span class="tx-danger">*</span></label>
                                         <!-- <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingresa el Folio"> -->
@@ -331,15 +331,18 @@ include('header.php');
                                         class="fa fa-plus"></i> AGREGAR ARTICULO</button>
                             </div>
                             <br>
+                            <h5 class="tx-gray-700 mg-b-5" style="text-align:center">EXTENDIDO</h5>
                             <div class="col-lg-12">
-                                <div id="listmemo1">
-                                </div><!-- col-12 -->
+                                <div id="listextent"></div><!-- col-12 -->
                             </div><!-- form-layout -->
-                            <h5 id="trans" name="trans" style="text-align: center"></h5>
+                            <h5 class="tx-gray-700 mg-b-5" style="text-align:center">ETIQUETAS</h5>
                             <div class="col-lg-12">
-                                <div id="listmemo2">
-                                </div><!-- col-12 -->
-                            </div><!-- form-layout -->
+                                <div id="listetiquetas"></div><!-- col-12 -->
+                            </div>
+                            <h5 class="tx-gray-700 mg-b-5" style="text-align:center">PRODUCTO TERMINADO</h5>
+                            <div class="col-lg-12">
+                                <div id="listproducfinal"></div><!-- col-12 -->
+                            </div>
                     </form>
                 </div>
             </div><!-- br-pagebody -->

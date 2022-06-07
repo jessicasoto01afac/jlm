@@ -606,13 +606,13 @@ function valproduct(id_produc) {
     alert(id_produc);
     $("#detaproduccion").toggle(250); //Muestra contenedor de detalles
     $("#lista").toggle("fast"); //Oculta lista
+    document.getElementById('vpfolio').value=id_produc;
     document.getElementById('folprod').innerHTML=id_produc;
     var autorizar = document.getElementById('btnvpautoriz');
     var liberar = document.getElementById('btnvpliberar');
     var surtir = document.getElementById('btnvpsurtir');
     var finalizado = document.getElementById('btnvpfinaliz');
     var editar = document.getElementById('openedivpinf');
-    
     
     $.ajax({
         url: '../controller/php/infvale_produc.php',
@@ -670,77 +670,124 @@ function valproduct(id_produc) {
             }
         }
     });
-    $.ajax({
-      url: '../controller/php/memo1.php',
-      type: 'POST'
-    }).done(function(resp) {
-      obj = JSON.parse(resp);
-      var res = obj.data;
-      var x = 0;
-      
-      html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvmemtras" name="infvmemtras" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
-      for (U = 0; U < res.length; U++) {  
-        //estatus pendiente
-        if (obj.data[U].refe_1 == id_produc && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION' && obj.data[U].status == 'PENDIENTE'){
-          x++;
-          $id_memo2=obj.data[U].id_kax;
-          html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down responsive'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10 responsive'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo($id_memo2);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartmeminf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartif'>Eliminar</a>" + "</td></tr>";            
-        //AUTORIZADO
-        } else if (obj.data[U].refe_1 == id_produc && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION' && obj.data[U].status == 'AUTORIZADO'){
-          x++;
-          $id_memo2=obj.data[U].id_kax;
-          html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down responsive'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10 responsive'><nav class='nav nav-style-1 flex-column'>" + "</td></tr>";            
-        //finalizado
-        }else if (obj.data[U].refe_1 == id_produc && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION' && obj.data[U].status == 'FINALIZADO'){
-          x++;
-          $id_memo2=obj.data[U].id_kax;
-          html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down responsive'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10 responsive'><nav class='nav nav-style-1 flex-column'>" + "</td></tr>";            
-        //SURTIDO
-        }else if (obj.data[U].refe_1 == id_produc && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION' && obj.data[U].status == 'SURTIDO'){
-          x++;
-          $id_memo2=obj.data[U].id_kax;
-          html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida  +  "</td><td class='dropdown hidden-xs-down responsive'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10 responsive'><nav class='nav nav-style-1 flex-column'>" + "</td></tr>";            
-        }
-      }
-      html += '</div></tbody></table></div></div>';
-      $("#listmemo1").html(html);
-    });
-  
-    $.ajax({
-        url: '../controller/php/memo1.php',
+   
+      //aqui-------------------------------------
+      $.ajax({
+        url: '../controller/php/convale_pro.php',
         type: 'POST'
       }).done(function(resp) {
         obj = JSON.parse(resp);
-        var res = obj.data;
-        var x = 0;
-        
-        html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvmemtras1" name="infvmemtras1" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        let res = obj.data;
+        let x = 0;
+        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="extendido" name="extendido" class="table display dataTable"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
         for (U = 0; U < res.length; U++) {  
-          //estatus pendiente 2
-          if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMADO' && obj.data[U].status == 'PENDIENTE'){
+          if (obj.data[U].refe_1 ==  document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref =='EXTENDIDO'){
             x++;
-            $id_memo3=obj.data[U].id_kax;
-            html += "<tr><td>" + x  + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarmemo2($id_memo3);' class='nav-link' data-toggle='modal' data-target='#modal-editarmemo'>Editar</a><a href='' onclick='delartmeminf2();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartif'>Eliminar</a>" + "</td></tr>";            
-          //AUTORIZADO 2
-          }else if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMADO' && obj.data[U].status == 'AUTORIZADO'){
-            x++;
-            $id_memo3=obj.data[U].id_kax;
-            html += "<tr><td>" + x  + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>" + "</td></tr>";            
-          //finalizado 2
-          }else if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMADO' && obj.data[U].status == 'FINALIZADO'){
-            x++;
-            $id_memo3=obj.data[U].id_kax;
-            html += "<tr><td>" + x  + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>" + "</td></tr>";            
-          //PENDIENTE 2
-          }else if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMADO' && obj.data[U].status == 'SURTIDO'){
-            x++;
-            $id_memo3=obj.data[U].id_kax;
-            html += "<tr><td>" + x  + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida +  "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>" + "</td></tr>";            
-          }
+            let id_valepro=obj.data[U].id_kax;
+            html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp("+id_valepro+");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a class='nav-link' onclick='deletenewart("+id_valepro+");' data-toggle='modal' data-target='#modal-delearvpnew'>Eliminar</a>" + "</td></tr>";            
+          }  
         }
         html += '</div></tbody></table></div></div>';
-        $("#listmemo2").html(html);
+        $("#listextent").html(html);
+        'use strict';
+        $('#extendido').DataTable({
+            responsive: true,
+            language: {
+              searchPlaceholder: 'Buscar...',
+              sSearch: '',
+              lengthMenu: 'mostrando _MENU_ paginas',
+              sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+              sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+              sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+              oPaginate: {
+                    sFirst: 'Primero',
+                    sLast: 'Último',
+                    sNext: 'Siguiente',
+                    sPrevious: 'Anterior',
+                },
+            }
+        
+        });
+      })
+      //LLAMADA DE ETIQUETAS
+      $.ajax({
+          url: '../controller/php/convale_pro.php',
+          type: 'POST'
+      }).done(function(resp) {
+          obj = JSON.parse(resp);
+      let res = obj.data;
+      let x = 0;
+      html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="idetiquetas" name="idetiquetas" class="table display dataTable"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+      for (U = 0; U < res.length; U++) {  
+        if (obj.data[U].refe_1 ==  document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref =='ETIQUETAS'){
+          x++;
+          let id_valepro=obj.data[U].id_kax;
+          html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp("+id_valepro+");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart("+id_valepro+");'>Eliminar</a>" + "</td></tr>";            
+      }  
+      }
+      html += '</div></tbody></table></div></div>';
+      $("#listetiquetas").html(html);
+      'use strict';
+      $('#idetiquetas').DataTable({
+          responsive: true,
+          language: {
+            searchPlaceholder: 'Buscar...',
+            sSearch: '',
+            lengthMenu: 'mostrando _MENU_ paginas',
+            sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+            sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+            sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+            oPaginate: {
+                  sFirst: 'Primero',
+                  sLast: 'Último',
+                  sNext: 'Siguiente',
+                  sPrevious: 'Anterior',
+              },
+          }
+      
       });
+      })
+  //LLAMADA DE PRODUCTO TERMINADO
+  $.ajax({
+      url: '../controller/php/convale_pro.php',
+      type: 'POST'
+    }).done(function(resp) {
+      obj = JSON.parse(resp);
+      let res = obj.data;
+      let x = 0;
+      html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="produfinalvp" name="produfinalvp" class="table display dataTable"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+      for (U = 0; U < res.length; U++) {  
+        if (obj.data[U].refe_1 ==  document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref =='PRODUCTO_TERMINADO'){
+          x++;
+          valprd=obj.data[U].id_kax;
+          //alert(id_valepro);
+          html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp("+valprd+");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart("+valprd+");'>Eliminar</a>" + "</td></tr>";            
+        }  
+      }
+      html += '</div></tbody></table></div></div>';
+      $("#listproducfinal").html(html);
+      'use strict';
+      $('#produfinalvp').DataTable({
+          responsive: true,
+          language: {
+            searchPlaceholder: 'Buscar...',
+            sSearch: '',
+            lengthMenu: 'mostrando _MENU_ paginas',
+            sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+            sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+            sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+            oPaginate: {
+                  sFirst: 'Primero',
+                  sLast: 'Último',
+                  sNext: 'Siguiente',
+                  sPrevious: 'Anterior',
+              },
+          }
+      
+      });
+  })
+  
+
   }
   //FUNIÓN PARA LIBERAR LA EDICIÓN EN ARTICULOS EXTENDIDOS EN ALTA DE VALE DE PRODUCCIÓN
   function editarextalta(){
