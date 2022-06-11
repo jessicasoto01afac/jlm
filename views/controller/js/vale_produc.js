@@ -679,35 +679,18 @@ function valproduct(id_produc) {
         obj = JSON.parse(resp);
         let res = obj.data;
         let x = 0;
-        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="extendido" name="extendido" class="table display dataTable"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="extendido" name="extendido" class="display table table-striped dataTable responsive no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
         for (U = 0; U < res.length; U++) {  
           if (obj.data[U].refe_1 ==  document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref =='EXTENDIDO'){
             x++;
             let id_valepro=obj.data[U].id_kax;
-            html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp("+id_valepro+");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a class='nav-link' onclick='deletenewart("+id_valepro+");' data-toggle='modal' data-target='#modal-delearvpnew'>Eliminar</a>" + "</td></tr>";            
+            html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp("+id_valepro+");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a class='nav-link' onclick='deletenewart("+id_valepro+");' data-toggle='modal' data-target='#modal-delearvpnew'>Eliminar</a>" + "</td></tr>";            
           }  
         }
-        html += '</div></tbody></table></div></div>';
+        html += '</div></tbody></table></div>';
         $("#listextent").html(html);
         'use strict';
-        $('#extendido').DataTable({
-            responsive: true,
-            language: {
-              searchPlaceholder: 'Buscar...',
-              sSearch: '',
-              lengthMenu: 'mostrando _MENU_ paginas',
-              sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
-              sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
-              sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
-              oPaginate: {
-                    sFirst: 'Primero',
-                    sLast: 'Último',
-                    sNext: 'Siguiente',
-                    sPrevious: 'Anterior',
-                },
-            }
         
-        });
       })
       //LLAMADA DE ETIQUETAS
       $.ajax({
@@ -717,35 +700,18 @@ function valproduct(id_produc) {
           obj = JSON.parse(resp);
       let res = obj.data;
       let x = 0;
-      html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="idetiquetas" name="idetiquetas" class="table display dataTable"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+      html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="etiquetas" name="etiquetas" class="display table table-striped dataTable responsive no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
       for (U = 0; U < res.length; U++) {  
         if (obj.data[U].refe_1 ==  document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref =='ETIQUETAS'){
           x++;
           let id_valepro=obj.data[U].id_kax;
-          html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp("+id_valepro+");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart("+id_valepro+");'>Eliminar</a>" + "</td></tr>";            
+          html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp("+id_valepro+");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart("+id_valepro+");'>Eliminar</a>" + "</td></tr>";            
       }  
       }
-      html += '</div></tbody></table></div></div>';
+      html += '</div></tbody></table></div>';
       $("#listetiquetas").html(html);
       'use strict';
-      $('#idetiquetas').DataTable({
-          responsive: true,
-          language: {
-            searchPlaceholder: 'Buscar...',
-            sSearch: '',
-            lengthMenu: 'mostrando _MENU_ paginas',
-            sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
-            sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
-            sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
-            oPaginate: {
-                  sFirst: 'Primero',
-                  sLast: 'Último',
-                  sNext: 'Siguiente',
-                  sPrevious: 'Anterior',
-              },
-          }
-      
-      });
+     
       })
   //LLAMADA DE PRODUCTO TERMINADO
   $.ajax({
@@ -755,36 +721,19 @@ function valproduct(id_produc) {
       obj = JSON.parse(resp);
       let res = obj.data;
       let x = 0;
-      html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="produfinalvp" name="produfinalvp" class="table display dataTable"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+      html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="produfinalvp" name="produfinalvp" class="display table table-striped dataTable responsive no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
       for (U = 0; U < res.length; U++) {  
         if (obj.data[U].refe_1 ==  document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref =='PRODUCTO_TERMINADO'){
           x++;
           valprd=obj.data[U].id_kax;
           //alert(id_valepro);
-          html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp("+valprd+");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart("+valprd+");'>Eliminar</a>" + "</td></tr>";            
+          html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp("+valprd+");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart("+valprd+");'>Eliminar</a>" + "</td></tr>";            
         }  
       }
-      html += '</div></tbody></table></div></div>';
+      html += '</div></tbody></table></div>';
       $("#listproducfinal").html(html);
       'use strict';
-      $('#produfinalvp').DataTable({
-          responsive: true,
-          language: {
-            searchPlaceholder: 'Buscar...',
-            sSearch: '',
-            lengthMenu: 'mostrando _MENU_ paginas',
-            sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
-            sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
-            sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
-            oPaginate: {
-                  sFirst: 'Primero',
-                  sLast: 'Último',
-                  sNext: 'Siguiente',
-                  sPrevious: 'Anterior',
-              },
-          }
       
-      });
   })
   
 

@@ -375,7 +375,7 @@ function infvale(){
     var res = obj.data;
     var x = 0;
     
-    html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvaofi1" name="infvaofi1" class="table display dataTable"><thead class="thead-colored thead-primary"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>CANTIDAD_SURTIDA</th><th style="width:20%;"><i></i>ESTATUS</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+    html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvaofi1" name="infvaofi1" class="display table table-striped dataTable responsive no-footer dtr-inline"><thead class=""><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>CANTIDAD_SURTIDA</th><th style="width:20%;"><i></i>ESTATUS</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
     for (U = 0; U < res.length; U++) {  
       if (obj.data[U].refe_1 == id_vofi){ 
         x++;
@@ -422,7 +422,7 @@ function infvale(){
         html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + estatus +  "</td><td class='dropdown hidden-xs-down'>" + acciones  + "</td></tr>";            
       }  
     }
-    html += '</div></tbody></table></div></div>';
+    html += '</div></tbody></table></div>';
     $("#listvaleofi1").html(html);
 })
 }) 

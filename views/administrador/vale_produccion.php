@@ -332,15 +332,15 @@ include('header.php');
                             </div>
                             <br>
                             <h5 class="tx-gray-700 mg-b-5" style="text-align:center">EXTENDIDO</h5>
-                            <div class="col-lg-12">
+                            <div class="col-lg-20">
                                 <div id="listextent"></div><!-- col-12 -->
                             </div><!-- form-layout -->
                             <h5 class="tx-gray-700 mg-b-5" style="text-align:center">ETIQUETAS</h5>
-                            <div class="col-lg-12">
+                            <div class="col-lg-20">
                                 <div id="listetiquetas"></div><!-- col-12 -->
                             </div>
                             <h5 class="tx-gray-700 mg-b-5" style="text-align:center">PRODUCTO TERMINADO</h5>
-                            <div class="col-lg-12">
+                            <div class="col-lg-20">
                                 <div id="listproducfinal"></div><!-- col-12 -->
                             </div>
                     </form>
