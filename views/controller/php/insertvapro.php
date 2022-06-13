@@ -628,7 +628,7 @@ function surtir1 ($folio,$conexion){
 }
 
 function surtirart ($id_kax,$refe_1,$codigo_1,$cantidad,$descripcion,$observa_dep,$conexion){
-    $query="UPDATE kardex SET status='SURTIDO',salida='$cantidad',codigo_1='$codigo_1',descripcion_1='$descripcion',observa_dep='$observa_dep' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION'";
+    $query="UPDATE kardex SET status_2 ='SURTIDO',salida='$cantidad',codigo_1='$codigo_1',descripcion_1='$descripcion',observa_dep='$observa_dep' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION' AND id_kax =$id_kax";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

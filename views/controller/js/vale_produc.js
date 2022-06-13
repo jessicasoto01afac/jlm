@@ -1926,8 +1926,8 @@ function acsurtirvpf() {
                 timer: 1500
             });
             $('#modal-surtirvprod').modal('hide');
-            //08052022
-            //reloout();
+           
+            updatedvpdett();
 
         } else {
             document.getElementById('edthvperrinf').style.display = '';
@@ -1937,3 +1937,5 @@ function acsurtirvpf() {
         }
     });
 }
+
+surtirme()
