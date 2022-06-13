@@ -103,9 +103,9 @@ include('header.php');
             <div class="br-pagebody">
                 <div style="float: right;">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button onclick="editmemo()" id="openedivpinf" name="openedivpinf" title="Dar clic para editar"
+                        <button onclick="editvaleproinf()" id="openedivpinf" name="openedivpinf" title="Dar clic para editar"
                             type="button" class="btn btn-secondary btn btn-warning"><i class="fa fa-edit"></i></button>
-                        <button onclick="closedithvmem()" id="closememo" title="Dar clic para cerrar edición"
+                        <button onclick="closevaleproinf()" id="closedvp" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
                         <button title="Imprimir" type="button" class="btn btn-secondary"><i
@@ -194,7 +194,7 @@ include('header.php');
                                             data-placeholder="Choose country">
                                             <option value="" selected>SELECCIONA UNA OPCIÓN</option>
                                             <option value="NORMAL">NORMAL</option>
-                                            <option value="OPERADORA">URGENTE</option>
+                                            <option value="URGENTE">URGENTE</option>
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
@@ -260,7 +260,7 @@ include('header.php');
                                                 class="tx-danger">*</span></label>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <button id="btnvpautoriz" name="btnvpautoriz" type="button"
-                                                style="display:none;" onclick="autorizarm()"
+                                                style="display:none;" onclick="autorizavp()"
                                                 class="btn btn-info pd-x-30">Autorizar</button>
                                             <button title="Dar click para liberar" id="btnvpliberar" name="btnvpliberar"
                                                 type="button" style="display:none;" onclick="liberarm()"
@@ -295,27 +295,27 @@ include('header.php');
                                 <br>
                             </div><!-- row -->
                             <div class="modal-footer">
-                                <button type="button" onclick="savevofic()" id="memedith" style="display:none;"
+                                <button type="button" onclick="savevpcabe()" id="saveinfvp" style="display:none;"
                                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
                                     CAMBIOS</button>
                                 <br>
                             </div>
 
-                            <div style="display:none;" id="edthmemiexi" name="edthmemiexi" class="alert alert-warning"
+                            <div style="display:none;" id="edthvpexi" name="edthvpexi" class="alert alert-warning"
                                 role="alert">
                                 <div class="d-flex align-items-center justify-content-start">
                                     <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                                     <span><strong>Advertencia!</strong> El resgistro ya existe</span>
                                 </div><!-- d-flex -->
                             </div><!-- alert -->
-                            <div style="display:none;" id="edthvoivacios" name="edthvoivacios" class="alert alert-info"
+                            <div style="display:none;" id="edthvpivacios" name="edthvpivacios" class="alert alert-info"
                                 role="alert">
                                 <div class="d-flex align-items-center justify-content-start">
                                     <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                                     <span><strong>Advertencia!</strong> Llenar todos los campos</span>
                                 </div><!-- d-flex -->
                             </div><!-- alert -->
-                            <div style="display:none;" id="edthvoierror" name="edthvoierror" class="alert alert-danger"
+                            <div style="display:none;" id="edthvpierror" name="edthvpierror" class="alert alert-danger"
                                 role="alert">
                                 <div class="d-flex align-items-center justify-content-start">
                                     <i class="icon ion-ios-close alert-icon tx-24"></i>
@@ -324,9 +324,8 @@ include('header.php');
                                 </div><!-- d-flex -->
                             </div><!-- alert -->
                             <div>
-                                <button type="button" onclick="masarticvo()" data-toggle='modal'
-                                    style="display:none; background-color: #009C28;" data-target='#modal-editavo1'
-                                    onclick="" id="memagartic"
+                                <button type="button" data-toggle='modal' style="display:none; background-color: #009C28;" data-target='#modal-addartvpinfo'
+                                    onclick="" id="vpaddartinf"
                                     class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i
                                         class="fa fa-plus"></i> AGREGAR ARTICULO</button>
                             </div>
@@ -346,7 +345,18 @@ include('header.php');
                     </form>
                 </div>
             </div><!-- br-pagebody -->
+            <footer class="br-footer">
+        <div class="footer-left">
+        <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
+          <div>Jose Luis Mondragon y CIA.</div>
+        </div>
+        <div class="footer-right d-flex align-items-center">
+          <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i class="fa fa-facebook tx-20"></i></a>
+          <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i class="fa fa-globe tx-20"></i></a>
+        </div>
+      </footer>
     </section>
+    
 
     <script src="../template/lib/jquery/jquery.js"></script>
     <script src="../template/lib/popper.js/popper.js"></script>

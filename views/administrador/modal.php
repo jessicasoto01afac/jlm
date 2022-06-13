@@ -33,6 +33,15 @@
 
       $sql10 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
       $artieditrnas = mysqli_query($conexion,$sql10);
+
+      $sql11 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $artiedidettvp = mysqli_query($conexion,$sql11);
+
+      $sql12 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $articuindv2 = mysqli_query($conexion,$sql12);
+
+      $sql13 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $articusurvp = mysqli_query($conexion,$sql13);
     ?>
 
 
@@ -2413,7 +2422,7 @@
     </div><!-- modal-dialog -->
 </div><!-- modal -->
 
-<!-- MODAL PARA ELIMINAR MEMO-->
+<!-- MODAL PARA ELIMINAR VALE DE PRODUCCIÓN-->
 <div class="modal fade" id='modal-deletevproduc'>
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content bd-0">
@@ -2436,6 +2445,368 @@
 
             </div>
             <div style="display:none;" id="delerrvprv" name="delerrvprv" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<!-- MODAL PARA EDITAR ARTICULOS EXTENDIDOS EN VISTA PREVIA DE VALE DE PRODUCCIÓN-->
+<div class="modal fade" id='modal-edithdetvp'>
+    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+        <div class="modal-content bd-5">
+            <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="edithvpextendido" class="form-horizontal" action="" method="POST">
+                <div class="modal-body pd-25">
+                    <a id="openedithextdetalle" style="float: right;font-size: 16px"
+                        class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editarvpdett()"
+                        title="Dar clic para editar">
+                        <div><i class="fa fa-edit"></i></div>
+                    </a>
+                    <a id="closedithextdetalle" style="float: right;font-size: 16px;display:none;"
+                        class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closedithvpdett()"
+                        title="Dar clic para cerrar">
+                        <div><i class="fa fa-times"></i></div>
+                    </a>
+                    <input style="display:none;" disabled="" class="form-control inputalta" type="text"
+                        name="id_exedithdett" id="id_exedithdett">
+                    <div class="row mg-b-25">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">CODIGO:<span
+                                        class="tx-danger">*</span></label>
+                                <select class="form-control" onchange="edithextdettvp()" id="cdedttvpedith"
+                                    name="cdedttvpedith" type="text" disabled data-live-search="true"
+                                    style="width: 100%">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($arttrasdett = mysqli_fetch_row($artiedidettvp)):?>
+                                    <option value="<?php echo $arttrasdett[0]?>"><?php echo $arttrasdett[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-9">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">DESCRIPCIÓN: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control" readonly name="vpdettedithdes"
+                                    id="vpdettedithdes" placeholder="" type="text" required>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">CANTIDAD: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control" name="vpeddettcantid"
+                                    id="vpeddettcantid" placeholder="Ingrese la cantidad" disabled type="number"
+                                    required>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">DEPARTAMENTO: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control" name="vpedthdepardell"
+                                    id="vpedthdepardell" placeholder="Departamento" readonly type="text" required>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">POSICIÓN DEL ARTICULO:
+                                    <span class="tx-danger">*</span></label>
+                                <select class="form-control" data-placeholder="Elegir la posición del articulo"
+                                    id="posicionextdell" name="posicionextdell" type="text" disabled
+                                    data-live-search="true" style="width: 100%">
+                                    <option value="EXTENDIDO">EXTENDIDO</option>
+                                    <option value="ETIQUETAS">ETIQUETAS</option>
+                                    <option value="PRODUCTO_TERMINADO">PRODUCTO TERMINADO</option>
+                                </select>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label label2">OBSERBACIONES: <span
+                                        class="tx-danger"></span></label>
+                                <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="vpobsadddetll"
+                                    id="vpobsadddetll" disabled placeholder="Ingresa alguna observación"></textarea>
+                            </div>
+                        </div><!-- col-12 -->
+                    </div><!-- col-4 -->
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" onclick="saveedithdettvp()" id="saveedithextdett" style="display:none;"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
+                    CAMBIOS</button>
+            </div>
+            <br>
+            <div style="display:none;" id="edithextdettlle" name="edithextdettlle" class="alert alert-info"
+                role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> Llenar todos los campos</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div style="display:none;" id="erraetiqdett" name="erraetiqdett" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<!-- MODAL PARA ELIMINAR ARTICULOS DE DETALLES DE VALE DE PRODUCCION-->
+<div class="modal fade" id='modal-delearvpdett' name='modal-delearvpdett'>
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content bd-0">
+            <div class="modal-header pd-x-20">
+                <h4 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ELIMINAR ARTICULO</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pd-20">
+                <p class="mg-b-5">ESTAS SEGURO DE ELIMINAR EL ARTICULO DE VALE DE PRODUCCIÓN?</p>
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text"
+                    name="del_artvpdetts" id="del_artvpdetts">
+                <input disabled="" style="text-align:center" class="form-control inputalta" type="text"
+                    name="deartvpdett" id="deartvpdett">
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" onclick="savdelevpartdet()"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
+                <br>
+            </div>
+            <div style="display:none;" id="delerarvpdett" name="delerarvpdett" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo eliminar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<!-- MODAL PARA AGREGAR ARTICULO INDIVIDUAL EN VALE DE PRODUCCIÓN DETALLES-->
+<div class="modal fade" id='modal-addartvpinfo'>
+    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+        <div class="modal-content bd-5">
+            <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">AGREGAR ARTICULO</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="editcli" class="form-horizontal" action="" method="POST">
+                <div class="modal-body pd-25">
+                    <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_vipinf"
+                        id="id_vipinf">
+                    <div class="row mg-b-25">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">CODIGO:<span
+                                        class="tx-danger">*</span></label>
+                                <select class="form-control" onchange="indivudualinf()" id="codindivinf"
+                                    name="codindivinf" type="text" data-live-search="true" style="width: 100%">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($artin2 = mysqli_fetch_row($articuindv2)):?>
+                                    <option value="<?php echo $artin2[0]?>"><?php echo $artin2[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-9">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">DESCRIPCIÓN: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control" readonly name="vindescripinf"
+                                    id="vindescripinf" placeholder="" type="text" required>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">CANTIDAD: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control" name="vincantidinf" id="vincantidinf"
+                                    placeholder="Ingrese la cantidad" type="number" required>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">DEPARTAMENTO: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control" name="vindeparinnf" id="vindeparinnf"
+                                    placeholder="Departamento" readonly type="text" required>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label style="font-size:16px" class="form-control-label">POSICIÓN DEL ARTICULO: <span
+                                        class="tx-danger">*</span></label>
+                                <select class="form-control" data-placeholder="Elegir la posición del articulo"
+                                    id="psiciontinf" name="psiciontinf" type="text" data-live-search="true"
+                                    style="width: 100%">
+                                    <option value="0">SELECCIONE LA POSICIÓN DEL ARTICULO</option>
+                                    <option value="EXTENDIDO">EXTENDIDO</option>
+                                    <option value="ETIQUETAS">ETIQUETAS</option>
+                                    <option value="PRODUCTO_TERMINADO">PRODUCTO TERMINADO</option>
+                                </select>
+                            </div><!-- form-group -->
+                        </div><!-- form-group -->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label label2">OBSERBACIONES: <span
+                                        class="tx-danger"></span></label>
+                                <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="vpinfbsertrass"
+                                    id="vpinfbsertrass" placeholder="Ingresa alguna observación"></textarea>
+                            </div>
+                        </div><!-- col-12 -->
+                    </div><!-- col-4 -->
+                </div>
+            </form>
+            <div style="display:none;" id="edthvinbli1inf" name="edthvinbli1inf" class="alert alert-warning"
+                role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> El resgistro ya existe</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div style="display:none;" id="edthvaincios1inf" name="edthvaincios1inf" class="alert alert-info"
+                role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> Llenar todos los campos</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div style="display:none;" id="edthvinperr1inf" name="edthvinperr1inf" class="alert alert-danger"
+                role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div class="modal-footer">
+                <button style="display:;" type="button" onclick="addarinproinfo()" id="addarinpro2" name="addarinpro2"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">AGREGAR</button>
+            </div>
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<!-- MODAL PARA SURTIR ARTICULOS VALE DE PRODUCCIÓN-->
+<div class="modal fade" id='modal-surtirvprod'>
+    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+        <div class="modal-content bd-5">
+            <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">SURTIR ARTICULO DE VALE</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="editvpinf" class="form-horizontal" action="" method="POST">
+                <div class="modal-body pd-25">
+                    <a href="#" id="surtirvprf" name="surtirvprf" style="float: right;font-size: 16px"
+                        class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="edithsurvpif()"
+                        title="Dar clic para editar">
+                        <div><i class="fa fa-edit"></i></div>
+                    </a>
+                    <a href="#"  id="closeditvprinf" name="closeditvprinf"
+                        style="float: right;font-size: 16px;display:none;"
+                        class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closedisurvpif()"
+                        title="Dar clic para cerrar">
+                        <div><i class="fa fa-times"></i></div>
+                    </a>
+                    <input style="display:none;" disabled="" class="form-control inputalta" type="text"
+                        name="id_surtvpif" id="id_surtvpif">
+                    <div class="row mg-b-25">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label label2">CODIGO: <span
+                                        class="tx-danger">*</span></label>
+                                <select class="form-control" onchange="indivsurtinf()" id="codisurtvp"
+                                    name="codisurtvp" type="text" disabled="" data-live-search="true" style="width: 100%">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($artsuvp = mysqli_fetch_row($articusurvp)):?>
+                                    <option value="<?php echo $artsuvp[0]?>"><?php echo $artsuvp[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label class="form-control-label label2">DESCRIPCIÓN: <span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="text"
+                                    name="descripsurvp" id="descripsurvp">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label label2">CANTIDAD SURTIDA:<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" onkeyup="mayus(this);" onchange="totalvoinfe()"
+                                    class="form-control inputalta" type="number" name="surtavprinf" id="surtavprinf">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label class="form-control-label label2">OBSERVACIONES ANEXAS:</label>
+                                <textarea disabled="" onkeyup="mayus(this);" rows="2" class="form-control" name="surbserevp"
+                                    id="surbserevp" placeholder="Ingresa alguna observación"></textarea>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label label2">AGREGAR OBSERVACIONES:</label>
+                                <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="surbserevp"
+                                    id="surbserevp" placeholder="Ingresa alguna observación"></textarea>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <button type="button" title="Dar click para marcar surtir" onclick="acsurtirvpf()"
+                                id="vprguardarsur" style=""
+                                class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">CONFIRAR
+                                SURTIR</button>
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="button" title="Dar click para marcar sin existencia" onclick="sinexisten()"
+                                id="vprguardarsur" style=""
+                                class="btn btn-danger tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">SIN
+                                EXISTENCIAS</button>
+                        </div>
+
+                    </div><!-- col-4 -->
+                </div>
+            </form>
+
+            <br>
+            <div style="display:none;" id="edthdvpblinf" name="edthdvpblinf" class="alert alert-warning" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> El resgistro ya existe</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div style="display:none;" id="edthvpvaciosin" name="edthvpvaciosin" class="alert alert-info" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> Llenar todos los campos</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div style="display:none;" id="edthvperrinf" name="edthvperrinf" class="alert alert-danger" role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-close alert-icon tx-24"></i>
                     <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un

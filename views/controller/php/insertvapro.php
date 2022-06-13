@@ -244,6 +244,115 @@ if(!isset($usuario)){
         }else{
             echo "1";
         } 
+    //EDICION DE CABECERA
+    }else if($opcion === 'cambio'){
+        $refe_1 = $_POST['refe_1'];
+        $fecha = $_POST['fecha'];
+        $refe_3 = $_POST['refe_3'];
+        $refe_2 = $_POST['refe_2'];
+        $proveedor_cliente = $_POST['proveedor_cliente'];
+        $caracter_vale = $_POST['caracter_vale'];
+        $ubicacion = $_POST['ubicacion'];
+        $id_person_creacion = $_POST['id_person_creacion'];
+        $id_person_autor = $_POST['id_person_autor'];
+        $id_person_surtio = $_POST['id_person_surtio'];
+        $fecha_surtido = $_POST['fecha_surtido'];
+        $id_person_final = $_POST['id_person_final'];
+        $fecha_finalizacion = $_POST['fecha_finalizacion'];
+        $estado = $_POST['estado'];
+        if (actualizacabe($refe_1,$fecha,$refe_3,$refe_2,$proveedor_cliente,$ubicacion,$estado,$conexion)){
+            echo "0";
+            actucabez2($refe_1,$caracter_vale,$id_person_creacion,$id_person_autor,$id_person_surtio,$fecha_surtido,$id_person_final,$fecha_finalizacion,$conexion);
+           // $realizo = 'EDITA LA CABECERA DEL VALE DE PRODUCIÓN';
+            // $usuario='pruebas';
+            //histedithvp($usuario,$realizo,$id_kax,$conexion);
+        }else{
+            echo "1";
+        }
+    }else if($opcion === 'regisinind'){
+        $refe_1 = $_POST['refe_1'];
+        $codigo_1 = $_POST['codigo_1'];
+    
+        if (comprobacion ($refe_1,$codigo_1,$conexion)){
+            $refe_3 = $_POST['refe_3'];
+            $refe_2 = $_POST['refe_2'];
+            $fecha = $_POST['fecha'];
+            $proveedor_cliente = $_POST['proveedor_cliente'];
+            $descripcion_1 = $_POST['descripcion_1'];
+            $cantidad_real = $_POST['cantidad_real'];
+            $salida = $_POST['salida'];
+            $observa = $_POST['observa'];
+            $ubicacion = $_POST['ubicacion'];
+            $tipo_ref = $_POST['tipo_ref'];
+            
+            if (registrarind($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion)){
+                echo "0";
+                historial($usuario,$refe_1,$codigo_1,$conexion);
+            }else{
+                echo "1";
+            }
+        }else{
+
+            echo "2";
+        }
+    //Condición donde se agrega el carton si aplica  
+    }else if($opcion === 'regiarindfinal'){
+        $refe_1 = $_POST['refe_1'];
+        $codigo_1 = $_POST['codigo_1'];
+        if (comprobacion ($refe_1,$codigo_1,$conexion)){
+            $refe_3 = $_POST['refe_3'];
+            $refe_2 = $_POST['refe_2'];
+            $fecha = $_POST['fecha'];
+            $proveedor_cliente = $_POST['proveedor_cliente'];
+            $descripcion_1 = $_POST['descripcion_1'];
+            $cantidad_real = $_POST['cantidad_real'];
+            $salida = $_POST['salida'];
+            $observa = $_POST['observa'];
+            $ubicacion = $_POST['ubicacion'];
+            $tipo_ref = $_POST['tipo_ref'];
+            if (regstindpf($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion)){
+                echo "0";
+                historial($usuario,$refe_1,$codigo_1,$conexion);
+            }else{
+                echo "1";
+            }
+        }else{
+            echo "2";
+        }
+    //Condición donde se autoriza el vale
+    }else if($opcion === 'autorizarvp'){
+        $folio = $_POST['folio'];
+            if (autorizar1($folio,$conexion)){
+                echo "0";
+                autorizar2($usuario,$folio,$conexion);
+                //histedith($usuario,$folio,$conexion);
+            }else{
+                echo "1";
+            }
+     //Condición donde libera el vale de produccción
+    }else if($opcion === 'liberarvp'){
+        $foliovp = $_POST['foliovp'];
+            if (liberarvpro ($foliovp,$conexion)){
+                echo "0";
+                //$usuario='PRUEBAS';
+                hisliber($usuario,$foliovp,$conexion); 
+            }else{
+                echo "1";
+            }
+    }else if($opcion === 'surtir'){
+        $id_kax = $_POST['id_kax'];
+        $refe_1 = $_POST['refe_1'];
+        $codigo_1 = $_POST['codigo_1'];
+        $cantidad = $_POST['cantidad'];
+        $descripcion = $_POST['descripcion'];
+        $observa_dep = $_POST['observa_dep'];
+        if (surtirart ($id_kax,$refe_1,$codigo_1,$cantidad,$descripcion,$observa_dep,$conexion)){
+            echo "0";
+            //$usuario='PRUEBAS';
+            //hisliber($usuario,$foliovp,$conexion); 
+        }else{
+            echo "1";
+        }
     }
     
 
@@ -329,7 +438,17 @@ function poductividad ($refe_1,$caracter,$conexion){
 }
 //funcion para guardar el vale de produccion individualmente
 function registrarind ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion){
-    $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','$refe_3','$fecha','$codigo_1','$descripcion_1','VALE_PRODUCCION','$tipo_ref','$proveedor_cliente','$ubicacion','$cantidad_real',0,'$salida','0',0,'0','$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0)";
+    $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','$refe_3','$fecha','$codigo_1','$descripcion_1','VALE_PRODUCCION','$tipo_ref','$proveedor_cliente','$ubicacion',$cantidad_real,0,$salida,0,0,0,'$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0)";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
+//add producto final iformacion del vale de produccion
+function regstindpf ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion){
+    $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','$refe_3','$fecha','$codigo_1','$descripcion_1','VALE_PRODUCCION','$tipo_ref','$proveedor_cliente','$ubicacion',$cantidad_real,$salida,0,0,0,0,'$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -357,6 +476,7 @@ function etiqueta ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$
     }
     $this->conexion->cerrar();
 }
+
 //funcion para guardar el carton de articulo de trasformación
 function carton ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$codigocart,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion){
     $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha','$codigocart',concat((select artdescrip from articulos where artcodigo = '$codigocart')),'VALE_PRODUCCION','EXTENDIDO','$proveedor_cliente',concat((select artubicac from articulos where artcodigo = '$codigocart')),concat((select $cantidad_real * multi_carton / div_carton from transforma where id_articulo_final = '$codigo_1')),0,concat((select $cantidad_real * multi_carton / div_carton from transforma where id_articulo_final = '$codigo_1')),'0',0,'0','','NA','PENDIENTE','PENDIENTE','NO','NO',0";
@@ -409,7 +529,7 @@ function cancelar ($refe_1,$conexion){
 }
 //funcion para actualizar el registro
 function actualizarnew ($id_kax,$codigo_1,$descripcion_1,$salida,$tipo_ref,$observa,$conexion){
-    $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1', entrada=0,salida=$salida,tipo_ref='$tipo_ref' ,observa='$observa' WHERE id_kax = '$id_kax'";
+    $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1', cantidad_real=$salida,entrada=0,salida=$salida,tipo_ref='$tipo_ref' ,observa='$observa' WHERE id_kax = '$id_kax'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -417,9 +537,31 @@ function actualizarnew ($id_kax,$codigo_1,$descripcion_1,$salida,$tipo_ref,$obse
     }
     cerrar($conexion);
 }
-//funcion para actualizar el registro desde la vista previa del vale de vale de producción
+//funcion para actualizar cabecera----------------------------------
+function actualizacabe($refe_1,$fecha,$refe_3,$refe_2,$proveedor_cliente,$ubicacion,$estado,$conexion){
+    $query="UPDATE kardex SET fecha='$fecha', refe_3='$refe_3',refe_2='$refe_2',proveedor_cliente='$proveedor_cliente',ubicacion='$ubicacion',estado='$estado' WHERE refe_1 = '$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
+function actucabez2($refe_1,$caracter_vale,$id_person_creacion,$id_person_autor,$id_person_surtio,$fecha_surtido,$id_person_final,$fecha_finalizacion,$conexion){
+    $query="UPDATE productividad SET  id_person_creacion='$id_person_creacion',id_person_autor='$id_person_autor',id_person_surtio='$id_person_surtio',fecha_surtido='$fecha_surtido',id_person_final='$id_person_final',fecha_finalizacion='$fecha_finalizacion',caracter_vale='$caracter_vale' WHERE referencia_1 = '$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//FIN DE CABECERA-------------------------------------------------------------------------------
+
+//funcion para actualizar el registro desde nuevo  vale de producción
 function actualizarnewext ($id_kax,$codigo_1,$descripcion_1,$salida,$tipo_ref,$observa,$conexion){
-    $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1', entrada=$salida, salida='0',tipo_ref='$tipo_ref' ,observa='$observa' WHERE id_kax = '$id_kax'";
+    $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1', cantidad_real=$salida ,entrada=$salida, salida='0',tipo_ref='$tipo_ref' ,observa='$observa' WHERE id_kax = '$id_kax'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -427,6 +569,7 @@ function actualizarnewext ($id_kax,$codigo_1,$descripcion_1,$salida,$tipo_ref,$o
     }
     cerrar($conexion);
 }
+
 //funcion para actualizar el registro
 function eliminar ($id_kardex,$conexion){
     $query="UPDATE kardex SET estado='1' WHERE id_kax= '$id_kardex'";
@@ -450,9 +593,9 @@ function deletevp ($folio,$conexion){
 }
 
 
-//funcion para autorizar
+//funcion para autorizar+++++++++++++++++++++++++++++++++++++++++
 function autorizar1 ($folio,$conexion){
-    $query="UPDATE kardex SET status='AUTORIZADO' WHERE refe_1 = '$folio' AND tipo='VALE_OFICINA'";
+    $query="UPDATE kardex SET status='AUTORIZADO' WHERE refe_1 = '$folio' AND tipo='VALE_PRODUCCION'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -460,7 +603,20 @@ function autorizar1 ($folio,$conexion){
     }
     cerrar($conexion);
 }
-//funcion para surtir
+function autorizar2 ($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query="UPDATE productividad SET fecha_autorizacion='$fecha', id_person_surtio='$usuario' WHERE referencia_1 = '$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
+
+//funcion para surtir +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function surtir1 ($folio,$conexion){
     $query="UPDATE kardex SET status='SURTIDO' WHERE refe_1 = '$folio' AND tipo='VALE_OFICINA'";
     if(mysqli_query($conexion,$query)){
@@ -470,6 +626,17 @@ function surtir1 ($folio,$conexion){
     }
     cerrar($conexion);
 }
+
+function surtirart ($id_kax,$refe_1,$codigo_1,$cantidad,$descripcion,$observa_dep,$conexion){
+    $query="UPDATE kardex SET status='SURTIDO',salida='$cantidad',codigo_1='$codigo_1',descripcion_1='$descripcion',observa_dep='$observa_dep' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
 //funcion para finalizar
 function finalizar1 ($folio,$conexion){
     $query="UPDATE kardex SET status='FINALIZADO' WHERE refe_1 = '$folio' AND tipo='VALE_OFICINA'";
@@ -481,8 +648,8 @@ function finalizar1 ($folio,$conexion){
     cerrar($conexion);
 }
 //funcion para LIBERAR vale
-function liberarvo ($valeof,$conexion){
-    $query="UPDATE kardex SET status='PENDIENTE' WHERE refe_1 = '$valeof' AND tipo='VALE_OFICINA'";
+function liberarvpro($foliovp,$conexion){
+    $query="UPDATE kardex SET status='PENDIENTE' WHERE refe_1 = '$foliovp' AND tipo='VALE_PRODUCCION'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -644,10 +811,10 @@ function hisfinal($usuario,$folio,$conexion){
     }
 }
 //funciones para guardar el historico liberar
-function hisliber($usuario,$valeof,$conexion){
+function hisliber($usuario,$foliovp,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'LIBERA VALE DE OFICINA', 'FOLIO:' '$valeof','$fecha1')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'LIBERA VALE DE PRODUCCIÓN', 'FOLIO:' '$foliovp','$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
