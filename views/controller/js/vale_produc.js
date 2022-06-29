@@ -149,7 +149,7 @@ function updatedvp() {
     document.getElementById('vpbservo').value = "";
     document.getElementById('pedidomem').value = "";
     //INFORMACION DE LAS TBLAS
-    let id_valeproduc = document.getElementById('vpfolio').value;
+    let id_valeproduc = document.getElementById('folprod').value;
     $.ajax({
             url: '../controller/php/convale_pro.php',
             type: 'POST'
@@ -607,20 +607,21 @@ function valproduct(id_produc) {
     $("#detaproduccion").toggle(250); //Muestra contenedor de detalles
     $("#lista").toggle("fast"); //Oculta lista
     document.getElementById('vpfolio').value = id_produc;
-    document.getElementById('folprod').innerHTML = id_produc;
-    var autorizar = document.getElementById('btnvpautoriz');
-    var liberar = document.getElementById('btnvpliberar');
-    var surtir = document.getElementById('btnvpsurtir');
-    var finalizado = document.getElementById('btnvpfinaliz');
-    var editar = document.getElementById('openedivpinf');
+
+
+    let autorizar = document.getElementById('btnvpautoriz');
+    let liberar = document.getElementById('btnvpliberar');
+    let surtir = document.getElementById('btnvpsurtir');
+    let finalizado = document.getElementById('btnvpfinaliz');
+    let editar = document.getElementById('openedivpinf');
 
     $.ajax({
         url: '../controller/php/infvale_produc.php',
         type: 'POST'
     }).done(function(respuesta) {
         obj = JSON.parse(respuesta);
-        var res = obj.data;
-        var x = 0;
+        let res = obj.data;
+        let x = 0;
         for (D = 0; D < res.length; D++) {
             if (obj.data[D].refe_1 == id_produc) {
                 datos =
@@ -637,7 +638,7 @@ function valproduct(id_produc) {
                     obj.data[D].status + '*' +
                     obj.data[D].fecha_surtido + '*' +
                     obj.data[D].estado;
-                var o = datos.split("*");
+                let o = datos.split("*");
                 $("#infvpdate").val(o[0]);
                 $("#infvpdepat").val(o[1]);
                 $("#infvptipo").val(o[2]);
@@ -650,9 +651,11 @@ function valproduct(id_produc) {
                 $("#infvprecibio").val(o[9]);
                 $("#infvpestatus").val(o[10]);
                 $("#infvpdatesurt").val(o[11]);
-
+                //alert(obj.data[D].refe_1);
+                document.getElementById('folprod').innerHTML = obj.data[D].refe_1;
                 //PENDIENTE-----------------------------------------------------------------------------------------------
                 if (obj.data[D].status == 'PENDIENTE') {
+                    let autorizar = document.getElementById('btnvpautoriz');
                     autorizar.style.display = '';
                     editar.style.display = '';
                     $.ajax({
@@ -734,9 +737,9 @@ function valproduct(id_produc) {
                                 if (obj.data[U].refe_1 == document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref == 'EXTENDIDO') {
                                     x++;
                                     let id_valepro = obj.data[U].id_kax;
-                                    //==================================================================================
+                                    //==================================================================================26062022
                                     if (obj.data[U].status_2 == "PENDIENTE") {
-                                        estatus = "<button type='button' onclick='surtirvof(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-surtirvprod'>SURTIR</button>"
+                                        estatus = "<button type='button' onclick='surtirvpf(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-surtirvprod'>SURTIR</button>"
                                     } else if (obj.data[U].status_2 == "SURTIDO") {
                                         estatus = "<span title='Ya fue surtido' class='spandis'>SURTIDO</span>"
 
@@ -800,6 +803,9 @@ function valproduct(id_produc) {
                     finalizado.style.display = '';
                     liberar.style.display = '';
                     editar.style.display = 'none'
+
+
+
                 } else if (obj.data[D].status == 'FINALIZADO') {
                     liberar.style.display = '';
                     editar.style.display = 'none'
@@ -1106,9 +1112,18 @@ function edithextdettvp() {
         }
     });
 }
-
+//actualiza
 function updatedvpdett() {
-    let id_produc = document.getElementById('folprod').innerHTML;
+    let id_produc = document.getElementById('vpfolio').value;
+    let status = document.getElementById('infvpestatus').value;
+
+    let autorizar = document.getElementById('btnvpautoriz');
+    let liberar = document.getElementById('btnvpliberar');
+    let surtir = document.getElementById('btnvpsurtir');
+    let finalizado = document.getElementById('btnvpfinaliz');
+    let editar = document.getElementById('openedivpinf');
+
+
     $.ajax({
         url: '../controller/php/infvale_produc.php',
         type: 'POST'
@@ -1118,6 +1133,7 @@ function updatedvpdett() {
         var x = 0;
         for (D = 0; D < res.length; D++) {
             if (obj.data[D].refe_1 == id_produc) {
+                //alert(status);
                 datos =
                     obj.data[D].fecha + '*' +
                     obj.data[D].refe_2 + '*' +
@@ -1147,18 +1163,157 @@ function updatedvpdett() {
                 $("#infvpdatesurt").val(o[11]);
 
 
-                if (obj.data[D].status == 'PENDIENTE') {
+                if (status == 'PENDIENTE') {
+                    let autorizar = document.getElementById('btnvpautoriz');
                     autorizar.style.display = '';
-                    editar.style.display = ''
-                } else if (obj.data[D].status == 'AUTORIZADO') {
+                    editar.style.display = '';
+                    $.ajax({
+                            url: '../controller/php/convale_pro.php',
+                            type: 'POST'
+                        }).done(function(resp) {
+                            obj = JSON.parse(resp);
+                            let res = obj.data;
+                            let x = 0;
+                            html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="extendido" name="extendido" class="display table table-striped dataTable responsive no-footer dtr-inline"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+                            for (U = 0; U < res.length; U++) {
+                                if (obj.data[U].refe_1 == document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref == 'EXTENDIDO') {
+                                    x++;
+                                    let id_valepro = obj.data[U].id_kax;
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a class='nav-link' onclick='deletedettart(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearvpdett'>Eliminar</a>" + "</td></tr>";
+                                }
+                            }
+                            html += '</div></tbody></table></div>';
+                            $("#listextent").html(html);
+                            'use strict';
+
+                        })
+                        //LLAMADA DE ETIQUETAS
+                    $.ajax({
+                            url: '../controller/php/convale_pro.php',
+                            type: 'POST'
+                        }).done(function(resp) {
+                            obj = JSON.parse(resp);
+                            let res = obj.data;
+                            let x = 0;
+                            html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="etiquetas" name="etiquetas" class="display table table-striped dataTable responsive no-footer dtr-inline"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+                            for (U = 0; U < res.length; U++) {
+                                if (obj.data[U].refe_1 == document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref == 'ETIQUETAS') {
+                                    x++;
+                                    let id_valepro = obj.data[U].id_kax;
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + id_valepro + ");'>Eliminar</a>" + "</td></tr>";
+                                }
+                            }
+                            html += '</div></tbody></table></div>';
+                            $("#listetiquetas").html(html);
+                            'use strict';
+
+                        })
+                        //LLAMADA DE PRODUCTO TERMINADO
+                    $.ajax({
+                        url: '../controller/php/convale_pro.php',
+                        type: 'POST'
+                    }).done(function(resp) {
+                        obj = JSON.parse(resp);
+                        let res = obj.data;
+                        let x = 0;
+                        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="produfinalvp" name="produfinalvp" class="display table table-striped dataTable responsive no-footer dtr-inline"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+                        for (U = 0; U < res.length; U++) {
+                            if (obj.data[U].refe_1 == document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref == 'PRODUCTO_TERMINADO') {
+                                x++;
+                                valprd = obj.data[U].id_kax;
+                                //alert(id_valepro);
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + valprd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + valprd + ");'>Eliminar</a>" + "</td></tr>";
+                            }
+                        }
+                        html += '</div></tbody></table></div>';
+                        $("#listproducfinal").html(html);
+                        'use strict';
+                    });
+                    //AUTORIZADO-----------------------------------------------------------------------------------------------------------
+                } else if (status == 'AUTORIZADO') {
+                    //alert("estatus2");
                     surtir.style.display = '';
                     liberar.style.display = '';
-                    editar.style.display = 'none'
-                } else if (obj.data[D].status == 'SURTIDO') {
+                    editar.style.display = 'none';
+                    $.ajax({
+                            url: '../controller/php/convale_pro.php',
+                            type: 'POST'
+                        }).done(function(resp) {
+                            obj = JSON.parse(resp);
+                            let res = obj.data;
+                            let x = 0;
+                            html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="extendido" name="extendido" class="display table table-striped dataTable responsive no-footer dtr-inline"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>CANTIDAD_SUTIDA</th><th><i></i>OBSERVACIONES</th><th><i></i>ESTATUS</th></tr></thead><tbody>';
+                            for (U = 0; U < res.length; U++) {
+                                if (obj.data[U].refe_1 == document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref == 'EXTENDIDO') {
+                                    x++;
+                                    let id_valepro = obj.data[U].id_kax;
+                                    //==================================================================================26062022
+                                    if (obj.data[U].status_2 == "PENDIENTE") {
+                                        estatus = "<button type='button' onclick='surtirvpf(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-surtirvprod'>SURTIR</button>"
+                                    } else if (obj.data[U].status_2 == "SURTIDO") {
+                                        estatus = "<span title='Ya fue surtido' class='spandis'>SURTIDO</span>"
+
+                                    } else if (obj.data[U].status_2 == "SIN EXISTENCIAS") {
+                                        estatus = "<span title='Ver detalles' onclick='infonosur()' data-toggle='modal' data-target='#modal-nosurtido' class='sinexisten' style='font-size:12px;cursor: pointer;'>SIN EXISTENCIA</span>"
+
+                                    }
+                                    //===================================================================================
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                }
+                            }
+                            html += '</div></tbody></table></div>';
+                            $("#listextent").html(html);
+                            'use strict';
+
+                        })
+                        //LLAMADA DE ETIQUETAS
+                    $.ajax({
+                            url: '../controller/php/convale_pro.php',
+                            type: 'POST'
+                        }).done(function(resp) {
+                            obj = JSON.parse(resp);
+                            let res = obj.data;
+                            let x = 0;
+                            html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="extendido" name="extendido" class="display table table-striped dataTable responsive no-footer dtr-inline"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>CANTIDAD_SUTIDA</th><th><i></i>OBSERVACIONES</th><th><i></i>ESTATUS</th></tr></thead><tbody>';
+                            for (U = 0; U < res.length; U++) {
+                                if (obj.data[U].refe_1 == document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref == 'ETIQUETAS') {
+                                    x++;
+                                    let id_valepro = obj.data[U].id_kax;
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + "<button type='button' onclick='editarinsvpdett(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-edithdetvp'>SURIR</button>" + "</td></tr>";
+                                }
+                            }
+                            html += '</div></tbody></table></div>';
+                            $("#listetiquetas").html(html);
+                            'use strict';
+
+                        })
+                        //LLAMADA DE PRODUCTO TERMINADO
+                    $.ajax({
+                        url: '../controller/php/convale_pro.php',
+                        type: 'POST'
+                    }).done(function(resp) {
+                        obj = JSON.parse(resp);
+                        let res = obj.data;
+                        let x = 0;
+                        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="extendido" name="extendido" class="display table table-striped dataTable responsive no-footer dtr-inline"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>CANTIDAD_SUTIDA</th><th><i></i>OBSERVACIONES</th><th><i></i>ESTATUS</th></tr></thead><tbody>';
+                        for (U = 0; U < res.length; U++) {
+                            if (obj.data[U].refe_1 == document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref == 'PRODUCTO_TERMINADO') {
+                                x++;
+                                valprd = obj.data[U].id_kax;
+                                //alert(id_valepro);
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td>" + "<button type='button' onclick='editarinsvpdett(" + valprd + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-edithdetvp'>SURIR</a>" + "</td></tr>";
+                            }
+                        }
+                        html += '</div></tbody></table></div>';
+                        $("#listproducfinal").html(html);
+                        'use strict';
+                    });
+
+                } else if (status == 'SURTIDO') {
                     finalizado.style.display = '';
                     liberar.style.display = '';
                     editar.style.display = 'none'
-                } else if (obj.data[D].status == 'FINALIZADO') {
+                } else if (status == 'FINALIZADO') {
                     liberar.style.display = '';
                     editar.style.display = 'none'
                 }
@@ -1625,9 +1780,9 @@ function addarinproinfo() {
         let datos = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&tipo_ref=' + tipo_ref + '&opcion=registrarind';
         //alert(datos);
         if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || codigo_1 == '' || descripcion_1 == '' || cantidad_real == '' || tipo_ref == '') {
-            document.getElementById('edthvaincios1inf').style.display = ''
+            document.getElementById('edthinfvcp').style.display = ''
             setTimeout(function() {
-                document.getElementById('edthvaincios1inf').style.display = 'none';
+                document.getElementById('edthinfvcp').style.display = 'none';
             }, 2000);
             return;
         } else {
@@ -1670,9 +1825,9 @@ function addarinproinfo() {
         let datos = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&tipo_ref=' + tipo_ref + '&opcion=registrarind';
         //alert(datos);
         if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || codigo_1 == '' || descripcion_1 == '' || cantidad_real == '' || tipo_ref == '') {
-            document.getElementById('edthvaincios1inf').style.display = ''
+            document.getElementById('edthinfvcp').style.display = ''
             setTimeout(function() {
-                document.getElementById('edthvaincios1inf').style.display = 'none';
+                document.getElementById('edthinfvcp').style.display = 'none';
             }, 2000);
             return;
         } else {
@@ -1714,9 +1869,9 @@ function addarinproinfo() {
         let datos = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&tipo_ref=' + tipo_ref + '&opcion=regiarindfinal';
         //alert(datos);
         if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || codigo_1 == '' || descripcion_1 == '' || cantidad_real == '' || tipo_ref == '') {
-            document.getElementById('edthvaincios1inf').style.display = ''
+            document.getElementById('edthinfvcp').style.display = ''
             setTimeout(function() {
-                document.getElementById('edthvaincios1inf').style.display = 'none';
+                document.getElementById('edthinfvcp').style.display = 'none';
             }, 2000);
             return;
         } else {
@@ -1783,7 +1938,7 @@ function autorizavp() {
                     type: 'success',
                     text: 'Se AUTORIZO de forma correcta',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 2000
                 });
                 setTimeout("location.href = 'vale_produccion.php';", 1500);
             } else if (respuesta == 2) {
@@ -1861,10 +2016,9 @@ function indivsurtinf() {
 }
 
 //FUNCION QUE MUESTRA LA INFORMACIÓN DEL ARTICULO A ASURTIR 
-function surtirvof(id_kardex) {
+function surtirvpf(id_kardex) {
     alert(id_kardex);
     document.getElementById('id_surtvpif').value = id_kardex;
-
     $.ajax({
         url: '../controller/php/convale_pro.php',
         type: 'POST'
@@ -1881,7 +2035,6 @@ function surtirvof(id_kardex) {
             }
         }
     });
-
 }
 
 //FUNCION DE EDITAR SURTIR
@@ -1926,7 +2079,7 @@ function acsurtirvpf() {
                 timer: 1500
             });
             $('#modal-surtirvprod').modal('hide');
-           
+
             updatedvpdett();
 
         } else {

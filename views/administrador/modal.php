@@ -2684,7 +2684,7 @@
                     <span><strong>Advertencia!</strong> El resgistro ya existe</span>
                 </div><!-- d-flex -->
             </div><!-- alert -->
-            <div style="display:none;" id="edthvaincios1inf" name="edthvaincios1inf" class="alert alert-info"
+            <div style="display:none;" id="edthinfvcp" name="edthinfvcp" class="alert alert-info"
                 role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
