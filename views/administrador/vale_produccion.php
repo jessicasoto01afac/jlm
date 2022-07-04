@@ -37,7 +37,6 @@
 
 include('header.php');
 ?>
-    <?php include('../administrador/modal.php');?>
     <!------------------------------- ########## LISTA DE VALES ########## -------------------------->
     <style>
 
@@ -110,6 +109,8 @@ include('header.php');
                                 class="fa fa-times"></i></button>
                         <button title="Imprimir" type="button" class="btn btn-secondary"><i
                                 class="fa fa-file-pdf-o"></i></button>
+                        <button title="ver historial" onclick="histvalepro()" data-toggle="modal" data-target="#modal-vphistorial" type="button" class="btn btn-primary"><i
+                                class="fa fa-history"></i></button>
                     </div>
                 </div><!-- col-5 -->
                 <div class="br-section-wrapper">
@@ -266,10 +267,10 @@ include('header.php');
                                                 type="button" style="display:none;" onclick="liberarm()"
                                                 class="btn btn-dark pd-x-25">Liberar</button>
                                             <button id="btnvpsurtir" name="btnvpsurtir" type="button"
-                                                style="display:none;" onclick="surtirme()"
+                                                style="display:none;" onclick="surtidovp()"
                                                 class="btn btn-indigo pd-x-25">Surtir</button>
                                             <button id="btnvpfinaliz" name="btnvpfinaliz" type="button"
-                                                style="display:none;" onclick="finalimemo()"
+                                                style="display:none;" onclick="finalizarvp()"
                                                 class="btn btn-success pd-x-25">Finalizar</button>
                                         </div>
 
@@ -378,7 +379,6 @@ include('header.php');
     <script src="../controller/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../controller/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <?php include('../administrador/modal.php');?>
     <script type="text/javascript">
     // TABLA INSPECTORES EXTERNOS//
     let table = $('#example').DataTable({

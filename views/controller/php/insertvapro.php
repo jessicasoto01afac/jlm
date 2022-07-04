@@ -329,7 +329,7 @@ if(!isset($usuario)){
             }else{
                 echo "1";
             }
-     //Condición donde libera el vale de produccción
+     //Condición donde libera el vale de produccción 
     }else if($opcion === 'liberarvp'){
         $foliovp = $_POST['foliovp'];
             if (liberarvpro ($foliovp,$conexion)){
@@ -349,14 +349,87 @@ if(!isset($usuario)){
         if (surtirart ($id_kax,$refe_1,$codigo_1,$cantidad,$descripcion,$observa_dep,$conexion)){
             echo "0";
             //$usuario='PRUEBAS';
-            //hisliber($usuario,$foliovp,$conexion); 
+            hisurtir2($usuario,$refe_1,$codigo_1,$conexion); 
         }else{
             echo "1";
         }
+    //editar surtir 
+    }else if($opcion === 'edthsurtir'){
+        $id_kax = $_POST['id_kax'];
+        $refe_1 = $_POST['refe_1'];
+        $cantidad = $_POST['cantidad'];
+        $observa_dep = $_POST['observa_dep'];
+        $descrip = $_POST['descrip'];
+        
+        if (surtirartupda ($id_kax,$refe_1,$cantidad,$observa_dep,$conexion)){
+            echo "0";
+            //$usuario='PRUEBAS';
+            hisupdasurtir($usuario,$refe_1,$descrip,$conexion); 
+        }else{
+            echo "1";
+        }
+    }else if($opcion === 'surtirfin'){
+        $id_kax = $_POST['id_kax'];
+        $refe_1 = $_POST['refe_1'];
+        $codigo_1 = $_POST['codigo_1'];
+        $cantidad = $_POST['cantidad'];
+        $descripcion = $_POST['descripcion'];
+        $observa_dep = $_POST['observa_dep'];
+        if (surtirartfn ($id_kax,$refe_1,$codigo_1,$cantidad,$descripcion,$observa_dep,$conexion)){
+            echo "0";
+            //$usuario='PRUEBAS';
+            hisurtir2($usuario,$refe_1,$codigo_1,$conexion); 
+        }else{
+            echo "1";
+        }
+    //editar surtir producto fin
+    }else if($opcion === 'edthsurtirfin'){
+        $id_kax = $_POST['id_kax'];
+        $refe_1 = $_POST['refe_1'];
+        $cantidad = $_POST['cantidad'];
+        $observa_dep = $_POST['observa_dep'];
+        $descrip = $_POST['descrip'];
+        
+        if (surtirartupdafin ($id_kax,$refe_1,$cantidad,$observa_dep,$conexion)){
+            echo "0";
+            //$usuario='PRUEBAS';
+            hisupdasurtir($usuario,$refe_1,$descrip,$conexion); 
+        }else{
+            echo "1";
+        }
+    }else if($opcion === 'surtirvp'){
+        $folio = $_POST['folio'];
+            if (surtir1($folio,$conexion)){
+                echo "0";
+                surtir2($usuario,$folio,$conexion);
+                histsurt($usuario,$folio,$conexion);
+            }else{
+                echo "1";
+            }
+    }else if($opcion === 'sinexistencia'){
+        $id_kax = $_POST['id_kax'];
+        $refe_1 = $_POST['refe_1'];
+        $codigo_1 = $_POST['codigo_1'];
+        $observa_dep = $_POST['observa_dep'];
+        if (sinexiste ($id_kax,$refe_1,$codigo_1,$observa_dep,$conexion)){
+            echo "0";
+            //$usuario='PRUEBAS';
+            histnoexist($usuario,$refe_1,$codigo_1,$conexion); 
+        }else{
+            echo "1";
+        }
+        //finalizar1
+    }else if($opcion === 'finalvp'){
+        $folio = $_POST['folio'];
+            if (finalizar1($folio,$conexion)){
+                echo "0";
+                finalizar2($usuario,$folio,$conexion);
+                histfinal($usuario,$folio,$conexion);
+            }else{
+                echo "1";
+            }
     }
     
-
-
 //FUNCIONES-----------------------------------------------------------------------------------------------------------------------------------------
 
 //funcion de comprobación para ver si el vale ya se encuentra en la base
@@ -606,7 +679,7 @@ function autorizar1 ($folio,$conexion){
 function autorizar2 ($usuario,$folio,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query="UPDATE productividad SET fecha_autorizacion='$fecha', id_person_surtio='$usuario' WHERE referencia_1 = '$folio'";
+    $query="UPDATE productividad SET fecha_autorizacion='$fecha', id_person_autor='$usuario' WHERE referencia_1 = '$folio'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -618,7 +691,19 @@ function autorizar2 ($usuario,$folio,$conexion){
 
 //funcion para surtir +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function surtir1 ($folio,$conexion){
-    $query="UPDATE kardex SET status='SURTIDO' WHERE refe_1 = '$folio' AND tipo='VALE_OFICINA'";
+    $query="UPDATE kardex SET status='SURTIDO' WHERE refe_1 = '$folio' AND tipo='VALE_PRODUCCION'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
+function surtir2 ($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query="UPDATE productividad SET fecha_surtido='$fecha', id_person_surtio='$usuario' WHERE referencia_1 = '$folio'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -636,10 +721,8 @@ function surtirart ($id_kax,$refe_1,$codigo_1,$cantidad,$descripcion,$observa_de
     }
     cerrar($conexion);
 }
-
-//funcion para finalizar
-function finalizar1 ($folio,$conexion){
-    $query="UPDATE kardex SET status='FINALIZADO' WHERE refe_1 = '$folio' AND tipo='VALE_OFICINA'";
+function surtirartfn ($id_kax,$refe_1,$codigo_1,$cantidad,$descripcion,$observa_dep,$conexion){
+    $query="UPDATE kardex SET status_2 ='SURTIDO',entrada='$cantidad',codigo_1='$codigo_1',descripcion_1='$descripcion',observa_dep='$observa_dep' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION' AND id_kax =$id_kax";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -647,7 +730,58 @@ function finalizar1 ($folio,$conexion){
     }
     cerrar($conexion);
 }
-//funcion para LIBERAR vale
+function surtirartupda ($id_kax,$refe_1,$cantidad,$observa_dep,$conexion){
+    $query="UPDATE kardex SET salida='$cantidad',observa_dep='$observa_dep' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION' AND id_kax =$id_kax";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+function surtirartupdafin ($id_kax,$refe_1,$cantidad,$observa_dep,$conexion){
+    $query="UPDATE kardex SET entrada='$cantidad',observa_dep='$observa_dep' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION' AND id_kax =$id_kax";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion que marca sin existencia 
+function sinexiste ($id_kax,$refe_1,$codigo_1,$observa_dep,$conexion){
+    $query="UPDATE kardex SET salida=0,entrada=0,observa_dep='$observa_dep',status_2='SIN EXISTENCIAS' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION' AND id_kax =$id_kax";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
+//funcion para finalizar
+function finalizar1 ($folio,$conexion){
+    $query="UPDATE kardex SET status='FINALIZADO' WHERE refe_1 = '$folio' AND tipo='VALE_PRODUCCION'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//FINALIZAR2
+function finalizar2 ($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query="UPDATE productividad SET fecha_finalizacion='$fecha', id_person_final='$usuario' WHERE referencia_1 = '$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para LIBERAR vale surtirvpf(593);
 function liberarvpro($foliovp,$conexion){
     $query="UPDATE kardex SET status='PENDIENTE' WHERE refe_1 = '$foliovp' AND tipo='VALE_PRODUCCION'";
     if(mysqli_query($conexion,$query)){
@@ -788,17 +922,7 @@ function histaut($usuario,$folio,$conexion){
         return false;
     }
 }
-//funciones para guardar el historico SURTIDO
-function hisurtir($usuario,$folio,$conexion){
-    ini_set('date.timezone','America/Mexico_City');
-    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'SURTE VALE DE OFICINA', 'FOLIO:' '$folio','$fecha1')";
-    if(mysqli_query($conexion,$query)){
-        return true;
-    }else{
-        return false;
-    }
-}
+
 //funciones para guardar el historico FINALIZADO
 function hisfinal($usuario,$folio,$conexion){
     ini_set('date.timezone','America/Mexico_City');
@@ -810,11 +934,78 @@ function hisfinal($usuario,$folio,$conexion){
         return false;
     }
 }
+//funciones para guardar el historico SURTIDO
+function hisurtir($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'SURTE VALE DE OFICINA', 'FOLIO:' '$folio','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funciones para guardar el historico de surtir
+function hisurtir2($usuario,$refe_1,$codigo_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'SURTE EL VALE DE PRODUCCIÓN', 'FOLIO:' '$refe_1' ' ARTICULO:' ' $codigo_1','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funciones para guardar el historico liberar
+function hisupdasurtir($usuario,$refe_1,$descrip,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'ACTUALIZA ARTICULO SURTIDO', 'FOLIO:' '$refe_1 ' 'ARTICULO: ' ' $descrip','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
 //funciones para guardar el historico liberar
 function hisliber($usuario,$foliovp,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario', 'LIBERA VALE DE PRODUCCIÓN', 'FOLIO:' '$foliovp','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funciones para guardar el historico liberar
+function histsurt($usuario,$foliovp,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'SURTE EL VALE DE PRODUCCIÓN', 'FOLIO:' '$foliovp','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funciones para guardar el historico sin existencias
+function histnoexist($usuario,$refe_1,$codigo_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'MARCA NO HAY EXISTENCIAS AL ARTICULO', 'VALE DE PRODUCCIÓN FOLIO:' '$refe_1' 'ARTICULO ' ' $codigo_1','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//funciones para guardar el historico liberar
+function histfinal($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'FINALIZA EL VALE', 'FOLIO:' '$folio','$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

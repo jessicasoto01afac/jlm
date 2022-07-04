@@ -37,8 +37,6 @@
 
 include('header.php');
 ?>
-    <?php include('../administrador/modal.php');?>
-    <!------------------------------- ########## LISTA DE VALES ########## -------------------------->
     <style>
 
     </style>
