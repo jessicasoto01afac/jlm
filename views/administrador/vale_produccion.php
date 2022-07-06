@@ -55,7 +55,8 @@ include('header.php');
                     <br>
                     <br>
                     <br>
-                    <table class="display table table-striped dataTable responsive no-footer dtr-inline" id="example"
+                    <div class="table-wrapper rounded table-responsive"> 
+                    <table class="table display dataTable no-footer" id="example"
                         style="width:100%">
                         <thead>
                             <tr>
@@ -71,6 +72,7 @@ include('header.php');
                             </tr>
                         </thead>
                     </table>
+                    </div>
                 </div><!-- br-section-wrapper -->
             </div><!-- br-pagebody -->
             <footer class="br-footer">
@@ -357,7 +359,7 @@ include('header.php');
         </div>
       </footer>
     </section>
-    
+    <?php include('../administrador/modal.php');?>
 
     <script src="../template/lib/jquery/jquery.js"></script>
     <script src="../template/lib/popper.js/popper.js"></script>

@@ -189,7 +189,7 @@ include('header.php');
                         <input class="form-control" type="date" id="vpfechafin" name="vpfechafin" value="2022-12-31"
                             placeholder="">
                         <button
-                            class="btn btn-info pd-y-13 pd-x-20 bd-0 mg-md-l-10 mg-t-10 mg-md-t-0 tx-uppercase tx-11 tx-spacing-2" onclick="recargarg2()">Validar Filtro</button>
+                            class="btn btn-primary pd-y-13 pd-x-20 bd-0 mg-md-l-10 mg-t-10 mg-md-t-0 tx-uppercase tx-11 tx-spacing-2" onclick="recargarg2()">Validar Filtro</button>
                     </div>
                 </div><!-- d-flex -->
             </div>
