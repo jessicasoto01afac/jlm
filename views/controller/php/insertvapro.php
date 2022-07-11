@@ -70,7 +70,7 @@ if(!isset($usuario)){
             
             if (registrarind($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion)){
                 echo "0";
-                historial($usuario,$refe_1,$codigo_1,$conexion);
+                historialinv($usuario,$refe_1,$codigo_1,$cantidad_real,$conexion);
             }else{
                 echo "1";
             }
@@ -216,7 +216,7 @@ if(!isset($usuario)){
         $observa = $_POST['observa'];
         if (actualizarnewext($id_kax,$codigo_1,$descripcion_1,$salida,$tipo_ref,$observa,$conexion)){
             echo "0";
-            $realizo = 'EDITA EL ARTICULO AGREGADO';
+            $realizo = 'EDITA EL ARTICULO AGREGADO DEL VALE DE PRODUCCIÓN';
             // $usuario='pruebas';
             histedith($usuario,$realizo,$id_kax,$conexion);
         }else{
@@ -225,11 +225,12 @@ if(!isset($usuario)){
         //updateexten
     }else if($opcion === 'deleartnew'){
         $id_kardex = $_POST['id_kardex'];
+        $codigo_1 = $_POST['codigo_1'];
         if (eliminar($id_kardex,$conexion)){
             echo "0";
-            $realizo = 'EDITA EL ARTICULO AGREGADO';
+            $realizo = 'ELIMINA ARTICULO DEL VALE DE PRODUCCIÓN';
             // $usuario='pruebas';
-            histdelete($usuario,$realizo,$id_kardex,$conexion);
+            histdelete($usuario,$realizo,$id_kardex,$codigo_1,$conexion);
         }else{
             echo "1";
         }
@@ -263,9 +264,8 @@ if(!isset($usuario)){
         if (actualizacabe($refe_1,$fecha,$refe_3,$refe_2,$proveedor_cliente,$ubicacion,$estado,$conexion)){
             echo "0";
             actucabez2($refe_1,$caracter_vale,$id_person_creacion,$id_person_autor,$id_person_surtio,$fecha_surtido,$id_person_final,$fecha_finalizacion,$conexion);
-           // $realizo = 'EDITA LA CABECERA DEL VALE DE PRODUCIÓN';
-            // $usuario='pruebas';
-            //histedithvp($usuario,$realizo,$id_kax,$conexion);
+            $realizo = 'EDITA LA CABECERA DEL VALE DE PRODUCIÓN';
+            histecabe($usuario,$realizo,$refe_1,$conexion);
         }else{
             echo "1";
         }
@@ -312,7 +312,7 @@ if(!isset($usuario)){
             $tipo_ref = $_POST['tipo_ref'];
             if (regstindpf($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion)){
                 echo "0";
-                historial($usuario,$refe_1,$codigo_1,$conexion);
+                historialinvfin($usuario,$refe_1,$codigo_1,$cantidad_real,$conexion);
             }else{
                 echo "1";
             }
@@ -325,7 +325,7 @@ if(!isset($usuario)){
             if (autorizar1($folio,$conexion)){
                 echo "0";
                 autorizar2($usuario,$folio,$conexion);
-                //histedith($usuario,$folio,$conexion);
+                histautoriza($usuario,$folio,$conexion);
             }else{
                 echo "1";
             }
@@ -349,7 +349,7 @@ if(!isset($usuario)){
         if (surtirart ($id_kax,$refe_1,$codigo_1,$cantidad,$descripcion,$observa_dep,$conexion)){
             echo "0";
             //$usuario='PRUEBAS';
-            hisurtir2($usuario,$refe_1,$codigo_1,$conexion); 
+            hisurtir2($usuario,$refe_1,$codigo_1,$cantidad,$conexion); 
         }else{
             echo "1";
         }
@@ -360,11 +360,12 @@ if(!isset($usuario)){
         $cantidad = $_POST['cantidad'];
         $observa_dep = $_POST['observa_dep'];
         $descrip = $_POST['descrip'];
+        $status2 = $_POST['status2'];
         
-        if (surtirartupda ($id_kax,$refe_1,$cantidad,$observa_dep,$conexion)){
+        if (surtirartupda ($id_kax,$refe_1,$cantidad,$observa_dep,$status2,$conexion)){
             echo "0";
             //$usuario='PRUEBAS';
-            hisupdasurtir($usuario,$refe_1,$descrip,$conexion); 
+            hisupdasurtir($usuario,$refe_1,$descrip,$cantidad,$conexion); 
         }else{
             echo "1";
         }
@@ -378,7 +379,7 @@ if(!isset($usuario)){
         if (surtirartfn ($id_kax,$refe_1,$codigo_1,$cantidad,$descripcion,$observa_dep,$conexion)){
             echo "0";
             //$usuario='PRUEBAS';
-            hisurtir2($usuario,$refe_1,$codigo_1,$conexion); 
+            hisurtir2($usuario,$refe_1,$codigo_1,$cantidad,$conexion); 
         }else{
             echo "1";
         }
@@ -389,11 +390,12 @@ if(!isset($usuario)){
         $cantidad = $_POST['cantidad'];
         $observa_dep = $_POST['observa_dep'];
         $descrip = $_POST['descrip'];
-        
-        if (surtirartupdafin ($id_kax,$refe_1,$cantidad,$observa_dep,$conexion)){
+        $status2 = $_POST['status2'];
+
+        if (surtirartupdafin ($id_kax,$refe_1,$cantidad,$observa_dep,$status2,$conexion)){
             echo "0";
             //$usuario='PRUEBAS';
-            hisupdasurtir($usuario,$refe_1,$descrip,$conexion); 
+            hisupdasurtir($usuario,$refe_1,$descrip,$cantidad,$conexion); 
         }else{
             echo "1";
         }
@@ -428,6 +430,48 @@ if(!isset($usuario)){
             }else{
                 echo "1";
             }
+    //Actualiza la informacion de no surtir extendido y etiqueta
+    }else if($opcion === 'edthsinexis'){
+        $id_kax = $_POST['id_kax'];
+        $refe_1 = $_POST['refe_1'];
+        $cantidad = $_POST['cantidad'];
+        $observa_dep = $_POST['observa_dep'];
+        $descrip = $_POST['descrip'];
+        $status2 = $_POST['status2'];
+        
+        if (sinexistartupda ($id_kax,$refe_1,$cantidad,$observa_dep,$status2,$conexion)){
+            echo "0";
+            //$usuario='PRUEBAS';
+            hisupdasurtir($usuario,$refe_1,$descrip,$cantidad,$conexion); 
+        }else{
+            echo "1";
+        }
+    //Actualiza la informacion de no surtir producto final
+    }else if($opcion === 'edthsinexisfin'){
+        $id_kax = $_POST['id_kax'];
+        $refe_1 = $_POST['refe_1'];
+        $cantidad = $_POST['cantidad'];
+        $observa_dep = $_POST['observa_dep'];
+        $descrip = $_POST['descrip'];
+        $status2 = $_POST['status2'];
+        
+        if (snextartupdafn ($id_kax,$refe_1,$cantidad,$observa_dep,$status2,$conexion)){
+            echo "0";
+            //$usuario='PRUEBAS';
+            hisupdasurtir($usuario,$refe_1,$descrip,$cantidad,$conexion); 
+        }else{
+            echo "1";
+        }
+    //Actualiza la relacion de sistema JML
+    }else if($opcion === 'revisionac'){
+        $revision = $_POST['revision'];
+        $refe_1 = $_POST['refe_1'];
+        if (jlmrelacion ($revision,$refe_1,$conexion)){
+            echo "0";
+        }else{
+            echo "1";
+        }
+        //edthsinexisfin
     }
     
 //FUNCIONES-----------------------------------------------------------------------------------------------------------------------------------------
@@ -600,6 +644,16 @@ function cancelar ($refe_1,$conexion){
     }
     cerrar($conexion);
 }
+//funcion para actualizar JLM relacion
+function jlmrelacion ($revision,$refe_1,$conexion){
+    $query="UPDATE kardex SET revision='$revision' WHERE refe_1 = '$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //funcion para actualizar el registro
 function actualizarnew ($id_kax,$codigo_1,$descripcion_1,$salida,$tipo_ref,$observa,$conexion){
     $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1', cantidad_real=$salida,entrada=0,salida=$salida,tipo_ref='$tipo_ref' ,observa='$observa' WHERE id_kax = '$id_kax'";
@@ -730,8 +784,9 @@ function surtirartfn ($id_kax,$refe_1,$codigo_1,$cantidad,$descripcion,$observa_
     }
     cerrar($conexion);
 }
-function surtirartupda ($id_kax,$refe_1,$cantidad,$observa_dep,$conexion){
-    $query="UPDATE kardex SET salida='$cantidad',observa_dep='$observa_dep' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION' AND id_kax =$id_kax";
+//funcion para actualizar surtido
+function surtirartupda ($id_kax,$refe_1,$cantidad,$observa_dep,$status2,$conexion){
+    $query="UPDATE kardex SET salida='$cantidad',observa_dep='$observa_dep',status_2='$status2' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION' AND id_kax =$id_kax";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -739,8 +794,28 @@ function surtirartupda ($id_kax,$refe_1,$cantidad,$observa_dep,$conexion){
     }
     cerrar($conexion);
 }
-function surtirartupdafin ($id_kax,$refe_1,$cantidad,$observa_dep,$conexion){
-    $query="UPDATE kardex SET entrada='$cantidad',observa_dep='$observa_dep' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION' AND id_kax =$id_kax";
+//funcion para actualizar sin existencia extendido y etiquetas
+function sinexistartupda ($id_kax,$refe_1,$cantidad,$observa_dep,$status2,$conexion){
+    $query="UPDATE kardex SET salida='$cantidad',observa_dep='$observa_dep',status_2='$status2' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION' AND id_kax =$id_kax";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para actualizar sin existencia articulo final
+function snextartupdafn ($id_kax,$refe_1,$cantidad,$observa_dep,$status2,$conexion){
+    $query="UPDATE kardex SET entrada='$cantidad',observa_dep='$observa_dep',status_2='$status2' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION' AND id_kax =$id_kax";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+function surtirartupdafin ($id_kax,$refe_1,$cantidad,$observa_dep,$status2,$conexion){
+    $query="UPDATE kardex SET entrada='$cantidad',observa_dep='$observa_dep',status_2='$status2' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION' AND id_kax =$id_kax";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -798,7 +873,40 @@ function liberarvpro($foliovp,$conexion){
 function historial($usuario,$refe_1,$codigo_1,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE PRODUCCIÓN', 'CODIGO:' ' $refe_1' ' ARTICULO:' ' $codigo_1','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE PRODUCCIÓN', 'FOLIO:' '$refe_1' ' ARTICULO:' ' $codigo_1','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funcion para registra articulo individual
+function historialinv($usuario,$refe_1,$codigo_1,$cantidad_real,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN ARTICULO AL VALE DE PRODUCCIÓN', 'FOLIO:' '$refe_1' ' ARTICULO:' ' $codigo_1' ' CANTIDAD:' ' $cantidad_real','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funcion para registra articulo individual ARTICULO FINAL
+function historialinvfin($usuario,$refe_1,$codigo_1,$cantidad_real,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN ARTICULO AL VALE DE PRODUCCIÓN', 'FOLIO:' '$refe_1' ' ARTICULO:' ' $codigo_1' ' CANTIDAD:' ' $cantidad_real','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funcion para registra historial de autorización
+function histautoriza($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AUTORIZA VALE DE PRODUCCIÓN', 'FOLIO:' '$folio','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -809,7 +917,7 @@ function historial($usuario,$refe_1,$codigo_1,$conexion){
 function historialcar($usuario,$refe_1,$codigocart,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE PRODUCCIÓN', 'CODIGO:' ' $refe_1' ' ARTICULO:' ' $codigocart','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE PRODUCCIÓN', 'FOLIO:' '$refe_1' ' ARTICULO:' ' $codigocart','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -820,7 +928,7 @@ function historialcar($usuario,$refe_1,$codigocart,$conexion){
 function historialcarsll($usuario,$refe_1,$codigocartons,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE PRODUCCIÓN', 'CODIGO:' ' $refe_1' ' ARTICULO:' '$codigocartons','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE PRODUCCIÓN', 'FOLIO:' '$refe_1' ' ARTICULO:' '$codigocartons','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -831,7 +939,7 @@ function historialcarsll($usuario,$refe_1,$codigocartons,$conexion){
 function historialcaple($usuario,$refe_1,$codigocaple,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE PRODUCCIÓN', 'CODIGO:' ' $refe_1' ' ARTICULO: ' '$codigocaple','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE PRODUCCIÓN', 'FOLIO:' '$refe_1' ' ARTICULO: ' '$codigocaple','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -842,7 +950,7 @@ function historialcaple($usuario,$refe_1,$codigocaple,$conexion){
 function historialist($usuario,$refe_1,$codigolist,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE PRODUCCIÓN', 'CODIGO:' ' $refe_1' ' ARTICULO:' ' $codigolist','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE PRODUCCIÓN', 'FOLIO:' '$refe_1' ' ARTICULO:' ' $codigolist','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -853,7 +961,18 @@ function historialist($usuario,$refe_1,$codigolist,$conexion){
 function histedith($usuario,$realizo,$id_kax,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', concat('CODIGO:',(select refe_1 from kardex where id_kax  = '$id_kax')),'$fecha1')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', concat('FOLIO:',(select refe_1 from kardex where id_kax  = '$id_kax')),'$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funciones para guardar el historico de la edicion de la cabecera
+function histecabe($usuario,$realizo,$refe_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'FOLIO:' '$refe_1','$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -863,17 +982,17 @@ function histedith($usuario,$realizo,$id_kax,$conexion){
 function histcambio($usuario,$codigo_1,$salida,$costo,$total,$refe_1,$id_kax,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'EDITA ARTUCULO VALE OFICINA', 'ID: ' '$id_kax ' '$refe_1' ' CODIGO:' '$codigo_1'  ' SALIDA: '  ' $salida' ' COSTO:' ' $costo' ' TOTAL:' ' $total' ,'$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'EDITA ARTICULO VALE OFICINA', 'FOLIO:' '$id_kax ' '$refe_1' ' CODIGO:' '$codigo_1'  ' SALIDA: '  ' $salida' ' COSTO:' ' $costo' ' TOTAL:' ' $total' ,'$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
         return false;
     }
 }
-function histdelete($usuario,$realizo,$id_kardex,$conexion){
+function histdelete($usuario,$realizo,$id_kardex,$codigo_1,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', concat('VALE: ',(select refe_1 from kardex where id_kax  = '$id_kardex')),'$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', concat('FOLIO:',(select refe_1 from kardex where id_kax= '$id_kardex'), ' CODIGO: ' '$codigo_1'),'$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -890,66 +1009,11 @@ function histelimi($usuario,$realizo,$folio,$conexion){
         return false;
     }
 }
-function hisinexist($usuario,$realizo,$refe_1,$codigo_1,$conexion){
-    ini_set('date.timezone','America/Mexico_City');
-    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'VALE DE OFICINA FOLIO:' '$refe_1' ' ARTICULO: ' '$codigo_1','$fecha')";
-    if(mysqli_query($conexion,$query)){
-        return true;
-    }else{
-        return false;
-    }
-}
-function hisexist($usuario,$realizo,$cantidad,$refe_1,$codigo_1,$conexion){
-    ini_set('date.timezone','America/Mexico_City');
-    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'VALE DE OFICINA FOLIO:' '$refe_1' ' ARTICULO: ' '$codigo_1' ' CANTIDAD: ' '$cantidad' ,'$fecha')";
-    if(mysqli_query($conexion,$query)){
-        return true;
-    }else{
-        return false;
-    }
-}
-
-//funciones para guardar el historico
-function histaut($usuario,$folio,$conexion){
-    ini_set('date.timezone','America/Mexico_City');
-    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'AUTORIZA VALE DE OFICINA', 'FOLIO:' '$folio','$fecha1')";
-    if(mysqli_query($conexion,$query)){
-        return true;
-    }else{
-        return false;
-    }
-}
-
-//funciones para guardar el historico FINALIZADO
-function hisfinal($usuario,$folio,$conexion){
-    ini_set('date.timezone','America/Mexico_City');
-    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'FINALIZA VALE DE OFICINA', 'FOLIO:' '$folio','$fecha1')";
-    if(mysqli_query($conexion,$query)){
-        return true;
-    }else{
-        return false;
-    }
-}
-//funciones para guardar el historico SURTIDO
-function hisurtir($usuario,$folio,$conexion){
-    ini_set('date.timezone','America/Mexico_City');
-    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'SURTE VALE DE OFICINA', 'FOLIO:' '$folio','$fecha1')";
-    if(mysqli_query($conexion,$query)){
-        return true;
-    }else{
-        return false;
-    }
-}
 //funciones para guardar el historico de surtir
-function hisurtir2($usuario,$refe_1,$codigo_1,$conexion){
+function hisurtir2($usuario,$refe_1,$codigo_1,$cantidad,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'SURTE EL VALE DE PRODUCCIÓN', 'FOLIO:' '$refe_1' ' ARTICULO:' ' $codigo_1','$fecha1')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'SURTE ARTICULO DEL VALE DE PRODUCCIÓN', 'FOLIO:' '$refe_1' ' ARTICULO:' ' $codigo_1 ' 'CANTIDAD: ' '$cantidad' ,'$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -957,10 +1021,10 @@ function hisurtir2($usuario,$refe_1,$codigo_1,$conexion){
     }
 }
 //funciones para guardar el historico liberar
-function hisupdasurtir($usuario,$refe_1,$descrip,$conexion){
+function hisupdasurtir($usuario,$refe_1,$descrip,$cantidad,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'ACTUALIZA ARTICULO SURTIDO', 'FOLIO:' '$refe_1 ' 'ARTICULO: ' ' $descrip','$fecha1')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'ACTUALIZA ARTICULO YA SURTIDO', 'FOLIO:' '$refe_1 ' 'ARTICULO: ' ' $descrip' ' CANTIDAD:' '$cantidad','$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -993,7 +1057,7 @@ function histsurt($usuario,$foliovp,$conexion){
 function histnoexist($usuario,$refe_1,$codigo_1,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'MARCA NO HAY EXISTENCIAS AL ARTICULO', 'VALE DE PRODUCCIÓN FOLIO:' '$refe_1' 'ARTICULO ' ' $codigo_1','$fecha1')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'MARCA QUE NO HAY EXISTENCIAS AL ARTICULO DEL VALE DE PRODUCCIÓN', 'FOLIO:' '$refe_1' ' ARTICULO: ' '$codigo_1','$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

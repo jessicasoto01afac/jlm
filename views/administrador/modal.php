@@ -2820,7 +2820,7 @@
         </div>
     </div><!-- modal-dialog -->
 </div><!-- modal -->
-<!-- !-- MODAL DE DETALLES SURTIDO--> -->
+<!-- !-- MODAL DE DETALLES SURTIDO-->
 <div class="modal fade" id='modal-surtido'>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -2847,7 +2847,7 @@
                     <div style="display:none" id="editarsur" name="editarsur">
                         <div align="left" class="form-group">
                             <label for="my-textarea" style="color:#03065B" class="tx-left">Cantidad:</label>
-                            <input class="form-control" type="text" name="cnsurt" id="cnsurt" placeholder="Cantidad:">
+                            <input class="form-control" type="number" name="cnsurt" id="cnsurt" placeholder="Cantidad:">
                         </div><!-- form-group -->
                         <div align="left" class="form-group">
                             <label for="my-textarea" style="color:#03065B" class="tx-left">Observaciones:</label>
@@ -2942,7 +2942,7 @@
                                 SURTIR</button>
                         </div>
                         <div class="col-lg-4">
-                            <button type="button" title="Dar click para marcar sin existencia" onclick="sinexisten()"
+                            <button type="button" title="Dar click para marcar sin existencia" onclick="sinexistenfin()"
                                 id="vprguarsurfn" style=""
                                 class="btn btn-danger tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">SIN
                                 EXISTENCIAS</button>
@@ -2976,7 +2976,7 @@
     </div><!-- modal-dialog -->
 </div><!-- modal -->
 
-<!-- !-- MODAL DE DETALLES SURTIDO PRODUCTO FINAL--> -->
+<!-- !-- MODAL DE DETALLES SURTIDO PRODUCTO FINAL-->
 <div class="modal fade" id='modal-surtidofin'>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -3003,7 +3003,7 @@
                     <div style="display:none" id="editarsurfn" name="editarsurfn">
                         <div align="left" class="form-group">
                             <label for="my-textarea" style="color:#03065B" class="tx-left">Cantidad:</label>
-                            <input class="form-control" type="text" name="cnsurtfin" id="cnsurtfin"
+                            <input class="form-control" type="number" name="cnsurtfin" id="cnsurtfin"
                                 placeholder="Cantidad:">
                         </div><!-- form-group -->
                         <div align="left" class="form-group">
@@ -3022,7 +3022,7 @@
     </div><!-- modal-dialog -->
 </div><!-- pd-y-50 -->
 
-<!-- !-- MODAL DE DETALLES SIN EXISTENCIA--> -->
+<!-- !-- MODAL DE DETALLES SIN EXISTENCIA-->
 <div class="modal fade" id='modal-sinexivp'>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -3049,14 +3049,60 @@
                     <div style="display:none" id="editarsinvp" name="editarsinvp">
                         <div align="left" class="form-group">
                             <label for="my-textarea" style="color:#03065B" class="tx-left">Cantidad:</label>
-                            <input class="form-control" type="text" name="cnsinvp" id="cnsinvp" placeholder="Cantidad:">
+                            <input class="form-control" type="number" name="cnsinvp" id="cnsinvp"
+                                placeholder="Cantidad:">
                         </div><!-- form-group -->
                         <div align="left" class="form-group">
                             <label for="my-textarea" style="color:#03065B" class="tx-left">Observaciones:</label>
                             <textarea onkeyup="mayus(this);" id="obdepsinvp" class="form-control" name="obdepsinvp"
                                 rows="2"></textarea>
                         </div>
-                        <button type="button" onclick="savesurtvp()"
+                        <button type="button" onclick="savesinextvp()"
+                            class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">
+                            Guardar cambios</button>
+                    </div><!-- modal-body -->
+                </div>
+            </div>
+
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- pd-y-50 -->
+<!-- !-- MODAL DE DETALLES SIN EXISTENCIA-->
+<div class="modal fade" id='modal-sinexifinvp'>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body tx-center pd-y-20 pd-x-20">
+                <input style="display:none" class="form-control" type="text" name="idsinexvpfin" id="idsinexvpfin">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <i class="icon icon ion-ios-close-outline tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
+                <h4 class="tx-danger mg-b-20">No fue surtido por falta de Existenciass</h4>
+                <div class="card-body pd-x-20 pd-xs-10">
+                    <p class="mg-b-30 tx-16" id="descsinvpfn" name="descsinvpfn"></p>
+                    <p class="mg-b-30 tx-16">"INFORMACIÓN DEL ARTICULO"</p>
+                    <a align="left" id="opesurt1snfn" name="opesurt1snfn" class="tx-20"
+                        href="javascript:opedithsexvpfn()">EDITAR</a>
+                    <a align="left" style="display:none" id="clossurt1snfn" name="clossurt1snfn" class="tx-20"
+                        href="javascript:closedithsnexfn()">CERRAR</a>
+                    <div id="infsursnfn" name="infsursnfn">
+                        <p class="mg-b-20 mg-x-20 tx-16 tx-blue"><b>CANTIDAD: </b><label class="tx-16" id="cartsinvpfn"
+                                name="cartsinvpfn"></label>
+                        <p class="tx-16 tx-blue"><b>OBSERVACIONES:</b></p> <label class="tx-16" id="opstsinvpfn"
+                            name="opstsinvpfn"></label></p>
+                    </div>
+                    <div style="display:none" id="editarsinvpfn" name="editarsinvpfn">
+                        <div align="left" class="form-group">
+                            <label for="my-textarea" style="color:#03065B" class="tx-left">Cantidad:</label>
+                            <input class="form-control" type="number" name="cnsinvpfn" id="cnsinvpfn"
+                                placeholder="Cantidad:">
+                        </div><!-- form-group -->
+                        <div align="left" class="form-group">
+                            <label for="my-textarea" style="color:#03065B" class="tx-left">Observaciones:</label>
+                            <textarea onkeyup="mayus(this);" id="obdepsinvpfn" class="form-control" name="obdepsinvpfn"
+                                rows="2"></textarea>
+                        </div>
+                        <button type="button" onclick="savesinextvpfn()"
                             class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">
                             Guardar cambios</button>
                     </div><!-- modal-body -->
@@ -3076,14 +3122,24 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
+
             <div class="col-12">
                 <div class="card bd-0 pd-30">
                     <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Historial</h6>
-                    <p id="" name="" class="mg-b-0"><span class="square-8 rounded-circle bg-primary mg-r-10"></span>Fecha de creación:<label for="">1/01/2022</label></p>
-                    <p id="" name="" class="mg-b-0"><span class="square-8 rounded-circle bg-teal mg-r-10"></span>Fecha de autorización:<label for="">1/01/2022</label></p>
-                    <p id="" name="" class="mg-b-0"><span class="square-8 rounded-circle bg-purple mg-r-10"></span>Fecha de surtido:<label for="">1/01/2022</label></p>
-                    <p id="" name="" class="mg-b-0"><span class="square-8 rounded-circle bg-teal mg-r-10"></span>Fecha de Finalización:<label for="">1/01/2022</label></p>
-
+                    <p id="" name="" class="mg-b-0"><span
+                            class="square-8 rounded-circle bg-primary mg-r-10"></span>Fecha de creación:<label
+                            id="fcreacion" name="fcreacion" for=""></label></p>
+                    <p id="" name="" class="mg-b-0"><span class="square-8 rounded-circle bg-teal mg-r-10"></span>Fecha
+                        de autorización:<label id="fautoriz" name="fautoriz" for=""></label></p>
+                    <p id="" name="" class="mg-b-0"><span class="square-8 rounded-circle bg-purple mg-r-10"></span>Fecha
+                        de surtido:<label id="fsurtido" name="fsurtido" for=""></label></p>
+                    <p id="" name="" class="mg-b-0"><span class="square-8 rounded-circle bg-teal mg-r-10"></span>Fecha
+                        de Finalización:<label id="ffinaliz" name="ffinaliz" for=""></label></p>
+                    <div class="col-12" align="right">
+                        <span class="square-10 bg-primary mg-r-5"></span><span id="dias1" name="dias1"></span>
+                        <span class="square-10 bg-purple mg-r-5"></span><span id="dias2" name="dias2"></span>
+                        <span class="square-10 bg-teal mg-r-5"></span><span id="dias3" name="dias3"></span>
+                    </div>
                     <div class="mg-t-20 tx-13">
                         <a href="" class="tx-gray-600 hover-info">Generar Reporte</a>
                         <a href="" class="tx-gray-600 hover-info bd-l mg-l-10 pd-l-10">Imprimir Reporte</a>
@@ -3115,54 +3171,54 @@
             </div>
             <div class="col-12">
                 <!-- filtro de fechas -->
-            <div stclass="col-sm-4 col-lg-12">
-                <div class="d-flex align-items-center justify-content-end bg-gray-100 ht-md-80 bd pd-x-20 mg-t-10">
-                    <div class="d-md-flex pd-y-20">
-                        <label for="">Selecciona el periodo</label>
-                        
-                        <input class="form-control" disabled="" type="date" id="vpfechaini" name="vpfechaini" value="2022-01-01"
-                            placeholder="">
-                        <input class="form-control" disabled="" type="date" id="vpfechafin" name="vpfechafin" value="2022-12-31"
-                            placeholder="">
-                            
-                    </div>
-                </div><!-- d-flex -->
+                <div stclass="col-sm-4 col-lg-12">
+                    <div class="d-flex align-items-center justify-content-end bg-gray-100 ht-md-80 bd pd-x-20 mg-t-10">
+                        <div class="d-md-flex pd-y-20">
+                            <label for="">Selecciona el periodo</label>
+
+                            <input class="form-control" disabled="" type="date" id="vpfechaini" name="vpfechaini"
+                                value="2022-01-01" placeholder="">
+                            <input class="form-control" disabled="" type="date" id="vpfechafin" name="vpfechafin"
+                                value="2022-12-31" placeholder="">
+
+                        </div>
+                    </div><!-- d-flex -->
+                </div>
+
             </div>
-            
         </div>
-    </div>
-</div><!-- modal -->
+    </div><!-- modal -->
 
-<script>
-$(function() {
-    // showing modal with effect
-    $('.modal-effect').on('click', function() {
-        var effect = $(this).attr('data-effect');
-        $('#modaldemo8').addClass(effect, function() {
-            $('#modaldemo8').modal('show');
+    <script>
+    $(function() {
+        // showing modal with effect
+        $('.modal-effect').on('click', function() {
+            var effect = $(this).attr('data-effect');
+            $('#modaldemo8').addClass(effect, function() {
+                $('#modaldemo8').modal('show');
+            });
+            return false;
         });
-        return false;
-    });
-    // hide modal with effect
-    $('#modaldemo8').on('hidden.bs.modal', function(e) {
-        $(this).removeClass(function(index, className) {
-            return (className.match(/(^|\s)effect-\S+/g) || []).join(' ');
+        // hide modal with effect
+        $('#modaldemo8').on('hidden.bs.modal', function(e) {
+            $(this).removeClass(function(index, className) {
+                return (className.match(/(^|\s)effect-\S+/g) || []).join(' ');
+            });
         });
     });
-});
-$(document).ready(function() {
-    $('#busccodigo').load('select/buscar2.php');
-    $('#edicovinf').load('select/buscar3.php');
-    $('#edipeinfinf').load('select/buscar4.php');
-    $('#edicovinf1sur').load('select/buscar5.php');
-    $('#edimemo').load('select/buscar6.php');
-    $('#busccodigo2').load('select/buscar2.php');
-    $('#edicovinf2').load('select/buscar3.php');
+    $(document).ready(function() {
+        $('#busccodigo').load('select/buscar2.php');
+        $('#edicovinf').load('select/buscar3.php');
+        $('#edipeinfinf').load('select/buscar4.php');
+        $('#edicovinf1sur').load('select/buscar5.php');
+        $('#edimemo').load('select/buscar6.php');
+        $('#busccodigo2').load('select/buscar2.php');
+        $('#edicovinf2').load('select/buscar3.php');
 
 
 
 
 
 
-});
-</script>
+    });
+    </script>

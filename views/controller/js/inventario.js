@@ -1,22 +1,4 @@
 function cargainv() {
-    // TABLA INSPECTORES EXTERNOS//
-    /*let table = $('#inventario').DataTable({
-
-        "language": {
-            "searchPlaceholder": "Buscar datos...",
-            "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-        },
-        "order": [
-            [4, "DESC"]
-        ],
-        "ajax": "../controller/php/infinventario.php",
-        "columnDefs": [{
-            //  "targets": -1,
-            // "data": null,
-            //"defaultContent": ""
-
-        }]
-    });*/
     let date = new Date();
     let output = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') +
         '/' + date.getFullYear();

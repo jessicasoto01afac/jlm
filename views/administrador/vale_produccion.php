@@ -45,7 +45,7 @@ include('header.php');
         <!-- ########## START: MAIN PANEL ########## -->
         <div class="br-mainpanel">
             <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-                <h4 class="tx-gray-800 mg-b-5">VALE DE PRODUCCIÓN</h4>
+                <h4 class="tx-gray-800 mg-b-5">VALES DE PRODUCCIÓN</h4>
             </div>
 
             <div class="br-pagebody">
@@ -55,23 +55,22 @@ include('header.php');
                     <br>
                     <br>
                     <br>
-                    <div class="table-wrapper rounded table-responsive"> 
-                    <table class="table display dataTable no-footer" id="example"
-                        style="width:100%">
-                        <thead>
-                            <tr>
-                                <th style="width:5%;">ID</th>
-                                <th>FOLIO</th>
-                                <th>FECHA</th>
-                                <th>DEPARTAMENTO</th>
-                                <th>PEDIDO</th>
-                                <th>ESTATUS</th>
-                                <th>ACCIONES</th>
-                                <!-- <th>ESTATUS</th> -->
-                                <!-- <th style="width:15%; display: none;">ACCIÓN</th> -->
-                            </tr>
-                        </thead>
-                    </table>
+                    <div class="table-wrapper rounded table-responsive">
+                        <table class="table display dataTable no-footer" id="example" name="example" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%;">ID</th>
+                                    <th>FOLIO</th>
+                                    <th>FECHA</th>
+                                    <th>DEPARTAMENTO</th>
+                                    <th>PEDIDO</th>
+                                    <th>ESTATUS</th>
+                                    <th>ACCIONES</th>
+                                    <!-- <th>ESTATUS</th> -->
+                                    <!-- <th style="width:15%; display: none;">ACCIÓN</th> -->
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div><!-- br-section-wrapper -->
             </div><!-- br-pagebody -->
@@ -104,14 +103,16 @@ include('header.php');
             <div class="br-pagebody">
                 <div style="float: right;">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button onclick="editvaleproinf()" id="openedivpinf" name="openedivpinf" title="Dar clic para editar"
-                            type="button" class="btn btn-secondary btn btn-warning"><i class="fa fa-edit"></i></button>
+                        <button onclick="editvaleproinf()" id="openedivpinf" name="openedivpinf"
+                            title="Dar clic para editar" type="button" class="btn btn-secondary btn btn-secondary"><i
+                                class="fa fa-edit"></i></button>
                         <button onclick="closevaleproinf()" id="closedvp" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
-                        <button title="Imprimir" type="button" class="btn btn-secondary"><i
-                                class="fa fa-file-pdf-o"></i></button>
-                        <button title="ver historial" onclick="histvalepro()" data-toggle="modal" data-target="#modal-vphistorial" type="button" class="btn btn-primary"><i
+                        <button onclick="pdfvp()" style="display:none;" title="Imprimir" id="pdfvprod" name="pdfvprod"
+                            type="button" class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
+                        <button title="ver historial" onclick="histvalepro()" data-toggle="modal"
+                            data-target="#modal-vphistorial" type="button" class="btn btn-primary"><i
                                 class="fa fa-history"></i></button>
                     </div>
                 </div><!-- col-5 -->
@@ -237,8 +238,8 @@ include('header.php');
                                     <div class="form-group mg-md-l--1">
                                         <label class="form-control-label" style="font-size:14px">Fecha/surtido: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly type="date" id="infvpdatesurt" name="infvpdatesurt"
-                                            placeholder="Enter lastname">
+                                        <input class="form-control" readonly type="date" id="infvpdatesurt"
+                                            name="infvpdatesurt" placeholder="Enter lastname">
                                     </div>
                                 </div><!-- col-3 -->
                                 <div class="col-md-4">
@@ -253,11 +254,11 @@ include('header.php');
                                     <div class="form-group mg-md-l--1">
                                         <label class="form-control-label" style="font-size:14px">Fecha/Recibio: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly type="date" id="infvpdaterecibio" name="infvpdaterecibio"
-                                            placeholder="Enter lastname">
+                                        <input class="form-control" readonly type="date" id="infvpdaterecibio"
+                                            name="infvpdaterecibio" placeholder="Enter lastname">
                                     </div>
                                 </div><!-- col-3 -->
-                                <div class="col-md-8">
+                                <div class="col-md-6">
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">ACCIONES: <span
                                                 class="tx-danger">*</span></label>
@@ -277,8 +278,15 @@ include('header.php');
                                         </div>
 
                                     </div>
+                                </div><!-- col-6 -->
+                                <div class="col-md-3">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">RELACIÓN JLM/ <a href="javascript:savevrevicion()">Guardar</a></label>
+                                        <textarea onkeyup="mayus(this);" rows="2" class="form-control"
+                                            name="relajlm" id="relajlm" placeholder="JLM"></textarea>
+                                    </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group mg-md-l--1 bd-t-0-force">
                                         <label class="form-control-label mg-b-0-force" style="font-size:14px">ESTATUS:
                                             <span class="tx-danger">*</span></label>
@@ -327,7 +335,8 @@ include('header.php');
                                 </div><!-- d-flex -->
                             </div><!-- alert -->
                             <div>
-                                <button type="button" data-toggle='modal' style="display:none; background-color: #009C28;" data-target='#modal-addartvpinfo'
+                                <button type="button" data-toggle='modal'
+                                    style="display:none; background-color: #009C28;" data-target='#modal-addartvpinfo'
                                     onclick="" id="vpaddartinf"
                                     class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i
                                         class="fa fa-plus"></i> AGREGAR ARTICULO</button>
@@ -349,15 +358,17 @@ include('header.php');
                 </div>
             </div><!-- br-pagebody -->
             <footer class="br-footer">
-        <div class="footer-left">
-        <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
-          <div>Jose Luis Mondragon y CIA.</div>
-        </div>
-        <div class="footer-right d-flex align-items-center">
-          <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i class="fa fa-facebook tx-20"></i></a>
-          <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i class="fa fa-globe tx-20"></i></a>
-        </div>
-      </footer>
+                <div class="footer-left">
+                    <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
+                    <div>Jose Luis Mondragon y CIA.</div>
+                </div>
+                <div class="footer-right d-flex align-items-center">
+                    <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i
+                            class="fa fa-facebook tx-20"></i></a>
+                    <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i
+                            class="fa fa-globe tx-20"></i></a>
+                </div>
+            </footer>
     </section>
     <?php include('../administrador/modal.php');?>
 
@@ -381,25 +392,15 @@ include('header.php');
     <script src="../controller/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../controller/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
     <script type="text/javascript">
     // TABLA INSPECTORES EXTERNOS//
-    let table = $('#example').DataTable({
-
-        "language": {
-            "searchPlaceholder": "Buscar datos...",
-            "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-        },
-        "order": [
-            [6, "DESC"]
-        ],
-        "ajax": "../controller/php/infvalprodu.php",
-        "columnDefs": [{
-            //  "targets": -1,
-            // "data": null,
-            //"defaultContent": ""
-
-        }]
-    });
+    openvalepr();
     </script>
 
 
