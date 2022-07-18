@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <?php include ("../controller/conexion.php");
-      $sql = "SELECT MAX(refe_1) + 1 AS id_memo FROM kardex where tipo ='MEMO'";
+      $sql = "SELECT MAX(folio) AS id_foliovp FROM folios where tipo ='MEMO' AND estado_f=0";
       $foliomemo = mysqli_query($conexion,$sql);
       $folio = mysqli_fetch_row($foliomemo);
-
 
       $sql = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
       $articulo = mysqli_query($conexion,$sql);
@@ -14,15 +13,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
     <link rel="shortcut icon" href="../template/img/logo.png" />
-
     <!-- Meta -->
     <meta name="author" content="Jessica Soto">
-
     <title>JLM|Agregar Memos</title>
-
     <!-- vendor css -->
     <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../template/lib/Ionicons/css/ionicons.css" rel="stylesheet">
@@ -31,17 +25,11 @@
     <link href="../template/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
     <script type="text/javascript" language="javascript" src="../datas/jquery-3.js"></script>
     <script type="text/javascript" async="" src="../datas/ga.js"></script>
-
     <script src="../template/js/sweetalert2.all.min.js"></script>
     <script src="../template/lib/select2/js/select2.min.js"></script>
     <link href="../template/lib/highlightjs/github.css" rel="stylesheet">
     <link href="../template/lib/jquery.steps/jquery.steps.css" rel="stylesheet">
     <script src="../controller/js/memos.js"></script>
-
-
-
-
-
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
 </head>
@@ -52,8 +40,7 @@
 }
 </style>
 
-
-<body>
+<body class="collapsed-menu">
     <?php
     include('header.php');
   ?>
@@ -70,12 +57,12 @@
         </div>
         <div class="br-pagebody">
             <div style="float: right;">
-                <a href="../administrador/memos.php" onclick="cancealmemo()" id="closememo" title="Dar clic para cancelar el memo" type="button"
-                    style="" class="btn btn-secondary"><i class="fa fa-times"></i></a>
+                <a href="../administrador/memos.php" onclick="cancealmemo()" id="closememo"
+                    title="Dar clic para cancelar el memo" type="button" style="" class="btn btn-secondary"><i
+                        class="fa fa-times"></i></a>
             </div>
             <div class="br-section-wrapper">
                 <div id="wizard6">
-
                     <h3>Cabezera del memo</h3>
                     <section>
                         <form id="valeoficina" method="POST">
@@ -108,14 +95,12 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">PEDIDOS RELACIONADOS:</label>
                                         <div id="buscpedido"></div>
                                     </div><!-- col-4 -->
                                 </div><!-- col-8 -->
-
                                 <div class="col-lg-4" id="departamento" style="">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">DEPARTAMENTO SOLICITANTE: <span
@@ -218,7 +203,6 @@
                                     </div>
                                 </div><!-- col-12 -->
                     </section>
-
                     <h3>Material traspasado</h3>
                     <section>
                         <h5>INGRESE LOS ARTICULOS TRASPASADOS</h5>
@@ -301,12 +285,12 @@
                                     <div id="listmemotra">
                                     </div>
                                 </div><!-- col-12 -->
-                                <a class="btn btn-primary" href="../administrador/memos.php"
-                                    style="float:right; color:white">FINALIZAR</a>
+                                <!-- <a class="btn btn-primary" href="../administrador/memos.php"
+                                    style="float:right; color:white">FINALIZAR</a> -->
                     </section>
+                    <a onclick="cancealmemo()" class="btn btn-danger" style="float:right; color:white">CANCELAR</a>
                 </div>
                 <br>
-                <a onclick="cancealmemo()" class="btn btn-danger" style="float:right; color:white">CANCELAR</a>
             </div><!-- br-pagebody -->
         </div><!-- br-pagebody -->
         <footer class="br-footer">
@@ -322,7 +306,6 @@
         </footer>
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
-
     <script src="../template/lib/jquery/jquery.js"></script>
     <script src="../template/lib/select2/js/select2.min.js"></script>
     <script src="../template/lib/popper.js/popper.js"></script>
@@ -343,112 +326,15 @@
     <script src="../template/lib/spectrum/spectrum.js"></script>
     <script src="../template/lib/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
     <script src="../template/lib/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
-
     <?php include('../administrador/modal.php');?>
-
     <script src="../template/js/bracket.js"></script>
     <script>
-    $(document).ready(function() {
-        'use strict';
-
-        $('#wizard2').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            enableFinishButton: false,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            onStepChanging: function(event, currentIndex, newIndex) {
-                if (currentIndex < newIndex) {
-                    // Step 1 form validation
-                    if (currentIndex === 0) {
-                        var fname = $('#vfolio').parsley();
-                        var lname = $('#vfecha').parsley();
-
-                        if (fname.isValid() && lname.isValid()) {
-                            return true;
-                        } else {
-                            fname.validate();
-                            lname.validate();
-                        }
-                    }
-
-                    // Step 2 form validation
-                    if (currentIndex === 1) {
-                        var email = $('#vcodigo').parsley();
-                        if (email.isValid()) {
-                            return true;
-                        } else {
-                            email.validate();
-                        }
-                    }
-                    // Always allow step back to the previous step even if the current step is not valid.
-                } else {
-                    return true;
-                }
-            }
-        });
-
-        $('#wizard3').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            stepsOrientation: 1
-        });
-
-        $('#wizard4').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            cssClass: 'wizard step-equal-width'
-        });
-
-        $('#wizard5').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            cssClass: 'wizard wizard-style-1'
-        });
-
-        $('#wizard6').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            errorSteps: [],
-            next: 'Siguiente',
-            previous: 'Anterior',
-            finish: 'Finalizar',
-            enableFinishButton: false,
-            loadingTemplate: '<span class="spinner"></span> #text#',
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            cssClass: 'wizard wizard-style-2'
-        });
-
-        $('#wizard7').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            cssClass: 'wizard wizard-style-3'
-        });
-
-
-
-
-    });
-
+    openmemo();
     $(document).ready(function() {
         $('#busccodimem').load('./select/buscarme.php');
         $('#busccodigomem2').load('./select/buscarme2.php');
         $('#buscpedido').load('./select/buspedi.php');
-
-
     });
     </script>
-
-
 </body>
-
 </html>

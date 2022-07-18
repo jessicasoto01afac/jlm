@@ -4,7 +4,6 @@
     $folio = $_POST['folio'];
 	$query = "SELECT * FROM historial WHERE registro LIKE '%$folio%' ORDER BY id_his ";
 	$resultado = mysqli_query($conexion, $query);
-
 	if(!$resultado){
 		die("error");
 	}else{

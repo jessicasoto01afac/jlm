@@ -74,6 +74,7 @@ if(!isset($usuario)){
                 echo "0";
                 //$usuario='PRUEBAS';
                 histedith($usuario,$folio,$conexion);
+                autorizar2($usuario,$folio,$conexion);
             }else{
                 echo "1";
             }
@@ -84,6 +85,7 @@ if(!isset($usuario)){
                 echo "0";
                // $usuario='PRUEBAS';
                 hisurtir($usuario,$folio,$conexion);
+                surtir2($usuario,$folio,$conexion);
             }else{
                 echo "1";
             }
@@ -94,6 +96,7 @@ if(!isset($usuario)){
                 echo "0";
                // $usuario='PRUEBAS';
                 hisfinal($usuario,$folio,$conexion);
+                finalizar2 ($usuario,$folio,$conexion);
             }else{
                 echo "1";
             }
@@ -202,10 +205,27 @@ if(!isset($usuario)){
         
             if (cancelar($refe_1,$conexion)){
                 echo "0";
+                //cancfolio ($refe_1,$conexion);
             }else{
                 echo "1";
             }
-    //Condición donde actualiza desde vista previa lka cabecera del vale de oficina
+    //Condición para generar codigo
+    }else if($opcion === 'gefolio'){
+        $tipo = $_POST['tipo'];
+        if (addfolio ($tipo,$conexion)){
+            echo "0";
+        }else{
+            echo "1";
+        }
+        //edthsinexisfin
+    }else if ($opcion === 'addmemo'){
+        $refe_1 = $_POST['refe_1'];
+        if (histoaltmem ($usuario,$refe_1,$conexion)){
+            echo "0";
+            poductividad ($usuario,$refe_1,$conexion);
+        }else{
+            echo "1";
+        }
     }
 
 //FUNCIONES-----------------------------------------------------------------------------------------------------------------------------------------
@@ -231,6 +251,40 @@ function comprobacion2 ($refe_1,$codigo_1,$conexion){
         return false;
     }
     $this->conexion->cerrar();
+}
+//Agregar folio
+function addfolio ($tipo,$conexion){
+    $folios="SELECT MAX(folio) + 1 AS id_foliovp FROM folios where tipo ='MEMO' AND estado_f=0";
+    $foliomemo = mysqli_query($conexion,$folios);
+    $folio = mysqli_fetch_row($foliomemo);
+    $query="INSERT INTO folios VALUES(0,'$folio[0]','$tipo',0)";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
+//funcion para registrar la productividad
+function poductividad ($usuario,$refe_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query="INSERT INTO productividad VALUES(0,'$refe_1','$usuario','$fecha','PENDIENTE','','PENDIENTE','','PENDIENTE','','NORMAL',0)";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
+function cancfolio ($refe_1,$conexion){
+    $query="UPDATE folios SET estado_f=1 WHERE folio = '$refe_1' and tipo='MEMO'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
 }
 //funcion para guardar el ARTICULO PARA TRASFORMACION EN LATA DE MEO 
 function registrar ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$refe_2,$conexion){
@@ -302,6 +356,17 @@ function autorizar ($folio,$conexion){
     }
     cerrar($conexion);
 }
+function autorizar2 ($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query="UPDATE productividad SET fecha_autorizacion='$fecha', id_person_autor='$usuario' WHERE referencia_1 = '$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //funcion para surtir
 function surtir ($folio,$conexion){
     $query="UPDATE kardex SET status='SURTIDO', status_2='SURTIDO' WHERE refe_1 = '$folio' AND tipo='MEMO'";
@@ -312,9 +377,31 @@ function surtir ($folio,$conexion){
     }
     cerrar($conexion);
 }
+function surtir2 ($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query="UPDATE productividad SET fecha_surtido='$fecha', id_person_surtio='$usuario' WHERE referencia_1 = '$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //funcion para finalizar
 function finalizar ($folio,$conexion){
     $query="UPDATE kardex SET status='FINALIZADO' WHERE refe_1 = '$folio' AND tipo='MEMO'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+function finalizar2 ($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query="UPDATE productividad SET fecha_finalizacion='$fecha', id_person_final='$usuario' WHERE referencia_1 = '$folio'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -369,7 +456,18 @@ function eliminarinf ($id_kax,$refe_1,$conexion){
 function historial($usuario,$refe_1,$codigo_1,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA MEMO', 'CODIGO:' ' $refe_1' ' ARTICULO PARA TRANSFORMACIÓN:' ' $codigo_1','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA ARTICULO A MEMO', 'FOLIO:' '$refe_1' ' ARTICULO PARA TRANSFORMACIÓN:' ' $codigo_1','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funcion para registra cambios
+function histoaltmem($usuario,$refe_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA MEMO', 'FOLIO:' '$refe_1','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

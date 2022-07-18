@@ -1,56 +1,5 @@
 $(document).ready(function() {
     'use strict';
-
-    $('#wizard2').steps({
-        headerTag: 'h3',
-        bodyTag: 'section',
-        autoFocus: true,
-        enableFinishButton: false,
-        titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-        onStepChanging: function(event, currentIndex, newIndex) {
-            if (currentIndex < newIndex) {
-                // Step 1 form validation
-                if (currentIndex === 0) {
-                    var fname = $('#vfolio').parsley();
-                    var lname = $('#vfecha').parsley();
-
-                    if (fname.isValid() && lname.isValid()) {
-                        return true;
-                    } else {
-                        fname.validate();
-                        lname.validate();
-                    }
-                }
-
-                // Step 2 form validation
-                if (currentIndex === 1) {
-                    var email = $('#vcodigo').parsley();
-                    if (email.isValid()) {
-                        return true;
-                    } else {
-                        email.validate();
-                    }
-                }
-                // Always allow step back to the previous step even if the current step is not valid.
-            } else {
-                return true;
-            }
-        }
-    });
-    $('#wizard3').steps({
-        headerTag: 'h3',
-        bodyTag: 'section',
-        autoFocus: true,
-        titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-        stepsOrientation: 1
-    });
-    $('#wizard4').steps({
-        headerTag: 'h3',
-        bodyTag: 'section',
-        autoFocus: true,
-        titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-        cssClass: 'wizard step-equal-width'
-    });
     $('#wizard5').steps({
         headerTag: 'h3',
         bodyTag: 'section',
@@ -92,35 +41,7 @@ $(document).ready(function() {
             }
         }
     });
-    $('#wizard6').steps({
-        headerTag: 'h3',
-        bodyTag: 'section',
-        autoFocus: true,
-        errorSteps: [],
-        next: 'Siguiente',
-        previous: 'Anterior',
-        finish: 'Finalizar',
-        enableFinishButton: false,
-        loadingTemplate: '<span class="spinner"></span> #text#',
-        titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-        cssClass: 'wizard wizard-style-2',
-        labels: {
-            cancel: "Cancelar",
-            current: "current step:",
-            pagination: "Pagination",
-            finish: "Cerrar",
-            next: "Siguiente",
-            previous: "Anterior",
-            loading: "Cargando ..."
-        }
-    });
-    $('#wizard7').steps({
-        headerTag: 'h3',
-        bodyTag: 'section',
-        autoFocus: true,
-        titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-        cssClass: 'wizard wizard-style-3'
-    });
+
 });
 $(document).ready(function() {
     $('#busccodimem').load('./select/buscarttras.php');
@@ -249,6 +170,33 @@ function openvalepr() {
      });*/
 
 }
+//FUNCION PARA AGREGAR UN NUEVO FOLIO
+function foliovp() {
+    //alert("entra folios");
+    let tipo = "VALE_PRODUCCION"
+        //--------------------------
+    let datos = 'tipo=' + tipo + '&opcion=gefolio';
+    //alert(datos);
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertvapro.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            setTimeout("location.href = 'newproduccion.php';", 1500);
+        } else if (respuesta == 2) {
+
+        } else {
+            Swal.fire({
+                type: 'danger',
+                text: 'Contactar a soporte tecnico',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    })
+}
+
 //LLAMADO DE DATOS
 function updatedvp() {
     //alert("entro el update");
@@ -3323,7 +3271,6 @@ function histvalepro() {
         }
         html += '</div></tbody></table></div></div>';
         $("#tabhisto").html(html);
-
     });
     //Historial del vale en productividad
     $.ajax({

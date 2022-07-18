@@ -23,7 +23,7 @@
             $data["refe_1"], 
             $data["fecha"],
             $data["proveedor_cliente"],
-            $data["refe_2"],
+            $data["ubicacion"],
             $estatus,
             $proceso
 		];
@@ -37,7 +37,7 @@
             $data["refe_1"], 
             $data["fecha"],
             $data["proveedor_cliente"],
-            $data["refe_2"],
+            $data["ubicacion"],
             $estatus,
             $proceso
 		];
@@ -51,7 +51,7 @@
             $data["refe_1"], 
             $data["fecha"],
             $data["proveedor_cliente"],
-            $data["refe_2"],
+            $data["ubicacion"],
             $estatus,
             $proceso
 		];
@@ -65,7 +65,7 @@
             $data["refe_1"], 
             $data["fecha"],
             $data["proveedor_cliente"],
-            $data["refe_2"],
+            $data["ubicacion"],
             $estatus,
             $proceso
 		];

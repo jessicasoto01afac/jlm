@@ -48,6 +48,8 @@ if(!isset($usuario)){
         
             if (cancelar($refe_1,$conexion)){
                 echo "0";
+                cancfolio($refe_1,$conexion);
+
             }else{
                 echo "1";
             }
@@ -472,9 +474,17 @@ if(!isset($usuario)){
             echo "1";
         }
         //edthsinexisfin
+    }else if($opcion === 'gefolio'){
+        $tipo = $_POST['tipo'];
+        if (addfolio ($tipo,$conexion)){
+            echo "0";
+        }else{
+            echo "1";
+        }
+        //edthsinexisfin
     }
     
-//FUNCIONES-----------------------------------------------------------------------------------------------------------------------------------------
+//FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
 
 //funcion de comprobación para ver si el vale ya se encuentra en la base
 function comprobacion ($refe_1,$codigo_1,$conexion){
@@ -487,6 +497,20 @@ function comprobacion ($refe_1,$codigo_1,$conexion){
     }
     $this->conexion->cerrar();
 }
+//Agregar folio
+function addfolio ($tipo,$conexion){
+    $folios="SELECT MAX(folio) + 1 AS id_foliovp FROM folios where tipo ='VALE_PRODUCCION' AND estado_f=0";
+    $foliovale_p = mysqli_query($conexion,$folios);
+    $folio = mysqli_fetch_row($foliovale_p);
+    $query="INSERT INTO folios VALUES(0,'$folio[0]','$tipo',0)";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+} 
+
 //funcion de comprobación para ver si el vale ya se encuentra en la base
 function comprobacion2 ($refe_1,$codigocart,$conexion){
     $query="SELECT * FROM kardex WHERE refe_1 = '$refe_1' AND  codigo_1='$codigocart' AND estado = 0 ";
@@ -637,6 +661,15 @@ function liston ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$co
 //funcion para cancelar el vale de producción
 function cancelar ($refe_1,$conexion){
     $query="UPDATE kardex SET estado=2, status='CANCELADO', status_2='CANCELADO' WHERE refe_1 = '$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+function cancfolio ($refe_1,$conexion){
+    $query="UPDATE folios SET estado_f=1 WHERE folio = '$refe_1' and tipo='VALE_PRODUCCION'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

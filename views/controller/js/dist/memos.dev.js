@@ -1,6 +1,73 @@
 "use strict";
 
-//FUNCIONES PARA GUARDAR ARTICULOS PARA TRASPASO
+function openmemo() {
+  $(document).ready(function () {
+    'use strict';
+
+    $('#wizard6').steps({
+      headerTag: 'h3',
+      bodyTag: 'section',
+      transitionEffect: "fade",
+      autoFocus: true,
+      errorSteps: [],
+      next: 'Siguiente',
+      previous: 'Anterior',
+      finish: 'Finalizar',
+      enableFinishButton: true,
+      loadingTemplate: '<span class="spinner"></span> #text#',
+      titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
+      cssClass: 'wizard wizard-style-2',
+      labels: {
+        cancel: "Cancelar",
+        current: "current step:",
+        pagination: "Pagination",
+        finish: "Finalizar",
+        next: "Siguiente",
+        previous: "Anterior",
+        loading: "Cargando ..."
+      },
+      onFinished: function onFinished(event, currentIndex) {
+        //alert("Form submitted.");
+        var refe_1 = document.getElementById('mfolio').value;
+        var fecha = document.getElementById('mfecha').value;
+        var refe_2 = document.getElementById('mtipo').value;
+        var refe_3 = document.getElementById('mdep').value; //--------------------------
+
+        var datos = 'refe_1=' + refe_1 + '&opcion=addmemo';
+
+        if (refe_1 == '' || fecha == '' || refe_3 == '' || refe_2 == '') {
+          Swal.fire({
+            type: 'warning',
+            text: 'Llenar todos los campos',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          return;
+        } else {
+          $.ajax({
+            type: "POST",
+            url: "../controller/php/insertmemo.php",
+            data: datos
+          }).done(function (respuesta) {
+            if (respuesta == 0) {
+              setTimeout("location.href = 'memos.php';", 1500);
+            } else if (respuesta == 2) {} else {
+              alert(respuesta);
+              Swal.fire({
+                type: 'warning',
+                text: 'Contactar a soporte tecnico',
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }
+          });
+        }
+      }
+    });
+  });
+} //FUNCIONES PARA GUARDAR ARTICULOS PARA TRASPASO
+
+
 function addmemo() {
   //alert("entro memo");
   var refe_1 = document.getElementById('mfolio').value; //FOLIO DEL MEMO
@@ -13,8 +80,20 @@ function addmemo() {
   var cantidad_real = document.getElementById('memocantidad').value;
   var salida = document.getElementById('memocantidad').value;
   var observa = document.getElementById('memobservo').value;
-  var ubicacion = document.getElementById('mdepart').value;
-  var refe_2 = document.getElementById('pedidomem').value;
+  var ubicacion = document.getElementById('mdepart').value; //var refe_2 = document.getElementById('pedidomem').value;
+  //multiselect de pedidos-----
+
+  var pedido = '';
+  var selectObject = document.getElementById("pedidomem");
+
+  for (var i = 0; i < selectObject.options.length; i++) {
+    if (selectObject.options[i].selected == true) {
+      pedido += ',' + selectObject.options[i].value;
+    }
+  }
+
+  var refe_2 = pedido.substr(1); //--------------------------
+
   var datos = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&refe_2=' + refe_2 + '&opcion=regismemo'; //var datos =$('#personal-ext').serialize();
   //alert(datos);
 
@@ -92,6 +171,32 @@ function addmemo() {
       }
     });
   }
+} //FUNCION PARA AGREGAR UN NUEVO FOLIO
+
+
+function foliomemo() {
+  //alert("entra folios");
+  var tipo = "MEMO"; //--------------------------
+
+  var datos = 'tipo=' + tipo + '&opcion=gefolio'; //alert(datos);
+
+  $.ajax({
+    type: "POST",
+    url: "../controller/php/insertmemo.php",
+    data: datos
+  }).done(function (respuesta) {
+    if (respuesta == 0) {
+      setTimeout("location.href = 'newmemo.php';", 1500);
+    } else if (respuesta == 2) {} else {
+      alert(respuesta);
+      Swal.fire({
+        type: 'warning',
+        text: 'Contactar a soporte tecnico',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  });
 } //FUNCION ACTUALIZA TABLAS DE MEMOS EN ALTA DE MEMOS
 
 
@@ -204,8 +309,20 @@ function addmemofin() {
   var cantidad_real = document.getElementById('mecantidad2').value;
   var ubicacion = document.getElementById('memdepart2').value;
   var observa = document.getElementById('memobservo2').value;
-  var salida = document.getElementById('mecantidad2').value;
-  var refe_2 = document.getElementById('pedidomem').value;
+  var salida = document.getElementById('mecantidad2').value; //var refe_2 = document.getElementById('pedidomem').value;
+  //multiselect de pedidos-----
+
+  var pedido = '';
+  var selectObject = document.getElementById("pedidomem");
+
+  for (var i = 0; i < selectObject.options.length; i++) {
+    if (selectObject.options[i].selected == true) {
+      pedido += ',' + selectObject.options[i].value;
+    }
+  }
+
+  var refe_2 = pedido.substr(1); //--------------------------
+
   var datos = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&refe_2=' + refe_2 + '&opcion=regmemofin'; //var datos =$('#personal-ext').serialize();
   //alert(datos);
 
@@ -296,6 +413,7 @@ function infmemo(id_memo) {
   var surtir = document.getElementById('btnsurtir');
   var finalizado = document.getElementById('btnfinaliz');
   var editar = document.getElementById('openedimem1');
+  var imprimir = document.getElementById('pdfmem');
   $.ajax({
     url: '../controller/php/memo1.php',
     type: 'POST'
@@ -306,14 +424,14 @@ function infmemo(id_memo) {
 
     for (D = 0; D < res.length; D++) {
       if (obj.data[D].refe_1 == id_memo) {
+        document.getElementById('memorefeped').value = obj.data[D].refe_2;
         datos = obj.data[D].fecha + '*' + obj.data[D].refe_3 + '*' + obj.data[D].proveedor_cliente + '*' + obj.data[D].status + '*' + obj.data[D].codigo_1 + '*' + obj.data[D].refe_2;
         var o = datos.split("*");
         $("#infecmem").val(o[0]);
         $("#intipomemo").val(o[1]);
         $("#infsolimem").val(o[2]);
         $("#infestamem").val(o[3]);
-        $("#trans").html(o[1]);
-        $("#memorefeped").val(o[5]);
+        $("#trans").html(o[1]); //$("#memorefeped").val(o[5]);
 
         if (obj.data[D].status == 'PENDIENTE') {
           autorizar.style.display = '';
@@ -321,13 +439,16 @@ function infmemo(id_memo) {
         } else if (obj.data[D].status == 'AUTORIZADO') {
           surtir.style.display = '';
           liberar.style.display = '';
+          imprimir.style.display = '';
           editar.style.display = 'none';
         } else if (obj.data[D].status == 'SURTIDO') {
           finalizado.style.display = '';
           liberar.style.display = '';
+          imprimir.style.display = '';
           editar.style.display = 'none';
         } else if (obj.data[D].status == 'FINALIZADO') {
           liberar.style.display = '';
+          imprimir.style.display = '';
           editar.style.display = 'none';
         }
       }
@@ -340,7 +461,7 @@ function infmemo(id_memo) {
     obj = JSON.parse(resp);
     var res = obj.data;
     var x = 0;
-    html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvmemtras" name="infvmemtras" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+    html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvmemtras" name="infvmemtras" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
 
     for (U = 0; U < res.length; U++) {
       //estatus pendiente
@@ -373,7 +494,7 @@ function infmemo(id_memo) {
     obj = JSON.parse(resp);
     var res = obj.data;
     var x = 0;
-    html = '<div class="bd bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvmemtras1" name="infvmemtras1" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+    html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="infvmemtras1" name="infvmemtras1" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>OBSERVACIONES</th><th><i></i>CANTIDAD</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
 
     for (U = 0; U < res.length; U++) {
       //estatus pendiente 2
@@ -636,6 +757,73 @@ function closedithvmem() {
   document.getElementById('closememo1').style.display = "none";
   document.getElementById('openedimem1').style.display = "";
   document.getElementById('btnautoriz').style.display = "";
+}
+
+function histvalepro() {
+  var folio = document.getElementById('folmemo').innerHTML;
+  var folio2 = "FOLIO:" + folio; //alert(folio);
+  //Tabla de historial del vale de producción
+
+  $.ajax({
+    url: '../controller/php/hisvaleprod.php',
+    type: 'POST',
+    data: 'folio=' + folio2
+  }).done(function (resp) {
+    obj = JSON.parse(resp);
+    var res = obj.data;
+    var x = 0; //alert("folio");
+
+    html = '<div class="rounded table-responsive"><table style="width:100%" id="hisvalevp" name="hisvalevp" class="table display dataTable no-footer"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>Usuario</th><th><i></i>Acción</th><th><i></i>Registro</th><th><i></i>fecha</th></tr></thead><tbody>';
+
+    for (U = 0; U < res.length; U++) {
+      x++;
+      html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_usu + "</td><td>" + obj.data[U].proceso + "</td><td>" + obj.data[U].registro + "</td><td>" + obj.data[U].fecha + "</td></tr>";
+    }
+
+    html += '</div></tbody></table></div></div>';
+    $("#tabhisto").html(html);
+  }); //Historial del vale en productividad
+
+  $.ajax({
+    url: '../controller/php/productiv.php',
+    type: 'POST',
+    data: 'folio=' + folio
+  }).done(function (resp) {
+    obj = JSON.parse(resp);
+    var res = obj.data;
+    var x = 0; //alert("folio");
+
+    for (D = 0; D < res.length; D++) {
+      document.getElementById('fcreacion').innerHTML = obj.data[D].fecha_creacion1;
+      document.getElementById('fautoriz').innerHTML = obj.data[D].fecha_autorizacion1;
+      document.getElementById('fsurtido').innerHTML = obj.data[D].fecha_surtido1;
+      document.getElementById('ffinaliz').innerHTML = obj.data[D].fecha_finalizacion1; //DIAS
+
+      if (obj.data[D].dias_totales > 0) {
+        document.getElementById('dias1').innerHTML = obj.data[D].dias_autorizacion + " dias Creación/Autorización";
+        document.getElementById('dias2').innerHTML = obj.data[D].dias_asurtdo + " dias Autorización/Surtido";
+        document.getElementById('dias3').innerHTML = obj.data[D].dias_totales + " dias trascurridos para finalización ";
+      }
+
+      if (obj.data[D].dias_totales == null) {
+        document.getElementById('dias1').innerHTML = obj.data[D].dias_autorizacion + " dias Creación/Autorización";
+        document.getElementById('dias2').innerHTML = obj.data[D].dias_asurtdo + " dias Autorización/Surtido";
+        document.getElementById('dias3').innerHTML = "Sin finalizar";
+      }
+
+      if (obj.data[D].dias_asurtdo == null) {
+        document.getElementById('dias1').innerHTML = obj.data[D].dias_autorizacion + " dias Creación/Autorización";
+        document.getElementById('dias2').innerHTML = "Sin surtir";
+        document.getElementById('dias3').innerHTML = "Sin finalizar";
+      }
+
+      if (obj.data[D].dias_autorizacion == null) {
+        document.getElementById('dias1').innerHTML = "Sin autorizar";
+        document.getElementById('dias2').innerHTML = "Sin surtir";
+        document.getElementById('dias3').innerHTML = "Sin finalizar";
+      }
+    }
+  });
 } //FUCIÓN PARA LLENAR INFORMACIÓN DEL ARTICULO DE TRASFORMACION VISTA PREVIA
 
 
@@ -1455,4 +1643,11 @@ function cancealmemo() {
       });
     }
   });
+}
+
+function pdfmemo() {
+  var folio = document.getElementById('folmemo').innerHTML; //alert("entro");
+
+  url = '../formatos/pdf_memo.php';
+  window.open(url + "?data=" + folio, '_black');
 }

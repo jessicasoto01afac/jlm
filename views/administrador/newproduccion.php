@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <?php include ("../controller/conexion.php");
-      $sql = "SELECT MAX(refe_1) + 1 AS id_memo FROM kardex where tipo ='MEMO'";
-      $foliomemo = mysqli_query($conexion,$sql);
-      $folio = mysqli_fetch_row($foliomemo);
-
+      $sql = "SELECT MAX(folio) AS id_foliovp FROM folios where tipo ='VALE_PRODUCCION' AND estado_f=0";
+      $foliovale_p = mysqli_query($conexion,$sql);
+      $folio = mysqli_fetch_row($foliovale_p);
 
       $sql = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
       $articulo = mysqli_query($conexion,$sql);
 ?>
-<html lang="en">
+<html lang="es">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
     <link rel="shortcut icon" href="../template/img/logo.png" />
-
     <!-- Meta -->
     <meta name="author" content="Jessica Soto">
-
     <title>JLM|Agregar_vale_producción</title>
-
     <!-- vendor css -->
     <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../template/lib/Ionicons/css/ionicons.css" rel="stylesheet">
@@ -31,13 +25,10 @@
     <link href="../template/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
     <script type="text/javascript" language="javascript" src="../datas/jquery-3.js"></script>
     <script type="text/javascript" async="" src="../datas/ga.js"></script>
-
     <script src="../template/js/sweetalert2.all.min.js"></script>
     <script src="../template/lib/select2/js/select2.min.js"></script>
     <link href="../template/lib/highlightjs/github.css" rel="stylesheet">
     <link href="../template/lib/jquery.steps/jquery.steps.css" rel="stylesheet">
-
-
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
 </head>
@@ -47,7 +38,6 @@
     font-size: 16px !important;
 }
 </style>
-
 
 <body class="collapsed-menu">
     <?php
@@ -81,8 +71,8 @@
                                         <label style="font-size:16px" class="form-control-label">ORDEN DE PRODUCCIÓN:
                                             <span class="tx-danger">*</span></label>
                                         <input onkeyup="mayus(this);" style="font-size:18px; color:#1F618D"
-                                            class="form-control" type="text" id="vpfolio" name="vpfolio" value=""
-                                            placeholder="">
+                                            class="form-control" type="text" id="vpfolio" name="vpfolio" readonly
+                                            placeholder="" value="<?php echo $folio[0]?>">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
                                 <div class="col-lg-4">
@@ -142,7 +132,8 @@
                                     <div class="form-group mg-b-10-force">
                                         <label style="font-size:16px" class="form-control-label">CARACTER DEL VALE:
                                             <span class="tx-danger">*</span></label>
-                                        <select class="form-control select2" onchange="" id="vpcaracter" name="vpcaracter">
+                                        <select class="form-control select2" onchange="" id="vpcaracter"
+                                            name="vpcaracter">
                                             <option value="">SELECCIONA UNA OPCIÓN</option>
                                             <option value="NORMAL">NORMAL</option>
                                             <option value="URGENTE">URGENTE</option>
@@ -160,7 +151,7 @@
                     <h3>Material para traspaso</h3>
                     <section>
                         <a onclick="" class="btn btn-indigo" data-toggle="modal" data-target="#modal-artinviprod"
-                            style="float:right; color:white">Agregar articulo individual</a>
+                            style="float:right; color:white"><i class="fa fa-plus mg-r-10"></i>Articulo individual</a>
                         <h5>INGRESE EL PRODUCTO FINAL</h5>
                         <br>
                         <div class="row mg-b-25">
@@ -256,9 +247,10 @@
                                 <div id="listproducfinal"></div><!-- col-12 -->
                             </div>
                     </section>
+                    <a onclick="cancelar()" class="btn btn-danger" style="float:right; color:white">CANCELAR</a>
                 </div>
                 <br>
-                <a onclick="cancelar()" class="btn btn-danger" style="float:right; color:white">CANCELAR</a>
+
             </div><!-- br-pagebody -->
         </div><!-- br-pagebody -->
         <footer class="br-footer">
@@ -274,7 +266,6 @@
         </footer>
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
-
     <script src="../template/lib/jquery/jquery.js"></script>
     <script src="../template/lib/select2/js/select2.min.js"></script>
     <script src="../template/lib/popper.js/popper.js"></script>
@@ -296,16 +287,10 @@
     <script src="../template/lib/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
     <script src="../template/lib/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
     <script src="../controller/js/vale_produc.js"></script>
-
     <?php include('../administrador/modal.php');?>
-
     <script src="../template/js/bracket.js"></script>
     <script>
-
-
-
     </script>
-
 </body>
 
 </html>
