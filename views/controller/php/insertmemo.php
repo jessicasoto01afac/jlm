@@ -226,6 +226,16 @@ if(!isset($usuario)){
         }else{
             echo "1";
         }
+    //ACTUALIZA LA RELACION DE JLM
+    }else if($opcion === 'revisionac'){
+        $revision = $_POST['revision'];
+        $refe_1 = $_POST['refe_1'];
+        if (jlmrelacion ($revision,$refe_1,$conexion)){
+            echo "0";
+        }else{
+            echo "1";
+        }
+        //edthsinexisfin
     }
 
 //FUNCIONES-----------------------------------------------------------------------------------------------------------------------------------------
@@ -443,6 +453,16 @@ function actualizar ($refe_1,$id_kax,$codigo_1,$descripcion_1,$salida,$observa,$
 ///funcion para actualizar aticulo de memo en vista previa
 function eliminarinf ($id_kax,$refe_1,$conexion){
     $query="UPDATE kardex SET estado=1 WHERE id_kax='$id_kax'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para actualizar JLM relacion
+function jlmrelacion ($revision,$refe_1,$conexion){
+    $query="UPDATE kardex SET revision='$revision' WHERE refe_1 = '$refe_1' and tipo='MEMO'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

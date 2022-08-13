@@ -24,6 +24,7 @@
             $data["fecha"],
             $data["proveedor_cliente"],
             $data["ubicacion"],
+			$data["revision"], 
             $estatus,
             $proceso
 		];
@@ -38,6 +39,7 @@
             $data["fecha"],
             $data["proveedor_cliente"],
             $data["ubicacion"],
+			$data["revision"], 
             $estatus,
             $proceso
 		];
@@ -52,6 +54,7 @@
             $data["fecha"],
             $data["proveedor_cliente"],
             $data["ubicacion"],
+			$data["revision"], 
             $estatus,
             $proceso
 		];
@@ -66,14 +69,12 @@
             $data["fecha"],
             $data["proveedor_cliente"],
             $data["ubicacion"],
+			$data["revision"], 
             $estatus,
             $proceso
 		];
 	}
-
-
 }
-		
 	}
 
 			if(isset($cursos)&&!empty($cursos )){
@@ -87,5 +88,4 @@
 
 		mysqli_free_result($resultado);
 		mysqli_close($conexion);
-
 ?>

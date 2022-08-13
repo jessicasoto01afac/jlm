@@ -64,10 +64,9 @@ include('header.php');
                                     <th>FECHA</th>
                                     <th>DEPARTAMENTO</th>
                                     <th>PEDIDO</th>
+                                    <th>FOLIO JLM</th>
                                     <th>ESTATUS</th>
                                     <th>ACCIONES</th>
-                                    <!-- <th>ESTATUS</th> -->
-                                    <!-- <th style="width:15%; display: none;">ACCIÓN</th> -->
                                 </tr>
                             </thead>
                         </table>
@@ -117,7 +116,6 @@ include('header.php');
                     </div>
                 </div><!-- col-5 -->
                 <div class="br-section-wrapper">
-
                     <h6 class="">INFORMACIÓN DEL VALE DE PRODUCCIÓN</h6>
                     <form id="info-memo" method="POST">
 

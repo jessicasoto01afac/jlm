@@ -115,8 +115,8 @@ include('header.php');
                         <button onclick="closedithvmem()" id="closememo1" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
-                        <button title="Imprimir" type="button" id="pdfmem" onclick="pdfmemo()" style="display:none;" class="btn btn-secondary"><i
-                                class="fa fa-file-pdf-o"></i></button>
+                        <button title="Imprimir" type="button" id="pdfmem" onclick="pdfmemo()" style="display:none;"
+                            class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
                         <button title="ver historial" onclick="histvalepro()" data-toggle="modal"
                             data-target="#modal-vphistorial" type="button" class="btn btn-primary"><i
                                 class="fa fa-history"></i></button>
@@ -127,7 +127,7 @@ include('header.php');
                     <form id="info-memo" method="POST">
                         <div class="form-layout form-layout-2">
                             <div class="row no-gutters">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <input style="display:none;" disabled="" class="form-control inputalta"
                                             type="text" name="infid" id="infid">
@@ -138,7 +138,7 @@ include('header.php');
                                             style="font-size: 24px;px; color:#14128F"></label>
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-4 mg-t--1 mg-md-t-0">
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
                                         <label class="form-control-label" style="font-size:14px">Fecha: <span
                                                 class="tx-danger">*</span></label>
@@ -146,7 +146,7 @@ include('header.php');
                                             placeholder="Enter lastname">
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-4 mg-t--1 mg-md-t-0">
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
                                         <label class="form-control-label mg-b-0-force" style="font-size:14px">TIPO DE
                                             MEMO: <span class="tx-danger">*</span></label>
@@ -158,8 +158,8 @@ include('header.php');
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-8">
-                                    <div class="form-group bd-t-0-force">
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
+                                    <div class="form-group mg-md-l--1">
                                         <label class="form-control-label" style="font-size:14px">DEPARTAMENTO
                                             SOLICITANTE: <span class="tx-danger">*</span></label>
                                         <!-- <input class="form-control" disabled="" id="infsolimem" name="infsolimem"
@@ -176,26 +176,30 @@ include('header.php');
                                             <option value="TALLER DE MEDICIÓN">TALLER DE MEDICIÓN</option>
                                             <option value="VENTAS">VENTAS</option>
                                         </select>
-                                        <label class="form-control-label" style="font-size:14px">PEDIDOS RELACIONADOS
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-md-3">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">PEDIDOS
+                                            RELACIONADOS
                                             <span class="tx-danger">*</span></label>
                                         <input readonly style="color:#000773; font-size:18px" onkeyup="mayus(this);"
                                             class="form-control" name="memorefeped" id="memorefeped"
                                             placeholder="PEDIDOS RELACIONADOS" type="text" required="">
                                     </div>
-                                </div><!-- col-8 -->
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">RELACIÓN JLM/ <a
+                                                href="javascript:saverevicionmem()">Guardar</a></label>
+                                        <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="relajlmem"
+                                            id="relajlmem" placeholder="JLM"></textarea>
+                                    </div>
+                                </div>
                                 <div class="col-md-4">
-                                    <div class="form-group mg-md-l--1 bd-t-0-force">
-                                        <label class="form-control-label mg-b-0-force" style="font-size:14px">ESTATUS:
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label mg-b-0-force" style="font-size:14px">ACCIONES:
                                             <span class="tx-danger">*</span></label>
-                                        <select id="infestamem" disabled="" name="infestamem"
-                                            style="font-size:18px; color:#14128F" class="form-control">
-                                            <option value="" selected>SELECCIONA UNA OPCIÓN</option>
-                                            <option value="PENDIENTE">PENDIENTE</option>
-                                            <option value="SURTIDO">SURTIDO</option>
-                                            <option value="FINALIZADO">FINALIZADO</option>
-                                            <option value="CANCELADO">CANCELADO</option>
-                                            <option value="AUTORIZADO">AUTORIZADO</option>
-                                        </select>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <button id="btnautoriz" name="btnautoriz" type="button"
                                                 style="display:none;" onclick="autorizarm()"
@@ -209,6 +213,21 @@ include('header.php');
                                                 style="display:none;" onclick="finalimemo()"
                                                 class="btn btn-success pd-x-25">Finalizar</button>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group mg-md-l--1 bd-t-0-force">
+                                        <label class="form-control-label mg-b-0-force" style="font-size:14px">ESTATUS:
+                                            <span class="tx-danger">*</span></label>
+                                        <select id="infestamem" disabled="" name="infestamem"
+                                            style="font-size:18px; color:#14128F" class="form-control">
+                                            <!-- <option value="" selected>SELECCIONA UNA OPCIÓN</option> -->
+                                            <option value="PENDIENTE">PENDIENTE</option>
+                                            <option value="SURTIDO">SURTIDO</option>
+                                            <option value="FINALIZADO">FINALIZADO</option>
+                                            <option value="CANCELADO">CANCELADO</option>
+                                            <option value="AUTORIZADO">AUTORIZADO</option>
+                                        </select>
                                     </div>
                                 </div><!-- col-4 -->
                                 <br>
