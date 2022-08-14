@@ -178,6 +178,33 @@ include('header.php');
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
+                                <div class="col-md-4">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">FORMULA:
+                                            <span class="tx-danger">*</span></label>
+                                        <input readonly style="color:#000773; font-size:16px" onkeyup="mayus(this);"
+                                            class="form-control" name="memoform" id="memoform"
+                                            placeholder="FORMULA" type="text" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">AUTORIZA:
+                                            <span class="tx-danger">*</span></label>
+                                        <input readonly style="color:#000773; font-size:16px" onkeyup="mayus(this);"
+                                            class="form-control" name="memoautor" id="memoautor"
+                                            placeholder="AUTORIZA" type="text" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">SURTIO:
+                                            <span class="tx-danger">*</span></label>
+                                        <input readonly style="color:#000773; font-size:16px" onkeyup="mayus(this);"
+                                            class="form-control" name="memosurt" id="memosurt"
+                                            placeholder="SURTIO" type="text" required="">
+                                    </div>
+                                </div>
                                 <div class="col-md-3">
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">PEDIDOS

@@ -426,6 +426,9 @@ function infmemo(id_memo) {
       if (obj.data[D].refe_1 == id_memo) {
         document.getElementById('memorefeped').value = obj.data[D].refe_2;
         document.getElementById('relajlmem').value = obj.data[D].revision;
+        document.getElementById('memoform').value = obj.data[D].crea;
+        document.getElementById('memoautor').value = obj.data[D].autoriza;
+        document.getElementById('memosurt').value = obj.data[D].surtio;
         datos = obj.data[D].fecha + '*' + obj.data[D].refe_3 + '*' + obj.data[D].proveedor_cliente + '*' + obj.data[D].status + '*' + obj.data[D].codigo_1 + '*' + obj.data[D].refe_2;
         var o = datos.split("*");
         $("#infecmem").val(o[0]);
