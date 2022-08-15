@@ -210,7 +210,7 @@ include('header.php');
                                         <label class="form-control-label" style="font-size:14px">PEDIDOS
                                             RELACIONADOS
                                             <span class="tx-danger">*</span></label>
-                                        <input readonly style="color:#000773; font-size:18px" onkeyup="mayus(this);"
+                                        <input readonly style="font-size:18px" onkeyup="mayus(this);"
                                             class="form-control" name="memorefeped" id="memorefeped"
                                             placeholder="PEDIDOS RELACIONADOS" type="text" required="">
                                     </div>

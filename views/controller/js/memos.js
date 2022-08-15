@@ -117,7 +117,7 @@ function addmemo() {
                 updatememoalt();
                 var id_memo = document.getElementById('mfolio').value;
                 $.ajax({
-                    url: '../controller/php/memo1.php',
+                    url: '../controller/php/infaltmemo.php',
                     type: 'POST'
                 }).done(function(resp) {
                     obj = JSON.parse(resp);
@@ -199,7 +199,7 @@ function foliomemo() {
 function updatememoalt() {
     var id_memo = document.getElementById('mfolio').value;
     $.ajax({
-        url: '../controller/php/memo1.php',
+        url: '../controller/php/infaltmemo.php',
         type: 'POST'
     }).done(function(resp) {
         obj = JSON.parse(resp);
@@ -249,7 +249,7 @@ function cleanalttras() {
 function updatememoaltf() {
     var id_memo = document.getElementById('mfolio').value;
     $.ajax({
-        url: '../controller/php/memo1.php',
+        url: '../controller/php/infaltmemo.php',
         type: 'POST'
     }).done(function(resp) {
         obj = JSON.parse(resp);
@@ -339,7 +339,7 @@ function addmemofin() {
 
                 var id_memo = document.getElementById('mfolio').value;
                 $.ajax({
-                    url: '../controller/php/memo1.php',
+                    url: '../controller/php/infaltmemo.php',
                     type: 'POST'
                 }).done(function(resp) {
                     obj = JSON.parse(resp);
