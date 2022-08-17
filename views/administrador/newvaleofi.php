@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php include ("../controller/conexion.php");
+      $sql = "SELECT MAX(folio) AS id_foliovp FROM folios where tipo ='VALE_OFICINA' AND estado_f=0";
+      $foliomemo = mysqli_query($conexion,$sql);
+      $folio = mysqli_fetch_row($foliomemo);
+
+?>
 <html lang="en">
 
 <head>
@@ -74,8 +80,8 @@
                                     <div class="form-group">
                                         <label style="font-size:16px" class="form-control-label">FOLIO: <span
                                                 class="tx-danger">*</span></label>
-                                        <input onkeyup="mayus(this);" class="form-control" type="text" id="vfolio"
-                                            name="vfolio" value="" placeholder="">
+                                        <input onkeyup="mayus(this);" readonly class="form-control" type="text" id="vfolio"
+                                            name="vfolio" value="<?php echo $folio[0]?>" placeholder="">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
                                 <div class="col-lg-4">

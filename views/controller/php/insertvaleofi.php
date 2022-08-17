@@ -202,7 +202,24 @@ if(!isset($usuario)){
             }else{
                 echo "1";
             }
-    //Condición donde actualiza desde vista previa lka cabecera del vale de oficina
+    //Condición donde se genera el folio de nuevo vale
+    }else if($opcion === 'gefolio'){
+        $tipo = $_POST['tipo'];
+        if (addfolio ($tipo,$conexion)){
+            echo "0";
+        }else{
+            echo "1";
+        }
+        //Condicion para guardar jlm revision 
+    }else if($opcion === 'revisionac'){
+        $revision = $_POST['revision'];
+        $refe_1 = $_POST['refe_1'];
+        if (jlmrelacion ($revision,$refe_1,$conexion)){
+            echo "0";
+        }else{
+            echo "1";
+        }
+        //edthsinexisfin
     }
     
 
@@ -300,6 +317,16 @@ function deletevo ($refe_1,$conexion){
     }
     cerrar($conexion);
 }
+//funcion para actualizar JLM relacion
+function jlmrelacion ($revision,$refe_1,$conexion){
+    $query="UPDATE kardex SET revision='$revision' WHERE refe_1 = '$refe_1' and tipo='VALE_OFICINA'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 
 //funcion para autorizar
 function autorizar1 ($folio,$conexion){
@@ -363,7 +390,19 @@ function cancelar ($refe_1,$conexion){
     cerrar($conexion);
 }
 
-
+//Agregar folio
+function addfolio ($tipo,$conexion){
+    $folios="SELECT MAX(folio) + 1 AS id_foliovp FROM folios where tipo ='VALE_OFICINA' AND estado_f=0";
+    $foliovaofi = mysqli_query($conexion,$folios);
+    $folio = mysqli_fetch_row($foliovaofi);
+    $query="INSERT INTO folios VALUES(0,'$folio[0]','$tipo',0)";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
 function historial($usuario,$refe_1,$codigo_1,$conexion){

@@ -49,7 +49,7 @@ include('header.php');
 
             <div class="br-pagebody">
                 <div class="br-section-wrapper">
-                    <a class="btn btn-primary" href="../administrador/newvaleofi.php" style="float:right"><i
+                    <a class="btn btn-primary" href="javascript:foliovalofi()" style="float:right"><i
                             class="fa fa-list-alt mg-r-10"></i>Agregar vale</a>
                     <br>
                     <br>
@@ -103,29 +103,29 @@ include('header.php');
 
                             <div class="row no-gutters">
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <input style="display:none;" disabled="" class="form-control inputalta"
                                             type="text" name="infid" id="infid">
-                                        <label class="form-control-label">FOLIO: <span
+                                        <label class="form-control-label" style="font-size:14px">FOLIO: <span
                                                 class="tx-danger">*</span></label>
                                         <!-- <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingresa el Folio"> -->
                                         <label class="form-control-label" id="fvofi" name="fvofi"
                                             style="font-size: 24px;px; color:#14128F"></label>
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-4 mg-t--1 mg-md-t-0">
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label">Fecha: <span
+                                        <label class="form-control-label" style="font-size:14px">Fecha: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" readonly type="date" id="infecvo" name="infecvo"
                                             placeholder="Enter lastname">
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-4 mg-t--1 mg-md-t-0">
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label mg-b-0-force">TIPO DE VALE: <span
-                                                class="tx-danger">*</span></label>
+                                        <label class="form-control-label mg-b-0-force" style="font-size:14px">TIPO DE
+                                            VALE: <span class="tx-danger">*</span></label>
                                         <select id="inftipevo" disabled="" name="inftipevo" class="form-control"
                                             data-placeholder="Choose country">
                                             <option value="" selected>SELECCIONA UNA OPCIÓN</option>
@@ -134,27 +134,53 @@ include('header.php');
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-8">
-                                    <div class="form-group bd-t-0-force">
-                                        <label class="form-control-label">SOLICITANTE: <span
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
+                                    <div class="form-group mg-md-l--1">
+                                        <label class="form-control-label" style="font-size:14px">SOLICITANTE: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" readonly id="infsolivo" name="infsolivo" type="text"
                                             name="address" placeholder="Enter address">
                                     </div>
                                 </div><!-- col-8 -->
                                 <div class="col-md-4">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">FORMULA:
+                                            <span class="tx-danger">*</span></label>
+                                        <input readonly style="color:#000773; font-size:16px" onkeyup="mayus(this);"
+                                            class="form-control" name="memoform" id="memoform" placeholder="FORMULA"
+                                            type="text" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">AUTORIZA:
+                                            <span class="tx-danger">*</span></label>
+                                        <input readonly style="color:#000773; font-size:16px" onkeyup="mayus(this);"
+                                            class="form-control" name="memoautor" id="memoautor" placeholder="AUTORIZA"
+                                            type="text" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">SURTIO:
+                                            <span class="tx-danger">*</span></label>
+                                        <input readonly style="color:#000773; font-size:16px" onkeyup="mayus(this);"
+                                            class="form-control" name="memosurt" id="memosurt" placeholder="SURTIO"
+                                            type="text" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">RELACIÓN JLM/ <a
+                                                href="javascript:saverevicionvof()">Guardar</a></label>
+                                        <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="relajlvof"
+                                            id="relajlvof" placeholder="JLM"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group mg-md-l--1 bd-t-0-force">
-                                        <label class="form-control-label mg-b-0-force">ESTATUS: <span
-                                                class="tx-danger">*</span></label>
-                                        <select id="infestavo" disabled="" name="infestavo"
-                                            style="font-size:14px; color:#14128F" class="form-control">
-                                            <option value="" selected>SELECCIONA UNA OPCIÓN</option>
-                                            <option value="PENDIENTE">PENDIENTE</option>
-                                            <option value="SURTIDO">SURTIDO</option>
-                                            <option value="FINALIZADO">FINALIZADO</option>
-                                            <option value="CANCELADO">CANCELADO</option>
-                                            <option value="AUTORIZADO">AUTORIZADO</option>
-                                        </select>
+                                        <label class="form-control-label mg-b-0-force" style="font-size:14px">ACCIONES:
+                                            <span class="tx-danger">*</span></label>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <button id="btnautorizv" name="btnautorizv" type="button"
                                                 style="display:none;" onclick="autorizarvo()"
@@ -169,6 +195,22 @@ include('header.php');
                                                 style="display:none;" onclick="finalivo()"
                                                 class="btn btn-success pd-x-25">Finalizar</button>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mg-md-l--1 bd-t-0-force">
+                                        <label class="form-control-label mg-b-0-force">ESTATUS: <span
+                                                class="tx-danger">*</span></label>
+                                        <select id="infestavo" disabled="" name="infestavo"
+                                            style="font-size:14px; color:#14128F" class="form-control">
+                                            <option value="" selected>SELECCIONA UNA OPCIÓN</option>
+                                            <option value="PENDIENTE">PENDIENTE</option>
+                                            <option value="SURTIDO">SURTIDO</option>
+                                            <option value="FINALIZADO">FINALIZADO</option>
+                                            <option value="CANCELADO">CANCELADO</option>
+                                            <option value="AUTORIZADO">AUTORIZADO</option>
+                                        </select>
+
                                     </div>
                                 </div><!-- col-4 -->
                                 <br>
