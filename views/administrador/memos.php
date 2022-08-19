@@ -67,6 +67,7 @@ include('header.php');
                                     <th>FECHA</th>
                                     <th>DEPARTAMENTO</th>
                                     <th>PEDIDO</th>
+                                    <th>RELACION JLM</th>
                                     <th>ESTATUS</th>
                                     <th>ACCIONES</th>
                                     <!-- <th>ESTATUS</th> -->

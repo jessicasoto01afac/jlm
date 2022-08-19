@@ -99,7 +99,7 @@ function cargainv() {
 
 
 function opende(id_artic) {
-  //alert(id_artic);
+  alert(id_artic);
   var id_artinv = id_artic;
   opendetllinv(id_artinv);
   document.getElementById('id_cod').innerHTML = id_artic;

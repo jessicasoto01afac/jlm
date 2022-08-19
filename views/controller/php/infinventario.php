@@ -13,7 +13,7 @@
 			ini_set('date.timezone','America/Mexico_City');
 			if ($data["estado"] == "0") {
 				$id_trans=$data["id_art"];
-				$id_codigo=$data["id_articulos"];
+				$id_codigo=$data["artcodigo"];
 				$existencias=$data["stock_inicial"] + $data["SUMA"] - $data["RESTA"];
 				$solicitar ="PENDIENTE";
 				$proceso = "<a onclick='opende($id_codigo)' title='ver detalles' style='hover:color:white' class='btn btn-outline-primary btn-icon rounded-circle mg-r-5'><div><i class='icon ion-share tx-20 tx-sm-bold tx-primary'></i></div></a>";	

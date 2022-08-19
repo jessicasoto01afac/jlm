@@ -2,7 +2,7 @@
 	include("../conexion.php");
 	session_start();
 	
-	$query = "SELECT * FROM kardex where estado='0' AND tipo='MEMO' GROUP BY refe_1 ORDER BY id_kax ASC	";
+	$query = "SELECT * FROM kardex where estado='0' AND tipo='MEMO' GROUP BY refe_1 ORDER BY refe_1 DESC";
 	$resultado = mysqli_query($conexion, $query);
 	$contador=0;
 	if(!$resultado){
@@ -24,6 +24,7 @@
             $data["fecha"],
             $data["proveedor_cliente"],
             $data["refe_2"],
+			$data["revision"],
             $estatus,
             $proceso
 		];
@@ -38,6 +39,7 @@
             $data["fecha"],
             $data["proveedor_cliente"],
             $data["refe_2"],
+			$data["revision"],
             $estatus,
             $proceso
 		];
@@ -52,6 +54,7 @@
             $data["fecha"],
             $data["proveedor_cliente"],
             $data["refe_2"],
+			$data["revision"],
             $estatus,
             $proceso
 		];
@@ -66,6 +69,7 @@
             $data["fecha"],
             $data["proveedor_cliente"],
             $data["refe_2"],
+			$data["revision"],
             $estatus,
             $proceso
 		];
