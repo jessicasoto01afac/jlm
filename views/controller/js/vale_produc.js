@@ -737,7 +737,7 @@ function valproduct(id_produc) {
                                 if (obj.data[U].refe_1 == document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref == 'EXTENDIDO') {
                                     x++;
                                     let id_valepro = obj.data[U].id_kax;
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a class='nav-link' onclick='deletedettart(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearvpdett'>Eliminar</a>" + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a class='nav-link' onclick='deletedettart(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearvpdett'>Eliminar</a>" + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -758,7 +758,7 @@ function valproduct(id_produc) {
                                 if (obj.data[U].refe_1 == document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref == 'ETIQUETAS') {
                                     x++;
                                     let id_valepro = obj.data[U].id_kax;
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + id_valepro + ");'>Eliminar</a>" + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + id_valepro + ");'>Eliminar</a>" + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -780,7 +780,7 @@ function valproduct(id_produc) {
                                 x++;
                                 valprd = obj.data[U].id_kax;
                                 //alert(id_valepro);
-                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + valprd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + valprd + ");'>Eliminar</a>" + "</td></tr>";
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + valprd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + valprd + ");'>Eliminar</a>" + "</td></tr>";
                             }
                         }
                         html += '</div></tbody></table></div>';
@@ -815,7 +815,7 @@ function valproduct(id_produc) {
                                         estatus = "<span title='Ver detalles' onclick='infsiexvp(" + id_valepro + ")' data-toggle='modal' data-target='#modal-sinexivp' class='sinexisten' style='font-size:12px;cursor: pointer;'>SIN EXISTENCIA</span>"
                                     }
                                     //===================================================================================
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -847,7 +847,7 @@ function valproduct(id_produc) {
 
                                     }
                                     //===================================================================================
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -879,7 +879,7 @@ function valproduct(id_produc) {
 
                                 }
                                 //===================================================================================
-                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                             }
                         }
                         html += '</div></tbody></table></div>';
@@ -915,7 +915,7 @@ function valproduct(id_produc) {
 
                                     }
                                     //===================================================================================
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -947,7 +947,7 @@ function valproduct(id_produc) {
 
                                     }
                                     //===================================================================================
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -979,7 +979,7 @@ function valproduct(id_produc) {
 
                                 }
                                 //===================================================================================
-                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                             }
                         }
                         html += '</div></tbody></table></div>';
@@ -1017,7 +1017,7 @@ function valproduct(id_produc) {
 
                                     }
                                     //===================================================================================
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -1049,7 +1049,7 @@ function valproduct(id_produc) {
 
                                     }
                                     //===================================================================================
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -1081,7 +1081,7 @@ function valproduct(id_produc) {
 
                                 }
                                 //===================================================================================
-                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                             }
                         }
                         html += '</div></tbody></table></div>';
@@ -1161,7 +1161,7 @@ function updatedvpdett() {
                                 if (obj.data[U].refe_1 == document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref == 'EXTENDIDO') {
                                     x++;
                                     let id_valepro = obj.data[U].id_kax;
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a class='nav-link' onclick='deletedettart(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearvpdett'>Eliminar</a>" + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a class='nav-link' onclick='deletedettart(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearvpdett'>Eliminar</a>" + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -1182,7 +1182,7 @@ function updatedvpdett() {
                                 if (obj.data[U].refe_1 == document.getElementById('folprod').innerHTML && obj.data[U].tipo_ref == 'ETIQUETAS') {
                                     x++;
                                     let id_valepro = obj.data[U].id_kax;
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + id_valepro + ");'>Eliminar</a>" + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + id_valepro + ");'>Eliminar</a>" + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -1204,7 +1204,7 @@ function updatedvpdett() {
                                 x++;
                                 valprd = obj.data[U].id_kax;
                                 //alert(id_valepro);
-                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + valprd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + valprd + ");'>Eliminar</a>" + "</td></tr>";
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + valprd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + valprd + ");'>Eliminar</a>" + "</td></tr>";
                             }
                         }
                         html += '</div></tbody></table></div>';
@@ -1240,7 +1240,7 @@ function updatedvpdett() {
 
                                     }
                                     //===================================================================================
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -1272,7 +1272,7 @@ function updatedvpdett() {
 
                                     }
                                     //===================================================================================
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -1303,7 +1303,7 @@ function updatedvpdett() {
                                     estatus = "<span title='Ver detalles' onclick='infsiexvpfn(" + valprd + ")' data-toggle='modal' data-target='#modal-sinexifinvp' class='sinexisten' style='font-size:12px;cursor: pointer;'>SIN EXISTENCIA</span>"
                                 }
                                 //===================================================================================
-                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                             }
                         }
                         html += '</div></tbody></table></div>';
@@ -1339,7 +1339,7 @@ function updatedvpdett() {
 
                                     }
                                     //===================================================================================
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -1371,7 +1371,7 @@ function updatedvpdett() {
 
                                     }
                                     //===================================================================================
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -1403,7 +1403,7 @@ function updatedvpdett() {
 
                                 }
                                 //===================================================================================
-                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                             }
                         }
                         html += '</div></tbody></table></div>';
@@ -1437,7 +1437,7 @@ function updatedvpdett() {
 
                                     }
                                     //===================================================================================
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -1469,7 +1469,7 @@ function updatedvpdett() {
 
                                     }
                                     //===================================================================================
-                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div>';
@@ -1501,7 +1501,7 @@ function updatedvpdett() {
 
                                 }
                                 //===================================================================================
-                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td>" + estatus + "</td></tr>";
                             }
                         }
                         html += '</div></tbody></table></div>';
@@ -1530,7 +1530,7 @@ function infsurti(id_valeprodu) {
             if (obj.data[C].id_kax == id_valeprodu) {
                 if (document.getElementById('infvpestatus').value == "SURTIDO" || document.getElementById('infvpestatus').value == "FINALIZADO") {
                     //alert("entro");
-                    document.getElementById('descsurt').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].descripcion_1;
+                    document.getElementById('descsurt').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].artdescrip;
                     document.getElementById('cartsur').innerHTML = obj.data[C].salida;
                     document.getElementById('opstsur').innerHTML = obj.data[C].observa_dep;
                     //inpus e edición
@@ -1540,7 +1540,7 @@ function infsurti(id_valeprodu) {
                     document.getElementById('opesurt1').style.display = "none";
                 } else {
                     //alert("entro");
-                    document.getElementById('descsurt').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].descripcion_1;
+                    document.getElementById('descsurt').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].artdescrip;
                     document.getElementById('cartsur').innerHTML = obj.data[C].salida;
                     document.getElementById('opstsur').innerHTML = obj.data[C].observa_dep;
                     //inpus e edición
@@ -1571,7 +1571,7 @@ function infsurtifin(id_valeprodu) {
             if (obj.data[C].id_kax == id_valeprodu) {
                 if (document.getElementById('infvpestatus').value == "SURTIDO" || document.getElementById('infvpestatus').value == "FINALIZADO") {
                     //alert("entro");
-                    document.getElementById('descsurtfin').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].descripcion_1;
+                    document.getElementById('descsurtfin').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].artdescrip;
                     document.getElementById('cartsurfn').innerHTML = obj.data[C].entrada;
                     document.getElementById('opstsurfn').innerHTML = obj.data[C].observa_dep;
                     //inpus e edición
@@ -1581,7 +1581,7 @@ function infsurtifin(id_valeprodu) {
                     document.getElementById('opesurt1fn').style.display = "none";
                 } else {
                     //alert("entro");
-                    document.getElementById('descsurtfin').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].descripcion_1;
+                    document.getElementById('descsurtfin').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].artdescrip;
                     document.getElementById('cartsurfn').innerHTML = obj.data[C].entrada;
                     document.getElementById('opstsurfn').innerHTML = obj.data[C].observa_dep;
                     //inpus e edición
@@ -1612,7 +1612,7 @@ function infsiexvp(id_valeprodu) {
             if (obj.data[C].id_kax == id_valeprodu) {
                 if (document.getElementById('infvpestatus').value == "SURTIDO" || document.getElementById('infvpestatus').value == "FINALIZADO") {
                     //alert("entro");
-                    document.getElementById('descsinvp').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].descripcion_1;
+                    document.getElementById('descsinvp').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].artdescrip;
                     document.getElementById('cartsinvp').innerHTML = obj.data[C].salida;
                     document.getElementById('obdepsinvp').innerHTML = obj.data[C].observa_dep;
                     //inpus e edición
@@ -1622,7 +1622,7 @@ function infsiexvp(id_valeprodu) {
                     document.getElementById('opesurt1sn').style.display = "none";
                 } else {
                     //alert("entro");
-                    document.getElementById('descsinvp').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].descripcion_1;
+                    document.getElementById('descsinvp').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].artdescrip;
                     document.getElementById('cartsinvp').innerHTML = obj.data[C].salida;
                     document.getElementById('obdepsinvp').innerHTML = obj.data[C].observa_dep;
                     //inpus e edición
@@ -1652,7 +1652,7 @@ function infsiexvpfn(id_valeprodu) {
             if (obj.data[C].id_kax == id_valeprodu) {
                 if (document.getElementById('infvpestatus').value == "SURTIDO" || document.getElementById('infvpestatus').value == "FINALIZADO") {
                     //alert("entro");
-                    document.getElementById('descsinvpfn').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].descripcion_1;
+                    document.getElementById('descsinvpfn').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].artdescrip;
                     document.getElementById('cartsinvpfn').innerHTML = obj.data[C].salida;
                     document.getElementById('obdepsinvpfn').innerHTML = obj.data[C].observa_dep;
                     //inpus e edición
@@ -1662,7 +1662,7 @@ function infsiexvpfn(id_valeprodu) {
                     document.getElementById('opesurt1snfn').style.display = "none";
                 } else {
                     //alert("entro");
-                    document.getElementById('descsinvpfn').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].descripcion_1;
+                    document.getElementById('descsinvpfn').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].artdescrip;
                     document.getElementById('cartsinvpfn').innerHTML = obj.data[C].salida;
                     document.getElementById('obdepsinvpfn').innerHTML = obj.data[C].observa_dep;
                     //inpus e edición
@@ -2832,7 +2832,7 @@ function surtirvpf(id_kardex) {
                 //alert("entro");
                 document.getElementById('codisurtvp').value = obj.data[C].codigo_1;
                 document.getElementById('surtavprinf').value = obj.data[C].salida;
-                document.getElementById('descripsurvp').value = obj.data[C].descripcion_1;
+                document.getElementById('descripsurvp').value = obj.data[C].artdescrip;
             }
         }
     });
@@ -2853,7 +2853,7 @@ function surtirvpfin(id_kardex) {
                 //alert("entro");
                 document.getElementById('codisurvpfin').value = obj.data[C].codigo_1;
                 document.getElementById('surtvpfn').value = obj.data[C].entrada;
-                document.getElementById('dessurvpfn').value = obj.data[C].descripcion_1;
+                document.getElementById('dessurvpfn').value = obj.data[C].artdescrip;
                 document.getElementById('surbservpfn').value = obj.data[C].observa;
             }
         }

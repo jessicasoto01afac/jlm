@@ -1,7 +1,7 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT * FROM kardex where estado='0' AND tipo='VALE_PRODUCCION' ORDER BY id_kax ASC";
+	$query = "SELECT * FROM kardex k, articulos a where k.estado='0' AND a.artcodigo=k.codigo_1 AND k.tipo='VALE_PRODUCCION' ORDER BY k.id_kax ASC";
 	$resultado = mysqli_query($conexion, $query);
 
 	if(!$resultado){
