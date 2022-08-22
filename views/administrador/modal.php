@@ -1475,7 +1475,8 @@
             </div>
             <form id="editvoinf" class="form-horizontal" action="" method="POST">
                 <div class="modal-body pd-25">
-                    <a href="#" id="openedimemarinf" style="float: right;font-size: 16px"
+                    <!-- editar salidas -->
+                    <a href="#" id="openedimemarinf" style="float: right;font-size: 16px;display:none;"
                         class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editartmemoinf()"
                         title="Dar clic para editar">
                         <div><i class="fa fa-edit"></i></div>
@@ -1485,6 +1486,18 @@
                         title="Dar clic para cerrar">
                         <div><i class="fa fa-times"></i></div>
                     </a>
+                     <!-- editar entradas -->
+                    <a href="#" id="openedimemarinf_v2" style="float: right;font-size: 16px;display:none;"
+                        class="btn btn-info btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editartmemoinf_v2()"
+                        title="Dar clic para editar">
+                        <div><i class="fa fa-edit"></i></div>
+                    </a>
+                    <a href="#" id="closeditmemartinf_v2" style="float: right;font-size: 16px;display:none;"
+                        class="btn btn-info btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closeditmeminf_v2()"
+                        title="Dar clic para cerrar">
+                        <div><i class="fa fa-times"></i></div>
+                    </a>
+
                     <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_meminf"
                         id="id_meminf">
                     <div class="row mg-b-25">
@@ -1535,6 +1548,9 @@
                 <button type="button" onclick="saveinfethmem()" id="memguardarinf" style="display:none;"
                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
                     CAMBIOS</button>
+                <button type="button" onclick="saveinfethmem2()" id="memguardarinf_v2" style="display:none;"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
+                    CAMBIOS2</button>
             </div>
             <br>
             <div style="display:none;" id="edthdmeminf" name="edthdmeminf" class="alert alert-warning" role="alert">
@@ -1572,13 +1588,24 @@
             </div>
             <form id="editvoinf" class="form-horizontal" action="" method="POST">
                 <div class="modal-body pd-25">
-                    <a href="#" id="openeditras" style="float: right;font-size: 16px"
+                    <a href="#" id="openeditras" style="float: right;font-size: 16px;display:none;"
                         class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editartmemoal()"
                         title="Dar clic para editar">
                         <div><i class="fa fa-edit"></i></div>
                     </a>
                     <a href="#" id="closeditras" style="float: right;font-size: 16px;display:none;"
                         class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closeditmemal()"
+                        title="Dar clic para cerrar">
+                        <div><i class="fa fa-times"></i></div>
+                    </a>
+
+                    <a href="#" id="openeditrasv2" style="float: right;font-size: 16px;display:none;"
+                        class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editartmemoalv2()"
+                        title="Dar clic para editar">
+                        <div><i class="fa fa-edit"></i></div>
+                    </a>
+                    <a href="#" id="closeditrasv2" style="float: right;font-size: 16px;display:none;"
+                        class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closeditmemalv2()"
                         title="Dar clic para cerrar">
                         <div><i class="fa fa-times"></i></div>
                     </a>
@@ -1638,6 +1665,9 @@
                 <button type="button" onclick="savealtethmem()" id="memguardaral" style="display:none;"
                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
                     CAMBIOS</button>
+                <button type="button" onclick="savealtethmemv2()" id="memguardaralv2" style="display:none;"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
+                CAMBIOS</button>
             </div>
             <br>
             <div style="display:none;" id="edthdmminf" name="edthdmminf" class="alert alert-warning" role="alert">

@@ -235,7 +235,41 @@ if(!isset($usuario)){
         }else{
             echo "1";
         }
-        //edthsinexisfin
+        //guarda edicion de entrada
+    }else if($opcion === 'actualizainfv2'){
+        $refe_1 = $_POST['refe_1'];
+        $id_kax = $_POST['id_kax'];
+        $codigo_1 = $_POST['codigo_1'];        
+        $descripcion_1 = $_POST['descripcion_1'];
+        $salida = $_POST['salida'];
+        $observa = $_POST['observa'];
+
+        if (actualizarv2($refe_1,$id_kax,$codigo_1,$descripcion_1,$salida,$observa,$conexion)){
+            echo "0";
+            $realizo = 'ACTUALIZO INFORMACION DEL ARTICULO';
+           // $usuario='pruebas';
+            histedithme($refe_1,$id_kax,$codigo_1,$descripcion_1,$salida,$observa,$usuario,$realizo,$conexion);
+        }else{
+            echo "1";
+        }
+    //Condición donde elimina usuario
+    }else if($opcion === 'actualizainfv2'){
+        $refe_1 = $_POST['refe_1'];
+        $id_kax = $_POST['id_kax'];
+        $codigo_1 = $_POST['codigo_1'];        
+        $descripcion_1 = $_POST['descripcion_1'];
+        $salida = $_POST['salida'];
+        $observa = $_POST['observa'];
+
+        if (actualizarv2($refe_1,$id_kax,$codigo_1,$descripcion_1,$salida,$observa,$conexion)){
+            echo "0";
+            $realizo = 'ACTUALIZO INFORMACION DEL ARTICULO';
+           // $usuario='pruebas';
+            histedithme($refe_1,$id_kax,$codigo_1,$descripcion_1,$salida,$observa,$usuario,$realizo,$conexion);
+        }else{
+            echo "1";
+        }
+    //Condición donde elimina usuario
     }
 
 //FUNCIONES-----------------------------------------------------------------------------------------------------------------------------------------
@@ -328,7 +362,7 @@ function registrar_3 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descr
 }
 //funcion para guardar el ARTICULO TRASFORMADO EN ALTA MEMO
 function registrar_4 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$refe_2,$conexion){
-    $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','$refe_3','$fecha','$codigo_1','$descripcion_1','MEMO','ARTICULO_TRANSFORMADO','$proveedor_cliente','$ubicacion','$cantidad_real',0,'$salida',0,0,0,'$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0)";
+    $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','$refe_3','$fecha','$codigo_1','$descripcion_1','MEMO','ARTICULO_TRANSFORMADO','$proveedor_cliente','$ubicacion','$cantidad_real','$salida',0,0,0,0,'$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -443,6 +477,16 @@ function liberarmem ($memo,$conexion){
 ///funcion para actualizar aticulo de memo en vista previa
 function actualizar ($refe_1,$id_kax,$codigo_1,$descripcion_1,$salida,$observa,$conexion){
     $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1',salida='$salida',observa='$observa' WHERE refe_1 = '$refe_1' AND id_kax='$id_kax'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+///funcion para actualizar aticulo de memo en vista previa
+function actualizarv2 ($refe_1,$id_kax,$codigo_1,$descripcion_1,$salida,$observa,$conexion){
+    $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1',entrada='$salida',observa='$observa' WHERE refe_1 = '$refe_1' AND id_kax='$id_kax'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
