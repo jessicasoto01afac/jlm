@@ -414,9 +414,11 @@ function infmemo(id_memo) {
   var finalizado = document.getElementById('btnfinaliz');
   var editar = document.getElementById('openedimem1');
   var imprimir = document.getElementById('pdfmem');
+  var folio = id_memo;
   $.ajax({
     url: '../controller/php/memo1.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;
@@ -460,7 +462,8 @@ function infmemo(id_memo) {
   });
   $.ajax({
     url: '../controller/php/memo1.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (resp) {
     obj = JSON.parse(resp);
     var res = obj.data;
@@ -494,7 +497,8 @@ function infmemo(id_memo) {
   });
   $.ajax({
     url: '../controller/php/memo1.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (resp) {
     obj = JSON.parse(resp);
     var res = obj.data;
