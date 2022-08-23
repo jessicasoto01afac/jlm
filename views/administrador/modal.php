@@ -7,6 +7,9 @@
       $sql1 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
       $extendido = mysqli_query($conexion,$sql1);
 
+      $sqlex1 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $extendidomas = mysqli_query($conexion,$sqlex1);
+
       $sql2 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
       $etiquetas = mysqli_query($conexion,$sql2);
 
@@ -1486,7 +1489,7 @@
                         title="Dar clic para cerrar">
                         <div><i class="fa fa-times"></i></div>
                     </a>
-                     <!-- editar entradas -->
+                    <!-- editar entradas -->
                     <a href="#" id="openedimemarinf_v2" style="float: right;font-size: 16px;display:none;"
                         class="btn btn-info btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editartmemoinf_v2()"
                         title="Dar clic para editar">
@@ -1667,7 +1670,7 @@
                     CAMBIOS</button>
                 <button type="button" onclick="savealtethmemv2()" id="memguardaralv2" style="display:none;"
                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
-                CAMBIOS</button>
+                    CAMBIOS</button>
             </div>
             <br>
             <div style="display:none;" id="edthdmminf" name="edthdmminf" class="alert alert-warning" role="alert">
@@ -1957,9 +1960,44 @@
                                     name="multlistonedt" id="multlistonedt" placeholder="Ingresa">
                             </div>
                         </div><!-- col-3 -->
+                        <br>
+                        <div class="col-lg-12" id="masplus" name="masplus" style="display:none">
+                            <button type="button" onclick="addplusedit()"
+                                class="btn btn-outline-purple btn-block mg-b-10"><i
+                                    class="fa fa-plus mg-r-10"></i>AGREGAR MAS
+                                COLORES</button>
+                        </div><!-- col-3 -->
+                        <div id="masplus2" name="masplus2" class="col-lg-6" id="masplusext" name="masplusext" style="display:none">
+                            <div class="form-group">
+                                <label class="form-control-label label2">CODIGO ARTICULO EXTENDIDO: <span
+                                        class="tx-danger">*</span></label>
+                                <select class="form-control" id="edithpusadd" name="edithpusadd" type="text"
+                                    data-live-search="true" style="width: 100%">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($ext2 = mysqli_fetch_row($extendidomas)):?>
+                                    <option value="<?php echo $ext2[0]?>"><?php echo $ext2[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div id="masplus3" name="masplus3" class="col-lg-3" id="multimascolor" style="display:none">
+                            <div class="form-group">
+                                <label class=" form-control-label label2">Multiplica</label>
+                                <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="mltimascolor" id="mltimascolor" placeholder="Ingresa">
+                            </div>
+                        </div>
+                        <div id="masplus4" name="masplus4" class="col-lg-3" id="divimascolor" style="display:none">
+                            <div class="form-group">
+                                <label class=" form-control-label label2">División</label>
+                                <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="divmasclo" id="divmasclo" placeholder="Ingresa">
+                            </div>
+                        </div>
                         <div class="col-lg-12">
                             <div id="extraxcolortable" name="extraxcolortable"></div>
                         </div>
+
                     </div><!-- col-4 -->
                 </div>
             </form>

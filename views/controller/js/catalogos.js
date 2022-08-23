@@ -897,7 +897,7 @@ function addtransform() { //08052022 agregar
 
 //FUNCION DONDE RECOLECTA LA INFORMACION DEL ARTICULO DE TRASFORMACION PARA EDITAR
 function infolistrans(id_transform) {
-    alert(id_transform);
+    //alert(id_transform);
     document.getElementById('id_arttras').value = id_transform
     $.ajax({
         url: '../controller/php/contrasforma.php',
@@ -979,7 +979,7 @@ function infolistrans(id_transform) {
                 //data de colores
 
                 let id = document.getElementById('edithartfin').value;
-                alert(id);
+                //alert(id);
 
                 $.ajax({
                     url: '../controller/php/addtrasfo.php',
@@ -996,7 +996,7 @@ function infolistrans(id_transform) {
                         if (obj.data[U].id_articulo_final == id && obj.data[U].id_etiquetas == 'GRUPO_TRANSF') {
                             x++;
                             $id_memo2 = obj.data[U].id_kax;
-                            html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick=''  style='cursor:pointer;'  title='Eliminar' class='btn btn-danger btn-icon'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
+                            html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='deletemascolor()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
                         }
                     }
                     html += '</div></tbody></table></div></div>';
@@ -1039,7 +1039,8 @@ function editrasnf() {
     document.getElementById('codlistonedt').disabled = false;
     document.getElementById('multlistonedt').disabled = false;
 
-
+    // mas color 
+    document.getElementById('masplus').style.display = "";
 
 }
 //FUNCION DE CERRAR EDICIÓN ARTICULO DE RASFORMACION
@@ -1069,6 +1070,20 @@ function closetrans() {
     document.getElementById('listonaplicedt').disabled = true;
     document.getElementById('codlistonedt').disabled = true;
     document.getElementById('multlistonedt').disabled = true;
+    //mas color
+    document.getElementById('masplus').style.display = "none";
+    document.getElementById('masplus2').style.display = "none";
+    document.getElementById('masplus3').style.display = "none";
+    document.getElementById('masplus4').style.display = "none";
+}
+//FUNCIÓN DE AGREGAR EN EDITAR
+function addplusedit() {
+    alert("entra");
+
+    document.getElementById('masplus').style.display = "";
+    document.getElementById('masplus2').style.display = "";
+    document.getElementById('masplus3').style.display = "";
+    document.getElementById('masplus4').style.display = "";
 }
 //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
 function deletransf(transf) {
