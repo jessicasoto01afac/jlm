@@ -96,6 +96,16 @@ include ("../controller/conexion.php");
                                     name="descripfin" id="descripfin" placeholder="Ingresa la Descripción" disabled>
                             </div>
                         </div><!-- col-4 -->
+                        <div class="col-lg-12">
+                            <label class="ckbox">
+                                <input style="size:25px" onchange="addplus()" id="pluscolor" name="pluscolor"
+                                    type="checkbox"><span class="tx-purple" style="font-size: 20px">Selecciona si tiene
+                                    mas de un color</span>
+                            </label>
+                        </div>
+                        <div id="line" name="line" style="display:none" class="col-lg-12">
+                        <hr style="color: black; background-color:#D7D6D6; width:100%;" />
+                        </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo articulo Extendido: <span
@@ -110,6 +120,28 @@ include ("../controller/conexion.php");
                                     name="descripext" id="descripext" placeholder="Ingresa la Descripción" disabled>
                             </div>
                         </div><!-- col-4 -->
+                        <div class="col-lg-12" id="addpluscolor" name="addpluscolor" style="display:none">
+                            <div class="col-lg-12" style="color:#03925C">
+                                AGREGAR LOS DETALLES DE LOS COLORES
+                                <div
+                                    class="d-flex align-items-center justify-content-end bg-gray-100 ht-md-80 bd pd-x-20 mg-t-10">
+                                    <div class="d-md-flex pd-y-20 pd-md-y-0">
+                                        <input id="multiplicadd" name="multiplicadd" type="number" class="form-control" placeholder="Multiplicaciones">
+                                        <input id="divicionesadd" name="divicionesadd" type="number" class="form-control mg-md-l-10 mg-t-10 mg-md-t-0"
+                                            placeholder="Diviviones">
+                                        <button onclick="saveaddplus()" type="button"
+                                            class="btn btn-success  pd-y-13 pd-x-20 bd-0 mg-md-l-10 mg-t-10 mg-md-t-0 tx-uppercase tx-11 tx-spacing-2">Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-lg-12">
+                                <p>COLORES AGREGADOS A LA TRANSFORMACIÓN</p>
+                                <div id="datepluscolor" name="datepluscolor"></div>
+                            </div>
+                            <hr style="color: black; background-color:#D7D6D6; width:100%;" />
+                        </div><!-- col-4 -->
+
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo articulo Etiquetas: <span
@@ -194,9 +226,9 @@ include ("../controller/conexion.php");
                             <div class="form-group">
                                 <label class="form-control-label label2 tx-primary" style="font-size:20px">Cartonsillo
                                     <span class="tx-danger">*</span></label>
-                                <select class="form-control select2"
-                                    data-placeholder="Elija si aplioca o no" onchange="cartonsillo()" id="cartaplic"
-                                    name="cartaplic" type="text" data-live-search="true" style="width: 100%">
+                                <select class="form-control select2" data-placeholder="Elija si aplioca o no"
+                                    onchange="cartonsillo()" id="cartaplic" name="cartaplic" type="text"
+                                    data-live-search="true" style="width: 100%">
                                     <option value="0" selected>SELECCIONE</option>
                                     <option value="APLICA">APLICA</option>
                                     <option value="NO APLICA">NO APLICA</option>
@@ -233,9 +265,9 @@ include ("../controller/conexion.php");
                         <div class="col-lg-3" id="caplearex" name="caplearex" style="display:none">
                             <div class="form-group">
                                 <label class="form-control-label label2 tx-primary" style="font-size:20px">Caple</label>
-                                <select class="form-control select2"
-                                    data-placeholder="Elija si aplioca o no" onchange="caple()" id="capleaplic"
-                                    name="capleaplic" type="text" data-live-search="true" style="width: 100%">
+                                <select class="form-control select2" data-placeholder="Elija si aplioca o no"
+                                    onchange="caple()" id="capleaplic" name="capleaplic" type="text"
+                                    data-live-search="true" style="width: 100%">
                                     <option value="0" selected>SELECCIONE</option>
                                     <option value="APLICA">APLICA</option>
                                     <option value="NO APLICA">NO APLICA</option>
@@ -273,9 +305,9 @@ include ("../controller/conexion.php");
                             <div class="form-group">
                                 <label class="form-control-label label2 tx-primary"
                                     style="font-size:20px">Listón/Cordon</label>
-                                <select class="form-control select2"
-                                    data-placeholder="Elija si aplioca o no" onchange="liston()" id="listonaplic"
-                                    name="listonaplic" type="text" data-live-search="true" style="width: 100%">
+                                <select class="form-control select2" data-placeholder="Elija si aplioca o no"
+                                    onchange="liston()" id="listonaplic" name="listonaplic" type="text"
+                                    data-live-search="true" style="width: 100%">
                                     <option value="0" selected>SELECCIONE</option>
                                     <option value="APLICA">APLICA</option>
                                     <option value="NO APLICA">NO APLICA</option>

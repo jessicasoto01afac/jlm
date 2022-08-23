@@ -82,8 +82,8 @@ if(!isset($usuario)){
             echo "1";
         }
     //Condición donde elimina usuario
-}else if($opcion === 'eliminar'){
-    $id_transformacion = $_POST['id_transformacion'];
+    }else if($opcion === 'eliminar'){
+        $id_transformacion = $_POST['id_transformacion'];
         if (eliminar($id_transformacion,$conexion)){
             echo "0";
             $realizo = 'ELIMINA A ARTICULO DE TRANSFORMACIÓN';
@@ -92,7 +92,25 @@ if(!isset($usuario)){
         }else{
             echo "1";
         }
-}
+        //addcolors
+    }else if($opcion === 'addcolors'){
+        $final = $_POST['final'];
+        $extendido = $_POST['extendido'];
+        if (comprobcolors ($final,$extendido,$conexion)){
+            $multiplic = $_POST['multiplic'];        
+            $divicion = $_POST['divicion'];
+            if (regiscolor($final,$extendido,$multiplic,$divicion,$conexion)){
+                echo "0";
+               // $usuario='pruebas';
+            }else{
+                echo "1";
+            }
+        }else{
+
+            echo "2";
+        }
+    
+    }
 
 //FUNCIONES-----------------------------------------------------------------------------------
 
@@ -107,9 +125,30 @@ function comprobacion ($id_articulo_final,$id_extendido,$id_etiquetas,$conexion)
     }
     $this->conexion->cerrar();
 }
+//funcion de comprobación de colores
+function comprobcolors ($final,$extendido,$conexion){
+    $query="SELECT * FROM transforma WHERE id_articulo_final = '$final' AND id_extendido = '$extendido' AND estado = 0";
+    $resultado= mysqli_query($conexion,$query);
+    if($resultado->num_rows==0){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
 //funcion para guardar articulo
 function registrar ($id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divicion,$carton,$id_carton,$div_carton,$multi_carton,$cartonsillo,$id_cortonsillo,$div_cartonsillo,$multi_cartonsillo,$caple,$id_caple,$div_caple,$multi_caple,$liston_cordon,$id_cordliston,$multi_liston,$conexion){
     $query="INSERT INTO transforma VALUES(0,'$id_articulo_final','$id_extendido','$id_etiquetas',$hojas,$divicion,'$carton','$id_carton',$div_carton,$multi_carton,'$cartonsillo','$id_cortonsillo',$div_cartonsillo,$multi_cartonsillo,'$caple','$id_caple',$div_caple,$multi_caple,'$liston_cordon','$id_cordliston',$multi_liston,0)";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
+//funcion registrar color
+function regiscolor ($final,$extendido,$multiplic,$divicion,$conexion){
+    $query="INSERT INTO transforma (id_trans,id_articulo_final,id_extendido,hojas,divicion,estado) VALUES(0,'$final','$extendido','$multiplic',$divicion,0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

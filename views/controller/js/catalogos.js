@@ -1236,3 +1236,95 @@ function artextra() {
         seleliston.style.display = 'none';
     }
 }
+
+function addplus() {
+    if ($('#pluscolor').is(':checked')) {
+        //alert("seleccionado");
+        document.getElementById("addpluscolor").style.display = "";
+        document.getElementById("line").style.display = "";
+
+    } else {
+        //alert("no seleccionado");
+        document.getElementById("addpluscolor").style.display = "none";
+        document.getElementById("line").style.display = "none";
+    }
+}
+
+function updateaddcolo() {
+    let id = document.getElementById("vppcodigo").value;
+    //data de colores
+    $.ajax({
+        url: '../controller/php/addtrasfo.php',
+        type: 'GET',
+        data: 'id=' + id
+    }).done(function(resp) {
+        obj = JSON.parse(resp);
+        var res = obj.data;
+        var x = 0;
+
+        html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplus" name="dateplus" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        for (U = 0; U < res.length; U++) {
+            //estatus pendiente
+            if (obj.data[U].id_articulo_final == id) {
+                x++;
+                $id_memo2 = obj.data[U].id_kax;
+                html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
+            }
+        }
+        html += '</div></tbody></table></div></div>';
+        $("#datepluscolor").html(html);
+    });
+}
+
+function saveaddplus() {
+    //alert("agreagr");
+    //alert("entra guardar cambios memeo");
+    let final = document.getElementById('vppcodigo').value;
+    let extendido = document.getElementById('vpcodigoext').value;
+    let multiplic = document.getElementById('multiplicadd').value;
+    let divicion = document.getElementById('divicionesadd').value;
+
+    let datos = 'final=' + final + '&extendido=' + extendido + '&multiplic=' + multiplic + '&divicion=' + divicion + '&opcion=addcolors';
+    //alert(datos);
+    if (final == '' || extendido == '' || multiplic == '' || divicion == '') {
+        Swal.fire({
+            type: 'warning',
+            text: 'LLENAR TODOS LOS CAMPOS OBLIGATORIOS',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertransf.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se agrego de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                updateaddcolo(); //llama a la función para actualizar la tabla ARREGLAR AQUI
+            } else if (respuesta == 2) {
+                Swal.fire({
+                    type: 'warning',
+                    text: 'EL ARTICULO YA ESTA AGREGADO A LA TRASFORMACIÓN',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                //alert("datos repetidos");
+            } else {
+                Swal.fire({
+                    type: 'danger',
+                    text: 'Error contactar a Soporte tecnico o levantar un ticket',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    }
+
+}
