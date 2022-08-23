@@ -2,7 +2,7 @@
 	include("../conexion.php");
 	session_start();
 	
-	$query = "SELECT * FROM transforma t, articulos a where t.estado='0' and t.id_articulo_final = a.artcodigo GROUP BY t.id_articulo_final  ORDER BY id_trans ASC";
+	$query = "SELECT * FROM transforma t, articulos a where t.estado='0' and t.id_articulo_final = a.artcodigo AND t.id_etiquetas!='GRUPO_TRANSF' GROUP BY t.id_articulo_final  ORDER BY id_trans ASC";
 	$resultado = mysqli_query($conexion, $query);
 	$contador=0;
 	if(!$resultado){

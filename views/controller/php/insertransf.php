@@ -148,7 +148,7 @@ function registrar ($id_articulo_final,$id_extendido,$id_etiquetas,$hojas,$divic
 }
 //funcion registrar color
 function regiscolor ($final,$extendido,$multiplic,$divicion,$conexion){
-    $query="INSERT INTO transforma (id_trans,id_articulo_final,id_extendido,hojas,divicion,estado) VALUES(0,'$final','$extendido','$multiplic',$divicion,0)";
+    $query="INSERT INTO transforma (id_trans,id_articulo_final,id_extendido,hojas,divicion,estado,id_etiquetas) VALUES(0,'$final','$extendido','$multiplic',$divicion,0,'GRUPO_TRANSF')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

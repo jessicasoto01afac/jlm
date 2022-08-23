@@ -1957,6 +1957,9 @@
                                     name="multlistonedt" id="multlistonedt" placeholder="Ingresa">
                             </div>
                         </div><!-- col-3 -->
+                        <div class="col-lg-12">
+                            <div id="extraxcolortable" name="extraxcolortable"></div>
+                        </div>
                     </div><!-- col-4 -->
                 </div>
             </form>

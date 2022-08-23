@@ -884,7 +884,7 @@ function addtransform() {
 
 
 function infolistrans(id_transform) {
-  //alert(id_transform);
+  alert(id_transform);
   document.getElementById('id_arttras').value = id_transform;
   $.ajax({
     url: '../controller/php/contrasforma.php',
@@ -896,60 +896,89 @@ function infolistrans(id_transform) {
 
     for (D = 0; D < res.length; D++) {
       if (obj.data[D].id_trans == id_transform) {
-        // alert(id_persona);
-        datos = obj.data[D].id_articulo_final + '*' + obj.data[D].id_extendido + '*' + obj.data[D].id_etiquetas + '*' + obj.data[D].hojas + '*' + obj.data[D].divicion + '*' + obj.data[D].id_carton + '*' + obj.data[D].div_carton + '*' + obj.data[D].multi_carton + '*' + obj.data[D].id_cortonsillo + '*' + obj.data[D].div_cartonsillo + '*' + obj.data[D].multi_cartonsillo + '*' + obj.data[D].id_caple + '*' + obj.data[D].div_caple + '*' + obj.data[D].multi_caple + '*' + obj.data[D].id_cordliston + '*' + obj.data[D].multi_liston;
-        var o = datos.split("*");
-        $("#modal-edithtrans #edithartfin").val(o[0]);
-        $("#modal-edithtrans #edithartext").val(o[1]);
-        $("#modal-edithtrans #editharetq").val(o[2]);
-        $("#modal-edithtrans #edithojas").val(o[3]);
-        $("#modal-edithtrans #editdivision").val(o[4]);
-        $("#modal-edithtrans #edthcarton").val(o[5]);
-        $("#modal-edithtrans #eddivcarton").val(o[6]);
-        $("#modal-edithtrans #multcartonedt").val(o[7]);
-        $("#modal-edithtrans #edthcartonsillo").val(o[8]);
-        $("#modal-edithtrans #eddivcartonsillo").val(o[9]);
-        $("#modal-edithtrans #multcartonsilloedt").val(o[10]);
-        $("#modal-edithtrans #edthcaplecod").val(o[11]);
-        $("#modal-edithtrans #eddivcaple").val(o[12]);
-        $("#modal-edithtrans #multcapleedt").val(o[13]);
-        $("#modal-edithtrans #codlistonedt").val(o[14]);
-        $("#modal-edithtrans #multlistonedt").val(o[15]); //CARTON
+        (function () {
+          // alert(id_persona)
+          var id = data[D].id_articulo_final;
+          datos = obj.data[D].id_articulo_final + '*' + obj.data[D].id_extendido + '*' + obj.data[D].id_etiquetas + '*' + obj.data[D].hojas + '*' + obj.data[D].divicion + '*' + obj.data[D].id_carton + '*' + obj.data[D].div_carton + '*' + obj.data[D].multi_carton + '*' + obj.data[D].id_cortonsillo + '*' + obj.data[D].div_cartonsillo + '*' + obj.data[D].multi_cartonsillo + '*' + obj.data[D].id_caple + '*' + obj.data[D].div_caple + '*' + obj.data[D].multi_caple + '*' + obj.data[D].id_cordliston + '*' + obj.data[D].multi_liston;
+          var o = datos.split("*");
+          $("#modal-edithtrans #edithartfin").val(o[0]);
+          $("#modal-edithtrans #edithartext").val(o[1]);
+          $("#modal-edithtrans #editharetq").val(o[2]);
+          $("#modal-edithtrans #edithojas").val(o[3]);
+          $("#modal-edithtrans #editdivision").val(o[4]);
+          $("#modal-edithtrans #edthcarton").val(o[5]);
+          $("#modal-edithtrans #eddivcarton").val(o[6]);
+          $("#modal-edithtrans #multcartonedt").val(o[7]);
+          $("#modal-edithtrans #edthcartonsillo").val(o[8]);
+          $("#modal-edithtrans #eddivcartonsillo").val(o[9]);
+          $("#modal-edithtrans #multcartonsilloedt").val(o[10]);
+          $("#modal-edithtrans #edthcaplecod").val(o[11]);
+          $("#modal-edithtrans #eddivcaple").val(o[12]);
+          $("#modal-edithtrans #multcapleedt").val(o[13]);
+          $("#modal-edithtrans #codlistonedt").val(o[14]);
+          $("#modal-edithtrans #multlistonedt").val(o[15]); //CARTON
 
-        if (obj.data[D].carton == "0") {
-          document.getElementById('cartonedt').value = "NO APLICA";
-        } else if (obj.data[D].carton == "NO APLICA") {
-          document.getElementById('cartonedt').value = "NO APLICA";
-        } else if (obj.data[D].carton == "APLICA") {
-          document.getElementById('cartonedt').value = "APLICA";
-        } //CARTONSILLO
-
-
-        if (obj.data[D].cartonsillo == "0") {
-          document.getElementById('cartonsilledith').value = "NO APLICA";
-        } else if (obj.data[D].cartonsillo == "NO APLICA") {
-          document.getElementById('cartonsilledith').value = "NO APLICA";
-        } else if (obj.data[D].cartonsillo == "APLICA") {
-          document.getElementById('cartonsilledith').value = "APLICA";
-        } //CAPLE
+          if (obj.data[D].carton == "0") {
+            document.getElementById('cartonedt').value = "NO APLICA";
+          } else if (obj.data[D].carton == "NO APLICA") {
+            document.getElementById('cartonedt').value = "NO APLICA";
+          } else if (obj.data[D].carton == "APLICA") {
+            document.getElementById('cartonedt').value = "APLICA";
+          } //CARTONSILLO
 
 
-        if (obj.data[D].caple == "0") {
-          document.getElementById('capleedith').value = "NO APLICA";
-        } else if (obj.data[D].caple == "NO APLICA") {
-          document.getElementById('capleedith').value = "NO APLICA";
-        } else if (obj.data[D].caple == "APLICA") {
-          document.getElementById('capleedith').value = "APLICA";
-        } //LISTON/CORDON
+          if (obj.data[D].cartonsillo == "0") {
+            document.getElementById('cartonsilledith').value = "NO APLICA";
+          } else if (obj.data[D].cartonsillo == "NO APLICA") {
+            document.getElementById('cartonsilledith').value = "NO APLICA";
+          } else if (obj.data[D].cartonsillo == "APLICA") {
+            document.getElementById('cartonsilledith').value = "APLICA";
+          } //CAPLE
 
 
-        if (obj.data[D].liston_cordon == "0") {
-          document.getElementById('listonaplicedt').value = "NO APLICA";
-        } else if (obj.data[D].liston_cordon == "NO APLICA") {
-          document.getElementById('listonaplicedt').value = "NO APLICA";
-        } else if (obj.data[D].liston_cordon == "APLICA") {
-          document.getElementById('listonaplicedt').value = "APLICA";
-        }
+          if (obj.data[D].caple == "0") {
+            document.getElementById('capleedith').value = "NO APLICA";
+          } else if (obj.data[D].caple == "NO APLICA") {
+            document.getElementById('capleedith').value = "NO APLICA";
+          } else if (obj.data[D].caple == "APLICA") {
+            document.getElementById('capleedith').value = "APLICA";
+          } //LISTON/CORDON
+
+
+          if (obj.data[D].liston_cordon == "0") {
+            document.getElementById('listonaplicedt').value = "NO APLICA";
+          } else if (obj.data[D].liston_cordon == "NO APLICA") {
+            document.getElementById('listonaplicedt').value = "NO APLICA";
+          } else if (obj.data[D].liston_cordon == "APLICA") {
+            document.getElementById('listonaplicedt').value = "APLICA";
+          } //let id = document.getElementById("edithartfin").value;
+          //data de colores
+
+
+          alert(obj.data[D].id_articulo_final);
+          $.ajax({
+            url: '../controller/php/addtrasfo.php',
+            type: 'GET',
+            data: 'id=' + id
+          }).done(function (resp) {
+            obj = JSON.parse(resp);
+            var res = obj.data;
+            var x = 0;
+            html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplus2" name="dateplus2" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+
+            for (U = 0; U < res.length; U++) {
+              //estatus pendiente
+              if (obj.data[U].id_articulo_final == id && obj.data[U].id_etiquetas == 'GRUPO_TRANSF') {
+                x++;
+                $id_memo2 = obj.data[U].id_kax;
+                html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
+              }
+            }
+
+            html += '</div></tbody></table></div></div>';
+            $("#extraxcolortable").html(html);
+          });
+        })();
       }
     }
   });
@@ -1289,6 +1318,9 @@ function saveaddplus() {
           timer: 1500
         });
         updateaddcolo(); //llama a la función para actualizar la tabla ARREGLAR AQUI
+
+        document.getElementById('multiplicadd').value = '';
+        document.getElementById('divicionesadd').value = '';
       } else if (respuesta == 2) {
         Swal.fire({
           type: 'warning',
