@@ -909,7 +909,6 @@ function infolistrans(id_transform) {
         for (D = 0; D < res.length; D++) {
             if (obj.data[D].id_trans == id_transform) {
                 // alert(id_persona)
-                let id = data[D].id_articulo_final;
                 datos =
                     obj.data[D].id_articulo_final + '*' +
                     obj.data[D].id_extendido + '*' +
@@ -978,7 +977,10 @@ function infolistrans(id_transform) {
                 }
                 //let id = document.getElementById("edithartfin").value;
                 //data de colores
-                alert(obj.data[D].id_articulo_final);
+
+                let id = document.getElementById('edithartfin').value;
+                alert(id);
+
                 $.ajax({
                     url: '../controller/php/addtrasfo.php',
                     type: 'GET',
@@ -988,18 +990,20 @@ function infolistrans(id_transform) {
                     var res = obj.data;
                     var x = 0;
 
-                    html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplus2" name="dateplus2" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+                    html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplus" name="dateplus" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
                     for (U = 0; U < res.length; U++) {
                         //estatus pendiente
                         if (obj.data[U].id_articulo_final == id && obj.data[U].id_etiquetas == 'GRUPO_TRANSF') {
                             x++;
                             $id_memo2 = obj.data[U].id_kax;
-                            html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
+                            html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick=''  style='cursor:pointer;'  title='Eliminar' class='btn btn-danger btn-icon'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
                         }
                     }
                     html += '</div></tbody></table></div></div>';
                     $("#extraxcolortable").html(html);
                 });
+
+
             }
         }
     });
