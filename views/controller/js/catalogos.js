@@ -990,7 +990,7 @@ function infolistrans(id_transform) {
                     var res = obj.data;
                     var x = 0;
 
-                    html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplus" name="dateplus" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+                    html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplusedith" name="dateplusedith" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
                     for (U = 0; U < res.length; U++) {
                         //estatus pendiente
                         if (obj.data[U].id_articulo_final == id && obj.data[U].id_etiquetas == 'GRUPO_TRANSF') {
@@ -1075,15 +1075,17 @@ function closetrans() {
     document.getElementById('masplus2').style.display = "none";
     document.getElementById('masplus3').style.display = "none";
     document.getElementById('masplus4').style.display = "none";
+    document.getElementById('masplusave').style.display = "none";
 }
 //FUNCIÓN DE AGREGAR EN EDITAR
 function addplusedit() {
-    alert("entra");
+    //alert("entra");
 
     document.getElementById('masplus').style.display = "";
     document.getElementById('masplus2').style.display = "";
     document.getElementById('masplus3').style.display = "";
     document.getElementById('masplus4').style.display = "";
+    document.getElementById('masplusave').style.display = "";
 }
 //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
 function deletransf(transf) {
@@ -1377,4 +1379,84 @@ function saveaddplus() {
         });
     }
 
+}
+
+function saveaddedith() {
+    //alert("agreagr");
+    //alert("entra guardar cambios memeo");
+    let final = document.getElementById('edithartfin').value;
+    let extendido = document.getElementById('edithpusadd').value;
+    let multiplic = document.getElementById('mltimascolor').value;
+    let divicion = document.getElementById('divmasclo').value;
+
+    let datos = 'final=' + final + '&extendido=' + extendido + '&multiplic=' + multiplic + '&divicion=' + divicion + '&opcion=addcolors';
+    //alert(datos);
+    if (final == '' || extendido == '' || multiplic == '' || divicion == '') {
+        Swal.fire({
+            type: 'warning',
+            text: 'LLENAR TODOS LOS CAMPOS OBLIGATORIOS',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertransf.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se agrego de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                updatcoloredith(); //llama a la función para actualizar la tabla ARREGLAR AQUI
+                document.getElementById('mltimascolor').value = '';
+                document.getElementById('divmasclo').value = '';
+            } else if (respuesta == 2) {
+                Swal.fire({
+                    type: 'warning',
+                    text: 'EL ARTICULO YA ESTA AGREGADO A LA TRASFORMACIÓN',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                //alert("datos repetidos");
+            } else {
+                Swal.fire({
+                    type: 'danger',
+                    text: 'Error contactar a Soporte tecnico o levantar un ticket',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    }
+}
+
+function updatcoloredith() {
+    let id = document.getElementById("edithartfin").value;
+    //data de colores
+    $.ajax({
+        url: '../controller/php/addtrasfo.php',
+        type: 'GET',
+        data: 'id=' + id
+    }).done(function(resp) {
+        obj = JSON.parse(resp);
+        var res = obj.data;
+        var x = 0;
+
+        html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplusedith" name="dateplusedith" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        for (U = 0; U < res.length; U++) {
+            //estatus pendiente
+            if (obj.data[U].id_articulo_final == id && obj.data[U].id_etiquetas == 'GRUPO_TRANSF') {
+                x++;
+                $id_memo2 = obj.data[U].id_kax;
+                html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='deletemascolor()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
+            }
+        }
+        html += '</div></tbody></table></div></div>';
+        $("#extraxcolortable").html(html);
+    });
 }

@@ -1967,7 +1967,8 @@
                                     class="fa fa-plus mg-r-10"></i>AGREGAR MAS
                                 COLORES</button>
                         </div><!-- col-3 -->
-                        <div id="masplus2" name="masplus2" class="col-lg-6" id="masplusext" name="masplusext" style="display:none">
+                        <div id="masplus2" name="masplus2" class="col-lg-6" id="masplusext" name="masplusext"
+                            style="display:none">
                             <div class="form-group">
                                 <label class="form-control-label label2">CODIGO ARTICULO EXTENDIDO: <span
                                         class="tx-danger">*</span></label>
@@ -1993,6 +1994,10 @@
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="divmasclo" id="divmasclo" placeholder="Ingresa">
                             </div>
+                        </div>
+                        <div id="masplusave" name="masplusave" class="col-lg-3" id="divimascolor" style="display:none">
+                            <button type="button" onclick="saveaddedith()"
+                                class="btn btn-oblong btn-success btn-block mg-b-10">GUARDAR</button>
                         </div>
                         <div class="col-lg-12">
                             <div id="extraxcolortable" name="extraxcolortable"></div>
