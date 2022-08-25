@@ -1461,7 +1461,7 @@ function updatcoloredith() {
 }
 
 function deletemascolor() {
-    alert("BORRAR");
+    //alert("BORRAR");
     //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
     $("#dateplusedith tr").on('click', function() {
         let id_colorss = "";

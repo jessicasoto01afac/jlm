@@ -1439,8 +1439,8 @@ function updatcoloredith() {
 }
 
 function deletemascolor() {
-  alert("BORRAR"); //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
-
+  //alert("BORRAR");
+  //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
   $("#dateplusedith tr").on('click', function () {
     var id_colorss = "";
     id_colorss += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
