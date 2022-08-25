@@ -884,7 +884,7 @@ function addtransform() {
 
 
 function infolistrans(id_transform) {
-  alert(id_transform);
+  //alert(id_transform);
   document.getElementById('id_arttras').value = id_transform;
   $.ajax({
     url: '../controller/php/contrasforma.php',
@@ -898,7 +898,6 @@ function infolistrans(id_transform) {
       if (obj.data[D].id_trans == id_transform) {
         (function () {
           // alert(id_persona)
-          var id = data[D].id_articulo_final;
           datos = obj.data[D].id_articulo_final + '*' + obj.data[D].id_extendido + '*' + obj.data[D].id_etiquetas + '*' + obj.data[D].hojas + '*' + obj.data[D].divicion + '*' + obj.data[D].id_carton + '*' + obj.data[D].div_carton + '*' + obj.data[D].multi_carton + '*' + obj.data[D].id_cortonsillo + '*' + obj.data[D].div_cartonsillo + '*' + obj.data[D].multi_cartonsillo + '*' + obj.data[D].id_caple + '*' + obj.data[D].div_caple + '*' + obj.data[D].multi_caple + '*' + obj.data[D].id_cordliston + '*' + obj.data[D].multi_liston;
           var o = datos.split("*");
           $("#modal-edithtrans #edithartfin").val(o[0]);
@@ -955,7 +954,8 @@ function infolistrans(id_transform) {
           //data de colores
 
 
-          alert(obj.data[D].id_articulo_final);
+          var id = document.getElementById('edithartfin').value; //alert(id);
+
           $.ajax({
             url: '../controller/php/addtrasfo.php',
             type: 'GET',
@@ -964,14 +964,14 @@ function infolistrans(id_transform) {
             obj = JSON.parse(resp);
             var res = obj.data;
             var x = 0;
-            html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplus2" name="dateplus2" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+            html = '<div class="bd-gray-300 rounded table-responsive"><table disable style="width:100%; table-layout:" id="dateplusedith" name="dateplusedith" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
 
             for (U = 0; U < res.length; U++) {
               //estatus pendiente
               if (obj.data[U].id_articulo_final == id && obj.data[U].id_etiquetas == 'GRUPO_TRANSF') {
                 x++;
-                $id_memo2 = obj.data[U].id_kax;
-                html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
+                $id_etiquetas = obj.data[U].id_extendido;
+                html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='deletemascolor()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
               }
             }
 
@@ -1011,7 +1011,9 @@ function editrasnf() {
   document.getElementById('multcapleedt').disabled = false;
   document.getElementById('listonaplicedt').disabled = false;
   document.getElementById('codlistonedt').disabled = false;
-  document.getElementById('multlistonedt').disabled = false;
+  document.getElementById('multlistonedt').disabled = false; // mas color 
+
+  document.getElementById('masplus').style.display = "";
 } //FUNCION DE CERRAR EDICIÓN ARTICULO DE RASFORMACION
 
 
@@ -1040,7 +1042,23 @@ function closetrans() {
   document.getElementById('multcapleedt').disabled = true;
   document.getElementById('listonaplicedt').disabled = true;
   document.getElementById('codlistonedt').disabled = true;
-  document.getElementById('multlistonedt').disabled = true;
+  document.getElementById('multlistonedt').disabled = true; //mas color
+
+  document.getElementById('masplus').style.display = "none";
+  document.getElementById('masplus2').style.display = "none";
+  document.getElementById('masplus3').style.display = "none";
+  document.getElementById('masplus4').style.display = "none";
+  document.getElementById('masplusave').style.display = "none";
+} //FUNCIÓN DE AGREGAR EN EDITAR
+
+
+function addplusedit() {
+  //alert("entra");
+  document.getElementById('masplus').style.display = "";
+  document.getElementById('masplus2').style.display = "";
+  document.getElementById('masplus3').style.display = "";
+  document.getElementById('masplus4').style.display = "";
+  document.getElementById('masplusave').style.display = "";
 } //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
 
 
@@ -1338,4 +1356,128 @@ function saveaddplus() {
       }
     });
   }
+}
+
+function saveaddedith() {
+  //alert("agreagr");
+  //alert("entra guardar cambios memeo");
+  var _final2 = document.getElementById('edithartfin').value;
+  var extendido = document.getElementById('edithpusadd').value;
+  var multiplic = document.getElementById('mltimascolor').value;
+  var divicion = document.getElementById('divmasclo').value;
+  var datos = 'final=' + _final2 + '&extendido=' + extendido + '&multiplic=' + multiplic + '&divicion=' + divicion + '&opcion=addcolors'; //alert(datos);
+
+  if (_final2 == '' || extendido == '' || multiplic == '' || divicion == '') {
+    Swal.fire({
+      type: 'warning',
+      text: 'LLENAR TODOS LOS CAMPOS OBLIGATORIOS',
+      showConfirmButton: false,
+      timer: 1500
+    });
+    return;
+  } else {
+    $.ajax({
+      type: "POST",
+      url: "../controller/php/insertransf.php",
+      data: datos
+    }).done(function (respuesta) {
+      if (respuesta == 0) {
+        Swal.fire({
+          type: 'success',
+          text: 'Se agrego de forma correcta',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        updatcoloredith(); //llama a la función para actualizar la tabla ARREGLAR AQUI
+
+        document.getElementById('mltimascolor').value = '';
+        document.getElementById('divmasclo').value = '';
+      } else if (respuesta == 2) {
+        Swal.fire({
+          type: 'warning',
+          text: 'EL ARTICULO YA ESTA AGREGADO A LA TRASFORMACIÓN',
+          showConfirmButton: false,
+          timer: 1500
+        }); //alert("datos repetidos");
+      } else {
+        Swal.fire({
+          type: 'danger',
+          text: 'Error contactar a Soporte tecnico o levantar un ticket',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    });
+  }
+}
+
+function updatcoloredith() {
+  var id = document.getElementById("edithartfin").value; //data de colores
+
+  $.ajax({
+    url: '../controller/php/addtrasfo.php',
+    type: 'GET',
+    data: 'id=' + id
+  }).done(function (resp) {
+    obj = JSON.parse(resp);
+    var res = obj.data;
+    var x = 0;
+    html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplusedith" name="dateplusedith" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+
+    for (U = 0; U < res.length; U++) {
+      //estatus pendiente
+      if (obj.data[U].id_articulo_final == id && obj.data[U].id_etiquetas == 'GRUPO_TRANSF') {
+        x++;
+        $id_memo2 = obj.data[U].id_kax;
+        html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='deletemascolor()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
+      }
+    }
+
+    html += '</div></tbody></table></div></div>';
+    $("#extraxcolortable").html(html);
+  });
+}
+
+function deletemascolor() {
+  alert("BORRAR"); //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
+
+  $("#dateplusedith tr").on('click', function () {
+    var id_colorss = "";
+    id_colorss += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
+    //alert(id_colors);
+
+    var idtrans = document.getElementById('edithartfin').value;
+    var datos = 'id_colorss=' + id_colorss + '&idtrans=' + idtrans + '&opcion=eliminarcolors'; //alert(datos);
+
+    $.ajax({
+      type: "POST",
+      url: "../controller/php/insertransf.php",
+      data: datos
+    }).done(function (respuesta) {
+      if (respuesta == 0) {
+        Swal.fire({
+          type: 'success',
+          text: 'SE ELIMINO DE FORMA CORRECTA',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        updatcoloredith();
+      } else {
+        Swal.fire({
+          type: 'danger',
+          text: 'CONTACTAR A SOPORTE TECNICO O LEVANTAR UN TICKET',
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    }); //FIN DE AJAX
+  });
+}
+
+function canceladd() {
+  document.getElementById('masplus').style.display = "";
+  document.getElementById('masplus2').style.display = "none";
+  document.getElementById('masplus3').style.display = "none";
+  document.getElementById('masplus4').style.display = "none";
+  document.getElementById('masplusave').style.display = "none";
 }

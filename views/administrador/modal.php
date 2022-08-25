@@ -1996,8 +1996,14 @@
                             </div>
                         </div>
                         <div id="masplusave" name="masplusave" class="col-lg-3" id="divimascolor" style="display:none">
-                            <button type="button" onclick="saveaddedith()"
-                                class="btn btn-oblong btn-success btn-block mg-b-10">GUARDAR</button>
+                            <!-- <button type="button" onclick="saveaddedith()"
+                                class="btn btn-oblong btn-success btn-block mg-b-10">GUARDAR</button> -->
+                            <a onclick="saveaddedith()" title="Guardar Articulo" style="color:white" class="btn btn-primary btn-icon mg-r-5 mg-b-10">
+                                <div><i class="fa fa-floppy-o"></i></div>
+                            </a>
+                            <a onclick="canceladd()" title="Cerrar agregar articulo" style="color:white" class="btn btn-purple btn-icon mg-r-5 mg-b-10">
+                                <div><i class="fa fa-times"></i></div>
+                            </a>
                         </div>
                         <div class="col-lg-12">
                             <div id="extraxcolortable" name="extraxcolortable"></div>
@@ -3234,6 +3240,38 @@
             </div> -->
         </div>
     </div>
+</div><!-- modal -->
+<!-- modal eliminar articulo de ransformacion -->
+<div class="modal fade" id='modal-deleditarcls'>
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content bd-0">
+            <div class="modal-header pd-x-20">
+                <h4 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ELIMINAR</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pd-20">
+                <p class="mg-b-5">ESTAS SEGURO DE ELIMINAR EL ARTICULO?</p>
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="detrasfor"
+                    id="detrasfor">
+                <input disabled="" class="form-control inputalta" type="text" name="artras_dele" id="artras_dele">
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" onclick="savdeletransf()"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
+                <br>
+
+            </div>
+            <div style="display:none;" id="delerrartras" name="delerrartras" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        </div>
+    </div><!-- modal-dialog -->
 </div><!-- modal -->
 <!-- MODAL PARA VALIDAR FECHA-->
 <div class="modal fade" id='modal-fechistorial'>

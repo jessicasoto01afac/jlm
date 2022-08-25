@@ -81,7 +81,7 @@ if(!isset($usuario)){
         }else{
             echo "1";
         }
-    //Condición donde elimina usuario
+    //Condición donde elimina usuario 
     }else if($opcion === 'eliminar'){
         $id_transformacion = $_POST['id_transformacion'];
         if (eliminar($id_transformacion,$conexion)){
@@ -89,6 +89,20 @@ if(!isset($usuario)){
             $realizo = 'ELIMINA A ARTICULO DE TRANSFORMACIÓN';
            // $usuario='pruebas';
             histdelete($usuario,$realizo,$id_transformacion,$conexion);
+        }else{
+            echo "1";
+        }
+        //eliminar colores
+    }else if($opcion === 'eliminarcolors'){
+
+        $id_colorss = $_POST['id_colorss'];
+        $idtrans = $_POST['idtrans'];
+
+        if (eliminarcolos($idtrans,$id_colorss,$conexion)){
+            echo "0";
+            $realizo = 'ELIMINA COLOR DE UNA TRANSFORMACIÓN';
+           // $usuario='pruebas';
+            //histdelete($usuario,$realizo,$id_transformacion,$conexion);
         }else{
             echo "1";
         }
@@ -170,6 +184,16 @@ function actualizar ($id_transformacion,$id_articulo_final,$id_extendido,$id_eti
 //funcion para eliminar el registro
 function eliminar ($id_transformacion,$conexion){
     $query="UPDATE transforma SET estado='1' WHERE id_trans = '$id_transformacion'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//function para eliminar colores
+function eliminarcolos ($idtrans,$id_colorss,$conexion){
+    $query="UPDATE transforma SET estado='1' WHERE id_articulo_final = '$idtrans' and id_extendido = '$id_colorss'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

@@ -990,12 +990,12 @@ function infolistrans(id_transform) {
                     var res = obj.data;
                     var x = 0;
 
-                    html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplusedith" name="dateplusedith" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+                    html = '<div class="bd-gray-300 rounded table-responsive"><table disable style="width:100%; table-layout:" id="dateplusedith" name="dateplusedith" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
                     for (U = 0; U < res.length; U++) {
                         //estatus pendiente
                         if (obj.data[U].id_articulo_final == id && obj.data[U].id_etiquetas == 'GRUPO_TRANSF') {
                             x++;
-                            $id_memo2 = obj.data[U].id_kax;
+                            $id_etiquetas = obj.data[U].id_extendido;
                             html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='deletemascolor()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
                         }
                     }
@@ -1080,7 +1080,6 @@ function closetrans() {
 //FUNCIÓN DE AGREGAR EN EDITAR
 function addplusedit() {
     //alert("entra");
-
     document.getElementById('masplus').style.display = "";
     document.getElementById('masplus2').style.display = "";
     document.getElementById('masplus3').style.display = "";
@@ -1459,4 +1458,47 @@ function updatcoloredith() {
         html += '</div></tbody></table></div></div>';
         $("#extraxcolortable").html(html);
     });
+}
+
+function deletemascolor() {
+    alert("BORRAR");
+    //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
+    $("#dateplusedith tr").on('click', function() {
+        let id_colorss = "";
+        id_colorss += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
+        //alert(id_colors);
+        let idtrans = document.getElementById('edithartfin').value;
+        let datos = 'id_colorss=' + id_colorss + '&idtrans=' + idtrans + '&opcion=eliminarcolors';
+        //alert(datos);
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertransf.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'SE ELIMINO DE FORMA CORRECTA',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                updatcoloredith()
+            } else {
+                Swal.fire({
+                    type: 'danger',
+                    text: 'CONTACTAR A SOPORTE TECNICO O LEVANTAR UN TICKET',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }
+        }); //FIN DE AJAX
+    });
+}
+
+function canceladd() {
+    document.getElementById('masplus').style.display = "";
+    document.getElementById('masplus2').style.display = "none";
+    document.getElementById('masplus3').style.display = "none";
+    document.getElementById('masplus4').style.display = "none";
+    document.getElementById('masplusave').style.display = "none";
 }
