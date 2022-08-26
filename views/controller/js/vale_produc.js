@@ -396,7 +396,7 @@ function addvaleprodu() {
             for (D = 0; D < res.length; D++) {
                 if (obj.data[D].id_articulo_final == codigo_1) {
                     //SI APLICA CARTON
-                    if (obj.data[D].carton == "APLICA") {
+                    if (obj.data[D].carton == "APLICA" && obj.data[D].id_etiquetas != "GRUPO_TRANSF" && obj.data[D].estado == "0") {
                         codigocart = obj.data[D].id_carton;
                         let datoscart = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&codigocart=' + codigocart + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&opcion=regcarton';
                         //alert(datoscart);
@@ -422,7 +422,7 @@ function addvaleprodu() {
                         })
                     }
                     //SI APLICA CARTONSILLO
-                    if (obj.data[D].cartonsillo == "APLICA") {
+                    if (obj.data[D].cartonsillo == "APLICA" && obj.data[D].id_etiquetas != "GRUPO_TRANSF" && obj.data[D].estado == "0") {
                         codigocartons = obj.data[D].id_cortonsillo;
                         let datoscasill = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&codigocartons=' + codigocartons + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&opcion=regcartonsillo';
                         //alert(datoscasill);
@@ -448,7 +448,7 @@ function addvaleprodu() {
                         })
                     }
                     //SI APLICA CAPLE
-                    if (obj.data[D].caple == "APLICA") {
+                    if (obj.data[D].caple == "APLICA" && obj.data[D].id_etiquetas != "GRUPO_TRANSF" && obj.data[D].estado == "0") {
                         codigocaple = obj.data[D].id_caple;
                         let datoscaple = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&codigocaple=' + codigocaple + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&opcion=regcaple';
                         //alert(datoscasill);
@@ -474,7 +474,7 @@ function addvaleprodu() {
                         })
                     }
                     //SI APLICA LISTON/CORDON
-                    if (obj.data[D].liston_cordon == "APLICA") {
+                    if (obj.data[D].liston_cordon == "APLICA" && obj.data[D].id_etiquetas != "GRUPO_TRANSF" && obj.data[D].estado == "0") {
                         codigolist = obj.data[D].id_cordliston;
                         let datoslist = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&codigolist=' + codigolist + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&opcion=regliston';
                         //alert(datoscasill);

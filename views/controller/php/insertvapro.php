@@ -635,7 +635,7 @@ function etiqueta ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$
 
 //funcion para guardar el carton de articulo de trasformación
 function carton ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$codigocart,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion){
-    $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha','$codigocart',concat((select artdescrip from articulos where artcodigo = '$codigocart' and id_etiquetas != 'GRUPO_TRANSF' )),'VALE_PRODUCCION','EXTENDIDO','$proveedor_cliente',concat((select artubicac from articulos where artcodigo = '$codigocart' and id_etiquetas != 'GRUPO_TRANSF' )),concat((select $cantidad_real * multi_carton / div_carton from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),0,concat((select $cantidad_real * multi_carton / div_carton from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),'0',0,'0','','NA','PENDIENTE','PENDIENTE','NO','NO',0";
+    $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha','$codigocart',concat((select artdescrip from articulos where artcodigo = '$codigocart')),'VALE_PRODUCCION','EXTENDIDO','$proveedor_cliente',concat((select artubicac from articulos where artcodigo = '$codigocart')),concat((select $cantidad_real * multi_carton / div_carton from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),0,concat((select $cantidad_real * multi_carton / div_carton from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),'0',0,'0','$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -645,7 +645,7 @@ function carton ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$co
 }
 //funcion para guardar el cartonsillo de articulo de trasformación
 function cartonsillo ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$codigocartons,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion){
-    $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha','$codigocartons',concat((select artdescrip from articulos where artcodigo = '$codigocartons' and id_etiquetas != 'GRUPO_TRANSF' )),'VALE_PRODUCCION','EXTENDIDO','$proveedor_cliente',concat((select artubicac from articulos where artcodigo = '$codigocartons' and id_etiquetas != 'GRUPO_TRANSF' )),concat((select $cantidad_real * multi_cartonsillo / div_cartonsillo from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF')),0,concat((select $cantidad_real * multi_cartonsillo / div_cartonsillo from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),'0',0,'0','','NA','PENDIENTE','PENDIENTE','NO','NO',0";
+    $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha','$codigocartons',concat((select artdescrip from articulos where artcodigo = '$codigocartons')),'VALE_PRODUCCION','EXTENDIDO','$proveedor_cliente',concat((select artubicac from articulos where artcodigo = '$codigocartons')),concat((select $cantidad_real * multi_cartonsillo / div_cartonsillo from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF')),0,concat((select $cantidad_real * multi_cartonsillo / div_cartonsillo from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),'0',0,'0','$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -655,7 +655,7 @@ function cartonsillo ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_
 }
 //funcion para guardar el caple de articulo de trasformación
 function caple ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$codigocaple,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion){
-    $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha','$codigocaple',concat((select artdescrip from articulos where artcodigo = '$codigocaple' and id_etiquetas != 'GRUPO_TRANSF' )),'VALE_PRODUCCION','EXTENDIDO','$proveedor_cliente',concat((select artubicac from articulos where artcodigo = '$codigocaple' and id_etiquetas != 'GRUPO_TRANSF' )),concat((select $cantidad_real * multi_caple / div_caple from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),0,concat((select $cantidad_real * multi_caple / div_caple from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),'0',0,'0','','NA','PENDIENTE','PENDIENTE','NO','NO',0";
+    $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha','$codigocaple',concat((select artdescrip from articulos where artcodigo = '$codigocaple')),'VALE_PRODUCCION','EXTENDIDO','$proveedor_cliente',concat((select artubicac from articulos where artcodigo = '$codigocaple')),concat((select $cantidad_real * multi_caple / div_caple from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),0,concat((select $cantidad_real * multi_caple / div_caple from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),'0',0,'0','$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -665,7 +665,7 @@ function caple ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$cod
 }
 //funcion para guardar el liston de articulo de trasformación
 function liston ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$codigolist,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion){
-    $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha','$codigolist',concat((select artdescrip from articulos where artcodigo = '$codigolist' and id_etiquetas != 'GRUPO_TRANSF' )),'VALE_PRODUCCION','ETIQUETAS','$proveedor_cliente',concat((select artubicac from articulos where artcodigo = '$codigolist' and id_etiquetas != 'GRUPO_TRANSF' )),concat((select $cantidad_real * multi_liston from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),0,concat((select $cantidad_real * multi_liston from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),'0',0,'0','','NA','PENDIENTE','PENDIENTE','NO','NO',0";
+    $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha','$codigolist',concat((select artdescrip from articulos where artcodigo = '$codigolist')),'VALE_PRODUCCION','ETIQUETAS','$proveedor_cliente',concat((select artubicac from articulos where artcodigo = '$codigolist')),concat((select $cantidad_real * multi_liston from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),0,concat((select $cantidad_real * multi_liston from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),'0',0,'0','$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
