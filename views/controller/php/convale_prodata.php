@@ -1,8 +1,8 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$folio = $_GET["folio"];
-	$query = "SELECT * FROM kardex k, articulos a where k.estado='0' AND a.artcodigo=k.codigo_1 AND k.tipo='VALE_PRODUCCION' AND  k.id_kax='$folio' ORDER BY k.id_kax ASC";
+    $folio = $_GET["folio"];
+	$query = "SELECT * FROM kardex k, articulos a where k.estado='0' AND a.artcodigo=k.codigo_1 AND k.tipo='VALE_PRODUCCION' AND k.refe_1='$folio' ORDER BY k.id_kax ASC";
 	$resultado = mysqli_query($conexion, $query);
 
 	if(!$resultado){
