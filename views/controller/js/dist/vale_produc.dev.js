@@ -183,9 +183,11 @@ function updatedvp() {
   document.getElementById('pedidomem').value = ""; //INFORMACION DE LAS TBLAS
 
   var id_valeproduc = document.getElementById('vpfolio').value;
+  var folio = id_valeproduc;
   $.ajax({
-    url: '../controller/php/convale_pro.php',
-    type: 'POST'
+    url: '../controller/php/convale_prodata.php',
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (resp) {
     obj = JSON.parse(resp);
     var res = obj.data;
@@ -196,7 +198,7 @@ function updatedvp() {
       if (obj.data[U].refe_1 == id_valeproduc && obj.data[U].tipo_ref == 'EXTENDIDO') {
         x++;
         var id_valepro = obj.data[U].id_kax;
-        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a class='nav-link' onclick='deletenewart(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearvpnew'>Eliminar</a>" + "</td></tr>";
+        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a class='nav-link' onclick='deletenewart(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearvpnew'>Eliminar</a>" + "</td></tr>";
       }
     }
 
@@ -224,8 +226,9 @@ function updatedvp() {
   }); //LLAMADA DE ETIQUETAS
 
   $.ajax({
-    url: '../controller/php/convale_pro.php',
-    type: 'POST'
+    url: '../controller/php/convale_prodata.php',
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (resp) {
     obj = JSON.parse(resp);
     var res = obj.data;
@@ -236,7 +239,7 @@ function updatedvp() {
       if (obj.data[U].refe_1 == id_valeproduc && obj.data[U].tipo_ref == 'ETIQUETAS') {
         x++;
         var id_valepro = obj.data[U].id_kax;
-        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart(" + id_valepro + ");'>Eliminar</a>" + "</td></tr>";
+        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart(" + id_valepro + ");'>Eliminar</a>" + "</td></tr>";
       }
     }
 
@@ -264,8 +267,9 @@ function updatedvp() {
   }); //LLAMADA DE PRODUCTO TERMINADO
 
   $.ajax({
-    url: '../controller/php/convale_pro.php',
-    type: 'POST'
+    url: '../controller/php/convale_prodata.php',
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (resp) {
     obj = JSON.parse(resp);
     var res = obj.data;
@@ -277,7 +281,7 @@ function updatedvp() {
         x++;
         valprd = obj.data[U].id_kax; //alert(id_valepro);
 
-        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].descripcion_1 + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp(" + valprd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart(" + valprd + ");'>Eliminar</a>" + "</td></tr>";
+        html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp(" + valprd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart(" + valprd + ");'>Eliminar</a>" + "</td></tr>";
       }
     }
 
@@ -378,7 +382,7 @@ function addvaleprodu() {
       for (D = 0; D < res.length; D++) {
         if (obj.data[D].id_articulo_final == codigo_1) {
           //SI APLICA CARTON
-          if (obj.data[D].carton == "APLICA") {
+          if (obj.data[D].carton == "APLICA" && obj.data[D].id_etiquetas != "GRUPO_TRANSF" && obj.data[D].estado == "0") {
             codigocart = obj.data[D].id_carton;
             var datoscart = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&codigocart=' + codigocart + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&opcion=regcarton'; //alert(datoscart);
 
@@ -404,7 +408,7 @@ function addvaleprodu() {
           } //SI APLICA CARTONSILLO
 
 
-          if (obj.data[D].cartonsillo == "APLICA") {
+          if (obj.data[D].cartonsillo == "APLICA" && obj.data[D].id_etiquetas != "GRUPO_TRANSF" && obj.data[D].estado == "0") {
             codigocartons = obj.data[D].id_cortonsillo;
             var datoscasill = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&codigocartons=' + codigocartons + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&opcion=regcartonsillo'; //alert(datoscasill);
 
@@ -430,7 +434,7 @@ function addvaleprodu() {
           } //SI APLICA CAPLE
 
 
-          if (obj.data[D].caple == "APLICA") {
+          if (obj.data[D].caple == "APLICA" && obj.data[D].id_etiquetas != "GRUPO_TRANSF" && obj.data[D].estado == "0") {
             codigocaple = obj.data[D].id_caple;
             var datoscaple = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&codigocaple=' + codigocaple + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&opcion=regcaple'; //alert(datoscasill);
 
@@ -456,7 +460,7 @@ function addvaleprodu() {
           } //SI APLICA LISTON/CORDON
 
 
-          if (obj.data[D].liston_cordon == "APLICA") {
+          if (obj.data[D].liston_cordon == "APLICA" && obj.data[D].id_etiquetas != "GRUPO_TRANSF" && obj.data[D].estado == "0") {
             codigolist = obj.data[D].id_cordliston;
             var datoslist = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&codigolist=' + codigolist + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&opcion=regliston'; //alert(datoscasill);
 
@@ -489,10 +493,12 @@ function addvaleprodu() {
 
 function editarinsvp(valprd) {
   //alert(valprd);
+  var folio = valprd;
   document.getElementById('id_exedith').value = valprd;
   $.ajax({
     url: '../controller/php/convale_pro.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;
@@ -658,9 +664,11 @@ function valproduct(id_produc) {
   var finalizado = document.getElementById('btnvpfinaliz');
   var editar = document.getElementById('openedivpinf');
   var pdfvp = document.getElementById('pdfvprod');
+  var folio = id_produc;
   $.ajax({
     url: '../controller/php/infvale_produc.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;
@@ -693,8 +701,9 @@ function valproduct(id_produc) {
           editar.style.display = '';
           pdfvp.style.display = 'none';
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -715,8 +724,9 @@ function valproduct(id_produc) {
           }); //LLAMADA DE ETIQUETAS
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -737,8 +747,9 @@ function valproduct(id_produc) {
           }); //LLAMADA DE PRODUCTO TERMINADO
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -764,8 +775,9 @@ function valproduct(id_produc) {
           editar.style.display = 'none';
           pdfvp.style.display = '';
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -796,8 +808,9 @@ function valproduct(id_produc) {
           }); //LLAMADA DE ETIQUETAS
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -828,8 +841,9 @@ function valproduct(id_produc) {
           }); //LLAMADA DE PRODUCTO TERMINADO
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -864,8 +878,9 @@ function valproduct(id_produc) {
           editar.style.display = 'none';
           pdfvp.style.display = '';
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -896,8 +911,9 @@ function valproduct(id_produc) {
           }); //LLAMADA DE ETIQUETAS
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -928,8 +944,9 @@ function valproduct(id_produc) {
           }); //LLAMADA DE PRODUCTO TERMINADO
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -963,8 +980,9 @@ function valproduct(id_produc) {
           editar.style.display = 'none';
           pdfvp.style.display = '';
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -995,8 +1013,9 @@ function valproduct(id_produc) {
           }); //LLAMADA DE ETIQUETAS
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1027,8 +1046,9 @@ function valproduct(id_produc) {
           }); //LLAMADA DE PRODUCTO TERMINADO
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1072,11 +1092,13 @@ function updatedvpdett() {
   var surtir = document.getElementById('btnvpsurtir');
   var finalizado = document.getElementById('btnvpfinaliz');
   var editar = document.getElementById('openedivpinf');
-  var pdfvp = document.getElementById('pdfvprod'); //alert(id_produc);
+  var pdfvp = document.getElementById('pdfvprod');
+  var folio = id_produc; //alert(id_produc);
 
   $.ajax({
     url: '../controller/php/infvale_produc.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;
@@ -1107,8 +1129,9 @@ function updatedvpdett() {
           editar.style.display = '';
           pdfvp.style.display = 'none';
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1129,8 +1152,9 @@ function updatedvpdett() {
           }); //LLAMADA DE ETIQUETAS
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1151,8 +1175,9 @@ function updatedvpdett() {
           }); //LLAMADA DE PRODUCTO TERMINADO
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1178,8 +1203,9 @@ function updatedvpdett() {
           editar.style.display = 'none';
           pdfvp.style.display = '';
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1210,8 +1236,9 @@ function updatedvpdett() {
           }); //LLAMADA DE ETIQUETAS
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1242,8 +1269,9 @@ function updatedvpdett() {
           }); //LLAMADA DE PRODUCTO TERMINADO
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1278,8 +1306,9 @@ function updatedvpdett() {
           editar.style.display = 'none';
           pdfvp.style.display = '';
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1310,8 +1339,9 @@ function updatedvpdett() {
           }); //LLAMADA DE ETIQUETAS
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1342,8 +1372,9 @@ function updatedvpdett() {
           }); //LLAMADA DE PRODUCTO TERMINADO
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1377,8 +1408,9 @@ function updatedvpdett() {
           editar.style.display = 'none';
           pdfvp.style.display = '';
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1409,8 +1441,9 @@ function updatedvpdett() {
           }); //LLAMADA DE ETIQUETAS
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1441,8 +1474,9 @@ function updatedvpdett() {
           }); //LLAMADA DE PRODUCTO TERMINADO
 
           $.ajax({
-            url: '../controller/php/convale_pro.php',
-            type: 'POST'
+            url: '../controller/php/convale_prodata.php',
+            type: 'GET',
+            data: 'folio=' + folio
           }).done(function (resp) {
             obj = JSON.parse(resp);
             var res = obj.data;
@@ -1481,10 +1515,12 @@ function updatedvpdett() {
 function infsurti(id_valeprodu) {
   //alert("entro");
   //alert(id_valeprodu);
+  var folio = id_valeprodu;
   document.getElementById('idsurt').value = id_valeprodu;
   $.ajax({
     url: '../controller/php/convale_pro.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;
@@ -1522,11 +1558,13 @@ function infsurti(id_valeprodu) {
 function infsurtifin(id_valeprodu) {
   //alert("entro");
   //alert(id_valeprodu);
+  var folio = id_valeprodu;
   document.getElementById('idsurtfin').value = id_valeprodu;
   var estatus = document.getElementById('infvpestatus').value;
   $.ajax({
     url: '../controller/php/convale_pro.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;
@@ -1564,11 +1602,13 @@ function infsurtifin(id_valeprodu) {
 function infsiexvp(id_valeprodu) {
   //alert("entro");
   //alert(id_valeprodu);
+  var folio = id_valeprodu;
   document.getElementById('idsinexvp').value = id_valeprodu;
   var estatus = document.getElementById('infvpestatus').value;
   $.ajax({
     url: '../controller/php/convale_pro.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;
@@ -1606,13 +1646,15 @@ function infsiexvp(id_valeprodu) {
 function infsiexvpfn(id_valeprodu) {
   //alert("entro");
   //alert(id_valeprodu);
+  var folio = id_valeprodu;
   document.getElementById('idsinexvpfin').value = id_valeprodu; //id
 
   var estatus = document.getElementById('infvpestatus').value; //estado
 
   $.ajax({
     url: '../controller/php/convale_pro.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;
@@ -1878,10 +1920,12 @@ function saveedithnewvp() {
 
 function deletenewart(id_delete) {
   //alert(id_delete);
+  var folio = id_delete;
   document.getElementById('id_exedith').value = id_delete;
   $.ajax({
     url: '../controller/php/convale_pro.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;
@@ -2140,10 +2184,12 @@ function saveedithdettvp() {
 
 function editarinsvpdett(valprd) {
   //alert(valprd);
+  var folio = valprd;
   document.getElementById('id_exedithdett').value = valprd;
   $.ajax({
     url: '../controller/php/convale_pro.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;
@@ -2183,10 +2229,12 @@ function editarinsvpdett(valprd) {
 
 function deletedettart(id_delete) {
   //alert(id_delete);
+  var folio = id_delete;
   document.getElementById('del_artvpdetts').value = id_delete;
   $.ajax({
     url: '../controller/php/convale_pro.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;
@@ -2781,10 +2829,12 @@ function indivsurtfin() {
 
 function surtirvpf(id_kardex) {
   //alert(id_kardex);
+  var folio = id_kardex;
   document.getElementById('id_surtvpif').value = id_kardex;
   $.ajax({
     url: '../controller/php/convale_pro.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;
@@ -2804,10 +2854,12 @@ function surtirvpf(id_kardex) {
 
 function surtirvpfin(id_kardex) {
   //alert(id_kardex);
+  var folio = id_kardex;
   document.getElementById('id_surtvpfin').value = id_kardex;
   $.ajax({
     url: '../controller/php/convale_pro.php',
-    type: 'POST'
+    type: 'GET',
+    data: 'folio=' + folio
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;

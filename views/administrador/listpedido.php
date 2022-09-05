@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+<?php include ("../../controller/conexion.php");
+
+    
+$sql = "SELECT codigo_clie,nombre FROM clientes WHERE estado = 0";
+$cliente = mysqli_query($conexion,$sql);
+
+$sql = "SELECT id_per,usunom,usuapell FROM accesos WHERE estado = 0";
+$person = mysqli_query($conexion,$sql);
+
+
+?>
 
 <head>
     <!-- Required meta tags -->
@@ -23,6 +34,7 @@
     <link href="../template/lib/datatables/jquery.dataTables.css" rel="stylesheet">
     <link href="../template/lib/select2/css/select2.min.css" rel="stylesheet">
 
+    <link href="../template/css/diseno.css" rel="stylesheet">
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
     <script src="../controller/js/pedidos.js"></script>
@@ -47,13 +59,14 @@ include('header.php');
 
             <div class="br-pagebody">
                 <div class="br-section-wrapper">
-                    <a class="btn btn-primary" href="infpedido.php" style="float:right"><i
-                            class="fa fa-user-plus mg-r-10"></i>Agregar Pedido</a>
+                    <a class="btn btn-primary" href="newpedido.php" style="float:right"><i
+                            class="fa fa-plus mg-r-10"></i>Agregar Pedido</a>
                     <br>
                     <br>
                     <br>
                     <div class="table-wrapper rounded table-responsive">
-                        <table class="table display dataTable no-footer" id="pedidosdata" name="pedidosdata" style="width:100%">
+                        <table class="table display dataTable no-footer" id="pedidosdata" name="pedidosdata"
+                            style="width:100%">
                             <thead>
                                 <tr>
                                     <th style="width:5%;">#</th>
@@ -66,21 +79,21 @@ include('header.php');
                             </thead>
                         </table>
                     </div>
-                    </div><!-- br-section-wrapper -->
-                </div><!-- br-pagebody -->
-                <footer class="br-footer">
-                    <div class="footer-left">
-                        <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
-                        <div>Jose Luis Mondragon y CIA.</div>
-                    </div>
-                    <div class="footer-right d-flex align-items-center">
-                        <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i
-                                class="fa fa-facebook tx-20"></i></a>
-                        <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i
-                                class="fa fa-globe tx-20"></i></a>
-                    </div>
-                </footer>
-            </div><!-- br-mainpanel -->
+                </div><!-- br-section-wrapper -->
+            </div><!-- br-pagebody -->
+            <footer class="br-footer">
+                <div class="footer-left">
+                    <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
+                    <div>Jose Luis Mondragon y CIA.</div>
+                </div>
+                <div class="footer-right d-flex align-items-center">
+                    <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i
+                            class="fa fa-facebook tx-20"></i></a>
+                    <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i
+                            class="fa fa-globe tx-20"></i></a>
+                </div>
+            </footer>
+        </div><!-- br-mainpanel -->
     </section>
     <!-- ########## END: MAIN PANEL ########## -->
     <!------------------------------- ########## DETALLES DEL PEDIDO ########## -------------------------->
@@ -97,109 +110,139 @@ include('header.php');
                 <div style="float: right;">
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button onclick="editpediinf()" id="openedipi" title="Dar clic para editar" type="button"
-                            class="btn btn-secondary btn btn-warning"><i class="fa fa-edit"></i></button>
+                            class="btn btn-secondary btn btn-secondary"><i class="fa fa-edit"></i></button>
                         <button onclick="closedithpin()" id="closepedi" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
+                        <button title="ver historial" onclick="histvalepro()" data-toggle="modal"
+                            data-target="#modal-vphistorial" type="button" class="btn btn-primary"><i
+                                class="fa fa-history"></i></button>
                     </div>
                 </div><!-- col-5 -->
                 <div class="br-section-wrapper">
                     <h6 class="">INFORMACIÓN DEL PEDIDO:</h6>
-                    <form id="info-valofi" method="POST">
-                        <div class="form-group">
-                            <div class="col-md-4 mg-t--1 mg-md-t-0">
+                    <div class="form-group">
+                        <div class="row mg-b-25">
+                            <div class="col-sm-9">
 
                             </div>
-                            <div class="row mg-b-25">
-                                <div class="col-sm-9">
-                                    <h3><label for="" id="idinped" name="idinped" style="color:#14128F"></label></h3>
-                                </div>
-                                <div class="col-sm-3">
-                                    <button type="button" id="estatus" name="estatus"
-                                        class="btn btn-oblong btn-secondary btn-block mg-b-3">PENDIENTE</button>
-                                </div>
-                                <div class="col-sm-12">
-                                    <label for="" id="" name="" style="">CLIENTE:</label>
-                                    <input class="form-control" readonly id="infclinte" name="infclinte" type="text"
-                                        name="address" placeholder="">
-
-                                </div>
-                                <div class="col-sm-4">
-
-                                </div>
-
+                            <div class="col-sm-3">
+                                <div name="button_estatus" id="button_estatus"></div>
+                                <input style="display:none" name="estatus2" id="estatus2" type="text">
                             </div>
                         </div>
-
-                        <div class="form-layout form-layout-1">
-                            <div class="row mg-b-25">
+                    </div>
+                    <form id="info-valofi" method="POST">
+                        <div class="form-layout form-layout-2">
+                            <div class="row no-gutters">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <input style="display:none;" disabled="" class="form-control inputalta"
-                                            type="text" name="infid" id="infid">
-                                        <label class="form-control-label">REMISIÓN: <span
-                                                class="tx-danger">*</span></label>
-                                        <input class="form-control" disabled="" type="text" name="inforemision"
-                                            id="inforemision" placeholder="Ingrese la Remisión">
+                                        <label class="form-control-label" style="font-size:14px">NUMERO DE PEDIDO: <span
+                                                class="tx-danger" style="font-size:14px">*</span></label>
+                                        <h3><label for="" id="idinped" readonly name="idinped"
+                                                style="color:#14128F"></label>
+                                        </h3>
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-4 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label">FECHA DE INGRESO: <span
-                                                class="tx-danger">*</span></label>
-                                        <input class="form-control" disabled="" type="date" id="inffcingr"
-                                            name="inffcingr" placeholder="Enter lastname">
+                                        <label class="form-control-label" style="font-size:14px">REMISIÓN DE PEDIDO:
+                                            <span class="tx-danger" style="font-size:14px">*</span></label>
+                                        <input class="form-control" style="color:#14128F;font-size:18px" readonly=""
+                                            type="text" id="remisioninf" name="remisioninf"
+                                            placeholder="Ingresar la remisión">
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-4 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label">FECHA DE ENTREGA: <span
+                                        <label class="form-control-label" style="font-size:14px">FECHA DE INGRESO: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" disabled="" type="date" id="inffecentre"
-                                            name="inffecentre" placeholder="Enter lastname">
+                                        <input class="form-control" readonly="" type="date" id="infvpdate"
+                                            name="infvpdate" placeholder="Enter lastname">
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-8 mg-t--1 mg-md-t-0">
+                                <div class="col-md-8">
                                     <div class="form-group bd-t-0-force">
-                                        <label class="form-control-label">ANTENDIO: <span
+                                        <label class="form-control-label" style="font-size:14px">CLIENTE: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" disabled="" id="infaten" name="infaten" type="text"
-                                            placeholder="Enter address">
+                                        <input class="form-control" readonly type="text" name="infclinte" id="infclinte"
+                                            value="" placeholder="Enter address" style="font-size:16px">
+                                        <!-- <select disabled class="form-control" name="infclinte" id="infclinte"
+                                            style="font-size:16px" data-placeholder="Choose country">
+                                            <option label="">Selecciona</option>
+                                            <?php while($clie = mysqli_fetch_row($cliente)):?>
+                                            <option value="<?php echo $clie[0]?>"><?php echo $clie[1]?></option>
+                                            <?php endwhile; ?>
+
+                                        </select> -->
                                     </div>
                                 </div><!-- col-8 -->
-                                <div class="col-md-4 mg-t--1 mg-md-t-0">
-                                    <div class="form-group bd-t-0-force">
-                                        <label class="form-control-label">LUGAR: <span
-                                                class="tx-danger">*</span></label>
-                                        <input class="form-control" disabled="" id="influgar" name="influgar"
-                                            type="text" placeholder="Enter address">
-                                    </div>
-                                </div><!-- col-8 -->
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="form-group mg-md-l--1 bd-t-0-force">
-                                        <label class="form-control-label mg-b-0-force">DIRECCIÓN: <span
+                                        <label class="form-control-label mg-b-0-force">ANTENDIO:<span
                                                 class="tx-danger">*</span></label>
-                                        <textarea class="form-control" id="infdirec" name="infdirec" disabled=""
-                                            rows="2"></textarea>
+                                        <select disabled class="form-control" name="atendioinf" id="atendioinf"
+                                            style="font-size:14px" data-placeholder="Choose country">
+                                            <option label="">Selecciona</option>
+                                            <?php while($per = mysqli_fetch_row($person)):?>
+                                            <option value="<?php echo $per[0]?>"><?php echo $per[1]?>
+                                                <?php echo $per[2]?></option>
+                                            <?php endwhile; ?>
+
+                                        </select>
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
+                                    <div class="form-group mg-md-l--1">
+                                        <label class="form-control-label" style="font-size:14px">AUTORIZA: <span
+                                                class="tx-danger">*</span></label>
+                                        <input class="form-control" readonly type="text" name="auropedid" id="auropedid"
+                                            value="" placeholder="Enter address" style="font-size:16px">
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
+                                    <div class="form-group mg-md-l--1">
+                                        <label class="form-control-label" style="font-size:14px">FECHA DE AUTORIZACIÓN:
+                                            <span class="tx-danger">*</span></label>
+                                        <input class="form-control" readonly="" type="date" id="feautoped"
+                                            name="feautoped" placeholder="Enter lastname">
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
+                                    <div class="form-group mg-md-l--1">
+                                        <label class="form-control-label" style="font-size:14px">FECHA DE SURTIDO: <span
+                                                class="tx-danger">*</span></label>
+                                        <input class="form-control" readonly="" type="date" id="fesurtped"
+                                            name="fesurtped" placeholder="Enter lastname">
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
+                                    <div class="form-group mg-md-l--1">
+                                        <label class="form-control-label" style="font-size:14px">FECHA DE ENTREGA: <span
+                                                class="tx-danger">*</span></label>
+                                        <input class="form-control" readonly="" type="date" id="fecentrega"
+                                            name="fecentrega" placeholder="Enter lastname">
                                     </div>
                                 </div><!-- col-4 -->
                             </div><!-- row -->
-                            <div class="form-layout-footer">
+                            <div class="form-layout-footer bd pd-20 bd-t-0">
                                 <button class="btn btn-info">Finalizar</button>
                                 <button id="cancelpe" style="display:none;" class="btn btn-secondary">Cancelar
                                     pedido</button>
-                                <button type="button" onclick="masarticvo()" data-toggle='modal'
-                                    style="display:none; background-color: #08D876;" data-target='#modal-editavo1'
-                                    onclick="" id="addarticp"
-                                    class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i
-                                        class="fa fa-plus"></i> Agregar Articulo</button>
-                            </div><!-- form-layout-footer -->
-                        </div>
+                            </div><!-- form-group -->
+                        </div><!-- form-layout -->
                     </form>
+                    <br>
+                    <button type="button" onclick="masarticvo()" data-toggle='modal'
+                        style="display:none; background-color: rgb(0, 156, 40);" data-target='#modal-editavo1'
+                        onclick="" id="addarticp"
+                        class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i
+                            class="fa fa-plus"></i> Agregar Articulo</button>
+                    <br>
                     <br>
                     <h6 class="col-md-4 mg-t--1 mg-md-t-0">ARTICULOS</h6>
                     <br>
-                    <div class="col-lg-12">
+                    <div class="col-lg-20">
                         <div id="listpedidinf"></div><!-- col-12 -->
                     </div><!-- form-layout -->
 
@@ -233,7 +276,7 @@ include('header.php');
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
 
-    <?php include('../administrador/modal.php');?>
+    <?php include('modal/mpedido.php');?>
     <script>
     openpedidos();
     </script>

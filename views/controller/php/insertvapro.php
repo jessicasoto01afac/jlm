@@ -572,7 +572,7 @@ function registrarcolors ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$cod
     FROM
         transforma 
     WHERE
-        id_articulo_final = '1095-7' and id_etiquetas='GRUPO_TRANSF'";
+        id_articulo_final = '$codigo_1' and id_etiquetas='GRUPO_TRANSF'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
