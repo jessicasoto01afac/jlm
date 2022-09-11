@@ -27,6 +27,8 @@ $(document).ready(function () {
       var refe_2 = document.getElementById('vpdepsoli').value;
       var refe_3 = document.getElementById('vptipo').value;
       var proveedor_cliente = document.getElementById('vpdepentr').value;
+      var caracter = document.getElementById('vpcaracter').value;
+      var datos = 'refe_1=' + refe_1 + '&caracter=' + caracter + '&opcion=registrarfin'; //alert(datos);
 
       if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || refe_2 == '') {
         document.getElementById('vaciosvp').style.display = '';
@@ -35,13 +37,36 @@ $(document).ready(function () {
         }, 2000);
         return;
       } else {
-        Swal.fire({
-          type: 'success',
-          text: 'Se finaliza de forma correcta',
-          showConfirmButton: false,
-          timer: 1500
+        $.ajax({
+          type: "POST",
+          url: "../controller/php/insertvapro.php",
+          data: datos
+        }).done(function (respuesta) {
+          //alert(respuesta);
+          if (respuesta == 0) {
+            Swal.fire({
+              type: 'success',
+              text: 'Se AGREGO el vale de producción de forma correcta',
+              showConfirmButton: false,
+              timer: 2000
+            });
+            setTimeout("location.href = 'vale_produccion.php';", 1500);
+          } else if (respuesta == 2) {
+            Swal.fire({
+              type: 'warning',
+              text: 'ya esta duplicado',
+              showConfirmButton: false,
+              timer: 1500
+            });
+          } else {
+            Swal.fire({
+              type: 'error',
+              text: 'Error contactar a soporte tecnico o levantar un ticket',
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
         });
-        setTimeout("location.href = 'vale_produccion.php';", 1500);
       }
     }
   });

@@ -48,7 +48,7 @@
 		$originalDate=$data["fecha"];
 		$newDate = date("d/m/Y", strtotime($originalDate));
 		$refe_1=$data["refe_1"];
-		$proceso = "<a onclick='infpedido("+$refe_1+")' style='cursor:pointer;' title='Editar' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-pencil-square-o'></i></div></a>  <a onclick='deletclient()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletecli'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
+		$proceso = "<a onclick='infpedido($refe_1)' style='cursor:pointer;' title='Editar' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-pencil-square-o'></i></div></a>  <a onclick='deletclient()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletecli'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
 		$estatus="SURTIDO";
         $pedidos[] = [ 
             $contador,
@@ -63,7 +63,7 @@
 		$originalDate=$data["fecha"];
 		$newDate = date("d/m/Y", strtotime($originalDate));
 		$refe_1=$data["refe_1"];
-		$proceso = "<a onclick='infpedido("+$refe_1+")' style='cursor:pointer;' title='Editar' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-pencil-square-o'></i></div></a>  <a onclick='deletclient()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletecli'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
+		$proceso = "<a onclick='infpedido($refe_1)' style='cursor:pointer;' title='Editar' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-pencil-square-o'></i></div></a>  <a onclick='deletclient()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletecli'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
         $estatus="FINALIZADO";
         $pedidos[] = [ 
             $contador,

@@ -114,8 +114,10 @@ include('header.php');
                         <button onclick="closedithpin()" id="closepedi" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
+                        <button onclick="pdfvp()" style="display:none;" title="Imprimir" id="pdfpedrod" name="pdfpedrod"
+                            type="button" class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
                         <button title="ver historial" onclick="histvalepro()" data-toggle="modal"
-                            data-target="#modal-vphistorial" type="button" class="btn btn-primary"><i
+                            data-target="#modal-pedhistorial" type="button" class="btn btn-primary"><i
                                 class="fa fa-history"></i></button>
                     </div>
                 </div><!-- col-5 -->
@@ -165,21 +167,21 @@ include('header.php');
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">CLIENTE: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly type="text" name="infclinte" id="infclinte"
-                                            value="" placeholder="Enter address" style="font-size:16px">
-                                        <!-- <select disabled class="form-control" name="infclinte" id="infclinte"
+                                        <!-- <input class="form-control" readonly type="text" name="infclinte" id="infclinte"
+                                            value="" placeholder="Enter address" style="font-size:16px"> -->
+                                        <select disabled class="form-control" name="infclinte" id="infclinte"
                                             style="font-size:16px" data-placeholder="Choose country">
                                             <option label="">Selecciona</option>
                                             <?php while($clie = mysqli_fetch_row($cliente)):?>
                                             <option value="<?php echo $clie[0]?>"><?php echo $clie[1]?></option>
                                             <?php endwhile; ?>
 
-                                        </select> -->
+                                        </select>
                                     </div>
                                 </div><!-- col-8 -->
                                 <div class="col-md-4">
                                     <div class="form-group mg-md-l--1 bd-t-0-force">
-                                        <label class="form-control-label mg-b-0-force">ANTENDIO:<span
+                                        <label class="form-control-label">ANTENDIO:<span
                                                 class="tx-danger">*</span></label>
                                         <select disabled class="form-control" name="atendioinf" id="atendioinf"
                                             style="font-size:14px" data-placeholder="Choose country">
@@ -192,12 +194,56 @@ include('header.php');
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
+                                <div class="col-md-4 mg-t--1 mg-md-t-0">
+                                    <div class="form-group mg-md-l--1">
+                                        <label class="form-control-label" style="font-size:14px">LUGAR: <span
+                                                class="tx-danger">*</span></label>
+                                        <textarea class="form-control" readonly name="infpedlugar" id="infpedlugar"
+                                            cols="3" rows="3"></textarea>
+                                    </div>
+                                </div><!-- col-6 -->
+                                <div class="col-md-5 mg-t--1 mg-md-t-0">
+                                    <div class="form-group mg-md-l--1">
+                                        <label class="form-control-label" style="font-size:14px">DIRECCIÓN: <span
+                                                class="tx-danger">*</span></label>
+                                        <textarea class="form-control" readonly name="infpeddirect" id="infpeddirect"
+                                            cols="3" rows="3"></textarea>
+                                    </div>
+                                </div><!-- col-6 -->
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
+                                    <div class="form-group mg-md-l--1">
+                                        <label class="form-control-label" style="font-size:14px">CARACTER DEL VALE:
+                                            <span class="tx-danger">*</span></label>
+                                        <select class="form-control" disabled onchange="" id="pedidcaracter"
+                                            name="pedidcaracter">
+                                            <option value="">SELECCIONA UNA OPCIÓN</option>
+                                            <option value="NORMAL">NORMAL</option>
+                                            <option value="URGENTE">URGENTE</option>
+                                        </select>
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
+                                    <div class="form-group mg-md-l--1">
+                                        <label class="form-control-label" style="font-size:12px">CREACIÓN: <span
+                                                class="tx-danger">*</span></label>
+                                        <input class="form-control" readonly type="text" name="creapedid" id="creapedid"
+                                            value="" placeholder="Creación" style="font-size:14px">
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
+                                    <div class="form-group mg-md-l--1">
+                                        <label class="form-control-label" style="font-size:14px">FECHA DE AUTORIZACIÓN:
+                                            <span class="tx-danger">*</span></label>
+                                        <input class="form-control" readonly="" type="date" id="fecreaped"
+                                            name="fecreaped" placeholder="Enter lastname">
+                                    </div>
+                                </div><!-- col-4 -->
                                 <div class="col-md-3 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
                                         <label class="form-control-label" style="font-size:14px">AUTORIZA: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" readonly type="text" name="auropedid" id="auropedid"
-                                            value="" placeholder="Enter address" style="font-size:16px">
+                                            value="" placeholder="Autoriza" style="font-size:14px">
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-3 mg-t--1 mg-md-t-0">
@@ -210,6 +256,14 @@ include('header.php');
                                 </div><!-- col-4 -->
                                 <div class="col-md-3 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
+                                        <label class="form-control-label" style="font-size:14px">SURTIO: <span
+                                                class="tx-danger">*</span></label>
+                                        <input class="form-control" readonly type="text" name="sutpedid" id="sutpedid"
+                                            value="" placeholder="Surtio" style="font-size:14px">
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
+                                    <div class="form-group mg-md-l--1">
                                         <label class="form-control-label" style="font-size:14px">FECHA DE SURTIDO: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" readonly="" type="date" id="fesurtped"
@@ -218,23 +272,40 @@ include('header.php');
                                 </div><!-- col-4 -->
                                 <div class="col-md-3 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label" style="font-size:14px">FECHA DE ENTREGA: <span
+                                        <label class="form-control-label" style="font-size:14px">FINALIZA: <span
                                                 class="tx-danger">*</span></label>
+                                        <input class="form-control" readonly type="text" name="finalizpedid"
+                                            id="finalizpedid" value="" placeholder="Entrega" style="font-size:14px">
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
+                                    <div class="form-group mg-md-l--1">
+                                        <label class="form-control-label" style="font-size:14px">FECHA DE FINALIZACIÓN:
+                                            <span class="tx-danger">*</span></label>
                                         <input class="form-control" readonly="" type="date" id="fecentrega"
                                             name="fecentrega" placeholder="Enter lastname">
                                     </div>
                                 </div><!-- col-4 -->
+
                             </div><!-- row -->
                             <div class="form-layout-footer bd pd-20 bd-t-0">
-                                <button class="btn btn-info">Finalizar</button>
-                                <button id="cancelpe" style="display:none;" class="btn btn-secondary">Cancelar
-                                    pedido</button>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button id="btnpedautoriz" name="btnpedautoriz" type="button" style="display:none;"
+                                        onclick="autorizaped()" class="btn btn-info pd-x-30">Autorizar</button>
+                                    <button title="Dar click para liberar" id="btnpedliberar" name="btnpedliberar"
+                                        type="button" style="display:none;" onclick="liberarped()"
+                                        class="btn btn-dark pd-x-25">Liberar</button>
+                                    <button id="btnpedsurtir" name="btnpedsurtir" type="button" style="display:none;"
+                                        onclick="surtidoped()" class="btn btn-indigo pd-x-25">Surtir</button>
+                                    <button id="btnpedfinaliz" name="btnpedfinaliz" type="button" style="display:none;"
+                                        onclick="finalizarvp()" class="btn btn-success pd-x-25">Finalizar</button>
+                                </div>
                             </div><!-- form-group -->
                         </div><!-- form-layout -->
                     </form>
                     <br>
-                    <button type="button" onclick="masarticvo()" data-toggle='modal'
-                        style="display:none; background-color: rgb(0, 156, 40);" data-target='#modal-editavo1'
+                    <button type="button" onclick="" data-toggle='modal'
+                        style="display:none; background-color: rgb(0, 156, 40);" data-target='#modal-addartpedinfo'
                         onclick="" id="addarticp"
                         class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i
                             class="fa fa-plus"></i> Agregar Articulo</button>
@@ -245,8 +316,9 @@ include('header.php');
                     <div class="col-lg-20">
                         <div id="listpedidinf"></div><!-- col-12 -->
                     </div><!-- form-layout -->
-
                 </div><!-- br-pagebody -->
+            </div><!-- br-pagebody -->
+        </div><!-- br-pagebody -->
     </section>
 
     <script src="../template/lib/jquery/jquery.js"></script>

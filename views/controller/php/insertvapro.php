@@ -33,7 +33,7 @@ if(!isset($usuario)){
                 echo "0";
                 extendido($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
                 etiqueta($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
-                poductividad($refe_1,$caracter,$conexion);
+                //poductividad($refe_1,$caracter,$conexion);
                 historial($usuario,$refe_1,$codigo_1,$conexion);
                 registrarcolors ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
             }else{
@@ -483,6 +483,23 @@ if(!isset($usuario)){
             echo "1";
         }
         //edthsinexisfin
+    }if($opcion === 'registrarfin'){
+        $refe_1 = $_POST['refe_1'];
+        if (comprobacionfin ($refe_1,$usuario,$conexion)){
+            $caracter = $_POST['caracter'];
+            
+            if (poductividad($refe_1,$caracter,$usuario,$conexion)){
+                echo "0";
+                finaliadd ($refe_1,$conexion);
+                //historial($usuario,$refe_1,$codigo_1,$conexion);
+            }else{
+                echo "1";
+            }
+        }else{
+
+            echo "2";
+        }
+    //Condición donde cancela el vale de producción
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -510,7 +527,18 @@ function addfolio ($tipo,$conexion){
         return false;
     }
     $this->conexion->cerrar();
-} 
+}
+//funcion de comprobación para ver si el vale ya se encuentra en la base
+function comprobacionfin ($refe_1,$usuario,$conexion){
+    $query="SELECT * FROM productividad WHERE referencia_1 = '$refe_1' AND estado = 0 ";
+    $resultado= mysqli_query($conexion,$query);
+    if($resultado->num_rows==0){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
 
 //funcion de comprobación para ver si el vale ya se encuentra en la base
 function comprobacion2 ($refe_1,$codigocart,$conexion){
@@ -533,6 +561,16 @@ function comprobacion3 ($refe_1,$codigocartons,$conexion){
         return false;
     }
     $this->conexion->cerrar();
+}
+//funcion para actualizar el registro
+function finaliadd ($refe_1,$conexion){
+    $query="UPDATE kardex SET estado=0 WHERE refe_1= '$refe_1' AND estado=1 ";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
 }
 //funcion de comprobación para ver si el vale ya se encuentra en la base
 function comprobacion4 ($refe_1,$codigocaple,$conexion){
@@ -581,10 +619,10 @@ function registrarcolors ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$cod
     $this->conexion->cerrar();
 }
 //funcion para registrar la productividad
-function poductividad ($refe_1,$caracter,$conexion){
+function poductividad ($refe_1,$caracter,$usuario,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query="INSERT INTO productividad VALUES(0,'$refe_1','NA','$fecha','PENDIENTE','','PENDIENTE','','PENDIENTE','','$caracter',0)";
+    $query="INSERT INTO productividad VALUES(0,'$refe_1','$usuario','$fecha','PENDIENTE','','PENDIENTE','','PENDIENTE','','$caracter',0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

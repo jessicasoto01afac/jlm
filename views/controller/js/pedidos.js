@@ -22,8 +22,12 @@ $(document).ready(function() {
             let refe_1 = document.getElementById('pedfolio').value;
             let fecha = document.getElementById('pedfecha').value;
             let refe_2 = document.getElementById('pedremision').value;
-            let refe_3 = document.getElementById('pedidcaracter').value;
+            let refe_3 = document.getElementById('pedidatentio').value;
             let proveedor_cliente = document.getElementById('pedicliente').value;
+            let caracter = document.getElementById('pedidcaracter').value;
+
+            //--------------------------
+            let datos = 'refe_1=' + refe_1 + '&caracter=' + caracter + '&opcion=registrarfin';
             if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || refe_2 == '') {
                 document.getElementById('vaciosped').style.display = ''
                 setTimeout(function() {
@@ -31,22 +35,45 @@ $(document).ready(function() {
                 }, 2000);
                 return;
             } else {
-                Swal.fire({
-                    type: 'success',
-                    text: 'Se finaliza de forma correcta',
-                    showConfirmButton: false,
-                    timer: 1500
+                $.ajax({
+                    type: "POST",
+                    url: "../controller/php/insertpedio.php",
+                    data: datos
+                }).done(function(respuesta) {
+                    if (respuesta == 0) {
+                        Swal.fire({
+                            type: 'success',
+                            text: 'Se AGREGO el pedido de forma correcta',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        setTimeout("location.href = 'listpedido.php';", 1500);
+                    } else if (respuesta == 2) {
+                        Swal.fire({
+                            type: 'warning',
+                            text: 'ya esta duplicado',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    } else {
+                        Swal.fire({
+                            type: 'error',
+                            text: 'Error contactar a soporte tecnico o levantar un ticket',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
                 });
-                setTimeout("location.href = 'listpedido.php';", 1500);
+
             }
         }
     });
 
 });
 $(document).ready(function() {
-    $('#busccodimem').load('./select/buscarttras.php');
-    $('#busccodigomem2').load('./select/buscarme2.php');
-    $('#buscpedido').load('./select/buspedi.php');
+    $('#busccodimem').load('./select/busartped.php');
+    //$('#busccodigomem2').load('./select/buscarme2.php');
+    //$('#buscpedido').load('./select/buspedi.php');
 });
 
 function openpedidos() {
@@ -247,8 +274,16 @@ function infpedido(pruebas) {
         document.getElementById('idinped').innerHTML = id_vofi;
         document.getElementById('infclinte').value = id_cli;
         $("#dettpedido").toggle(250); //Muestra contenedor 
-        $("#listaped").toggle("fast"); //Oculta lista
+        $("#listaped").toggle("fast"); //Oculta lista idinped infclinte
         let folio = id_vofi;
+        //BOTONES -----------------------------------------------
+        let autorizar = document.getElementById('btnpedautoriz');
+        let liberar = document.getElementById('btnpedliberar');
+        let surtir = document.getElementById('btnpedsurtir');
+        let finalizado = document.getElementById('btnpedfinaliz');
+        let editar = document.getElementById('openedipi');
+        let pdf = document.getElementById('pdfpedrod');
+        //fin botones -------------------------------------------
         $.ajax({
             url: '../controller/php/infpedigrup.php',
             type: 'GET',
@@ -260,14 +295,32 @@ function infpedido(pruebas) {
             for (D = 0; D < res.length; D++) {
                 if (obj.data[D].refe_1 == id_vofi) {
                     document.getElementById('estatus2').value = obj.data[D].status;
+                    document.getElementById('infpeddirect').value = obj.data[D].descripcion_1;
+                    document.getElementById('infpedlugar').value = obj.data[D].ubicacion;
+                    document.getElementById('atendioinf').value = obj.data[D].refe_3;
+                    document.getElementById('pedidcaracter').value = obj.data[D].caracter;
+                    document.getElementById('creapedid').value = obj.data[D].creacion;
+                    document.getElementById('fecreaped').value = obj.data[D].fec_creacion;
+                    document.getElementById('auropedid').value = obj.data[D].autoriza;
+                    document.getElementById('feautoped').value = obj.data[D].fec_autoriza;
+                    document.getElementById('sutpedid').value = obj.data[D].surtio;
+                    document.getElementById('fesurtped').value = obj.data[D].fec_surtio;
+                    document.getElementById('finalizpedid').value = obj.data[D].finaliza;
+                    document.getElementById('fecentrega').value = obj.data[D].fec_finaliza;
                     datos =
                         obj.data[D].fecha + '*' +
                         obj.data[D].refe_2;
                     var o = datos.split("*");
-                    $("#inffcingr").val(o[0]);
-                    $("#inforemision").html(o[1]);
+                    $("#infvpdate").val(o[0]);
+                    $("#remisioninf").val(o[1]);
 
                     if (obj.data[D].status == 'AUTORIZADO') {
+                        autorizar.style.display = 'none';
+                        liberar.style.display = '';
+                        surtir.style.display = '';
+                        finalizado.style.display = 'none';
+                        editar.style.display = '';
+                        pdf.style.display = '';
                         html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
                         $("#button_estatus").html(html);
                         $.ajax({
@@ -286,7 +339,7 @@ function infpedido(pruebas) {
 
                                     //==================================================================================30062022
                                     if (obj.data[U].status_2 === "PENDIENTE") {
-                                        var status = "<button type='button' onclick='surtirvpf(" + id_pedido + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-surtirvprod'>SURTIR</button>";
+                                        var status = "<button type='button' onclick='surtirvpf(" + id_pedido + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-surtirpedrod'>SURTIR</button>";
                                     } else if (obj.data[U].status_2 === "SURTIDO") {
                                         var status = "<span style='cursor:pointer;' title='Ya fue surtido' onclick='infsurtiped(" + id_pedido + ");' data-toggle='modal' data-target='#modal-surtido' class='spandis'>SURTIDO</span>";
                                     } else if (obj.data[U].status_2 === "SIN EXISTENCIAS") {
@@ -301,6 +354,12 @@ function infpedido(pruebas) {
 
                         })
                     } else if (obj.data[D].status == 'PENDIENTE') {
+                        autorizar.style.display = '';
+                        liberar.style.display = 'none';
+                        surtir.style.display = 'none';
+                        finalizado.style.display = 'none';
+                        editar.style.display = '';
+                        pdf.style.display = 'none';
                         html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-secondary btn-block mg-b-3">PENDIDENTE</button>';
                         $("#button_estatus").html(html);
                         $.ajax({
@@ -316,7 +375,7 @@ function infpedido(pruebas) {
                                 if (obj.data[U].refe_1 == id_vofi) {
                                     x++;
                                     let id_kardex = obj.data[U].id_kax;
-                                    html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class=''>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='infartpedid(" + id_kardex + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetpedi'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";
+                                    html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class=''>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='infartpedid(" + id_kardex + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetpedi'>Editar</a><a href='' onclick='delartpedinf(" + id_kardex + ");'  class='nav-link' data-toggle='modal' data-target='#modal-deleartped'>Eliminar</a>" + "</td></tr>";
                                 }
                             }
                             html += '</div></tbody></table></div></div>';
@@ -324,10 +383,13 @@ function infpedido(pruebas) {
 
                         })
                     } else if (obj.data[D].status == 'SURTIDO') {
+                        autorizar.style.display = 'none';
+                        liberar.style.display = 'none';
+                        surtir.style.display = 'none';
+                        finalizado.style.display = '';
+                        editar.style.display = 'none';
+                        pdf.style.display = '';
                         html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-info btn-block mg-b-3">SURTIDO</button>';
-                        $("#button_estatus").html(html);
-
-                        html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
                         $("#button_estatus").html(html);
                         $.ajax({
                             url: '../controller/php/infpedido.php',
@@ -360,12 +422,13 @@ function infpedido(pruebas) {
 
                         })
                     } else if (obj.data[D].status == 'FINALIZADO') {
+                        autorizar.style.display = 'none';
+                        liberar.style.display = 'none';
+                        surtir.style.display = 'none';
+                        finalizado.style.display = 'none';
+                        editar.style.display = 'none';
+                        pdf.style.display = '';
                         html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">FINALIZADO</button>';
-                        $("#button_estatus").html(html);
-                        html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-info btn-block mg-b-3">SURTIDO</button>';
-                        $("#button_estatus").html(html);
-
-                        html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
                         $("#button_estatus").html(html);
                         $.ajax({
                             url: '../controller/php/infpedido.php',
@@ -431,6 +494,7 @@ function infpedido(pruebas) {
                                     html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + status + "</td></tr>";
                                 }
                             }
+
                             html += '</div></tbody></table></div></div>';
                             $("#listpedidinf").html(html);
 
@@ -444,9 +508,8 @@ function infpedido(pruebas) {
 }
 
 function updateinfped() {
-
     let folio = document.getElementById('idinped').innerHTML;
-    alert(folio);
+    //alert(folio);
     $.ajax({
         url: '../controller/php/infpedigrup.php',
         type: 'GET',
@@ -484,7 +547,7 @@ function updateinfped() {
 
                                 //==================================================================================30062022
                                 if (obj.data[U].status_2 === "PENDIENTE") {
-                                    var status = "<button type='button' onclick='surtirvpf(" + id_pedido + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-surtirvprod'>SURTIR</button>";
+                                    var status = "<button type='button' onclick='surtirvpf(" + id_pedido + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-surtirpedrod'>SURTIR</button>";
                                 } else if (obj.data[U].status_2 === "SURTIDO") {
                                     var status = "<span style='cursor:pointer;' title='Ya fue surtido' onclick='infsurtiped(" + id_pedido + ");' data-toggle='modal' data-target='#modal-surtido' class='spandis'>SURTIDO</span>";
                                 } else if (obj.data[U].status_2 === "SIN EXISTENCIAS") {
@@ -514,7 +577,7 @@ function updateinfped() {
                             if (obj.data[U].refe_1 == folio) {
                                 x++;
                                 let id_kardex = obj.data[U].id_kax;
-                                html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class=''>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='infartpedid(" + id_kardex + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetpedi'>Editar</a><a href='' onclick='delartvoinf();'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>" + "</td></tr>";
+                                html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class=''>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='infartpedid(" + id_kardex + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetpedi'>Editar</a><a href='' onclick='delartpedinf(" + id_kardex + ");'  class='nav-link' data-toggle='modal' data-target='#modal-deleartped'>Eliminar</a>" + "</td></tr>";
                             }
                         }
                         html += '</div></tbody></table></div></div>';
@@ -719,7 +782,7 @@ function saveeditharped() {
     //alert("entra guardar cambios valeproducción");
     let id_kax = document.getElementById('id_edithpe').value;
     let codigo_1 = document.getElementById('cdnewvpedith').value;
-    let descripcion_1 = document.getElementById('pednewedithdes').value;
+    let descripcion_1 = document.getElementById('adddireccion').value;
     let salida = document.getElementById('pedednewtcantid').value;
     let observa = document.getElementById('pepidobsaddnew').value;
 
@@ -767,7 +830,7 @@ function editpediinf() {
     document.getElementById('openedipi').style.display = "none";
     //muestra los botones
     document.getElementById('addarticp').style.display = "";
-    document.getElementById('cancelpe').style.display = "";
+    //document.getElementById('cancelpe').style.display = "";
     //campos
     $("#infvpdate").removeAttr("readonly");
     $("#infclinte").removeAttr("readonly");
@@ -783,7 +846,6 @@ function closedithpin() {
     //alert("cierra pedido");
     //muestra los botones
     document.getElementById('addarticp').style.display = "none";
-    document.getElementById('cancelpe').style.display = "none";
     //muestra el boton de cerrar editar
     document.getElementById('closepedi').style.display = "none";
     document.getElementById('openedipi').style.display = "";
@@ -884,7 +946,7 @@ function infsiexpedid(id_pedido) {
                     document.getElementById('cnsinped').value = obj.data[C].salida; //listo vista para editar
                     document.getElementById('obdepsinped').value = obj.data[C].observa_dep; //listo vista para editar
                     //oculta la edición
-                    document.getElementById('opesurt1sn').style.display = "none";
+                    document.getElementById('opesurt1snp').style.display = "none";
                 } else {
                     //alert("entro"); 
                     document.getElementById('descsinpedi').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].artdescrip;
@@ -894,7 +956,7 @@ function infsiexpedid(id_pedido) {
                     document.getElementById('cnsinped').value = obj.data[C].salida; //listo vista para editar
                     document.getElementById('obdepsinped').value = obj.data[C].observa_dep; //listo vista para editar
                     //muestra la edición
-                    document.getElementById('opesurt1sn').style.display = "";
+                    document.getElementById('opesurt1snp').style.display = "";
                 }
             }
         }
@@ -948,11 +1010,11 @@ function savesinextped() {
                 showConfirmButton: false,
                 timer: 1500
             });
-            $('#modal-sinexivp').modal('hide');
+            $('#modal-sinexipedido').modal('hide');
 
 
-            updatepedid();
-            closedithsnex();
+            updateinfped();
+            clossurt1snp();
         } else {
             Swal.fire({
                 type: 'info',
@@ -1050,7 +1112,7 @@ function saveedithdettped() {
     let observa = document.getElementById('pedobsadddetll').value;
 
     let datos = 'salida=' + salida + '&observa=' + observa + '&id_kax=' + id_kax + '&codigo_1=' + codigo_1 + '&opcion=updateartnewinfo';
-    alert(datos);
+    //alert(datos);
     if (codigo_1 == '' || salida == '') {
         document.getElementById('edithpdidettlle').style.display = '';
         setTimeout(function() {
@@ -1084,4 +1146,598 @@ function saveedithdettped() {
             }
         });
     }
+}
+
+//FUNCION PARA QUE TRAIGA LA INFOMACION DE EL ARTICULO EN DETALLES DEL PEDIDO
+function delartpedinf(id_articulo) {;
+    //alert(id_articulo);
+    document.getElementById('del_artpeddetts').value = id_articulo;
+    let folio = id_articulo;
+    $.ajax({
+        url: '../controller/php/conpedidios.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (C = 0; C < res.length; C++) {
+            if (obj.data[C].id_kax == id_articulo) {
+                //alert("entro");
+                document.getElementById('deartpedidett').value = obj.data[C].codigo_1 + "/" + obj.data[C].artdescrip;
+            }
+        }
+    })
+}
+//GUARDA LA ELIMINACION POR ARTICULO EN DETALLES EN PEDIDOS
+function savdelepediartdet() {
+    let id_kardex = document.getElementById('del_artpeddetts').value;
+    let codigo_1 = document.getElementById('deartpedidett').value;
+    let datos = 'id_kardex=' + id_kardex + '&codigo_1=' + codigo_1 + '&opcion=deleartnew';
+    //alert(datos);
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertpedio.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'Se elimino de forma correcta',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            updateinfped();
+            $('#modal-deleartped').modal('hide'); //cierra el modal
+            // $('#modal-editarmemoalta').modal('hide'); //cierra el modal
+        } else {
+            document.getElementById('delerarvpdett').style.display = '';
+            setTimeout(function() {
+                document.getElementById('delerarvpdett').style.display = 'none';
+            }, 2000);
+            //alert(respuesta);
+        }
+    });
+}
+
+//AGEGAR ARTICULO INDIVIDUAL EN AGRGAR ARTICULO
+function indivudualinf() {
+    //alert("eentraarticulo")
+    $.ajax({
+        url: '../controller/php/conarticulos.php',
+        type: 'POST'
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (D = 0; D < res.length; D++) {
+            if (obj.data[D].artcodigo == document.getElementById('codindivinf').value) {
+                // alert(id_persona);
+                datos =
+                    obj.data[D].artcodigo + '*' +
+                    obj.data[D].artdescrip + '*' +
+                    obj.data[D].artubicac;
+                var o = datos.split("*");
+                $("#pindescripinf").val(o[1]);
+                $("#pindeparinnf").val(o[2]);
+            }
+        }
+    });
+}
+
+//GUARDAR EL ARTICLO INDIVIDUAL EN DETALLES DE VALE DE PRODUCCIÓN
+function addarinpedinfo() {
+    //alert("entro agregar vale de producción");
+    let refe_1 = document.getElementById('idinped').innerHTML;
+    let fecha = document.getElementById('infvpdate').value;
+    let refe_2 = document.getElementById('remisioninf').value;
+    let refe_3 = document.getElementById('atendioinf').value;
+    let proveedor_cliente = document.getElementById('infclinte').value;
+    let codigo_1 = document.getElementById('codindivinf').value;
+    let cantidad_real = document.getElementById('pincantidinf').value;
+    let salida = document.getElementById('pincantidinf').value;
+    let observa = document.getElementById('ppinfbsertrass').value;
+    let tipo_ref = "ARTICULO";
+    let ubicacion = document.getElementById('infpedlugar').value; //lugar
+    let descripcion_1 = document.getElementById('infpeddirect').value; //DIRECCION
+    let datos = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&tipo_ref=' + tipo_ref + '&opcion=registrarind';
+    //alert(datos);
+    if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || codigo_1 == '' || descripcion_1 == '' || cantidad_real == '' || tipo_ref == '') {
+        document.getElementById('edthinfvcp').style.display = ''
+        setTimeout(function() {
+            document.getElementById('edthinfvcp').style.display = 'none';
+        }, 2000);
+        alert("VACIS");
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertpedio.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se agrego el articulo de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                document.getElementById('codindivinf').value = "";
+                document.getElementById('pindescripinf').value = "";
+                document.getElementById('pincantidinf').value = "";
+                document.getElementById('ppinfbsertrass').value = "";
+                updateinfped();
+                $("#modal-addartpedinfo").modal('hide'); //ocultamos el modal
+            } else if (respuesta == 2) {
+                document.getElementById('edthvinbli1inf').style.display = ''
+                setTimeout(function() {
+                    document.getElementById('edthvinbli1inf').style.display = 'none';
+                }, 1000);
+                //alert("datos repetidos");
+            } else {
+                document.getElementById('edthvinperr1inf').style.display = ''
+                setTimeout(function() {
+                    document.getElementById('edthvinperr1inf').style.display = 'none';
+                }, 1000);
+                //alert("ERRs");
+            }
+        })
+    }
+}
+//INFORMACIÓN DE HISTORIAL DE PEDIDOS
+function histvalepro() {
+    let folio = document.getElementById('idinped').innerHTML;
+    let folio2 = "FOLIO:" + folio;
+    alert(folio);
+    //Tabla de historial del vale de producción
+    $.ajax({
+        url: '../controller/php/hisvaleprod.php',
+        type: 'POST',
+        data: 'folio=' + folio2
+    }).done(function(resp) {
+        obj = JSON.parse(resp);
+        var res = obj.data;
+        var x = 0;
+        //alert("folio");
+        html = '<div class="rounded table-responsive"><table style="width:100%" id="hisvalevp" name="hisvalevp" class="table display dataTable no-footer"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>Usuario</th><th><i></i>Acción</th><th><i></i>Registro</th><th><i></i>fecha</th></tr></thead><tbody>';
+        for (U = 0; U < res.length; U++) {
+            x++;
+            html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_usu + "</td><td>" + obj.data[U].proceso + "</td><td>" + obj.data[U].registro + "</td><td>" + obj.data[U].fecha + "</td></tr>";
+        }
+        html += '</div></tbody></table></div></div>';
+        $("#tabhisto").html(html);
+    });
+    //Historial del vale en productividad
+    $.ajax({
+        url: '../controller/php/productiv.php',
+        type: 'POST',
+        data: 'folio=' + folio
+    }).done(function(resp) {
+        obj = JSON.parse(resp);
+        var res = obj.data;
+        var x = 0;
+        //alert(resp);
+        for (D = 0; D < res.length; D++) {
+            document.getElementById('fcreacion').innerHTML = obj.data[D].fecha_creacion1;
+            document.getElementById('fautoriz').innerHTML = obj.data[D].fecha_autorizacion1;
+            document.getElementById('fsurtido').innerHTML = obj.data[D].fecha_surtido1;
+            document.getElementById('ffinaliz').innerHTML = obj.data[D].fecha_finalizacion1;
+            //DIAS
+            if (obj.data[D].dias_totales > 0) {
+                document.getElementById('dias1').innerHTML = obj.data[D].dias_autorizacion + " dias Creación/Autorización";
+                document.getElementById('dias2').innerHTML = obj.data[D].dias_asurtdo + " dias Autorización/Surtido";
+                document.getElementById('dias3').innerHTML = obj.data[D].dias_totales + " dias trascurridos para finalización ";
+            }
+            if (obj.data[D].dias_totales == null) {
+                document.getElementById('dias1').innerHTML = obj.data[D].dias_autorizacion + " dias Creación/Autorización";
+                document.getElementById('dias2').innerHTML = obj.data[D].dias_asurtdo + " dias Autorización/Surtido";
+                document.getElementById('dias3').innerHTML = "Sin finalizar";
+            }
+            if (obj.data[D].dias_asurtdo == null) {
+                document.getElementById('dias1').innerHTML = obj.data[D].dias_autorizacion + " dias Creación/Autorización";
+                document.getElementById('dias2').innerHTML = "Sin surtir";
+                document.getElementById('dias3').innerHTML = "Sin finalizar";
+            }
+            if (obj.data[D].dias_autorizacion == null) {
+                document.getElementById('dias1').innerHTML = "Sin autorizar";
+                document.getElementById('dias2').innerHTML = "Sin surtir";
+                document.getElementById('dias3').innerHTML = "Sin finalizar";
+            }
+        }
+    });
+}
+//FUNCIÓN DE AUTORIZAR PEDIDOS 
+function autorizaped() {
+    //alert("entra memo");
+    let status = 'AUTORIZADO';
+    let folio = document.getElementById('idinped').innerHTML; //FOLIO DEL MEMO
+    let datos = 'folio=' + folio + '&opcion=autorizarped';
+    //alert(datos);
+    if (folio == '') {
+        Swal.fire({
+            type: 'warning',
+            text: 'No hay folio ingresar',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertpedio.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se AUTORIZO de forma correcta',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                setTimeout("location.href = 'listpedido.php';", 1500);
+            } else if (respuesta == 2) {
+                Swal.fire({
+                    type: 'warning',
+                    text: 'ya esta duplicado',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    text: 'Error contactar a soporte tecnico o levantar un ticket',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    }
+}
+//FUNCIONES DE LIBERAR PEDIDOS
+function liberarped() {
+    //alert("memos"); 
+    var foliovp = document.getElementById('idinped').innerHTML;
+    var datos = 'foliovp=' + foliovp + '&opcion=liberarped';
+    //alert(datos);
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertpedio.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'SE LIBERO FORMA CORRECTA',
+                showConfirmButton: false,
+                timer: 2500
+            });
+            setTimeout("location.href = 'listpedido.php';", 2500);
+        } else {
+            Swal.fire({
+                type: 'error',
+                text: 'Error contactar a soporte tecnico o levantar un ticket',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+    });
+}
+//FUNCIÓN DE SURTIR
+function surtidoped() {
+    //alert("entra memo");
+    let status = 'SURTIDO';
+    let folio = document.getElementById('idinped').innerHTML; //FOLIO DEL MEMO
+    let datos = 'folio=' + folio + '&opcion=surtirped';
+    //alert(datos);
+    if (folio == '') {
+        Swal.fire({
+            type: 'warning',
+            text: 'No hay folio ingresar',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertpedio.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se SURTIO de forma correcta',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                setTimeout("location.href = 'listpedido.php';", 1500);
+            } else if (respuesta == 2) {
+                Swal.fire({
+                    type: 'warning',
+                    text: 'ya esta duplicado',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    text: 'Error contactar a soporte tecnico o levantar un ticket',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    }
+}
+//FUNCIÓN DE FINALIZAR
+function finalizarvp() {
+    //alert("entra memo");
+    let status = 'FINALIZADO';
+    let folio = document.getElementById('idinped').innerHTML; //FOLIO DEL MEMO
+    let datos = 'folio=' + folio + '&opcion=finalped';
+    //alert(datos);
+    if (folio == '') {
+        Swal.fire({
+            type: 'warning',
+            text: 'No hay folio ingresar',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertpedio.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se FINALIZO de forma correcta',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                setTimeout("location.href = 'listpedido.php';", 1500);
+            } else if (respuesta == 2) {
+                Swal.fire({
+                    type: 'warning',
+                    text: 'ya esta duplicado',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    text: 'Error contactar a soporte tecnico o levantar un ticket',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    }
+}
+
+//FUNCION QUE MUESTRA LA INFORMACIÓN DEL ARTICULO A ASURTIR 
+function surtirvpf(id_kardex) {
+    //alert(id_kardex);
+    let folio = id_kardex;
+    document.getElementById('id_surtpedif').value = id_kardex;
+    $.ajax({
+        url: '../controller/php/conpedidios.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (C = 0; C < res.length; C++) {
+            if (obj.data[C].id_kax == id_kardex) {
+                //alert("entro");
+                document.getElementById('codisurtped').value = obj.data[C].codigo_1;
+                document.getElementById('surtapedrinf').value = obj.data[C].salida;
+                document.getElementById('descripsurped').value = obj.data[C].artdescrip;
+            }
+        }
+    });
+}
+
+//FUNCION DE EDITAR SURTIR
+function edithsurpedif() {
+    //alert("edit articulo infovale");
+    document.getElementById('codisurtped').disabled = false;
+    document.getElementById('surtapedrinf').disabled = false;
+    document.getElementById('closeditpedrinf').style.display = "";
+    document.getElementById('surtirpedrf').style.display = "none";
+}
+//FUNCION DE EDITAR SURTIR PRODUCTO TERMINADO
+function edithsurvpfin() {
+    //alert("edit articulo infovale");
+    document.getElementById('codisurpedfin').disabled = false;
+    document.getElementById('surtpedfn').disabled = false;
+    document.getElementById('closeditpedfin').style.display = "";
+    document.getElementById('surtirpedfin').style.display = "none";
+}
+
+//FUNCION DE CERRAR EDITAR SURTIR
+function closedisurvpif() {
+    //alert("edit articulo infovale");
+    document.getElementById('codisurtped').disabled = true;
+    document.getElementById('surtapedrinf').disabled = true;
+    document.getElementById('closeditpedrinf').style.display = "none";
+    document.getElementById('surtirpedrf').style.display = "";
+}
+
+//FUNCION PARA MARCAR SURTIR ARTICULO INDIVIDUAL DETALLE DEL VALE
+function acsurtirpedf() {
+    //alert("entro vales")
+    var id_kax = document.getElementById('id_surtpedif').value;
+    var refe_1 = document.getElementById('idinped').innerHTML;
+    var codigo_1 = document.getElementById('codisurtped').value;
+    var cantidad = document.getElementById('surtapedrinf').value;
+    var observa_dep = document.getElementById('surbsereped').value;
+    var datos = 'id_kax=' + id_kax + '&observa_dep=' + observa_dep + '&refe_1=' + refe_1 + '&codigo_1=' + codigo_1 + '&cantidad=' + cantidad + '&opcion=surtir';
+    //alert(datos)
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertpedio.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'Se actualizo de forma correcta',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            $('#modal-surtirpedrod').modal('hide');
+
+            updateinfped();
+            closedisurvpif()
+
+        } else {
+            document.getElementById('edthpederrinf').style.display = '';
+            setTimeout(function() {
+                document.getElementById('edthpederrinf').style.display = 'none';
+            }, 2000);
+        }
+    });
+}
+//FUNCION PARA MARCAR SIN EXISTENCIAS 
+function sinexisten() {
+    //alert("sinexisten");
+    var id_kax = document.getElementById('id_surtpedif').value;
+    var refe_1 = document.getElementById('idinped').innerHTML;
+    var codigo_1 = document.getElementById('codisurtped').value;
+    var observa_dep = document.getElementById('surbsereped').value;
+    var datos = 'id_kax=' + id_kax + '&observa_dep=' + observa_dep + '&refe_1=' + refe_1 + '&codigo_1=' + codigo_1 + '&opcion=sinexistencia';
+    //alert(datos);
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertpedio.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'Se actualizo de forma correcta',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            $('#modal-surtirpedrod').modal('hide');
+            updateinfped();
+            closedisurvpif()
+        } else {
+            document.getElementById('edthpederrinf').style.display = '';
+            setTimeout(function() {
+                document.getElementById('edthpederrinf').style.display = 'none';
+            }, 2000);
+            alert(respuesta);
+        }
+    });
+}
+
+//FUNCIÓN PARA REVISAR EL ARTICULO SURTIDO
+function infsurtiped(id_valeprodu) {
+    //alert("entro");
+    let folio = id_valeprodu;
+    document.getElementById('idsurt').value = id_valeprodu;
+    $.ajax({
+        url: '../controller/php/conpedidios.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (C = 0; C < res.length; C++) {
+            if (obj.data[C].id_kax == id_valeprodu) {
+                if (document.getElementById('estatus').innerHTML == "SURTIDO" || document.getElementById('estatus').innerHTML == "FINALIZADO") {
+                    //alert("entro");
+                    document.getElementById('descsurt').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].artdescrip;
+                    document.getElementById('cartsur').innerHTML = obj.data[C].salida;
+                    document.getElementById('opstsur').innerHTML = obj.data[C].observa_dep;
+                    //inpus e edición
+                    document.getElementById('cnsurt').value = obj.data[C].salida;
+                    document.getElementById('obdepinf').value = obj.data[C].observa_dep;
+                    //oculta la edición
+                    document.getElementById('opesurt1').style.display = "none";
+                } else {
+                    //alert("entro");
+                    document.getElementById('descsurt').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].artdescrip;
+                    document.getElementById('cartsur').innerHTML = obj.data[C].salida;
+                    document.getElementById('opstsur').innerHTML = obj.data[C].observa_dep;
+                    //inpus e edición
+                    document.getElementById('cnsurt').value = obj.data[C].salida;
+                    document.getElementById('obdepinf').value = obj.data[C].observa_dep;
+                    //muestra la edición
+                    document.getElementById('opesurt1').style.display = "";
+                }
+
+            }
+        }
+    });
+}
+//ABRE EDICION DE MODAL SURTIDO
+function openedithsurt() {
+    document.getElementById('editarsur').style.display = "";
+    document.getElementById('infsur').style.display = "none";
+    document.getElementById('opesurt1').style.display = "none";
+    document.getElementById('clossurt1').style.display = "";
+}
+//ABRE EDICION DE MODAL SURTIDO PRODUCTO FINAL
+function openedithsurtfin() {
+    document.getElementById('editarsurfn').style.display = "";
+    document.getElementById('infsurfn').style.display = "none";
+    document.getElementById('opesurt1fn').style.display = "none";
+    document.getElementById('clossurt1fn').style.display = "";
+}
+
+//FUNCION PARA GUARDAR EDITAR SURTIR
+function savesurtped() {
+    //alert("entro vales");
+    let id_kax = document.getElementById('idsurt').value;
+    let refe_1 = document.getElementById('idinped').innerHTML;
+    let cantidad = document.getElementById('cnsurt').value;
+    let observa_dep = document.getElementById('obdepinf').value;
+    let descrip = document.getElementById('descsurt').innerHTML;
+    //alert("entro vales2");
+    let status2 = "SURTIDO";
+    //Condición de cambiar status2 si es mayor a 0
+    if (document.getElementById('cnsurt').value > 0) {
+        status2 = "SURTIDO";
+    }
+    if (document.getElementById('cnsurt').value == 0) {
+        status2 = "SIN EXISTENCIAS";
+    }
+    let datos = 'id_kax=' + id_kax + '&descrip=' + descrip + '&observa_dep=' + observa_dep + '&refe_1=' + refe_1 + '&cantidad=' + cantidad + '&status2=' + status2 + '&opcion=edthsurtir';
+    //alert(datos);
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertpedio.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'Se actualizo de forma correcta',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            $('#modal-surtido').modal('hide');
+            updateinfped();
+            closedisurvpif()
+        } else {
+            document.getElementById('edthvperrinf').style.display = '';
+            setTimeout(function() {
+                document.getElementById('edthvperrinf').style.display = 'none';
+            }, 2000);
+        }
+    });
+}
+//CIERRA EDICION DE MODAL SURTIDO
+function closedithsurt() {
+    document.getElementById('editarsur').style.display = "none";
+    document.getElementById('infsur').style.display = "";
+    document.getElementById('opesurt1').style.display = "";
+    document.getElementById('clossurt1').style.display = "none";
 }
