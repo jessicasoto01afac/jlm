@@ -319,7 +319,7 @@ function infpedido(pruebas) {
                         liberar.style.display = '';
                         surtir.style.display = '';
                         finalizado.style.display = 'none';
-                        editar.style.display = '';
+                        editar.style.display = 'none';
                         pdf.style.display = '';
                         html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
                         $("#button_estatus").html(html);
@@ -1740,4 +1740,11 @@ function closedithsurt() {
     document.getElementById('infsur').style.display = "";
     document.getElementById('opesurt1').style.display = "";
     document.getElementById('clossurt1').style.display = "none";
+}
+//FUNCIÓN PARA CREAR PDF
+function pdfvp() {
+    var folio = document.getElementById('idinped').innerHTML;
+    //alert("entro");
+    url = '../formatos/pdf_pedidos.php'
+    window.open(url + "?data=" + folio, '_black');
 }
