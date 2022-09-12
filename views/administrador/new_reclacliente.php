@@ -66,7 +66,7 @@
                     <section>
                         <form id="valeoficina" method="POST">
                             <div class="row mg-b-25">
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="form-group">
                                         <label style="font-size:16px" class="form-control-label">FOLIO: <span
                                                 class="tx-danger">*</span></label>
@@ -75,7 +75,7 @@
                                             value="" placeholder="">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="form-group">
                                         <label style="font-size:16px" class="form-control-label">FECHA: <span
                                                 class="tx-danger">*</span></label>
@@ -83,7 +83,19 @@
                                             placeholder="">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
+                                    <div class="form-group mg-b-10-force">
+                                        <label style="font-size:16px" class="form-control-label">TIPO DE REPORTE:
+                                            <span class="tx-danger">*</span></label>
+                                        <select class="form-control" onchange="" id="tiporeclit" name="tiporeclit">
+                                            <option value="">SELECCIONA UNA OPCIÓN</option>
+                                            <option value="RECLAMO">RECLAMO</option>
+                                            <option value="RECHAZO">RECHAZO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-3">
                                     <div class="form-group mg-b-10-force">
                                         <label style="font-size:16px" class="form-control-label">TIPO DE INCIDENCIA:
                                             <span class="tx-danger">*</span></label>
@@ -157,7 +169,7 @@
                     </section>
                     <h3>Ingres los articulos</h3>
                     <section>
-                        <h5>INGRESE LOS ARTICULOS</h5>
+                        <h5>INGRESE LOS ARTICULOS RELACIONADOS</h5>
                         <br>
                         <div class="row mg-b-25">
                             <div class="col-lg-3">
@@ -244,7 +256,7 @@
                                 <div class="form-group">
                                     <label style="font-size:16px" class="form-control-label">INGRESE EL REPORTE DEL CLIENTE: <span
                                             class="tx-danger">*</span></label>
-                                            <textarea onkeyup="mayus(this);" rows="8" class="form-control" name="resmcliente"
+                                            <textarea onkeyup="mayus(this);" rows="10" class="form-control" name="resmcliente"
                                         id="resmcliente" placeholder="Ingresa la descripción del cliente"></textarea>
                                 </div><!-- form-group -->
                             </div><!-- form-group -->
