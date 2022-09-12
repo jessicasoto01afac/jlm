@@ -172,7 +172,7 @@ if(!isset($usuario)){
             
             if (poductividad($refe_1,$caracter,$usuario,$conexion)){
                 echo "0";
-                finaliadd ($refe_1,$conexion);
+                //finaliadd ($refe_1,$conexion);
                 //historial($usuario,$refe_1,$codigo_1,$conexion);
             }else{
                 echo "1";
@@ -268,7 +268,7 @@ function comprobacionfin ($refe_1,$usuario,$conexion){
 }
 //funcion para guardar el articulo de producción
 function registrar ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
-    $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','$refe_3','$fecha','$codigo_1','$descripcion_1','PEDIDO','ARTICULO','$proveedor_cliente','$ubicacion','$cantidad_real',0,$salida,'0',0,'0','$observa','NA','PENDIENTE','PENDIENTE','NO','NO',1)";
+    $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','$refe_3','$fecha','$codigo_1','$descripcion_1','PEDIDO','ARTICULO','$proveedor_cliente','$ubicacion','$cantidad_real',0,$salida,'0',0,'0','$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
