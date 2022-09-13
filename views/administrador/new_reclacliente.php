@@ -99,7 +99,7 @@
                                     <div class="form-group mg-b-10-force">
                                         <label style="font-size:16px" class="form-control-label">TIPO DE INCIDENCIA:
                                             <span class="tx-danger">*</span></label>
-                                        <select class="form-control" onchange="" id="tiporeclit" name="tiporeclit">
+                                        <select class="form-control" onchange="" id="tipoincclit" name="tipoincclit">
                                             <option value="">SELECCIONA UNA OPCIÓN</option>
                                             <option value="ERROR_EN_EL_COSTO">ERROR EN EL COSTO</option>
                                             <option value="MATERIAL_DEFECTUOSO">MATERIAL DEFECTUOSO</option>
@@ -135,7 +135,7 @@
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
 
-                                <div class="col-lg-6" id="departamento" style="">
+                                <div class="col-lg-8" id="departamento" style="">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">CLIENTE: <span
                                                 class="tx-danger">*</span></label>
@@ -151,7 +151,7 @@
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">SE ACREDITA EL RECLAMO A: <span
                                                 class="tx-danger">*</span></label>
-                                        <select class="form-control" id="deprechaclie" name="deprechaclie">
+                                        <select class="form-control" id="acrediclien" name="acrediclien">
                                             <option value="">SELECCIONA UNA OPCIÓN</option>
                                             <option value="ALMACEN">ALMACEN</option>
                                             <option value="BODEGA">BODEGA</option>
@@ -177,6 +177,7 @@
                                     <label style="font-size:16px" class="form-control-label">CODIGO: <span
                                             class="tx-danger">*</span></label>
                                     <div id="busccodimem"></div>
+                                    <!-- <div id="busrecliente"></div> -->
                                 </div><!-- form-group -->
                             </div><!-- form-group -->
                             <div class="col-lg-9">
@@ -199,7 +200,7 @@
                                 <div class="form-group">
                                     <label style="font-size:16px" class="form-control-label">DEPARTAMENTO: <span
                                             class="tx-danger">*</span></label>
-                                    <input onkeyup="mayus(this);" class="form-control" name="mdepart" id="mdepart"
+                                    <input onkeyup="mayus(this);" class="form-control" name="vdepart" id="vdepart"
                                         placeholder="Departamento" readonly type="text" required>
                                 </div><!-- form-group -->
                             </div><!-- form-group -->
@@ -258,6 +259,30 @@
                                             class="tx-danger">*</span></label>
                                             <textarea onkeyup="mayus(this);" rows="10" class="form-control" name="resmcliente"
                                         id="resmcliente" placeholder="Ingresa la descripción del cliente"></textarea>
+                                </div><!-- form-group -->
+                            </div><!-- form-group -->
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label style="font-size:16px" class="form-control-label">INGRESE EL REPORTE DE JLM: <span
+                                            class="tx-danger">*</span></label>
+                                            <textarea onkeyup="mayus(this);" rows="10" class="form-control" name="resmjlm"
+                                        id="resmjlm" placeholder="Ingresa la descripción del cliente"></textarea>
+                                </div><!-- form-group -->
+                            </div><!-- form-group -->
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label style="font-size:16px" class="form-control-label">SEGUIMIENTO: <span
+                                            class="tx-danger">*</span></label>
+                                            <textarea onkeyup="mayus(this);" rows="10" class="form-control" name="seguiminto"
+                                        id="seguiminto" placeholder="Ingresa la descripción del cliente"></textarea>
+                                </div><!-- form-group -->
+                            </div><!-- form-group -->
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label style="font-size:16px" class="form-control-label">CONCLUSIÓN: <span
+                                            class="tx-danger">*</span></label>
+                                            <textarea onkeyup="mayus(this);" rows="10" class="form-control" name="conclusioncli"
+                                        id="conclusioncli" placeholder="Ingresa la descripción del cliente"></textarea>
                                 </div><!-- form-group -->
                             </div><!-- form-group -->
                             </form>
@@ -335,37 +360,7 @@
 
     <script src="../template/js/bracket.js"></script>
     <script>
-    $(document).ready(function() {
-        'use strict';
-
-
-        $('#wizard7').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            cssClass: 'wizard wizard-style-3',
-            labels: {
-                cancel: "Cancelar",
-                current: "current step:",
-                pagination: "Pagination",
-                finish: "Finalizar",
-                next: "Siguiente",
-                previous: "Anterior",
-                loading: "Cargando ..."
-            },
-        });
-
-
-
-
-    });
-
-    $(document).ready(function() {
-        $('#busccodimem').load('./select/buscarme.php');
-        $('#busccodigomem2').load('./select/buscarme2.php');
-        $('#buscpedido').load('./select/buspedi.php');
-    });
+    openrepclient()
     </script>
 
 

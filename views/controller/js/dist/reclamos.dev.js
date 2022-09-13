@@ -1,5 +1,34 @@
 "use strict";
 
+//MUESTRA EL DISEÑO DE NUEVO REPORTE CLIENTE
+function openrepclient() {
+  $(document).ready(function () {
+    'use strict';
+
+    $('#wizard7').steps({
+      headerTag: 'h3',
+      bodyTag: 'section',
+      autoFocus: true,
+      titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
+      cssClass: 'wizard wizard-style-3',
+      labels: {
+        cancel: "Cancelar",
+        current: "current step:",
+        pagination: "Pagination",
+        finish: "Finalizar",
+        next: "Siguiente",
+        previous: "Anterior",
+        loading: "Cargando ..."
+      }
+    });
+  });
+  $(document).ready(function () {
+    $('#busccodimem').load('./select/buscarme.php');
+    $('#busccodigomem2').load('./select/buscarme2.php');
+    $('#buscpedido').load('./select/buspedirec.php');
+  });
+}
+
 function openreclientes() {
   var currentdate = new Date();
   var datetime = "Fecha de Impresion: " + currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear() + " - " + currentdate.getHours() + ":" + currentdate.getMinutes();
@@ -67,13 +96,13 @@ function openreclientes() {
 
 
 function addartrepclt() {
-  //alert("entro memo");
+  alert("entro reclamo");
   var folio_recl = document.getElementById('folioreclie').value; //FOLIO
 
   var fecha_recl = document.getElementById('fecharepclie').value;
   var remision = document.getElementById('remisreclam').value;
   var factura = document.getElementById('factreclam').value;
-  var pedido = document.getElementById('pedidomem').value;
+  var pedido = document.getElementById('pedidorec').value;
   var codigo_cliente = document.getElementById('deprechaclie').value;
   var cantidad = document.getElementById('cantidadrecl').value;
   var dep_responsa = document.getElementById('deprechaclie').value;
