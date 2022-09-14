@@ -36,7 +36,7 @@
             </div>
             <div class="br-pagebody">
                 <div class="br-section-wrapper">
-                    <a class="btn btn-purple" title="Agregar nuevo reporte" href="../administrador/new_reclacliente.php" style="float:right"><i
+                    <a class="btn btn-purple" title="Agregar nuevo reporte" href="javascript:foliovp()" style="float:right"><i
                             class="fa fa-plus mg-r-10"></i>Agregar reporte</a>
                     <br>
                     <br>

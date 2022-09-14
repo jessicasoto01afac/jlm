@@ -6,6 +6,10 @@
 
       $querry = "SELECT * FROM clientes WHERE estado = 0";
       $cliente1 = mysqli_query($conexion,$querry);
+
+      $sql = "SELECT MAX(folio) AS id_foliorecli FROM folios where tipo ='RECLAMO_CLIENTE' AND estado_f=0";
+      $foliovale_p = mysqli_query($conexion,$sql);
+      $folio = mysqli_fetch_row($foliovale_p);
 ?>
 <html lang="en">
 <head>
@@ -70,9 +74,9 @@
                                     <div class="form-group">
                                         <label style="font-size:16px" class="form-control-label">FOLIO: <span
                                                 class="tx-danger">*</span></label>
-                                        <input onkeyup="mayus(this);" style="font-size:18px; color:#1F618D"
+                                        <input onkeyup="mayus(this);" readonly style="font-size:18px; color:#1F618D"
                                             class="form-control" type="text" id="folioreclie" name="folioreclie"
-                                            value="" placeholder="">
+                                            value="<?php echo $folio[0]?>" placeholder="">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
                                 <div class="col-lg-3">

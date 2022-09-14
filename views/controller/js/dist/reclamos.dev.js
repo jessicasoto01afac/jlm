@@ -92,6 +92,31 @@ function openreclientes() {
     // ],
     "ajax": "../controller/php/infrecl_clientes.php"
   });
+} //FUNCION PARA AGREGAR UN NUEVO FOLIO
+
+
+function foliovp() {
+  //alert("entra folios");
+  var tipo = "RECLAMO_CLIENTE";
+  var datos = 'tipo=' + tipo + '&opcion=gefolio'; //alert(datos);
+
+  $.ajax({
+    type: "POST",
+    url: "../controller/php/insertreclamo.php",
+    data: datos
+  }).done(function (respuesta) {
+    if (respuesta == 0) {
+      setTimeout("location.href = 'new_reclacliente.php';", 1500);
+      alert(respuesta);
+    } else if (respuesta == 2) {} else {
+      Swal.fire({
+        type: 'danger',
+        text: 'Contactar a soporte tecnico',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  });
 } //FUNCIONES PARA GUARDAR ARTICULOS DE REPORTE DE CLIENTE
 
 
