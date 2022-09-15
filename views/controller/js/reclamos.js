@@ -138,14 +138,21 @@ function addartrepclt() {
     alert("entro reclamo");
     let folio_recl = document.getElementById('folioreclie').value; //FOLIO
     let fecha_recl = document.getElementById('fecharepclie').value;
+    let codigo_cliente = document.getElementById('deprechaclie').value;
+    let pedido = document.getElementById('pedidorec').value;
     let remision = document.getElementById('remisreclam').value;
     let factura = document.getElementById('factreclam').value;
-    let pedido = document.getElementById('pedidorec').value;
-    let codigo_cliente = document.getElementById('deprechaclie').value;
-    let cantidad = document.getElementById('cantidadrecl').value;
-    let dep_responsa = document.getElementById('deprechaclie').value;
-    let tipo_incidencia = document.getElementById('tiporeclit').value;
     let rep_cliente = document.getElementById('resmcliente').value;
+    let rep_jlm = document.getElementById('resmjlm').value;
+    let seguimiento = document.getElementById('seguiminto').value;
+    let conclusion = document.getElementById('conclusioncli').value;
+    let dep_responsa = document.getElementById('deprechaclie').value;
+    let tipo_incidencia = document.getElementById('tipoincclit').value;
+    let tipo_reporte = document.getElementById('tiporeclit').value;
+
+
+
+    let cantidad = document.getElementById('cantidadrecl').value;
     let codigo_art = document.getElementById('mcodigotr').value;
     let datos = 'folio_recl=' + folio_recl + '&fecha_recl=' + fecha_recl + '&remision=' + remision + '&factura=' + factura + '&pedido=' + pedido + '&codigo_cliente=' + codigo_cliente + '&cantidad=' + cantidad + '&dep_responsa=' + dep_responsa + '&tipo_incidencia=' + tipo_incidencia + '&rep_cliente=' + rep_cliente + '&codigo_art=' + codigo_art + '&opcion=regisrepcl';
     alert(datos);
