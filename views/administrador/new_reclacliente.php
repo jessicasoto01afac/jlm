@@ -7,11 +7,12 @@
       $querry = "SELECT * FROM clientes WHERE estado = 0";
       $cliente1 = mysqli_query($conexion,$querry);
 
-      $sql = "SELECT MAX(folio) AS id_foliorecli FROM folios where tipo ='RECLAMO_CLIENTE' AND estado_f=0";
-      $foliovale_p = mysqli_query($conexion,$sql);
+      $sql2 = "SELECT MAX(folio) AS id_foliorecli FROM folios where tipo ='RECLAMO_CLIENTE' AND estado_f=0";
+      $foliovale_p = mysqli_query($conexion,$sql2);
       $folio = mysqli_fetch_row($foliovale_p);
 ?>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -33,6 +34,10 @@
     <link href="../template/lib/highlightjs/github.css" rel="stylesheet">
     <link href="../template/lib/jquery.steps/jquery.steps.css" rel="stylesheet">
     <script src="../controller/js/memos.js"></script>
+    <link href="../template/lib/jquery-switchbutton/jquery.switchButton.css" rel="stylesheet">
+    <link href="../template/lib/medium-editor/medium-editor.css" rel="stylesheet">
+    <link href="../template/lib/medium-editor/default.css" rel="stylesheet">
+    <link href="../template/lib/summernote/summernote-bs4.css" rel="stylesheet">
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
 </head>
@@ -83,8 +88,8 @@
                                     <div class="form-group">
                                         <label style="font-size:16px" class="form-control-label">FECHA: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" type="date" id="fecharepclie" name="fecharepclie" value=""
-                                            placeholder="">
+                                        <input class="form-control" type="date" id="fecharepclie" name="fecharepclie"
+                                            value="" placeholder="">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
                                 <div class="col-lg-3">
@@ -98,18 +103,18 @@
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-lg-3">
                                     <div class="form-group mg-b-10-force">
                                         <label style="font-size:16px" class="form-control-label">TIPO DE INCIDENCIA:
                                             <span class="tx-danger">*</span></label>
                                         <select class="form-control" onchange="" id="tipoincclit" name="tipoincclit">
                                             <option value="">SELECCIONA UNA OPCIÓN</option>
-                                            <option value="ERROR_EN_EL_COSTO">ERROR EN EL COSTO</option>
-                                            <option value="MATERIAL_DEFECTUOSO">MATERIAL DEFECTUOSO</option>
-                                            <option value="MATERIAL_INCORRECTO">MATERIAL INCORRECTO</option>
-                                            <option value="MATERIAL_NO_ENVIADO">MATERIAL NO ENVIADO</option>
-                                            <option value="ERROR_DE_FACTURACIÓN">ERROR DE FACTURACIÓN</option>
+                                            <option value="ERROR EN EL COSTO">ERROR EN EL COSTO</option>
+                                            <option value="MATERIAL DEFECTUOSO">MATERIAL DEFECTUOSO</option>
+                                            <option value="MATERIAL INCORRECTO">MATERIAL INCORRECTO</option>
+                                            <option value="MATERIAL NO ENVIADO">MATERIAL NO ENVIADO</option>
+                                            <option value="ERROR DE FACTURACIÓN">ERROR DE FACTURACIÓN</option>
                                             <option value="OTROS">OTROS</option>
                                         </select>
                                     </div>
@@ -208,6 +213,14 @@
                                         placeholder="Departamento" readonly type="text" required>
                                 </div><!-- form-group -->
                             </div><!-- form-group -->
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label label2">OBSERBACIONES: <span
+                                            class="tx-danger"></span></label>
+                                    <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="pedobservo"
+                                        id="pedobservo" placeholder="Ingresa alguna observación"></textarea>
+                                </div>
+                            </div><!-- col-12 -->
                             </form>
                             <br>
                             <div class="col-lg-12">
@@ -233,8 +246,8 @@
                                                 <span><strong>Advertencia!</strong> Llenar todos los campos</span>
                                             </div><!-- d-flex -->
                                         </div><!-- alert -->
-                                        <div style="display:none;" id="errrecc" name="errrecc" class="alert alert-danger"
-                                            role="alert">
+                                        <div style="display:none;" id="errrecc" name="errrecc"
+                                            class="alert alert-danger" role="alert">
                                             <div class="d-flex align-items-center justify-content-start">
                                                 <i class="icon ion-ios-close alert-icon tx-24"></i>
                                                 <span><strong>Advertencia!</strong>No se puedo guardar coontactar a
@@ -259,50 +272,50 @@
                         <div class="row mg-b-25">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label style="font-size:16px" class="form-control-label">INGRESE EL REPORTE DEL CLIENTE: <span
-                                            class="tx-danger">*</span></label>
-                                            <textarea onkeyup="mayus(this);" rows="10" class="form-control" name="resmcliente"
-                                        id="resmcliente" placeholder="Ingresa la descripción del cliente"></textarea>
+                                    <label style="font-size:16px" class="form-control-label">INGRESE EL REPORTE DEL
+                                        CLIENTE: <span class="tx-danger">*</span></label>
+                                    <div id="clientenote" name="clientenote"></div>
                                 </div><!-- form-group -->
                             </div><!-- form-group -->
+                            <div style="display:none;" name="repcliente" id="repcliente"></div>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label style="font-size:16px" class="form-control-label">INGRESE EL REPORTE DE JLM: <span
-                                            class="tx-danger">*</span></label>
-                                            <textarea onkeyup="mayus(this);" rows="10" class="form-control" name="resmjlm"
-                                        id="resmjlm" placeholder="Ingresa la descripción del cliente"></textarea>
+                                    <label style="font-size:16px" class="form-control-label">INGRESE EL REPORTE DE JLM:
+                                        <span class="tx-danger">*</span></label>
+                                    <div id="jlmnote"></div>
                                 </div><!-- form-group -->
                             </div><!-- form-group -->
+                            <div style="display:none;" name="repjlm" id="repjlm"></div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label style="font-size:16px" class="form-control-label">SEGUIMIENTO: <span
                                             class="tx-danger">*</span></label>
-                                            <textarea onkeyup="mayus(this);" rows="10" class="form-control" name="seguiminto"
-                                        id="seguiminto" placeholder="Ingresa la descripción del cliente"></textarea>
+                                    <div id="seguimientonote"></div>
                                 </div><!-- form-group -->
                             </div><!-- form-group -->
+                            <div style="display:none;" name="repseguimiento" id="repseguimiento"></div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label style="font-size:16px" class="form-control-label">CONCLUSIÓN: <span
                                             class="tx-danger">*</span></label>
-                                            <textarea onkeyup="mayus(this);" rows="10" class="form-control" name="conclusioncli"
-                                        id="conclusioncli" placeholder="Ingresa la descripción del cliente"></textarea>
+                                    <div id="conclicionnote"></div>
                                 </div><!-- form-group -->
                             </div><!-- form-group -->
+                            <div style="display:none;" name="repconclu" id="repconclu"></div>
                             </form>
                             <div class="col-lg-12">
                                 <br>
                                 <div class="form-group">
                                     <br>
-                                    <div style="display:none;" id="dublirec2" name="dublirec2" class="alert alert-warning"
-                                        role="alert">
+                                    <div style="display:none;" id="dublirec2" name="dublirec2"
+                                        class="alert alert-warning" role="alert">
                                         <div class="d-flex align-items-center justify-content-start">
                                             <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                                             <span><strong>Advertencia!</strong> El resgistro ya existe</span>
                                         </div><!-- d-flex -->
                                     </div><!-- alert -->
-                                    <div style="display:none;" id="vaciosrec2" name="vaciosrec2" class="alert alert-info"
-                                        role="alert">
+                                    <div style="display:none;" id="vaciosrec2" name="vaciosrec2"
+                                        class="alert alert-info" role="alert">
                                         <div class="d-flex align-items-center justify-content-start">
                                             <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                                             <span><strong>Advertencia!</strong> Llenar todos los campos</span>
@@ -359,12 +372,40 @@
     <script src="../template/lib/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
     <script src="../template/lib/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
     <script src="../controller/js/reclamos.js"></script>
+    <script src="../template/lib/summernote/summernote-bs4.min.js"></script>
+    <script src="../template/lib/medium-editor/medium-editor.js"></script>
 
-    <?php include('../administrador/modal.php');?>
+    <?php include('../administrador/modal/mpedido.php');?>
 
     <script src="../template/js/bracket.js"></script>
     <script>
-    openrepclient()
+    openrepclient();
+    $(function() {
+        'use strict';
+
+        // Inline editor
+        var editor = new MediumEditor('.editable');
+
+        $('#clientenote').summernote({
+            height: 150,
+            tooltip: false
+        });
+        $('#jlmnote').summernote({
+            height: 150,
+            tooltip: false
+        });
+        $('#seguimientonote').summernote({
+            height: 150,
+            tooltip: false
+        });
+        $('#conclicionnote').summernote({
+            height: 150,
+            tooltip: false
+        });
+
+
+
+    });
     </script>
 
 

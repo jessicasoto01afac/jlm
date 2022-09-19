@@ -13,10 +13,9 @@
 </select>
 
 <script type="text/javascript">
+    
 $(document).ready(function() {
     $('#pedidorec').select2();
-
-
     $('#pedidorec').change(function() {
         $.ajax({
             type: "post",
