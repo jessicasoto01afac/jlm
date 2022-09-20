@@ -285,6 +285,11 @@
                             </div><!-- form-layout -->
                         </div>
                         <h4 style="text-align:center">Resumen del reporte</h4>
+                        <button onclick="()" id="edithreport" name="edithreport"
+                            title="Dar clic para editar" type="button" style="float: right" class="btn btn-secondary btn btn-secondary"><i
+                                class="fa fa-edit"></i></button>
+                                <br>
+                                <br>
                         <section>
                             <div class="row mg-b-25">
                                 <div class="col-lg-12">
