@@ -112,7 +112,8 @@
                                             type="text" name="rclietfolio" id="rclietfolio">
                                         <label class="form-control-label" style="font-size:14px">FOLIO DE REPORTE
                                             <span class="tx-danger">*</span></label>
-                                        <input class="form-control" style="display:none" type="text" id="folioreclie" name="folioreclie">
+                                        <input class="form-control" style="display:none" type="text" id="folioreclie"
+                                            name="folioreclie">
                                         <label class="form-control-label" id="folreport" name="folreport"
                                             style="font-size:24px; color:#14128F"></label>
                                     </div>
@@ -285,11 +286,14 @@
                             </div><!-- form-layout -->
                         </div>
                         <h4 style="text-align:center">Resumen del reporte</h4>
-                        <button onclick="()" id="edithreport" name="edithreport"
-                            title="Dar clic para editar" type="button" style="float: right" class="btn btn-secondary btn btn-secondary"><i
+                        <button onclick="edithrep()" id="edithreport" name="edithreport" title="Dar clic para editar"
+                            type="button" style="float: right" class="btn btn-secondary btn btn-secondary"><i
                                 class="fa fa-edit"></i></button>
-                                <br>
-                                <br>
+                        <button onclick="closeedithrep()" id="edithreportclose" name="edithreportclose"
+                            title="Dar clic para editar" type="button" style="float: right; display:none"
+                            class="btn btn-danger btn btn-danger"><i class="fa fa-times"></i></button>
+                        <br>
+                        <br>
                         <section>
                             <div class="row mg-b-25">
                                 <div class="col-lg-12">
@@ -322,7 +326,11 @@
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
                                 <div style="display:none;" name="repconclu" id="repconclu"></div>
+                                
                                 <div class="col-lg-12">
+                                <button onclick="edithrep()" id="saverepoinf" name="saverepoinf"
+                                    title="Dar clic para editar" type="button" style="float:right"
+                                    class="col-lg-3 btn btn-info btn btn-info">Guardar</button>
                                     <br>
                                     <div class="form-group">
                                         <br>

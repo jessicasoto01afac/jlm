@@ -227,7 +227,7 @@ function addartrepclt() {
     let datos = 'folio=' + folio + '&tipo_incidencia=' + tipo_incidencia + '&tipo_reporte=' + tipo_reporte + '&cantidad=' + cantidad + '&id_articulo=' + id_articulo + '&observ_recl=' + observ_recl + '&opcion=registrar';
     //alert(datos);
     if (folio == '' || fecha_recl == '' || cliente == '' || factura == '' || remision == '') {
-        document.getElementById('vaciosrec2').style.display = ''
+        document.getElementById('vaciosrec2').style.display = '';
         setTimeout(function() {
             document.getElementById('vaciosrec2').style.display = 'none';
         }, 2000);
@@ -886,4 +886,26 @@ function destrasmemalt() {
             }
         }
     });
+}
+
+function edithrep() {
+    // encendidos para actualizar
+    $('#clientenote').summernote('enable');
+    $('#jlmnote').summernote('enable');
+    $('#seguimientonote').summernote('enable');
+    $('#conclicionnote').summernote('enable');
+    document.getElementById('edithreportclose').style.display = '';
+    document.getElementById('edithreport').style.display = 'none';
+    document.getElementById('saverepoinf').style.display = '';
+}
+
+function closeedithrep() {
+    // encendidos para actualizar
+    $('#clientenote').summernote('disable');
+    $('#jlmnote').summernote('disable');
+    $('#seguimientonote').summernote('disable');
+    $('#conclicionnote').summernote('disable');
+    document.getElementById('edithreportclose').style.display = 'none';
+    document.getElementById('edithreport').style.display = '';
+    document.getElementById('saverepoinf').style.display = 'none';
 }
