@@ -51,7 +51,7 @@ function openrepclient() {
                 let pedido2 = tPrfil.substr(1);
                 //--------------------------
                 let datos = 'folio=' + folio + '&fecha_recl=' + fecha_recl + '&tipo_reporte=' + tipo_reporte + '&tipo_incidencia=' + tipo_incidencia + '&remision=' + remision + '&factura=' + factura + '&deprechaclie=' + deprechaclie + '&dep_responsa=' + dep_responsa + '&rep_cliente=' + rep_cliente + '&code_cliente=' + code_cliente + '&rep_jlm=' + rep_jlm + '&code_jlm=' + code_jlm + '&seguimiento=' + seguimiento + '&code_seguimiento=' + code_seguimiento + '&conclusion=' + conclusion + '&code_conclucion=' + code_conclucion + '&pedido2=' + pedido2 + '&opcion=savereport';
-                alert(datos);
+                //alert(datos);
                 if (folio == '' || fecha_recl == '' || code_cliente == '' || factura == '' || remision == '' || rep_cliente == '') {
                     Swal.fire({
                         type: 'info',
@@ -111,7 +111,7 @@ function openreclientes() {
         currentdate.getFullYear() + " - " +
         currentdate.getHours() + ":" +
         currentdate.getMinutes();
-    let table = $('#recliente').DataTable({
+    let table = $('#recliente2').DataTable({
         dom: 'Bfrtip',
         buttons: [{
                 extend: 'copy',
@@ -329,7 +329,7 @@ function closeditclient() {
 //FUCIÓN PARA LLENAR INFORMACIÓN DEL ARTICULO DE ALTA DE RECLAMO DE CLIENTE
 function editararclienalt(idreclamo) {
     //alert("entrta editar alata");
-    //alert(idreclamo);
+    alert(idreclamo);
     let folio2 = document.getElementById('folioreclie').value; //FOLIO    
     document.getElementById('openeditarclie').style.display = '';
     document.getElementById('closediarclie').style.display = 'none';
@@ -400,6 +400,7 @@ function updatearticul() {
         });
     })
 }
+
 //FUNIÓN PARA GUARDAR LA EDICIÓN EN ARTICULOS ALTA D REPORTE CLIENTE
 function savealtrepclie() {
     //Datos para inserttar en al atabla de reclamoclient
@@ -434,9 +435,61 @@ function savealtrepclie() {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                closeditclient();
+                closeditclient2();
                 updatearticul(); //llama a la función para actualizar la tabla
                 $('#modal-editararclalta').modal('hide'); //cierra el modal
+            } else if (respuesta == 2) {
+                document.getElementById('edthclieciosal').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthclieciosal').style.display = 'none';
+                }, 1000);
+                //alert("datos repetidos");
+            } else {
+                document.getElementById('edthclieinfr').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthclieinfr').style.display = 'none';
+                }, 2000);
+            }
+        });
+    }
+}
+//FUNIÓN PARA GUARDAR LA EDICIÓN EN ARTICULOS ALTA D REPORTE CLIENTE
+function savealtrepclie2() {
+    //Datos para inserttar en al atabla de reclamoclient
+    let folio = document.getElementById('folioreclie').value; //FOLIO    
+    let cantidad = document.getElementById('editcaclien2').value;
+    let id_articulo = document.getElementById('codiclieth2').value; //codigo
+    let observ_recl = document.getElementById('obserclien2').value; //observaciones
+    //datos para validad agregar
+    let fecha_recl = document.getElementById('infrepdate').value;
+    let remision = document.getElementById('infpedremisi').value;
+    let factura = document.getElementById('infpedfac').value;
+    let cliente = document.getElementById('infrepxlientes').value;
+    let id_reclamo = document.getElementById('id_artclien2').value;
+    let datos = 'folio=' + folio + '&id_reclamo=' + id_reclamo + '&cantidad=' + cantidad + '&id_articulo=' + id_articulo + '&observ_recl=' + observ_recl + '&opcion=actualizainf';
+    //alert(datos);
+    if (folio == '' || fecha_recl == '' || cliente == '' || factura == '' || remision == '') {
+        document.getElementById('edthmmciosal').style.display = '';
+        setTimeout(function() {
+            document.getElementById('edthmmciosal').style.display = 'none';
+        }, 2000);
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertreclamo.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se actualizo de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                closeditclient();
+                updatearticul2(); //llama a la función para actualizar la tabla
+                $('#modal-editararclalta2').modal('hide'); //cierra el modal
             } else if (respuesta == 2) {
                 document.getElementById('edthclieciosal').style.display = '';
                 setTimeout(function() {
@@ -472,6 +525,7 @@ function delartaltpedart(id_delete) {;
         }
     });
 }
+
 //GUARDA LA ELIMINACION POR ARTICULO EN ALTA DE PRODUCCION
 function savdelercliart() {
     let id_reclamo = document.getElementById('del_artrecli').value;
@@ -499,6 +553,287 @@ function savdelercliart() {
                 document.getElementById('deartrepclie').style.display = 'none';
             }, 2000);
             //alert(respuesta);
+        }
+    });
+}
+
+function reclamocliente(id_reclaclient) {
+    //alert(id_reclaclient);
+    $("#detareport").toggle(250); //Muestra contenedor de detalles
+    $("#lista").toggle("fast"); //Oculta lista
+    document.getElementById('rclietfolio').value = id_reclaclient;
+    let liberar = document.getElementById('btnrclitliberar'); //LIBERAR
+    let finalizado = document.getElementById('btnrclitfinaliz'); //FINALIZACION
+    let editar = document.getElementById('openedipcliinf'); //EDITAR
+    let pdfvp = document.getElementById('pdfrpclient'); //PDF
+    let folio = id_reclaclient; //FOLIO
+    //INFORMACIÓN 
+    $.ajax({
+        url: '../controller/php/inforeportes.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        let res = obj.data;
+        let x = 0;
+        for (D = 0; D < res.length; D++) {
+            if (obj.data[D].folio_recl == id_reclaclient) {
+                document.getElementById('folreport').innerHTML = obj.data[D].folio_recl;
+                document.getElementById('folioreclie').value = obj.data[D].folio_recl; //folio oculto
+                document.getElementById('infrepdate').value = obj.data[D].fecha_recl;
+                document.getElementById('infreptipo').value = obj.data[D].tipo_reporte;
+                document.getElementById('infrepincid').value = obj.data[D].tipo_incidencia;
+                document.getElementById('infvppedidos').value = obj.data[D].pedido;
+                document.getElementById('infpedremisi').value = obj.data[D].remision;
+                document.getElementById('infpedfac').value = obj.data[D].factura;
+                document.getElementById('infrepxlientes').value = obj.data[D].nombre;
+                document.getElementById('infrepacred').value = obj.data[D].dep_responsa;
+                document.getElementById('infrepformul').value = obj.data[D].usunom + " " + obj.data[D].usuapell;
+                document.getElementById('infrpestatus').value = obj.data[D].estatus_recl;
+
+                //mejor codigo para html
+                $('#clientenote').summernote('code', obj.data[D].code_cliente);
+                $('#jlmnote').summernote('code', obj.data[D].code_jlm);
+                $('#seguimientonote').summernote('code', obj.data[D].code_seguimiento);
+                $('#conclicionnote').summernote('code', obj.data[D].code_conclucion);
+
+                // To disable
+                $('#clientenote').summernote('disable');
+                $('#jlmnote').summernote('disable');
+                $('#seguimientonote').summernote('disable');
+                $('#conclicionnote').summernote('disable');
+                //PENDIENTE-----------------------------------------------------------------------------------------------
+                if (obj.data[D].estatus_recl == 'PENDIENTE') {
+                    finalizado.style.display = '';
+                    editar.style.display = '';
+                    pdfvp.style.display = 'none';
+                    $.ajax({
+                            url: '../controller/php/articurep.php',
+                            type: 'GET',
+                            data: 'folio=' + folio
+                        }).done(function(resp) {
+                            obj = JSON.parse(resp);
+                            let res = obj.data;
+                            let x = 0;
+                            html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="datareclamo" name="datareclamo" class="table display dataTable"><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>SALIDA</th><th><i></i>OBSERVACIONES</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+                            for (U = 0; U < res.length; U++) {
+                                if (obj.data[U].folio == folio && obj.data[U].tipo == 'CLIENTE') {
+                                    x++;
+                                    $id_reclamo = obj.data[U].id_reclamo;
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observ_recl + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editararclienalt2(" + $id_reclamo + ");' class='nav-link' data-toggle='modal' data-target='#modal-editararclalta2'>Editar</a> <a onclick='delartaltpedart2(" + $id_reclamo + ");' class='nav-link' data-toggle='modal' data-target='#modal-deleteartal2'>Eliminar</a>" + "</td></tr>";
+                                }
+                            }
+                            html += '</div></tbody></table></div>';
+                            $("#listarticlien").html(html);
+                            'use strict';
+
+                        })
+                        //FINALIZADO 19092022 -----------------------------------------------------------------------------------------------------------
+                } else if (obj.data[D].estatus_recl == 'FINALIZADO') {
+                    let liberar = document.getElementById('btnrclitliberar');
+                    liberar.style.display = '';
+                    editar.style.display = 'none';
+                    pdfvp.style.display = '';
+                    $.ajax({
+                        url: '../controller/php/articurep.php',
+                        type: 'GET',
+                        data: 'folio=' + folio
+                    }).done(function(resp) {
+                        obj = JSON.parse(resp);
+                        let res = obj.data;
+                        let x = 0;
+                        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="datareclamo" name="datareclamo" class="table display dataTable"><thead class="thead-colored thead-info"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>SALIDA</th><th><i></i>OBSERVACIONES</th></tr></thead><tbody>';
+                        for (U = 0; U < res.length; U++) {
+                            if (obj.data[U].folio == folio && obj.data[U].tipo == 'CLIENTE') {
+                                x++;
+                                $id_reclamo = obj.data[U].id_reclamo;
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observ_recl + "</td></tr>";
+                            }
+                        }
+                        html += '</div></tbody></table></div>';
+                        $("#listarticlien").html(html);
+                        'use strict';
+                    })
+                }
+            }
+        }
+    });
+}
+//FUNCIONES PARA GUARDAR ARTICULOS DE REPORTE DE CLIENTE
+function updatearticul2() {
+
+    let liberar = document.getElementById('btnrclitliberar'); //LIBERAR
+    let finalizado = document.getElementById('btnrclitfinaliz'); //FINALIZACION
+    let editar = document.getElementById('openedipcliinf'); //EDITAR
+    let pdfvp = document.getElementById('pdfrpclient'); //PDF
+    let folio = document.getElementById('folreport').innerHTML; //FOLIO 
+    //INFORMACIÓN 
+    $.ajax({
+        url: '../controller/php/inforeportes.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        let res = obj.data;
+        let x = 0;
+        for (D = 0; D < res.length; D++) {
+            if (obj.data[D].folio_recl == folio) {
+                //PENDIENTE-----------------------------------------------------------------------------------------------
+                if (obj.data[D].estatus_recl == 'PENDIENTE') {
+                    finalizado.style.display = '';
+                    editar.style.display = '';
+                    pdfvp.style.display = 'none';
+                    $.ajax({
+                            url: '../controller/php/articurep.php',
+                            type: 'GET',
+                            data: 'folio=' + folio
+                        }).done(function(resp) {
+                            obj = JSON.parse(resp);
+                            let res = obj.data;
+                            let x = 0;
+                            html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="datareclamo" name="datareclamo" class="table display dataTable"><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>SALIDA</th><th><i></i>OBSERVACIONES</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+                            for (U = 0; U < res.length; U++) {
+                                if (obj.data[U].folio == folio && obj.data[U].tipo == 'CLIENTE') {
+                                    x++;
+                                    $id_reclamo = obj.data[U].id_reclamo;
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observ_recl + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editararclienalt2(" + $id_reclamo + ");' class='nav-link' data-toggle='modal' data-target='#modal-editararclalta2'>Editar</a> <a onclick='delartaltpedart2(" + $id_reclamo + ");' class='nav-link' data-toggle='modal' data-target='#modal-deleteartal2'>Eliminar</a>" + "</td></tr>";
+                                }
+                            }
+                            html += '</div></tbody></table></div>';
+                            $("#listarticlien").html(html);
+                            'use strict';
+
+                        })
+                        //FINALIZADO 19092022 -----------------------------------------------------------------------------------------------------------
+                } else if (obj.data[D].estatus_recl == 'FINALIZADO') {
+                    let liberar = document.getElementById('btnrclitliberar');
+                    liberar.style.display = '';
+                    editar.style.display = 'none';
+                    pdfvp.style.display = '';
+                    $.ajax({
+                        url: '../controller/php/articurep.php',
+                        type: 'GET',
+                        data: 'folio=' + folio
+                    }).done(function(resp) {
+                        obj = JSON.parse(resp);
+                        let res = obj.data;
+                        let x = 0;
+                        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="datareclamo" name="datareclamo" class="table display dataTable"><thead class="thead-colored thead-info"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>SALIDA</th><th><i></i>OBSERVACIONES</th></tr></thead><tbody>';
+                        for (U = 0; U < res.length; U++) {
+                            if (obj.data[U].folio == folio && obj.data[U].tipo == 'CLIENTE') {
+                                x++;
+                                $id_reclamo = obj.data[U].id_reclamo;
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observ_recl + "</td></tr>";
+                            }
+                        }
+                        html += '</div></tbody></table></div>';
+                        $("#listarticlien").html(html);
+                        'use strict';
+                    })
+                }
+            }
+        }
+    });
+}
+//FUCIÓN PARA LLENAR INFORMACIÓN DEL ARTICULO DE ALTA DE RECLAMO DE CLIENTE
+function editararclienalt2(idreclamo) {
+    //alert("entrta editar alata");
+    //alert(idreclamo);
+    let folio2 = document.getElementById('folioreclie').value; //FOLIO    
+    document.getElementById('openeditarclie2').style.display = '';
+    document.getElementById('closediarclie2').style.display = 'none';
+    $.ajax({
+        url: '../controller/php/articurep.php',
+        type: 'GET',
+        data: 'folio=' + folio2
+    }).done(function(respuesta) {
+        //alert("respuesta");
+        obj = JSON.parse(respuesta);
+        let res = obj.data;
+        let x = 0;
+        for (U = 0; U < res.length; U++) {
+            if (obj.data[U].id_reclamo == idreclamo) {
+                //alert();
+                document.getElementById('codiclieth2').value = obj.data[U].id_articulo;
+                document.getElementById('desclientrep2').value = obj.data[U].artdescrip;
+                document.getElementById('editcaclien2').value = obj.data[U].cantidad;
+                document.getElementById('editdeplien2').value = obj.data[U].artubicac;
+                document.getElementById('obserclien2').value = obj.data[U].observ_recl;
+                document.getElementById('id_artclien2').value = obj.data[U].id_reclamo;
+
+            }
+        }
+    });
+}
+//FUNIÓN PARA LIBERAR LA EDICIÓN EN ARTICULOS REPORTE CLIENTE
+function editartrecliente2() {
+    //alert("edit articulo infovalesds");
+    document.getElementById('closediarclie2').style.display = "";
+    document.getElementById('openeditarclie2').style.display = "none";
+    document.getElementById('guardarreclie2').style.display = "";
+    document.getElementById('editcaclien2').disabled = false;
+    document.getElementById('obserclien2').disabled = false;
+    document.getElementById('codiclieth2').disabled = false;
+}
+//FUNIÓN PARA CERRAR LA EDICIÓN EN ARTICULOS MEMO ALTA MEMO
+function closeditclient2() {
+    //alert("edit articulo infovalesds");
+    document.getElementById('closediarclie2').style.display = "none";
+    document.getElementById('openeditarclie2').style.display = "";
+    document.getElementById('guardarreclie2').style.display = "none";
+    document.getElementById('editcaclien2').disabled = true;
+    document.getElementById('obserclien2').disabled = true;
+    document.getElementById('codiclieth2').disabled = true;
+}
+//cambio de descripcion articulo traspaspaso en alta de memo
+function destrasmemalt2() {
+    //alert("eentraarticulo")
+    let codivo = document.getElementById('codiclieth2').value;
+    $.ajax({
+        url: '../controller/php/conarticulos.php',
+        type: 'POST'
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (D = 0; D < res.length; D++) {
+            if (obj.data[D].artcodigo == codivo) {
+                // alert(id_persona);
+                datos =
+                    obj.data[D].artcodigo + '*' +
+                    obj.data[D].artdescrip + '*' +
+                    obj.data[D].artubicac;
+                var o = datos.split("*");
+                $("#desclientrep2").val(o[1]);
+                $("#editdeplien2").val(o[2]);
+
+            }
+        }
+    });
+}
+//cambio de descripcion articulo traspaspaso en alta de memo
+function destrasmemalt() {
+    //alert("eentraarticulo")
+    let codivo = document.getElementById('codiclieth').value;
+    $.ajax({
+        url: '../controller/php/conarticulos.php',
+        type: 'POST'
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (D = 0; D < res.length; D++) {
+            if (obj.data[D].artcodigo == codivo) {
+                // alert(id_persona);
+                datos =
+                    obj.data[D].artcodigo + '*' +
+                    obj.data[D].artdescrip + '*' +
+                    obj.data[D].artubicac;
+                var o = datos.split("*");
+                $("#desclientrep").val(o[1]);
+                $("#editdeplien").val(o[2]);
+
+            }
         }
     });
 }

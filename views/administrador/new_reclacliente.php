@@ -331,6 +331,7 @@
                                     </div><!-- alert -->
                                 </div>
                             </div><!-- col-12 -->
+                        </div>
                     </section>
                 </div>
                 <br>
@@ -375,7 +376,7 @@
     <script src="../template/lib/summernote/summernote-bs4.min.js"></script>
     <script src="../template/lib/medium-editor/medium-editor.js"></script>
 
-    <?php include('../administrador/modal/mpedido.php');?>
+    <?php include('../administrador/modal/mreporte.php');?>
 
     <script src="../template/js/bracket.js"></script>
     <script>

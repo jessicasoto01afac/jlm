@@ -17,7 +17,7 @@
 		$id_kardex=$data["id_kax"];
 		$refe_1=$data["refe_1"];
 		$proceso = "<a onclick='valproduct($refe_1)' style='cursor:pointer;' title='Ver detalles de memo' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='delevpro($refe_1)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletevproduc'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
-        $estatus="POR AUTORIZAR";
+        $estatus="<td class='tx-12'><span class='square-8 bg-warning mg-r-5 rounded-circle'></span>POR AUTORIZAR</td>";
         $cursos[] = [ 
             $contador,
             $data["refe_1"], 
@@ -32,7 +32,7 @@
 		$id_kardex=$data["id_kax"];
 		$refe_1=$data["refe_1"];
 		$proceso = "<a onclick='valproduct($refe_1)' style='cursor:pointer;' title='Ver detalles de memo' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='delevpro($refe_1)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletevproduc'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
-        $estatus="AUTORIZADO";
+        $estatus="<td class='tx-12'><span class='square-8 bg-info mg-r-5 rounded-circle'></span>AUTORIZADO</td>";
         $cursos[] = [ 
             $contador,
             $data["refe_1"], 
@@ -47,7 +47,7 @@
 		$id_kardex=$data["id_kax"];
 		$refe_1=$data["refe_1"];
 		$proceso = "<a onclick='valproduct($refe_1)' style='cursor:pointer;' title='Ver detalles de memo' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='delevpro($refe_1)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletevproduc'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
-		$estatus="SURTIDO";
+		$estatus="<td class='tx-12'><span class='square-8 bg-purple mg-r-5 rounded-circle'></span>SURTIDO</td>";
         $cursos[] = [ 
             $contador,
             $data["refe_1"], 
@@ -62,7 +62,7 @@
 		$id_kardex=$data["id_kax"];
 		$refe_1=$data["refe_1"];
 		$proceso = "<a onclick='valproduct($refe_1)' style='cursor:pointer;' title='Ver detalles de memo' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='delevpro($refe_1)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletevproduc'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
-        $estatus="FINALIZADO";
+        $estatus="<td class='tx-12'><span class='square-8 bg-success mg-r-5 rounded-circle'></span>FINALIZADO</td>";
         $cursos[] = [ 
             $contador,
             $data["refe_1"], 
