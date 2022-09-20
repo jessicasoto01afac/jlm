@@ -549,6 +549,29 @@ function delartaltpedart(id_delete) {
       }
     }
   });
+} //FUNCION QUE TRAE EL CODIGO DE EL ARTICULO A ELIMINAR ALTA DE MEMO
+
+
+function delartaltpedart2(id_delete) {
+  ; //alert(id_delete);
+
+  var folio2 = document.getElementById('folioreclie').value;
+  $.ajax({
+    url: '../controller/php/articurep.php',
+    type: 'GET',
+    data: 'folio=' + folio2
+  }).done(function (respuesta) {
+    obj = JSON.parse(respuesta);
+    var res = obj.data;
+    var x = 0;
+
+    for (U = 0; U < res.length; U++) {
+      if (obj.data[U].id_reclamo == id_delete) {
+        document.getElementById('del_artrecli2').value = obj.data[U].id_reclamo;
+        document.getElementById('deartrepcli2').value = obj.data[U].id_articulo + "/" + obj.data[U].artdescrip;
+      }
+    }
+  });
 } //GUARDA LA ELIMINACION POR ARTICULO EN ALTA DE PRODUCCION
 
 
@@ -577,6 +600,37 @@ function savdelercliart() {
       document.getElementById('deartrepclie').style.display = '';
       setTimeout(function () {
         document.getElementById('deartrepclie').style.display = 'none';
+      }, 2000); //alert(respuesta);
+    }
+  });
+} //GUARDA LA ELIMINACION POR ARTICULO EN ALTA DE PRODUCCION
+
+
+function savdelercliart2() {
+  var id_reclamo = document.getElementById('del_artrecli2').value;
+  var folio = document.getElementById('folioreclie').value;
+  var datos = 'id_reclamo=' + id_reclamo + '&folio=' + folio + '&opcion=deleartnew'; //alert(datos);
+
+  $.ajax({
+    type: "POST",
+    url: "../controller/php/insertreclamo.php",
+    data: datos
+  }).done(function (respuesta) {
+    //alert(respuesta);
+    if (respuesta == 0) {
+      Swal.fire({
+        type: 'success',
+        text: 'Se elimino de forma correcta',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      updatearticul2(); //llama a la función para actualizar la tabla
+
+      $('#modal-deleteartal2').modal('hide'); //cierra el modal
+    } else {
+      document.getElementById('deartrepclie2').style.display = '';
+      setTimeout(function () {
+        document.getElementById('deartrepclie2').style.display = 'none';
       }, 2000); //alert(respuesta);
     }
   });

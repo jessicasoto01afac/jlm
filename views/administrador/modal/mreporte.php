@@ -299,3 +299,35 @@
         </div>
     </div><!-- modal-dialog -->
 </div><!-- modal -->
+<!-- MODAL PARA ELIMINAR ARTICULOS DE RECLAMO CLIENTE-->
+<div class="modal fade" id='modal-deleteartal2' name='modal-deleteartal2'>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bd-0">
+            <div class="modal-header pd-x-20">
+                <h4 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ELIMINAR ARTICULO DE ALTA DE RECLAMO</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pd-20">
+                <p class="mg-b-5">ESTAS SEGURO DE ELIMINAR EL ARTICULO DE ESTE REPORTE?</p>
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="del_artrecli2"
+                    id="del_artrecli2">
+                <!-- <input disabled="" class="form-control inputalta" type="text" name="deartrepcli" id="deartrepcli"> -->
+                <textarea disabled="" class="form-control" name="deartrepcli2" id="deartrepcli2" rows="3"></textarea>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" onclick="savdelercliart2()"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
+                <br>
+            </div>
+            <div style="display:none;" id="deartrepclie2" name="deartrepclie2" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo eliminar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
