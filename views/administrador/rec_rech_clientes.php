@@ -87,7 +87,7 @@
             <div class="br-pagebody">
                 <div style="float: right;">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button onclick="editvaleproinf()" id="openedipcliinf" name="openedipcliinf"
+                        <button onclick="editreportinf()" id="openedipcliinf" name="openedipcliinf"
                             title="Dar clic para editar" type="button" class="btn btn-secondary btn btn-secondary"><i
                                 class="fa fa-edit"></i></button>
                         <button onclick="closevaleproinf()" id="closedrcliet" title="Dar clic para cerrar edición"

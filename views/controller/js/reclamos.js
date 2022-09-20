@@ -909,3 +909,18 @@ function closeedithrep() {
     document.getElementById('edithreport').style.display = '';
     document.getElementById('saverepoinf').style.display = 'none';
 }
+
+//FUNCION PARA EDITAR VALE DE OFICINA EN VISTA DE INFORMACION
+function editreportinf() {
+    //alert("EDITAR VALE");
+    $("#infrepdate").removeAttr("readonly");
+    document.getElementById('infreptipo').disabled = false;
+    document.getElementById('infrepincid').disabled = false;
+    $("#infvppedidos").removeAttr("readonly");
+    document.getElementById('infrepacred').disabled = false;
+    document.getElementById('infrpestatus').disabled = false;
+    $("#infpedremisi").removeAttr("readonly");
+    $("#infpedfac").removeAttr("readonly");
+    document.getElementById('closedrcliet').style.display = '';
+    document.getElementById('openedipcliinf').style.display = 'none';
+}
