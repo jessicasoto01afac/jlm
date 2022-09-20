@@ -90,7 +90,7 @@
                         <button onclick="editreportinf()" id="openedipcliinf" name="openedipcliinf"
                             title="Dar clic para editar" type="button" class="btn btn-secondary btn btn-secondary"><i
                                 class="fa fa-edit"></i></button>
-                        <button onclick="closevaleproinf()" id="closedrcliet" title="Dar clic para cerrar edición"
+                        <button onclick="closereporinf()" id="closedrcliet" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
                         <button onclick="pdfvp()" style="display:none;" title="Imprimir" id="pdfrpclient"

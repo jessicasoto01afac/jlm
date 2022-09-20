@@ -924,3 +924,17 @@ function editreportinf() {
     document.getElementById('closedrcliet').style.display = '';
     document.getElementById('openedipcliinf').style.display = 'none';
 }
+
+function closereporinf() {
+    //alert("EDITAR VALE");
+    $("#infrepdate").attr("readonly", "readonly");;
+    document.getElementById('infreptipo').disabled = true;
+    document.getElementById('infrepincid').disabled = true;
+    $("#infvppedidos").attr("readonly", "readonly");;
+    document.getElementById('infrepacred').disabled = false;
+    document.getElementById('infrpestatus').disabled = false;
+    $("#infpedremisi").attr("readonly", "readonly");;
+    $("#infpedfac").attr("readonly", "readonly");;
+    document.getElementById('closedrcliet').style.display = 'none';
+    document.getElementById('openedipcliinf').style.display = '';
+}
