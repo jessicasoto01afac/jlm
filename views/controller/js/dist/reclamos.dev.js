@@ -935,3 +935,184 @@ function destrasmemalt() {
     }
   });
 }
+
+function edithrep() {
+  // encendidos para actualizar
+  $('#clientenote').summernote('enable');
+  $('#jlmnote').summernote('enable');
+  $('#seguimientonote').summernote('enable');
+  $('#conclicionnote').summernote('enable');
+  document.getElementById('edithreportclose').style.display = '';
+  document.getElementById('edithreport').style.display = 'none';
+  document.getElementById('saverepoinf').style.display = '';
+}
+
+function closeedithrep() {
+  // encendidos para actualizar
+  $('#clientenote').summernote('disable');
+  $('#jlmnote').summernote('disable');
+  $('#seguimientonote').summernote('disable');
+  $('#conclicionnote').summernote('disable');
+  document.getElementById('edithreportclose').style.display = 'none';
+  document.getElementById('edithreport').style.display = '';
+  document.getElementById('saverepoinf').style.display = 'none';
+} //FUNCION PARA EDITAR VALE DE OFICINA EN VISTA DE INFORMACION
+
+
+function editreportinf() {
+  //alert("EDITAR VALE");
+  $("#infrepdate").removeAttr("readonly");
+  document.getElementById('infreptipo').disabled = false;
+  document.getElementById('infrepincid').disabled = false;
+  $("#infvppedidos").removeAttr("readonly");
+  document.getElementById('infrepacred').disabled = false;
+  document.getElementById('infrpestatus').disabled = false;
+  $("#infpedremisi").removeAttr("readonly");
+  $("#infpedfac").removeAttr("readonly");
+  document.getElementById('closedrcliet').style.display = '';
+  document.getElementById('openedipcliinf').style.display = 'none';
+  document.getElementById('savehadearrep').style.display = '';
+  document.getElementById('repaddartinf').style.display = '';
+}
+
+function closereporinf() {
+  //alert("EDITAR VALE");
+  $("#infrepdate").attr("readonly", "readonly");
+  ;
+  document.getElementById('infreptipo').disabled = true;
+  document.getElementById('infrepincid').disabled = true;
+  $("#infvppedidos").attr("readonly", "readonly");
+  ;
+  document.getElementById('infrepacred').disabled = false;
+  document.getElementById('infrpestatus').disabled = false;
+  $("#infpedremisi").attr("readonly", "readonly");
+  ;
+  $("#infpedfac").attr("readonly", "readonly");
+  ;
+  document.getElementById('closedrcliet').style.display = 'none';
+  document.getElementById('openedipcliinf').style.display = '';
+  document.getElementById('savehadearrep').style.display = 'none';
+  document.getElementById('repaddartinf').style.display = 'none';
+}
+
+function saveupdatereport() {
+  //alert("pruebas");
+  var folio = document.getElementById('folioreclie').value;
+  var rep_cliente = document.getElementById('repcliente').innerText;
+  var code_cliente = $('#clientenote').summernote('code'); //CODIGO CLIENTE (tomar el codigo para la base de datos)
+
+  var rep_jlm = document.getElementById('repjlm').innerText; //REPORTE JLM (Tomamos el texto para la base de datos )
+
+  var code_jlm = $('#jlmnote').summernote('code'); //CODIGO JLM (tomar el codigo para la base de datos)
+
+  var seguimiento = document.getElementById('repseguimiento').innerText; //REPORTE seguimiento (Tomamos el texto para la base de datos )
+
+  var code_seguimiento = $('#seguimientonote').summernote('code'); //CODIGO seguimiento (tomar el codigo para la base de datos)
+
+  var conclusion = document.getElementById('repconclu').innerText; //REPORTE conclusion (Tomamos el texto para la base de datos )
+
+  var code_conclucion = $('#conclicionnote').summernote('code'); //CODIGO conclusion (tomar el codigo para la base de datos)
+
+  var datos = 'folio=' + folio + '&rep_cliente=' + rep_cliente + '&code_cliente=' + code_cliente + '&rep_jlm=' + rep_jlm + '&code_jlm=' + code_jlm + '&seguimiento=' + seguimiento + '&code_seguimiento=' + code_seguimiento + '&conclusion=' + conclusion + '&code_conclucion=' + code_conclucion + '&opcion=updatesavereport'; //alert(datos);
+
+  if (folio == '') {
+    Swal.fire({
+      type: 'info',
+      text: 'LLENAR LOS CAMPOS OBLIGOTARIOS',
+      showConfirmButton: false,
+      timer: 1500
+    });
+    return;
+  } else {
+    $.ajax({
+      type: "POST",
+      url: "../controller/php/insertreclamo.php",
+      data: datos
+    }).done(function (respuesta) {
+      if (respuesta == 0) {
+        Swal.fire({
+          type: 'success',
+          text: 'Se agrega de fora correcta',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        closeedithrep();
+      } else if (respuesta == 2) {
+        Swal.fire({
+          type: 'warning',
+          text: 'LLENAR LOS CAMPOS OBLIGOTARIOS',
+          showConfirmButton: false,
+          timer: 1500
+        }); //alert(respuesta);
+      } else {
+        Swal.fire({
+          type: 'danger',
+          text: 'No se puedo guardar coontactar a soporte tecnico o levantar un ticke',
+          showConfirmButton: false,
+          timer: 1500
+        }); //alert(respuesta);
+      }
+    });
+  }
+}
+
+function savehadearrep() {
+  var folio = document.getElementById('folioreclie').value; //FOLIO    
+
+  var fecha_recl = document.getElementById('infrepdate').value; //FECHA
+
+  var tipo_reporte = document.getElementById('infreptipo').value; //TIPO DE REPORTE
+
+  var tipo_incidencia = document.getElementById('infrepincid').value; //TIPO DE INCIDENCIA
+
+  var remision = document.getElementById('infpedremisi').value; //REMISION
+
+  var factura = document.getElementById('infpedfac').value; //FACTURA
+
+  var dep_responsa = document.getElementById('infrepacred').value;
+  var estatus = document.getElementById('infrpestatus').value; //CODIGO CLIENTE
+
+  var pedido = document.getElementById('infvppedidos').value; //CODIGO CLIENTE
+
+  var datos = 'folio=' + folio + '&fecha_recl=' + fecha_recl + '&tipo_reporte=' + tipo_reporte + '&tipo_incidencia=' + tipo_incidencia + '&remision=' + remision + '&factura=' + factura + '&estatus=' + estatus + '&dep_responsa=' + dep_responsa + '&pedido=' + pedido + '&opcion=svrepheader'; //alert(datos);
+
+  if (folio == '') {
+    Swal.fire({
+      type: 'info',
+      text: 'LLENAR LOS CAMPOS OBLIGOTARIOS',
+      showConfirmButton: false,
+      timer: 1500
+    });
+    return;
+  } else {
+    $.ajax({
+      type: "POST",
+      url: "../controller/php/insertreclamo.php",
+      data: datos
+    }).done(function (respuesta) {
+      if (respuesta == 0) {
+        Swal.fire({
+          type: 'success',
+          text: 'Se agrega de fora correcta',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        closeedithrep();
+      } else if (respuesta == 2) {
+        Swal.fire({
+          type: 'warning',
+          text: 'LLENAR LOS CAMPOS OBLIGOTARIOS',
+          showConfirmButton: false,
+          timer: 1500
+        }); //alert(respuesta);
+      } else {
+        Swal.fire({
+          type: 'danger',
+          text: 'No se puedo guardar coontactar a soporte tecnico o levantar un ticke',
+          showConfirmButton: false,
+          timer: 1500
+        }); //alert(respuesta);
+      }
+    });
+  }
+}

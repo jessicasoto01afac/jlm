@@ -105,6 +105,25 @@ if(!isset($usuario)){
             echo "1";
         }
     //elimina vales de producción 
+    }else if($opcion === 'updatesavereport'){
+        $folio = $_POST['folio'];
+        $rep_cliente=$_POST['rep_cliente'];
+        $code_cliente=$_POST['code_cliente'];
+        $rep_jlm=$_POST['rep_jlm'];
+        $code_jlm=$_POST['code_jlm'];
+        $seguimiento=$_POST['seguimiento'];
+        $code_seguimiento=$_POST['code_seguimiento'];
+        $conclusion=$_POST['conclusion'];
+        $code_conclucion=$_POST['code_conclucion'];
+        if (updatereports($folio,$rep_cliente,$code_cliente,$rep_jlm,$code_jlm,$seguimiento,$code_seguimiento,$conclusion,$code_conclucion,$conexion)){
+            echo "0";
+            $realizo = 'ACTUALIZA EL REPORTE DEL CLIENTE';
+            // $usuario='pruebas';
+            histuprep($usuario,$realizo,$folio,$conexion);
+        }else{
+            echo "1";
+        }
+    //elimina vales de producción updatesavereport
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -195,6 +214,16 @@ function eliminar ($id_reclamo,$conexion){
     }
     cerrar($conexion);
 }
+//funcion para actualizar aticulo de memo en vista previa
+function updatereports ($folio,$rep_cliente,$code_cliente,$rep_jlm,$code_jlm,$seguimiento,$code_seguimiento,$conclusion,$code_conclucion,$conexion){
+    $query="UPDATE reclamoclient SET rep_cliente='$rep_cliente', code_cliente='$code_cliente',rep_jlm='$rep_jlm',code_jlm='$code_jlm',seguimiento='$seguimiento',code_seguimiento='$code_seguimiento',conclusion='$conclusion',code_conclucion='$code_conclucion' WHERE folio_recl = '$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
 function historial($usuario,$folio,$id_articulo,$conexion){
@@ -241,6 +270,18 @@ function histdelete($usuario,$realizo,$id_reclamo,$folio,$conexion){
     }
 }
 
+
+//funcion para registra cambios
+function histuprep($usuario,$realizo,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario','$realizo', 'FOLIO :' ' $folio','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 //funcion para cerrar laa conexion
 function cerrar($conexion){

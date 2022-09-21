@@ -246,7 +246,7 @@
                                 <br>
                             </div><!-- row -->
                             <div class="modal-footer">
-                                <button type="button" onclick="savevpcabe()" id="saveinfvp" style="display:none;"
+                                <button type="button" onclick="savevpcabe()" id="savehadearrep" style="display:none;"
                                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
                                     CAMBIOS</button>
                                 <br>
@@ -275,10 +275,11 @@
                             </div><!-- alert -->
                             <div>
                                 <button type="button" data-toggle='modal'
-                                    style="display:none; background-color: #009C28;" data-target='#modal-addartvpinfo'
-                                    onclick="" id="vpaddartinf"
+                                    style="display:none; background-color: #009C28;" data-target='#modal-addartrpinfo'
+                                    onclick="" id="repaddartinf"
                                     class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i
                                         class="fa fa-plus"></i> AGREGAR ARTICULO</button>
+                                
                             </div>
                             <h4 style="text-align:center">Articulos Relacionados</h4>
                             <div class="col-lg-20">
@@ -326,11 +327,11 @@
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
                                 <div style="display:none;" name="repconclu" id="repconclu"></div>
-                                
+
                                 <div class="col-lg-12">
-                                <button onclick="edithrep()" id="saverepoinf" name="saverepoinf"
-                                    title="Dar clic para editar" type="button" style="float:right"
-                                    class="col-lg-3 btn btn-info btn btn-info">Guardar</button>
+                                    <button onclick="saveupdatereport()" id="saverepoinf" name="saverepoinf"
+                                        title="Dar clic para editar" type="button" style="float:right; display:none"
+                                        class="col-lg-2 btn btn-info btn btn-info">Guardar</button>
                                     <br>
                                     <div class="form-group">
                                         <br>

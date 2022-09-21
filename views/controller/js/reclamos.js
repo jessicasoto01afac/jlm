@@ -923,6 +923,9 @@ function editreportinf() {
     $("#infpedfac").removeAttr("readonly");
     document.getElementById('closedrcliet').style.display = '';
     document.getElementById('openedipcliinf').style.display = 'none';
+    document.getElementById('savehadearrep').style.display = '';
+    document.getElementById('repaddartinf').style.display = '';
+
 }
 
 function closereporinf() {
@@ -937,4 +940,121 @@ function closereporinf() {
     $("#infpedfac").attr("readonly", "readonly");;
     document.getElementById('closedrcliet').style.display = 'none';
     document.getElementById('openedipcliinf').style.display = '';
+    document.getElementById('savehadearrep').style.display = 'none';
+    document.getElementById('repaddartinf').style.display = 'none';
+
+}
+
+function saveupdatereport() {
+    //alert("pruebas");
+    let folio = document.getElementById('folioreclie').value;
+    let rep_cliente = document.getElementById('repcliente').innerText;
+    let code_cliente = $('#clientenote').summernote('code'); //CODIGO CLIENTE (tomar el codigo para la base de datos)
+    let rep_jlm = document.getElementById('repjlm').innerText; //REPORTE JLM (Tomamos el texto para la base de datos )
+    let code_jlm = $('#jlmnote').summernote('code'); //CODIGO JLM (tomar el codigo para la base de datos)
+    let seguimiento = document.getElementById('repseguimiento').innerText; //REPORTE seguimiento (Tomamos el texto para la base de datos )
+    let code_seguimiento = $('#seguimientonote').summernote('code'); //CODIGO seguimiento (tomar el codigo para la base de datos)
+    let conclusion = document.getElementById('repconclu').innerText; //REPORTE conclusion (Tomamos el texto para la base de datos )
+    let code_conclucion = $('#conclicionnote').summernote('code'); //CODIGO conclusion (tomar el codigo para la base de datos)
+    let datos = 'folio=' + folio + '&rep_cliente=' + rep_cliente + '&code_cliente=' + code_cliente + '&rep_jlm=' + rep_jlm + '&code_jlm=' + code_jlm + '&seguimiento=' + seguimiento + '&code_seguimiento=' + code_seguimiento + '&conclusion=' + conclusion + '&code_conclucion=' + code_conclucion + '&opcion=updatesavereport';
+    //alert(datos);
+    if (folio == '') {
+        Swal.fire({
+            type: 'info',
+            text: 'LLENAR LOS CAMPOS OBLIGOTARIOS',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertreclamo.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se agrega de fora correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                closeedithrep();
+            } else if (respuesta == 2) {
+                Swal.fire({
+                    type: 'warning',
+                    text: 'LLENAR LOS CAMPOS OBLIGOTARIOS',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                //alert(respuesta);
+            } else {
+                Swal.fire({
+                    type: 'danger',
+                    text: 'No se puedo guardar coontactar a soporte tecnico o levantar un ticke',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                //alert(respuesta);
+            }
+        });
+    }
+}
+
+function savehadearrep() {
+
+    let folio = document.getElementById('folioreclie').value; //FOLIO    
+    let fecha_recl = document.getElementById('infrepdate').value; //FECHA
+    let tipo_reporte = document.getElementById('infreptipo').value; //TIPO DE REPORTE
+    let tipo_incidencia = document.getElementById('infrepincid').value; //TIPO DE INCIDENCIA
+    let remision = document.getElementById('infpedremisi').value; //REMISION
+    let factura = document.getElementById('infpedfac').value; //FACTURA
+    let dep_responsa = document.getElementById('infrepacred').value;
+    let estatus = document.getElementById('infrpestatus').value; //CODIGO CLIENTE
+    let pedido = document.getElementById('infvppedidos').value; //CODIGO CLIENTE
+
+    let datos = 'folio=' + folio + '&fecha_recl=' + fecha_recl + '&tipo_reporte=' + tipo_reporte + '&tipo_incidencia=' + tipo_incidencia + '&remision=' + remision + '&factura=' + factura + '&estatus=' + estatus + '&dep_responsa=' + dep_responsa + '&pedido=' + pedido + '&opcion=svrepheader';
+    //alert(datos);
+    if (folio == '') {
+        Swal.fire({
+            type: 'info',
+            text: 'LLENAR LOS CAMPOS OBLIGOTARIOS',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertreclamo.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se agrega de fora correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                closeedithrep();
+            } else if (respuesta == 2) {
+                Swal.fire({
+                    type: 'warning',
+                    text: 'LLENAR LOS CAMPOS OBLIGOTARIOS',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                //alert(respuesta);
+            } else {
+                Swal.fire({
+                    type: 'danger',
+                    text: 'No se puedo guardar coontactar a soporte tecnico o levantar un ticke',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                //alert(respuesta);
+            }
+        });
+    }
+
 }
