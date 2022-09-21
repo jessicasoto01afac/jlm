@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+<?php include ("../../controller/conexion.php");
+    
+$sql = "SELECT codigo_clie,nombre FROM clientes WHERE estado = 0";
+$cliente = mysqli_query($conexion,$sql);
+
+?>
 
 <head>
     <!-- Required meta tags -->
@@ -181,10 +187,18 @@
 
                                 <div class="col-md-8">
                                     <div class="form-group bd-t-0-force">
-                                        <label class="form-control-label" style="font-size:14px">CLIENTE: <span
+                                    <label class="form-control-label" style="font-size:14px">CLIENTE: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly id="infrepxlientes" name="infrepxlientes"
-                                            type="text" name="address" placeholder="FORMULA">
+                                        <!-- <input class="form-control" readonly type="text" name="infclinte" id="infclinte"
+                                            value="" placeholder="Enter address" style="font-size:16px"> -->
+                                        <select disabled class="form-control" name="infrepxlientes" id="infrepxlientes" 
+                                            style="font-size:16px" data-placeholder="Choose country">
+                                            <option label="">Selecciona</option>
+                                            <?php while($clie = mysqli_fetch_row($cliente)):?>
+                                            <option value="<?php echo $clie[0]?>"><?php echo $clie[1]?></option>
+                                            <?php endwhile; ?>
+
+                                        </select>
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-4 mg-t--1 mg-md-t-0">
@@ -246,26 +260,26 @@
                                 <br>
                             </div><!-- row -->
                             <div class="modal-footer">
-                                <button type="button" onclick="savevpcabe()" id="savehadearrep" style="display:none;"
+                                <button type="button" onclick="saverepcabe()" id="savehadearrep" style="display:none;"
                                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
                                     CAMBIOS</button>
                                 <br>
                             </div>
-                            <div style="display:none;" id="edthvpexi" name="edthvpexi" class="alert alert-warning"
+                            <div style="display:none;" id="edthrepexi" name="edthrepexi" class="alert alert-warning"
                                 role="alert">
                                 <div class="d-flex align-items-center justify-content-start">
                                     <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                                     <span><strong>Advertencia!</strong> El resgistro ya existe</span>
                                 </div><!-- d-flex -->
                             </div><!-- alert -->
-                            <div style="display:none;" id="edthvpivacios" name="edthvpivacios" class="alert alert-info"
+                            <div style="display:none;" id="edthrepvacios" name="edthrepvacios" class="alert alert-info"
                                 role="alert">
                                 <div class="d-flex align-items-center justify-content-start">
                                     <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                                     <span><strong>Advertencia!</strong> Llenar todos los campos</span>
                                 </div><!-- d-flex -->
                             </div><!-- alert -->
-                            <div style="display:none;" id="edthvpierror" name="edthvpierror" class="alert alert-danger"
+                            <div style="display:none;" id="edthreierror" name="edthreierror" class="alert alert-danger"
                                 role="alert">
                                 <div class="d-flex align-items-center justify-content-start">
                                     <i class="icon ion-ios-close alert-icon tx-24"></i>

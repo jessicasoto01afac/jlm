@@ -636,7 +636,7 @@ function reclamocliente(id_reclaclient) {
                 document.getElementById('infvppedidos').value = obj.data[D].pedido;
                 document.getElementById('infpedremisi').value = obj.data[D].remision;
                 document.getElementById('infpedfac').value = obj.data[D].factura;
-                document.getElementById('infrepxlientes').value = obj.data[D].nombre;
+                document.getElementById('infrepxlientes').value = obj.data[D].codigo_cliente;
                 document.getElementById('infrepacred').value = obj.data[D].dep_responsa;
                 document.getElementById('infrepformul').value = obj.data[D].usunom + " " + obj.data[D].usuapell;
                 document.getElementById('infrpestatus').value = obj.data[D].estatus_recl;
@@ -925,6 +925,7 @@ function editreportinf() {
     document.getElementById('openedipcliinf').style.display = 'none';
     document.getElementById('savehadearrep').style.display = '';
     document.getElementById('repaddartinf').style.display = '';
+    document.getElementById('infrepxlientes').disabled = false;
 
 }
 
@@ -942,6 +943,7 @@ function closereporinf() {
     document.getElementById('openedipcliinf').style.display = '';
     document.getElementById('savehadearrep').style.display = 'none';
     document.getElementById('repaddartinf').style.display = 'none';
+    document.getElementById('infrepxlientes').disabled = true;
 
 }
 
@@ -1056,5 +1058,80 @@ function savehadearrep() {
             }
         });
     }
+}
 
+//FUNCION QUE GUARDA LA EDICIÓN DE LA CABECERA DEL VALE DE PRODCCIÓN EN VISTA PREVIA 
+function saverepcabe() {
+    let folio = document.getElementById('folioreclie').value; //FOLIO
+    let fecha_recl = document.getElementById('infrepdate').value; //FECHA
+    let tipo_reporte = document.getElementById('infreptipo').value; //TIPO DE REPORTE
+    let tipo_incidencia = document.getElementById('infrepincid').value; //TIPO DE INCIDENCIA
+    let pedido = document.getElementById('infvppedidos').value; //PEDIDO
+    let remision = document.getElementById('infpedremisi').value; //REMISION
+    let factura = document.getElementById('infpedfac').value; //FACTURA
+    let code_cliente = document.getElementById('infrepxlientes').value; //CLIENTES
+    let dep_responsa = document.getElementById('infrepacred').value; //DEPARTAMENTO RESPONSABLE
+    let estatus_recl = document.getElementById('infrpestatus').value; //ESTATUS RECLAMO
+    let datos = 'folio=' + folio + '&fecha_recl=' + fecha_recl + '&tipo_reporte=' + tipo_reporte + '&tipo_incidencia=' + tipo_incidencia + '&pedido=' + pedido + '&remision=' + remision + '&factura=' + factura + '&code_cliente=' + code_cliente + '&dep_responsa=' + dep_responsa + '&estatus_recl=' + estatus_recl + '&opcion=cambioheader';
+    //alert(datos);
+    if (fecha_recl == '' || tipo_reporte == '' || tipo_incidencia == '' || code_cliente == '' || estatus_recl == '') {
+        document.getElementById('edthrepvacios').style.display = '';
+        setTimeout(function() {
+            document.getElementById('edthrepvacios').style.display = 'none';
+        }, 2000);
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertreclamo.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se actualizo de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                closereporinf();
+            } else if (respuesta == 2) {
+                document.getElementById('edthrepexi').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthrepexi').style.display = 'none';
+                }, 1000);
+                //alert("datos repetidos");
+            } else {
+                document.getElementById('edthreierror').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthreierror').style.display = 'none';
+                }, 2000);
+                //alert(respuesta);
+            }
+        });
+    }
+}
+
+//AGEGAR ARTICULO INDIVIDUAL EN AGRGAR ARTICULO
+function indivudualinf() {
+    //alert("eentraarticulo")
+    $.ajax({
+        url: '../controller/php/conarticulos.php',
+        type: 'POST'
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (D = 0; D < res.length; D++) {
+            if (obj.data[D].artcodigo == document.getElementById('codindivinf').value) {
+                // alert(id_persona);
+                datos =
+                    obj.data[D].artcodigo + '*' +
+                    obj.data[D].artdescrip + '*' +
+                    obj.data[D].artubicac;
+                var o = datos.split("*");
+                $("#vindescripinf").val(o[1]);
+                $("#vindeparinnf").val(o[2]);
+            }
+        }
+    });
 }

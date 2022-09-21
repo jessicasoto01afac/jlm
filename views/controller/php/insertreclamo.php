@@ -104,7 +104,7 @@ if(!isset($usuario)){
         }else{
             echo "1";
         }
-    //elimina vales de producción 
+    //ACTUALIZA LOS REPORTES
     }else if($opcion === 'updatesavereport'){
         $folio = $_POST['folio'];
         $rep_cliente=$_POST['rep_cliente'];
@@ -123,7 +123,27 @@ if(!isset($usuario)){
         }else{
             echo "1";
         }
-    //elimina vales de producción updatesavereport
+    //ACTUALIZA EL HEADER DEL REPORTE  
+    }else if($opcion === 'cambioheader'){
+        $folio = $_POST['folio'];
+        $fecha_recl=$_POST['fecha_recl'];
+        $tipo_reporte=$_POST['tipo_reporte'];
+        $tipo_incidencia=$_POST['tipo_incidencia'];
+        $pedido=$_POST['pedido'];
+        $remision=$_POST['remision'];
+        $factura=$_POST['factura'];
+        $code_cliente=$_POST['code_cliente'];
+        $dep_responsa=$_POST['dep_responsa'];
+        $estatus_recl=$_POST['estatus_recl'];
+        if (updaheaderrep($folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$pedido,$remision,$factura,$code_cliente,$dep_responsa,$estatus_recl,$conexion)){
+            echo "0";
+            $realizo = 'ACTUALIZA LOS DATOS DEL REPORTE';
+            // $usuario='pruebas';
+            histuprep($usuario,$realizo,$folio,$conexion);
+        }else{
+            echo "1";
+        }
+    //elimina vales de producción cambioheader  
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -214,7 +234,7 @@ function eliminar ($id_reclamo,$conexion){
     }
     cerrar($conexion);
 }
-//funcion para actualizar aticulo de memo en vista previa
+//funcion para actualizar los reportes
 function updatereports ($folio,$rep_cliente,$code_cliente,$rep_jlm,$code_jlm,$seguimiento,$code_seguimiento,$conclusion,$code_conclucion,$conexion){
     $query="UPDATE reclamoclient SET rep_cliente='$rep_cliente', code_cliente='$code_cliente',rep_jlm='$rep_jlm',code_jlm='$code_jlm',seguimiento='$seguimiento',code_seguimiento='$code_seguimiento',conclusion='$conclusion',code_conclucion='$code_conclucion' WHERE folio_recl = '$folio'";
     if(mysqli_query($conexion,$query)){
@@ -224,6 +244,17 @@ function updatereports ($folio,$rep_cliente,$code_cliente,$rep_jlm,$code_jlm,$se
     }
     cerrar($conexion);
 }
+//funcion para actualizar la cabecera de reporte
+function updaheaderrep ($folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$pedido,$remision,$factura,$code_cliente,$dep_responsa,$estatus_recl,$conexion){
+    $query="UPDATE reclamoclient SET fecha_recl='$fecha_recl', tipo_reporte='$tipo_reporte',tipo_incidencia='$tipo_incidencia',pedido='$pedido',remision='$remision',factura='$factura',code_cliente='$code_cliente',dep_responsa='$dep_responsa', estatus_recl='$estatus_recl' WHERE folio_recl = '$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
 function historial($usuario,$folio,$id_articulo,$conexion){
