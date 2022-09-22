@@ -977,7 +977,7 @@ function saveupdatereport() {
             if (respuesta == 0) {
                 Swal.fire({
                     type: 'success',
-                    text: 'Se agrega de fora correcta',
+                    text: 'Se actualiza de forma correcta',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -1111,27 +1111,108 @@ function saverepcabe() {
     }
 }
 
-//AGEGAR ARTICULO INDIVIDUAL EN AGRGAR ARTICULO
-function indivudualinf() {
-    //alert("eentraarticulo")
-    $.ajax({
-        url: '../controller/php/conarticulos.php',
-        type: 'POST'
-    }).done(function(respuesta) {
-        obj = JSON.parse(respuesta);
-        var res = obj.data;
-        var x = 0;
-        for (D = 0; D < res.length; D++) {
-            if (obj.data[D].artcodigo == document.getElementById('codindivinf').value) {
-                // alert(id_persona);
-                datos =
-                    obj.data[D].artcodigo + '*' +
-                    obj.data[D].artdescrip + '*' +
-                    obj.data[D].artubicac;
-                var o = datos.split("*");
-                $("#vindescripinf").val(o[1]);
-                $("#vindeparinnf").val(o[2]);
+//FUNCIONES PARA GUARDAR ARTICULOS DE REPORTE DE CLIENTE EN VISTA
+function editaddreport() {
+    //alert("entro reclamo");
+    //Datos para inserttar en al atabla de reclamoclient
+    let folio = document.getElementById('folioreclie').value; //FOLIO  
+    let tipo_incidencia = document.getElementById('infrepincid').value;
+    let tipo_reporte = document.getElementById('infreptipo').value;
+    let id_articulo = document.getElementById('codindivinf').value; //cantida
+    let cantidad = document.getElementById('vincantidinf').value;
+    let observ_recl = document.getElementById('vpinfbsertrass').value;
+    //datos para validad agregar
+    let fecha_recl = document.getElementById('infrepdate').value;
+    let remision = document.getElementById('infpedremisi').value;
+    let factura = document.getElementById('infpedfac').value;
+    let cliente = document.getElementById('infrepxlientes').value;
+
+    let datos = 'folio=' + folio + '&tipo_incidencia=' + tipo_incidencia + '&tipo_reporte=' + tipo_reporte + '&cantidad=' + cantidad + '&id_articulo=' + id_articulo + '&observ_recl=' + observ_recl + '&opcion=registrar';
+    //alert(datos);
+    if (folio == '' || fecha_recl == '' || cliente == '' || factura == '' || remision == '' || id_articulo == '0' || cantidad == '') {
+        document.getElementById('addrepinflle').style.display = '';
+        setTimeout(function() {
+            document.getElementById('addrepinflle').style.display = 'none';
+        }, 2000);
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertreclamo.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se agrego el articulo de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                document.getElementById('codindivinf').value = '';
+                document.getElementById('vincantidinf').value = '';
+                document.getElementById('vindescripinf').value = '';
+                document.getElementById('vindeparinnf').value = '';
+                document.getElementById('vpinfbsertrass').value = '';
+                updatearticul2(); //llama a la función para actualizar la tabla
+            } else if (respuesta == 2) {
+                document.getElementById('addrepinfrep').style.display = ''
+                setTimeout(function() {
+                    document.getElementById('addrepinfrep').style.display = 'none';
+                }, 1000);
+                //alert("datos repetidos");
+            } else {
+                document.getElementById('addrepoinerr').style.display = ''
+                setTimeout(function() {
+                    document.getElementById('addrepoinerr').style.display = 'none';
+                }, 1000);
             }
-        }
-    });
+        })
+    }
+}
+//FUNCIÓN DE FINALIZAR
+function finalizarep() {
+    //alert("entra memo");
+    let status = 'FINALIZADO';
+    let folio = document.getElementById('folioreclie').value; //FOLIO DEL MEMO
+    let datos = 'folio=' + folio + '&opcion=finalrep'; //finalped
+    //alert(datos);
+    if (folio == '') {
+        Swal.fire({
+            type: 'warning',
+            text: 'Ingresar el folio',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertreclamo.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se FINALIZO de forma correcta',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                setTimeout("location.href = 'rec_rech_clientes.php';", 1500);
+            } else if (respuesta == 2) {
+                Swal.fire({
+                    type: 'warning',
+                    text: 'ya esta duplicado',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    text: 'Error contactar a soporte tecnico o levantar un ticket',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    }
 }

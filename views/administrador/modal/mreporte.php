@@ -332,7 +332,7 @@
     </div><!-- modal-dialog -->
 </div><!-- modal -->
 
-<!-- MODAL PARA AGREGAR ARTICULO INDIVIDUAL EN VALE DE PRODUCCIÓN DETALLES-->
+<!-- MODAL PARA AGREGAR ARTICULO INDIVIDUAL EN REPORTE  DETALLES-->
 <div class="modal fade" id='modal-addartrpinfo'>
     <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
         <div class="modal-content bd-5">
@@ -395,20 +395,20 @@
                     </div><!-- col-4 -->
                 </div>
             </form>
-            <div style="display:none;" id="edthvinbli1inf" name="edthvinbli1inf" class="alert alert-warning"
+            <div style="display:none;" id="addrepinfrep" name="addrepinfrep" class="alert alert-warning"
                 role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                     <span><strong>Advertencia!</strong> El resgistro ya existe</span>
                 </div><!-- d-flex -->
             </div><!-- alert -->
-            <div style="display:none;" id="edthinfvcp" name="edthinfvcp" class="alert alert-info" role="alert">
+            <div style="display:none;" id="addrepinflle" name="addrepinflle" class="alert alert-info" role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                     <span><strong>Advertencia!</strong> Llenar todos los campos</span>
                 </div><!-- d-flex -->
             </div><!-- alert -->
-            <div style="display:none;" id="edthvinperr1inf" name="edthvinperr1inf" class="alert alert-danger"
+            <div style="display:none;" id="addrepoinerr" name="addrepoinerr" class="alert alert-danger"
                 role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-close alert-icon tx-24"></i>
@@ -417,7 +417,7 @@
                 </div><!-- d-flex -->
             </div><!-- alert -->
             <div class="modal-footer">
-                <button style="display:;" type="button" onclick="addarinproinfo()" id="addarinpro2" name="addarinpro2"
+                <button style="display:;" type="button" onclick="editaddreport()" id="addarinpro2" name="addarinpro2"
                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">AGREGAR</button>
             </div>
         </div>

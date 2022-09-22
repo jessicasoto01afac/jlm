@@ -251,7 +251,7 @@ $cliente = mysqli_query($conexion,$sql);
                                                 name="btnrclitliberar" type="button" style="display:none;"
                                                 onclick="liberarm()" class="btn btn-dark pd-x-25">Liberar</button>
                                             <button id="btnrclitfinaliz" name="btnrclitfinaliz" type="button"
-                                                style="display:none;" onclick="finalizarvp()"
+                                                style="display:none;" onclick="finalizarep()"
                                                 class="btn btn-success pd-x-25">Finalizar</button>
                                         </div>
 

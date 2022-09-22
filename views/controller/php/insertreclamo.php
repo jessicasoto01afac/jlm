@@ -144,6 +144,15 @@ if(!isset($usuario)){
             echo "1";
         }
     //elimina vales de producción cambioheader  
+    }else if($opcion === 'finalrep'){
+        $folio = $_POST['folio'];
+            if (finalizar1($folio,$conexion)){
+                echo "0";
+                histfinal($usuario,$folio,$conexion);
+            }else{
+                echo "1";
+            }
+    //Actualiza la informacion de no surtir extendido y etiqueta
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -254,6 +263,17 @@ function updaheaderrep ($folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$pedid
     }
     cerrar($conexion);
 }
+//FINALIZA+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//funcion para finalizar
+function finalizar1 ($folio,$conexion){
+    $query="UPDATE reclamoclient SET estatus_recl='FINALIZADO' WHERE folio_recl = '$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
@@ -307,6 +327,17 @@ function histuprep($usuario,$realizo,$folio,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario','$realizo', 'FOLIO :' ' $folio','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funciones para guardar el historico FINALIZAR
+function histfinal($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'FINALIZA EL REPORTE DE CLIENTE', 'FOLIO:' '$folio','$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
