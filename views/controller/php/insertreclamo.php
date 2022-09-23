@@ -153,6 +153,24 @@ if(!isset($usuario)){
                 echo "1";
             }
     //Actualiza la informacion de no surtir extendido y etiqueta
+    }else if($opcion === 'liberarrep'){
+        $folio = $_POST['folio'];
+            if (liberar ($folio,$conexion)){
+                echo "0";
+                //$usuario='PRUEBAS';
+                hisliber($usuario,$folio,$conexion); 
+            }else{
+                echo "1";
+            }
+    }else if($opcion === 'deleterpcli'){
+        $folio = $_POST['folio'];
+            if (deleterepcl ($folio,$conexion)){
+                echo "0";
+                //$usuario='PRUEBAS';
+                histrecldete($usuario,$folio,$conexion); 
+            }else{
+                echo "1";
+            }
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -263,10 +281,29 @@ function updaheaderrep ($folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$pedid
     }
     cerrar($conexion);
 }
-//FINALIZA+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //funcion para finalizar
 function finalizar1 ($folio,$conexion){
     $query="UPDATE reclamoclient SET estatus_recl='FINALIZADO' WHERE folio_recl = '$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para liberar
+function liberar ($folio,$conexion){
+    $query="UPDATE reclamoclient SET estatus_recl='PENDIENTE' WHERE folio_recl = '$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para liberar
+function deleterepcl ($folio,$conexion){
+    $query="UPDATE reclamoclient SET estado='1' WHERE folio_recl = '$folio'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -344,6 +381,29 @@ function histfinal($usuario,$folio,$conexion){
         return false;
     }
 }
+//funciones para guardar el historico liberar
+function hisliber($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'LIBERA REPORTE DE CLIENTE', 'FOLIO:' '$folio','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funciones para guardar el historico liberar
+function histrecldete($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'ELIMINA UN REPORTE DE CLIENTE', 'FOLIO:' '$folio','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 
 //funcion para cerrar laa conexion
 function cerrar($conexion){

@@ -1110,7 +1110,70 @@ function saverepcabe() {
         });
     }
 }
+//FUNCIONES PARA ACTUALIZAR LA TABLA DE ARTICULOS EN INFO REPORTE
+function updatearticul3() {
+    let folio = document.getElementById('folreport').innerHTML; //FOLIO 
+    //INFORMACIÓN 
+    $.ajax({
+        url: '../controller/php/inforeportes.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        let res = obj.data;
+        let x = 0;
+        for (D = 0; D < res.length; D++) {
+            if (obj.data[D].folio_recl == folio) {
+                //PENDIENTE-----------------------------------------------------------------------------------------------
+                if (obj.data[D].estatus_recl == 'PENDIENTE') {
+                    $.ajax({
+                            url: '../controller/php/articurep.php',
+                            type: 'GET',
+                            data: 'folio=' + folio
+                        }).done(function(resp) {
+                            obj = JSON.parse(resp);
+                            let res = obj.data;
+                            let x = 0;
+                            html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="datareclamo" name="datareclamo" class="table display dataTable"><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>SALIDA</th><th><i></i>OBSERVACIONES</th><th style="width:100px;"><i></i>ACCIONES</th></tr></thead><tbody>';
+                            for (U = 0; U < res.length; U++) {
+                                if (obj.data[U].folio == folio && obj.data[U].tipo == 'CLIENTE') {
+                                    x++;
+                                    $id_reclamo = obj.data[U].id_reclamo;
+                                    html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observ_recl + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editararclienalt2(" + $id_reclamo + ");' class='nav-link' data-toggle='modal' data-target='#modal-editararclalta2'>Editar</a> <a onclick='delartaltpedart2(" + $id_reclamo + ");' class='nav-link' data-toggle='modal' data-target='#modal-deleteartal2'>Eliminar</a>" + "</td></tr>";
+                                }
+                            }
+                            html += '</div></tbody></table></div>';
+                            $("#listarticlien").html(html);
+                            'use strict';
 
+                        })
+                        //FINALIZADO 19092022 -----------------------------------------------------------------------------------------------------------
+                } else if (obj.data[D].estatus_recl == 'FINALIZADO') {
+                    $.ajax({
+                        url: '../controller/php/articurep.php',
+                        type: 'GET',
+                        data: 'folio=' + folio
+                    }).done(function(resp) {
+                        obj = JSON.parse(resp);
+                        let res = obj.data;
+                        let x = 0;
+                        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="datareclamo" name="datareclamo" class="table display dataTable"><thead class="thead-colored thead-info"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>SALIDA</th><th><i></i>OBSERVACIONES</th></tr></thead><tbody>';
+                        for (U = 0; U < res.length; U++) {
+                            if (obj.data[U].folio == folio && obj.data[U].tipo == 'CLIENTE') {
+                                x++;
+                                $id_reclamo = obj.data[U].id_reclamo;
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observ_recl + "</td></tr>";
+                            }
+                        }
+                        html += '</div></tbody></table></div>';
+                        $("#listarticlien").html(html);
+                        'use strict';
+                    })
+                }
+            }
+        }
+    });
+}
 //FUNCIONES PARA GUARDAR ARTICULOS DE REPORTE DE CLIENTE EN VISTA
 function editaddreport() {
     //alert("entro reclamo");
@@ -1126,7 +1189,6 @@ function editaddreport() {
     let remision = document.getElementById('infpedremisi').value;
     let factura = document.getElementById('infpedfac').value;
     let cliente = document.getElementById('infrepxlientes').value;
-
     let datos = 'folio=' + folio + '&tipo_incidencia=' + tipo_incidencia + '&tipo_reporte=' + tipo_reporte + '&cantidad=' + cantidad + '&id_articulo=' + id_articulo + '&observ_recl=' + observ_recl + '&opcion=registrar';
     //alert(datos);
     if (folio == '' || fecha_recl == '' || cliente == '' || factura == '' || remision == '' || id_articulo == '0' || cantidad == '') {
@@ -1153,7 +1215,7 @@ function editaddreport() {
                 document.getElementById('vindescripinf').value = '';
                 document.getElementById('vindeparinnf').value = '';
                 document.getElementById('vpinfbsertrass').value = '';
-                updatearticul2(); //llama a la función para actualizar la tabla
+                updatearticul3(); //llama a la función para actualizar la tabla
             } else if (respuesta == 2) {
                 document.getElementById('addrepinfrep').style.display = ''
                 setTimeout(function() {
@@ -1215,4 +1277,152 @@ function finalizarep() {
             }
         });
     }
+}
+//FUNCION PARA LLAMAR LA DESCRIPCION Y DEPARTAMENTO EN ADD INDIVIDIAL INFO REPORTE
+function indivudualinf() {
+    //alert("eentraarticulo")
+    $.ajax({
+        url: '../controller/php/conarticulos.php',
+        type: 'POST'
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (D = 0; D < res.length; D++) {
+            if (obj.data[D].artcodigo == document.getElementById('codindivinf').value) {
+                // alert(id_persona);
+                datos =
+                    obj.data[D].artcodigo + '*' +
+                    obj.data[D].artdescrip + '*' +
+                    obj.data[D].artubicac;
+                var o = datos.split("*");
+                $("#vindescripinf").val(o[1]);
+                $("#vindeparinnf").val(o[2]);
+            }
+        }
+    });
+}
+//FUNCIÓN DE FINALIZAR
+function liverarreprt() {
+    //alert("memos"); 
+    var folio = document.getElementById('folioreclie').value;
+    var datos = 'folio=' + folio + '&opcion=liberarrep';
+    //alert(datos);
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertreclamo.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'SE LIBERO FORMA CORRECTA',
+                showConfirmButton: false,
+                timer: 2500
+            });
+            setTimeout("location.href = 'rec_rech_clientes.php';", 1500);
+        } else {
+            Swal.fire({
+                type: 'error',
+                text: 'Error contactar a soporte tecnico o levantar un ticket',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+    });
+}
+//LLAMA EL FOLIO 
+function delerepcl(foliorp) {
+    //alert(foliorp);
+    document.getElementById('del_reportclien').value = foliorp;
+    document.getElementById('delrepclient').value = foliorp;
+}
+//GUARDAR LA ELIMINACION DE VALE DE PRODUCCIÓN
+function savedelrec() {
+    //alert("entro guardar eliminar");
+    let folio = document.getElementById('del_reportclien').value;
+    let datos = 'folio=' + folio + '&opcion=deleterpcli';
+    //alert(datos);
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertreclamo.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'Se elimino de forma correcta',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setTimeout("location.href = 'rec_rech_clientes.php';", 1500);
+        } else {
+            document.getElementById('delerpclierr').style.display = '';
+            setTimeout(function() {
+                document.getElementById('delerpclierr').style.display = 'none';
+            }, 2000);
+        }
+    });
+}
+
+function histvalepro() {
+    let folio = document.getElementById('folioreclie').value;
+    let folio2 = "FOLIO:" + folio;
+    //alert(folio);
+    //Tabla de historial del vale de producción
+    $.ajax({
+        url: '../controller/php/hisvaleprod.php',
+        type: 'POST',
+        data: 'folio=' + folio2
+    }).done(function(resp) {
+        obj = JSON.parse(resp);
+        var res = obj.data;
+        var x = 0;
+        //alert("folio");
+        html = '<div class="table-responsive"><table style="width:100%" id="hisvalevp" name="hisvalevp" class="table display dataTable no-footer"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>Usuario</th><th><i></i>Acción</th><th><i></i>Registro</th><th><i></i>fecha</th></tr></thead><tbody>';
+        for (U = 0; U < res.length; U++) {
+            x++;
+            html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_usu + "</td><td>" + obj.data[U].proceso + "</td><td>" + obj.data[U].registro + "</td><td>" + obj.data[U].fecha + "</td></tr>";
+        }
+        html += '</div></tbody></table></div></div>';
+        $("#tabhisto").html(html);
+    });
+    //Historial del vale en productividad
+    $.ajax({
+        url: '../controller/php/productiv.php',
+        type: 'POST',
+        data: 'folio=' + folio
+    }).done(function(resp) {
+        obj = JSON.parse(resp);
+        var res = obj.data;
+        var x = 0;
+        //alert("folio");
+        for (D = 0; D < res.length; D++) {
+            document.getElementById('fcreacion').innerHTML = obj.data[D].fecha_creacion1;
+            document.getElementById('fautoriz').innerHTML = obj.data[D].fecha_autorizacion1;
+            document.getElementById('fsurtido').innerHTML = obj.data[D].fecha_surtido1;
+            document.getElementById('ffinaliz').innerHTML = obj.data[D].fecha_finalizacion1;
+            //DIAS
+            if (obj.data[D].dias_totales > 0) {
+                document.getElementById('dias1').innerHTML = obj.data[D].dias_autorizacion + " dias Creación/Autorización";
+                document.getElementById('dias2').innerHTML = obj.data[D].dias_asurtdo + " dias Autorización/Surtido";
+                document.getElementById('dias3').innerHTML = obj.data[D].dias_totales + " dias trascurridos para finalización ";
+            }
+            if (obj.data[D].dias_totales == null) {
+                document.getElementById('dias1').innerHTML = obj.data[D].dias_autorizacion + " dias Creación/Autorización";
+                document.getElementById('dias2').innerHTML = obj.data[D].dias_asurtdo + " dias Autorización/Surtido";
+                document.getElementById('dias3').innerHTML = "Sin finalizar";
+            }
+            if (obj.data[D].dias_asurtdo == null) {
+                document.getElementById('dias1').innerHTML = obj.data[D].dias_autorizacion + " dias Creación/Autorización";
+                document.getElementById('dias2').innerHTML = "Sin surtir";
+                document.getElementById('dias3').innerHTML = "Sin finalizar";
+            }
+            if (obj.data[D].dias_autorizacion == null) {
+                document.getElementById('dias1').innerHTML = "Sin autorizar";
+                document.getElementById('dias2').innerHTML = "Sin surtir";
+                document.getElementById('dias3').innerHTML = "Sin finalizar";
+            }
+        }
+    });
 }

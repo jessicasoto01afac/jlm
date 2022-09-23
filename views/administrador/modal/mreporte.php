@@ -283,7 +283,8 @@
                     <span><strong>Advertencia!</strong> El resgistro ya existe</span>
                 </div><!-- d-flex -->
             </div><!-- alert -->
-            <div style="display:none;" id="edthclieciosal2" name="edthclieciosal2" class="alert alert-info" role="alert">
+            <div style="display:none;" id="edthclieciosal2" name="edthclieciosal2" class="alert alert-info"
+                role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                     <span><strong>Advertencia!</strong> Llenar todos los campos</span>
@@ -395,8 +396,7 @@
                     </div><!-- col-4 -->
                 </div>
             </form>
-            <div style="display:none;" id="addrepinfrep" name="addrepinfrep" class="alert alert-warning"
-                role="alert">
+            <div style="display:none;" id="addrepinfrep" name="addrepinfrep" class="alert alert-warning" role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                     <span><strong>Advertencia!</strong> El resgistro ya existe</span>
@@ -408,8 +408,7 @@
                     <span><strong>Advertencia!</strong> Llenar todos los campos</span>
                 </div><!-- d-flex -->
             </div><!-- alert -->
-            <div style="display:none;" id="addrepoinerr" name="addrepoinerr" class="alert alert-danger"
-                role="alert">
+            <div style="display:none;" id="addrepoinerr" name="addrepoinerr" class="alert alert-danger" role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-close alert-icon tx-24"></i>
                     <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
@@ -422,4 +421,91 @@
             </div>
         </div>
     </div><!-- modal-dialog -->
+</div><!-- modal -->
+<!-- MODAL PARA ELIMINAR REPORTE DE CLIENTE-->
+<div class="modal fade" id='modal-delreprclient'>
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content bd-0">
+            <div class="modal-header pd-x-20">
+                <h4 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ELIMINAR</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pd-20">
+                <p class="mg-b-5">ESTAS SEGURO DE ELIMINAR EL REPORTE DE CLIENTE?</p>
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text"
+                    name="del_reportclien" id="del_reportclien">
+                <input disabled="" style="text-align:center" class="form-control inputalta" type="text"
+                    name="delrepclient" id="delrepclient">
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" onclick="savedelrec()"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
+                <br>
+
+            </div>
+            <div style="display:none;" id="delerpclierr" name="delerpclierr" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+<!-- MODAL PARA HISTORIAL-->
+<div class="modal fade" id='modal-rphistorial'>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">VISTA DE HISTORIAL</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body pd-25">
+                <div class="col-12">
+                    <div class="card bd-0 pd-30">
+                        <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Historial</h6>
+                        <p id="" name="" class="mg-b-0"><span
+                                class="square-8 rounded-circle bg-primary mg-r-10"></span>Fecha de creación:<label
+                                id="fcreacion" name="fcreacion" for=""></label></p>
+                        <p id="" name="" class="mg-b-0"><span
+                                class="square-8 rounded-circle bg-teal mg-r-10"></span>Fecha
+                            de autorización:<label id="fautoriz" name="fautoriz" for=""></label></p>
+                        <p id="" name="" class="mg-b-0"><span
+                                class="square-8 rounded-circle bg-purple mg-r-10"></span>Fecha
+                            de surtido:<label id="fsurtido" name="fsurtido" for=""></label></p>
+                        <p id="" name="" class="mg-b-0"><span
+                                class="square-8 rounded-circle bg-teal mg-r-10"></span>Fecha
+                            de Finalización:<label id="ffinaliz" name="ffinaliz" for=""></label></p>
+                        <div class="col-12" align="right">
+                            <span class="square-10 bg-primary mg-r-5"></span><span id="dias1" name="dias1"></span>
+                            <span class="square-10 bg-purple mg-r-5"></span><span id="dias2" name="dias2"></span>
+                            <span class="square-10 bg-teal mg-r-5"></span><span id="dias3" name="dias3"></span>
+                        </div>
+                        <div class="mg-t-20 tx-13">
+                            <a href="" class="tx-gray-600 hover-info">Generar Reporte</a>
+                            <a href="" class="tx-gray-600 hover-info bd-l mg-l-10 pd-l-10">Imprimir Reporte</a>
+                        </div>
+                    </div><!-- card -->
+                </div>
+
+                <h4 class="lh-3 mg-b-20"><a href="" class="tx-inverse hover-primary">Registros de movimientos</a></h4>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <div id="tabhisto" name="tabhisto"></div>
+                    </div>
+                </div>
+            </div><!-- modal-body -->
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">Save
+                    changes</button>
+                <button type="button"
+                    class="btn btn-secondary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">Close</button>
+            </div> -->
+        </div>
+    </div>
 </div><!-- modal -->

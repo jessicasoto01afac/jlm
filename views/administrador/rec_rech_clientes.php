@@ -103,7 +103,7 @@ $cliente = mysqli_query($conexion,$sql);
                             name="pdfrpclient" type="button" class="btn btn-secondary"><i
                                 class="fa fa-file-pdf-o"></i></button>
                         <button title="ver historial" onclick="histvalepro()" data-toggle="modal"
-                            data-target="#modal-vphistorial" type="button" class="btn btn-primary"><i
+                            data-target="#modal-rphistorial" type="button" class="btn btn-primary"><i
                                 class="fa fa-history"></i></button>
                     </div>
                 </div><!-- col-5 -->
@@ -249,7 +249,7 @@ $cliente = mysqli_query($conexion,$sql);
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <button title="Dar click para liberar" id="btnrclitliberar"
                                                 name="btnrclitliberar" type="button" style="display:none;"
-                                                onclick="liberarm()" class="btn btn-dark pd-x-25">Liberar</button>
+                                                onclick="liverarreprt()" class="btn btn-dark pd-x-25">Liberar</button>
                                             <button id="btnrclitfinaliz" name="btnrclitfinaliz" type="button"
                                                 style="display:none;" onclick="finalizarep()"
                                                 class="btn btn-success pd-x-25">Finalizar</button>

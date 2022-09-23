@@ -13,7 +13,7 @@
             if ($data["estatus_recl"] == "PENDIENTE") {
                 $id_reclamo=$data["id_reclamo"];
                 $folio=$data["folio_recl"];
-                $proceso = "<a onclick='reclamocliente($folio)' style='cursor:pointer;' title='Ver detalles del reporte' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='delevpro($id_reclamo)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletevproduc'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
+                $proceso = "<a onclick='reclamocliente($folio)' style='cursor:pointer;' title='Ver detalles del reporte' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='delerepcl($folio)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-delreprclient'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
                 $estatus="<td class='tx-12'><span class='square-8 bg-warning mg-r-5 rounded-circle'></span>PENDIENTE</td>";
                 $cursos[] = [ 
                     $contador,
@@ -28,7 +28,7 @@
             }else if($data["estatus_recl"] == "FINALIZADO") {
                 $id_reclamo=$data["id_reclamo"];
                 $folio=$data["folio_recl"];
-                $proceso = "<a onclick='reclamocliente($folio)' style='cursor:pointer;' title='Ver detalles del reporte' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='delevpro($id_reclamo)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletevproduc'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
+                $proceso = "<a onclick='reclamocliente($folio)' style='cursor:pointer;' title='Ver detalles del reporte' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='delerepcl($folio)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-delreprclient'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";	
                 $estatus="<td class='tx-12'><span class='square-8 bg-success mg-r-5 rounded-circle'></span>FINALIZADO</td>";
                 $cursos[] = [
                     $contador,
