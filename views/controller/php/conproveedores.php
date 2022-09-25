@@ -1,7 +1,8 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT * FROM proveedores where estado='0' ORDER BY codigo_pro ASC";
+	$folio = $_POST['folio'];
+	$query = "SELECT * FROM proveedores where estado='0' AND id_prov =$folio ORDER BY codigo_pro ASC";
 	$resultado = mysqli_query($conexion, $query);
 
 	if(!$resultado){

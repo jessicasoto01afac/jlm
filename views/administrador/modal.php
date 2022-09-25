@@ -504,7 +504,7 @@
                             <div class="form-group">
                                 <label class="form-control-label label2">CODIGO: <span
                                         class="tx-danger">*</span></label>
-                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="text"
                                     name="editcodigo_pro" id="editcodigo_pro">
                             </div>
                         </div>

@@ -82,7 +82,7 @@ include ("../controller/conexion.php");
                         <option value="NO APLICA">NO APLICA</option>
                         <option value="CONTADO">CONTADO</option>
                         <option value="7 DIAS">7 DIAS</option>
-                        <option value="8 DIAS">15 DIAS</option>
+                        <option value="8 DIAS">8 DIAS</option>
                         <option value="15 DIAS">15 DIAS</option>
                         <option value="30 DIAS">30 DIAS</option>
                         <option value="45 DIAS">45 DIAS</option>
@@ -119,7 +119,7 @@ include ("../controller/conexion.php");
                     <div class="form-group">
                       <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-phone tx-16 lh-0 op-6"></i></span>
-                      <input onkeyup="mayus(this);" type="text" title="ingresar el telefono" name="tel_c1" id="tel_c1" class="form-control inputalta" placeholder="(999) 999-9999">
+                      <input onkeyup="mayus(this);" type="number" title="ingresar el telefono" name="tel_c1" id="tel_c1" class="form-control inputalta" placeholder="(999) 999-9999">
                     </div>
                   </div>
                   </div><!-- col-4 -->
@@ -127,7 +127,7 @@ include ("../controller/conexion.php");
                   <div class="form-group">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-phone tx-16 lh-0 op-6"></i></span>
-                      <input onkeyup="mayus(this);" type="text" name="tel_c2" id="tel_c2" class="form-control inputalta" placeholder="(999) 999-9999">
+                      <input onkeyup="mayus(this);" type="number" name="tel_c2" id="tel_c2" class="form-control inputalta" placeholder="(999) 999-9999">
                     </div>
                     </div>
                   </div><!-- col-4 -->
@@ -135,7 +135,7 @@ include ("../controller/conexion.php");
                   <div class="form-group">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-envelope tx-16 lh-0 op-6"></i></span>
-                      <input type="text" class="form-control inputalta" name="email_c1" id="email_c1" placeholder="ingresar@correo">
+                      <input type="email" class="form-control inputalta" name="email_c1" id="email_c1" placeholder="ingresar@correo">
                     </div>
                     </div>
                   </div><!-- col-6 -->
@@ -143,7 +143,7 @@ include ("../controller/conexion.php");
                   <div class="form-group">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-envelope tx-16 lh-0 op-6"></i></span>
-                      <input type="text" class="form-control inputalta"  name="email_c2" id="email_c2" placeholder="ingresar@correo">
+                      <input type="email" class="form-control inputalta"  name="email_c2" id="email_c2" placeholder="ingresar@correo">
                     </div>
                     </div>
                   </div><!-- col-6 -->
@@ -164,7 +164,7 @@ include ("../controller/conexion.php");
                     <div class="form-group">
                       <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-phone tx-16 lh-0 op-6"></i></span>
-                      <input onkeyup="mayus(this);" type="text" title="ingresar el telefono" name="tel_c3" id="tel_c3" class="form-control inputalta" placeholder="(999) 999-9999">
+                      <input onkeyup="mayus(this);" type="number" title="ingresar el telefono" name="tel_c3" id="tel_c3" class="form-control inputalta" placeholder="(999) 999-9999">
                     </div>
                   </div>
                   </div><!-- col-4 -->
@@ -172,7 +172,7 @@ include ("../controller/conexion.php");
                   <div class="form-group">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-phone tx-16 lh-0 op-6"></i></span>
-                      <input onkeyup="mayus(this);" type="text" class="form-control inputalta" name="tel_c4" id="tel_c4" placeholder="(999) 999-9999">
+                      <input onkeyup="mayus(this);" type="number" class="form-control inputalta" name="tel_c4" id="tel_c4" placeholder="(999) 999-9999">
                     </div>
                     </div>
                   </div><!-- col-4 -->
@@ -180,7 +180,7 @@ include ("../controller/conexion.php");
                   <div class="form-group">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-envelope tx-16 lh-0 op-6"></i></span>
-                      <input type="text" class="form-control inputalta" name="email_c3" id="email_c3" placeholder="ingresar@correo">
+                      <input type="email" class="form-control inputalta" name="email_c3" id="email_c3" placeholder="ingresar@correo">
                     </div>
                     </div>
                   </div><!-- col-6 -->
@@ -188,7 +188,7 @@ include ("../controller/conexion.php");
                   <div class="form-group">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-envelope tx-16 lh-0 op-6"></i></span>
-                      <input type="text" class="form-control inputalta" name="email_c4" id="email_c4" placeholder="ingresar@correo">
+                      <input type="email" class="form-control inputalta" name="email_c4" id="email_c4" placeholder="ingresar@correo">
                     </div>
                     </div>
                   </div><!-- col-6 -->
@@ -209,7 +209,7 @@ include ("../controller/conexion.php");
                     <div class="form-group">
                       <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-phone tx-16 lh-0 op-6"></i></span>
-                      <input onkeyup="mayus(this);" type="text" title="ingresar el telefono" name="tel_c5" id="tel_c5" class="form-control inputalta" placeholder="(999) 999-9999">
+                      <input onkeyup="mayus(this);" type="number" title="ingresar el telefono" name="tel_c5" id="tel_c5" class="form-control inputalta" placeholder="(999) 999-9999">
                     </div>
                   </div>
                   </div><!-- col-4 -->
@@ -217,7 +217,7 @@ include ("../controller/conexion.php");
                   <div class="form-group">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-phone tx-16 lh-0 op-6"></i></span>
-                      <input onkeyup="mayus(this);" type="text" class="form-control inputalta" name="tel_c6" id="tel_c6" placeholder="(999) 999-9999">
+                      <input onkeyup="mayus(this);" type="number" class="form-control inputalta" name="tel_c6" id="tel_c6" placeholder="(999) 999-9999">
                     </div>
                     </div>
                   </div><!-- col-4 -->
@@ -225,7 +225,7 @@ include ("../controller/conexion.php");
                   <div class="form-group">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-envelope tx-16 lh-0 op-6"></i></span>
-                      <input type="text" class="form-control inputalta" name="email_c5" id="email_c5" placeholder="ingresar@correo">
+                      <input type="email" class="form-control inputalta" name="email_c5" id="email_c5" placeholder="ingresar@correo">
                     </div>
                     </div>
                   </div><!-- col-6 -->
@@ -233,7 +233,7 @@ include ("../controller/conexion.php");
                   <div class="form-group">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-envelope tx-16 lh-0 op-6"></i></span>
-                      <input type="text" class="form-control inputalta" name="email_c6" id="email_c6" placeholder="ingresar@correo">
+                      <input type="email" class="form-control inputalta" name="email_c6" id="email_c6" placeholder="ingresar@correo">
                     </div>
                     </div>
                   </div><!-- col-6 -->

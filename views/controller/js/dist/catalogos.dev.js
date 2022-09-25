@@ -589,48 +589,45 @@ function closedthpro() {
 } //Funcion que trae los datos al modal editar articulo
 
 
-function proveedith() {
-  //alert("entra EDITAR PROVEEDOR")
-  $("#dataprove tr").on('click', function () {
-    var id_prov = "";
-    id_prov += $(this).find('td:eq(0)').html(); //Toma el id de la persona 
+function proveedith(id_prov) {
+  document.getElementById('id_prov').value = id_prov;
+  var folio = id_prov; //alert(id_prov);
 
-    document.getElementById('id_prov').value = id_prov;
-    $.ajax({
-      url: '../controller/php/conproveedores.php',
-      type: 'POST'
-    }).done(function (respuesta) {
-      obj = JSON.parse(respuesta);
-      var res = obj.data;
-      var x = 0;
+  $.ajax({
+    url: '../controller/php/conproveedores.php',
+    type: 'POST',
+    data: 'folio=' + folio
+  }).done(function (respuesta) {
+    obj = JSON.parse(respuesta);
+    var res = obj.data;
+    var x = 0;
 
-      for (P = 0; P < res.length; P++) {
-        if (obj.data[P].id_prov == id_prov) {
-          datos = obj.data[P].codigo_pro + '*' + obj.data[P].condi_pago + '*' + obj.data[P].nom_pro + '*' + obj.data[P].domi_fisc + '*' + obj.data[P].cont_1 + '*' + obj.data[P].tel_c1 + '*' + obj.data[P].tel_c2 + '*' + obj.data[P].email_c1 + '*' + obj.data[P].email_c2 + '*' + obj.data[P].cont_2 + '*' + obj.data[P].tel_c3 + '*' + obj.data[P].tel_c4 + '*' + obj.data[P].email_c3 + '*' + obj.data[P].email_c4 + '*' + obj.data[P].cont_3 + '*' + obj.data[P].tel_c5 + '*' + obj.data[P].tel_c6 + '*' + obj.data[P].email_c5 + '*' + obj.data[P].email_c6 + '*' + obj.data[P].obser_prov;
-          var d = datos.split("*");
-          $("#modal-editprov #editcodigo_pro").val(d[0]);
-          $("#modal-editprov #editcondi_pago").val(d[1]);
-          $("#modal-editprov #editnom_pro").val(d[2]);
-          $("#modal-editprov #edithdomi_fisc").val(d[3]);
-          $("#modal-editprov #edtcont_1").val(d[4]);
-          $("#modal-editprov #edthtel_c1").val(d[5]);
-          $("#modal-editprov #edithtel_c2").val(d[6]);
-          $("#modal-editprov #edithemail_c1").val(d[7]);
-          $("#modal-editprov #edithemail_c2").val(d[8]);
-          $("#modal-editprov #edithcont_2").val(d[9]);
-          $("#modal-editprov #edithtel_c3").val(d[10]);
-          $("#modal-editprov #edithtel_c4").val(d[11]);
-          $("#modal-editprov #edithemail_c3").val(d[12]);
-          $("#modal-editprov #edithemail_c4").val(d[13]);
-          $("#modal-editprov #edithcont_3").val(d[14]);
-          $("#modal-editprov #edithtel_c5").val(d[15]);
-          $("#modal-editprov #edithtel_c6").val(d[16]);
-          $("#modal-editprov #edithemail_c5").val(d[17]);
-          $("#modal-editprov #edithemail_c6").val(d[18]);
-          $("#modal-editprov #edithobser_prov").val(d[19]);
-        }
+    for (P = 0; P < res.length; P++) {
+      if (obj.data[P].id_prov == id_prov) {
+        datos = obj.data[P].codigo_pro + '*' + obj.data[P].condi_pago + '*' + obj.data[P].nom_pro + '*' + obj.data[P].domi_fisc + '*' + obj.data[P].cont_1 + '*' + obj.data[P].tel_c1 + '*' + obj.data[P].tel_c2 + '*' + obj.data[P].email_c1 + '*' + obj.data[P].email_c2 + '*' + obj.data[P].cont_2 + '*' + obj.data[P].tel_c3 + '*' + obj.data[P].tel_c4 + '*' + obj.data[P].email_c3 + '*' + obj.data[P].email_c4 + '*' + obj.data[P].cont_3 + '*' + obj.data[P].tel_c5 + '*' + obj.data[P].tel_c6 + '*' + obj.data[P].email_c5 + '*' + obj.data[P].email_c6 + '*' + obj.data[P].obser_prov;
+        var d = datos.split("*");
+        $("#modal-editprov #editcodigo_pro").val(d[0]);
+        $("#modal-editprov #editcondi_pago").val(d[1]);
+        $("#modal-editprov #editnom_pro").val(d[2]);
+        $("#modal-editprov #edithdomi_fisc").val(d[3]);
+        $("#modal-editprov #edtcont_1").val(d[4]);
+        $("#modal-editprov #edthtel_c1").val(d[5]);
+        $("#modal-editprov #edithtel_c2").val(d[6]);
+        $("#modal-editprov #edithemail_c1").val(d[7]);
+        $("#modal-editprov #edithemail_c2").val(d[8]);
+        $("#modal-editprov #edithcont_2").val(d[9]);
+        $("#modal-editprov #edithtel_c3").val(d[10]);
+        $("#modal-editprov #edithtel_c4").val(d[11]);
+        $("#modal-editprov #edithemail_c3").val(d[12]);
+        $("#modal-editprov #edithemail_c4").val(d[13]);
+        $("#modal-editprov #edithcont_3").val(d[14]);
+        $("#modal-editprov #edithtel_c5").val(d[15]);
+        $("#modal-editprov #edithtel_c6").val(d[16]);
+        $("#modal-editprov #edithemail_c5").val(d[17]);
+        $("#modal-editprov #edithemail_c6").val(d[18]);
+        $("#modal-editprov #edithobser_prov").val(d[19]);
       }
-    });
+    }
   });
 } //Funcion que trae los guarda los datos actualizados de proveedores
 
@@ -695,30 +692,27 @@ function saveprovedith() {
 } //FUNCION QUE TRAE LOS DATOS PARA ELIMINAR AL PROVEEDOR
 
 
-function deletprov() {
-  $("#dataprove tr").on('click', function () {
-    var del_prov = "";
-    del_prov += $(this).find('td:eq(0)').html(); //Toma el id de la persona 
+function deletprov(del_prov) {
+  document.getElementById('del_prov').value = del_prov; //alert(del_prov);
 
-    document.getElementById('del_prov').value = del_prov; //alert(del_prov);
+  var folio = del_prov;
+  $.ajax({
+    url: '../controller/php/conproveedores.php',
+    type: 'POST',
+    data: 'folio=' + folio
+  }).done(function (respuesta) {
+    obj = JSON.parse(respuesta);
+    var res = obj.data;
+    var x = 0;
 
-    $.ajax({
-      url: '../controller/php/conproveedores.php',
-      type: 'POST'
-    }).done(function (respuesta) {
-      obj = JSON.parse(respuesta);
-      var res = obj.data;
-      var x = 0;
-
-      for (D = 0; D < res.length; D++) {
-        if (obj.data[D].id_prov == del_prov) {
-          // alert(id_persona);
-          datos = obj.data[D].nom_pro;
-          var o = datos.split("*");
-          $("#modal-deleprov #deprov").val(o[0]);
-        }
+    for (D = 0; D < res.length; D++) {
+      if (obj.data[D].id_prov == del_prov) {
+        // alert(id_persona);
+        datos = obj.data[D].nom_pro;
+        var o = datos.split("*");
+        $("#modal-deleprov #deprov").val(o[0]);
       }
-    });
+    }
   });
 } //FUNCION QUE GUARDA ELIMINAR PROVEEDOR
 
@@ -1711,5 +1705,70 @@ function openclientes() {
     //     [5, "asc"]
     // ],
     "ajax": "../controller/php/infoclient.php"
+  });
+}
+
+function openproveedor() {
+  var currentdate = new Date();
+  var datetime = "Fecha de Impresion: " + currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear() + " - " + currentdate.getHours() + ":" + currentdate.getMinutes();
+  var table = $('#listpproveedor').DataTable({
+    dom: 'Bfrtip',
+    buttons: [{
+      extend: 'copy',
+      exportOptions: {
+        columns: [0, 1, 2]
+      }
+    }, {
+      extend: 'pdfHtml5',
+      text: 'Generar PDF',
+      messageTop: 'RESUMEN DE PPROVEEDORES',
+      exportOptions: {
+        columns: [0, 1, 2]
+      },
+      download: 'open',
+      header: true,
+      title: '',
+      customize: function customize(doc) {
+        doc.defaultStyle.fontSize = 12;
+        doc.styles.tableHeader.fontSize = 12;
+
+        doc['footer'] = function (page, pages) {
+          return {
+            columns: [datetime, {
+              alignment: 'right',
+              text: [{
+                text: page.toString(),
+                italics: false
+              }, ' de ', {
+                text: pages.toString(),
+                italics: false
+              }]
+            }],
+            margin: [25, 0]
+          };
+        };
+      }
+    }, {
+      extend: 'excel',
+      text: 'Generar Excel',
+      exportOptions: {
+        columns: [0, 1, 2]
+      }
+    }],
+    "language": {
+      buttons: {
+        copyTitle: 'Pedidos copiados',
+        copySuccess: {
+          _: '%d Pedidos copiados',
+          1: '1 Pedidos copiado'
+        }
+      },
+      "searchPlaceholder": "Buscar transformación...",
+      "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+    },
+    // "order": [
+    //     [5, "asc"]
+    // ],
+    "ajax": "../controller/php/tableprovee.php"
   });
 }
