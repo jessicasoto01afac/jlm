@@ -409,31 +409,29 @@ function closedthcli() {
 } //Funcion que trae los datos al modal editar cliente
 
 
-function clienedith() {
-  $("#datacliente tr").on('click', function () {
-    var id_cliente = "";
-    id_cliente += $(this).find('td:eq(0)').html(); //Toma el id de la persona 
+function clienedith(id_cliente) {
+  document.getElementById('id_cli').value = id_cliente;
+  var folio = id_cliente; //alert(id_cliente);
 
-    document.getElementById('id_cli').value = id_cliente;
-    $.ajax({
-      url: '../controller/php/conclientes.php',
-      type: 'POST'
-    }).done(function (respuesta) {
-      obj = JSON.parse(respuesta);
-      var res = obj.data;
-      var x = 0;
+  $.ajax({
+    url: '../controller/php/conclientes.php',
+    type: 'POST',
+    data: 'folio=' + folio
+  }).done(function (respuesta) {
+    obj = JSON.parse(respuesta);
+    var res = obj.data;
+    var x = 0;
 
-      for (C = 0; C < res.length; C++) {
-        if (obj.data[C].id_cliente == id_cliente) {
-          datos = obj.data[C].codigo_clie + '*' + obj.data[C].nombre + '*' + obj.data[C].rfc + '*' + obj.data[C].email;
-          var d = datos.split("*");
-          $("#modal-editclient #edicocli").val(d[0]);
-          $("#modal-editclient #edithnom").val(d[1]);
-          $("#modal-editclient #editrfc").val(d[2]);
-          $("#modal-editclient #editcorrc").val(d[3]);
-        }
+    for (C = 0; C < res.length; C++) {
+      if (obj.data[C].id_cliente == id_cliente) {
+        datos = obj.data[C].codigo_clie + '*' + obj.data[C].nombre + '*' + obj.data[C].rfc + '*' + obj.data[C].email;
+        var d = datos.split("*");
+        $("#modal-editclient #edicocli").val(d[0]);
+        $("#modal-editclient #edithnom").val(d[1]);
+        $("#modal-editclient #editrfc").val(d[2]);
+        $("#modal-editclient #editcorrc").val(d[3]);
       }
-    });
+    }
   });
 } //Funcion que trae los guarda los datos actulizados de clientes
 
@@ -479,33 +477,30 @@ function savecliedith() {
       }
     });
   }
-} //FUNCION QUE TRAE LOS DATOS PARA ELIMINAR AL CLIENTE
+} //FUNCION QUE TRAE LOS DATOS PARA ELIMINAR AL CLIENTE 24092022
 
 
-function deletclient() {
-  $("#datacliente tr").on('click', function () {
-    var del_clie = "";
-    del_clie += $(this).find('td:eq(0)').html(); //Toma el id de la persona 
+function deletclient(del_clie) {
+  document.getElementById('del_clie').value = del_clie;
+  var folio = del_clie; //alert(del_clie);
 
-    document.getElementById('del_clie').value = del_clie; //alert(del_clie);
+  $.ajax({
+    url: '../controller/php/conclientes.php',
+    type: 'POST',
+    data: 'folio=' + folio
+  }).done(function (respuesta) {
+    obj = JSON.parse(respuesta);
+    var res = obj.data;
+    var x = 0;
 
-    $.ajax({
-      url: '../controller/php/conclientes.php',
-      type: 'POST'
-    }).done(function (respuesta) {
-      obj = JSON.parse(respuesta);
-      var res = obj.data;
-      var x = 0;
-
-      for (D = 0; D < res.length; D++) {
-        if (obj.data[D].id_cliente == del_clie) {
-          // alert(id_persona);
-          datos = obj.data[D].nombre;
-          var o = datos.split("*");
-          $("#modal-deletecli #decli").val(o[0]);
-        }
+    for (D = 0; D < res.length; D++) {
+      if (obj.data[D].id_cliente == del_clie) {
+        // alert(id_persona);
+        datos = obj.data[D].nombre;
+        var o = datos.split("*");
+        $("#modal-deletecli #decli").val(o[0]);
       }
-    });
+    }
   });
 } //FUNCION QUE GUARDA ELIMINAR CLIENTE
 
@@ -1480,4 +1475,241 @@ function canceladd() {
   document.getElementById('masplus3').style.display = "none";
   document.getElementById('masplus4').style.display = "none";
   document.getElementById('masplusave').style.display = "none";
+}
+
+function closeaddusu() {
+  document.getElementById('usunom').value = "";
+  document.getElementById('usuapell').value = "";
+  document.getElementById('correo').value = "";
+  document.getElementById('usuario').value = "";
+  document.getElementById('password').value = "";
+  document.getElementById('privilegios').value = "";
+}
+
+function openarticulo() {
+  /*$('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
+  // TABLA INSPECTORES EXTERNOS//
+  let table = $('#arttable').DataTable({
+        "language": {
+          "searchPlaceholder": "Buscar datos...",
+          "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+      },
+      "order": [
+          [4, "DESC"]
+      ],
+      "ajax": "../controller/php/infarticulos.php",
+      "columnDefs": [{
+          //  "targets": -1,
+          // "data": null,
+          //"defaultContent": ""
+        }]
+  });*/
+  //--------------------------------------------------
+  var currentdate = new Date();
+  var datetime = "Fecha de Impresion: " + currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear() + " - " + currentdate.getHours() + ":" + currentdate.getMinutes();
+  var table = $('#arttable').DataTable({
+    dom: 'Bfrtip',
+    buttons: [{
+      extend: 'copy',
+      exportOptions: {
+        columns: [0, 1, 2, 3]
+      }
+    }, {
+      extend: 'pdfHtml5',
+      text: 'Generar PDF',
+      messageTop: 'RESUMEN DE ARTICULOS',
+      exportOptions: {
+        columns: [0, 1, 2, 3]
+      },
+      download: 'open',
+      header: true,
+      title: '',
+      customize: function customize(doc) {
+        doc.defaultStyle.fontSize = 12;
+        doc.styles.tableHeader.fontSize = 12;
+
+        doc['footer'] = function (page, pages) {
+          return {
+            columns: [datetime, {
+              alignment: 'right',
+              text: [{
+                text: page.toString(),
+                italics: false
+              }, ' de ', {
+                text: pages.toString(),
+                italics: false
+              }]
+            }],
+            margin: [25, 0]
+          };
+        };
+      }
+    }, {
+      extend: 'excel',
+      text: 'Generar Excel',
+      exportOptions: {
+        columns: [0, 1, 2, 3]
+      }
+    }],
+    "language": {
+      buttons: {
+        copyTitle: 'Pedidos copiados',
+        copySuccess: {
+          _: '%d Pedidos copiados',
+          1: '1 Pedidos copiado'
+        }
+      },
+      "searchPlaceholder": "Buscar articulos...",
+      "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+    },
+    // "order": [
+    //     [5, "asc"]
+    // ],
+    "ajax": "../controller/php/infarticulos.php"
+  });
+}
+
+function opentrans() {
+  /*let table = $('#transfomacion').DataTable({
+        "language": {
+          "searchPlaceholder": "Buscar datos...",
+          "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+      },
+      "order": [
+          [4, "DESC"]
+      ],
+      "ajax": "../controller/php/inftransfor.php",
+      "columnDefs": [{
+          //  "targets": -1,
+          // "data": null,
+          //"defaultContent": ""
+        }]
+  });*/
+  var currentdate = new Date();
+  var datetime = "Fecha de Impresion: " + currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear() + " - " + currentdate.getHours() + ":" + currentdate.getMinutes();
+  var table = $('#transfomacion').DataTable({
+    dom: 'Bfrtip',
+    buttons: [{
+      extend: 'copy',
+      exportOptions: {
+        columns: [0, 1, 2, 3]
+      }
+    }, {
+      extend: 'pdfHtml5',
+      text: 'Generar PDF',
+      messageTop: 'RESUMEN DE TRANSFORMACIÓN',
+      exportOptions: {
+        columns: [0, 1, 2, 3]
+      },
+      download: 'open',
+      header: true,
+      title: '',
+      customize: function customize(doc) {
+        doc.defaultStyle.fontSize = 12;
+        doc.styles.tableHeader.fontSize = 12;
+
+        doc['footer'] = function (page, pages) {
+          return {
+            columns: [datetime, {
+              alignment: 'right',
+              text: [{
+                text: page.toString(),
+                italics: false
+              }, ' de ', {
+                text: pages.toString(),
+                italics: false
+              }]
+            }],
+            margin: [25, 0]
+          };
+        };
+      }
+    }, {
+      extend: 'excel',
+      text: 'Generar Excel',
+      exportOptions: {
+        columns: [0, 1, 2, 3]
+      }
+    }],
+    "language": {
+      buttons: {
+        copyTitle: 'Pedidos copiados',
+        copySuccess: {
+          _: '%d Pedidos copiados',
+          1: '1 Pedidos copiado'
+        }
+      },
+      "searchPlaceholder": "Buscar transformación...",
+      "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+    },
+    // "order": [
+    //     [5, "asc"]
+    // ],
+    "ajax": "../controller/php/inftransfor.php"
+  });
+}
+
+function openclientes() {
+  var currentdate = new Date();
+  var datetime = "Fecha de Impresion: " + currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear() + " - " + currentdate.getHours() + ":" + currentdate.getMinutes();
+  var table = $('#listartic').DataTable({
+    dom: 'Bfrtip',
+    buttons: [{
+      extend: 'copy',
+      exportOptions: {
+        columns: [0, 1, 2, 3]
+      }
+    }, {
+      extend: 'pdfHtml5',
+      text: 'Generar PDF',
+      messageTop: 'RESUMEN DE CLIENTES',
+      exportOptions: {
+        columns: [0, 1, 2, 3]
+      },
+      download: 'open',
+      header: true,
+      title: '',
+      customize: function customize(doc) {
+        doc.defaultStyle.fontSize = 12;
+        doc.styles.tableHeader.fontSize = 12;
+
+        doc['footer'] = function (page, pages) {
+          return {
+            columns: [datetime, {
+              alignment: 'right',
+              text: [{
+                text: page.toString(),
+                italics: false
+              }, ' de ', {
+                text: pages.toString(),
+                italics: false
+              }]
+            }],
+            margin: [25, 0]
+          };
+        };
+      }
+    }, {
+      extend: 'excel',
+      text: 'Generar Excel',
+      exportOptions: {
+        columns: [0, 1, 2, 3]
+      }
+    }],
+    "language": {
+      buttons: {
+        copyTitle: 'Pedidos copiados',
+        copySuccess: {
+          _: '%d Pedidos copiados',
+          1: '1 Pedidos copiado'
+        }
+      },
+      "searchPlaceholder": "Buscar transformación...",
+      "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+    },
+    // "order": [
+    //     [5, "asc"]
+    // ],
+    "ajax": "../controller/php/infoclient.php"
+  });
 }

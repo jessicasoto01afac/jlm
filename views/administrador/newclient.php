@@ -29,7 +29,7 @@ include ("../controller/conexion.php");
     <script type="text/javascript" async="" src="../datas/ga.js"></script>
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
     <script src="../template/js/sweetalert2.all.min.js"></script>
-    <script src="../controller/js/catalogos.js"></script>
+   
 
 
     <!-- Bracket CSS -->
@@ -95,7 +95,7 @@ include ("../controller/conexion.php");
                   </div><!-- col-4 -->
                   <div class="col-lg-4">
                     <div class="form-group mg-b-10-force">
-                      <label class="form-control-label label2">Correo: <span class="tx-danger">*</span></label>
+                      <label class="form-control-label label2">Correo:</label>
                       <input class="form-control inputalta" type="text" name="cliencorr" id="cliencorr" placeholder="ingresa@hotmail.com">
                     </div>
                   </div><!-- col-8 -->
@@ -149,6 +149,7 @@ include ("../controller/conexion.php");
     <script src="../template/lib/highlightjs/highlight.pack.js"></script>
     <script src="../template/lib/select2/js/select2.min.js"></script>
     <script src="../template/js/bracket.js"></script>
+    <script src="../controller/js/catalogos.js"></script>
     <script>
 //FUNCION PARA AGREGAR UN USUARIO NUEVO
     function addclient(){
@@ -159,7 +160,7 @@ include ("../controller/conexion.php");
         var email = document.getElementById('cliencorr').value;
         var datos= 'codigo_clie=' + codigo_clie + '&nombre=' + nombre + '&rfc=' + rfc + '&email=' + email + '&opcion=registrar';
         //alert(datos);
-      if (document.getElementById('clicodgo').value == '' || document.getElementById('cliennom').value == '' || document.getElementById('clierfc').value == '' || document.getElementById('cliencorr').value == '') { 
+      if (document.getElementById('clicodgo').value == '' || document.getElementById('cliennom').value == '' || document.getElementById('clierfc').value == '') { 
         document.getElementById('vacioscli').style.display=''
         setTimeout(function(){
           document.getElementById('vacioscli').style.display='none';

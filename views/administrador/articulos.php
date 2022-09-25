@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="../template/img/logo.png"/>
+    <link rel="shortcut icon" href="../template/img/logo.png" />
     <title>JLM|Articulos</title>
 
     <!-- vendor css -->
@@ -18,40 +19,31 @@
 
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
-  </head>
+</head>
 
-  <body class="collapsed-menu">
+<body class="collapsed-menu">
 
-  <?php
+    <?php
 
 include('header.php');
 ?>
 
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="br-mainpanel">
-      <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-        <h4 class="tx-gray-800 mg-b-5">ARTICULOS</h4>
-      </div>
-      <div style="float: right;">
-      <div class="col-lg-5 mg-t-20 mg-lg-t-0">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" id="exportexc" name="exportexc" class="btn btn-secondary active"><i class="fa fa-file-excel-o"></i></button>
-                <button type="button" class="btn btn-secondary"><i class="fa fa-print"></i></button>
-              </div>
-      </div><!-- col-5 -->
-      </div>
-      <br>
-
-      <div class="br-pagebody">
-        <div class="br-section-wrapper">
-          <a class="btn btn-primary" href="../administrador/newarticul.php" style="float:right"><i class="fa fa-plus mg-r-10"></i>Agregar Articulo</a>
-          <br>   
-          <br> 
-          <br> 
-            <!-- <div id="listartic"> -->
-            <div class="rounded table-responsive">
-                    <table class="table display dataTable"
-                    name="arttable" id="arttable" style="width:100%">
+        <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
+            <h4 class="tx-gray-800 mg-b-5">ARTICULOS</h4>
+        </div>
+        <br>
+        <div class="br-pagebody">
+            <div class="br-section-wrapper">
+                <a class="btn btn-primary" href="../administrador/newarticul.php" style="float:right"><i
+                        class="fa fa-plus mg-r-10"></i>Agregar Articulo</a>
+                <br>
+                <br>
+                <br>
+                <!-- <div id="listartic"> -->
+                <div class="rounded table-responsive">
+                    <table class="table display dataTable" name="arttable" id="arttable" style="width:100%">
                         <thead>
                             <tr>
                                 <th style="width:5%;">ID</th>
@@ -62,19 +54,20 @@ include('header.php');
                             </tr>
                         </thead>
                     </table>
-                    </div>
-        </div><!-- br-section-wrapper -->
-      </div><!-- br-pagebody -->
-      <footer class="br-footer">
-        <div class="footer-left">
-        <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
-          <div>Jose Luis Mondragon y CIA.</div>
-        </div>
-        <div class="footer-right d-flex align-items-center">
-          <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i class="fa fa-facebook tx-20"></i></a>
-          <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i class="fa fa-globe tx-20"></i></a>
-        </div>
-      </footer>
+                </div>
+            </div><!-- br-section-wrapper -->
+        </div><!-- br-pagebody -->
+        <footer class="br-footer">
+            <div class="footer-left">
+                <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
+                <div>Jose Luis Mondragon y CIA.</div>
+            </div>
+            <div class="footer-right d-flex align-items-center">
+                <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i
+                        class="fa fa-facebook tx-20"></i></a>
+                <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i class="fa fa-globe tx-20"></i></a>
+            </div>
+        </footer>
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
 
@@ -95,86 +88,24 @@ include('header.php');
     <script src="../template/js/bracket.js"></script>
 
     <script src="../controller/datatables.net/js/jquery.dataTables.js"></script>
-        <script src="../controller/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="../controller/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-        <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="../controller/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../controller/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
 
 
     <?php include('../administrador/modal.php');?>
     <script type="text/javascript">
-        // TABLA INSPECTORES EXTERNOS//
-        let table = $('#arttable').DataTable({
 
-            "language": {
-                "searchPlaceholder": "Buscar datos...",
-                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-            },
-            "order": [
-                [4, "DESC"]
-            ],
-            "ajax": "../controller/php/infarticulos.php",
-            "columnDefs": [{
-                //  "targets": -1,
-                // "data": null,
-                //"defaultContent": ""
-
-            }]
-        });
-        </script>
-    <script>
-      /* $.ajax({
-        url: '../controller/php/conarticulos.php',
-        type: 'POST'
-    }).done(function(resp) {
-        obj = JSON.parse(resp);
-        var res = obj.data;
-        var x = 0;
-        html = '<div class="table-wrapper"><table style="width:100%" name="arttable" id="arttable" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th style="width:100px;"><i></i>DESCRIPCIÓN</th><th><i></i>UBICACION</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
-        for (V = 0; V < res.length; V++) {  
-                x++;
-                html += "<tr><td>" + obj.data[V].id_art + "</td><td>" + obj.data[V].artcodigo + "</td><td>" + obj.data[V].artdescrip + "</td><td>" + obj.data[V].artubicac + "</td><td>" + "<a style='cursor:pointer;' onclick='artedith()' title='Editar' class='btn btn-primary btn-icon' data-toggle='modal' data-target='#modal-editarticul'><div><i style='color:white;' class='fa fa-pencil-square-o'></i></div></a>  <a onclick='deletart()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deleteart'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";            
-        }
-        html += '</div></tbody></table></div></div>';
-        $("#listartic").html(html);
-        'use strict';
-        $('#arttable').DataTable({
-            responsive: true,
-            language: {
-              searchPlaceholder: 'Buscar...',
-              sSearch: '',
-              lengthMenu: '_MENU_ items/page',
-            }
-        });
-    })*/
-
-
-    
-
-    $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
-    
-      $(function(){
-        'use strict';
-
-        $('#datatable1').DataTable({
-          responsive: true,
-          language: {
-            searchPlaceholder: 'Search...',
-            sSearch: '',
-            lengthMenu: '_MENU_ items/page',
-          }
-        });
-
-        $('#datatable2').DataTable({
-          bLengthChange: false,
-          searching: false,
-          responsive: true
-        });
-
-        // Select2
-        $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
-
-      });
     </script>
-  </body>
+    <script>
+    openarticulo()
+    </script>
+</body>
 
 </html>

@@ -1,7 +1,8 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT * FROM clientes where estado='0' ORDER BY id_cliente ASC";
+	$folio = $_POST['folio'];
+	$query = "SELECT * FROM clientes where estado='0' AND id_cliente=$folio  ORDER BY id_cliente ASC";
 	$resultado = mysqli_query($conexion, $query);
 
 	if(!$resultado){
