@@ -46,7 +46,7 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="../administrador/vale_produccion.php">Lista de vales de Producción</a>
+                <a class="breadcrumb-item" href="../administrador/vale_produccion.php" onclick="cancelar();">Lista de vales de Producción</a>
                 <span class="breadcrumb-item active">Alta de Vale de Producción</span>
             </nav>
         </div><!-- br-pageheader -->
@@ -189,7 +189,7 @@
                             </div><!-- form-group -->
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label class="form-control-label label2">OBSERBACIONES: <span
+                                    <label class="form-control-label label2">OBSERVACIONES:<span
                                             class="tx-danger"></span></label>
                                     <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="vpbservo"
                                         id="vpbservo" placeholder="Ingresa alguna observación"></textarea>

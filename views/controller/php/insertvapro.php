@@ -499,7 +499,7 @@ if(!isset($usuario)){
 
             echo "2";
         }
-    //Condición donde cancela el vale de producción
+    //Condición donde se agrega mas de un calor
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -564,7 +564,7 @@ function comprobacion3 ($refe_1,$codigocartons,$conexion){
 }
 //funcion para actualizar el registro
 function finaliadd ($refe_1,$conexion){
-    $query="UPDATE kardex SET estado=0 WHERE refe_1= '$refe_1' AND estado=1 ";
+    $query="UPDATE kardex SET estado=0 WHERE refe_1= '$refe_1' AND estado=0 ";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -601,6 +601,21 @@ function registrar ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,
         return true;
     }else{
         return false;
+    }
+    $this->conexion->cerrar();
+}
+//comprobación de colores
+function compracolors ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
+    $query="SELECT * FROM transforma WHERE id_articulo_final = '$codigo_1' AND  id_etiquetas='GRUPO_TRANSF' AND estado = 0 ";
+    $resultado= mysqli_query($conexion,$query);
+    if($resultado->num_rows==0){
+        return false;
+    }else{
+        $query2="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_extendido,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor'),('0'),('$cantidad_real'),(hojas*$salida/divicion),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
+        FROM
+            transforma 
+        WHERE
+            id_articulo_final = '$codigo_1' and id_etiquetas='GRUPO_TRANSF'";
     }
     $this->conexion->cerrar();
 }
@@ -711,8 +726,8 @@ function liston ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$co
     }
     $this->conexion->cerrar();
 }
-//funcion para cancelar el vale de producción
-function cancelar ($refe_1,$conexion){
+//funcion para cancelar el vale de producción SE COMENTA 
+/*function cancelar ($refe_1,$conexion){
     $query="UPDATE kardex SET estado=2, status='CANCELADO', status_2='CANCELADO' WHERE refe_1 = '$refe_1'";
     if(mysqli_query($conexion,$query)){
         return true;
@@ -720,9 +735,28 @@ function cancelar ($refe_1,$conexion){
         return false;
     }
     cerrar($conexion);
+}*/
+//funcion para cancelar el vale de producción
+function cancelar ($refe_1,$conexion){
+    $query="DELETE FROM kardex WHERE refe_1 = '$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
 }
-function cancfolio ($refe_1,$conexion){
+/*function cancfolio ($refe_1,$conexion){
     $query="UPDATE folios SET estado_f=1 WHERE folio = '$refe_1' and tipo='VALE_PRODUCCION'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}*/
+function cancfolio ($refe_1,$conexion){
+    $query="DELETE FROM folios WHERE folio = '$refe_1' and tipo='VALE_PRODUCCION'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -783,9 +817,18 @@ function actualizarnewext ($id_kax,$codigo_1,$descripcion_1,$salida,$tipo_ref,$o
     cerrar($conexion);
 }
 
-//funcion para actualizar el registro
-function eliminar ($id_kardex,$conexion){
+//funcion para actualizar el registro (DESCOMNETAR EN CASO DE USAR SE COMENTA POR QUE SE ELIMINA) 25092022
+/*function eliminar ($id_kardex,$conexion){
     $query="UPDATE kardex SET estado='1' WHERE id_kax= '$id_kardex'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}*/
+function eliminar ($id_kardex,$conexion){
+    $query="DELETE FROM kardex WHERE id_kax= '$id_kardex'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

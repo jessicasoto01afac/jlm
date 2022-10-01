@@ -228,7 +228,8 @@ function updatedvp() {
     document.getElementById('pedidomem').value = "";
     //INFORMACION DE LAS TBLAS
     let id_valeproduc = document.getElementById('vpfolio').value;
-    let folio = id_valeproduc;
+    let folio = document.getElementById('vpfolio').value;
+    //alert(folio);
     $.ajax({
             url: '../controller/php/convale_prodata.php',
             type: 'GET',
@@ -321,7 +322,7 @@ function updatedvp() {
                 x++;
                 valprd = obj.data[U].id_kax;
                 //alert(id_valepro);
-                html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvp(" + valprd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart(" + valprd + ");'>Eliminar</a>" + "</td></tr>";
+                html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpfinal(" + valprd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithvpextendido'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpnew' onclick='deletenewart(" + valprd + ");'>Eliminar</a>" + "</td></tr>";
             }
         }
         html += '</div></tbody></table></div></div>';
@@ -523,10 +524,10 @@ function addvaleprodu() {
                         })
 
                     }
+
                 }
             }
         });
-
     }
 }
 //ABRIR EDITAR EXTENDIDO EN ALTA DE PRODUCCIÓN
@@ -549,27 +550,35 @@ function editarinsvp(valprd) {
                 document.getElementById('vpednewtcantid').value = obj.data[C].salida;
                 document.getElementById('vpobsaddnew').value = obj.data[C].observa;
                 document.getElementById('posicionextnew').value = obj.data[C].tipo_ref;
+                document.getElementById('vpnewedithdes').value = obj.data[C].artdescrip;
+                document.getElementById('vpedthdeparnew').value = obj.data[C].artubicac;
             }
         }
     });
-    //informacion del articulos
+}
+
+//ABRIR EDITAR EXTENDIDO EN ALTA DE PRODUCCIÓN
+function editarinsvpfinal(valprd) {
+    //alert(valprd);
+    let folio = valprd;
+    document.getElementById('id_exedith').value = valprd;
     $.ajax({
-        url: '../controller/php/conarticulos.php',
-        type: 'POST'
+        url: '../controller/php/convale_pro.php',
+        type: 'GET',
+        data: 'folio=' + folio
     }).done(function(respuesta) {
         obj = JSON.parse(respuesta);
         var res = obj.data;
         var x = 0;
-        for (D = 0; D < res.length; D++) {
-            if (obj.data[D].artcodigo == document.getElementById('cdnewvpedith').value) {
-                // alert(id_persona);
-                datos =
-                    obj.data[D].artcodigo + '*' +
-                    obj.data[D].artdescrip + '*' +
-                    obj.data[D].artubicac;
-                var o = datos.split("*");
-                $("#vpnewedithdes").val(o[1]);
-                $("#vpedthdeparnew").val(o[2]);
+        for (C = 0; C < res.length; C++) {
+            if (obj.data[C].id_kax == valprd) {
+                //alert("entro");
+                document.getElementById('cdnewvpedith').value = obj.data[C].codigo_1;
+                document.getElementById('vpednewtcantid').value = obj.data[C].entrada;
+                document.getElementById('vpobsaddnew').value = obj.data[C].observa;
+                document.getElementById('posicionextnew').value = obj.data[C].tipo_ref;
+                document.getElementById('vpnewedithdes').value = obj.data[C].artdescrip;
+                document.getElementById('vpedthdeparnew').value = obj.data[C].artubicac;
             }
         }
     });
@@ -809,7 +818,7 @@ function valproduct(id_produc) {
                                 x++;
                                 valprd = obj.data[U].id_kax;
                                 //alert(id_valepro);
-                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + valprd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + valprd + ");'>Eliminar</a>" + "</td></tr>";
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarprtermin(" + valprd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + valprd + ");'>Eliminar</a>" + "</td></tr>";
                             }
                         }
                         html += '</div></tbody></table></div>';
@@ -1247,7 +1256,7 @@ function updatedvpdett() {
                                 x++;
                                 valprd = obj.data[U].id_kax;
                                 //alert(id_valepro);
-                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsvpdett(" + valprd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + valprd + ");'>Eliminar</a>" + "</td></tr>";
+                                html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarprtermin(" + valprd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetvp'>Editar</a><a href='' class='nav-link' data-toggle='modal' data-target='#modal-delearvpdett' onclick='deletedettart(" + valprd + ");'>Eliminar</a>" + "</td></tr>";
                             }
                         }
                         html += '</div></tbody></table></div>';
@@ -1815,7 +1824,7 @@ function closeditextalta() {
     document.getElementById('posicionextnew').disabled = true;
     document.getElementById('vpobsaddnew').disabled = true;
 }
-//FUNIÓN PARA GUARDAR LA EDICIÓN EN ARTICULOS MEMO ALTA TRASPASO 01052022
+//FUNIÓN PARA GUARDAR LA EDICIÓN EN ARTICULOS EN ALTA DE VALE
 function saveedithnewvp() {
     //alert("entra guardar cambios valeproducción");
     let id_kax = document.getElementById('id_exedith').value;
@@ -1959,7 +1968,7 @@ function saveedithnewvp() {
 function deletenewart(id_delete) {
     //alert(id_delete);
     let folio = id_delete;
-    document.getElementById('id_exedith').value = id_delete;
+    document.getElementById('del_artvpnew').value = id_delete;
     $.ajax({
         url: '../controller/php/convale_pro.php',
         type: 'GET',
@@ -1978,8 +1987,9 @@ function deletenewart(id_delete) {
 }
 //GUARDA LA ELIMINACION POR ARTICULO EN ALTA DE PRODUCCION
 function savdelevpart() {
-    let id_kardex = document.getElementById('id_exedith').value;
-    let datos = 'id_kardex=' + id_kardex + '&opcion=deleartnew';
+    let id_kardex = document.getElementById('del_artvpnew').value;
+    let codigo_1 = document.getElementById('deartvpdett').value;
+    let datos = 'id_kardex=' + id_kardex + '&codigo_1=' + codigo_1 + '&opcion=deleartnew';
     //alert(datos);
     $.ajax({
         type: "POST",
@@ -2092,7 +2102,7 @@ function edithextdettvp() {
 }
 
 
-//FUNIÓN PARA GUARDAR LA EDICIÓN EN ARTICULOS MEMO ALTA TRASPASO 01052022
+//FUNIÓN PARA GUARDAR LA EDICIÓN EN ARTICULOS ALTA VALE 01052022
 function saveedithdettvp() {
     //alert("entra guardar cambios valeproducción");
     let id_kax = document.getElementById('id_exedithdett').value;
@@ -2266,6 +2276,34 @@ function editarinsvpdett(valprd) {
             }
         }
     });
+}
+
+//ABRIR EDITAR ARTICULO EN DETALLES DE PRODUCCIÓN
+function editarprtermin(valprd) {
+    //alert(valprd);
+    let folio = valprd;
+    document.getElementById('id_exedithdett').value = valprd;
+    $.ajax({
+        url: '../controller/php/convale_pro.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (C = 0; C < res.length; C++) {
+            if (obj.data[C].id_kax == valprd) {
+                //alert("entro");
+                document.getElementById('cdedttvpedith').value = obj.data[C].codigo_1;
+                document.getElementById('vpeddettcantid').value = obj.data[C].entrada;
+                document.getElementById('vpobsadddetll').value = obj.data[C].observa;
+                document.getElementById('posicionextdell').value = obj.data[C].tipo_ref;
+                document.getElementById('vpdettedithdes').value = obj.data[C].artcodigo;
+                document.getElementById('vpedthdepardell').value = obj.data[C].artubicac;
+            }
+        }
+    });
+
 }
 
 //LLAMA LA INFORMACIÓN PARA ELIMINAR ARTICULO EN DETALLES DE PRODUCCIÓN
@@ -2520,6 +2558,7 @@ function addarinproinfo() {
     let observa = document.getElementById('vpinfbsertrass').value;
     let ubicacion = document.getElementById('infvppedidos').value;
     let tipo_ref = document.getElementById('psiciontinf').value;
+
     //let datos= 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&tipo_ref=' + tipo_ref + '&opcion=registrarind';
     if (document.getElementById('psiciontinf').value === "EXTENDIDO") {
         let datos = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&tipo_ref=' + tipo_ref + '&opcion=registrarind';
@@ -2544,13 +2583,13 @@ function addarinproinfo() {
                         timer: 1500
                     });
 
-                    codigo_1 = "";
-                    descripcion_1 = "";
-                    cantidad_real = "";
-                    tipo_ref = "0";
-                    observa = "";
+                    document.getElementById('codindivinf').value = "";
+                    document.getElementById('vindescripinf').value = "";
+                    document.getElementById('vincantidinf').value = "";
+                    document.getElementById('psiciontinf').value = 0;
+                    document.getElementById('vpinfbsertrass').value = "";
                     updatedvpdett();
-                    //$("#modal-addartvpinfo").modal('hide');//ocultamos el modal
+                    $("#modal-addartvpinfo").modal('hide'); //ocultamos el modal
                 } else if (respuesta == 2) {
                     document.getElementById('edthvinbli1inf').style.display = ''
                     setTimeout(function() {
