@@ -3407,3 +3407,10 @@ function pdfvp() {
   url = '../formatos/pdf_valeproduccin.php';
   window.open(url + "?data=" + folio, '_black');
 }
+
+function pdfhistory() {
+  var folio = document.getElementById('folprod').innerHTML; //alert("entro");
+
+  url = '../formatos/pdf_reporthistory.php';
+  window.open(url + "?data=" + folio, '_black');
+}

@@ -3223,8 +3223,8 @@
                         <span class="square-10 bg-teal mg-r-5"></span><span id="dias3" name="dias3"></span>
                     </div>
                     <div class="mg-t-20 tx-13">
-                        <a href="" class="tx-gray-600 hover-info">Generar Reporte</a>
-                        <a href="" class="tx-gray-600 hover-info bd-l mg-l-10 pd-l-10">Imprimir Reporte</a>
+                        <a href="javascript:pdfhistory()" class="tx-gray-600 hover-info">Generar Reporte</a>
+                        <!-- <a href="" class="tx-gray-600 hover-info bd-l mg-l-10 pd-l-10">Imprimir Reporte</a> -->
                     </div>
                 </div><!-- card -->
             </div>
