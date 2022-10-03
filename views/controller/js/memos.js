@@ -1959,3 +1959,10 @@ function saverevicionmem() {
         }
     });
 }
+
+function pdfhistory() {
+    var folio = document.getElementById('folmemo').innerHTML;
+    alert(folio);
+    url = '../formatos/pdf_reporthistoryme.php'
+    window.open(url + "?data=" + folio, '_black');
+}
