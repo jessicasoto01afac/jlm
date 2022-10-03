@@ -372,7 +372,7 @@ function registrar_4 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descr
 }
 //funcion para cancelar el registro
 function cancelar ($refe_1,$conexion){
-    $query="UPDATE kardex SET estado=2, status='CANCELADO', status_2='CANCELADO' WHERE refe_1 = '$refe_1'";
+    $query="DELETE FROM kardex WHERE refe_1 = '$refe_1'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

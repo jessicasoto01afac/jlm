@@ -2106,7 +2106,7 @@
 
 <!-- MODAL PARA ELIMINAR ARTICULOS DE ALTA DE MEMOS-->
 <div class="modal fade" id='modal-deleteartal' name='modal-deleteartal'>
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-0">
             <div class="modal-header pd-x-20">
                 <h4 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ELIMINAR ARTICULO DE ALTA DE MEMO</h4>
@@ -3218,9 +3218,9 @@
                     <p id="" name="" class="mg-b-0"><span class="square-8 rounded-circle bg-teal mg-r-10"></span>Fecha
                         de Finalización:<label id="ffinaliz" name="ffinaliz" for=""></label></p>
                     <div class="col-12" align="right">
-                        <span class="square-10 bg-primary mg-r-5"></span><span id="dias1" name="dias1"></span>
-                        <span class="square-10 bg-purple mg-r-5"></span><span id="dias2" name="dias2"></span>
-                        <span class="square-10 bg-teal mg-r-5"></span><span id="dias3" name="dias3"></span>
+                        <span class="square-10 bg-primary mg-r-5"></span><span id="dias1" name="dias1">1</span>
+                        <span class="square-10 bg-purple mg-r-5"></span><span id="dias2" name="dias2">2</span>
+                        <span class="square-10 bg-teal mg-r-5"></span><span id="dias3" name="dias3">3</span>
                     </div>
                     <div class="mg-t-20 tx-13">
                         <a href="javascript:pdfhistory()" class="tx-gray-600 hover-info">Generar Reporte</a>

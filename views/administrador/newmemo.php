@@ -47,7 +47,7 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="../administrador/memos.php">Lista de memos</a>
+                <a class="breadcrumb-item" onclick="cancealmemo()" href="../administrador/memos.php">Lista de memos</a>
                 <span class="breadcrumb-item active">Alta de Memo</span>
             </nav>
         </div><!-- br-pageheader -->

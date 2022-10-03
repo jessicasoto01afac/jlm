@@ -112,7 +112,8 @@ include('header.php');
                 <div style="float: right;">
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button onclick="editmemo()" id="openedimem1" name="openedimem1" title="Dar clic para editar"
-                            type="button" class="btn btn-secondary btn btn-warning"><i class="fa fa-edit"></i></button>
+                            type="button" class="btn btn-secondary btn btn-secondary"><i
+                                class="fa fa-edit"></i></button>
                         <button onclick="closedithvmem()" id="closememo1" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
@@ -184,8 +185,8 @@ include('header.php');
                                         <label class="form-control-label" style="font-size:14px">FORMULA:
                                             <span class="tx-danger">*</span></label>
                                         <input readonly style="color:#000773; font-size:16px" onkeyup="mayus(this);"
-                                            class="form-control" name="memoform" id="memoform"
-                                            placeholder="FORMULA" type="text" required="">
+                                            class="form-control" name="memoform" id="memoform" placeholder="FORMULA"
+                                            type="text" required="">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -193,8 +194,8 @@ include('header.php');
                                         <label class="form-control-label" style="font-size:14px">AUTORIZA:
                                             <span class="tx-danger">*</span></label>
                                         <input readonly style="color:#000773; font-size:16px" onkeyup="mayus(this);"
-                                            class="form-control" name="memoautor" id="memoautor"
-                                            placeholder="AUTORIZA" type="text" required="">
+                                            class="form-control" name="memoautor" id="memoautor" placeholder="AUTORIZA"
+                                            type="text" required="">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -202,8 +203,8 @@ include('header.php');
                                         <label class="form-control-label" style="font-size:14px">SURTIO:
                                             <span class="tx-danger">*</span></label>
                                         <input readonly style="color:#000773; font-size:16px" onkeyup="mayus(this);"
-                                            class="form-control" name="memosurt" id="memosurt"
-                                            placeholder="SURTIO" type="text" required="">
+                                            class="form-control" name="memosurt" id="memosurt" placeholder="SURTIO"
+                                            type="text" required="">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -316,6 +317,18 @@ include('header.php');
                     </form>
                 </div>
             </div><!-- br-pagebody -->
+            <footer class="br-footer">
+                <div class="footer-left">
+                    <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
+                    <div>Jose Luis Mondragon y CIA.</div>
+                </div>
+                <div class="footer-right d-flex align-items-center">
+                    <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i
+                            class="fa fa-facebook tx-20"></i></a>
+                    <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i
+                            class="fa fa-globe tx-20"></i></a>
+                </div>
+            </footer>
     </section>
 
     <script src="../template/lib/jquery/jquery.js"></script>
@@ -338,27 +351,16 @@ include('header.php');
     <script src="../controller/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../controller/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
     <?php include('../administrador/modal.php');?>
     <script type="text/javascript">
     // TABLA INSPECTORES EXTERNOS//
-    var table = $('#example').DataTable({
-
-
-        "language": {
-            "searchPlaceholder": "Buscar datos...",
-            "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-        },
-        "order": [
-            [6, "DESC"]
-        ],
-        "ajax": "../controller/php/infmemos.php",
-        "columnDefs": [{
-            //  "targets": -1,
-            // "data": null,
-            //"defaultContent": ""
-
-        }]
-    });
+    memopen();
     </script>
 
 
