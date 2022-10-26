@@ -122,7 +122,7 @@ if(!isset($usuario)){
 
             if (sinexistencia($id_kax,$conexion)){
                 echo "0";
-                $realizo = 'MARCA ARTICULO SIN EXISTENCIA';
+                $realizo = 'MARCA ARTICULO SIN EXISTENCIA DE VALE DE OFICINA';
                 //$usuario='PRUEBAS';
                 hisinexist($usuario,$realizo,$refe_1,$codigo_1,$conexion);
             }else{
@@ -138,7 +138,7 @@ if(!isset($usuario)){
 
             if (existencia($id_kax,$cantidad,$codigo_1,$descripcion,$conexion)){
                 echo "0";
-                $realizo = 'SURTE ARTICULO DE OFICINA';
+                $realizo = 'SURTE ARTICULO DE VALE DE OFICINA';
                 //$usuario='PRUEBAS';
                 hisexist($usuario,$realizo,$cantidad,$refe_1,$codigo_1,$conexion);
             }else{
@@ -148,7 +148,7 @@ if(!isset($usuario)){
         $folio = $_POST['folio'];
             if (autorizar1($folio,$conexion)){
                 echo "0";
-                $usuario='PRUEBAS';
+                //$usuario='PRUEBAS';
                 autorizar2($usuario,$folio,$conexion);
                 histaut($usuario,$folio,$conexion);
             }else{
@@ -526,7 +526,7 @@ function surtirartupda ($id_kax,$refe_1,$cantidad,$observa_dep,$status2,$conexio
 function historial($usuario,$refe_1,$codigo_1,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE OFICINA', 'CODIGO:' ' $refe_1' ' ARTICULO:' ' $codigo_1','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE OFICINA', 'FOLIO:' '$refe_1 ' 'CODIGO:' ' $refe_1' ' ARTICULO:' ' $codigo_1','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -547,7 +547,7 @@ function histedith($usuario,$fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$c
 function histcambio($usuario,$codigo_1,$salida,$costo,$total,$refe_1,$id_kax,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'EDITA ARTUCULO VALE OFICINA', 'ID: ' '$id_kax ' '$refe_1' ' CODIGO:' '$codigo_1'  ' SALIDA: '  ' $salida' ' COSTO:' ' $costo' ' TOTAL:' ' $total' ,'$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'EDITA ARTICULO VALE DE OFICINA', 'ID: ' '$id_kax ' '$refe_1' ' CODIGO:' '$codigo_1'  ' SALIDA: '  ' $salida' ' COSTO:' ' $costo' ' TOTAL:' ' $total' ,'$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -653,7 +653,7 @@ function histdeinf($id_kax,$refe_1,$usuario,$realizo,$conexion){
 function hisupdasurtir($usuario,$refe_1,$descrip,$cantidad,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'ACTUALIZA ARTICULO YA SURTIDO', 'FOLIO:' '$refe_1 ' 'ARTICULO: ' ' $descrip' ' CANTIDAD:' '$cantidad','$fecha1')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'ACTUALIZA ARTICULO YA SURTIDO DE VALE DE OFICINA', 'FOLIO:' '$refe_1 ' 'ARTICULO: ' ' $descrip' ' CANTIDAD:' '$cantidad','$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

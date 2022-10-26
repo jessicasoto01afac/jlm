@@ -1889,3 +1889,10 @@ function pdfvp() {
   url = '../formatos/pdf_valeoficina.php';
   window.open(url + "?data=" + folio, '_black');
 }
+
+function pdfhistory() {
+  var folio = document.getElementById('fvofi').innerHTML; //alert("entro");
+
+  url = '../formatos/pdf_reporthistoryvaleofi.php';
+  window.open(url + "?data=" + folio, '_black');
+}
