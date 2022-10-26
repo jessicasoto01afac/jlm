@@ -2871,8 +2871,8 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label label2">AGREGAR OBSERVACIONES:</label>
-                                <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="surbserevp"
-                                    id="surbserevp" placeholder="Ingresa alguna observación"></textarea>
+                                <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="surbserevpdep"
+                                    id="surbserevpdep" placeholder="Ingresa alguna observación"></textarea>
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-4">

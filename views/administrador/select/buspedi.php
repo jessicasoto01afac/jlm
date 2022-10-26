@@ -1,6 +1,6 @@
 <?php include ("../../controller/conexion.php");
 
-      $sql = "SELECT refe_1 FROM kardex where estado='0' AND tipo ='PEDIDO' AND status='PENDIENTE' GROUP BY refe_1 ORDER BY id_kax ASC";
+      $sql = "SELECT refe_1 FROM kardex where estado='0' AND tipo ='PEDIDO' AND status='PENDIENTE' AND status='AUTORIZADOS' GROUP BY refe_1 ORDER BY id_kax ASC";
       $pedidos = mysqli_query($conexion,$sql);
     ?>
 <select class="form-control select2-show-search" multiple="multiple" data-placeholder="Elige un pedido relacionado"

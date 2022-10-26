@@ -656,7 +656,7 @@ function reclamocliente(id_reclaclient) {
                 if (obj.data[D].estatus_recl == 'PENDIENTE') {
                     finalizado.style.display = '';
                     editar.style.display = '';
-                    pdfvp.style.display = 'none';
+                    pdfvp.style.display = '';
                     $.ajax({
                             url: '../controller/php/articurep.php',
                             type: 'GET',
@@ -1425,4 +1425,11 @@ function histvalepro() {
             }
         }
     });
+}
+
+function pdfvp() {
+    var folio = document.getElementById('folreport').innerHTML;
+    //alert(folio);
+    url = '../formatos/pdf_reclamo_cliente.php'
+    window.open(url + "?data=" + folio, '_black');
 }

@@ -1602,7 +1602,7 @@ function infsurti(id_valeprodu) {
                     //oculta la edición
                     document.getElementById('opesurt1').style.display = "none";
                 } else {
-                    //alert("entro");
+                    //alert("entro"); opstsur
                     document.getElementById('descsurt').innerHTML = obj.data[C].codigo_1 + " / " + obj.data[C].artdescrip;
                     document.getElementById('cartsur').innerHTML = obj.data[C].salida;
                     document.getElementById('opstsur').innerHTML = obj.data[C].observa_dep;
@@ -3012,10 +3012,10 @@ function acsurtirvpf() {
     var codigo_1 = document.getElementById('codisurtvp').value;
     var cantidad = document.getElementById('surtavprinf').value;
     var descripcion = document.getElementById('descripsurvp').value;
-    var observa_dep = document.getElementById('surbserevp').value;
+    var observa_dep = document.getElementById('surbserevpdep').value;
 
     var datos = 'id_kax=' + id_kax + '&observa_dep=' + observa_dep + '&refe_1=' + refe_1 + '&codigo_1=' + codigo_1 + '&cantidad=' + cantidad + '&descripcion=' + descripcion + '&opcion=surtir';
-    //alert(datos)
+    alert(datos)
     $.ajax({
         type: "POST",
         url: "../controller/php/insertvapro.php",

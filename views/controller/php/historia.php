@@ -1,7 +1,7 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT * FROM historial ORDER BY id_his ASC";
+	$query = "SELECT * FROM historial ORDER BY id_his DESC";
 	$resultado = mysqli_query($conexion, $query);
 
 	if(!$resultado){
