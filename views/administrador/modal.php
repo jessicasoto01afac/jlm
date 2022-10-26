@@ -810,8 +810,16 @@
                             <div class="form-group">
                                 <label class="form-control-label label2">CODIGO: <span
                                         class="tx-danger">*</span></label>
-                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
-                                    name="edicovo" id="edicovo">
+                                <!-- <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="edicovo" id="edicovo"> -->
+                                <select class="form-control" onchange="edithextdettvp()" id="edicovo"
+                                    name="edicovo" type="text" disabled data-live-search="true"
+                                    style="width: 100%">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($arttrasdett = mysqli_fetch_row($artiedidettvp)):?>
+                                    <option value="<?php echo $arttrasdett[0]?>"><?php echo $arttrasdett[0]?></option>
+                                    <?php endwhile; ?>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-8">
@@ -1359,6 +1367,9 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body tx-center pd-y-20 pd-x-20">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 <i class="icon icon ion-ios-close-outline tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
                 <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_nosur"
                     id="id_nosur">
@@ -1998,10 +2009,12 @@
                         <div id="masplusave" name="masplusave" class="col-lg-3" id="divimascolor" style="display:none">
                             <!-- <button type="button" onclick="saveaddedith()"
                                 class="btn btn-oblong btn-success btn-block mg-b-10">GUARDAR</button> -->
-                            <a onclick="saveaddedith()" title="Guardar Articulo" style="color:white" class="btn btn-primary btn-icon mg-r-5 mg-b-10">
+                            <a onclick="saveaddedith()" title="Guardar Articulo" style="color:white"
+                                class="btn btn-primary btn-icon mg-r-5 mg-b-10">
                                 <div><i class="fa fa-floppy-o"></i></div>
                             </a>
-                            <a onclick="canceladd()" title="Cerrar agregar articulo" style="color:white" class="btn btn-purple btn-icon mg-r-5 mg-b-10">
+                            <a onclick="canceladd()" title="Cerrar agregar articulo" style="color:white"
+                                class="btn btn-purple btn-icon mg-r-5 mg-b-10">
                                 <div><i class="fa fa-times"></i></div>
                             </a>
                         </div>
@@ -2908,7 +2921,7 @@
         <div class="modal-content">
             <div class="modal-body tx-center pd-y-20 pd-x-20">
                 <input style="display:none" class="form-control" type="text" name="idsurt" id="idsurt">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" onclick="closedithsurt()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <i class="icon ion-ios-checkmark-outline tx-100 tx-success lh-1 mg-t-20 d-inline-block"></i>
@@ -2942,7 +2955,6 @@
                     </div><!-- modal-body -->
                 </div>
             </div>
-
         </div><!-- modal-content -->
     </div><!-- modal-dialog -->
 </div><!-- pd-y-50 -->
@@ -3110,7 +3122,7 @@
         <div class="modal-content">
             <div class="modal-body tx-center pd-y-20 pd-x-20">
                 <input style="display:none" class="form-control" type="text" name="idsinexvp" id="idsinexvp">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" onclick="closedithsnex()" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <i class="icon icon ion-ios-close-outline tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>

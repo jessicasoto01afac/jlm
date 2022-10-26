@@ -1685,7 +1685,8 @@ function infsiexvp(id_valeprodu) {
                     //inpus e edición
                     document.getElementById('cnsinvp').value = obj.data[C].salida;
                     document.getElementById('obdepsinvp').value = obj.data[C].observa_dep;
-                    //oculta la edición
+                    document.getElementById('opstsinvp').innerHTML = obj.data[C].observa_dep;
+                    //oculta la edición opstsinvp
                     document.getElementById('opesurt1sn').style.display = "none";
                 } else {
                     //alert("entro");
@@ -1695,6 +1696,7 @@ function infsiexvp(id_valeprodu) {
                     //inpus e edición
                     document.getElementById('cnsinvp').value = obj.data[C].salida;
                     document.getElementById('obdepsinvp').value = obj.data[C].observa_dep;
+                    document.getElementById('opstsinvp').innerHTML = obj.data[C].observa_dep;
                     //muestra la edición
                     document.getElementById('opesurt1sn').style.display = "";
                 }

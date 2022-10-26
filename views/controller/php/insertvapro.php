@@ -490,7 +490,7 @@ if(!isset($usuario)){
             
             if (poductividad($refe_1,$caracter,$usuario,$conexion)){
                 echo "0";
-                finaliadd ($refe_1,$conexion);
+                //finaliadd ($refe_1,$conexion);
                 //historial($usuario,$refe_1,$codigo_1,$conexion);
             }else{
                 echo "1";

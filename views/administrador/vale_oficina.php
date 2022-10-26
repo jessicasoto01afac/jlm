@@ -6,14 +6,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="../template/img/logo.png" />
-
-
     <!-- Meta -->
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
-
     <title>JLM|Vale de oficina</title>
-
     <!-- vendor css -->
     <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../template/lib/Ionicons/css/ionicons.css" rel="stylesheet">
@@ -23,30 +19,21 @@
     <link href="../template/lib/datatables/jquery.dataTables.css" rel="stylesheet">
     <link href="../template/lib/select2/css/select2.min.css" rel="stylesheet">
     <link href="../template/css/diseno.css" rel="stylesheet">
-
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
     <script src="../controller/js/vales.js"></script>
-
 </head>
 
 <body class="collapsed-menu">
-
-
     <?php
-
 include('header.php');
 ?>
-    <style>
-
-    </style>
     <section class="content" id="lista">
         <!-- ########## START: MAIN PANEL ########## -->
         <div class="br-mainpanel">
             <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
                 <h4 class="tx-gray-800 mg-b-5">VALES DE OFICINA</h4>
             </div>
-
             <div class="br-pagebody">
                 <div class="br-section-wrapper">
                     <a class="btn btn-primary" href="javascript:foliovalofi()" style="float:right"><i
@@ -54,22 +41,37 @@ include('header.php');
                     <br>
                     <br>
                     <br>
-                    <div id="listvale_ofi">
-                    </div><!-- br-section-wrapper -->
-                </div><!-- br-pagebody -->
-                <footer class="br-footer">
-                    <div class="footer-left">
-                        <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
-                        <div>Jose Luis Mondragon y CIA.</div>
+                    <div class="table-wrapper rounded table-responsive">
+                        <table class="table display dataTable no-footer" id="datavaleofi" name="datavaleofi"
+                            style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%;">ID</th>
+                                    <th>FOLIO</th>
+                                    <th>FECHA</th>
+                                    <th>SOLICITANTE</th>
+                                    <th>FOLIO JLM</th>
+                                    <th>ESTADO</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
-                    <div class="footer-right d-flex align-items-center">
-                        <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i
-                                class="fa fa-facebook tx-20"></i></a>
-                        <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i
-                                class="fa fa-globe tx-20"></i></a>
-                    </div>
-                </footer>
-            </div><!-- br-mainpanel -->
+                </div><!-- br-section-wrapper -->
+            </div><!-- br-pagebody -->
+            <footer class="br-footer">
+                <div class="footer-left">
+                    <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
+                    <div>Jose Luis Mondragon y CIA.</div>
+                </div>
+                <div class="footer-right d-flex align-items-center">
+                    <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i
+                            class="fa fa-facebook tx-20"></i></a>
+                    <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i
+                            class="fa fa-globe tx-20"></i></a>
+                </div>
+            </footer>
+        </div><!-- br-mainpanel -->
     </section>
     <!-- ########## END: MAIN PANEL ########## -->
     <!------------------------------- ########## DETALLES DEL VALE ########## -------------------------->
@@ -86,12 +88,15 @@ include('header.php');
                 <div style="float: right;">
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button onclick="editvaleof()" id="openedivo1" title="Dar clic para editar" type="button"
-                            class="btn btn-secondary btn btn-warning"><i class="fa fa-edit"></i></button>
+                            class="btn btn-secondary btn btn-secondary"><i class="fa fa-edit"></i></button>
                         <button onclick="closedithvo()" id="closevoed" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
-                        <button title="Imprimir" type="button" class="btn btn-secondary"><i
-                                class="fa fa-file-pdf-o"></i></button>
+                        <button onclick="pdfvp()" style="display:none;" title="Imprimir" id="pdfvofi" name="pdfvofi"
+                            type="button" class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
+                        <button title="ver historial" onclick="histvaleofi()" data-toggle="modal"
+                            data-target="#modal-vphistorial" type="button" class="btn btn-primary"><i
+                                class="fa fa-history"></i></button>
                     </div>
                 </div><!-- col-5 -->
                 <div class="br-section-wrapper">
@@ -254,8 +259,7 @@ include('header.php');
                             <h6 class="col-md-4 mg-t--1 mg-md-t-0">ARTICULOS</h6>
                             <br>
                             <div class="col-lg-12">
-                                <div id="listvaleofi1">
-                                </div><!-- col-12 -->
+                                <div id="listvaleofi1"></div>
                             </div><!-- form-layout -->
                     </form>
                 </div>
@@ -282,80 +286,16 @@ include('header.php');
     <script src="../controller/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../controller/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
     <?php include('../administrador/modal.php');?>
     <script type="text/javascript">
     // TABLA INSPECTORES EXTERNOS//
-    $.ajax({
-        url: '../controller/php/convaleoficin.php',
-        type: 'POST'
-    }).done(function(resp) {
-        obj = JSON.parse(resp);
-        var res = obj.data;
-        var x = 0;
-        html =
-            '<div class="table-wrapper table-responsive"><table style="width:100%" id="datavaleofi" name="datavaleofi" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>FOLIO</th><th style="width:100px;"><i></i>FECHA</th><th><i></i>SOLICITANTE</th><th><i></i>ESTADO</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
-        for (U = 0; U < res.length; U++) {
-            x++;
-
-            id_per = "este es la person" //indentificacion de la person
-
-            html += "<tr><td>" + x + "</td><td>" + obj.data[U].refe_1 + "</td><td>" + obj.data[U].fecha +
-                "</td><td>" + obj.data[U].proveedor_cliente + "</td><td>" + obj.data[U].status + "</td><td>" +
-                "<a onclick='infvale()' style='cursor:pointer;' title='Editar Articulo' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='deletvolis()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletevol'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" +
-                "</td></tr>";
-        }
-        html += '</div></tbody></table></div></div>';
-        $("#listvale_ofi").html(html);
-        'use strict';
-        $('#datavaleofi').DataTable({
-            responsive: true,
-            language: {
-                searchPlaceholder: 'Buscar...',
-                sSearch: '',
-                lengthMenu: 'mostrando _MENU_ paginas',
-                sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
-                sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
-                sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
-                oPaginate: {
-                    sFirst: 'Primero',
-                    sLast: 'Último',
-                    sNext: 'Siguiente',
-                    sPrevious: 'Anterior',
-                },
-            }
-        });
-    })
-
-    //otro script
-    $('.dataTables_length select').select2({
-        minimumResultsForSearch: Infinity
-    });
-
-    $(function() {
-        'use strict';
-
-        $('#datatable1').DataTable({
-            responsive: true,
-            language: {
-                searchPlaceholder: 'Search...',
-                sSearch: '',
-                lengthMenu: '_MENU_ items/page',
-            }
-        });
-
-        $('#datatable2').DataTable({
-            bLengthChange: false,
-            searching: false,
-            responsive: true
-        });
-
-        // Select2
-        $('.dataTables_length select').select2({
-            minimumResultsForSearch: Infinity
-        });
-
-
-    });
+    openvalofic();
     </script>
 
 

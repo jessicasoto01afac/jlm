@@ -11,14 +11,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link rel="shortcut icon" href="../template/img/logo.png" />
-
     <!-- Meta -->
     <meta name="author" content="Jessica Soto">
-
     <title>JLM|Vales_oficina</title>
-
     <!-- vendor css -->
     <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../template/lib/Ionicons/css/ionicons.css" rel="stylesheet">
@@ -29,14 +25,9 @@
     <script type="text/javascript" async="" src="../datas/ga.js"></script>
     <link href="../template/lib/select2/css/select2.min.css" rel="stylesheet">
     <script src="../template/js/sweetalert2.all.min.js"></script>
-
     <link href="../template/lib/highlightjs/github.css" rel="stylesheet">
     <link href="../template/lib/jquery.steps/jquery.steps.css" rel="stylesheet">
     <script src="../controller/js/vales.js"></script>
-
-
-
-
 
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
@@ -80,8 +71,8 @@
                                     <div class="form-group">
                                         <label style="font-size:16px" class="form-control-label">FOLIO: <span
                                                 class="tx-danger">*</span></label>
-                                        <input onkeyup="mayus(this);" readonly class="form-control" type="text" id="vfolio"
-                                            name="vfolio" value="<?php echo $folio[0]?>" placeholder="">
+                                        <input onkeyup="mayus(this);" readonly class="form-control" type="text"
+                                            id="vfolio" name="vfolio" value="<?php echo $folio[0]?>" placeholder="">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
                                 <div class="col-lg-4">
@@ -316,7 +307,6 @@
 
     $(document).ready(function() {
         'use strict';
-
         $('#wizard2').steps({
             headerTag: 'h3',
             bodyTag: 'section',
@@ -324,36 +314,65 @@
             enableFinishButton: true,
             titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
             labels: {
-            cancel: "Cancelar",
-            current: "current step:",
-            pagination: "Pagination",
-            finish: "Finalizar",
-            next: "Siguiente",
-            previous: "Anterior",
-            loading: "Cargando ..."
-        },
-        onFinished: function (event, currentIndex) {
-            //alert("Form submitted.");
-            var refe_1 = document.getElementById('vfolio').value; //FOLIO DEL VALE
-            var fecha = document.getElementById('vfecha').value; 
-            var refe_3 = document.getElementById('vtipo').value;
-            var proveedor_cliente = document.getElementById('vdep').value + document.getElementById('vprove').value ; 
-            if (document.getElementById('vfolio').value == '' || document.getElementById('vfecha').value == '' || document.getElementById('vtipo').value == '' || proveedor_cliente == '' ) { 
-        document.getElementById('vaciosvo').style.display=''
-        setTimeout(function(){
-            document.getElementById('vaciosvo').style.display='none';
-        }, 2000);
-          return;
-        } else {
-            Swal.fire({
-                type: 'success',
-                text: 'Se finaliza de forma correcta',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            setTimeout("location.href = 'vale_oficina.php';", 1500);
-        }
-        },
+                cancel: "Cancelar",
+                current: "current step:",
+                pagination: "Pagination",
+                finish: "Finalizar",
+                next: "Siguiente",
+                previous: "Anterior",
+                loading: "Cargando ..."
+            },
+            onFinished: function(event, currentIndex) {
+                //alert("Form submitted.");
+                var refe_1 = document.getElementById('vfolio').value; //FOLIO DEL VALE
+                var fecha = document.getElementById('vfecha').value;
+                var refe_3 = document.getElementById('vtipo').value;
+                var proveedor_cliente = document.getElementById('vdep').value + document
+                    .getElementById('vprove').value;
+
+                let datos = 'refe_1=' + refe_1 + '&refe_3=' + refe_3 + '&opcion=registrarfin';
+                //alert(datos);
+                if (document.getElementById('vfolio').value == '' || document.getElementById(
+                        'vfecha').value == '' || document.getElementById('vtipo').value == '' ||
+                    proveedor_cliente == '') {
+                    document.getElementById('vaciosvo').style.display = ''
+                    setTimeout(function() {
+                        document.getElementById('vaciosvo').style.display = 'none';
+                    }, 2000);
+                    return;
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "../controller/php/insertvaleofi.php",
+                        data: datos
+                    }).done(function(respuesta) {
+                        //alert(respuesta);
+                        if (respuesta == 0) {
+                            Swal.fire({
+                                type: 'success',
+                                text: 'Se AGREGO el vale de producción de forma correcta',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                            setTimeout("location.href = 'vale_oficina.php';", 1500);
+                        } else if (respuesta == 2) {
+                            Swal.fire({
+                                type: 'warning',
+                                text: 'ya esta duplicado',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        } else {
+                            Swal.fire({
+                                type: 'error',
+                                text: 'Error contactar a soporte tecnico o levantar un ticket',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    });
+                }
+            },
             onStepChanging: function(event, currentIndex, newIndex) {
                 if (currentIndex < newIndex) {
                     // Step 1 form validation
@@ -384,55 +403,11 @@
                 }
             }
         });
-
-        $('#wizard3').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            stepsOrientation: 1
-        });
-
-        $('#wizard4').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            cssClass: 'wizard step-equal-width'
-        });
-
-        $('#wizard5').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            cssClass: 'wizard wizard-style-1'
-        });
-
-        $('#wizard6').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            cssClass: 'wizard wizard-style-2'
-        });
-
-        $('#wizard7').steps({
-            headerTag: 'h3',
-            bodyTag: 'section',
-            autoFocus: true,
-            titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
-            cssClass: 'wizard wizard-style-3'
-        });
-
     });
 
     $(document).ready(function() {
         $('#busccodigo').load('./select/buscar.php');
     });
     </script>
-
-
 </body>
-
 </html>
