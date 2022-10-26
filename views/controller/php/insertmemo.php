@@ -205,7 +205,7 @@ if(!isset($usuario)){
         
             if (cancelar($refe_1,$conexion)){
                 echo "0";
-                //cancfolio ($refe_1,$conexion);
+                cancfolio ($refe_1,$conexion);
             }else{
                 echo "1";
             }
@@ -321,15 +321,7 @@ function poductividad ($usuario,$refe_1,$conexion){
     }
     $this->conexion->cerrar();
 }
-function cancfolio ($refe_1,$conexion){
-    $query="UPDATE folios SET estado_f=1 WHERE folio = '$refe_1' and tipo='MEMO'";
-    if(mysqli_query($conexion,$query)){
-        return true;
-    }else{
-        return false;
-    }
-    cerrar($conexion);
-}
+
 //funcion para guardar el ARTICULO PARA TRASFORMACION EN LATA DE MEO 
 function registrar ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$refe_2,$conexion){
     $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','$refe_3','$fecha','$codigo_1','$descripcion_1','MEMO','ARTICULO_TRANSFORMACION','$proveedor_cliente','$ubicacion','$cantidad_real',0,'$salida',0,0,0,'$observa','NA','PENDIENTE','PENDIENTE','NO','NO',0)";
@@ -373,6 +365,15 @@ function registrar_4 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descr
 //funcion para cancelar el registro
 function cancelar ($refe_1,$conexion){
     $query="DELETE FROM kardex WHERE refe_1 = '$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+function cancfolio ($refe_1,$conexion){
+    $query="DELETE FROM folios WHERE folio = '$refe_1' and tipo='MEMO'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
