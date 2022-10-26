@@ -90,7 +90,7 @@ function openrepclient() {
                                 showConfirmButton: false,
                                 timer: 1500
                             });
-                            alert(respuesta);
+                            //alert(respuesta);
                         }
                     });
                 }
@@ -329,7 +329,7 @@ function closeditclient() {
 //FUCIÓN PARA LLENAR INFORMACIÓN DEL ARTICULO DE ALTA DE RECLAMO DE CLIENTE
 function editararclienalt(idreclamo) {
     //alert("entrta editar alata");
-    alert(idreclamo);
+    //alert(idreclamo);
     let folio2 = document.getElementById('folioreclie').value; //FOLIO    
     document.getElementById('openeditarclie').style.display = '';
     document.getElementById('closediarclie').style.display = 'none';

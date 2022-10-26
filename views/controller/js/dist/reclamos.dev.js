@@ -110,8 +110,7 @@ function openrepclient() {
                 text: 'No se puedo guardar coontactar a soporte tecnico o levantar un ticke',
                 showConfirmButton: false,
                 timer: 1500
-              });
-              alert(respuesta);
+              }); //alert(respuesta);
             }
           });
         }
@@ -339,7 +338,7 @@ function closeditclient() {
 
 function editararclienalt(idreclamo) {
   //alert("entrta editar alata");
-  alert(idreclamo);
+  //alert(idreclamo);
   var folio2 = document.getElementById('folioreclie').value; //FOLIO    
 
   document.getElementById('openeditarclie').style.display = '';
