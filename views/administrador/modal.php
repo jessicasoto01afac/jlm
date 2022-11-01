@@ -1743,9 +1743,9 @@
 </div><!-- modal -->
 <!-- MODAL PARA EDITAR UISUARIOS-->
 <div class="modal fade" id='modal-edithtrans'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
-            <div class="modal-header pd-y-20 pd-x-25">
+            <div class="modal-header pd-x-20">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO DE TRANSFORMACIÓN</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

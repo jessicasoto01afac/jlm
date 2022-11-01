@@ -2223,7 +2223,7 @@ function saveedithdettvp() {
 
 
 function editarinsvpdett(valprd) {
-  alert(valprd);
+  //alert(valprd);
   var folio = valprd;
   document.getElementById('id_exedithdett').value = valprd;
   $.ajax({
