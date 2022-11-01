@@ -13,6 +13,22 @@ $pedfin = "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado=
 $resulpefin = mysqli_query($conexion,$pedfin);
 $pedfinali = mysqli_fetch_assoc($resulpefin); 
 
+$bureclam = "SELECT count(*) as result FROM (SELECT folio_recl FROM reclamoclient where estado='0' GROUP BY folio_recl) AS Total";
+$resulrecli = mysqli_query($conexion,$bureclam);
+$reclamo = mysqli_fetch_assoc($resulrecli); 
+
+$busproduc = "SELECT CONCAT(ROUND(((SELECT count(*) as cantidad FROM (SELECT id_kax FROM kardex where estado='0' AND tipo='VALE_PRODUCCION' AND status='FINALIZADO' GROUP BY refe_1)AS Cantidad ) / (SELECT count(*) as result FROM (SELECT id_kax FROM kardex where estado='0' AND tipo='VALE_PRODUCCION' GROUP BY refe_1) AS Total) * 100), 2), '%') AS porcentaje";
+$resulprod = mysqli_query($conexion,$busproduc);
+$product = mysqli_fetch_assoc($resulprod);
+
+$busped = "SELECT CONCAT(ROUND(((SELECT count(*) as cantidad FROM (SELECT id_kax FROM kardex where estado='0' AND tipo='PEDIDO' AND status='FINALIZADO' GROUP BY refe_1)AS Cantidad ) / (SELECT count(*) as result FROM (SELECT id_kax FROM kardex where estado='0' AND tipo='PEDIDO' GROUP BY refe_1) AS Total) * 100), 2), '%') AS porcentaje";
+$resulped = mysqli_query($conexion,$busped);
+$porpedid = mysqli_fetch_assoc($resulped);
+
+$busped2 = "SELECT CONCAT(ROUND(((SELECT count(*) as cantidad FROM (SELECT id_kax FROM kardex where estado='0' AND tipo='PEDIDO' AND status='FINALIZADO' GROUP BY refe_1)AS Cantidad ) / (SELECT count(*) as result FROM (SELECT id_kax FROM kardex where estado='0' AND tipo='PEDIDO' GROUP BY refe_1) AS Total) * 100), 2)) AS porcentaje";
+$resulped2 = mysqli_query($conexion,$busped2);
+$porpedid2 = mysqli_fetch_assoc($resulped2);
+
 
 ?>
 <html lang="en">
@@ -59,9 +75,9 @@ $pedfinali = mysqli_fetch_assoc($resulpefin);
               <div class="pd-25 d-flex align-items-center">
                 <i class="ion ion-earth tx-60 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
-                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total de pedidos</p>
+                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total de Pedidos</p>
                   <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1"><?php echo $pedidos['result']?></p>
-                  <span class="tx-11 tx-roboto tx-white-6">24% higher yesterday</span>
+                  <span class="tx-11 tx-roboto tx-white-6">Pedidos</span>
                 </div>
               </div>
             </div>
@@ -71,8 +87,8 @@ $pedfinali = mysqli_fetch_assoc($resulpefin);
               <div class="pd-25 d-flex align-items-center">
                 <i class="icon ion-bookmark tx-60 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
-                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Reclamos</p>
-                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">$329,291</p>
+                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total de Reclamos</p>
+                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1"><?php echo $reclamo['result']?></p>
                   <span class="tx-11 tx-roboto tx-white-6">Clientes</span>
                 </div>
               </div>
@@ -84,8 +100,8 @@ $pedfinali = mysqli_fetch_assoc($resulpefin);
                 <i class="ion ion-monitor tx-60 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
                   <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Producción</p>
-                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">54.45%</p>
-                  <span class="tx-11 tx-roboto tx-white-6">Ordenes de producción</span>
+                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1"><?php echo $product['porcentaje']?></p>
+                  <span class="tx-11 tx-roboto tx-white-6">Vales de producción finalizado</span>
                 </div>
               </div>
             </div>
@@ -108,9 +124,9 @@ $pedfinali = mysqli_fetch_assoc($resulpefin);
               <div class="row">
                 <div class="col-sm-6">
                   <h6 class="card-title tx-uppercase tx-12">PEDIDOS FINALIZADOS</h6>
-                  <p class="display-4 tx-medium tx-inverse mg-b-5 tx-lato">19.20%</p>
+                  <p class="display-4 tx-medium tx-inverse mg-b-5 tx-lato"><?php echo $porpedid['porcentaje']?></p>
                   <div class="progress mg-b-10">
-                    <div class="progress-bar bg-primary progress-bar-xs wd-<?php echo $pedfinali['result'] * 100 / $pedidos['result']?>p" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-primary progress-bar-xs wd-30" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                   </div><!-- progress -->
                   <p class="tx-16 lh-3 mg-b-0">Puedes visualizar todos los pedidos <a href="../administrador/listpedido.php" target="blank">aqui</a>.</p>
                 </div><!-- col-6 -->
@@ -125,7 +141,7 @@ $pedfinali = mysqli_fetch_assoc($resulpefin);
               <div class="d-flex align-items-center justify-content-between mg-b-30">
                 <div>
                   <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">CLIENTES CON MAYOR DEMANDA</h6>
-                  <p class="mg-b-0"><i class="icon ion-calendar mg-r-5"></i> From October 2017 - December 2017</p>
+                  <p class="mg-b-0"><i class="icon ion-calendar mg-r-5"></i>Enero 2022 - Diciembre 2022</p>
                 </div>
                 <a href="../administrador/listpedido.php" class="btn btn-outline-info btn-oblong tx-11 tx-uppercase tx-mont tx-medium tx-spacing-1 pd-x-30 bd-2">Ver mas</a>
               </div><!-- d-flex -->

@@ -2,7 +2,7 @@
 	include("../conexion.php");
 	session_start();
 	
-	$query = "SELECT * FROM kardex where estado='0' AND tipo ='PEDIDO' GROUP BY refe_1 ORDER BY refe_1 DESC";
+	$query = "SELECT * FROM kardex where estado='0' AND tipo ='PEDIDO' GROUP BY refe_1 ORDER BY id_kax DESC";
 	$resultado = mysqli_query($conexion, $query);
 	$contador=0;
 	if(!$resultado){

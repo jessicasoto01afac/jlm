@@ -48,6 +48,9 @@
 
       $sql14 = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
       $artisuvpfn = mysqli_query($conexion,$sql14);
+
+      $sqlpri = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $artidettvp = mysqli_query($conexion,$sqlpri);
       
     ?>
 
@@ -2587,8 +2590,8 @@
                                     name="cdedttvpedith" type="text" disabled data-live-search="true"
                                     style="width: 100%">
                                     <option value="0">CODIGO</option>
-                                    <?php while($arttrasdett = mysqli_fetch_row($artiedidettvp)):?>
-                                    <option value="<?php echo $arttrasdett[0]?>"><?php echo $arttrasdett[0]?></option>
+                                    <?php while($arttrasdettped = mysqli_fetch_row($artidettvp)):?>
+                                    <option value="<?php echo $arttrasdettped[0]?>"><?php echo $arttrasdettped[0]?></option>
                                     <?php endwhile; ?>
                                 </select>
                             </div><!-- form-group -->

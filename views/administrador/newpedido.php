@@ -84,8 +84,7 @@
                                 </div><!-- form-group -->
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label style="font-size:16px" class="form-control-label">REMISION:
-                                            <span class="tx-danger">*</span></label>
+                                        <label style="font-size:16px" class="form-control-label">REMISION:</label>
                                         <input onkeyup="mayus(this);" style="font-size:18px; color:#1F618D"
                                             class="form-control" type="text" id="pedremision" name="pedremision"
                                             placeholder="" value="">
@@ -101,8 +100,7 @@
                                 </div><!-- form-group -->
                                 <div class="col-lg-4">
                                     <div class="form-group mg-b-10-force">
-                                        <label style="font-size:16px" class="form-control-label">ATENDIDO POR: <span
-                                                class="tx-danger">*</span></label>
+                                        <label style="font-size:16px" class="form-control-label">ATENDIDO POR: </label>
                                         <select class="form-control select2" onchange="" id="pedidatentio" name="pedidatentio">
                                             <option value="">SELECCIONA UNA OPCIÓN</option>
                                             <?php while($usu = mysqli_fetch_row($usuarios)):?>
@@ -139,15 +137,13 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="form-group mg-b-10-force">
-                                        <label style="font-size:16px" class="form-control-label">LUGAR:
-                                            <span class="tx-danger">*</span></label>
+                                        <label style="font-size:16px" class="form-control-label">LUGAR:</label>
                                         <input onkeyup="mayus(this);" style="font-size:12px;" class="form-control"
                                             type="text" id="addlugar" name="addlugar" placeholder="" value="">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <label style="font-size:16px" class="form-control-label">DIRECCIÓN:
-                                        <span class="tx-danger">*</span></label>
+                                    <label style="font-size:16px" class="form-control-label">DIRECCIÓN:</label>
                                     <textarea onkeyup="mayus(this);" class="form-control" name="adddireccion" id="adddireccion" cols="30" rows="5" id="adddireccion" name="adddireccion"></textarea>
                                 </div>
                     </section>

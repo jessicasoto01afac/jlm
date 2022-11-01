@@ -67,7 +67,20 @@ if(!isset($usuario1)){
             }else{
                 echo "1";
             }
-    }
+    }else if($opcion === 'actpassword'){
+        $contase = $_POST['contase'];
+        $password = password_hash($contase,PASSWORD_DEFAULT); //CIFRADO DE CONTRASEÑA
+        $confir = $_POST['confir'];
+        $idusu = $_POST['idusu'];
+            if (updatepassword($password,$idusu,$conexion)){
+                echo "0";
+                $realizo = 'ACTUALIZA CONTRASEÑA';
+                $usuario='pruebas';
+                hisupdatepass($usuario,$realizo,$idusu,$conexion);
+            }else{
+                echo "1";
+            }
+    }//insertusu
 
 
 //FUNCIONES-----------------------------------------------------------------------------------
@@ -114,6 +127,16 @@ if(!isset($usuario1)){
         }
         cerrar($conexion);
     }
+    //funcion para actualizar el registro
+    function updatepassword($password,$idusu,$conexion){
+        $query="UPDATE accesos SET password='$password' WHERE id_per = '$idusu'";
+        if(mysqli_query($conexion,$query)){
+            return true;
+        }else{
+            return false;
+        }
+        cerrar($conexion);
+    }
 
     //funcion para registra cambios
     function historial($usuario1,$usuario,$usunom,$usuapell,$password,$privilegios,$conexion){
@@ -141,6 +164,16 @@ if(!isset($usuario1)){
         ini_set('date.timezone','America/Mexico_City');
         $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
         $query = "INSERT INTO historial VALUES (0,'$usuario1', '$realizo', ' ID:' '$id_per' ' $persona' ,'$fecha')";
+        if(mysqli_query($conexion,$query)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    function hisupdatepass($usuario,$realizo,$idusu,$conexion){
+        ini_set('date.timezone','America/Mexico_City');
+        $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+        $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'USUARIO:' '$usuario','$fecha')";
         if(mysqli_query($conexion,$query)){
             return true;
         }else{

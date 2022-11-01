@@ -81,10 +81,9 @@ include ("../controller/conexion.php");
                         $proveedor_cliente     = !empty($datos[0])  ? ($datos[0]) : '';
                         $refe_1                = !empty($datos[1])  ? ($datos[1]) : '';
                         $codigo_1              = !empty($datos[2])  ? ($datos[2]) : '';
-                        $descripcion_1         = !empty($datos[3])  ? ($datos[3]) : '';
-                        $cantidad_real         = !empty($datos[4])  ? ($datos[4]) : '';
-                        $salida                = !empty($datos[4])  ? ($datos[4]) : '';
-                        $fecha                 = !empty($datos[5])  ? ($datos[5]) : '';
+                        //$descripcion_1         = !empty($datos[3])  ? ($datos[3]) : '';
+                        $cantidad_real         = !empty($datos[3])  ? ($datos[3]) : '';
+                        //$fecha                 = !empty($datos[5])  ? ($datos[5]) : '';
                        
                 if( !empty($codigo_1) && !empty($refe_1) ){
                     $checkemail_duplicidad = ("SELECT codigo_1 FROM kardex WHERE codigo_1='$codigo_1' AND refe_1='$refe_1' AND tipo	='PEDIDO'");
@@ -93,8 +92,8 @@ include ("../controller/conexion.php");
                 
                 //No existe Registros Duplicados
                 if ( $ca_dupli->num_rows == 0 ) {
-                  
-                  $insertarData = "INSERT INTO kardex VALUES(0,'$refe_1','0','0','$fecha','$codigo_1','$descripcion_1','PEDIDO','ARTICULO','$proveedor_cliente','PENDIENTE','$cantidad_real','0','$salida','0','0','0','NA','NA','PENDIENTE','PENDIENTE','PENDIENTE','PENDIENTE','0')";
+                  $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+                  $insertarData = "INSERT INTO kardex VALUES(0,'$refe_1','0','0','$fecha','$codigo_1','','PEDIDO','ARTICULO','$proveedor_cliente','PENDIENTE',$cantidad_real,'0',$cantidad_real,'0','0','0','NA','NA','PENDIENTE','PENDIENTE','PENDIENTE','PENDIENTE','0')";
                   mysqli_query($conexion, $insertarData);
                   
                   

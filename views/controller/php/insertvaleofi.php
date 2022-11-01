@@ -252,6 +252,17 @@ if(!isset($usuario)){
         }else{
             echo "1";
         }
+    }else if($opcion === 'deletevale'){
+        $folio = $_POST['folio'];
+        if (deletevp($folio,$conexion)){
+            echo "0";
+            $realizo = 'ELIMINA VALE DE OFICINA';
+            // $usuario='pruebas';
+            histelimivo($usuario,$realizo,$folio,$conexion);
+        }else{
+            echo "1";
+        } 
+    //EDICION DE CABECERA
     }
     
 
@@ -521,6 +532,16 @@ function surtirartupda ($id_kax,$refe_1,$cantidad,$observa_dep,$status2,$conexio
     }
     cerrar($conexion);
 }
+//funcion para actualizar el registro
+function deletevp ($folio,$conexion){
+    $query="UPDATE kardex SET estado='1' WHERE refe_1= '$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
 function historial($usuario,$refe_1,$codigo_1,$conexion){
@@ -660,6 +681,17 @@ function hisupdasurtir($usuario,$refe_1,$descrip,$cantidad,$conexion){
         return false;
     }
 }
+function histelimivo($usuario,$realizo,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'FOLIO:' '$folio','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 
 //funcion para cerrar laa conexion
 function cerrar($conexion){

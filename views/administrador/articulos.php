@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../template/css/bracket.css">
 </head>
 
-<body class="collapsed-menu">
+<body class="collapsed-menu with-subleft">
 
     <?php
 

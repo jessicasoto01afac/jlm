@@ -2236,7 +2236,7 @@ function saveedithdettvp() {
 
 //ABRIR EDITAR ARTICULO EN DETALLES DE PRODUCCIÓN
 function editarinsvpdett(valprd) {
-    //alert(valprd);
+    alert(valprd);
     let folio = valprd;
     document.getElementById('id_exedithdett').value = valprd;
     $.ajax({

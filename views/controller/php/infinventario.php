@@ -2,7 +2,7 @@
 	include("../conexion.php");
 	session_start();
 	
-	$query = "SELECT *, concat((select SUM(salida) from kardex where codigo_1 = i.id_articulos)) AS RESTA, concat((select SUM(entrada) from kardex where codigo_1 = i.id_articulos)) AS SUMA FROM inventario i, articulos a where a.artcodigo=i.id_articulos ORDER BY a.id_art ASC";
+	$query = "SELECT *, (SELECT SUM(salida) from movements where codigo1 = i.id_articulos)AS RESTA,(SELECT SUM(entrada) from movements where codigo1 = i.id_articulos)AS SUMA FROM inventario i, articulos a where a.artcodigo=i.id_articulos ORDER BY a.id_art ASC";
 	$resultado = mysqli_query($conexion, $query);
 	$contador=0;
 	if(!$resultado){

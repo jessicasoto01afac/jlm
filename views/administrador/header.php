@@ -9,10 +9,53 @@ if(!isset($usuario)){
 }
 //$id = $_SESSION['persona'];
 $sql = 
-       "SELECT id_per,usunom,usuapell FROM accesos WHERE usuario = '$usuario'";
-
+       "SELECT id_per,usunom,usuapell,correo,privilegios,password FROM accesos WHERE usuario = '$usuario'";
       $persona = mysqli_query($conexion,$sql);
       $datos = mysqli_fetch_row($persona);
+
+      $buspedfin = "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='PEDIDO' AND status='FINALIZADO' GROUP BY refe_1) AS Total";
+      $resulfin = mysqli_query($conexion,$buspedfin);
+      $finalizados = mysqli_fetch_assoc($resulfin);
+
+      $buspedsurt = "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='PEDIDO' AND status='SURTIDO' GROUP BY refe_1) AS Total";
+      $resulsur = mysqli_query($conexion,$buspedsurt);
+      $surtidos = mysqli_fetch_assoc($resulsur);
+
+      $buspedautori = "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='PEDIDO' AND status='AUTORIZADO' GROUP BY refe_1) AS Total";
+      $resulauto = mysqli_query($conexion,$buspedautori);
+      $autorizados = mysqli_fetch_assoc($resulauto);
+
+      $buspend= "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='PEDIDO' AND status='PENDIENTE' GROUP BY refe_1) AS Total";
+      $resulpedid = mysqli_query($conexion,$buspend);
+      $pendientes = mysqli_fetch_assoc($resulpedid);
+
+      $buspedsinf= "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='VALE_PRODUCCION' AND status='AUTORIZADO' GROUP BY refe_1) AS Total";
+      $resulpedidsnf = mysqli_query($conexion,$buspedsinf);
+      $sinfinalizar = mysqli_fetch_assoc($resulpedidsnf);
+
+      $buspedsisurt= "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='PEDIDO' AND status='AUTORIZADO' GROUP BY refe_1) AS Total";
+      $resulpedsinsurt = mysqli_query($conexion,$buspedsisurt);
+      $pendsinsurtir = mysqli_fetch_assoc($resulpedsinsurt);
+
+      $buspedsnautoriza= "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='VALE_PRODUCCION' AND status='PENDIENTE' GROUP BY refe_1) AS Total";
+      $resulpedxautor = mysqli_query($conexion,$buspedsnautoriza);
+      $pendautorizar = mysqli_fetch_assoc($resulpedxautor);
+
+      $busvofisinsurt= "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='VALE_OFICINA' AND status='AUTORIZADO' GROUP BY refe_1) AS Total";
+      $resulvosinf = mysqli_query($conexion,$busvofisinsurt);
+      $valeofisin = mysqli_fetch_assoc($resulvosinf);
+
+      $busautopedi= "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='VALE_OFICINA' AND status='PENDIENTE' GROUP BY refe_1) AS Total";
+      $resulauofic = mysqli_query($conexion,$busautopedi);
+      $pendcoficina = mysqli_fetch_assoc($resulauofic);
+
+      $busautmemos= "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='MEMOS' AND status='PENDIENTE' GROUP BY refe_1) AS Total";
+      $resulmemos = mysqli_query($conexion,$busautmemos);
+      $memoautri = mysqli_fetch_assoc($resulmemos);
+
+      $busmemosins= "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='MEMOS' AND status='PENDIENTE' GROUP BY refe_1) AS Total";
+      $resulmemossi = mysqli_query($conexion,$busmemosins);
+      $memosin = mysqli_fetch_assoc($resulmemossi);
 ?>
 
 </style>
@@ -67,7 +110,7 @@ $sql =
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
             <li class="nav-item"><a href="../administrador/pedidos.php" class="nav-link">Agregar layout</a></li>
-            <li class="nav-item"><a href="../administrador/listpedido.php" class="nav-link">Lista de pedidos</a></li>
+            <li class="nav-item"><a href="../administrador/listpedido.php" class="nav-link">Pedidos</a></li>
         </ul>
         <a href="#" class="br-menu-link">
             <div class="br-menu-item">
@@ -100,7 +143,6 @@ $sql =
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
             <li class="nav-item"><a href="inventario.php" class="nav-link">Existencias</a></li>
-            <li class="nav-item"><a href="chart-flot.html" class="nav-link">Kardex</a></li>
         </ul>
         <a href="#" class="br-menu-link">
             <div class="br-menu-item">
@@ -137,38 +179,40 @@ $sql =
         <div class="d-flex align-items-center justify-content-between pd-x-15">
             <div>
                 <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Finalizados</p>
-                <h5 class="tx-lato tx-white tx-normal mg-b-0">32.3%</h5>
+                <h5 class="tx-lato tx-white tx-normal mg-b-0"><?php echo $finalizados['result']?></h5>
             </div>
             <span class="peity-bar"
-                data-peity='{ "fill": ["#336490"], "height": 35, "width": 60 }'>8,6,5,9,8,4,9,3,5,9</span>
+                data-peity='{ "fill": ["#0B9265"], "height": 35, "width": 60 }'>8,6,5,9,8,4,9,3,5,9</span>
         </div><!-- d-flex -->
 
         <div class="d-flex align-items-center justify-content-between pd-x-15 mg-t-20">
             <div>
                 <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Surtidos</p>
-                <h5 class="tx-lato tx-white tx-normal mg-b-0">140.05</h5>
+                <h5 class="tx-lato tx-white tx-normal mg-b-0"><?php echo $surtidos['result']?></h5>
             </div>
             <span class="peity-bar"
-                data-peity='{ "fill": ["#1C7973"], "height": 35, "width": 60 }'>4,3,5,7,12,10,4,5,11,7</span>
+                data-peity='{ "fill": ["#6F42C1"], "height": 35, "width": 60 }'>4,3,5,7,12,10,4,5,11,7</span>
+        </div><!-- d-flex -->
+
+        <div class="d-flex align-items-center justify-content-between pd-x-15 mg-t-20">
+            <div>
+                <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Autorizado</p>
+                <h5 class="tx-lato tx-white tx-normal mg-b-0"><?php echo $autorizados['result']?></h5>
+            </div>
+            <span class="peity-bar"
+                data-peity='{ "fill": ["#336490"], "height": 35, "width": 60 }'>3,12,7,9,2,3,4,5,2</span>
         </div><!-- d-flex -->
 
         <div class="d-flex align-items-center justify-content-between pd-x-15 mg-t-20">
             <div>
                 <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Pendientes</p>
-                <h5 class="tx-lato tx-white tx-normal mg-b-0">82.02%</h5>
+                <h5 class="tx-lato tx-white tx-normal mg-b-0"><?php echo $pendientes['result']?></h5>
             </div>
             <span class="peity-bar"
-                data-peity='{ "fill": ["#8E4246"], "height": 35, "width": 60 }'>1,2,1,3,2,10,4,12,7</span>
+                data-peity='{ "fill": ["#9C7846"], "height": 35, "width": 60 }'>1,2,1,3,2,10,4,12,7</span>
         </div><!-- d-flex -->
 
-        <div class="d-flex align-items-center justify-content-between pd-x-15 mg-t-20">
-            <div>
-                <p class="tx-10 tx-roboto tx-uppercase tx-spacing-1 tx-white op-3 mg-b-2 space-nowrap">Cancelados</p>
-                <h5 class="tx-lato tx-white tx-normal mg-b-0">62,201</h5>
-            </div>
-            <span class="peity-bar"
-                data-peity='{ "fill": ["#9C7846"], "height": 35, "width": 60 }'>3,12,7,9,2,3,4,5,2</span>
-        </div><!-- d-flex -->
+        
     </div><!-- info-lst -->
 
     <br>
@@ -266,37 +310,88 @@ $sql =
                 </a>
                 <div class="dropdown-menu dropdown-menu-header wd-300 pd-0-force">
                     <div class="d-flex align-items-center justify-content-between pd-y-10 pd-x-20 bd-b bd-gray-200">
-                        <label class="tx-12 tx-info tx-uppercase tx-semibold tx-spacing-2 mg-b-0">Notificación</label>
+                        <label class="tx-12 tx-info tx-uppercase tx-semibold tx-spacing-2 mg-b-0">Notificaciónes</label>
                         <a href="" class="tx-11"></a>
                     </div><!-- d-flex -->
 
                     <div class="media-list">
-                        <!-- loop starts here -->
+                        <!-- loop starts here 29222 -->
+                        <a href="vale_produccion.php" class="media-list-link read">
+                            <div class="media pd-x-20 pd-y-15">
+                                <!-- <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt=""> -->
+                                <i style="font-size:22px;color:#E9B804" class="fa fa-warning"></i>
+                                <div class="media-body">
+                                <p class="tx-13 mg-b-0 tx-gray-700">TIENES <u style="color:blue"><?php echo $pendautorizar['result']?></u> <strong
+                                            class="tx-medium tx-gray-800">VALES DE PRODUCCION</strong> POR AUTORIZAR</p>
+                                </div>
+                            </div><!-- media -->
+                        </a>
+                        <a href="vale_oficina.php" class="media-list-link read">
+                            <div class="media pd-x-20 pd-y-15">
+                                <!-- <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt=""> -->
+                                <i style="font-size:22px;color:#E9B804" class="fa fa-warning"></i>
+                                <div class="media-body">
+                                <p class="tx-13 mg-b-0 tx-gray-700">TIENES <u style="color:blue"><?php echo $pendcoficina['result']?></u> <strong
+                                            class="tx-medium tx-gray-800">VALES DE OFICINA</strong> POR AUTORIZAR</p>
+                                </div>
+                            </div><!-- media -->
+                        </a>
+                        <a href="memos.php" class="media-list-link read">
+                            <div class="media pd-x-20 pd-y-15">
+                                <!-- <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt=""> -->
+                                <i style="font-size:22px;color:#E9B804" class="fa fa-warning"></i>
+                                <div class="media-body">
+                                <p class="tx-13 mg-b-0 tx-gray-700">TIENES <u style="color:blue"><?php echo $memoautri['result']?></u> <strong
+                                            class="tx-medium tx-gray-800">MEMOS</strong> POR AUTORIZAR</p>
+                                </div>
+                            </div><!-- media -->
+                        </a>
                         <a href="" class="media-list-link read">
                             <div class="media pd-x-20 pd-y-15">
-                                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
+                                <!-- <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt=""> -->
+                                <i style="font-size:18px;color:#2E4EB2" class="fa fa-dot-circle-o"></i>
                                 <div class="media-body">
-                                    <p class="tx-13 mg-b-0 tx-gray-700"><strong
-                                            class="tx-medium tx-gray-800">PEDIDOS</strong>Tienes 20 pedidos sin finalzar
-                                    </p>
-                                    <span class="tx-12">lunes 03, 2022 8:45am</span>
+                                <p class="tx-13 mg-b-0 tx-gray-700">HAY <u style="color:blue;f"><?php echo $pendsinsurtir['result']?></u> <strong
+                                            class="tx-medium tx-gray-800">PEDIDOS</strong> SIN SURTIR</p>
                                 </div>
                             </div><!-- media -->
                         </a>
                         <!-- loop ends here -->
                         <a href="" class="media-list-link read">
                             <div class="media pd-x-20 pd-y-15">
-                                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
+                                <!-- <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt=""> -->
+                                <i style="font-size:18px;color:#2E4EB2" class="fa fa-dot-circle-o"></i>
                                 <div class="media-body">
-                                    <p class="tx-13 mg-b-0 tx-gray-700"><strong
-                                            class="tx-medium tx-gray-800">VALES</strong> AUN NO SURTES EL VALE 1215</p>
-                                    <span class="tx-12">October 02, 2017 12:44am</span>
+                                    <p class="tx-13 mg-b-0 tx-gray-700">HAY <u style="color:blue"><?php echo $sinfinalizar['result']?></u> <strong
+                                            class="tx-medium tx-gray-800">VALES DE PRODUCCIÓN</strong> SIN SURTIR</p>
                                 </div>
                             </div><!-- media -->
                         </a>
-                        <div class="pd-y-10 tx-center bd-t">
+                        <!-- loop ends here -->
+                        <a href="" class="media-list-link read">
+                            <div class="media pd-x-20 pd-y-15">
+                                <!-- <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt=""> -->
+                                <i style="font-size:18px;color:#2E4EB2" class="fa fa-dot-circle-o"></i>
+                                <div class="media-body">
+                                    <p class="tx-13 mg-b-0 tx-gray-700">HAY <u style="color:blue"><?php echo $valeofisin['result']?></u> <strong
+                                            class="tx-medium tx-gray-800">VALES DE OFICINA</strong> SIN SURTIR</p>
+                                </div>
+                            </div><!-- media -->
+                        </a>
+                        <!-- loop ends here -->
+                        <a href="" class="media-list-link read">
+                            <div class="media pd-x-20 pd-y-15">
+                                <!-- <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt=""> -->
+                                <i style="font-size:18px;color:#2E4EB2" class="fa fa-dot-circle-o"></i>
+                                <div class="media-body">
+                                    <p class="tx-13 mg-b-0 tx-gray-700">HAY <u style="color:blue"><?php echo $memosin['result']?></u> <strong
+                                            class="tx-medium tx-gray-800">MEMOS</strong> SIN SURTIR</p>
+                                </div>
+                            </div><!-- media -->
+                        </a>
+                        <!-- <div class="pd-y-10 tx-center bd-t">
                             <a href="" class="tx-12"><i class="fa fa-angle-down mg-r-5"></i> Ver todos</a>
-                        </div>
+                        </div> -->
                     </div><!-- media-list -->
                 </div><!-- dropdown-menu -->
             </div><!-- dropdown -->
@@ -308,11 +403,11 @@ $sql =
                 </a>
                 <div class="dropdown-menu dropdown-menu-header wd-200">
                     <ul class="list-unstyled user-profile-nav">
-                        <li><a href=""><i class="icon ion-ios-person"></i> Editar pefil</a></li>
-                        <li><a href=""><i class="icon ion-ios-gear"></i> Configuración</a></li>
-                        <li><a href=""><i class="icon ion-ios-download"></i> Descragas</a></li>
-                        <li><a href=""><i class="icon ion-ios-star"></i> Favoritos</a></li>
-                        <li><a href=""><i class="icon ion-ios-folder"></i> Collecciones</a></li>
+                        <li><a href="perfil.php"><i class="icon ion-ios-person"></i> Editar pefil</a></li>
+                        <!-- <li><a href=""><i class="icon ion-ios-gear"></i> Configuración</a></li> -->
+                        <!-- <li><a href=""><i class="icon ion-ios-download"></i> Descragas</a></li> -->
+                        <!-- <li><a href=""><i class="icon ion-ios-star"></i> Favoritos</a></li> -->
+                        <!-- <li><a href=""><i class="icon ion-ios-folder"></i> Collecciones</a></li> -->
                         <li><a href="./../../controller/logout.php"><i class="icon ion-power"></i> Cerrar sesión</a>
                         </li>
                     </ul>

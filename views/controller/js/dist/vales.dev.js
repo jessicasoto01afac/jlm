@@ -1158,12 +1158,22 @@ function savedelarvo() {
 } //FUNCION QUE TOMAR EL FOLIO DE EL VALE DE OFIINA
 
 
-function deletvolis() {
-  $("#datavaleofi tr").on('click', function () {
-    var id_vale = "";
-    id_vale += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
+function deletvolis(folvale) {
+  //alert(folvale);
+  var folio = folvale;
+  $.ajax({
+    type: "GET",
+    url: "../controller/php/valepofigruop.php",
+    data: 'folio=' + folio
+  }).done(function (respuesta) {
+    obj = JSON.parse(respuesta);
+    var res = obj.data;
+    var x = 0;
 
-    document.getElementById('devaofi').value = id_vale; //alert(id_vale)
+    for (U = 0; U < res.length; U++) {
+      document.getElementById('delerrvprv').value = obj.data[U].refe_1;
+      document.getElementById('devaproduc').value = "FOLIO" + obj.data[U].refe_1; //alert("entro2");
+    }
   });
 } //FUNCION QUE GUARDA LA ELIMINACIÓN DE VALE DE OFICINA
 
@@ -1895,4 +1905,32 @@ function pdfhistory() {
 
   url = '../formatos/pdf_reporthistoryvaleofi.php';
   window.open(url + "?data=" + folio, '_black');
+} //FUNIÓN PARA GUARDAR LA ELIMINACION DE EL VALE DE OFICINA
+
+
+function savedeprodu() {
+  //alert("entro guardar eliminar");
+  var folio = document.getElementById('delerrvprv').value;
+  var datos = 'folio=' + folio + '&opcion=deletevale'; //alert(datos);
+
+  $.ajax({
+    type: "POST",
+    url: "../controller/php/insertvaleofi.php",
+    data: datos
+  }).done(function (respuesta) {
+    if (respuesta == 0) {
+      Swal.fire({
+        type: 'success',
+        text: 'Se elimino de forma correcta',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      setTimeout("location.href = 'vale_oficina.php';", 1500);
+    } else {
+      document.getElementById('delerrvprv').style.display = '';
+      setTimeout(function () {
+        document.getElementById('delerrvprv').style.display = 'none';
+      }, 2000);
+    }
+  });
 }
