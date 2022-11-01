@@ -198,8 +198,8 @@ include ("../controller/conexion.php");
                         <div class="col-lg-3" id="carton" name="carton" style="display:none">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo de Carton:</label>
-                                <select onchange="carton()" class="form-control" data-placeholder="Seleccione"
-                                    id="codcarton" name="codcarton" type="text" data-live-search="true">
+                                <select onchange="carton()" class="form-control select2-show-search" data-placeholder="Seleccione"
+                                    id="codcarton" name="codcarton" type="text" data-live-search="true" style="width: 100%">
                                     <option value="0" selected>CODIGO</option>
                                     <?php while($idpst = mysqli_fetch_row($articulo)):?>
                                     <option value="<?php echo $idpst[0]?>"><?php echo $idpst[0]?></option>
@@ -238,8 +238,8 @@ include ("../controller/conexion.php");
                         <div class="col-lg-3" id="cartonsillo" name="cartonsillo" style="display:none">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo de Cartonsillo:</label>
-                                <select onchange="" class="form-control" data-placeholder="Seleccione"
-                                    id="codcartonsillo" name="codcartonsillo" type="text" data-live-search="true">
+                                <select onchange="" class="form-control select2-show-search" data-placeholder="Seleccione"
+                                    id="codcartonsillo" name="codcartonsillo" type="text" data-live-search="true" style="width: 100%">
                                     <option value="0" selected>CODIGO</option>
                                     <?php while($idpst2 = mysqli_fetch_row($articulo2)):?>
                                     <option value="<?php echo $idpst2[0]?>"><?php echo $idpst2[0]?></option>
@@ -265,7 +265,7 @@ include ("../controller/conexion.php");
                         <div class="col-lg-3" id="caplearex" name="caplearex" style="display:none">
                             <div class="form-group">
                                 <label class="form-control-label label2 tx-primary" style="font-size:20px">Caple</label>
-                                <select class="form-control select2" data-placeholder="Elija si aplioca o no"
+                                <select class="form-control select2" data-placeholder="Elija si aplioca o no" 
                                     onchange="caple()" id="capleaplic" name="capleaplic" type="text"
                                     data-live-search="true" style="width: 100%">
                                     <option value="0" selected>SELECCIONE</option>
@@ -277,8 +277,8 @@ include ("../controller/conexion.php");
                         <div class="col-lg-3" id="caple" name="caple" style="display:none">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo de Caple:</label>
-                                <select onchange="" class="form-control" data-placeholder="Seleccione" id="codcaple"
-                                    name="codcaple" type="text" data-live-search="true">
+                                <select onchange="" class="form-control select2-show-search" data-placeholder="Seleccione" id="codcaple"
+                                    name="codcaple" type="text" data-live-search="true" style="width: 100%">
                                     <option value="0" selected>CODIGO</option>
                                     <?php while($idpst3 = mysqli_fetch_row($articulo3)):?>
                                     <option value="<?php echo $idpst3[0]?>"><?php echo $idpst3[0]?></option>
@@ -317,8 +317,8 @@ include ("../controller/conexion.php");
                         <div class="col-lg-3" id="liston" name="liston" style="display:none">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo de listón:</label>
-                                <select onchange="" class="form-control" data-placeholder="Seleccione" id="codliston"
-                                    name="codliston" type="text" data-live-search="true">
+                                <select onchange="" class="form-control select2-show-search" data-placeholder="Seleccione" id="codliston"
+                                    name="codliston" type="text" data-live-search="true" style="width: 100%">
                                     <option value="0" selected>CODIGO</option>
                                     <?php while($idpst4 = mysqli_fetch_row($articulo4)):?>
                                     <option value="<?php echo $idpst4[0]?>"><?php echo $idpst4[0]?></option>
@@ -395,6 +395,7 @@ include ("../controller/conexion.php");
         $('#bsfinal').load('select/final.php');
         $('#bscodigoetiq').load('select/etiquetas.php');
         $('#bscodigoext').load('select/extendido.php');
+        $('#codcarton').select2();
     });
     </script>
 
