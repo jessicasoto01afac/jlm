@@ -283,6 +283,7 @@ function infpedido(pruebas) {
         let finalizado = document.getElementById('btnpedfinaliz');
         let editar = document.getElementById('openedipi');
         let pdf = document.getElementById('pdfpedrod');
+        //let masivo = document.getElementById('masivo');
         //fin botones -------------------------------------------
         $.ajax({
             url: '../controller/php/infpedigrup.php',
@@ -293,7 +294,7 @@ function infpedido(pruebas) {
             var res = obj.data;
             var x = 0;
             for (D = 0; D < res.length; D++) {
-                if (obj.data[D].refe_1 == id_vofi) {
+                if (obj.data[D].refe_1 == id_vofi) { //auropedid
                     document.getElementById('estatus2').value = obj.data[D].status;
                     document.getElementById('infpeddirect').value = obj.data[D].descripcion_1;
                     document.getElementById('infpedlugar').value = obj.data[D].ubicacion;
@@ -321,6 +322,7 @@ function infpedido(pruebas) {
                         finalizado.style.display = 'none';
                         editar.style.display = 'none';
                         pdf.style.display = '';
+                        let masivo = $("#masivo").removeClass("d-none");
                         html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
                         $("#button_estatus").html(html);
                         $.ajax({
@@ -351,7 +353,23 @@ function infpedido(pruebas) {
                             }
                             html += '</div></tbody></table></div></div>';
                             $("#listpedidinf").html(html);
-
+                            $('#lispedidoinf').DataTable({
+                                pageLength: 100,
+                                language: {
+                                    searchPlaceholder: 'Buscar...',
+                                    sSearch: '',
+                                    lengthMenu: 'mostrando _MENU_ paginas',
+                                    sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                                    sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                                    sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+                                    oPaginate: {
+                                        sFirst: 'Primero',
+                                        sLast: 'Último',
+                                        sNext: 'Siguiente',
+                                        sPrevious: 'Anterior',
+                                    },
+                                }
+                            });
                         })
                     } else if (obj.data[D].status == 'PENDIENTE') {
                         autorizar.style.display = '';
@@ -360,6 +378,7 @@ function infpedido(pruebas) {
                         finalizado.style.display = 'none';
                         editar.style.display = '';
                         pdf.style.display = 'none';
+                        let masivo = $("#masivo").addClass("d-none");
                         html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-secondary btn-block mg-b-3">PENDIDENTE</button>';
                         $("#button_estatus").html(html);
                         $.ajax({
@@ -380,6 +399,23 @@ function infpedido(pruebas) {
                             }
                             html += '</div></tbody></table></div></div>';
                             $("#listpedidinf").html(html);
+                            $('#lispedidoinf').DataTable({
+                                pageLength: 100,
+                                language: {
+                                    searchPlaceholder: 'Buscar...',
+                                    sSearch: '',
+                                    lengthMenu: 'mostrando _MENU_ paginas',
+                                    sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                                    sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                                    sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+                                    oPaginate: {
+                                        sFirst: 'Primero',
+                                        sLast: 'Último',
+                                        sNext: 'Siguiente',
+                                        sPrevious: 'Anterior',
+                                    },
+                                }
+                            });
 
                         })
                     } else if (obj.data[D].status == 'SURTIDO') {
@@ -389,6 +425,7 @@ function infpedido(pruebas) {
                         finalizado.style.display = '';
                         editar.style.display = 'none';
                         pdf.style.display = '';
+                        let masivo = $("#masivo").addClass("d-none");
                         html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-info btn-block mg-b-3">SURTIDO</button>';
                         $("#button_estatus").html(html);
                         $.ajax({
@@ -419,6 +456,23 @@ function infpedido(pruebas) {
                             }
                             html += '</div></tbody></table></div></div>';
                             $("#listpedidinf").html(html);
+                            $('#lispedidoinf').DataTable({
+                                pageLength: 100,
+                                language: {
+                                    searchPlaceholder: 'Buscar...',
+                                    sSearch: '',
+                                    lengthMenu: 'mostrando _MENU_ paginas',
+                                    sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                                    sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                                    sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+                                    oPaginate: {
+                                        sFirst: 'Primero',
+                                        sLast: 'Último',
+                                        sNext: 'Siguiente',
+                                        sPrevious: 'Anterior',
+                                    },
+                                }
+                            });
 
                         })
                     } else if (obj.data[D].status == 'FINALIZADO') {
@@ -428,6 +482,7 @@ function infpedido(pruebas) {
                         finalizado.style.display = 'none';
                         editar.style.display = 'none';
                         pdf.style.display = '';
+                        let masivo = $("#masivo").addClass("d-none");
                         html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">FINALIZADO</button>';
                         $("#button_estatus").html(html);
                         $.ajax({
@@ -458,9 +513,27 @@ function infpedido(pruebas) {
                             }
                             html += '</div></tbody></table></div></div>';
                             $("#listpedidinf").html(html);
+                            $('#lispedidoinf').DataTable({
+                                pageLength: 100,
+                                language: {
+                                    searchPlaceholder: 'Buscar...',
+                                    sSearch: '',
+                                    lengthMenu: 'mostrando _MENU_ paginas',
+                                    sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                                    sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                                    sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+                                    oPaginate: {
+                                        sFirst: 'Primero',
+                                        sLast: 'Último',
+                                        sNext: 'Siguiente',
+                                        sPrevious: 'Anterior',
+                                    },
+                                }
+                            });
 
                         })
                     } else if (obj.data[D].status == 'ENTREGADO') {
+                        let masivo = $("#masivo").addClass("d-none");
                         html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">FINALIZADO</button>';
                         $("#button_estatus").html(html);
                         html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-info btn-block mg-b-3">SURTIDO</button>';
@@ -497,6 +570,24 @@ function infpedido(pruebas) {
 
                             html += '</div></tbody></table></div></div>';
                             $("#listpedidinf").html(html);
+                            $('#lispedidoinf').DataTable({
+                                pageLength: 100,
+                                language: {
+                                    searchPlaceholder: 'Buscar...',
+                                    sSearch: '',
+                                    lengthMenu: 'mostrando _MENU_ paginas',
+                                    sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                                    sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                                    sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+                                    oPaginate: {
+                                        sFirst: 'Primero',
+                                        sLast: 'Último',
+                                        sNext: 'Siguiente',
+                                        sPrevious: 'Anterior',
+                                    },
+                                }
+                            });
+
 
                         })
                     }
@@ -529,6 +620,7 @@ function updateinfped() {
                 $("#inforemision").html(o[1]);
 
                 if (obj.data[D].status == 'AUTORIZADO') {
+                    let masivo = $("#masivo").removeClass("d-none");
                     html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
                     $("#button_estatus").html(html);
                     $.ajax({
@@ -559,9 +651,27 @@ function updateinfped() {
                         }
                         html += '</div></tbody></table></div></div>';
                         $("#listpedidinf").html(html);
+                        $('#lispedidoinf').DataTable({
+                            pageLength: 100,
+                            language: {
+                                searchPlaceholder: 'Buscar...',
+                                sSearch: '',
+                                lengthMenu: 'mostrando _MENU_ paginas',
+                                sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                                sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                                sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+                                oPaginate: {
+                                    sFirst: 'Primero',
+                                    sLast: 'Último',
+                                    sNext: 'Siguiente',
+                                    sPrevious: 'Anterior',
+                                },
+                            }
+                        });
 
                     })
                 } else if (obj.data[D].status == 'PENDIENTE') {
+                    let masivo = $("#masivo").addClass("d-none");
                     html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-secondary btn-block mg-b-3">PENDIDENTE</button>';
                     $("#button_estatus").html(html);
                     $.ajax({
@@ -582,9 +692,27 @@ function updateinfped() {
                         }
                         html += '</div></tbody></table></div></div>';
                         $("#listpedidinf").html(html);
+                        $('#lispedidoinf').DataTable({
+                            pageLength: 100,
+                            language: {
+                                searchPlaceholder: 'Buscar...',
+                                sSearch: '',
+                                lengthMenu: 'mostrando _MENU_ paginas',
+                                sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                                sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                                sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+                                oPaginate: {
+                                    sFirst: 'Primero',
+                                    sLast: 'Último',
+                                    sNext: 'Siguiente',
+                                    sPrevious: 'Anterior',
+                                },
+                            }
+                        });
 
                     })
                 } else if (obj.data[D].status == 'SURTIDO') {
+                    let masivo = $("#masivo").addClass("d-none");
                     html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-info btn-block mg-b-3">SURTIDO</button>';
                     $("#button_estatus").html(html);
 
@@ -618,9 +746,27 @@ function updateinfped() {
                         }
                         html += '</div></tbody></table></div></div>';
                         $("#listpedidinf").html(html);
+                        $('#lispedidoinf').DataTable({
+                            pageLength: 100,
+                            language: {
+                                searchPlaceholder: 'Buscar...',
+                                sSearch: '',
+                                lengthMenu: 'mostrando _MENU_ paginas',
+                                sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                                sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                                sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+                                oPaginate: {
+                                    sFirst: 'Primero',
+                                    sLast: 'Último',
+                                    sNext: 'Siguiente',
+                                    sPrevious: 'Anterior',
+                                },
+                            }
+                        });
 
                     })
                 } else if (obj.data[D].status == 'FINALIZADO') {
+                    let masivo = $("#masivo").addClass("d-none");
                     html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">FINALIZADO</button>';
                     $("#button_estatus").html(html);
                     html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-info btn-block mg-b-3">SURTIDO</button>';
@@ -656,9 +802,27 @@ function updateinfped() {
                         }
                         html += '</div></tbody></table></div></div>';
                         $("#listpedidinf").html(html);
+                        $('#lispedidoinf').DataTable({
+                            pageLength: 100,
+                            language: {
+                                searchPlaceholder: 'Buscar...',
+                                sSearch: '',
+                                lengthMenu: 'mostrando _MENU_ paginas',
+                                sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                                sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                                sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+                                oPaginate: {
+                                    sFirst: 'Primero',
+                                    sLast: 'Último',
+                                    sNext: 'Siguiente',
+                                    sPrevious: 'Anterior',
+                                },
+                            }
+                        });
 
                     })
                 } else if (obj.data[D].status == 'ENTREGADO') {
+                    let masivo = $("#masivo").addClass("d-none");
                     html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">FINALIZADO</button>';
                     $("#button_estatus").html(html);
                     html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-info btn-block mg-b-3">SURTIDO</button>';
@@ -694,6 +858,23 @@ function updateinfped() {
                         }
                         html += '</div></tbody></table></div></div>';
                         $("#listpedidinf").html(html);
+                        $('#lispedidoinf').DataTable({
+                            pageLength: 100,
+                            language: {
+                                searchPlaceholder: 'Buscar...',
+                                sSearch: '',
+                                lengthMenu: 'mostrando _MENU_ paginas',
+                                sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                                sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                                sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+                                oPaginate: {
+                                    sFirst: 'Primero',
+                                    sLast: 'Último',
+                                    sNext: 'Siguiente',
+                                    sPrevious: 'Anterior',
+                                },
+                            }
+                        });
 
                     })
                 }
@@ -828,18 +1009,22 @@ function editpediinf() {
     //muestra el boton de cerrar editar
     document.getElementById('closepedi').style.display = "";
     document.getElementById('openedipi').style.display = "none";
+    document.getElementById('saveinped').style.display = "";
     //muestra los botones
     document.getElementById('addarticp').style.display = "";
     //document.getElementById('cancelpe').style.display = "";
-    //campos
+    //campos 
     $("#infvpdate").removeAttr("readonly");
-    $("#infclinte").removeAttr("readonly");
     $("#auropedid").removeAttr("readonly");
     $("#feautoped").removeAttr("readonly");
     $("#fesurtped").removeAttr("readonly");
     $("#fecentrega").removeAttr("readonly");
     $("#remisioninf").removeAttr("readonly");
+    $("#infpedlugar").removeAttr("readonly");
+    $("#infpeddirect").removeAttr("readonly");
     document.getElementById('atendioinf').disabled = false;
+    document.getElementById('infclinte').disabled = false;
+    document.getElementById('pedidcaracter').disabled = false;
 }
 //FUNCION PARA CERRAR EDITAR VALE DE OFICINA EN VISTA DE INFORMACION
 function closedithpin() {
@@ -849,13 +1034,15 @@ function closedithpin() {
     //muestra el boton de cerrar editar
     document.getElementById('closepedi').style.display = "none";
     document.getElementById('openedipi').style.display = "";
+    document.getElementById('saveinped').style.display = "none";
     $("#infvpdate").attr("readonly", "readonly");
-    $("#infclinte").attr("readonly", "readonly");
     $("#auropedid").attr("readonly", "readonly");
     $("#feautoped").attr("readonly", "readonly");
     $("#fesurtped").attr("readonly", "readonly");
     $("#fecentrega").attr("readonly", "readonly");
     $("#remisioninf").attr("readonly", "readonly");
+    $("#infpedlugar").attr("readonly", "readonly");
+    $("#infpeddirect").attr("readonly", "readonly");
     document.getElementById('atendioinf').disabled = true;
 }
 //FUNCION PARA ABRIR EDICION DE ARTICULO DE PEDIDO EN VISTA DE INFORMACION
@@ -1288,7 +1475,7 @@ function addarinpedinfo() {
 function histvalepro() {
     let folio = document.getElementById('idinped').innerHTML;
     let folio2 = "FOLIO:" + folio;
-    alert(folio);
+    //alert(folio);
     //Tabla de historial del vale de producción
     $.ajax({
         url: '../controller/php/hisvaleprod.php',
@@ -1747,4 +1934,147 @@ function pdfvp() {
     //alert("entro");
     url = '../formatos/pdf_pedidos.php'
     window.open(url + "?data=" + folio, '_black');
+}
+
+function masive() {
+    //alert("entra masivo");
+    let folio = document.getElementById('idinped').innerHTML;
+    $.ajax({
+        url: '../controller/php/infpedido.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(resp) {
+        obj = JSON.parse(resp);
+        var res = obj.data;
+        var x = 0;
+        html = '<div class="rounded table-responsive"><table style="width:100%" id="lismasive" name="lismasive" class="table table-bordered"><thead class="thead-colored thead-primary"><tr><th class="d-none"><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>CANTIDAD_SURTIDA</th><th><i></i>OBSERVACIONES</th></tr></thead><tbody>';
+        for (U = 0; U < res.length; U++) {
+            if (obj.data[U].refe_1 == folio) {
+                let id_pedido = obj.data[U].id_kax;
+                x++;
+                var status = "<button type='button' onclick='surtirvpf(" + id_pedido + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-surtirpedrod'>SURTIR</button>";
+                html += "<tr><td class='d-none'> <input class='d-none' id='idperon' name='idperon' value='" + obj.data[U].id_kax + "'></td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td><input type='number'  max='99999' title='confima la cantidad' name='cantidadmasv' min='' id='cantidadmasv' value='" + obj.data[U].salida + "' >" + "</td><td><input type='text' title='ingresa observaciones' name='obsevmasv' min='0' id='obsevmasv' value='" + obj.data[U].observa_dep + "'>" + "</td></tr>";
+            }
+        }
+        html += '</tbody></table></div>';
+        $("#masive").html(html);
+        $('#lismasive').DataTable({
+            pageLength: 100,
+            language: {
+                searchPlaceholder: 'Buscar...',
+                sSearch: '',
+                lengthMenu: 'mostrando _MENU_ paginas',
+                sInfo: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                sInfoFiltered: '(filtrado de un total de _MAX_ registros)',
+                oPaginate: {
+                    sFirst: 'Primero',
+                    sLast: 'Último',
+                    sNext: 'Siguiente',
+                    sPrevious: 'Anterior',
+                },
+            }
+        });
+    });
+}
+//funciones para guardar masivamente la información
+function savemasive() {
+    var idperon = new Array();
+    /*Agrupamos todos los input con name=cbxEstudiante*/
+    $('input[name="idperon"]').each(function(element) {
+        var item = {};
+        item.idperon = this.value;
+        idperon.push(item);
+    });
+    var evaluacion = new Array();
+    /*Agrupamos todos los input con name=cbxEstudiante*/
+    $('input[name="cantidadmasv"]').each(function(element) {
+        var item = {};
+        item.evaluacion = this.value;
+        evaluacion.push(item);
+    });
+    var observaciones = new Array();
+    /*Agrupamos todos los input con name=cbxEstudiante*/
+    $('input[name="obsevmasv"]').each(function(element) {
+        var item = {};
+        item.observaciones = this.value;
+        observaciones.push(item);
+    });
+    var array1 = JSON.stringify(idperon);
+    var array2 = JSON.stringify(evaluacion);
+    var array3 = JSON.stringify(observaciones);
+    datos = 'array1=' + array1 + '&array2=' + array2 + '&array3=' + array3 + '&opcion=surmasivo';
+    //alert(datos);
+    $.ajax({
+        url: '../controller/php/insertpedio.php',
+        type: 'POST',
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'Se actualizo de forma correcta',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            $('#modal-surtirmasivo').modal('hide');
+            updateinfped();
+        } else {
+            //alert("error");
+            Swal.fire({
+                type: 'danger',
+                text: 'Contactar a soporte tecnico o levantar un ticket',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    });
+}
+
+function savepedcabe() {
+    let refe_1 = document.getElementById('idinped').innerHTML;
+    let refe_2 = document.getElementById('remisioninf').value;
+    let fecha = document.getElementById('infvpdate').value;
+    let proveedor_cliente = document.getElementById('infclinte').value;
+    let refe_3 = document.getElementById('atendioinf').value;
+    let ubicacion = document.getElementById('infpedlugar').value;
+    let descripcion_1 = document.getElementById('infpeddirect').value;
+    let pedidcaracter = document.getElementById('pedidcaracter').value;
+    let datos = 'refe_1=' + refe_1 + '&refe_2=' + refe_2 + '&fecha=' + fecha + '&proveedor_cliente=' + proveedor_cliente + '&refe_3=' + refe_3 + '&ubicacion=' + ubicacion + '&descripcion_1=' + descripcion_1 + '&pedidcaracter=' + pedidcaracter + '&opcion=savecabez';
+    //alert(datos);
+    if (fecha == '' || refe_3 == '' || proveedor_cliente == '' || pedidcaracter == '') {
+        document.getElementById('edthpedvacios').style.display = '';
+        setTimeout(function() {
+            document.getElementById('edthpedvacios').style.display = 'none';
+        }, 2000);
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertpedio.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se actualizo de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                closedithpin();
+            } else if (respuesta == 2) {
+                document.getElementById('edthpedexi').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthpedexi').style.display = 'none';
+                }, 1000);
+                //alert("datos repetidos");
+            } else {
+                document.getElementById('edthpedierror').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthpedierror').style.display = 'none';
+                }, 2000);
+                //alert(respuesta);
+            }
+        });
+    }
 }

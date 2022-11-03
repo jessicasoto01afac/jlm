@@ -137,7 +137,7 @@ function saveusuedit() {
     var datos = 'usunom=' + usunom + '&usuapell=' + usuapell + '&correo=' + correo + '&usuario=' + usuario + '&password=' + password + '&privilegios=' + privilegios + '&id_per=' + id_per + '&opcion=actualizar';
     //alert(datos);
 
-    if (document.getElementById('edinom').value == '' || document.getElementById('ediapell').value == '' || document.getElementById('editcorre').value == '' || document.getElementById('editusu1').value == '' || document.getElementById('editcontra').value == '' || document.getElementById('editprivi').value == '') {
+    if (document.getElementById('edinom').value == '' || document.getElementById('ediapell').value == '' || document.getElementById('editusu1').value == '' || document.getElementById('editcontra').value == '' || document.getElementById('editprivi').value == '') {
         document.getElementById('edthvacios').style.display = '';
         setTimeout(function() {
             document.getElementById('edthvacios').style.display = 'none';

@@ -259,8 +259,7 @@
                         </div><!-- col-4 -->
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label label2">CORREO ELECTRONICO<span
-                                        class="tx-danger">*</span></label>
+                                <label class="form-control-label label2">CORREO ELECTRONICO></label>
                                 <input disabled="" class="form-control inputalta" type="text" name="editcorre"
                                     id="editcorre">
                             </div>

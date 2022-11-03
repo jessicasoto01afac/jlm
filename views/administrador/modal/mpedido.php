@@ -358,7 +358,8 @@
                     name="del_artpeddetts" id="del_artpeddetts">
                 <!-- <input disabled="" style="text-align:center" class="form-control inputalta" type="text"
                     name="deartpedidett" id="deartpedidett"> -->
-                    <textarea disabled="" style="text-align:center" class="form-control inputalta" name="deartpedidett" id="deartpedidett" cols="3" rows="3"></textarea>
+                <textarea disabled="" style="text-align:center" class="form-control inputalta" name="deartpedidett"
+                    id="deartpedidett" cols="3" rows="3"></textarea>
             </div>
             <div class="modal-footer justify-content-center">
                 <button type="button" onclick="savdelepediartdet()"
@@ -388,8 +389,8 @@
             </div>
             <form id="editcliped" class="form-horizontal" action="" method="POST">
                 <div class="modal-body pd-25">
-                    <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="id_pediinf"
-                        id="id_pediinf">
+                    <input style="display:none;" disabled="" class="form-control inputalta" type="text"
+                        name="id_pediinf" id="id_pediinf">
                     <div class="row mg-b-25">
                         <div class="col-lg-3">
                             <div class="form-group">
@@ -544,8 +545,9 @@
                             <div class="form-group">
                                 <label class="form-control-label label2">CODIGO: <span
                                         class="tx-danger">*</span></label>
-                                <select class="form-control" onchange="indivsurtinf()" id="codisurtped" name="codisurtped"
-                                    type="text" disabled="" data-live-search="true" style="width: 100%">
+                                <select class="form-control" onchange="indivsurtinf()" id="codisurtped"
+                                    name="codisurtped" type="text" disabled="" data-live-search="true"
+                                    style="width: 100%">
                                     <option value="0">CODIGO</option>
                                     <?php while($artsuvp = mysqli_fetch_row($articusurvp)):?>
                                     <option value="<?php echo $artsuvp[0]?>"><?php echo $artsuvp[0]?></option>
@@ -608,7 +610,8 @@
                     <span><strong>Advertencia!</strong> El resgistro ya existe</span>
                 </div><!-- d-flex -->
             </div><!-- alert -->
-            <div style="display:none;" id="edthpedvaciosin" name="edthpedvaciosin" class="alert alert-info" role="alert">
+            <div style="display:none;" id="edthpedvaciosin" name="edthpedvaciosin" class="alert alert-info"
+                role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                     <span><strong>Advertencia!</strong> Llenar todos los campos</span>
@@ -668,3 +671,35 @@
         </div><!-- modal-content -->
     </div><!-- modal-dialog -->
 </div><!-- pd-y-50 -->
+
+<!-- MODAL PARA SURTIR ARTICULOS DE PRODUCCIÓN MASIVAMENTE-->
+<div class="modal fade" id='modal-surtirmasivo'>
+    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+        <div class="modal-content bd-5">
+            <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">SURTIR MASIVAMENTE</h6>
+                <button type="button" onclick="closedisurvpif()" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="masivopedi" class="form-horizontal" action="" method="POST">
+                <div class="modal-body pd-12">
+                    <div class="col-lg-20">
+                        <div id="masive" name="masive"></div>
+                    </div>
+                    <button type="button" onclick="savemasive()"
+                        class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">
+                        Guardar</button>
+                </div>
+            </form>
+            <br>
+            <div id="errmasivo" name="errmasivo" class="alert alert-danger d-none" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->

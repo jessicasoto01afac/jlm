@@ -240,8 +240,54 @@ if(!isset($usuario)){
             echo "1";
         }
     //Actualiza la informacion de no surtir producto final
+    }else if($opcion === 'surmasivo'){
+        $valor = $_POST['array1'];
+        $varray1 = json_decode($valor, true);
+        $valor = count($varray1);
+        $array2 = $_POST['array2'];
+        $array2 = json_decode($array2, true);
+        $array3 = $_POST['array3'];
+        $array3 = json_decode($array3, true);
+        for($i=0; $i<$valor; $i++){
+            $idcurs = $varray1[$i]["idperon"];
+            if($idcurs==''){
+            }else{
+                $evaluacion = $array2[$i]["evaluacion"];
+                $observaciones = $array3[$i]["observaciones"];
+                if($evaluacion >= 1){
+                    $estatus='SURTIDO';
+                }else if($evaluacion == 0){
+                    $estatus='SIN EXISTENCIAS';
+                }else if($evaluacion == ''){
+                    $estatus='PENDIENTE';
+                }
+                //llamada al guardo
+                if(masivosurtir($idcurs,$evaluacion,$estatus,$observaciones,$conexion)){	
+                    echo "0";	
+                }else{	
+                    echo "1";	
+                }
+            }
+        }
+    }else if($opcion === 'savecabez'){
+        $refe_1 = $_POST['refe_1'];
+        $refe_2 = $_POST['refe_2'];
+        $fecha = $_POST['fecha'];
+        $proveedor_cliente = $_POST['proveedor_cliente'];
+        $refe_3 = $_POST['refe_3'];
+        $ubicacion = $_POST['ubicacion'];
+        $descripcion_1 = $_POST['descripcion_1'];
+        $pedidcaracter = $_POST['pedidcaracter'];
+        if (updatehader($refe_1,$refe_2,$fecha,$proveedor_cliente,$refe_3,$ubicacion,$descripcion_1,$pedidcaracter,$conexion)){
+            echo "0";
+            //$usuario='PRUEBAS';
+            updatehadercar($refe_1,$pedidcaracter,$conexion);
+            histhader($usuario,$refe_1,$conexion); 
+        }else{
+            echo "1";
+        }
+    //Actualiza la informacion de no surtir producto final
     }
-    
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
 
 //funcion de comprobación para ver si el vale ya se encuentra en la base
@@ -467,6 +513,34 @@ function surtirartupda ($id_kax,$refe_1,$cantidad,$observa_dep,$status2,$conexio
     }
     cerrar($conexion);
 }
+function masivosurtir($idcurs,$evaluacion,$estatus,$observaciones,$conexion){
+    $query="UPDATE kardex SET salida = '$evaluacion',status_2='$estatus', observa_dep='$observaciones' WHERE id_kax=$idcurs";
+    if(mysqli_query($conexion,$query)){
+		return true;
+	}else{
+		return false;
+	}
+	cerrar($conexion);
+}
+function updatehader($refe_1,$refe_2,$fecha,$proveedor_cliente,$refe_3,$ubicacion,$descripcion_1,$pedidcaracter,$conexion){
+    $query="UPDATE kardex SET refe_2='$refe_2', fecha='$fecha',proveedor_cliente='$proveedor_cliente',refe_3='$refe_3',ubicacion='$ubicacion',descripcion_1='$descripcion_1' WHERE refe_1='$refe_1'";
+    if(mysqli_query($conexion,$query)){
+		return true;
+	}else{
+		return false;
+	}
+	cerrar($conexion);
+}
+
+function updatehadercar($refe_1,$pedidcaracter,$conexion){
+    $query="UPDATE productividad SET caracter_vale='$pedidcaracter' WHERE referencia_1='$refe_1'";
+    if(mysqli_query($conexion,$query)){
+		return true;
+	}else{
+		return false;
+	}
+	cerrar($conexion);
+}
 
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -597,6 +671,17 @@ function hisupdasurtir($usuario,$refe_1,$descrip,$cantidad,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario', 'ACTUALIZA ARTICULO YA SURTIDO', 'FOLIO:' '$refe_1 ' 'ARTICULO: ' ' $descrip' ' CANTIDAD:' '$cantidad','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funciones para guardar el historico liberar
+function histhader($usuario,$refe_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'ACTUALIZA LA CABEZERA DEL PEDIDO', 'FOLIO:' '$refe_1 ','$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

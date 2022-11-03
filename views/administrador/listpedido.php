@@ -304,15 +304,45 @@ include('header.php');
                         </div><!-- form-layout -->
                     </form>
                     <br>
+                    <div class="modal-footer">
+                        <button type="button" onclick="savepedcabe()" id="saveinped" style="display:none;"
+                            class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
+                            CAMBIOS</button>
+                        <br>
+                    </div>
+                    <div style="display:none;" id="edthpedexi" name="edthpedexi" class="alert alert-warning" role="alert">
+                        <div class="d-flex align-items-center justify-content-start">
+                            <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                            <span><strong>Advertencia!</strong> El resgistro ya existe</span>
+                        </div><!-- d-flex -->
+                    </div><!-- alert -->
+                    <div style="display:none;" id="edthpedvacios" name="edthpedvacios" class="alert alert-info"
+                        role="alert">
+                        <div class="d-flex align-items-center justify-content-start">
+                            <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                            <span><strong>Advertencia!</strong> Llenar todos los campos</span>
+                        </div><!-- d-flex -->
+                    </div><!-- alert -->
+                    <div style="display:none;" id="edthpedierror" name="edthpedierror" class="alert alert-danger"
+                        role="alert">
+                        <div class="d-flex align-items-center justify-content-start">
+                            <i class="icon ion-ios-close alert-icon tx-24"></i>
+                            <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte
+                                tecnico o levantar un ticket</span>
+                        </div><!-- d-flex -->
+                    </div><!-- alert -->
                     <button type="button" onclick="" data-toggle='modal'
                         style="display:none; background-color: rgb(0, 156, 40);" data-target='#modal-addartpedinfo'
                         onclick="" id="addarticp"
                         class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i
                             class="fa fa-plus"></i> Agregar Articulo</button>
                     <br>
+                    <!-- surtido masivo -->
+                    <button id="masivo" name="masivo" type="button" onclick="masive()" data-toggle='modal'
+                        data-target='#modal-surtirmasivo' class="btn btn-indigo pd-x-25 float-right d-none">Surtir
+                        masivo</button>
                     <br>
                     <h6 class="col-md-4 mg-t--1 mg-md-t-0">ARTICULOS</h6>
-                    <br>
                     <div class="col-lg-20">
                         <div id="listpedidinf"></div><!-- col-12 -->
                     </div><!-- form-layout -->
