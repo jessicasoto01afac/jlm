@@ -320,7 +320,7 @@ function infpedido(pruebas) {
                         liberar.style.display = '';
                         surtir.style.display = '';
                         finalizado.style.display = 'none';
-                        editar.style.display = 'none';
+                        editar.style.display = '';
                         pdf.style.display = '';
                         let masivo = $("#masivo").removeClass("d-none");
                         html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
@@ -351,7 +351,7 @@ function infpedido(pruebas) {
                                     html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + status + "</td></tr>";
                                 }
                             }
-                            html += '</div></tbody></table></div></div>';
+                            html += '</tbody></table></div>';
                             $("#listpedidinf").html(html);
                             $('#lispedidoinf').DataTable({
                                 pageLength: 100,
@@ -397,7 +397,7 @@ function infpedido(pruebas) {
                                     html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class=''>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='infartpedid(" + id_kardex + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetpedi'>Editar</a><a href='' onclick='delartpedinf(" + id_kardex + ");'  class='nav-link' data-toggle='modal' data-target='#modal-deleartped'>Eliminar</a>" + "</td></tr>";
                                 }
                             }
-                            html += '</div></tbody></table></div></div>';
+                            html += '</tbody></table></div>';
                             $("#listpedidinf").html(html);
                             $('#lispedidoinf').DataTable({
                                 pageLength: 100,
@@ -454,7 +454,7 @@ function infpedido(pruebas) {
                                     html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + status + "</td></tr>";
                                 }
                             }
-                            html += '</div></tbody></table></div></div>';
+                            html += '</tbody></table></div>';
                             $("#listpedidinf").html(html);
                             $('#lispedidoinf').DataTable({
                                 pageLength: 100,
@@ -511,7 +511,7 @@ function infpedido(pruebas) {
                                     html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + status + "</td></tr>";
                                 }
                             }
-                            html += '</div></tbody></table></div></div>';
+                            html += '</tbody></table></div>';
                             $("#listpedidinf").html(html);
                             $('#lispedidoinf').DataTable({
                                 pageLength: 100,
@@ -568,7 +568,7 @@ function infpedido(pruebas) {
                                 }
                             }
 
-                            html += '</div></tbody></table></div></div>';
+                            html += '</tbody></table></div>';
                             $("#listpedidinf").html(html);
                             $('#lispedidoinf').DataTable({
                                 pageLength: 100,
@@ -601,6 +601,14 @@ function infpedido(pruebas) {
 function updateinfped() {
     let folio = document.getElementById('idinped').innerHTML;
     //alert(folio);
+    //BOTONES -----------------------------------------------
+    let autorizar = document.getElementById('btnpedautoriz');
+    let liberar = document.getElementById('btnpedliberar');
+    let surtir = document.getElementById('btnpedsurtir');
+    let finalizado = document.getElementById('btnpedfinaliz');
+    let editar = document.getElementById('openedipi');
+    let pdf = document.getElementById('pdfpedrod');
+    //let masivo = document.getElementById('masivo');
     $.ajax({
         url: '../controller/php/infpedigrup.php',
         type: 'GET',
@@ -620,6 +628,12 @@ function updateinfped() {
                 $("#inforemision").html(o[1]);
 
                 if (obj.data[D].status == 'AUTORIZADO') {
+                    autorizar.style.display = 'none';
+                    liberar.style.display = '';
+                    surtir.style.display = '';
+                    finalizado.style.display = 'none';
+                    editar.style.display = '';
+                    pdf.style.display = '';
                     let masivo = $("#masivo").removeClass("d-none");
                     html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
                     $("#button_estatus").html(html);
@@ -649,7 +663,7 @@ function updateinfped() {
                                 html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + status + "</td></tr>";
                             }
                         }
-                        html += '</div></tbody></table></div></div>';
+                        html += '</tbody></table></div>';
                         $("#listpedidinf").html(html);
                         $('#lispedidoinf').DataTable({
                             pageLength: 100,
@@ -671,6 +685,12 @@ function updateinfped() {
 
                     })
                 } else if (obj.data[D].status == 'PENDIENTE') {
+                    autorizar.style.display = '';
+                    liberar.style.display = 'none';
+                    surtir.style.display = 'none';
+                    finalizado.style.display = 'none';
+                    editar.style.display = '';
+                    pdf.style.display = 'none';
                     let masivo = $("#masivo").addClass("d-none");
                     html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-secondary btn-block mg-b-3">PENDIDENTE</button>';
                     $("#button_estatus").html(html);
@@ -690,7 +710,7 @@ function updateinfped() {
                                 html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class=''>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='infartpedid(" + id_kardex + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetpedi'>Editar</a><a href='' onclick='delartpedinf(" + id_kardex + ");'  class='nav-link' data-toggle='modal' data-target='#modal-deleartped'>Eliminar</a>" + "</td></tr>";
                             }
                         }
-                        html += '</div></tbody></table></div></div>';
+                        html += '</tbody></table></div>';
                         $("#listpedidinf").html(html);
                         $('#lispedidoinf').DataTable({
                             pageLength: 100,
@@ -712,6 +732,12 @@ function updateinfped() {
 
                     })
                 } else if (obj.data[D].status == 'SURTIDO') {
+                    autorizar.style.display = 'none';
+                    liberar.style.display = 'none';
+                    surtir.style.display = 'none';
+                    finalizado.style.display = '';
+                    editar.style.display = 'none';
+                    pdf.style.display = '';
                     let masivo = $("#masivo").addClass("d-none");
                     html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-info btn-block mg-b-3">SURTIDO</button>';
                     $("#button_estatus").html(html);
@@ -744,7 +770,7 @@ function updateinfped() {
                                 html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + status + "</td></tr>";
                             }
                         }
-                        html += '</div></tbody></table></div></div>';
+                        html += '</tbody></table></div>';
                         $("#listpedidinf").html(html);
                         $('#lispedidoinf').DataTable({
                             pageLength: 100,
@@ -766,6 +792,12 @@ function updateinfped() {
 
                     })
                 } else if (obj.data[D].status == 'FINALIZADO') {
+                    autorizar.style.display = 'none';
+                    liberar.style.display = 'none';
+                    surtir.style.display = 'none';
+                    finalizado.style.display = 'none';
+                    editar.style.display = 'none';
+                    pdf.style.display = '';
                     let masivo = $("#masivo").addClass("d-none");
                     html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">FINALIZADO</button>';
                     $("#button_estatus").html(html);
@@ -800,7 +832,7 @@ function updateinfped() {
                                 html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + status + "</td></tr>";
                             }
                         }
-                        html += '</div></tbody></table></div></div>';
+                        html += '</tbody></table></div>';
                         $("#listpedidinf").html(html);
                         $('#lispedidoinf').DataTable({
                             pageLength: 100,
@@ -856,7 +888,7 @@ function updateinfped() {
                                 html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + status + "</td></tr>";
                             }
                         }
-                        html += '</div></tbody></table></div></div>';
+                        html += '</tbody></table></div>';
                         $("#listpedidinf").html(html);
                         $('#lispedidoinf').DataTable({
                             pageLength: 100,
@@ -1478,7 +1510,7 @@ function histvalepro() {
     //alert(folio);
     //Tabla de historial del vale de producción
     $.ajax({
-        url: '../controller/php/hisvaleprod.php',
+        url: '../controller/php/hispedidos.php',
         type: 'POST',
         data: 'folio=' + folio2
     }).done(function(resp) {
@@ -2003,7 +2035,9 @@ function savemasive() {
     var array1 = JSON.stringify(idperon);
     var array2 = JSON.stringify(evaluacion);
     var array3 = JSON.stringify(observaciones);
-    datos = 'array1=' + array1 + '&array2=' + array2 + '&array3=' + array3 + '&opcion=surmasivo';
+    var folio = document.getElementById('idinped').innerHTML;
+
+    datos = 'array1=' + array1 + '&array2=' + array2 + '&array3=' + array3 + '&folio=' + folio + '&opcion=surmasivo';
     //alert(datos);
     $.ajax({
         url: '../controller/php/insertpedio.php',

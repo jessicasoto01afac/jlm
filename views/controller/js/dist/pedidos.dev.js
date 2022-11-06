@@ -310,7 +310,7 @@ function infpedido(pruebas) {
             liberar.style.display = '';
             surtir.style.display = '';
             finalizado.style.display = 'none';
-            editar.style.display = 'none';
+            editar.style.display = '';
             pdf.style.display = '';
             var masivo = $("#masivo").removeClass("d-none");
             html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
@@ -343,7 +343,7 @@ function infpedido(pruebas) {
                 }
               }
 
-              html += '</div></tbody></table></div></div>';
+              html += '</tbody></table></div>';
               $("#listpedidinf").html(html);
               $('#lispedidoinf').DataTable({
                 pageLength: 100,
@@ -393,7 +393,7 @@ function infpedido(pruebas) {
                 }
               }
 
-              html += '</div></tbody></table></div></div>';
+              html += '</tbody></table></div>';
               $("#listpedidinf").html(html);
               $('#lispedidoinf').DataTable({
                 pageLength: 100,
@@ -453,7 +453,7 @@ function infpedido(pruebas) {
                 }
               }
 
-              html += '</div></tbody></table></div></div>';
+              html += '</tbody></table></div>';
               $("#listpedidinf").html(html);
               $('#lispedidoinf').DataTable({
                 pageLength: 100,
@@ -513,7 +513,7 @@ function infpedido(pruebas) {
                 }
               }
 
-              html += '</div></tbody></table></div></div>';
+              html += '</tbody></table></div>';
               $("#listpedidinf").html(html);
               $('#lispedidoinf').DataTable({
                 pageLength: 100,
@@ -570,7 +570,7 @@ function infpedido(pruebas) {
                 }
               }
 
-              html += '</div></tbody></table></div></div>';
+              html += '</tbody></table></div>';
               $("#listpedidinf").html(html);
               $('#lispedidoinf').DataTable({
                 pageLength: 100,
@@ -599,6 +599,14 @@ function infpedido(pruebas) {
 
 function updateinfped() {
   var folio = document.getElementById('idinped').innerHTML; //alert(folio);
+  //BOTONES -----------------------------------------------
+
+  var autorizar = document.getElementById('btnpedautoriz');
+  var liberar = document.getElementById('btnpedliberar');
+  var surtir = document.getElementById('btnpedsurtir');
+  var finalizado = document.getElementById('btnpedfinaliz');
+  var editar = document.getElementById('openedipi');
+  var pdf = document.getElementById('pdfpedrod'); //let masivo = document.getElementById('masivo');
 
   $.ajax({
     url: '../controller/php/infpedigrup.php',
@@ -618,6 +626,12 @@ function updateinfped() {
         $("#inforemision").html(o[1]);
 
         if (obj.data[D].status == 'AUTORIZADO') {
+          autorizar.style.display = 'none';
+          liberar.style.display = '';
+          surtir.style.display = '';
+          finalizado.style.display = 'none';
+          editar.style.display = '';
+          pdf.style.display = '';
           var masivo = $("#masivo").removeClass("d-none");
           html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
           $("#button_estatus").html(html);
@@ -649,7 +663,7 @@ function updateinfped() {
               }
             }
 
-            html += '</div></tbody></table></div></div>';
+            html += '</tbody></table></div>';
             $("#listpedidinf").html(html);
             $('#lispedidoinf').DataTable({
               pageLength: 100,
@@ -670,6 +684,13 @@ function updateinfped() {
             });
           });
         } else if (obj.data[D].status == 'PENDIENTE') {
+          autorizar.style.display = '';
+          liberar.style.display = 'none';
+          surtir.style.display = 'none';
+          finalizado.style.display = 'none';
+          editar.style.display = '';
+          pdf.style.display = 'none';
+
           var _masivo5 = $("#masivo").addClass("d-none");
 
           html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-secondary btn-block mg-b-3">PENDIDENTE</button>';
@@ -692,7 +713,7 @@ function updateinfped() {
               }
             }
 
-            html += '</div></tbody></table></div></div>';
+            html += '</tbody></table></div>';
             $("#listpedidinf").html(html);
             $('#lispedidoinf').DataTable({
               pageLength: 100,
@@ -713,6 +734,13 @@ function updateinfped() {
             });
           });
         } else if (obj.data[D].status == 'SURTIDO') {
+          autorizar.style.display = 'none';
+          liberar.style.display = 'none';
+          surtir.style.display = 'none';
+          finalizado.style.display = '';
+          editar.style.display = 'none';
+          pdf.style.display = '';
+
           var _masivo6 = $("#masivo").addClass("d-none");
 
           html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-info btn-block mg-b-3">SURTIDO</button>';
@@ -747,7 +775,7 @@ function updateinfped() {
               }
             }
 
-            html += '</div></tbody></table></div></div>';
+            html += '</tbody></table></div>';
             $("#listpedidinf").html(html);
             $('#lispedidoinf').DataTable({
               pageLength: 100,
@@ -768,6 +796,13 @@ function updateinfped() {
             });
           });
         } else if (obj.data[D].status == 'FINALIZADO') {
+          autorizar.style.display = 'none';
+          liberar.style.display = 'none';
+          surtir.style.display = 'none';
+          finalizado.style.display = 'none';
+          editar.style.display = 'none';
+          pdf.style.display = '';
+
           var _masivo7 = $("#masivo").addClass("d-none");
 
           html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">FINALIZADO</button>';
@@ -804,7 +839,7 @@ function updateinfped() {
               }
             }
 
-            html += '</div></tbody></table></div></div>';
+            html += '</tbody></table></div>';
             $("#listpedidinf").html(html);
             $('#lispedidoinf').DataTable({
               pageLength: 100,
@@ -861,7 +896,7 @@ function updateinfped() {
               }
             }
 
-            html += '</div></tbody></table></div></div>';
+            html += '</tbody></table></div>';
             $("#listpedidinf").html(html);
             $('#lispedidoinf').DataTable({
               pageLength: 100,
@@ -1488,7 +1523,7 @@ function histvalepro() {
   //Tabla de historial del vale de producción
 
   $.ajax({
-    url: '../controller/php/hisvaleprod.php',
+    url: '../controller/php/hispedidos.php',
     type: 'POST',
     data: 'folio=' + folio2
   }).done(function (resp) {
@@ -2038,7 +2073,8 @@ function savemasive() {
   var array1 = JSON.stringify(idperon);
   var array2 = JSON.stringify(evaluacion);
   var array3 = JSON.stringify(observaciones);
-  datos = 'array1=' + array1 + '&array2=' + array2 + '&array3=' + array3 + '&opcion=surmasivo'; //alert(datos);
+  var folio = document.getElementById('idinped').innerHTML;
+  datos = 'array1=' + array1 + '&array2=' + array2 + '&array3=' + array3 + '&folio=' + folio + '&opcion=surmasivo'; //alert(datos);
 
   $.ajax({
     url: '../controller/php/insertpedio.php',

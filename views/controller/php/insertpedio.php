@@ -248,6 +248,7 @@ if(!isset($usuario)){
         $array2 = json_decode($array2, true);
         $array3 = $_POST['array3'];
         $array3 = json_decode($array3, true);
+        $folio = $_POST['folio'];
         for($i=0; $i<$valor; $i++){
             $idcurs = $varray1[$i]["idperon"];
             if($idcurs==''){
@@ -263,7 +264,8 @@ if(!isset($usuario)){
                 }
                 //llamada al guardo
                 if(masivosurtir($idcurs,$evaluacion,$estatus,$observaciones,$conexion)){	
-                    echo "0";	
+                    echo "0";
+                    hisurtmasiv($usuario,$folio,$conexion);	
                 }else{	
                     echo "1";	
                 }
@@ -682,6 +684,18 @@ function histhader($usuario,$refe_1,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario', 'ACTUALIZA LA CABEZERA DEL PEDIDO', 'FOLIO:' '$refe_1 ','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//funciones para guardar el historico liberar
+function hisurtmasiv($usuario,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'SURTE MASIVAMENTE PEDIDO', 'FOLIO:' '$folio',' $fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

@@ -115,7 +115,7 @@ include('header.php');
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
                         <button onclick="pdfvp()" style="display:none;" title="Imprimir" id="pdfpedrod" name="pdfpedrod"
-                            type="button" class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
+                            type="button" class="btn btn-info"><i class="fa fa-file-pdf-o"></i></button>
                         <button title="ver historial" onclick="histvalepro()" data-toggle="modal"
                             data-target="#modal-pedhistorial" type="button" class="btn btn-primary"><i
                                 class="fa fa-history"></i></button>
