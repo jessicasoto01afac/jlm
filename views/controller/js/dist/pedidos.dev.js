@@ -2147,3 +2147,10 @@ function savepedcabe() {
     });
   }
 }
+
+function pdfhistory() {
+  var folio = document.getElementById('idinped').innerHTML; //alert("entro");
+
+  url = '../formatos/pdf_reporthistorypedido.php';
+  window.open(url + "?data=" + folio, '_black');
+}
