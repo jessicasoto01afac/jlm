@@ -310,7 +310,8 @@ include('header.php');
                             CAMBIOS</button>
                         <br>
                     </div>
-                    <div style="display:none;" id="edthpedexi" name="edthpedexi" class="alert alert-warning" role="alert">
+                    <div style="display:none;" id="edthpedexi" name="edthpedexi" class="alert alert-warning"
+                        role="alert">
                         <div class="d-flex align-items-center justify-content-start">
                             <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                             <span><strong>Advertencia!</strong> El resgistro ya existe</span>
@@ -348,6 +349,18 @@ include('header.php');
                     </div><!-- form-layout -->
                 </div><!-- br-pagebody -->
             </div><!-- br-pagebody -->
+            <footer class="br-footer">
+                <div class="footer-left">
+                    <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
+                    <div>Jose Luis Mondragon y CIA.</div>
+                </div>
+                <div class="footer-right d-flex align-items-center">
+                    <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i
+                            class="fa fa-facebook tx-20"></i></a>
+                    <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i
+                            class="fa fa-globe tx-20"></i></a>
+                </div>
+            </footer>
         </div><!-- br-pagebody -->
     </section>
 

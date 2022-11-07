@@ -449,7 +449,7 @@ function savecliedith() {
     var datos = 'codigo_clie=' + codigo_clie + '&nombre=' + nombre + '&rfc=' + rfc + '&email=' + email + '&id_cliente=' + id_cliente + '&opcion=actualizar';
     //alert(datos);
 
-    if (document.getElementById('edicocli').value == '' || document.getElementById('edithnom').value == '' || document.getElementById('editrfc').value == '' || document.getElementById('editcorrc').value == '') {
+    if (document.getElementById('edicocli').value == '' || document.getElementById('edithnom').value == '' || document.getElementById('editrfc').value == '') {
         document.getElementById('edthclivacios').style.display = '';
         setTimeout(function() {
             document.getElementById('edthclivacios').style.display = 'none';

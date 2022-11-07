@@ -182,7 +182,7 @@ include ("../controller/conexion.php");
                     focusConfirm: false,
                     confirmButtonColor: "#1774D8",
                     customClass: 'swal-wide',
-                    confirmButtonText: '<span style="color: white;"><a class="a-alert" href="newacces">¿Deseas agregar otro cliente?</a></span>',
+                    confirmButtonText: '<span style="color: white;"><a class="a-alert" href="newclient.php">¿Deseas agregar otro cliente?</a></span>',
                     confirmButtonAriaLabel: 'Thumbs up, great!',
                     cancelButtonText: '<a  class="a-alert" href="clientes.php"><span style="color: white;">Cerrar</span></a>',
                     cancelButtonAriaLabel: 'Thumbs down'
