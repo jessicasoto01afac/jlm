@@ -98,7 +98,7 @@ if(!isset($usuario)){
         $folio = $_POST['folio'];
         if (eliminar($id_reclamo,$conexion)){
             echo "0";
-            $realizo = 'ELIMINA ARTICULO DEL REPORTE';
+            $realizo = 'ELIMINA ARTICULO DEL REPORTE DE CLIENTE';
             // $usuario='pruebas';
             histdelete($usuario,$realizo,$id_reclamo,$folio,$conexion);
         }else{
@@ -117,7 +117,7 @@ if(!isset($usuario)){
         $code_conclucion=$_POST['code_conclucion'];
         if (updatereports($folio,$rep_cliente,$code_cliente,$rep_jlm,$code_jlm,$seguimiento,$code_seguimiento,$conclusion,$code_conclucion,$conexion)){
             echo "0";
-            $realizo = 'ACTUALIZA EL REPORTE DEL CLIENTE';
+            $realizo = 'ACTUALIZA EL REPORTE DE CLIENTE';
             // $usuario='pruebas';
             histuprep($usuario,$realizo,$folio,$conexion);
         }else{
@@ -137,7 +137,7 @@ if(!isset($usuario)){
         $estatus_recl=$_POST['estatus_recl'];
         if (updaheaderrep($folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$pedido,$remision,$factura,$code_cliente,$dep_responsa,$estatus_recl,$conexion)){
             echo "0";
-            $realizo = 'ACTUALIZA LOS DATOS DEL REPORTE';
+            $realizo = 'ACTUALIZA LOS DATOS DEL REPORTE DE CLIENTE';
             // $usuario='pruebas';
             histuprep($usuario,$realizo,$folio,$conexion);
         }else{
@@ -317,7 +317,7 @@ function deleterepcl ($folio,$conexion){
 function historial($usuario,$folio,$id_articulo,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN ARTICULO EN EL REPORTE', 'FOLIO:' '$folio' ' ARTICULO:' ' $id_articulo','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN ARTICULO EN EL REPORTE DE CLIENTE', 'FOLIO:' '$folio' ' ARTICULO:' ' $id_articulo','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -350,7 +350,7 @@ function historialclie($usuario,$folio,$tipo_reporte,$tipo_incidencia,$conexion)
 function histdelete($usuario,$realizo,$id_reclamo,$folio,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','$realizo', 'FOLIO :' ' $folio' 'ARTICULO: ' (select id_articulo from id_reclamo = $id_reclamo) ,'$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','$realizo', 'FOLIO:' '$folio' 'ARTICULO: ' (select id_articulo from id_reclamo = $id_reclamo) ,'$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -363,7 +363,7 @@ function histdelete($usuario,$realizo,$id_reclamo,$folio,$conexion){
 function histuprep($usuario,$realizo,$folio,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','$realizo', 'FOLIO :' ' $folio','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','$realizo', 'FOLIO:' '$folio','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

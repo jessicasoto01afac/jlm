@@ -1449,7 +1449,7 @@ function histvalepro() {
   //Tabla de historial del vale de producción
 
   $.ajax({
-    url: '../controller/php/hisvaleprod.php',
+    url: '../controller/php/hisreclamocliente.php',
     type: 'POST',
     data: 'folio=' + folio2
   }).done(function (resp) {
@@ -1466,47 +1466,6 @@ function histvalepro() {
 
     html += '</div></tbody></table></div></div>';
     $("#tabhisto").html(html);
-  }); //Historial del vale en productividad
-
-  $.ajax({
-    url: '../controller/php/productiv.php',
-    type: 'POST',
-    data: 'folio=' + folio
-  }).done(function (resp) {
-    obj = JSON.parse(resp);
-    var res = obj.data;
-    var x = 0; //alert("folio");
-
-    for (D = 0; D < res.length; D++) {
-      document.getElementById('fcreacion').innerHTML = obj.data[D].fecha_creacion1;
-      document.getElementById('fautoriz').innerHTML = obj.data[D].fecha_autorizacion1;
-      document.getElementById('fsurtido').innerHTML = obj.data[D].fecha_surtido1;
-      document.getElementById('ffinaliz').innerHTML = obj.data[D].fecha_finalizacion1; //DIAS
-
-      if (obj.data[D].dias_totales > 0) {
-        document.getElementById('dias1').innerHTML = obj.data[D].dias_autorizacion + " dias Creación/Autorización";
-        document.getElementById('dias2').innerHTML = obj.data[D].dias_asurtdo + " dias Autorización/Surtido";
-        document.getElementById('dias3').innerHTML = obj.data[D].dias_totales + " dias trascurridos para finalización ";
-      }
-
-      if (obj.data[D].dias_totales == null) {
-        document.getElementById('dias1').innerHTML = obj.data[D].dias_autorizacion + " dias Creación/Autorización";
-        document.getElementById('dias2').innerHTML = obj.data[D].dias_asurtdo + " dias Autorización/Surtido";
-        document.getElementById('dias3').innerHTML = "Sin finalizar";
-      }
-
-      if (obj.data[D].dias_asurtdo == null) {
-        document.getElementById('dias1').innerHTML = obj.data[D].dias_autorizacion + " dias Creación/Autorización";
-        document.getElementById('dias2').innerHTML = "Sin surtir";
-        document.getElementById('dias3').innerHTML = "Sin finalizar";
-      }
-
-      if (obj.data[D].dias_autorizacion == null) {
-        document.getElementById('dias1').innerHTML = "Sin autorizar";
-        document.getElementById('dias2').innerHTML = "Sin surtir";
-        document.getElementById('dias3').innerHTML = "Sin finalizar";
-      }
-    }
   });
 }
 

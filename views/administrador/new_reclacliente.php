@@ -149,7 +149,7 @@
                                         <label class="form-control-label">CLIENTE: <span
                                                 class="tx-danger">*</span></label>
                                         <select class="form-control" id="deprechaclie" name="deprechaclie">
-                                            <option value="">SELECCIONA UNA OPCIÓN</option>
+                                            <option value="">SELECCIONA AL CLIENTE</option>
                                             <?php while($clien = mysqli_fetch_row($cliente1)):?>
                                             <option value="<?php echo $clien[1]?>"><?php echo $clien[2]?></option>
                                             <?php endwhile; ?>
@@ -158,8 +158,7 @@
                                 </div><!-- col-4 -->
                                 <div class="col-lg-4" id="departamento" style="">
                                     <div class="form-group mg-b-10-force">
-                                        <label class="form-control-label">SE ACREDITA EL RECLAMO A: <span
-                                                class="tx-danger">*</span></label>
+                                        <label class="form-control-label">SE ACREDITA EL RECLAMO A:</label>
                                         <select class="form-control" id="acrediclien" name="acrediclien">
                                             <option value="">SELECCIONA UNA OPCIÓN</option>
                                             <option value="ALMACEN">ALMACEN</option>
@@ -272,7 +271,7 @@
                         <div class="row mg-b-25">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label style="font-size:16px" class="form-control-label">INGRESE EL REPORTE DEL
+                                    <label style="font-size:16px" class="form-control-label ">INGRESE EL REPORTE DEL
                                         CLIENTE: <span class="tx-danger">*</span></label>
                                     <div id="clientenote" name="clientenote"></div>
                                 </div><!-- form-group -->
@@ -383,7 +382,7 @@
     openrepclient();
     $(function() {
         'use strict';
-
+        $('#deprechaclie').select2();
         // Inline editor
         var editor = new MediumEditor('.editable');
 

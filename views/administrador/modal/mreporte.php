@@ -466,7 +466,7 @@
                 </button>
             </div>
             <div class="modal-body pd-25">
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <div class="card bd-0 pd-30">
                         <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Historial</h6>
                         <p id="" name="" class="mg-b-0"><span
@@ -490,10 +490,10 @@
                             <a href="" class="tx-gray-600 hover-info">Generar Reporte</a>
                             <a href="" class="tx-gray-600 hover-info bd-l mg-l-10 pd-l-10">Imprimir Reporte</a>
                         </div>
-                    </div><!-- card -->
-                </div>
-
-                <h4 class="lh-3 mg-b-20"><a href="" class="tx-inverse hover-primary">Registros de movimientos</a></h4>
+                    </div>                   
+                </div> -->
+                <a href="" class="tx-gray-600 hover-info">Generar Reporte</a>
+                <h4 class="lh-3 mg-b-20"><a class="tx-inverse hover-primary">Registros de movimientos</a></h4>
                 <div class="col-lg-12">
                     <div class="form-group">
                         <div id="tabhisto" name="tabhisto"></div>

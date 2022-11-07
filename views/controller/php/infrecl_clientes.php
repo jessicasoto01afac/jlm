@@ -1,7 +1,7 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT * FROM reclamoclient r, clientes c where r.estado='0' and r.codigo_cliente=c.codigo_clie ORDER BY id_reclamo ASC";
+	$query = "SELECT * FROM reclamoclient r, clientes c where r.estado='0' and r.codigo_cliente=c.codigo_clie ORDER BY id_reclamo DESC";
 	$resultado = mysqli_query($conexion, $query);
 	$contador=0;
 	if(!$resultado){
