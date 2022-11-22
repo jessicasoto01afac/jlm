@@ -1219,7 +1219,7 @@ function histvalepro() {
 }
 
 function pdfvp() {
-    var folio = document.getElementById('folioreprove').innerHTML;
+    var folio = document.getElementById('folioreprove').value;
     //alert(folio);
     url = '../formatos/pdf_reclamo_proveedor.php'
     window.open(url + "?data=" + folio, '_black');
