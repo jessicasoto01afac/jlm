@@ -132,7 +132,7 @@ $sql =
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
             <li class="nav-item"><a href="rec_rech_clientes.php" class="nav-link">Clientes</a></li>
-            <li class="nav-item"><a href="chart-flot.html" class="nav-link">Proveedores</a></li>
+            <li class="nav-item"><a href="rec_rech_proveedor.php" class="nav-link">Proveedores</a></li>
         </ul>
         <a href="#" class="br-menu-link">
             <div class="br-menu-item">

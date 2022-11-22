@@ -354,7 +354,7 @@ function editararclienalt(idreclamo) {
     var x = 0;
 
     for (U = 0; U < res.length; U++) {
-      if (obj.data[U].id_reclamo == idreclamo) {
+      if (obj.data[U].id_reclamo == idreclamo && obj.data[U].tipo == 'CLIENTE') {
         //alert();
         document.getElementById('codiclieth').value = obj.data[U].id_articulo;
         document.getElementById('desclientrep').value = obj.data[U].artdescrip;

@@ -57,7 +57,7 @@ if(!isset($usuario)){
 
         if (actualizar($folio,$id_articulo,$cantidad,$observ_recl,$id_reclamo,$conexion)){
             echo "0";
-            $realizo = 'ACTUALIZO INFORMACION DEL ARTICULO';
+            $realizo = 'ACTUALIZO INFORMACION DEL ARTICULO DEL REPORTE DE PROVEEDOR';
             historialup($folio,$id_articulo,$cantidad,$observ_recl,$usuario,$realizo,$conexion);
         }else{
             echo "1";
@@ -69,21 +69,25 @@ if(!isset($usuario)){
             $fecha_recl = $_POST['fecha_recl'];
             $tipo_reporte = $_POST['tipo_reporte'];
             $tipo_incidencia = $_POST['tipo_incidencia'];
-            $remision = $_POST['remision'];
+            $orden_compra = $_POST['orden_compra'];
             $factura = $_POST['factura'];
-            $deprechaclie = $_POST['deprechaclie'];
-            $dep_responsa = $_POST['dep_responsa'];
-            $rep_cliente = $_POST['rep_cliente'];
-            $code_cliente = $_POST['code_cliente'];
+            $proveedor = $_POST['proveedor'];
+            $dep_report = $_POST['dep_report'];
+            $pers_report = $_POST['pers_report'];
             $rep_jlm = $_POST['rep_jlm'];
-            $code_jlm = $_POST['code_jlm']; 
+            $code_jlm = $_POST['code_jlm'];
+            $date_send = $_POST['date_send']; 
+            $dept_provee = $_POST['dept_provee'];
+            $evio_a = $_POST['evio_a'];
+            $email = $_POST['email'];
+            $telefono = $_POST['telefono'];
+            $medios = $_POST['medios'];
             $seguimiento = $_POST['seguimiento'];
             $code_seguimiento = $_POST['code_seguimiento'];
             $conclusion = $_POST['conclusion'];
             $code_conclucion = $_POST['code_conclucion'];
-            $pedido2 = $_POST['pedido2'];
-            
-            if (registrarclie($usuario,$folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$remision,$factura,$deprechaclie,$dep_responsa,$rep_cliente,$code_cliente,$rep_jlm,$code_jlm,$seguimiento,$code_seguimiento,$conclusion,$code_conclucion,$pedido2,$conexion)){
+
+            if (registrarprove($folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$orden_compra,$factura,$proveedor,$dep_report,$pers_report,$rep_jlm,$code_jlm,$date_send,$dept_provee,$evio_a,$email,$telefono,$medios,$seguimiento,$code_seguimiento,$conclusion,$code_conclucion,$usuario,$conexion)){
                 echo "0";
                 historialclie($usuario,$folio,$tipo_reporte,$tipo_incidencia,$conexion);
             }else{
@@ -98,7 +102,7 @@ if(!isset($usuario)){
         $folio = $_POST['folio'];
         if (eliminar($id_reclamo,$conexion)){
             echo "0";
-            $realizo = 'ELIMINA ARTICULO DEL REPORTE DE CLIENTE';
+            $realizo = 'ELIMINA ARTICULO DEL REPORTE DE PROVEEDOR';
             // $usuario='pruebas';
             histdelete($usuario,$realizo,$id_reclamo,$folio,$conexion);
         }else{
@@ -107,17 +111,21 @@ if(!isset($usuario)){
     //ACTUALIZA LOS REPORTES
     }else if($opcion === 'updatesavereport'){
         $folio = $_POST['folio'];
-        $rep_cliente=$_POST['rep_cliente'];
-        $code_cliente=$_POST['code_cliente'];
-        $rep_jlm=$_POST['rep_jlm'];
-        $code_jlm=$_POST['code_jlm'];
-        $seguimiento=$_POST['seguimiento'];
-        $code_seguimiento=$_POST['code_seguimiento'];
-        $conclusion=$_POST['conclusion'];
-        $code_conclucion=$_POST['code_conclucion'];
-        if (updatereports($folio,$rep_cliente,$code_cliente,$rep_jlm,$code_jlm,$seguimiento,$code_seguimiento,$conclusion,$code_conclucion,$conexion)){
+        $rep_jlm = $_POST['rep_jlm'];
+        $code_jlm = $_POST['code_jlm'];
+        $date_send = $_POST['date_send']; 
+        $dept_provee = $_POST['dept_provee'];
+        $evio_a = $_POST['evio_a'];
+        $telefono = $_POST['telefono'];
+        $email = $_POST['email'];
+        $medios = $_POST['medios'];
+        $seguimiento = $_POST['seguimiento'];
+        $code_seguimiento = $_POST['code_seguimiento'];
+        $conclusion = $_POST['conclusion'];
+        $code_conclucion = $_POST['code_conclucion'];
+        if (updatereports($folio,$rep_jlm,$code_jlm,$date_send,$dept_provee,$evio_a,$telefono,$email,$medios,$seguimiento,$code_seguimiento,$conclusion,$code_conclucion,$conexion)){
             echo "0";
-            $realizo = 'ACTUALIZA EL REPORTE DE CLIENTE';
+            $realizo = 'ACTUALIZA EL REPORTE DE PROVEEDOR';
             // $usuario='pruebas';
             histuprep($usuario,$realizo,$folio,$conexion);
         }else{
@@ -129,15 +137,15 @@ if(!isset($usuario)){
         $fecha_recl=$_POST['fecha_recl'];
         $tipo_reporte=$_POST['tipo_reporte'];
         $tipo_incidencia=$_POST['tipo_incidencia'];
-        $pedido=$_POST['pedido'];
-        $remision=$_POST['remision'];
+        $orden_compra=$_POST['orden_compra'];
         $factura=$_POST['factura'];
-        $code_cliente=$_POST['code_cliente'];
-        $dep_responsa=$_POST['dep_responsa'];
+        $dep_resport=$_POST['dep_resport'];
+        $pers_report=$_POST['pers_report'];
+        $proveedor=$_POST['proveedor'];
         $estatus_recl=$_POST['estatus_recl'];
-        if (updaheaderrep($folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$pedido,$remision,$factura,$code_cliente,$dep_responsa,$estatus_recl,$conexion)){
+        if (updaheaderrep($folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$orden_compra,$factura,$dep_resport,$pers_report,$proveedor,$estatus_recl,$conexion)){
             echo "0";
-            $realizo = 'ACTUALIZA LOS DATOS DEL REPORTE DE CLIENTE';
+            $realizo = 'ACTUALIZA LOS DATOS DEL REPORTE DE PROVEEDOR';
             // $usuario='pruebas';
             histuprep($usuario,$realizo,$folio,$conexion);
         }else{
@@ -177,7 +185,7 @@ if(!isset($usuario)){
 
 //funcion de comprobación para ver si el vale ya se encuentra en la base
 function comprobacion ($folio,$id_articulo,$conexion){
-    $query="SELECT * FROM artreclamos WHERE folio = '$folio' AND  id_articulo='$id_articulo' AND estado = 0 AND tipo='CLIENTE'";
+    $query="SELECT * FROM artreclamos WHERE folio = '$folio' AND  id_articulo='$id_articulo' AND estado = 0 AND tipo='PROVEEDOR'";
     $resultado= mysqli_query($conexion,$query);
     if($resultado->num_rows==0){
         return true;
@@ -199,7 +207,7 @@ function comprobacion2 ($folio,$conexion){
 }
 //Agregar folio para nuevo reporte
 function addfolio ($tipo,$conexion){
-    $folios="SELECT MAX(folio) + 1 AS id_foliovp FROM folios where tipo ='RECLAMO_CLIENTE' AND estado_f=0";
+    $folios="SELECT MAX(folio) + 1 AS id_foliovp FROM folios where tipo ='$tipo' AND estado_f=0";
     $foliovale_p = mysqli_query($conexion,$folios);
     $folio = mysqli_fetch_row($foliovale_p);
     $query="INSERT INTO folios VALUES(0,'$folio[0]','$tipo',0)";
@@ -212,7 +220,7 @@ function addfolio ($tipo,$conexion){
 }
 //funcion para guardar el articulo de nuevo reporte
 function registrar ($folio,$id_articulo,$cantidad,$observ_recl,$conexion){
-    $query="INSERT INTO artreclamos VALUES(0,'$folio','$id_articulo','$cantidad','$observ_recl','CLIENTE',0)";
+    $query="INSERT INTO artreclamos VALUES(0,'$folio','$id_articulo','$cantidad','$observ_recl','PROVEEDOR',0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -220,9 +228,9 @@ function registrar ($folio,$id_articulo,$cantidad,$observ_recl,$conexion){
     }
     $this->conexion->cerrar();
 }
-//funcion para guardar el articulo de nuevo reporte
-function registrarclie ($usuario,$folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$remision,$factura,$deprechaclie,$dep_responsa,$rep_cliente,$code_cliente,$rep_jlm,$code_jlm,$seguimiento,$code_seguimiento,$conclusion,$code_conclucion,$pedido2,$conexion){
-    $query="INSERT INTO reclamoclient VALUES(0,'$folio','$fecha_recl','$deprechaclie','$pedido2','$remision','$factura','$rep_cliente','$code_cliente','$rep_jlm','$code_jlm','$seguimiento','$code_seguimiento','$conclusion','$code_conclucion','$usuario','0','PENDIENTE','$dep_responsa','$tipo_incidencia','$tipo_reporte',0)";
+//funcion para guardar el articulo de nuevo reporte ***OK
+function registrarprove ($folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$orden_compra,$factura,$proveedor,$dep_report,$pers_report,$rep_jlm,$code_jlm,$date_send,$dept_provee,$evio_a,$email,$telefono,$medios,$seguimiento,$code_seguimiento,$conclusion,$code_conclucion,$usuario,$conexion){
+    $query="INSERT INTO reclamoproveedor VALUES(0,'$folio','$fecha_recl','$tipo_reporte','$tipo_incidencia','$orden_compra','$factura','$proveedor','$dep_report','$pers_report','$rep_jlm','$code_jlm','$date_send','$dept_provee','$evio_a','$email','$telefono','$medios','$seguimiento','$code_seguimiento','$conclusion','$code_conclucion','$usuario','PENDIENTE',0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -262,8 +270,8 @@ function eliminar ($id_reclamo,$conexion){
     cerrar($conexion);
 }
 //funcion para actualizar los reportes
-function updatereports ($folio,$rep_cliente,$code_cliente,$rep_jlm,$code_jlm,$seguimiento,$code_seguimiento,$conclusion,$code_conclucion,$conexion){
-    $query="UPDATE reclamoclient SET rep_cliente='$rep_cliente', code_cliente='$code_cliente',rep_jlm='$rep_jlm',code_jlm='$code_jlm',seguimiento='$seguimiento',code_seguimiento='$code_seguimiento',conclusion='$conclusion',code_conclucion='$code_conclucion' WHERE folio_recl = '$folio'";
+function updatereports ($folio,$rep_jlm,$code_jlm,$date_send,$dept_provee,$evio_a,$telefono,$email,$medios,$seguimiento,$code_seguimiento,$conclusion,$code_conclucion,$conexion){
+    $query="UPDATE reclamoproveedor SET rep_jlm='$rep_jlm', code_jlm='$code_jlm',date_send='$date_send',dept_provee='$dept_provee',evio_a='$evio_a',e_mail='$email',tel='$telefono',medio='$medios',seguimiento='$seguimiento',code_seguimiento='$code_seguimiento',conclusion='$conclusion',code_conclucion='$code_conclucion' WHERE folio_recl = '$folio'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -272,8 +280,8 @@ function updatereports ($folio,$rep_cliente,$code_cliente,$rep_jlm,$code_jlm,$se
     cerrar($conexion);
 }
 //funcion para actualizar la cabecera de reporte
-function updaheaderrep ($folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$pedido,$remision,$factura,$code_cliente,$dep_responsa,$estatus_recl,$conexion){
-    $query="UPDATE reclamoclient SET fecha_recl='$fecha_recl', tipo_reporte='$tipo_reporte',tipo_incidencia='$tipo_incidencia',pedido='$pedido',remision='$remision',factura='$factura',code_cliente='$code_cliente',dep_responsa='$dep_responsa', estatus_recl='$estatus_recl' WHERE folio_recl = '$folio'";
+function updaheaderrep ($folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$orden_compra,$factura,$dep_resport,$pers_report,$proveedor,$estatus_recl,$conexion){
+    $query="UPDATE reclamoproveedor SET fecha_recl='$fecha_recl', tipo_reporte='$tipo_reporte',tipo_incidencia='$tipo_incidencia',orden_compra='$orden_compra',pers_report='$pers_report',factura='$factura',dep_resport='$dep_resport',proveedor='$proveedor', estatus_recl='$estatus_recl' WHERE folio_recl = '$folio'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -311,13 +319,22 @@ function deleterepcl ($folio,$conexion){
     }
     cerrar($conexion);
 }
+function cancfolio ($refe_1,$conexion){
+    $query="DELETE FROM folios WHERE folio = '$refe_1' and tipo='MEMO'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
 function historial($usuario,$folio,$id_articulo,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN ARTICULO EN EL REPORTE DE CLIENTE', 'FOLIO:' '$folio' ' ARTICULO:' ' $id_articulo','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN ARTICULO EN EL REPORTE DE PROVEEDOR', 'FOLIO:' '$folio' ' ARTICULO:' ' $id_articulo','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

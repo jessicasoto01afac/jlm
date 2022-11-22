@@ -343,7 +343,7 @@ function editararclienalt(idreclamo) {
         let res = obj.data;
         let x = 0;
         for (U = 0; U < res.length; U++) {
-            if (obj.data[U].id_reclamo == idreclamo) {
+            if (obj.data[U].id_reclamo == idreclamo && obj.data[U].tipo == 'CLIENTE') {
                 //alert();
                 document.getElementById('codiclieth').value = obj.data[U].id_articulo;
                 document.getElementById('desclientrep').value = obj.data[U].artdescrip;
@@ -351,7 +351,6 @@ function editararclienalt(idreclamo) {
                 document.getElementById('editdeplien').value = obj.data[U].artubicac;
                 document.getElementById('obserclien').value = obj.data[U].observ_recl;
                 document.getElementById('id_artclien').value = obj.data[U].id_reclamo;
-
             }
         }
     });
