@@ -291,7 +291,7 @@ function updaheaderrep ($folio,$fecha_recl,$tipo_reporte,$tipo_incidencia,$orden
 }
 //funcion para finalizar
 function finalizar1 ($folio,$conexion){
-    $query="UPDATE reclamoclient SET estatus_recl='FINALIZADO' WHERE folio_recl = '$folio'";
+    $query="UPDATE reclamoproveedor SET estatus_recl='FINALIZADO' WHERE folio_recl = '$folio'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -301,7 +301,7 @@ function finalizar1 ($folio,$conexion){
 }
 //funcion para liberar
 function liberar ($folio,$conexion){
-    $query="UPDATE reclamoclient SET estatus_recl='PENDIENTE' WHERE folio_recl = '$folio'";
+    $query="UPDATE reclamoproveedor SET estatus_recl='PENDIENTE' WHERE folio_recl = '$folio'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -356,7 +356,7 @@ function historialup($folio,$id_articulo,$cantidad,$observ_recl,$usuario,$realiz
 function historialclie($usuario,$folio,$tipo_reporte,$tipo_incidencia,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario','GENERA UN ' '$tipo_reporte' ' CLIENTE', 'FOLIO:' '$folio' ' TIPO DE INCIDENCIA:' ' $tipo_incidencia','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario','GENERA UN ' '$tipo_reporte' ' PROVEEDOR', 'FOLIO:' '$folio' ' TIPO DE INCIDENCIA:' ' $tipo_incidencia','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -391,7 +391,7 @@ function histuprep($usuario,$realizo,$folio,$conexion){
 function histfinal($usuario,$folio,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'FINALIZA EL REPORTE DE CLIENTE', 'FOLIO:' '$folio','$fecha1')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'FINALIZA EL REPORTE DE PROVEEDOR', 'FOLIO:' '$folio','$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -402,7 +402,7 @@ function histfinal($usuario,$folio,$conexion){
 function hisliber($usuario,$folio,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'LIBERA REPORTE DE CLIENTE', 'FOLIO:' '$folio','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'LIBERA REPORTE DE PROVEEDOR', 'FOLIO:' '$folio','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -413,7 +413,7 @@ function hisliber($usuario,$folio,$conexion){
 function histrecldete($usuario,$folio,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'ELIMINA UN REPORTE DE CLIENTE', 'FOLIO:' '$folio','$fecha')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'ELIMINA UN REPORTE DE PROVEEDOR', 'FOLIO:' '$folio','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

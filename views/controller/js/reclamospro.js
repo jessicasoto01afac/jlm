@@ -1164,7 +1164,7 @@ function finalizarep() {
     } else {
         $.ajax({
             type: "POST",
-            url: "../controller/php/insertreclamo.php",
+            url: "../controller/php/insertreclamopr.php",
             data: datos
         }).done(function(respuesta) {
             if (respuesta == 0) {
@@ -1174,7 +1174,7 @@ function finalizarep() {
                     showConfirmButton: false,
                     timer: 2000
                 });
-                setTimeout("location.href = 'rec_rech_clientes.php';", 1500);
+                setTimeout("location.href = 'rec_rech_proveedor.php';", 1500);
             } else if (respuesta == 2) {
                 Swal.fire({
                     type: 'warning',
@@ -1223,4 +1223,34 @@ function pdfvp() {
     //alert(folio);
     url = '../formatos/pdf_reclamo_proveedor.php'
     window.open(url + "?data=" + folio, '_black');
+}
+
+//FUNCIÓN DE FINALIZAR
+function liverarreprt() {
+    //alert("memos"); 
+    var folio = document.getElementById('folioreprove').value;
+    var datos = 'folio=' + folio + '&opcion=liberarrep';
+    //alert(datos);
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertreclamopr.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'SE LIBERO FORMA CORRECTA',
+                showConfirmButton: false,
+                timer: 2500
+            });
+            setTimeout("location.href = 'rec_rech_proveedor.php';", 1500);
+        } else {
+            Swal.fire({
+                type: 'error',
+                text: 'Error contactar a soporte tecnico o levantar un ticket',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+    });
 }
