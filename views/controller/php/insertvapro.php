@@ -34,6 +34,7 @@ if(!isset($usuario)){
                 extendido($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
                 etiqueta($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
                 //poductividad($refe_1,$caracter,$conexion);
+                minagriss($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
                 historial($usuario,$refe_1,$codigo_1,$conexion);
                 registrarcolors ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
             }else{
@@ -675,6 +676,20 @@ function extendido ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,
     }
     $this->conexion->cerrar();
 }
+//minagirssss 
+
+//funcion para guardar el minagriss de articulo de trasformación
+function minagriss ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
+    $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha',concat((select minagris1 from transforma where id_articulo_final = '$codigo_1')),concat((select artdescrip from articulos where artcodigo = (select minagris1 from transforma where id_articulo_final = '$codigo_1'))),'VALE_PRODUCCION','EXTENDIDO','$proveedor_cliente','$ubicacion',concat((select $cantidad_real * hojasmin / canminagras from transforma where id_articulo_final = '$codigo_1')),0,concat((select $cantidad_real * hojasmin / canminagras from transforma where id_articulo_final = '$codigo_1')),'0',0,'0','','NA','PENDIENTE','PENDIENTE','NO','NO',0";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
+
+
 //funcion para guardar la etiqueta de articulo de trasformación
 function etiqueta ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
     $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha',concat((select id_etiquetas from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF' )),concat((select artdescrip from articulos where artcodigo = (select id_etiquetas from transforma where id_articulo_final = '$codigo_1' and id_etiquetas != 'GRUPO_TRANSF'))),'VALE_PRODUCCION','ETIQUETAS','$proveedor_cliente','$ubicacion','$cantidad_real',0,'$salida','0',0,'0','','NA','PENDIENTE','PENDIENTE','NO','NO',0";

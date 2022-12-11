@@ -793,6 +793,9 @@ function addtransform() { //08052022 agregar
     let liston_cordon = document.getElementById('listonaplic').value;
     let id_cordliston = document.getElementById('codliston').value;
     let multi_liston = document.getElementById('multliston').value;
+    let minagris = document.getElementById('mingrisid').value;
+    let multiminagris = document.getElementById('acntminagr').value;
+    let hjmini = document.getElementById('acntminagrhj').value;
     //Comprobar si esta esta seleccionado
     if (carton == 'NO APLICA') {
         document.getElementById('cartonapl').value = 'NO APLICA';
@@ -842,7 +845,7 @@ function addtransform() { //08052022 agregar
         multi_liston = 0;
     }
 
-    let datos = 'id_articulo_final=' + id_articulo_final + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&carton=' + carton + '&id_carton=' + id_carton + '&div_carton=' + div_carton + '&multi_carton=' + multi_carton + '&cartonsillo=' + cartonsillo + '&id_cortonsillo=' + id_cortonsillo + '&div_cartonsillo=' + div_cartonsillo + '&multi_cartonsillo=' + multi_cartonsillo + '&caple=' + caple + '&id_caple=' + id_caple + '&div_caple=' + div_caple + '&multi_caple=' + multi_caple + '&liston_cordon=' + liston_cordon + '&id_cordliston=' + id_cordliston + '&multi_liston=' + multi_liston + '&opcion=registrar';
+    let datos = 'id_articulo_final=' + id_articulo_final + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&carton=' + carton + '&id_carton=' + id_carton + '&div_carton=' + div_carton + '&multi_carton=' + multi_carton + '&cartonsillo=' + cartonsillo + '&id_cortonsillo=' + id_cortonsillo + '&div_cartonsillo=' + div_cartonsillo + '&multi_cartonsillo=' + multi_cartonsillo + '&caple=' + caple + '&id_caple=' + id_caple + '&div_caple=' + div_caple + '&multi_caple=' + multi_caple + '&liston_cordon=' + liston_cordon + '&id_cordliston=' + id_cordliston + '&multi_liston=' + multi_liston + '&minagris=' + minagris + '&multiminagris=' + multiminagris + '&hjmini=' + hjmini + '&opcion=registrar';
     //alert(datos);
 
     if (id_articulo_final == '' || id_extendido == '' || id_etiquetas == '' || hojas == '' || divicion == '') {
@@ -937,6 +940,9 @@ function infolistrans(id_transform) {
                 $("#modal-edithtrans #multcapleedt").val(o[13]);
                 $("#modal-edithtrans #codlistonedt").val(o[14]);
                 $("#modal-edithtrans #multlistonedt").val(o[15]);
+                $("#modal-edithtrans #mingriscd").val(obj.data[D].minagris1);
+                $("#modal-edithtrans #hjminag").val(obj.data[D].canminagras);
+                $("#modal-edithtrans #catminagr").val(obj.data[D].hojasmin);
                 //CARTON
                 if (obj.data[D].carton == "0") {
                     document.getElementById('cartonedt').value = "NO APLICA";
@@ -1032,7 +1038,9 @@ function editrasnf() {
     document.getElementById('listonaplicedt').disabled = false;
     document.getElementById('codlistonedt').disabled = false;
     document.getElementById('multlistonedt').disabled = false;
-
+    document.getElementById('mingriscd').disabled = false;
+    document.getElementById('hjminag').disabled = false;
+    document.getElementById('catminagr').disabled = false; //27112022
     // mas color 
     document.getElementById('masplus').style.display = "";
 
@@ -1064,6 +1072,9 @@ function closetrans() {
     document.getElementById('listonaplicedt').disabled = true;
     document.getElementById('codlistonedt').disabled = true;
     document.getElementById('multlistonedt').disabled = true;
+    document.getElementById('mingriscd').disabled = true;
+    document.getElementById('hjminag').disabled = true;
+    document.getElementById('catminagr').disabled = true; //27112022
     //mas color
     document.getElementById('masplus').style.display = "none";
     document.getElementById('masplus2').style.display = "none";
@@ -1144,7 +1155,11 @@ function savetraedit() {
     let liston_cordon = document.getElementById('listonaplicedt').value;
     let id_cordliston = document.getElementById('codlistonedt').value;
     let multi_liston = document.getElementById('multlistonedt').value;
-    let datos = 'id_transformacion=' + id_transformacion + '&id_articulo_final=' + id_articulo_final + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&carton=' + carton + '&id_carton=' + id_carton + '&div_carton=' + div_carton + '&multi_carton=' + multi_carton + '&cartonsillo=' + cartonsillo + '&id_cortonsillo=' + id_cortonsillo + '&div_cartonsillo=' + div_cartonsillo + '&multi_cartonsillo=' + multi_cartonsillo + '&caple=' + caple + '&id_caple=' + id_caple + '&div_caple=' + div_caple + '&multi_caple=' + multi_caple + '&liston_cordon=' + liston_cordon + '&id_cordliston=' + id_cordliston + '&multi_liston=' + multi_liston + '&opcion=actualizara';
+
+    let minagris1 = document.getElementById('mingriscd').value;
+    let canminagras = document.getElementById('hjminag').value;
+    let hojasmin = document.getElementById('catminagr').value; //27112022
+    let datos = 'id_transformacion=' + id_transformacion + '&id_articulo_final=' + id_articulo_final + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&carton=' + carton + '&id_carton=' + id_carton + '&div_carton=' + div_carton + '&multi_carton=' + multi_carton + '&cartonsillo=' + cartonsillo + '&id_cortonsillo=' + id_cortonsillo + '&div_cartonsillo=' + div_cartonsillo + '&multi_cartonsillo=' + multi_cartonsillo + '&caple=' + caple + '&id_caple=' + id_caple + '&div_caple=' + div_caple + '&multi_caple=' + multi_caple + '&liston_cordon=' + liston_cordon + '&id_cordliston=' + id_cordliston + '&multi_liston=' + multi_liston + '&minagris1=' + minagris1 + '&canminagras=' + canminagras + '&hojasmin=' + hojasmin + '&opcion=actualizara';
     //alert(datos);
     $.ajax({
         type: "POST",
@@ -1850,4 +1865,10 @@ function openproveedor() {
         // ],
         "ajax": "../controller/php/tableprovee.php",
     });
+}
+
+function minagris() {
+    let minagris = document.getElementById('mingrisid').value;
+    document.getElementById('acntminagr').value = 500;
+    document.getElementById('acntminagrhj').value = 1;
 }

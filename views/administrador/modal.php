@@ -1819,6 +1819,34 @@
                                     id="editdivision">
                             </div>
                         </div><!-- col-4 -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label label2">CODIGO DE MINAGRIS<span
+                                        class="tx-danger">*</span></label>
+                                <select disabled="" class="form-control" id="mingriscd" name="mingriscd" type="text"
+                                    data-live-search="true" style="width: 100%">
+                                    <option value="">CODIGO</option>
+                                    <option value="2000">2000</option>
+                                    <option value="2005">2005</option>
+                                    <option value="0">NO APLICA</option>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="form-control-label label2">HOJAS<span class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="number" name="hjminag"
+                                    id="hjminag">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="form-control-label label2">CANTIDAD<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="number" name="catminagr"
+                                    id="catminagr">
+                            </div>
+                        </div><!-- col-4 -->
                         <div class="col-lg-12">
                             <label class="tx-indigo" style="font-size:20px" for="">ARTICULOS EXTRA</label>
                         </div>

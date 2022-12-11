@@ -172,6 +172,33 @@ include ("../controller/conexion.php");
                                     name="division" id="division" placeholder="Ingresa la cantidad a dividir">
                             </div>
                         </div><!-- col-4 -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label label2">Minagris: <span class="tx-danger">*</span></label>
+                                <select class="form-control select2-show-search" name="mingrisid" id="mingrisid" style="" onchange="minagris()">
+                                    <option value="0">SELECCIONA EL MINAGRIS</option>
+                                    <option value="2000">CARTONCILLO MINAGRIS I DE 200G. T.57X87CMS.</option>
+                                    <option value="2005">CARTONCILLO MINAGRIS I DE 200G. T.70X95CMS.</option>
+                                    <option value="0">NO APLICA</option>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="form-control-label label2">hojas: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="acntminagr" id="acntminagr" placeholder="Ingresa la cantidad a dividir">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="form-control-label label2">cantidad: <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="acntminagrhj" id="acntminagrhj" placeholder="Ingresa la cantidad a dividir">
+                            </div>
+                        </div><!-- col-4 -->
                         <br>
                         <br>
                         <label class="ckbox">
@@ -396,6 +423,7 @@ include ("../controller/conexion.php");
         $('#bscodigoetiq').load('select/etiquetas.php');
         $('#bscodigoext').load('select/extendido.php');
         $('#codcarton').select2();
+        $('#mingrisid').select2();
     });
     </script>
 
