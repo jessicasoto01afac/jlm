@@ -4,7 +4,7 @@
 	$id_artinv = $_GET["id_artinv"];
 	$fec_inicio = $_GET["fec_inicio"];
 	$fec_fin = $_GET["fec_fin"];
-	$query = "SELECT * FROM kardex k where estado='0' AND codigo_1='$id_artinv' and fecha between '$fec_inicio' and '$fec_fin' ORDER BY id_kax ASC";
+	$query = "SELECT * FROM kardex k, articulos a where k.estado='0' AND k.codigo_1=a.artcodigo AND a.id_art='$id_artinv' and fecha between '$fec_inicio' and '$fec_fin' ORDER BY id_kax ASC";
 	$resultado = mysqli_query($conexion, $query);
 	$item = 0;
 	if(!$resultado){
@@ -18,9 +18,8 @@
                 $data["codigo_1"], 
                 $fecha,
                 $data["refe_1"],
-				$data["refe_2"],
                 $data["tipo"],
-                $data["tipo_ref"],
+				$data["tipo_ref"],
                 $data["proveedor_cliente"],
                 $data["salida"],
                 $data["entrada"]

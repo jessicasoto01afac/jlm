@@ -121,10 +121,10 @@ function cargainv() {
 }
 //ABRIR EL DETALLE DEL ARTICULO
 function opende(id_artic) {
-    alert(id_artic);
+    //alert(id_artic);
     let id_artinv = id_artic;
     opendetllinv(id_artinv);
-    document.getElementById('id_cod').innerHTML = id_artic;
+    //document.getElementById('id_cod').innerHTML = id_artic;
     $("#datalles").toggle(250); //Muestra contenedor de detalles
     $("#inventarios").toggle("fast");
     porarticulo(id_artic); //PORCENTAJES
@@ -153,8 +153,10 @@ function actualizar() {
                 let totalmovimientos = conteo_entradas + conteo_salidas;
                 let porentradas = conteo_entradas * 100 / totalmovimientos;
                 let porsalidas = conteo_salidas * 100 / totalmovimientos;
-                document.getElementById('porentradas').innerHTML = porentradas + "%";
-                document.getElementById('porsalidas').innerHTML = porsalidas + "%";
+                let porcentradas = porentradas.toFixed(0)
+                let porcsalidas = porsalidas.toFixed(0)
+                document.getElementById('porentradas').innerHTML = porcentradas + "%";
+                document.getElementById('porsalidas').innerHTML = porcsalidas + "%";
                 $('#porentradas').width(porentradas + "%").attr('aria-valuenow', porentradas); //movimiento de las barras de %
                 $('#porsalidas').width(porsalidas + "%").attr('aria-valuenow', porsalidas); //movimiento de las barras de %
                 // fin del porcentaje   
@@ -387,8 +389,9 @@ function porarticulo(id_artic) {
         let x = 0;
         for (D = 0; D < res.length; D++) {
             //alert(respuesta);
-            if (obj.data[D].artcodigo == id_artic) {
+            if (obj.data[D].id_art == id_artic) {
                 //existencia
+                document.getElementById('id_cod').innerHTML = obj.data[D].artcodigo;
                 let suma = Number(obj.data[D].SUMA);
                 let resta = Number(obj.data[D].RESTA);
                 let inicio = Number(obj.data[D].stock_inicial);
@@ -400,8 +403,10 @@ function porarticulo(id_artic) {
                 let totalmovimientos = conteo_entradas + conteo_salidas;
                 let porentradas = conteo_entradas * 100 / totalmovimientos;
                 let porsalidas = conteo_salidas * 100 / totalmovimientos;
-                document.getElementById('porentradas').innerHTML = porentradas + "%";
-                document.getElementById('porsalidas').innerHTML = porsalidas + "%";
+                let porcentradas = porentradas.toFixed(0)
+                let porcsalidas = porsalidas.toFixed(0)
+                document.getElementById('porentradas').innerHTML = porcentradas + "%";
+                document.getElementById('porsalidas').innerHTML = porcsalidas + "%";
                 $('#porentradas').width(porentradas + "%").attr('aria-valuenow', porentradas); //movimiento de las barras de %
                 $('#porsalidas').width(porsalidas + "%").attr('aria-valuenow', porsalidas); //movimiento de las barras de %
                 // fin del porcentaje   

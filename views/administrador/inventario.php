@@ -22,6 +22,10 @@
       $sql6 = "SELECT codigo_1, sum(salida) as salida from kardex group by codigo_1 order by salida desc LIMIT 0, 1";
       $datos3 = mysqli_query($conexion,$sql6);
       $salmas = mysqli_fetch_assoc($datos3);
+
+      $sql7 = "SELECT codigo_1, COUNT(codigo_1) as cantidad from kardex group by codigo_1 order by cantidad ASC LIMIT 0, 1";
+      $datos4 = mysqli_query($conexion,$sql7);
+      $sinmov = mysqli_fetch_assoc($datos4);
 ?>
 <html lang="es">
 
@@ -71,8 +75,8 @@ include('header.php');
                                 </div><!-- card-header -->
                                 <div class="card-body d-xs-flex justify-content-between align-items-center">
                                     <h4 class="mg-b-0 tx-inverse tx-lato tx-bold"><?php echo $movmas['cantidad']?></h4>
-                                    <p class="mg-b-0 tx-sm"> Codigo:<?php echo $movmas['codigo_1']?> <span class="tx-success"><i class="fa fa-arrow-up"></i>
-                                            34.32%</span></p>
+                                    <p class="mg-b-0 tx-sm-18"> Codigo:<?php echo $movmas['codigo_1']?> <span class="tx-success"><i class="fa fa-arrow-up"></i>
+                                            </span></p>
                                 </div><!-- card-body -->
                             </div><!-- card -->
                         </div><!-- col-4 -->
@@ -85,8 +89,8 @@ include('header.php');
                                 </div><!-- card-header salmas-->
                                 <div class="card-body d-xs-flex justify-content-between align-items-center">
                                     <h4 class="mg-b-0 tx-inverse tx-lato tx-bold"><?php echo $salmas['salida']?></h4>
-                                    <p class="mg-b-0 tx-sm"> Codigo:<?php echo $salmas['codigo_1']?> <span class="tx-success"><i class="fa fa-arrow-up"></i>
-                                            34.32%</span></p>
+                                    <p class="mg-b-0 tx-sm-18"> Codigo:<?php echo $salmas['codigo_1']?> <span class="tx-success"><i class="fa fa-arrow-up"></i>
+                                           </span></p>
                                 </div><!-- card-body -->
                             </div><!-- card -->
                         </div><!-- col-4 -->
@@ -98,9 +102,9 @@ include('header.php');
                                     <span id="menor" name="menor" class="tx-12 tx-uppercase"></span>
                                 </div><!-- card-header -->
                                 <div class="card-body d-xs-flex justify-content-between align-items-center">
-                                    <h4 class="mg-b-0 tx-inverse tx-lato tx-bold">3,006,983</h4>
-                                    <p class="mg-b-0 tx-sm"><span class="tx-danger"><i class="fa fa-arrow-down"></i>
-                                            0.92%</span> Codigo:</p>
+                                    <h4 class="mg-b-0 tx-inverse tx-lato tx-bold"><?php echo $sinmov['cantidad']?></h4>
+                                    <p class="mg-b-0 tx-sm-18">Codigo:<?php echo $sinmov['codigo_1']?><span class="tx-danger"><i class="fa fa-arrow-down"></i>
+                                            </span></p>
                                 </div><!-- card-body -->
                             </div><!-- card -->
                         </div><!-- col-4 -->
@@ -272,9 +276,8 @@ include('header.php');
                                     <th>CODIGO</th>
                                     <th>FECHA</th>
                                     <th>FOLIO</th>
-                                    <th>REFERENCIA_2</th>
                                     <th>TIPO</th>
-                                    <th>CLASE</th>
+                                    <th>TIPO_REFERENCIA</th>
                                     <th>PROVEEDOR/CLIENTE</th>
                                     <th>SALIDA</th>
                                     <th>ENTRADA</th>
