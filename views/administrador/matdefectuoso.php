@@ -57,6 +57,7 @@ include('header.php');
                                     <th>FECHA</th>
                                     <th>CLIENTE</th>
                                     <th>DEPARTAMENTO</th>
+                                    <th>FOLIO JLM</th>
                                     <th>ACCIONES</th>
                                 </tr>
                             </thead>
@@ -98,10 +99,10 @@ include('header.php');
                         <button onclick="closedithmdef()" id="closemted" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
-                        <button onclick="pdfvp()" style="display:none;" title="Imprimir" id="pdfvofi" name="pdfvofi"
+                        <button onclick="pdfvp()" style="display:;" title="Imprimir" id="pdfvofi" name="pdfvofi"
                             type="button" class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
-                        <button title="ver historial" onclick="histvaleofi()" data-toggle="modal"
-                            data-target="#modal-vphistorial" type="button" class="btn btn-primary"><i
+                        <button title="ver historial" onclick="histmaterdef()" data-toggle="modal"
+                            data-target="#modal-mdhistorial" type="button" class="btn btn-primary"><i
                                 class="fa fa-history"></i></button>
                     </div>
                 </div><!-- col-5 -->
@@ -177,15 +178,17 @@ include('header.php');
                                 <div class="col-lg-6">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">PEDIDOS RELACIONADOS/STOCK:</label>
-                                        <div id="pedmatdef"></div>
+                                        <input class="form-control" readonly id="pedmatdef" name="pedmatdef"
+                                            placeholder="Enter lastname">
+                                        <!-- <div id="pedmatdef"></div> -->
                                     </div><!-- col-4 -->
                                 </div><!-- col-8 -->
                                 <div class="col-md-6">
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">RELACIÓN JLM/ <a
-                                                href="javascript:saverevicionvof()">Guardar</a></label>
-                                        <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="relajlvof"
-                                            id="relajlvof" placeholder="JLM"></textarea>
+                                                href="javascript:saverevicionmdf()">Guardar</a></label>
+                                        <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="relajlmdf"
+                                            id="relajlmdf" placeholder="JLM"></textarea>
                                     </div>
                                 </div>
                                 <br>
@@ -219,7 +222,7 @@ include('header.php');
                                 </div><!-- d-flex -->
                             </div><!-- alert -->
                             <div>
-                                <button type="button" onclick="masarticvo()" data-toggle='modal'
+                                <button type="button" onclick="" data-toggle='modal'
                                     style="display:none; background-color: #009C28;" data-target='#modal-editavo1'
                                     onclick="" id="voagartic"
                                     class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i
@@ -262,7 +265,7 @@ include('header.php');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
-    <?php include('../administrador/modal.php');?>
+    <?php include('../administrador/modal/entradassalidas.php');?>
     <script type="text/javascript">
     // TABLA INSPECTORES EXTERNOS//
     opendefectuoso();

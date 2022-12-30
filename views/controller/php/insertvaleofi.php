@@ -302,7 +302,7 @@ function actualizar ($codigo_1,$descripcion_1,$salida,$observa,$id_kax,$conexion
 }
 //funcion para actualizar el registro desde la vista previa del vale de oficina
 function cambio ($fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$conexion){
-    $query="UPDATE kardex SET fecha='$fecha', refe_3='$refe_3', status='$status', proveedor_cliente='$proveedor_cliente' WHERE refe_1 = '$refe_1'";
+    $query="UPDATE kardex SET fecha='$fecha', refe_3='$refe_3', status='$status', proveedor_cliente='$proveedor_cliente' WHERE refe_1 = '$refe_1' AND tipo='VALE_OFICINA'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

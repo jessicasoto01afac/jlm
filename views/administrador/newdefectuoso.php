@@ -141,7 +141,7 @@
                                 <div class="form-group">
                                     <label style="font-size:16px" class="form-control-label">CODIGO: <span
                                             class="tx-danger">*</span></label>
-                                    <div id="busccodimem"></div>
+                                    <div id="buscarticulos"></div>
                                     <!-- <div id="busccodigtrasns"></div> -->
                                 </div><!-- form-group -->
                             </div><!-- form-group -->

@@ -801,7 +801,7 @@ function actualizarnew ($id_kax,$codigo_1,$descripcion_1,$salida,$tipo_ref,$obse
 }
 //funcion para actualizar cabecera----------------------------------
 function actualizacabe($refe_1,$fecha,$refe_3,$refe_2,$proveedor_cliente,$ubicacion,$estado,$conexion){
-    $query="UPDATE kardex SET fecha='$fecha', refe_3='$refe_3',refe_2='$refe_2',proveedor_cliente='$proveedor_cliente',ubicacion='$ubicacion',estado='$estado' WHERE refe_1 = '$refe_1'";
+    $query="UPDATE kardex SET fecha='$fecha', refe_3='$refe_3',refe_2='$refe_2',proveedor_cliente='$proveedor_cliente',ubicacion='$ubicacion',estado='$estado' WHERE refe_1 = '$refe_1' AND tipo='VALE_PRODUCCION'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

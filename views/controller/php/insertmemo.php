@@ -383,7 +383,7 @@ function cancfolio ($refe_1,$conexion){
 }
 //funcion para actualizar la cabecera desde la vista previa del memo
 function cambio ($fecha,$refe_3,$status,$refe_1,$proveedor_cliente,$conexion){
-    $query="UPDATE kardex SET fecha='$fecha', refe_3='$refe_3', status='$status', proveedor_cliente='$proveedor_cliente' WHERE refe_1 = '$refe_1'";
+    $query="UPDATE kardex SET fecha='$fecha', refe_3='$refe_3', status='$status', proveedor_cliente='$proveedor_cliente' WHERE refe_1 = '$refe_1' AND tipo='MEMO'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

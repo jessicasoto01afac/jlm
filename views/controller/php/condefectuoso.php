@@ -1,7 +1,7 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT * FROM kardex where tipo='MATERIAL_DEFECTUOSO' AND estado=0 group by refe_1  ";
+	$query = "SELECT * from kardex k, clientes c where k.tipo='MATERIAL_DEFECTUOSO' AND k.estado=0  AND c.codigo_clie=k.proveedor_cliente group by k.refe_1 ORDER BY k.id_kax DESC";
 	$resultado = mysqli_query($conexion, $query);
 	$contador=0;
 	if(!$resultado){
@@ -16,8 +16,9 @@
 					$contador,
 					$data["refe_1"], 
 					$data["fecha"],
-					$data["proveedor_cliente"],
-					$data["refe_2"], 
+					$data["nombre"],
+					$data["refe_2"],
+					$data["revision"],  
 					$proceso
 				];
 		}

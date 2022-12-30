@@ -525,7 +525,7 @@ function masivosurtir($idcurs,$evaluacion,$estatus,$observaciones,$conexion){
 	cerrar($conexion);
 }
 function updatehader($refe_1,$refe_2,$fecha,$proveedor_cliente,$refe_3,$ubicacion,$descripcion_1,$pedidcaracter,$conexion){
-    $query="UPDATE kardex SET refe_2='$refe_2', fecha='$fecha',proveedor_cliente='$proveedor_cliente',refe_3='$refe_3',ubicacion='$ubicacion',descripcion_1='$descripcion_1' WHERE refe_1='$refe_1'";
+    $query="UPDATE kardex SET refe_2='$refe_2', fecha='$fecha',proveedor_cliente='$proveedor_cliente',refe_3='$refe_3',ubicacion='$ubicacion',descripcion_1='$descripcion_1' WHERE refe_1='$refe_1' AND tipo='PEDIDO'";
     if(mysqli_query($conexion,$query)){
 		return true;
 	}else{
