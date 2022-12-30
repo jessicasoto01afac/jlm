@@ -3,7 +3,7 @@ ob_start();
 $folio = $_GET['data'];
 include ("../controller/conexion.php");
 //CABECERA
-$query = "SELECT k.*, p.* ,(select a.usunom FROM accesos a where a.usuario=p.id_person_autor) as usunom, (select a.usuapell FROM accesos a where a.usuario=p.id_person_autor) as usuapell FROM kardex k, productividad p where k.refe_1=p.referencia_1 AND k.estado='0' AND k.tipo='MEMO' AND k.refe_1='$folio' GROUP BY refe_1 ORDER BY id_kax ASC";
+$query = "SELECT k.* FROM kardex k where k.estado='0' AND k.tipo='MATERIAL_DEFECTUOSO' AND k.refe_1='$folio' GROUP BY refe_1 ORDER BY id_kax ASC";
       $resultado = mysqli_query($conexion, $query);
     $data = mysqli_fetch_array($resultado);
     //CABECERA2
@@ -11,7 +11,7 @@ $cabec = "SELECT k.*, p.* ,(select a.usunom FROM accesos a where a.usuario=p.id_
       $resul = mysqli_query($conexion, $cabec);
 
 //TABLA DE EXTENDIDO
-$query1 = "SELECT * FROM historial WHERE registro LIKE '%$folio%' AND proceso LIKE '%MEMO%' ORDER BY id_his ASC";
+$query1 = "SELECT * FROM historial WHERE registro LIKE '%$folio%' AND proceso LIKE '%MATERIAL_DEFECTUOSO%' ORDER BY id_his ASC";
       $resultado1 = mysqli_query($conexion, $query1);
     //$data1 = mysqli_fetch_array($resultado1);
 
@@ -212,7 +212,7 @@ td.text-right {
   
     <p style="font-weight:bold; font-size:28px; text-align:center;padding-top:-6%;">REPORTE DE HISTORIAL</p> 
     
-    <p style="font-weight:bold; font-size:23px; text-align:;padding-top:1.5%;">MEMO FOLIO: <?php echo $data['refe_1']?></p>
+    <p style="font-weight:bold; font-size:23px; text-align:;padding-top:1.5%;">MATERIAL DEFECTUOSO: <?php echo $data['refe_1']?></p>
 
     <!-- MATERIAL SOLICITADO-->
     <?php               
