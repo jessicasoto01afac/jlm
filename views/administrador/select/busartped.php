@@ -47,5 +47,4 @@ $.ajax({
           }
       });
 }
-
-	</script>
+</script>

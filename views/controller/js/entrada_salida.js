@@ -1016,3 +1016,9 @@ function pdfvp() {
     url = '../formatos/pdf_defectuoso.php'
     window.open(url + "?data=" + folio, '_black');
 }
+function pdfhistorymd() {
+    var folio = document.getElementById('fmdi').innerHTML;
+    //alert("entro");
+    url = '../formatos/pdf_reporthistorydf.php'
+    window.open(url + "?data=" + folio, '_black');
+}

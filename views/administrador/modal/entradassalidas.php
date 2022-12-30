@@ -419,7 +419,7 @@
                 </button>
             </div>
             <div class="pd-x-12 mg-t-12 tx-13">
-                <a href="javascript:pdfhistory()" class="tx-gray-600 hover-info">Generar Reporte</a>
+                <a href="javascript:pdfhistorymd()" class="tx-gray-600 hover-info">Generar Reporte</a>
                 <!-- <a href="" class="tx-gray-600 hover-info bd-l mg-l-10 pd-l-10">Imprimir Reporte</a> -->
             </div>
             <div class="modal-body pd-25">
