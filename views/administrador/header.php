@@ -110,7 +110,7 @@ $sql =
             </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="" class="nav-link">Devolución</a></li>
+            <li class="nav-item"><a href="../administrador/devolution.php" class="nav-link">Devolución</a></li>
             <li class="nav-item"><a href="../administrador/matdefectuoso.php" class="nav-link">Defectuso</a></li>
             <li class="nav-item"><a href="" class="nav-link">Faltante</a></li>
             <li class="nav-item"><a href="" class="nav-link">Sobrante</a></li>

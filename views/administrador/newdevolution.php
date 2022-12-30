@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php include ("../controller/conexion.php");
-      $sql = "SELECT MAX(folio) AS id_foliovp FROM folios where tipo ='MATERIAL_DEFECTUOSO' AND estado_f=0";
+      $sql = "SELECT MAX(folio) AS id_foliovp FROM folios where tipo ='DEVOLUCIÓN' AND estado_f=0";
       $foliovale_p = mysqli_query($conexion,$sql);
       $folio = mysqli_fetch_row($foliovale_p);
 
@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="../template/img/logo.png" />
     <!-- Meta -->
     <meta name="author" content="Jessica Soto">
-    <title>JLM|Agregar_mat_defectuoso</title>
+    <title>JLM|Agregar_Devolución</title>
     <!-- vendor css -->
     <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../template/lib/Ionicons/css/ionicons.css" rel="stylesheet">
@@ -50,14 +50,14 @@
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a class="breadcrumb-item" href="../administrador/matdefectuoso.php" onclick="cancelar();">Lista de
-                    Material Defectuoso</a>
-                <span class="breadcrumb-item active">Alta de Material Defectuoso</span>
+                    Devoluciones</a>
+                <span class="breadcrumb-item active">Alta de Devolución</span>
             </nav>
         </div><!-- br-pageheader -->
 
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5">ALTA DE MATERIAL DEFECTUOSO</h4>
-            <input value="MATERIAL_DEFECTUOSO" id="tipe" name="tipe" style="display:none" type="text">
+            <h4 class="tx-gray-800 mg-b-5">ALTA DE DEVOLUCIÓN</h4>
+            <input value="DEVOLUCIÓN" id="tipe" name="tipe" style="display:none" type="text">
         </div>
         <div class="br-pagebody">
             <div style="float: right;">
@@ -76,7 +76,7 @@
                                         <label style="font-size:16px" class="form-control-label">FOLIO:
                                             <span class="tx-danger">*</span></label>
                                         <input onkeyup="mayus(this);" style="font-size:18px; color:#1F618D"
-                                            class="form-control" type="text" id="dffolio" name="dffolio" readonly
+                                            class="form-control" type="text" id="dvfolio" name="dvfolio" readonly
                                             placeholder="" value="<?php echo $folio[0]?>">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
@@ -84,7 +84,7 @@
                                     <div class="form-group">
                                         <label style="font-size:16px" class="form-control-label">FECHA: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" type="date" id="dffecha" name="dffecha" value=""
+                                        <input class="form-control" type="date" id="dvfecha" name="dvfecha" value=""
                                             placeholder="">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
@@ -92,7 +92,7 @@
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">DEPARTAMENTO: <span
                                                 class="tx-danger">*</span></label>
-                                        <select class="form-control" id="dffdeped" name="dffdeped">
+                                        <select class="form-control" id="dvfdeped" name="dvfdeped">
                                             <option value="">SELECCIONA UNA OPCIÓN</option>
                                             <option value="ALMACEN">ALMACEN</option>
                                             <option value="BODEGA">BODEGA</option>
@@ -107,9 +107,9 @@
                                 </div><!-- col-4 -->
                                 <div class="col-lg-12" id="depmaterial" style="">
                                     <div class="form-group mg-b-10-force">
-                                        <label class="form-control-label">OBSERVACIONES: <span
+                                        <label class="form-control-label">MOTIVO DE LA DEVOLUCIÓN: <span
                                                 class="tx-danger"></span></label>
-                                        <textarea onkeyup="mayus(this);" id="dfmotivo" name="dfmotivo" rows="3"
+                                        <textarea onkeyup="mayus(this);" id="dvmotivo" name="dvmotivo" rows="3"
                                             class="form-control" placeholder="INGRESA EL MOTIVO"></textarea>
                                     </div>
                                 </div><!-- col-4 -->
@@ -117,7 +117,7 @@
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">CLIENTE: <span
                                                 class="tx-danger">*</span></label>
-                                        <select class="form-control" id="dfcliente" name="dfcliente">
+                                        <select class="form-control" id="dvcliente" name="dvcliente">
                                             <option value="">SELECCIONA UNA OPCIÓN</option>
                                             <?php while($clie = mysqli_fetch_row($cliente)):?>
                                             <option value="<?php echo $clie[1]?>"><?php echo $clie[2]?></option>
@@ -133,7 +133,7 @@
                                 </div><!-- col-8 -->
                             </div>
                     </section>
-                    <h3>Material Defectuo</h3>
+                    <h3>Material de Devolución</h3>
                     <section>
                         <h5>INGRESE LOS ARTICULOS</h5>
                         <br>
@@ -158,7 +158,7 @@
                                 <div class="form-group">
                                     <label style="font-size:16px" class="form-control-label">CANTIDAD: <span
                                             class="tx-danger">*</span></label>
-                                    <input onkeyup="mayus(this);" class="form-control" name="vpcantidad" id="vpcantidad"
+                                    <input onkeyup="mayus(this);" class="form-control" name="dvcantidad" id="dvcantidad"
                                         placeholder="Ingrese la cantidad" type="number" required>
                                 </div><!-- form-group -->
                             </div><!-- form-group -->
@@ -174,8 +174,8 @@
                                 <div class="form-group">
                                     <label class="form-control-label label2">OBSERVACIONES:<span
                                             class="tx-danger"></span></label>
-                                    <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="dfbservo"
-                                        id="dfbservo" placeholder="Ingresa alguna observación"></textarea>
+                                    <textarea onkeyup="mayus(this);" rows="3" class="form-control" name="dvbservo"
+                                        id="dvbservo" placeholder="Ingresa alguna observación"></textarea>
                                 </div>
                             </div><!-- col-12 -->
                             </form>
@@ -183,7 +183,7 @@
                             <br>
                             <div class="col-lg-12">
                                 <div class="form-layout-footer">
-                                    <button class="btn btn-primary" onclick="addmatdefctuoso()">AGREGAR</button>
+                                    <button class="btn btn-primary" onclick="addmatdevolucion()">AGREGAR</button>
                                 </div><!-- form-layout-footer -->
                             </div>
                             <br>
@@ -265,7 +265,7 @@
     <?php include('../administrador/modal/entradassalidas.php');?>
     <script src="../template/js/bracket.js"></script>
     <script>
-        openew();
+        openewdv();
     </script>
 </body>
 

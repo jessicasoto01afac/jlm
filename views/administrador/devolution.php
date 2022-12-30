@@ -16,7 +16,7 @@ $person = mysqli_query($conexion,$sql);
     <!-- Meta -->
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
-    <title>JLM|Material Defectuoso</title>
+    <title>JLM|Devolución</title>
     <!-- vendor css -->
     <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../template/lib/Ionicons/css/ionicons.css" rel="stylesheet">
@@ -38,12 +38,12 @@ include('header.php');
         <!-- ########## START: MAIN PANEL ########## -->
         <div class="br-mainpanel">
             <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-                <h4 class="tx-gray-800 mg-b-5">MATERIAL DEFECTUOSO</h4>
+                <h4 class="tx-gray-800 mg-b-5">DEVOLUCIÓN</h4>
             </div>
             <div class="br-pagebody">
                 <div class="br-section-wrapper">
-                    <a class="btn btn-primary" href="javascript:foliomatdefect()" style="float:right"><i
-                            class="fa fa-list-alt mg-r-10"></i>Agregar Material Defectuoso</a>
+                    <a class="btn btn-primary" href="javascript:foliodevolution()" style="float:right"><i
+                            class="fa fa-list-alt mg-r-10"></i>Agregar Devolución</a>
                     <br>
                     <br>
                     <br>
@@ -86,9 +86,9 @@ include('header.php');
         <div class="br-mainpanel">
             <div class="br-pageheader pd-y-15 pd-l-20">
                 <nav class="breadcrumb pd-0 mg-0 tx-12">
-                    <a class="breadcrumb-item" href="../administrador/matdefectuoso.php" onclick="cancelar();">Lista de
-                        Material Defectuoso</a>
-                    <span class="breadcrumb-item active">Material Defectuoso</span>
+                    <a class="breadcrumb-item" href="../administrador/devolution.php" onclick="cancelar();">Lista de
+                        Devolución</a>
+                    <span class="breadcrumb-item active">Devolución</span>
                 </nav>
             </div><!-- br-pageheader -->
             <div class="br-pagebody">
@@ -99,17 +99,17 @@ include('header.php');
                         <button onclick="closedithmdef()" id="closemted" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
-                        <button onclick="pdfvp()" style="display:;" title="Imprimir" id="pdfvofi" name="pdfvofi"
+                        <button onclick="pdfdv()" style="display:;" title="Imprimir" id="pdfvofi" name="pdfvofi"
                             type="button" class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
-                        <button title="ver historial" onclick="histmaterdef()" data-toggle="modal"
-                            data-target="#modal-mdhistorial" type="button" class="btn btn-primary"><i
+                        <button title="ver historial" onclick="histmaterdv()" data-toggle="modal"
+                            data-target="#modal-mdhistorialvd" type="button" class="btn btn-primary"><i
                                 class="fa fa-history"></i></button>
                     </div>
                 </div><!-- col-5 -->
                 <div class="br-section-wrapper">
 
-                    <h6 class="">MATERIAL DEFECTUOSO</h6>
-                    <input value="MATERIAL_DEFECTUOSO" id="tipe1" name="tipe1" style="display:none" type="text">
+                    <h6 class="">DEVOLUCIÓN</h6>
+                    <input value="DEVOLUCIÓN" id="tipe1" name="tipe1" style="display:none" type="text">
                     <form id="info-valofi" method="POST">
 
                         <div class="form-layout form-layout-2">
@@ -187,7 +187,7 @@ include('header.php');
                                 <div class="col-md-6">
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">RELACIÓN JLM/ <a
-                                                href="javascript:saverevicionmdf()">Guardar</a></label>
+                                                href="javascript:savereviciondv()">Guardar</a></label>
                                         <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="relajlmdf"
                                             id="relajlmdf" placeholder="JLM"></textarea>
                                     </div>
@@ -195,7 +195,7 @@ include('header.php');
                                 <br>
                             </div><!-- row -->
                             <div class="modal-footer">
-                                <button type="button" onclick="savevofic()" id="mtedith" style="display:none;"
+                                <button type="button" onclick="savedevhead()" id="mtedith" style="display:none;"
                                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
                                     CAMBIOS</button>
                             </div>
@@ -269,7 +269,7 @@ include('header.php');
     <?php include('../administrador/modal/entradassalidas.php');?>
     <script type="text/javascript">
     // TABLA INSPECTORES EXTERNOS//
-    opendefectuoso();
+    opendevolucion();
     </script>
 
 

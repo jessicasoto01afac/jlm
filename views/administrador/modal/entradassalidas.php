@@ -429,3 +429,25 @@
         </div>
     </div>
 </div><!-- modal -->
+<!-- MODAL PARA HISTORIAL-->
+<div class="modal fade" id='modal-mdhistorialvd'>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">VISTA DE HISTORIAL</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="pd-x-12 mg-t-12 tx-13">
+                <a href="javascript:pdfhistorydv()" class="tx-gray-600 hover-info">Generar Reporte</a>
+                <!-- <a href="" class="tx-gray-600 hover-info bd-l mg-l-10 pd-l-10">Imprimir Reporte</a> -->
+            </div>
+            <div class="modal-body pd-25">
+                <h4 class="lh-3 mg-b-20"><a href="" class="tx-inverse hover-primary">Registros de movimientos</a></h4>
+                <div id="tabhisto1" name="tabhisto1"></div>
+            </div><!-- modal-body -->
+        </div>
+    </div>
+</div><!-- modal -->
+

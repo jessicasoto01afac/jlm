@@ -61,10 +61,15 @@ if(!isset($usuario)){
         $codigo_1 = $_POST['codigo_1'];
         $descripcion_1 = $_POST['descripcion_1'];
         $salida = $_POST['salida'];
+        $entrada = $_POST['entrada'];
         $observa = $_POST['observa'];
-        if (actualizarnew($id_kax,$codigo_1,$descripcion_1,$salida,$observa,$conexion)){
+        if (actualizarnew($id_kax,$codigo_1,$descripcion_1,$salida,$entrada,$observa,$conexion)){
             echo "0";
-            $realizo = 'EDITA EL ARTICULO AGREGADO MATERIAL DEFECTUOSO';
+            if ($entrada>0){
+                $realizo = 'EDITA EL ARTICULO AGREGADO DEVOLUCIÓN';
+            }else{
+                $realizo = 'EDITA EL ARTICULO AGREGADO MATERIAL DEFECTUOSO';
+            }
             // $usuario='pruebas';
             histedith($usuario,$realizo,$id_kax,$conexion);
         }else{
@@ -102,11 +107,81 @@ if(!isset($usuario)){
             if (cambio($fecha,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion)){
                 echo "0";
                 //$usuario='PRUEBAS';
-                histedith2($usuario,$fecha,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion);
+                $realizo = 'EDITA INFORMACIÓN DE LA CABECERA DE MATERIAL DEFECTUSO';
+                histedith2($usuario,$fecha,$realizo,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion);
             }else{
                 echo "1";
             }
     //Condición donde elimina usuario
+    }else if($opcion === 'gefoliodv'){
+        $tipo = $_POST['tipo'];
+            if (addfoliodv ($tipo,$conexion)){
+                echo "0";
+            }else{
+                echo "1";
+            }
+    //CANCELAR
+    }else if($opcion === 'registrardv'){
+        $refe_1 = $_POST['refe_1'];
+        $codigo_1 = $_POST['codigo_1'];
+        if (comprobaciondv ($refe_1,$codigo_1,$conexion)){
+            $fecha = $_POST['fecha'];
+            $descripcion_1 = $_POST['descripcion_1'];
+            $proveedor_cliente = $_POST['proveedor_cliente'];
+            $cantidad_real = $_POST['cantidad_real'];
+            $salida = $_POST['salida'];
+            $observa = $_POST['observa'];
+            //$refe_3 = $_POST['refe_3'];
+            $refe_2 = $_POST['refe_2'];
+            $ubicacion = $_POST['ubicacion'];
+            if (registrardv($refe_1,$codigo_1,$fecha,$descripcion_1,$proveedor_cliente,$cantidad_real,$salida,$observa,$refe_2,$ubicacion,$conexion)){
+                echo "0";
+                historialdv($usuario,$refe_1,$codigo_1,$conexion);
+            }else{
+                echo "1";
+            }
+        }else{
+
+            echo "2";
+        }
+    //Condición donde cancela el vale de producción
+    }else if($opcion === 'cambiocabdv'){
+        $fecha = $_POST['fecha'];
+        $descripcion_1  = $_POST['descripcion_1'];
+        $ubicacion = $_POST['ubicacion'];
+        $refe_2 = $_POST['refe_2'];
+        $refe_1 = $_POST['refe_1'];
+        $proveedor_cliente = $_POST['proveedor_cliente'];
+            if (cambiodv($fecha,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion)){
+                echo "0";
+                //$usuario='PRUEBAS';
+                $realizo = 'EDITA INFORMACIÓN DE LA CABECERA DE DEVOLUCIÓN';
+                histedith2($usuario,$fecha,$realizo,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion);
+            }else{
+                echo "1";
+            }
+    //Condición donde elimina usuario
+    }else if($opcion === 'deleartnewdv'){
+        $id_kardex = $_POST['id_kardex'];
+        $codigo_1 = $_POST['codigo_1'];
+        if (eliminar($id_kardex,$conexion)){
+            echo "0";
+            $realizo = 'ELIMINA ARTICULO DE DEVOLUCIÓN';
+            // $usuario='pruebas';
+            histdelete($usuario,$realizo,$id_kardex,$codigo_1,$conexion);
+        }else{
+            echo "1";
+        }
+    //elimina vales de producción 
+    }else if($opcion === 'revisionac2'){
+        $revision = $_POST['revision'];
+        $refe_1 = $_POST['refe_1'];
+        if (jlmrelacion2 ($revision,$refe_1,$conexion)){
+            echo "0";
+        }else{
+            echo "1";
+        }
+        //guarda edicion de entrada
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -167,8 +242,8 @@ function cancfolio ($refe_1,$conexion){
 }
 
 //funcion para actualizar el registro
-function actualizarnew ($id_kax,$codigo_1,$descripcion_1,$salida,$observa,$conexion){
-    $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1', cantidad_real=$salida,entrada=0,salida=$salida,observa='$observa' WHERE id_kax = '$id_kax'";
+function actualizarnew ($id_kax,$codigo_1,$descripcion_1,$salida,$entrada,$observa,$conexion){
+    $query="UPDATE kardex SET codigo_1='$codigo_1', descripcion_1='$descripcion_1', cantidad_real=$salida,entrada=$entrada,salida=$salida,observa='$observa' WHERE id_kax = '$id_kax'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -196,9 +271,63 @@ function jlmrelacion ($revision,$refe_1,$conexion){
     }
     cerrar($conexion);
 }
+//funcion para actualizar JLM relacion
+function jlmrelacion2 ($revision,$refe_1,$conexion){
+    $query="UPDATE kardex SET revision='$revision' WHERE refe_1 = '$refe_1' and tipo='DEVOLUCIÓN'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //funcion para actualizar la cabecera desde la vista DE MATERIAL DEFECTUOSO
 function cambio ($fecha,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion){
     $query="UPDATE kardex SET fecha='$fecha', descripcion_1='$descripcion_1', ubicacion='$ubicacion',refe_2='$refe_2',proveedor_cliente='$proveedor_cliente' WHERE refe_1 = '$refe_1' AND tipo='MATERIAL_DEFECTUOSO'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//Agregar folio DEVOLCIÓN
+function addfoliodv ($tipo,$conexion){
+    $folios="SELECT MAX(folio) + 1 AS id_foliovp FROM folios where tipo ='DEVOLUCIÓN' AND estado_f=0";
+    $foliomatdef = mysqli_query($conexion,$folios);
+    $folio = mysqli_fetch_row($foliomatdef);
+    $query="INSERT INTO folios VALUES(0,'$folio[0]','$tipo',0)";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
+//funcion de comprobación para ver si el vale ya se encuentra en la base
+function comprobaciondv ($refe_1,$codigo_1,$conexion){
+    $query="SELECT * FROM kardex WHERE refe_1 = '$refe_1' AND  codigo_1='$codigo_1' AND estado = 0 AND tipo='DEVOLUCIÓN'";
+    $resultado= mysqli_query($conexion,$query);
+    if($resultado->num_rows==0){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
+//funcion para guardar un material defectuoso
+function registrardv ($refe_1,$codigo_1,$fecha,$descripcion_1,$proveedor_cliente,$cantidad_real,$salida,$observa,$refe_2,$ubicacion,$conexion){
+    $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','0','$fecha','$codigo_1','$descripcion_1','DEVOLUCIÓN','ARTICULO','$proveedor_cliente','$ubicacion','$cantidad_real','$salida','0',0,0,0,'$observa','NA','FINALIZADO','FINALIZADO','NO','NO',0)";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    $this->conexion->cerrar();
+}
+//funcion para actualizar la cabecera desde la vista DE MATERIAL DEFECTUOSO
+function cambiodv ($fecha,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion){
+    $query="UPDATE kardex SET fecha='$fecha', descripcion_1='$descripcion_1', ubicacion='$ubicacion',refe_2='$refe_2',proveedor_cliente='$proveedor_cliente' WHERE refe_1 = '$refe_1' AND tipo='DEVOLUCIÓN'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -240,10 +369,21 @@ function histdelete($usuario,$realizo,$id_kardex,$codigo_1,$conexion){
     }
 }
 //funciones para guardar el historico de la edicion de cabecra de matyerial defectuoso
-function histedith2($usuario,$fecha,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion){
+function histedith2($usuario,$fecha,$realizo,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
-    $query = "INSERT INTO historial VALUES (0,'$usuario', 'EDITA INFORMACIÓN DE LA CABECERA DE MATERIAL DEFECTUSO', 'FOLIO:' '$refe_1' ' FECHA:' '$fecha'  ' MOTIVO: '  ' $descripcion_1' ' DEPARTAMENTO:' ' $refe_2' ' PEDIDOS:' ' $ubicacion' ,'$fecha1')";
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'FOLIO:' '$refe_1' ' FECHA:' '$fecha'  ' MOTIVO: '  ' $descripcion_1' ' DEPARTAMENTO:' ' $refe_2' ' PEDIDOS:' ' $ubicacion' ,'$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funcion para registra cambios
+function historialdv($usuario,$refe_1,$codigo_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA DEVOLUCIÓN', 'FOLIO:' '$refe_1' ' ARTICULO:' ' $codigo_1','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
