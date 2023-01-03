@@ -101,7 +101,7 @@ $porpedid2 = mysqli_fetch_assoc($resulped2);
                 <div class="mg-l-20">
                   <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Producción</p>
                   <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1"><?php echo $product['porcentaje']?></p>
-                  <span class="tx-11 tx-roboto tx-white-6">Vales de producción finalizado</span>
+                  <span class="tx-11 tx-roboto tx-white-6">Vales de producción</span>
                 </div>
               </div>
             </div>

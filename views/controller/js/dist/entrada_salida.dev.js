@@ -1076,6 +1076,28 @@ function pdfhistorymd() {
 
   url = '../formatos/pdf_reporthistorydf.php';
   window.open(url + "?data=" + folio, '_black');
+} //FUNCION QUE TOMAR EL FOLIO DE EL VALE DE OFIINA
+
+
+function deletdefc(folvale) {
+  //alert(folvale);
+  var folio = folvale;
+  var tipo = "MATERIAL_DEFECTUOSO";
+  document.getElementById('del_tipo').value = tipo;
+  $.ajax({
+    type: "GET",
+    url: "../controller/php/salidaentradagro.php",
+    data: 'folio=' + folio + '&tipo=' + tipo
+  }).done(function (respuesta) {
+    obj = JSON.parse(respuesta);
+    var res = obj.data;
+    var x = 0;
+
+    for (U = 0; U < res.length; U++) {
+      document.getElementById('del_vproduct').value = obj.data[U].refe_1;
+      document.getElementById('devaproduc').value = "FOLIO" + obj.data[U].refe_1; //alert("entro2");
+    }
+  });
 } //-------------------------------------------------DEFECTUOSO------------------------------------------------------------
 
 
@@ -1611,6 +1633,83 @@ function savereviciondv() {
       setTimeout(function () {
         document.getElementById('edthmmerror').style.display = 'none';
       }, 2000); //alert(respuesta);
+    }
+  });
+} //FUNCION QUE TOMAR EL FOLIO DE EL VALE DE OFIINA
+
+
+function deletvolis2(folvale) {
+  //alert(folvale);
+  var folio = folvale;
+  var tipo = "MATERIAL_DEFECTUOSO";
+  $.ajax({
+    type: "GET",
+    url: "../controller/php/salidaentradagro.php",
+    data: 'folio=' + foliodefc + '&tipo=' + tipo
+  }).done(function (respuesta) {
+    obj = JSON.parse(respuesta);
+    var res = obj.data;
+    var x = 0;
+
+    for (U = 0; U < res.length; U++) {
+      document.getElementById('delerrvprv').value = obj.data[U].refe_1;
+      document.getElementById('devaproduc').value = "FOLIO" + obj.data[U].refe_1; //alert("entro2");
+    }
+  });
+} //GUARDAR LA ELIMINACION DE DEFECTUOSO
+
+
+function savedefect() {
+  //alert("entro guardar eliminar");
+  var folio = document.getElementById('del_vproduct').value;
+  var tipo = document.getElementById('del_tipo').value;
+  var datos = 'folio=' + folio + '&tipo=' + tipo + '&opcion=deletedefc'; //alert(datos);
+
+  $.ajax({
+    type: "POST",
+    url: "../controller/php/insertsalidentra.php",
+    data: datos
+  }).done(function (respuesta) {
+    if (respuesta == 0) {
+      Swal.fire({
+        type: 'success',
+        text: 'Se elimino de forma correcta',
+        showConfirmButton: false,
+        timer: 1500
+      });
+
+      if (document.getElementById('del_tipo').value == 'MATERIAL_DEFECTUOSO') {
+        setTimeout("location.href = 'matdefectuoso.php';", 1500);
+      } else {
+        setTimeout("location.href = 'devolution.php';", 1500);
+      }
+    } else {
+      document.getElementById('delerrvprv').style.display = '';
+      setTimeout(function () {
+        document.getElementById('delerrvprv').style.display = 'none';
+      }, 2000);
+    }
+  });
+} //FUNCION QUE TOMAR EL FOLIO DE EL VALE DE OFIINA
+
+
+function deletdevolu(folvale) {
+  //alert(folvale);
+  var folio = folvale;
+  var tipo = "DEVOLUCIÓN";
+  document.getElementById('del_tipo').value = tipo;
+  $.ajax({
+    type: "GET",
+    url: "../controller/php/salidaentradagro.php",
+    data: 'folio=' + folio + '&tipo=' + tipo
+  }).done(function (respuesta) {
+    obj = JSON.parse(respuesta);
+    var res = obj.data;
+    var x = 0;
+
+    for (U = 0; U < res.length; U++) {
+      document.getElementById('del_vproduct').value = obj.data[U].refe_1;
+      document.getElementById('devaproduc').value = "FOLIO" + obj.data[U].refe_1; //alert("entro2");
     }
   });
 }

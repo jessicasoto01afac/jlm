@@ -182,6 +182,18 @@ if(!isset($usuario)){
             echo "1";
         }
         //guarda edicion de entrada
+    }else if($opcion === 'deletedefc'){
+        $folio = $_POST['folio'];
+        $tipo = $_POST['tipo'];
+        if (deletedefc($folio,$tipo,$conexion)){
+            echo "0";
+            $realizo = 'ELIMINA REPORTE DE '.$tipo;
+            // $usuario='pruebas';
+            hisdetedefc($usuario,$realizo,$folio,$conexion);
+        }else{
+            echo "1";
+        } 
+    //EDICION DE CABECERA
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -335,6 +347,16 @@ function cambiodv ($fecha,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_c
     }
     cerrar($conexion);
 }
+//funcion para actualizar el registro
+function deletedefc ($folio,$tipo,$conexion){
+    $query="UPDATE kardex SET estado='1' WHERE refe_1= '$folio' AND tipo='$tipo'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
 function historial($usuario,$refe_1,$codigo_1,$conexion){
@@ -384,6 +406,16 @@ function historialdv($usuario,$refe_1,$codigo_1,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA DEVOLUCIÓN', 'FOLIO:' '$refe_1' ' ARTICULO:' ' $codigo_1','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+function hisdetedefc($usuario,$realizo,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'FOLIO:' '$folio','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
