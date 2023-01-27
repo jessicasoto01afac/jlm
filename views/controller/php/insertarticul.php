@@ -18,7 +18,7 @@ if(!isset($usuario)){
         $artcodigo = $_POST['artcodigo'];
         $artdescrip = $_POST['artdescrip'];
         
-        if (comprobacion ($artcodigo,$artdescrip,$conexion)){
+        if (comprobaespc ($artcodigo,$artdescrip,$conexion)){
             $artubicac = $_POST['artubicac'];
             $artunidad = $_POST['artunidad'];
             $artgrupo = $_POST['artgrupo'];
