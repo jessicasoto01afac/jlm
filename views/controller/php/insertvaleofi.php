@@ -278,7 +278,7 @@ function comprobacion ($refe_1,$codigo_1,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar el vale de oficina
 function registrar ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$costo,$total,$ubicacion,$conexion){
@@ -288,7 +288,7 @@ function registrar ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descrip
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para actualizar el registro
 function actualizar ($codigo_1,$descripcion_1,$salida,$observa,$id_kax,$conexion){
@@ -486,7 +486,7 @@ function addfolio ($tipo,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 
 //funcion de comprobación para ver si el vale ya se encuentra en la base
@@ -498,7 +498,7 @@ function comprobacionfin ($refe_1,$usuario,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para registrar la productividad
 function poductividad ($refe_1,$refe_3,$usuario,$conexion){
@@ -510,7 +510,7 @@ function poductividad ($refe_1,$refe_3,$usuario,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para actualizar el registro
 function finaliadd ($refe_1,$conexion){

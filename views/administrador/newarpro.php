@@ -108,31 +108,31 @@ include ("../controller/conexion.php");
                   <div class="col-lg-4">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">LARGO: <span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa el largo">
+                      <input class="form-control inputalta" type="text" name="largo" id="largo"  placeholder="Ingresa el largo">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-4">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">ANCHO: <span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa el ancho">
+                      <input class="form-control inputalta" type="text" name="ancho" id="ancho"  placeholder="Ingresa el ancho">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-4">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">GRAMAJE: <span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa Contraseña">
+                      <input class="form-control inputalta" type="text" name="gramaje" id="gramaje"  placeholder="Ingresa Contraseña">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-4">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">PESO X MILLAR (KGS): <span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa el peso">
+                      <input class="form-control inputalta" type="number" name="paso_millar" id="paso_millar"  placeholder="Ingresa el peso">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-4">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">PESO X HOJA: <span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa el peso por hoja">
+                      <input class="form-control inputalta" type="number" name="peso_hoja" id="peso_hoja"  placeholder="Ingresa el peso por hoja">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-4">
@@ -150,13 +150,13 @@ include ("../controller/conexion.php");
                   <div class="col-lg-4">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">PESO KGS PQT CERRADO: <span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa el peso">
+                      <input class="form-control inputalta" type="number" name="kgs_paqcerr" id="kgs_paqcerr"  placeholder="Ingresa el peso">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-4">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">UNIDAD: <span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa la unidad">
+                      <input class="form-control inputalta" type="text" name="unidad" id="unidad"  placeholder="Ingresa la unidad">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-12">
@@ -169,67 +169,66 @@ include ("../controller/conexion.php");
                   <div class="col-lg-6">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">PRECIO ANTERIOR:<span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa precio anterior">
+                      <input class="form-control inputalta" type="number" name="price_antr" id="price_antr"  placeholder="Ingresa precio anterior">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-6">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">PRECIOS ACTUAL:<span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa precio actual">
+                      <input class="form-control inputalta" type="number" name="price_actl" id="price_actl"  placeholder="Ingresa precio actual">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-2">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">DESCUENTO 1:<span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa Descuento1">
+                      <input class="form-control inputalta" type="number" name="des1" id="des1"  placeholder="Ingresa Descuento1">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-2">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">DESCUENTO 2:<span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa Descuento2">
+                      <input class="form-control inputalta" type="number" name="des2" id="des2"  placeholder="Ingresa Descuento2">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-2">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">DESCUENTO 3:<span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa Descuento3">
+                      <input class="form-control inputalta" type="number" name="des3" id="des3"  placeholder="Ingresa Descuento3">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-2">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">DESCUENTO 4:<span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa Descuento4">
+                      <input class="form-control inputalta" type="number" name="des4" id="des4"  placeholder="Ingresa Descuento4">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-2">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">DESCUENTO 5:<span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa Descuento5">
+                      <input class="form-control inputalta" type="number" name="des5" id="des5"  placeholder="Ingresa Descuento5">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-2">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">DESCUENTO 6:<span class="tx-danger">*</span></label>
-                      <input class="form-control inputalta" type="text" name="password" id="password"  placeholder="Ingresa Descuento6">
+                      <input class="form-control inputalta" type="number" name="des6" id="des6"  placeholder="Ingresa Descuento6">
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-6">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">OBSERVACION:<span class="tx-danger">*</span></label>
-                      <textarea class="col-sm-12" name="comentarios" id="comeneva" rows="2" cols="10" onkeyup="mayus(this);" style="font-size: 14px; border-radius: 5px;" placeholder="Comentarios Adicionales"></textarea>
+                      <textarea class="col-sm-12" name="comentarios1" id="comentarios1" rows="2" cols="10" onkeyup="mayus(this);" style="font-size: 14px; border-radius: 5px;" placeholder="Comentarios Adicionales"></textarea>
                     </div>
                   </div><!-- col-8 -->
                   <div class="col-lg-6">
                     <div class="form-group mg-b-10-force">
                       <label class="form-control-label label2">OBSERVACION 2:<span class="tx-danger">*</span></label>
-                      <textarea class="col-sm-12" name="comentarios" id="comeneva" rows="2" cols="10" onkeyup="mayus(this);" style="font-size: 14px; border-radius: 5px;" placeholder="Comentarios Adicionales"></textarea>
+                      <textarea class="col-sm-12" name="comentarios2" id="comentarios2" rows="2" cols="10" onkeyup="mayus(this);" style="font-size: 14px; border-radius: 5px;" placeholder="Comentarios Adicionales"></textarea>
                     </div>
                   </div><!-- col-8 -->
-                  
                 </div><!-- row -->
                 <div class="form-layout-footer">
-                  <button type="button" class="btn btn-info" style="background-color:#1774D8; font-size 14px;" onclick="addPerson()">ACEPTAR</button>
+                  <button type="button" class="btn btn-info" style="background-color:#1774D8; font-size:14px;" onclick="savearprove()">ACEPTAR</button>
                 </div><!-- form-layout-footer -->
               </form>
               <br>
@@ -279,19 +278,38 @@ include ("../controller/conexion.php");
     <script src="../template/js/bracket.js"></script>
     <script>
 //FUNCION PARA AGREGAR UN USUARIO NUEVO
-    function addPerson(){
+    function savearprove(){
         //alert("entra");
-        var usunom = document.getElementById('usunom').value;
-        var usuapell = document.getElementById('usuapell').value;
-        var correo = document.getElementById('correo').value;
-        var usuario = document.getElementById('usuario').value;
-        var password = document.getElementById('password').value;
-        var privilegios = document.getElementById('privilegios').value;
+        let id_articulo = String(document.getElementById('vcodigo').value);
+        let proveedor = document.getElementById('vprov').value;
+        let codigo_proveedor = document.getElementById('cprove').value;
+        let descrip_proveedor = document.getElementById('desprov').value;
+        let largo = document.getElementById('largo').value;
+        let ancho = document.getElementById('ancho').value;
+        let gramaje = document.getElementById('gramaje').value;
+        let peso_x_millar = document.getElementById('paso_millar').value;
+        let peso_x_hoja = document.getElementById('peso_hoja').value;
+        let presentacion = document.getElementById('prensent').value;
+        let peso_paq_cerrado = document.getElementById('kgs_paqcerr').value;
+        let unidad = document.getElementById('unidad').value;
+        let precio_anterior = document.getElementById('price_antr').value;
+        let precio_actual = document.getElementById('price_actl').value;
+        let des1 = document.getElementById('des1').value;
+        let des2 = document.getElementById('des2').value;
+        let des3 = document.getElementById('des3').value;
+        let des4 = document.getElementById('des4').value;
+        let des5 = document.getElementById('des5').value;
+        let des6 = document.getElementById('des6').value;
+        let observ1 = document.getElementById('comentarios1').value;
+        let observ2 = document.getElementById('comentarios2').value;
 
-        var datos= 'usunom=' + usunom + '&usuapell=' + usuapell + '&correo=' + correo + '&usuario=' + usuario + '&password=' + password + '&privilegios=' + privilegios + '&opcion=registrar';
+
+        let datos= 'id_articulo=' + id_articulo + '&proveedor=' + proveedor + '&codigo_proveedor=' + codigo_proveedor + '&descrip_proveedor=' + descrip_proveedor + '&largo=' + largo 
+        + '&ancho=' + ancho + '&gramaje=' + gramaje + '&peso_x_millar=' + peso_x_millar + '&peso_x_hoja=' + peso_x_hoja + '&presentacion=' + presentacion + '&peso_paq_cerrado=' + peso_paq_cerrado + '&unidad=' + unidad + '&precio_anterior=' + precio_anterior + '&precio_actual=' + precio_actual + '&des1=' + des1 + '&des2=' + des2 + '&des3=' + des3
+        + '&des4=' + des4 + '&des5=' + des5 + '&des6=' + des6 + '&observ1=' + observ1 + '&observ2=' + observ2 + '&opcion=registrar';
         //var datos =$('#personal-ext').serialize();
-        //alert(datos);
-      if (document.getElementById('usunom').value == '' || document.getElementById('usuapell').value == '' || document.getElementById('correo').value == '' || document.getElementById('usuario').value == '' || document.getElementById('password').value == ''|| document.getElementById('privilegios').value == '') { 
+      //alert(datos);
+      if (id_articulo.value == '' ||proveedor.value == '' || codigo_proveedor.value == '' || descrip_proveedor.value == '' || precio_actual.value == '') { 
         document.getElementById('vacios').style.display=''
         setTimeout(function(){
           document.getElementById('vacios').style.display='none';
@@ -300,9 +318,10 @@ include ("../controller/conexion.php");
       } else {
         $.ajax({
           type:"POST",
-          url:"../controller/insertusu.php",
+          url:"../controller/php/insertartprov.php",
           data:datos
         }).done(function(respuesta){
+          //alert(respuesta);
           if (respuesta==0){
             Swal.fire({
                     type: 'success',
@@ -313,9 +332,9 @@ include ("../controller/conexion.php");
                     focusConfirm: false,
                     confirmButtonColor: "#1774D8",
                     customClass: 'swal-wide',
-                    confirmButtonText: '<span style="color: white;"><a class="a-alert" href="newacces">¿Deseas agregar otro registro?</a></span>',
+                    confirmButtonText: '<span style="color: white;"><a class="a-alert" href="newarpro">¿Deseas agregar otro registro?</a></span>',
                     confirmButtonAriaLabel: 'Thumbs up, great!',
-                    cancelButtonText: '<a  class="a-alert" href="usuarios.php"><span style="color: white;">Cerrar</span></a>',
+                    cancelButtonText: '<a  class="a-alert" href="artiprove.php"><span style="color: white;">Cerrar</span></a>',
                     cancelButtonAriaLabel: 'Thumbs down'
                         // timer: 2900
                 });

@@ -514,7 +514,7 @@ function comprobacion ($refe_1,$codigo_1,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //Agregar folio
 function addfolio ($tipo,$conexion){
@@ -527,7 +527,7 @@ function addfolio ($tipo,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion de comprobación para ver si el vale ya se encuentra en la base
 function comprobacionfin ($refe_1,$usuario,$conexion){
@@ -538,7 +538,7 @@ function comprobacionfin ($refe_1,$usuario,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 
 //funcion de comprobación para ver si el vale ya se encuentra en la base
@@ -550,7 +550,7 @@ function comprobacion2 ($refe_1,$codigocart,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion de comprobación para ver si el vale ya se encuentra en la base
 function comprobacion3 ($refe_1,$codigocartons,$conexion){
@@ -561,7 +561,7 @@ function comprobacion3 ($refe_1,$codigocartons,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para actualizar el registro
 function finaliadd ($refe_1,$conexion){
@@ -582,7 +582,7 @@ function comprobacion4 ($refe_1,$codigocaple,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion de comprobación para ver si el vale ya se encuentra en la base
 function comprobacion5 ($refe_1,$codigolist,$conexion){
@@ -593,7 +593,7 @@ function comprobacion5 ($refe_1,$codigolist,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar el articulo de producción
 function registrar ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
@@ -603,7 +603,7 @@ function registrar ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //comprobación de colores
 function compracolors ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
@@ -612,17 +612,17 @@ function compracolors ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo
     if($resultado->num_rows==0){
         return false;
     }else{
-        $query2="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_extendido,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor'),('0'),('$cantidad_real'),(hojas*$salida/divicion),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
+        $query2="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_extendido,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor_cliente'),('0'),('$cantidad_real'),(hojas*$salida/divicion),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
         FROM
             transforma 
         WHERE
             id_articulo_final = '$codigo_1' and id_etiquetas='GRUPO_TRANSF'";
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar los colores del articulo
 function registrarcolors ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
-    $query="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_extendido,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor'),('0'),('$cantidad_real'),(hojas*$salida/divicion),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
+    $query="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_extendido,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor_cliente'),('0'),('$cantidad_real'),(hojas*$salida/divicion),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
     FROM
         transforma 
     WHERE
@@ -632,7 +632,7 @@ function registrarcolors ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$cod
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para registrar la productividad
 function poductividad ($refe_1,$caracter,$usuario,$conexion){
@@ -644,7 +644,7 @@ function poductividad ($refe_1,$caracter,$usuario,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar el vale de produccion individualmente
 function registrarind ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion){
@@ -654,7 +654,7 @@ function registrarind ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //add producto final iformacion del vale de produccion
 function regstindpf ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion){
@@ -664,7 +664,7 @@ function regstindpf ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar el exendido de articulo de trasformación
 function extendido ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
@@ -674,7 +674,7 @@ function extendido ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //minagirssss 
 
@@ -686,7 +686,7 @@ function minagriss ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 
 
@@ -698,7 +698,7 @@ function etiqueta ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 
 //funcion para guardar el carton de articulo de trasformación
@@ -709,7 +709,7 @@ function carton ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$co
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar el cartonsillo de articulo de trasformación
 function cartonsillo ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$codigocartons,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion){
@@ -719,7 +719,7 @@ function cartonsillo ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar el caple de articulo de trasformación
 function caple ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$codigocaple,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion){
@@ -729,7 +729,7 @@ function caple ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$cod
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar el liston de articulo de trasformación
 function liston ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$codigolist,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$tipo_ref,$conexion){
@@ -739,7 +739,7 @@ function liston ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$co
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para cancelar el vale de producción SE COMENTA 
 /*function cancelar ($refe_1,$conexion){

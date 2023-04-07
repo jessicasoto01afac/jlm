@@ -1326,7 +1326,7 @@ function updateaddcolo() {
             if (obj.data[U].id_articulo_final == id) {
                 x++;
                 $id_memo2 = obj.data[U].id_kax;
-                html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
+                html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='deletemascolors()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
             }
         }
         html += '</div></tbody></table></div></div>';
@@ -1492,6 +1492,41 @@ function deletemascolor() {
                     timer: 1000
                 });
                 updatcoloredith()
+            } else {
+                Swal.fire({
+                    type: 'danger',
+                    text: 'CONTACTAR A SOPORTE TECNICO O LEVANTAR UN TICKET',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }
+        }); //FIN DE AJAX
+    });
+}
+
+function deletemascolors() {
+    //alert("BORRAR");
+    //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
+    $("#datepluscolor tr").on('click', function() {
+        let id_colorss = "";
+        id_colorss += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
+        //alert(id_colors);
+        let idtrans = document.getElementById('vppcodigo').value;
+        let datos = 'id_colorss=' + id_colorss + '&idtrans=' + idtrans + '&opcion=eliminarcolors';
+        //alert(datos);
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertransf.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'SE ELIMINO DE FORMA CORRECTA',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                updateaddcolo()
             } else {
                 Swal.fire({
                     type: 'danger',
@@ -1871,4 +1906,309 @@ function minagris() {
     let minagris = document.getElementById('mingrisid').value;
     document.getElementById('acntminagr').value = 500;
     document.getElementById('acntminagrhj').value = 1;
+}
+
+function openartprov() {
+
+    var currentdate = new Date();
+    var datetime = "Fecha de Impresion: " + currentdate.getDate() + "/" +
+        (currentdate.getMonth() + 1) + "/" +
+        currentdate.getFullYear() + " - " +
+        currentdate.getHours() + ":" +
+        currentdate.getMinutes();
+
+    var table = $('#example2').DataTable({
+
+        dom: 'Bfrtip',
+        buttons: [{
+                extend: 'copy',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                text: 'Generar PDF',
+                messageTop: 'RESUMEN DE ARTICULOS DE PROVEEDOR',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                },
+                download: 'open',
+                header: true,
+                title: '',
+                customize: function(doc) {
+                    doc.defaultStyle.fontSize = 12;
+                    doc.styles.tableHeader.fontSize = 12;
+                    doc['footer'] = (function(page, pages) {
+                        return {
+                            columns: [
+                                datetime,
+                                {
+                                    alignment: 'right',
+                                    text: [{
+                                            text: page.toString(),
+                                            italics: false
+                                        },
+                                        ' de ',
+                                        {
+                                            text: pages.toString(),
+                                            italics: false
+                                        }
+                                    ]
+                                }
+                            ],
+                            margin: [25, 0]
+                        }
+                    });
+                }
+            },
+            {
+                extend: 'excel',
+                text: 'Generar Excel',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                }
+            }
+        ],
+        "language": {
+            buttons: {
+                copyTitle: 'Registros copiados',
+                copySuccess: {
+                    _: '%d registros copiados',
+                    1: '1 registro copiado'
+                }
+            },
+            "searchPlaceholder": "Buscar datos...",
+            "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+        },
+        // "order": [
+        //     [5, "asc"]
+        // ],
+        "ajax": "../controller/php/infartprovee.php",
+    });
+
+    // CON ESTO FUNCIONA EL MULTIFILTRO//
+    /*$('#inventario thead tr').clone(true).appendTo('#inventario thead');
+ 
+     $('#inventario thead tr:eq(1) th').each(function(i) {
+         var title = $(this).text(); //es el nombre de la columna
+         $(this).html('<input type="text"  placeholder="Buscar" />');
+ 
+         $('input', this).on('keyup change', function() {
+             if (table.column(i).search() !== this.value) {
+                 table
+                     .column(i)
+                     .search(this.value)
+                     .draw();
+             }
+         });
+     });*/
+
+}
+
+//FUNCION DONDE RECOLECTA LA INFORMACION DEL ARTICULO DE PROVEEDOR 
+function infoartraf(id_arprovee) {
+    //alert(id_arprovee);
+    document.getElementById('id_artprov').value = id_arprovee;
+    let folio = id_arprovee;
+    $.ajax({
+        url: '../controller/php/conartrprve.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        let res = obj.data;
+        let x = 0;
+        for (D = 0; D < res.length; D++) {
+            if (obj.data[D].id_arprov == id_arprovee) {
+                $("#modal-edithartprovee #editprovee1").val(obj.data[D].proveedor);
+                $("#modal-edithartprovee #edithcidprv").val(obj.data[D].id_articulo);
+                $("#modal-edithartprovee #edithdesprvv").val(obj.data[D].id_articulo);
+                $("#modal-edithartprovee #codprvar").val(obj.data[D].codigo_proveedor);
+                $("#modal-edithartprovee #desprvar").val(obj.data[D].descrip_proveedor);
+                $("#modal-edithartprovee #edithlargo").val(obj.data[D].largo);
+                $("#modal-edithartprovee #edithancho").val(obj.data[D].ancho);
+                $("#modal-edithartprovee #edithgram").val(obj.data[D].gramaje);
+                $("#modal-edithartprovee #edithpeso_mill").val(obj.data[D].peso_x_millar);
+                $("#modal-edithartprovee #edithpeso_hoja").val(obj.data[D].peso_x_hoja);
+                $("#modal-edithartprovee #edithpresent").val(obj.data[D].presentacion);
+                $("#modal-edithartprovee #edithpescerr").val(obj.data[D].peso_paq_cerrado);
+                $("#modal-edithartprovee #edithunidad").val(obj.data[D].unidad);
+                $("#modal-edithartprovee #edithprecio").val(obj.data[D].precio_anterior);
+                $("#modal-edithartprovee #edithprecioac").val(obj.data[D].precio_actual);
+                $("#modal-edithartprovee #edithsec1").val(obj.data[D].des1);
+                $("#modal-edithartprovee #edithsec2").val(obj.data[D].des2);
+                $("#modal-edithartprovee #edithsec3").val(obj.data[D].des3);
+                $("#modal-edithartprovee #edithsec4").val(obj.data[D].des4);
+                $("#modal-edithartprovee #edithsec5").val(obj.data[D].des5);
+                $("#modal-edithartprovee #edithsec6").val(obj.data[D].des6);
+                $("#modal-edithartprovee #edithobs1").val(obj.data[D].observ1);
+                $("#modal-edithartprovee #edithobs2").val(obj.data[D].observ2);
+            }
+        }
+    });
+}
+
+//FUNCION DE EDITAR ARTICULO DE PROVEEDOR
+function edithartprov() {
+    //alert("editusuarios");
+    document.getElementById('openarprov').style.display = "none";
+    document.getElementById('closearprov').style.display = "";
+    document.getElementById('editprovee1').disabled = false;
+    document.getElementById('edithcidprv').disabled = false;
+    document.getElementById('codprvar').disabled = false;
+    document.getElementById('desprvar').disabled = false;
+    document.getElementById('edithlargo').disabled = false;
+    document.getElementById('edithancho').disabled = false;
+    document.getElementById('edithgram').disabled = false;
+    document.getElementById('edithpeso_mill').disabled = false;
+    document.getElementById('edithpeso_hoja').disabled = false;
+    document.getElementById('edithpresent').disabled = false;
+    document.getElementById('edithpescerr').disabled = false;
+    document.getElementById('edithunidad').disabled = false;
+    document.getElementById('edithprecio').disabled = false;
+    document.getElementById('edithprecioac').disabled = false;
+    document.getElementById('edithsec1').disabled = false;
+    document.getElementById('edithsec2').disabled = false;
+    document.getElementById('edithsec3').disabled = false;
+    document.getElementById('edithsec4').disabled = false;
+    document.getElementById('edithsec5').disabled = false;
+    document.getElementById('edithsec6').disabled = false;
+    document.getElementById('edithobs1').disabled = false;
+    document.getElementById('edithobs2').disabled = false;
+    document.getElementById('edthprvart').style.display = "";
+
+
+}
+//FUNCION DE CERRAR EDICIÓN ARTICULO DE PROVEEDOR
+function closeartprov() {
+    //alert("cerrarusu");
+    document.getElementById('openarprov').style.display = "";
+    document.getElementById('closearprov').style.display = "none";
+    document.getElementById('editprovee1').disabled = true;
+    document.getElementById('edithcidprv').disabled = true;
+    document.getElementById('codprvar').disabled = true;
+    document.getElementById('desprvar').disabled = true;
+    document.getElementById('edithlargo').disabled = true;
+    document.getElementById('edithancho').disabled = true;
+    document.getElementById('edithgram').disabled = true;
+    document.getElementById('edithpeso_mill').disabled = true;
+    document.getElementById('edithpeso_hoja').disabled = true;
+    document.getElementById('edithpresent').disabled = true;
+    document.getElementById('edithpescerr').disabled = true;
+    document.getElementById('edithunidad').disabled = true;
+    document.getElementById('edithprecio').disabled = true;
+    document.getElementById('edithprecioac').disabled = true;
+    document.getElementById('edithsec1').disabled = true;
+    document.getElementById('edithsec2').disabled = true;
+    document.getElementById('edithsec3').disabled = true;
+    document.getElementById('edithsec4').disabled = true;
+    document.getElementById('edithsec5').disabled = true;
+    document.getElementById('edithsec6').disabled = true;
+    document.getElementById('edithobs1').disabled = true;
+    document.getElementById('edithobs2').disabled = true;
+    document.getElementById('edthprvart').style.display = "none";
+}
+//FUNCIONQUE GUARDA LA EDICIÓN DE ARTICULO DE TRASFORMACIÓN
+function savethiarprvv() {
+    //alert("ENTRA GUARDAR EDICIÓN");
+    let id_arprov = document.getElementById('id_artprov').value;
+    let id_articulo = document.getElementById('edithcidprv').value;
+    let proveedor = document.getElementById('editprovee1').value;
+    let codigo_proveedor = document.getElementById('codprvar').value;
+    let descrip_proveedor = document.getElementById('desprvar').value;
+    let largo = document.getElementById('edithlargo').value;
+    let ancho = document.getElementById('edithancho').value;
+    let gramaje = document.getElementById('edithgram').value;
+    let peso_x_millar = document.getElementById('edithpeso_mill').value;
+    let peso_x_hoja = document.getElementById('edithpeso_hoja').value;
+    let presentacion = document.getElementById('edithpresent').value;
+    let peso_paq_cerrado = document.getElementById('edithpescerr').value;
+    let unidad = document.getElementById('edithunidad').value;
+    let precio_anterior = document.getElementById('edithprecio').value;
+    let precio_actual = document.getElementById('edithprecioac').value;
+    let des1 = document.getElementById('edithsec1').value;
+    let des2 = document.getElementById('edithsec2').value;
+    let des3 = document.getElementById('edithsec3').value;
+    let des4 = document.getElementById('edithsec4').value;
+    let des5 = document.getElementById('edithsec5').value;
+    let des6 = document.getElementById('edithsec6').value;
+    let observ1 = document.getElementById('edithobs1').value;
+    let observ2 = document.getElementById('edithobs2').value;
+
+    let datos = 'id_arprov=' + id_arprov + '&id_articulo=' + id_articulo + '&proveedor=' + proveedor + '&codigo_proveedor=' + codigo_proveedor + '&descrip_proveedor=' + descrip_proveedor + '&largo=' + largo + '&ancho=' + ancho + '&gramaje=' + gramaje + '&peso_x_millar=' + peso_x_millar + '&peso_x_hoja=' + peso_x_hoja + '&presentacion=' + presentacion + '&peso_paq_cerrado=' + peso_paq_cerrado + '&unidad=' + unidad + '&precio_anterior=' + precio_anterior + '&precio_actual=' + precio_actual + '&des1=' + des1 + '&des2=' + des2 + '&des3=' + des3 + '&des4=' + des4 + '&des5=' + des5 + '&des6=' + des6 + '&observ1=' + observ1 + '&observ2=' + observ2 + '&opcion=actarprv';
+    //alert(datos);
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertartprov.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'SE ACTUALIZO DE FORMA CORRECTA',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            setTimeout("location.href = 'artiprove.php';", 1000);
+        } else {
+            document.getElementById('edtherrartprvv').style.display = ''
+            setTimeout(function() {
+                document.getElementById('edtherrartprvv').style.display = 'none';
+            }, 2000);
+            alert(respuesta);
+        }
+    }); //FIN DE AJAX
+}
+//FUNCION QUE TRAE LOS DATOS A  ELIMINAR A UN ARTICULO DE PROVEEDOR
+function deletartprvv(id_art) {
+    document.getElementById('del_artpvv').value = id_art;
+    //alert(id_art);
+    let folio = id_art;
+    $.ajax({
+        url: '../controller/php/conartrprve.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(respuesta) {
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (D = 0; D < res.length; D++) {
+            if (obj.data[D].id_arprov == id_art) {
+                // alert(id_persona);
+                datos =
+                    obj.data[D].codigo_proveedor + '*' +
+                    obj.data[D].artdescrip;
+                var o = datos.split("*");
+                $("#modal-deleteartprv #deart").val(o[0]);
+            }
+        }
+    });
+}
+
+function savedeartprv() {
+    let id_arprov = document.getElementById('del_artpvv').value;
+    let datos = 'id_arprov=' + id_arprov + '&opcion=eliminarartic';
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertartprov.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'SE ELIMINO DE FORMA CORRECTA',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            setTimeout("location.href = 'artiprove.php';", 1000);
+        } else {
+            document.getElementById('edtherrartprvv').style.display = ''
+            setTimeout(function() {
+                document.getElementById('edtherrartprvv').style.display = 'none';
+            }, 2000);
+            alert(respuesta);
+        }
+    }); //FIN DE AJAX
+
 }

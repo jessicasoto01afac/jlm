@@ -73,7 +73,7 @@ function comprobacion ($artcodigo,$artdescrip,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar articulo
 function registrar ($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$conexion){
@@ -83,7 +83,7 @@ function registrar ($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$cone
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para actualizar el registro
 function actualizar ($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$id_art,$conexion){

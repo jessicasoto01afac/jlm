@@ -16,7 +16,7 @@ $person = mysqli_query($conexion,$sql);
     <!-- Meta -->
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
-    <title>JLM|Devolución</title>
+    <title>JLM|Compras</title>
     <!-- vendor css -->
     <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../template/lib/Ionicons/css/ionicons.css" rel="stylesheet">
@@ -38,12 +38,12 @@ include('header.php');
         <!-- ########## START: MAIN PANEL ########## -->
         <div class="br-mainpanel">
             <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-                <h4 class="tx-gray-800 mg-b-5">DEVOLUCIÓN</h4>
+                <h4 class="tx-gray-800 mg-b-5">COMPRAS</h4>
             </div>
             <div class="br-pagebody">
                 <div class="br-section-wrapper">
-                    <a class="btn btn-primary" href="javascript:foliodevolution()" style="float:right"><i
-                            class="fa fa-list-alt mg-r-10"></i>Agregar Devolución</a>
+                    <a class="btn btn-purple" href="javascript:foliocompras()" style="float:right"><i
+                            class="fa fa-cart-plus mg-r-10"></i>Agregar Compras</a>
                     <br>
                     <br>
                     <br>
@@ -55,8 +55,7 @@ include('header.php');
                                     <th style="width:5%;">ID</th>
                                     <th>FOLIO</th>
                                     <th>FECHA</th>
-                                    <th>CLIENTE</th>
-                                    <th>DEPARTAMENTO</th>
+                                    <th>PROVEEDOR</th>
                                     <th>FOLIO JLM</th>
                                     <th>ACCIONES</th>
                                 </tr>
@@ -253,7 +252,7 @@ include('header.php');
     <script src="../template/lib/datatables-responsive/dataTables.responsive.js"></script>
 
     <script src="../template/lib/select2/js/select2.min.js"></script>
-    <script src="../controller/js/entrada_salida.js"></script>
+    <script src="../controller/js/compras.js"></script>
     <script src="../template/js/bracket.js"></script>
     <!-- DataTables -->
     <script src="../controller/datatables.net/js/jquery.dataTables.js"></script>
@@ -269,7 +268,7 @@ include('header.php');
     <?php include('../administrador/modal/entradassalidas.php');?>
     <script type="text/javascript">
     // TABLA INSPECTORES EXTERNOS//
-    opendevolucion();
+    opencompras();
     </script>
 
 

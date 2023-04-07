@@ -376,6 +376,9 @@ function addvaleprodu() {
       url: "../controller/php/insertvapro.php",
       data: datos
     }).done(function (respuesta) {
+      alert("respuesta");
+      alert(respuesta);
+
       if (respuesta == 0) {
         Swal.fire({
           type: 'success',

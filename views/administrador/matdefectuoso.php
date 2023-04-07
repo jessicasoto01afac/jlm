@@ -99,7 +99,7 @@ include('header.php');
                         <button onclick="closedithmdef()" id="closemted" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
-                        <button onclick="pdfvp()" style="display:;" title="Imprimir" id="pdfvofi" name="pdfvofi"
+                        <button onclick="pdfvp()" title="Imprimir" id="pdfvofi" name="pdfvofi"
                             type="button" class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
                         <button title="ver historial" onclick="histmaterdef()" data-toggle="modal"
                             data-target="#modal-mdhistorial" type="button" class="btn btn-primary"><i
@@ -124,7 +124,7 @@ include('header.php');
                                                 class="tx-danger">*</span></label>
                                         <!-- <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingresa el Folio"> -->
                                         <label class="form-control-label" id="fmdi" name="fmdi"
-                                            style="font-size: 24px;px; color:#14128F"></label>
+                                            style="font-size: 24px; color:#14128F"></label>
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-4 mg-t--1 mg-md-t-0">

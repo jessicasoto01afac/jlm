@@ -127,7 +127,7 @@ include ("../controller/conexion.php");
                   </div><!-- col-4 -->
                 </div><!-- row -->
                 <div class="form-layout-footer">
-                  <button type="button" class="btn btn-info" style="background-color:#1774D8; font-size 14px;" onclick="addPerson()">ACEPTAR</button>
+                  <button type="button" class="btn btn-info" style="background-color:#1774D8; font-size:14px;" onclick="addPerson()">ACEPTAR</button>
                 </div><!-- form-layout-footer -->
               </form>
               <br>

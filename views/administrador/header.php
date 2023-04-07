@@ -112,7 +112,7 @@ $sql =
         <ul class="br-menu-sub nav flex-column">
             <li class="nav-item"><a href="../administrador/devolution.php" class="nav-link">Devolución</a></li>
             <li class="nav-item"><a href="../administrador/matdefectuoso.php" class="nav-link">Defectuso</a></li>
-            <li class="nav-item"><a href="" class="nav-link">Faltante</a></li>
+            <li class="nav-item"><a href="../administrador/matfaltante.php" class="nav-link">Faltante</a></li>
             <li class="nav-item"><a href="" class="nav-link">Sobrante</a></li>
             <li class="nav-item"><a href="" class="nav-link">Reacondicionado</a></li>
         </ul>
@@ -135,8 +135,8 @@ $sql =
             </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="chart-morris.html" class="nav-link">Alta de orden</a></li>
-            <li class="nav-item"><a href="chart-flot.html" class="nav-link">Lista de Compras</a></li>
+            <li class="nav-item"><a href="../administrador/compras.php" class="nav-link">Lista de Compras</a></li>
+            <li class="nav-item"><a href="chart-morris.html" class="nav-link">Pronostico de Compras</a></li>
         </ul>
         <a href="#" class="br-menu-link">
             <div class="br-menu-item">
@@ -366,7 +366,7 @@ $sql =
                                 <!-- <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt=""> -->
                                 <i style="font-size:18px;color:#2E4EB2" class="fa fa-dot-circle-o"></i>
                                 <div class="media-body">
-                                <p class="tx-13 mg-b-0 tx-gray-700">HAY <u style="color:blue;f"><?php echo $pendsinsurtir['result']?></u> <strong
+                                <p class="tx-13 mg-b-0 tx-gray-700">HAY <u style="color:blue;"><?php echo $pendsinsurtir['result']?></u> <strong
                                             class="tx-medium tx-gray-800">PEDIDOS</strong> SIN SURTIR</p>
                                 </div>
                             </div><!-- media -->
@@ -374,7 +374,6 @@ $sql =
                         <!-- loop ends here -->
                         <a href="" class="media-list-link read">
                             <div class="media pd-x-20 pd-y-15">
-                                <!-- <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt=""> -->
                                 <i style="font-size:18px;color:#2E4EB2" class="fa fa-dot-circle-o"></i>
                                 <div class="media-body">
                                     <p class="tx-13 mg-b-0 tx-gray-700">HAY <u style="color:blue"><?php echo $sinfinalizar['result']?></u> <strong

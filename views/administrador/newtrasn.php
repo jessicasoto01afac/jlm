@@ -96,6 +96,9 @@ include ("../controller/conexion.php");
                                     name="descripfin" id="descripfin" placeholder="Ingresa la Descripción" disabled>
                             </div>
                         </div><!-- col-4 -->
+                        <div id="line" name="line" class="col-lg-12">
+                            <hr style="color: black; background-color:#D7D6D6; width:100%;" />
+                        </div>
                         <div class="col-lg-12">
                             <label class="ckbox">
                                 <input style="size:25px" onchange="addplus()" id="pluscolor" name="pluscolor"
@@ -104,7 +107,11 @@ include ("../controller/conexion.php");
                             </label>
                         </div>
                         <div id="line" name="line" style="display:none" class="col-lg-12">
-                        <hr style="color: black; background-color:#D7D6D6; width:100%;" />
+                            <hr style="color: black; background-color:#D7D6D6; width:100%;" />
+                        </div>
+                        <br>
+                        <div id="line" name="line" class="col-lg-12">
+                            <hr style="color: black; background-color:#D7D6D6; width:100%;" />
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
@@ -126,9 +133,10 @@ include ("../controller/conexion.php");
                                 <div
                                     class="d-flex align-items-center justify-content-end bg-gray-100 ht-md-80 bd pd-x-20 mg-t-10">
                                     <div class="d-md-flex pd-y-20 pd-md-y-0">
-                                        <input id="multiplicadd" name="multiplicadd" type="number" class="form-control" placeholder="Multiplicaciones">
-                                        <input id="divicionesadd" name="divicionesadd" type="number" class="form-control mg-md-l-10 mg-t-10 mg-md-t-0"
-                                            placeholder="Diviviones">
+                                        <input id="multiplicadd" name="multiplicadd" type="number" class="form-control"
+                                            placeholder="Multiplicación">
+                                        <input id="divicionesadd" name="divicionesadd" type="number"
+                                            class="form-control mg-md-l-10 mg-t-10 mg-md-t-0" placeholder="Divición">
                                         <button onclick="saveaddplus()" type="button"
                                             class="btn btn-success  pd-y-13 pd-x-20 bd-0 mg-md-l-10 mg-t-10 mg-md-t-0 tx-uppercase tx-11 tx-spacing-2">Agregar</button>
                                     </div>
@@ -172,10 +180,16 @@ include ("../controller/conexion.php");
                                     name="division" id="division" placeholder="Ingresa la cantidad a dividir">
                             </div>
                         </div><!-- col-4 -->
+                        <br>
+                        <div id="line" name="line" class="col-lg-12">
+                            <hr style="color: black; background-color:#D7D6D6; width:100%;" />
+                        </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label label2">Minagris: <span class="tx-danger">*</span></label>
-                                <select class="form-control select2-show-search" name="mingrisid" id="mingrisid" style="" onchange="minagris()">
+                                <label class="form-control-label label2">Minagris: <span
+                                        class="tx-danger">*</span></label>
+                                <select class="form-control select2-show-search select2" name="mingrisid" id="mingrisid"
+                                    onchange="minagris()">
                                     <option value="0">SELECCIONA EL MINAGRIS</option>
                                     <option value="2000">CARTONCILLO MINAGRIS I DE 200G. T.57X87CMS.</option>
                                     <option value="2005">CARTONCILLO MINAGRIS I DE 200G. T.70X95CMS.</option>
@@ -185,8 +199,7 @@ include ("../controller/conexion.php");
                         </div><!-- col-4 -->
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label class="form-control-label label2">hojas: <span
-                                        class="tx-danger">*</span></label>
+                                <label class="form-control-label label2">hojas: <span class="tx-danger">*</span></label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="acntminagr" id="acntminagr" placeholder="Ingresa la cantidad a dividir">
                             </div>
@@ -201,6 +214,9 @@ include ("../controller/conexion.php");
                         </div><!-- col-4 -->
                         <br>
                         <br>
+                        <div id="line" name="line" class="col-lg-12">
+                            <hr style="color: black; background-color:#D7D6D6; width:100%;" />
+                        </div>
                         <label class="ckbox">
                             <input style="size:25px" onchange="artextra()" id="artxtra" name="artxtra"
                                 type="checkbox"><span class="tx-purple" style="font-size: 20px">Selecciona si tiene
@@ -212,7 +228,7 @@ include ("../controller/conexion.php");
                         <div class="col-lg-3" id="cartontex" name="cartontex" style="display:none">
                             <div class="form-group">
                                 <label class="form-control-label label2 tx-primary"
-                                    style="font-size:20px">Cartón</label>
+                                    style="font-size:18px">Cartón</label>
                                 <select class="form-control select2" data-placeholder="Elija si aplioca o no"
                                     onchange="carton()" id="cartonapl" name="cartonapl" type="text"
                                     data-live-search="true" style="width: 100%">
@@ -225,8 +241,9 @@ include ("../controller/conexion.php");
                         <div class="col-lg-3" id="carton" name="carton" style="display:none">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo de Carton:</label>
-                                <select onchange="carton()" class="form-control select2-show-search" data-placeholder="Seleccione"
-                                    id="codcarton" name="codcarton" type="text" data-live-search="true" style="width: 100%">
+                                <select onchange="carton()" class="form-control select2-show-search"
+                                    data-placeholder="Seleccione" id="codcarton" name="codcarton" type="text"
+                                    data-live-search="true" style="width: 100%">
                                     <option value="0" selected>CODIGO</option>
                                     <?php while($idpst = mysqli_fetch_row($articulo)):?>
                                     <option value="<?php echo $idpst[0]?>"><?php echo $idpst[0]?></option>
@@ -235,14 +252,14 @@ include ("../controller/conexion.php");
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-3" id="cartondes" name="cartondes" style="display:none">
-                            <div class="form-group" style="display:">
+                            <div class="form-group" style="display:''">
                                 <label class=" form-control-label label2">División carton</label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="descarton" id="descarton" placeholder="Ingresa">
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-3" id="cartonmilt" name="cartonmilt" style="display:none">
-                            <div class="form-group" style="display:">
+                            <div class="form-group" style="display:''">
                                 <label class=" form-control-label label2">multiplica carton</label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="multcarton" id="multcarton" placeholder="Ingresa">
@@ -251,7 +268,7 @@ include ("../controller/conexion.php");
                         <!-- cartonsillo -->
                         <div class="col-lg-3" id="cartonsitex" name="cartonsitex" style="display:none">
                             <div class="form-group">
-                                <label class="form-control-label label2 tx-primary" style="font-size:20px">Cartonsillo
+                                <label class="form-control-label label2 tx-primary" style="font-size:18px">Cartonsillo
                                     <span class="tx-danger">*</span></label>
                                 <select class="form-control select2" data-placeholder="Elija si aplioca o no"
                                     onchange="cartonsillo()" id="cartaplic" name="cartaplic" type="text"
@@ -265,8 +282,9 @@ include ("../controller/conexion.php");
                         <div class="col-lg-3" id="cartonsillo" name="cartonsillo" style="display:none">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo de Cartonsillo:</label>
-                                <select onchange="" class="form-control select2-show-search" data-placeholder="Seleccione"
-                                    id="codcartonsillo" name="codcartonsillo" type="text" data-live-search="true" style="width: 100%">
+                                <select onchange="" class="form-control select2-show-search"
+                                    data-placeholder="Seleccione" id="codcartonsillo" name="codcartonsillo" type="text"
+                                    data-live-search="true" style="width: 100%">
                                     <option value="0" selected>CODIGO</option>
                                     <?php while($idpst2 = mysqli_fetch_row($articulo2)):?>
                                     <option value="<?php echo $idpst2[0]?>"><?php echo $idpst2[0]?></option>
@@ -282,7 +300,7 @@ include ("../controller/conexion.php");
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-3" id="cartonsillomilt" name="cartonsillomilt" style="display:none">
-                            <div class="form-group" style="display:">
+                            <div class="form-group" style="display:''">
                                 <label class=" form-control-label label2">multiplica cartonsillo</label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="multcartonsillo" id="multcartonsillo" placeholder="Ingresa">
@@ -291,8 +309,8 @@ include ("../controller/conexion.php");
                         <!-- caple -->
                         <div class="col-lg-3" id="caplearex" name="caplearex" style="display:none">
                             <div class="form-group">
-                                <label class="form-control-label label2 tx-primary" style="font-size:20px">Caple</label>
-                                <select class="form-control select2" data-placeholder="Elija si aplioca o no" 
+                                <label class="form-control-label label2 tx-primary" style="font-size:18px">Caple</label>
+                                <select class="form-control select2" data-placeholder="Elija si aplioca o no"
                                     onchange="caple()" id="capleaplic" name="capleaplic" type="text"
                                     data-live-search="true" style="width: 100%">
                                     <option value="0" selected>SELECCIONE</option>
@@ -304,8 +322,9 @@ include ("../controller/conexion.php");
                         <div class="col-lg-3" id="caple" name="caple" style="display:none">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo de Caple:</label>
-                                <select onchange="" class="form-control select2-show-search" data-placeholder="Seleccione" id="codcaple"
-                                    name="codcaple" type="text" data-live-search="true" style="width: 100%">
+                                <select onchange="" class="form-control select2-show-search"
+                                    data-placeholder="Seleccione" id="codcaple" name="codcaple" type="text"
+                                    data-live-search="true" style="width: 100%">
                                     <option value="0" selected>CODIGO</option>
                                     <?php while($idpst3 = mysqli_fetch_row($articulo3)):?>
                                     <option value="<?php echo $idpst3[0]?>"><?php echo $idpst3[0]?></option>
@@ -314,14 +333,14 @@ include ("../controller/conexion.php");
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-3" id="capledes" name="capledes" style="display:none">
-                            <div class="form-group" style="display:">
+                            <div class="form-group" style="display:''">
                                 <label class=" form-control-label label2">División caple</label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="descaple" id="descaple" placeholder="Ingresa">
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-3" id="caplemilt" name="caplemilt" style="display:none">
-                            <div class="form-group" style="display:">
+                            <div class="form-group" style="display:''">
                                 <label class=" form-control-label label2">multiplica caple</label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="multcaple" id="multcaple" placeholder="Ingresa">
@@ -331,7 +350,7 @@ include ("../controller/conexion.php");
                         <div class="col-lg-3" id="listonarex" name="listonarex" style="display:none">
                             <div class="form-group">
                                 <label class="form-control-label label2 tx-primary"
-                                    style="font-size:20px">Listón/Cordon</label>
+                                    style="font-size:18px">Listón/Cordon</label>
                                 <select class="form-control select2" data-placeholder="Elija si aplioca o no"
                                     onchange="liston()" id="listonaplic" name="listonaplic" type="text"
                                     data-live-search="true" style="width: 100%">
@@ -344,8 +363,9 @@ include ("../controller/conexion.php");
                         <div class="col-lg-3" id="liston" name="liston" style="display:none">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo de listón:</label>
-                                <select onchange="" class="form-control select2-show-search" data-placeholder="Seleccione" id="codliston"
-                                    name="codliston" type="text" data-live-search="true" style="width: 100%">
+                                <select onchange="" class="form-control select2-show-search"
+                                    data-placeholder="Seleccione" id="codliston" name="codliston" type="text"
+                                    data-live-search="true" style="width: 100%">
                                     <option value="0" selected>CODIGO</option>
                                     <?php while($idpst4 = mysqli_fetch_row($articulo4)):?>
                                     <option value="<?php echo $idpst4[0]?>"><?php echo $idpst4[0]?></option>
@@ -355,7 +375,7 @@ include ("../controller/conexion.php");
                         </div><!-- col-4 -->
                         <!-- col-4 -->
                         <div class="col-lg-3" id="listonmilt" name="listonmilt" style="display:none">
-                            <div class="form-group" style="display:">
+                            <div class="form-group" style="display:''">
                                 <label class=" form-control-label label2">multiplica listón</label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="multliston" id="multliston" placeholder="Ingresa">
@@ -363,7 +383,7 @@ include ("../controller/conexion.php");
                         </div><!-- col-3 -->
                     </div><!-- row -->
                     <div class="form-layout-footer">
-                        <button type="button" class="btn btn-info" style="background-color:#1774D8; font-size 14px;"
+                        <button type="button" class="btn btn-info" style="background-color:#1774D8; font-size:14px;"
                             onclick="addtransform()">AGREGAR</button>
                     </div><!-- form-layout-footer -->
             </div><!-- row -->
@@ -389,18 +409,17 @@ include ("../controller/conexion.php");
                 </div><!-- d-flex -->
             </div><!-- alert -->
         </div>
-    </div><!-- br-pagebody -->
-    <footer class="br-footer">
-        <div class="footer-left">
-            <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
-            <div>Jose Luis Mondragon y CIA.</div>
-        </div>
-        <div class="footer-right d-flex align-items-center">
-            <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i
-                    class="fa fa-facebook tx-20"></i></a>
-            <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i class="fa fa-globe tx-20"></i></a>
-        </div>
-    </footer>
+        <footer class="br-footer">
+            <div class="footer-left">
+                <div class="mg-b-2">Copyright &copy; 2022. Derechos reservados a JLM.</div>
+                <div>Jose Luis Mondragon y CIA.</div>
+            </div>
+            <div class="footer-right d-flex align-items-center">
+                <a target="_blank" class="pd-x-5" href="http://www.facebook.com/JLMPAPELERA"><i
+                        class="fa fa-facebook tx-20"></i></a>
+                <a target="_blank" class="pd-x-5" href="http://www.jlmycia.com.mx"><i class="fa fa-globe tx-20"></i></a>
+            </div>
+        </footer>
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
     <script src="../template/lib/jquery/jquery.js"></script>

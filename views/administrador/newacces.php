@@ -140,7 +140,7 @@ include ("../controller/conexion.php");
 
                             <div class="form-layout-footer">
                                 <button type="button" class="btn btn-info"
-                                    style="background-color:#1774D8; font-size 14px;"
+                                    style="background-color:#1774D8; font-size: 14px;"
                                     onclick="addPerson()">ACEPTAR</button>
                                 <button class="btn btn-secondary" onclick="closeaddusu()">CANCELAR</button>
                             </div><!-- form-layout-footer -->
@@ -224,21 +224,46 @@ include ("../controller/conexion.php");
                 data: datos
             }).done(function(respuesta) {
                 if (respuesta == 0) {
-                    Swal.fire({
-                        type: 'success',
-                        title: 'JLM INFORMA',
-                        text: 'SUS DATOS FUERON GUARDADOS CORRECTAMENTE',
-                        showCloseButton: false,
-                        showCancelButton: true,
-                        focusConfirm: false,
-                        confirmButtonColor: "#1774D8",
-                        customClass: 'swal-wide',
-                        confirmButtonText: '<span style="color: white;"><a class="a-alert" href="newacces">¿Deseas agregar otro registro?</a></span>',
-                        confirmButtonAriaLabel: 'Thumbs up, great!',
-                        cancelButtonText: '<a  class="a-alert" href="usuarios.php"><span style="color: white;">Cerrar</span></a>',
-                        cancelButtonAriaLabel: 'Thumbs down'
-                        // timer: 2900
-                    });
+                    correoResponsable = document.getElementById('correo').value;
+                    if (correoResponsable == '') {
+                        Swal.fire({
+                            type: 'success',
+                            title: 'JLM INFORMA',
+                            text: 'SUS DATOS FUERON GUARDADOS CORRECTAMENTE',
+                            showCloseButton: false,
+                            showCancelButton: true,
+                            focusConfirm: false,
+                            confirmButtonColor: "#1774D8",
+                            customClass: 'swal-wide',
+                            confirmButtonText: '<span style="color: white;"><a class="a-alert" href="newacces">¿Deseas agregar otro registro?</a></span>',
+                            confirmButtonAriaLabel: 'Thumbs up, great!',
+                            cancelButtonText: '<a  class="a-alert" href="usuarios.php"><span style="color: white;">Cerrar</span></a>',
+                            cancelButtonAriaLabel: 'Thumbs down'
+                            // timer: 2900
+                        });
+                    } else {
+                        $.ajax({
+                            url: '../admin/enviarMailResp.php',
+                            type: 'POST',
+                            data: 'correoResponsable=' + correoResponsable
+                        }).done(function(html) {
+                            Swal.fire({
+                                type: 'success',
+                                title: 'JLM INFORMA',
+                                text: 'SUS DATOS FUERON GUARDADOS CORRECTAMENTE',
+                                showCloseButton: false,
+                                showCancelButton: true,
+                                focusConfirm: false,
+                                confirmButtonColor: "#1774D8",
+                                customClass: 'swal-wide',
+                                confirmButtonText: '<span style="color: white;"><a class="a-alert" href="newacces">¿Deseas agregar otro registro?</a></span>',
+                                confirmButtonAriaLabel: 'Thumbs up, great!',
+                                cancelButtonText: '<a  class="a-alert" href="usuarios.php"><span style="color: white;">Cerrar</span></a>',
+                                cancelButtonAriaLabel: 'Thumbs down'
+                                // timer: 2900
+                            });
+                        });
+                    }
                 } else if (respuesta == 2) {
                     document.getElementById('dubli').style.display = ''
                     setTimeout(function() {

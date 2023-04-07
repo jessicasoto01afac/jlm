@@ -51,6 +51,16 @@
 
       $sqlpri = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
       $artidettvp = mysqli_query($conexion,$sqlpri);
+
+      $sqlarp = "SELECT codigo_pro,nom_pro,id_prov FROM proveedores WHERE estado = 0";
+      $artproe = mysqli_query($conexion,$sqlarp);
+
+      $sqlarex = "SELECT artcodigo,id_art,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $artprvv = mysqli_query($conexion,$sqlarex);
+
+      $sqlarex2 = "SELECT artcodigo,id_art,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $artprvv2 = mysqli_query($conexion,$sqlarex2);
+
       
     ?>
 
@@ -67,7 +77,7 @@
 </style>
 <!-- MODAL PARA EDITAR ARTICULOS. -->
 <div class="modal fade" id='modal-editarticul'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO</h6>
@@ -218,7 +228,7 @@
 </div><!-- modal -->
 <!-- MODAL PARA EDITAR UISUARIOS-->
 <div class="modal fade" id='modal-editusu'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR USUARIO</h6>
@@ -361,7 +371,7 @@
 </div><!-- modal -->
 <!-- MODAL PARA EDITAR CLIENTES-->
 <div class="modal fade" id='modal-editclient'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR CLIENTES</h6>
@@ -479,7 +489,7 @@
 </div><!-- modal -->
 <!-- MODAL PARA EDITAR PROVEEDORES-->
 <div class="modal fade" id='modal-editprov'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR PROVEEDOR</h6>
@@ -785,7 +795,7 @@
 </div><!-- modal -->
 <!-- MODAL PARA EDITAR CLIENTES-->
 <div class="modal fade" id='modal-editavo'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO</h6>
@@ -814,9 +824,8 @@
                                         class="tx-danger">*</span></label>
                                 <!-- <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="edicovo" id="edicovo"> -->
-                                <select class="form-control" onchange="edithextdettvp()" id="edicovo"
-                                    name="edicovo" type="text" disabled data-live-search="true"
-                                    style="width: 100%">
+                                <select class="form-control" onchange="edithextdettvp()" id="edicovo" name="edicovo"
+                                    type="text" disabled data-live-search="true" style="width: 100%">
                                     <option value="0">CODIGO</option>
                                     <?php while($arttrasdett = mysqli_fetch_row($artiedidettvp)):?>
                                     <option value="<?php echo $arttrasdett[0]?>"><?php echo $arttrasdett[0]?></option>
@@ -882,7 +891,7 @@
 </div><!-- modal -->
 
 <div class="modal fade" id='modal-editavo1'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">AGREGAR ARTICULO</h6>
@@ -981,7 +990,7 @@
 
 <!-- MODAL PARA EDITAR CLIENTES-->
 <div class="modal fade" id='modal-editavoinf'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO</h6>
@@ -1156,7 +1165,7 @@
 </div><!-- modal -->
 <!-- MODAL PARA EDITAR ARTICULOS DE LISTA DE PEDIDOS-->
 <div class="modal fade" id='modal-editpeinf'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO DE PEDIDO</h6>
@@ -1210,7 +1219,7 @@
                                     name="editdepinpe" id="editdepinpe">
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-3" id="precioinf" style="display:;">
+                        <div class="col-lg-3" id="precioinf">
                             <div class="form-group">
                                 <label class="form-control-label label2">$ PRECIO: <span
                                         class="tx-danger">*</span></label>
@@ -1219,7 +1228,7 @@
                                     name="pprecioinf" placeholder="Ingrese el precio">
                             </div>
                         </div><!-- col-6 -->
-                        <div class="col-lg-3" id="totalinf" style="display:;">
+                        <div class="col-lg-3" id="totalinf">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label label2">$ TOTAL: <span
                                         class="tx-danger">*</span></label>
@@ -1269,7 +1278,7 @@
 
 <!-- MODAL PARA SURTIR ARTICULOS-->
 <div class="modal fade" id='modal-surtirvof'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">SURTIR ARTICULO</h6>
@@ -1325,13 +1334,13 @@
                         </div><!-- col-4 -->
                         <div class="col-lg-4">
                             <button type="button" title="Dar click para marcar surtir" onclick="acsurtirvof()"
-                                id="voguardarsur1" style=""
+                                id="voguardarsur1"
                                 class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">CONFIRAR
                                 SURTIR</button>
                         </div>
                         <div class="col-lg-4">
                             <button type="button" title="Dar click para marcar sin existencia" onclick="sinexisten()"
-                                id="voguardarsur2" style=""
+                                id="voguardarsur2"
                                 class="btn btn-danger tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">SIN
                                 EXISTENCIAS</button>
                         </div>
@@ -1369,7 +1378,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body tx-center pd-y-20 pd-x-20">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <i class="icon icon ion-ios-close-outline tx-100 tx-danger lh-1 mg-t-20 d-inline-block"></i>
@@ -1391,7 +1400,7 @@
 </div><!-- modal -->
 <!-- MODAL PARA EDITAR CLIENTES-->
 <div class="modal fade" id='modal-editavo'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO</h6>
@@ -1481,7 +1490,7 @@
 
 <!-- MODAL PARA ARTICULOS DE MEMO -->
 <div class="modal fade" id='modal-editarmemo'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO DEL MEMO</h6>
@@ -1594,7 +1603,7 @@
 </div><!-- modal -->
 <!-- MODAL PARA EDITAR ARTICULOS DE ALTA DE MEMO -->
 <div class="modal fade" id='modal-editarmemoalta'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO DEL ALTA DE MEMO</h6>
@@ -1850,7 +1859,7 @@
                         <div class="col-lg-12">
                             <label class="tx-indigo" style="font-size:20px" for="">ARTICULOS EXTRA</label>
                         </div>
-                        <div class="col-lg-3" id="cartonedith" name="cartonedith" style="display:">
+                        <div class="col-lg-3" id="cartonedith" name="cartonedith">
                             <div class="form-group">
                                 <label class="form-control-label label2 tx-primary">Cartón</label>
                                 <select disabled="" class="form-control" data-placeholder="Elija si aplioca o no"
@@ -1862,7 +1871,7 @@
                                 </select>
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-3" id="cartoned" name="cartoned" style="display:">
+                        <div class="col-lg-3" id="cartoned" name="cartoned">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo de Carton:</label>
                                 <select disabled="" onchange="carton()" class="form-control"
@@ -1875,22 +1884,22 @@
                                 </select>
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-3" id="cartonedith" name="cartonedith" style="display:">
-                            <div class="form-group" style="display:">
+                        <div class="col-lg-3" id="cartonedith" name="cartonedith">
+                            <div class="form-group">
                                 <label class=" form-control-label label2">División carton</label>
                                 <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="eddivcarton" id="eddivcarton" placeholder="Ingresa">
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-3" id="cartonmilteed" name="cartonmilteed" style="display:">
-                            <div class="form-group" style="display:">
+                        <div class="col-lg-3" id="cartonmilteed" name="cartonmilteed">
+                            <div class="form-group">
                                 <label class=" form-control-label label2">multiplica carton</label>
                                 <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="multcartonedt" id="multcartonedt" placeholder="Ingresa">
                             </div>
                         </div>
                         <!-- cartonsillo -->
-                        <div class="col-lg-3" id="cartonsilloedith" name="cartonsilloedith" style="display:">
+                        <div class="col-lg-3" id="cartonsilloedith" name="cartonsilloedith">
                             <div class="form-group">
                                 <label class="form-control-label label2 tx-primary">Cartonsillo</label>
                                 <select disabled="" class="form-control" data-placeholder="Elija si aplioca o no"
@@ -1902,7 +1911,7 @@
                                 </select>
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-3" id="cartonsilloed" name="cartonsilloed" style="display:">
+                        <div class="col-lg-3" id="cartonsilloed" name="cartonsilloed">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo de cartonsillo:</label>
                                 <select disabled="" onchange="" class="form-control" data-placeholder="Seleccione"
@@ -1914,15 +1923,15 @@
                                 </select>
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-3" id="carnsillodvedith" name="carnsillodvedith" style="display:">
-                            <div class="form-group" style="display:">
+                        <div class="col-lg-3" id="carnsillodvedith" name="carnsillodvedith">
+                            <div class="form-group">
                                 <label class=" form-control-label label2">División cartonsillo</label>
                                 <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="eddivcartonsillo" id="eddivcartonsillo" placeholder="Ingresa">
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-3" id="cartonsillomilteed" name="cartonsillomilteed" style="display:">
-                            <div class="form-group" style="display:">
+                        <div class="col-lg-3" id="cartonsillomilteed" name="cartonsillomilteed">
+                            <div class="form-group">
                                 <label class=" form-control-label label2">multiplica cartonsillo</label>
                                 <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="multcartonsilloedt" id="multcartonsilloedt" placeholder="Ingresa">
@@ -1930,7 +1939,7 @@
                         </div>
 
                         <!-- caple -->
-                        <div class="col-lg-3" id="capleedithdv" name="capleedithdv" style="display:">
+                        <div class="col-lg-3" id="capleedithdv" name="capleedithdv">
                             <div class="form-group">
                                 <label class="form-control-label label2 tx-primary">Caple</label>
                                 <select disabled="" class="form-control" data-placeholder="Elija si aplioca o no"
@@ -1942,7 +1951,7 @@
                                 </select>
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-3" id="caplecoeth" name="cartonsilloed" style="display:">
+                        <div class="col-lg-3" id="caplecoeth" name="cartonsilloed">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo de caple:</label>
                                 <select disabled="" onchange="" class="form-control" data-placeholder="Seleccione"
@@ -1954,22 +1963,22 @@
                                 </select>
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-3" id="capledvedith" name="capledvedith" style="display:">
-                            <div class="form-group" style="display:">
+                        <div class="col-lg-3" id="capledvedith" name="capledvedith">
+                            <div class="form-group">
                                 <label class=" form-control-label label2">División caple</label>
                                 <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="eddivcaple" id="eddivcaple" placeholder="Ingresa">
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-3" id="caplemilteed" name="caplemilteed" style="display:">
-                            <div class="form-group" style="display:">
+                        <div class="col-lg-3" id="caplemilteed" name="caplemilteed">
+                            <div class="form-group">
                                 <label class=" form-control-label label2">multiplica caple</label>
                                 <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="multcapleedt" id="multcapleedt" placeholder="Ingresa">
                             </div>
                         </div>
                         <!-- liston/cordon -->
-                        <div class="col-lg-3" id="listonarexedth" name="listonarexedth" style="display:">
+                        <div class="col-lg-3" id="listonarexedth" name="listonarexedth">
                             <div class="form-group">
                                 <label class="form-control-label label2 tx-primary">Listón/Cordon</label>
                                 <select disabled="" class="form-control" data-placeholder="Elija si aplioca o no"
@@ -1981,7 +1990,7 @@
                                 </select>
                             </div>
                         </div><!-- col-4 -->
-                        <div class="col-lg-3" id="listonedth" name="listonedth" style="display:">
+                        <div class="col-lg-3" id="listonedth" name="listonedth">
                             <div class="form-group">
                                 <label class="form-control-label label2">Codigo de listón:</label>
                                 <select disabled="" onchange="" class="form-control" data-placeholder="Seleccione"
@@ -1994,8 +2003,8 @@
                             </div>
                         </div><!-- col-4 -->
                         <!-- col-4 -->
-                        <div class="col-lg-3" id="listonmilt" name="listonmilt" style="display:">
-                            <div class="form-group" style="display:">
+                        <div class="col-lg-3" id="listonmilt" name="listonmilt">
+                            <div class="form-group">
                                 <label class=" form-control-label label2">multiplica listón</label>
                                 <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="multlistonedt" id="multlistonedt" placeholder="Ingresa">
@@ -2213,7 +2222,7 @@
 
 <!-- MODAL PARA AGREGAR ARTICULO EN TRASPASO DE MEMO EN VISTA PREVIA-->
 <div class="modal fade" id='modal-addartmeminf'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">AGREGAR ARTICULO</h6>
@@ -2306,7 +2315,7 @@
 
 <!-- MODAL PARA AGREGAR ARTICULO INDIVIDUAL EN VALE DE PRODUCCIÓN 15052022-->
 <div class="modal fade" id='modal-artinviprod'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">AGREGAR ARTICULO</h6>
@@ -2401,7 +2410,7 @@
                 </div><!-- d-flex -->
             </div><!-- alert -->
             <div class="modal-footer">
-                <button style="display:;" type="button" onclick="addarinpro()" id="addarinpro" name="addarinpro"
+                <button type="button" onclick="addarinpro()" id="addarinpro" name="addarinpro"
                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">AGREGAR</button>
             </div>
         </div>
@@ -2410,7 +2419,7 @@
 
 <!-- MODAL PARA EDITAR ARTICULOS EXTENDIDOS EN ALTA DE VALE DE PRODUCCIÓN 04062022-->
 <div class="modal fade" id='modal-edithvpextendido'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO</h6>
@@ -2586,7 +2595,7 @@
 
 <!-- MODAL PARA EDITAR ARTICULOS EXTENDIDOS EN VISTA PREVIA DE VALE DE PRODUCCIÓN-->
 <div class="modal fade" id='modal-edithdetvp'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO</h6>
@@ -2618,7 +2627,8 @@
                                     style="width: 100%">
                                     <option value="0">CODIGO</option>
                                     <?php while($arttrasdettped = mysqli_fetch_row($artidettvp)):?>
-                                    <option value="<?php echo $arttrasdettped[0]?>"><?php echo $arttrasdettped[0]?></option>
+                                    <option value="<?php echo $arttrasdettped[0]?>"><?php echo $arttrasdettped[0]?>
+                                    </option>
                                     <?php endwhile; ?>
                                 </select>
                             </div><!-- form-group -->
@@ -2731,7 +2741,7 @@
 
 <!-- MODAL PARA AGREGAR ARTICULO INDIVIDUAL EN VALE DE PRODUCCIÓN DETALLES-->
 <div class="modal fade" id='modal-addartvpinfo'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">AGREGAR ARTICULO</h6>
@@ -2828,7 +2838,7 @@
                 </div><!-- d-flex -->
             </div><!-- alert -->
             <div class="modal-footer">
-                <button style="display:;" type="button" onclick="addarinproinfo()" id="addarinpro2" name="addarinpro2"
+                <button type="button" onclick="addarinproinfo()" id="addarinpro2" name="addarinpro2"
                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">AGREGAR</button>
             </div>
         </div>
@@ -2837,7 +2847,7 @@
 
 <!-- MODAL PARA SURTIR ARTICULOS VALE DE PRODUCCIÓN-->
 <div class="modal fade" id='modal-surtirvprod'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">SURTIR ARTICULO DE VALE</h6>
@@ -2907,13 +2917,13 @@
                         </div><!-- col-4 -->
                         <div class="col-lg-4">
                             <button type="button" title="Dar click para marcar surtir" onclick="acsurtirvpf()"
-                                id="vprguardarsur" style=""
+                                id="vprguardarsur"
                                 class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">CONFIRAR
                                 SURTIR</button>
                         </div>
                         <div class="col-lg-4">
                             <button type="button" title="Dar click para marcar sin existencia" onclick="sinexisten()"
-                                id="vprguardarsur" style=""
+                                id="vprguardarsur"
                                 class="btn btn-danger tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">SIN
                                 EXISTENCIAS</button>
                         </div>
@@ -2990,7 +3000,7 @@
 </div><!-- pd-y-50 -->
 <!-- MODAL PARA SURTIR ARTICULOS VALE DE PRODUCCIÓN PRODUCTO TERMINAL-->
 <div class="modal fade" id='modal-surtprterm'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">SURTIR ARTICULO DE VALE</h6>
@@ -3061,13 +3071,13 @@
                         </div><!-- col-4 -->
                         <div class="col-lg-4">
                             <button type="button" title="Dar click para marcar surtir" onclick="acsurtirvpfin()"
-                                id="vprguardarsur" style=""
+                                id="vprguardarsur"
                                 class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">CONFIRAR
                                 SURTIR</button>
                         </div>
                         <div class="col-lg-4">
                             <button type="button" title="Dar click para marcar sin existencia" onclick="sinexistenfin()"
-                                id="vprguarsurfn" style=""
+                                id="vprguarsurfn"
                                 class="btn btn-danger tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">SIN
                                 EXISTENCIAS</button>
                         </div>
@@ -3344,37 +3354,326 @@
             </div>
         </div>
     </div><!-- modal -->
+</div><!-- modal -->
+<!-- MODAL PARA EDITAR UISUARIOS-->
+<div class="modal fade" id='modal-edithartprovee'>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bd-5">
+            <div class="modal-header pd-x-20">
+                <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO DE PROVEEDOR</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="editartprove" class="form-horizontal" action="" method="POST">
+                <div class="modal-body pd-25">
+                    <a href="#" id="openarprov" style="float: right;font-size: 16px"
+                        class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="edithartprov()"
+                        title="Dar clic para editar">
+                        <div><i class="fa fa-edit"></i></div>
+                    </a>
+                    <a href="#" id="closearprov" style="float: right;font-size: 16px;display:none;"
+                        class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closeartprov()"
+                        title="Dar clic para cerrar">
+                        <div><i class="fa fa-times"></i></div>
+                    </a>
+                    <input style="display:none;" disabled="" class="form-control inputalta" type="text"
+                        name="id_artprov" id="id_artprov">
+                    <div class="row mg-b-25">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label label2">PROVEEDOR<span
+                                        class="tx-danger">*</span></label>
+                                <select disabled="" class="form-control" id="editprovee1" name="editprovee1" type="text"
+                                    data-live-search="true" style="width: 100%">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($idarp = mysqli_fetch_row($artproe)):?>
+                                    <option value="<?php echo $idarp[0]?>"><?php echo $idarp[1]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label label2">CODIGO ARTICULO JLM: <span
+                                        class="tx-danger">*</span></label>
+                                <select disabled="" class="form-control" id="edithcidprv" name="edithcidprv" type="text"
+                                    data-live-search="true" style="width: 100%">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($extrt = mysqli_fetch_row($artprvv)):?>
+                                    <option value="<?php echo $extrt[0]?>"><?php echo $extrt[1]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label class="form-control-label label2">DESCRIPCIÓN<span
+                                        class="tx-danger">*</span></label>
+                                <select disabled="" class="form-control" id="edithdesprvv" name="edithdesprvv" type="text"
+                                    data-live-search="true" style="width: 100%">
+                                    <option value="0">CODIGO</option>
+                                    <?php while($artss1 = mysqli_fetch_row($artprvv2)):?>
+                                    <option value="<?php echo $artss1[0]?>"><?php echo $artss1[2]?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label label2">CODIGO DEL PROVEEDOR: <span
+                                        class="tx-danger">*</span></label>
+                                        <input disabled="" class="form-control inputalta" type="text" name="codprvar"
+                                    id="codprvar">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label class="form-control-label label2">DESCRIPCIÓN PROVEEDOR<span
+                                        class="tx-danger">*</span></label>
+                                        <input disabled="" class="form-control inputalta" type="text" name="desprvar"
+                                    id="desprvar">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label label2">LARGO<span class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="text" name="edithlargo"
+                                    id="edithlargo">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label label2">ANCHO<span class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="text" name="edithancho"
+                                    id="edithancho">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label label2">GRAMAJE<span class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="text" name="edithgram"
+                                    id="edithgram">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label label2">PESO X MILLAR (KGS):<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="number" name="edithpeso_mill"
+                                    id="edithpeso_mill">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label label2">PESO X HOJA:<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="number" name="edithpeso_hoja"
+                                    id="edithpeso_hoja">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label label2">PRESENTACIÓN:<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="text" name="edithpresent"
+                                    id="edithpresent">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label label2">PESO KGS PQT CERRADO:<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="number" name="edithpescerr"
+                                    id="edithpescerr">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label label2">UNIDAD:<span class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="text" name="edithunidad"
+                                    id="edithunidad">
+                            </div>
+                        </div><!-- col-4 -->
+                    </div><!-- col-4 -->
+                    <div class="row mg-b-25">
+                        <div class="col-lg-12">
+                            <label class="tx-indigo" style="font-size:20px" for="">COSTO</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label label2">PRECIO ANTERIOR:<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="number" name="edithprecio"
+                                    id="edithprecio">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label label2">PRECIOS ACTUAL:<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="number" name="edithprecioac"
+                                    id="edithprecioac">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class="form-control-label label2">DESC 1:<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="number" name="edithsec1"
+                                    id="edithsec1">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class="form-control-label label2">DESC 2:<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="number" name="edithsec2"
+                                    id="edithsec2">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class="form-control-label label2">DESC 3:<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="number" name="edithsec3"
+                                    id="edithsec3">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class="form-control-label label2">DESC 4:<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="number" name="edithsec4"
+                                    id="edithsec4">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class="form-control-label label2">DESC 5:<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="number" name="edithsec5"
+                                    id="edithsec5">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class="form-control-label label2">DESC 6:<span
+                                        class="tx-danger">*</span></label>
+                                <input disabled="" class="form-control inputalta" type="number" name="edithsec6"
+                                    id="edithsec6">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label label2">OBSERVACION:<span
+                                        class="tx-danger">*</span></label>
+                                <textarea disabled="" class="form-control inputalta" name="edithobs1" id="edithobs1" cols="5" rows="5"></textarea>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label label2">OBSERVACION 2:<span
+                                        class="tx-danger">*</span></label>
+                                <textarea disabled="" class="form-control inputalta" name="edithobs2" id="edithobs2" cols="5" rows="5"></textarea>
+                            </div>
+                        </div><!-- col-4 -->
+                    </div><!-- col-4 -->
+                </div>
 
-    <script>
-    $(function() {
-        // showing modal with effect
-        $('.modal-effect').on('click', function() {
-            var effect = $(this).attr('data-effect');
-            $('#modaldemo8').addClass(effect, function() {
-                $('#modaldemo8').modal('show');
-            });
-            return false;
+            </form>
+            <div class="modal-footer">
+                <button type="button" onclick="savethiarprvv()" id="edthprvart" style="display:none;"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
+                    CAMBIOS</button>
+            </div>
+            <br>
+            <div style="display:none;" id="edthdubliarprv" name="edthdubliarprv" class="alert alert-warning" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> El resgistro ya existe</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div style="display:none;" id="edthvaciosarprvv" name="edthvaciosarprvv" class="alert alert-info" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
+                    <span><strong>Advertencia!</strong> Llenar todos los campos</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+            <div style="display:none;" id="edtherrartprvv" name="edtherrartprvv" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<!-- MODAL PARA ELIMINAR ARTICULOS-->
+<div class="modal fade" id='modal-deleteartprv'>
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content bd-0">
+            <div class="modal-header pd-x-20">
+                <h4 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">ELIMINAR</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pd-20">
+                <p class="mg-b-5">ESTAS SEGURO DE ELIMINAR AL ARTICULO?</p>
+                <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="del_artpvv"
+                    id="del_artpvv">
+                <input disabled="" class="form-control inputalta" type="text" name="deart" id="deart">
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" onclick="savedeartprv()"
+                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">ELIMINAR</button>
+                <br>
+            </div>
+            <div style="display:none;" id="delerarpv" name="delerarpv" class="alert alert-danger" role="alert">
+                <div class="d-flex align-items-center justify-content-start">
+                    <i class="icon ion-ios-close alert-icon tx-24"></i>
+                    <span><strong>Advertencia!</strong>No se puedo eliminar contactar a soporte tecnico o levantar un
+                        ticket</span>
+                </div><!-- d-flex -->
+            </div><!-- alert -->
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+
+<script>
+$(function() {
+    // showing modal with effect
+    $('.modal-effect').on('click', function() {
+        var effect = $(this).attr('data-effect');
+        $('#modaldemo8').addClass(effect, function() {
+            $('#modaldemo8').modal('show');
         });
-        // hide modal with effect
-        $('#modaldemo8').on('hidden.bs.modal', function(e) {
-            $(this).removeClass(function(index, className) {
-                return (className.match(/(^|\s)effect-\S+/g) || []).join(' ');
-            });
+        return false;
+    });
+    // hide modal with effect
+    $('#modaldemo8').on('hidden.bs.modal', function(e) {
+        $(this).removeClass(function(index, className) {
+            return (className.match(/(^|\s)effect-\S+/g) || []).join(' ');
         });
     });
-    $(document).ready(function() {
-        $('#busccodigo').load('select/buscar2.php');
-        $('#edicovinf').load('select/buscar3.php');
-        $('#edipeinfinf').load('select/buscar4.php');
-        $('#edicovinf1sur').load('select/buscar5.php');
-        $('#edimemo').load('select/buscar6.php');
-        $('#busccodigo2').load('select/buscar2.php');
-        $('#edicovinf2').load('select/buscar3.php');
+});
+$(document).ready(function() {
+    $('#busccodigo').load('select/buscar2.php');
+    $('#edicovinf').load('select/buscar3.php');
+    $('#edipeinfinf').load('select/buscar4.php');
+    $('#edicovinf1sur').load('select/buscar5.php');
+    $('#edimemo').load('select/buscar6.php');
+    $('#busccodigo2').load('select/buscar2.php');
+    $('#edicovinf2').load('select/buscar3.php');
 
 
 
 
 
 
-    });
-    </script>
+});
+</script>

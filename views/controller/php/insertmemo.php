@@ -283,7 +283,7 @@ function comprobacion ($refe_1,$codigo_1,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion de comprobación para ver si el vale ya se encuentra en la base
 function comprobacion2 ($refe_1,$codigo_1,$conexion){
@@ -294,7 +294,7 @@ function comprobacion2 ($refe_1,$codigo_1,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //Agregar folio
 function addfolio ($tipo,$conexion){
@@ -307,7 +307,7 @@ function addfolio ($tipo,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para registrar la productividad
 function poductividad ($usuario,$refe_1,$conexion){
@@ -319,7 +319,7 @@ function poductividad ($usuario,$refe_1,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 
 //funcion para guardar el ARTICULO PARA TRASFORMACION EN LATA DE MEO 
@@ -330,7 +330,7 @@ function registrar ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descrip
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar el vale de oficina
 function registrar_2 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$refe_2,$conexion){
@@ -340,7 +340,7 @@ function registrar_2 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descr
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar el ARTICULO TRASFORMADO EN ALTA MEMO
 function registrar_3 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$refe_2,$conexion){
@@ -350,7 +350,7 @@ function registrar_3 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descr
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar el ARTICULO TRASFORMADO EN ALTA MEMO
 function registrar_4 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$refe_2,$conexion){
@@ -360,7 +360,7 @@ function registrar_4 ($refe_1,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descr
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para cancelar el registro
 function cancelar ($refe_1,$conexion){

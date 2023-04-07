@@ -194,6 +194,34 @@ if(!isset($usuario)){
             echo "1";
         } 
     //EDICION DE CABECERA
+    }else if($opcion === 'gefolioflt'){
+        $tipo = $_POST['tipo'];
+            if (addfolioflt ($tipo,$conexion)){
+                echo "0";
+            }else{
+                echo "1";
+            }
+    }if($opcion === 'registrarflt'){
+        $refe_1 = $_POST['refe_1'];
+        $codigo_1 = $_POST['codigo_1'];
+        if (comprobacionftl ($refe_1,$codigo_1,$conexion)){
+            $fecha = $_POST['fecha'];
+            $proveedor_cliente = $_POST['proveedor_cliente'];
+            $cantidad_real = $_POST['cantidad_real'];
+            $salida = $_POST['salida'];
+            $observa = $_POST['observa'];
+            $refe_2 = $_POST['refe_2'];
+            if (registrarftl($refe_1,$codigo_1,$fecha,$proveedor_cliente,$cantidad_real,$salida,$observa,$refe_2,$conexion)){
+                echo "0";
+                historial($usuario,$refe_1,$codigo_1,$conexion);
+            }else{
+                echo "1";
+            }
+        }else{
+    
+            echo "2";
+        }
+    //Condición donde cancela el vale de producción
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -207,7 +235,7 @@ function comprobacion ($refe_1,$codigo_1,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar un material defectuoso
 function registrar ($refe_1,$codigo_1,$fecha,$descripcion_1,$proveedor_cliente,$cantidad_real,$salida,$observa,$refe_2,$ubicacion,$conexion){
@@ -217,7 +245,7 @@ function registrar ($refe_1,$codigo_1,$fecha,$descripcion_1,$proveedor_cliente,$
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //Agregar folio
 function addfolio ($tipo,$conexion){
@@ -230,7 +258,7 @@ function addfolio ($tipo,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //FUNCION PARA CANCELAR EL FOLIO
 function cancelar ($refe_1,$conexion){
@@ -314,7 +342,7 @@ function addfoliodv ($tipo,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion de comprobación para ver si el vale ya se encuentra en la base
 function comprobaciondv ($refe_1,$codigo_1,$conexion){
@@ -325,7 +353,7 @@ function comprobaciondv ($refe_1,$codigo_1,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar un material defectuoso
 function registrardv ($refe_1,$codigo_1,$fecha,$descripcion_1,$proveedor_cliente,$cantidad_real,$salida,$observa,$refe_2,$ubicacion,$conexion){
@@ -335,7 +363,7 @@ function registrardv ($refe_1,$codigo_1,$fecha,$descripcion_1,$proveedor_cliente
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para actualizar la cabecera desde la vista DE MATERIAL DEFECTUOSO
 function cambiodv ($fecha,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion){
@@ -350,6 +378,40 @@ function cambiodv ($fecha,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_c
 //funcion para actualizar el registro
 function deletedefc ($folio,$tipo,$conexion){
     $query="UPDATE kardex SET estado='1' WHERE refe_1= '$folio' AND tipo='$tipo'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//Agregar folio DEVOLCIÓN
+function addfolioflt ($tipo,$conexion){
+    $folios="SELECT MAX(folio) + 1 AS id_foliovp FROM folios where tipo ='$tipo' AND estado_f=0";
+    $foliomatdef = mysqli_query($conexion,$folios);
+    $folio = mysqli_fetch_row($foliomatdef);
+    $query="INSERT INTO folios VALUES(0,'$folio[0]','$tipo',0)";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion de comprobación para ver si el vale ya se encuentra en la base
+function comprobacionftl ($refe_1,$codigo_1,$conexion){
+    $query="SELECT * FROM kardex WHERE refe_1 = '$refe_1' AND  codigo_1='$codigo_1' AND estado = 0 AND tipo='MATERIAL_FALTANTE'";
+    $resultado= mysqli_query($conexion,$query);
+    if($resultado->num_rows==0){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para guardar un material defectuoso
+function registrarftl ($refe_1,$codigo_1,$fecha,$proveedor_cliente,$cantidad_real,$salida,$observa,$refe_2,$conexion){
+    $query="INSERT INTO kardex VALUES(0,'$refe_1','$refe_2','0','$fecha','$codigo_1','0','MATERIAL_FALTANTE','ARTICULO','$proveedor_cliente','0','$cantidad_real',0,'$salida',0,0,0,'$observa','NA','FINALIZADO','FINALIZADO','NO','NO',0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -422,6 +484,7 @@ function hisdetedefc($usuario,$realizo,$folio,$conexion){
         return false;
     }
 }
+
 
 
 //funcion para cerrar laa conexion
