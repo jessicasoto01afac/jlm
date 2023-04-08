@@ -45,6 +45,34 @@ if(!isset($usuario)){
             echo "2";
         }
     //Condición donde cancela el vale de producción
+    }else if($opcion === 'registrarp'){
+        $refe_1 = $_POST['refe_1'];
+        $codigo_1 = $_POST['codigo_1'];
+        if (comprobacion ($refe_1,$codigo_1,$conexion)){
+            $refe_3 = $_POST['refe_3'];
+            $refe_2 = $_POST['refe_2'];
+            $fecha = $_POST['fecha'];
+            $proveedor_cliente = $_POST['proveedor_cliente'];
+            $descripcion_1 = $_POST['descripcion_1'];
+            $cantidad_real = $_POST['cantidad_real'];
+            $salida = $_POST['salida'];
+            $observa = $_POST['observa'];
+            $ubicacion = $_POST['ubicacion'];
+            $caracter = $_POST['caracter'];
+            
+            if (registrar($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion)){
+                echo "0";
+
+                registrarnew ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
+                registrarnewetiq ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
+            }else{
+                echo "1";
+            }
+        }else{
+
+            echo "2";
+        }
+    //Condición donde agrega un articulo individualmente
     }else if($opcion === 'cancelar'){
         $refe_1 = $_POST['refe_1'];
         
@@ -492,7 +520,7 @@ if(!isset($usuario)){
             if (poductividad($refe_1,$caracter,$usuario,$conexion)){
                 echo "0";
                 //finaliadd ($refe_1,$conexion);
-                //historial($usuario,$refe_1,$codigo_1,$conexion);
+                historialadd($usuario,$refe_1,$conexion);
             }else{
                 echo "1";
             }
@@ -634,6 +662,34 @@ function registrarcolors ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$cod
     }
     cerrar($conexion);
 }
+//funcion para guardar los colores del articulo
+function registrarnew ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
+    $query="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_articulo,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor_cliente'),('0'),('$cantidad_real'),(hojas*$salida/division),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
+    FROM
+    transformation 
+    WHERE
+    id_articfial = '$codigo_1' AND type_art='EXTENDIDO' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='CARTONSILLO' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='CARTON' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='CAPLE' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='MINAGRIS' AND estado=0";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+function registrarnewetiq ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
+    $query="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_articulo,( 'VALE_PRODUCCIÓN' ),( 'ETIQUETAS' ),('$proveedor_cliente'),('0'),('$cantidad_real'),(hojas*$salida/division),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
+    FROM
+    transformation 
+    WHERE
+    id_articfial = '$codigo_1' AND type_art='ETIQUETAS' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='LISTON_CORDÓN' AND estado=0";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
 //funcion para registrar la productividad
 function poductividad ($refe_1,$caracter,$usuario,$conexion){
     ini_set('date.timezone','America/Mexico_City');
@@ -833,7 +889,7 @@ function actualizarnewext ($id_kax,$codigo_1,$descripcion_1,$salida,$tipo_ref,$o
 }
 
 //funcion para actualizar el registro (DESCOMNETAR EN CASO DE USAR SE COMENTA POR QUE SE ELIMINA) 25092022
-/*function eliminar ($id_kardex,$conexion){
+function eliminar ($id_kardex,$conexion){
     $query="UPDATE kardex SET estado='1' WHERE id_kax= '$id_kardex'";
     if(mysqli_query($conexion,$query)){
         return true;
@@ -841,8 +897,8 @@ function actualizarnewext ($id_kax,$codigo_1,$descripcion_1,$salida,$tipo_ref,$o
         return false;
     }
     cerrar($conexion);
-}*/
-function eliminar ($id_kardex,$conexion){
+}
+/*function eliminar ($id_kardex,$conexion){
     $query="DELETE FROM kardex WHERE id_kax= '$id_kardex'";
     if(mysqli_query($conexion,$query)){
         return true;
@@ -850,7 +906,7 @@ function eliminar ($id_kardex,$conexion){
         return false;
     }
     cerrar($conexion);
-}
+}*/
 
 //funcion para actualizar el registro
 function deletevp ($folio,$conexion){
@@ -1214,6 +1270,17 @@ function histfinal($usuario,$folio,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario', 'FINALIZA EL VALE', 'FOLIO:' '$folio','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//funcion para registra cambios
+function historialadd($usuario,$refe_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN VALE DE PRODUCCIÓN', 'FOLIO:' '$refe_1','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

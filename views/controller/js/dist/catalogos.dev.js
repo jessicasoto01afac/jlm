@@ -746,91 +746,133 @@ function savedeprov() {
 } //--------------------------------TRANSFORMACIÓN---------------------------------------------------------------------
 //Funcion para habilitar los input de edición de usuarios
 
+/*function addtransform() { //08052022 agregar
+    //alert("entra transform");
+    let id_articulo_final = document.getElementById('vppcodigo').value;
+    let id_extendido = document.getElementById('vpcodigoext').value;
+    let id_etiquetas = document.getElementById('vpcodigoetiq').value;
+    let hojas = document.getElementById('artdescriphojas').value;
+    let divicion = document.getElementById('division').value;
+    let carton = document.getElementById('cartonapl').value;
+    let id_carton = document.getElementById('codcarton').value;
+    let div_carton = document.getElementById('descarton').value;
+    let multi_carton = document.getElementById('multcarton').value;
+    let cartonsillo = document.getElementById('cartaplic').value;
+    let id_cortonsillo = document.getElementById('codcartonsillo').value;
+    let div_cartonsillo = document.getElementById('descartonsillo').value;
+    let multi_cartonsillo = document.getElementById('multcartonsillo').value;
+    let caple = document.getElementById('capleaplic').value;
+    let id_caple = document.getElementById('codcaple').value;
+    let div_caple = document.getElementById('descaple').value;
+    let multi_caple = document.getElementById('multcaple').value;
+    let liston_cordon = document.getElementById('listonaplic').value;
+    let id_cordliston = document.getElementById('codliston').value;
+    let multi_liston = document.getElementById('multliston').value;
+    let minagris = document.getElementById('mingrisid').value;
+    let multiminagris = document.getElementById('acntminagr').value;
+    let hjmini = document.getElementById('acntminagrhj').value;
+    //Comprobar si esta esta seleccionado
+    if (carton == 'NO APLICA') {
+        document.getElementById('cartonapl').value = 'NO APLICA';
+        id_carton = 0;
+        div_carton = 0;
+        multi_carton = 0;
+    }
+    if (cartonsillo == 'NO APLICA') {
+        cartonsillo.value = 'NO APLICA';
+        id_cortonsillo = 0;
+        div_cartonsillo = 0;
+        multi_cartonsillo = 0;
+    }
+    if (caple == 'NO APLICA') {
+        caple.value = 'NO APLICA';
+        id_caple = 0;
+        div_caple = 0;
+        multi_caple = 0;
+    }
+    if (liston_cordon == 'NO APLICA') {
+        liston_cordon.value = 'NO APLICA';
+        id_cordliston = 0;
+        multi_liston = 0;
+    }
+
+    if (carton == 0) {
+        carton = 'NO APLICA';
+        id_carton = 0;
+        div_carton = 0;
+        multi_carton = 0;
+    }
+    if (cartonsillo == 0) {
+        cartonsillo = 'NO APLICA';
+        id_cortonsillo = 0;
+        div_cartonsillo = 0;
+        multi_cartonsillo = 0;
+    }
+    if (caple == 0) {
+        caple = 'NO APLICA';
+        id_caple = 0;
+        div_caple = 0;
+        multi_caple = 0;
+    }
+    if (liston_cordon == 0) {
+        liston_cordon = 'NO APLICA';
+        id_cordliston = 0;
+        multi_liston = 0;
+    }
+
+    let datos = 'id_articulo_final=' + id_articulo_final + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&carton=' + carton + '&id_carton=' + id_carton + '&div_carton=' + div_carton + '&multi_carton=' + multi_carton + '&cartonsillo=' + cartonsillo + '&id_cortonsillo=' + id_cortonsillo + '&div_cartonsillo=' + div_cartonsillo + '&multi_cartonsillo=' + multi_cartonsillo + '&caple=' + caple + '&id_caple=' + id_caple + '&div_caple=' + div_caple + '&multi_caple=' + multi_caple + '&liston_cordon=' + liston_cordon + '&id_cordliston=' + id_cordliston + '&multi_liston=' + multi_liston + '&minagris=' + minagris + '&multiminagris=' + multiminagris + '&hjmini=' + hjmini + '&opcion=registrar';
+    //alert(datos);
+
+    if (id_articulo_final == '' || id_extendido == '' || id_etiquetas == '' || hojas == '' || divicion == '') {
+        document.getElementById('vaciosartras').style.display = ''
+        setTimeout(function() {
+            document.getElementById('vaciosartras').style.display = 'none';
+        }, 1500);
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertransf.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    title: 'JLM INFORMA',
+                    text: 'LA TRANSFORMACIÓN SE AGREGO CORRECTAMENTE',
+                    showCloseButton: false,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonColor: "#1774D8",
+                    customClass: 'swal-wide',
+                    confirmButtonText: '<span style="color: white;"><a class="a-alert" href="newtrasn.php">¿Deseas agregar otro articulo?</a></span>',
+                    confirmButtonAriaLabel: 'Thumbs up, great!',
+                    cancelButtonText: '<a  class="a-alert" href="transformacion.php"><span style="color: white;">Cerrar</span></a>',
+                    cancelButtonAriaLabel: 'Thumbs down'
+                        // timer: 2900
+                });
+            } else if (respuesta == 2) {
+                document.getElementById('dubliartras').style.display = ''
+                setTimeout(function() {
+                    document.getElementById('dubliartras').style.display = 'none';
+                }, 1000);
+            } else {
+                document.getElementById('errartras').style.display = ''
+                setTimeout(function() {
+                    document.getElementById('errartras').style.display = 'none';
+                }, 2000);
+                alert(respuesta);
+            }
+        }); //FIN DE AJAX
+    }
+}*/
+
 
 function addtransform() {
-  //08052022 agregar
-  //alert("entra transform");
   var id_articulo_final = document.getElementById('vppcodigo').value;
-  var id_extendido = document.getElementById('vpcodigoext').value;
-  var id_etiquetas = document.getElementById('vpcodigoetiq').value;
-  var hojas = document.getElementById('artdescriphojas').value;
-  var divicion = document.getElementById('division').value;
-  var carton = document.getElementById('cartonapl').value;
-  var id_carton = document.getElementById('codcarton').value;
-  var div_carton = document.getElementById('descarton').value;
-  var multi_carton = document.getElementById('multcarton').value;
-  var cartonsillo = document.getElementById('cartaplic').value;
-  var id_cortonsillo = document.getElementById('codcartonsillo').value;
-  var div_cartonsillo = document.getElementById('descartonsillo').value;
-  var multi_cartonsillo = document.getElementById('multcartonsillo').value;
-  var caple = document.getElementById('capleaplic').value;
-  var id_caple = document.getElementById('codcaple').value;
-  var div_caple = document.getElementById('descaple').value;
-  var multi_caple = document.getElementById('multcaple').value;
-  var liston_cordon = document.getElementById('listonaplic').value;
-  var id_cordliston = document.getElementById('codliston').value;
-  var multi_liston = document.getElementById('multliston').value;
-  var minagris = document.getElementById('mingrisid').value;
-  var multiminagris = document.getElementById('acntminagr').value;
-  var hjmini = document.getElementById('acntminagrhj').value; //Comprobar si esta esta seleccionado
+  var datos = 'id_articulo_final=' + id_articulo_final + '&opcion=registrar'; //alert(datos);
 
-  if (carton == 'NO APLICA') {
-    document.getElementById('cartonapl').value = 'NO APLICA';
-    id_carton = 0;
-    div_carton = 0;
-    multi_carton = 0;
-  }
-
-  if (cartonsillo == 'NO APLICA') {
-    cartonsillo.value = 'NO APLICA';
-    id_cortonsillo = 0;
-    div_cartonsillo = 0;
-    multi_cartonsillo = 0;
-  }
-
-  if (caple == 'NO APLICA') {
-    caple.value = 'NO APLICA';
-    id_caple = 0;
-    div_caple = 0;
-    multi_caple = 0;
-  }
-
-  if (liston_cordon == 'NO APLICA') {
-    liston_cordon.value = 'NO APLICA';
-    id_cordliston = 0;
-    multi_liston = 0;
-  }
-
-  if (carton == 0) {
-    carton = 'NO APLICA';
-    id_carton = 0;
-    div_carton = 0;
-    multi_carton = 0;
-  }
-
-  if (cartonsillo == 0) {
-    cartonsillo = 'NO APLICA';
-    id_cortonsillo = 0;
-    div_cartonsillo = 0;
-    multi_cartonsillo = 0;
-  }
-
-  if (caple == 0) {
-    caple = 'NO APLICA';
-    id_caple = 0;
-    div_caple = 0;
-    multi_caple = 0;
-  }
-
-  if (liston_cordon == 0) {
-    liston_cordon = 'NO APLICA';
-    id_cordliston = 0;
-    multi_liston = 0;
-  }
-
-  var datos = 'id_articulo_final=' + id_articulo_final + '&id_extendido=' + id_extendido + '&id_etiquetas=' + id_etiquetas + '&hojas=' + hojas + '&divicion=' + divicion + '&carton=' + carton + '&id_carton=' + id_carton + '&div_carton=' + div_carton + '&multi_carton=' + multi_carton + '&cartonsillo=' + cartonsillo + '&id_cortonsillo=' + id_cortonsillo + '&div_cartonsillo=' + div_cartonsillo + '&multi_cartonsillo=' + multi_cartonsillo + '&caple=' + caple + '&id_caple=' + id_caple + '&div_caple=' + div_caple + '&multi_caple=' + multi_caple + '&liston_cordon=' + liston_cordon + '&id_cordliston=' + id_cordliston + '&multi_liston=' + multi_liston + '&minagris=' + minagris + '&multiminagris=' + multiminagris + '&hjmini=' + hjmini + '&opcion=registrar'; //alert(datos);
-
-  if (id_articulo_final == '' || id_extendido == '' || id_etiquetas == '' || hojas == '' || divicion == '') {
+  if (id_articulo_final == '' || id_articulo_final == '0') {
     document.getElementById('vaciosartras').style.display = '';
     setTimeout(function () {
       document.getElementById('vaciosartras').style.display = 'none';
@@ -890,83 +932,28 @@ function infolistrans(id_transform) {
       if (obj.data[D].id_trans == id_transform) {
         (function () {
           // alert(id_persona)
-          datos = obj.data[D].id_articulo_final + '*' + obj.data[D].id_extendido + '*' + obj.data[D].id_etiquetas + '*' + obj.data[D].hojas + '*' + obj.data[D].divicion + '*' + obj.data[D].id_carton + '*' + obj.data[D].div_carton + '*' + obj.data[D].multi_carton + '*' + obj.data[D].id_cortonsillo + '*' + obj.data[D].div_cartonsillo + '*' + obj.data[D].multi_cartonsillo + '*' + obj.data[D].id_caple + '*' + obj.data[D].div_caple + '*' + obj.data[D].multi_caple + '*' + obj.data[D].id_cordliston + '*' + obj.data[D].multi_liston;
+          datos = obj.data[D].id_articfial + '*' + obj.data[D].id_extendido;
           var o = datos.split("*");
           $("#modal-edithtrans #edithartfin").val(o[0]);
-          $("#modal-edithtrans #edithartext").val(o[1]);
-          $("#modal-edithtrans #editharetq").val(o[2]);
-          $("#modal-edithtrans #edithojas").val(o[3]);
-          $("#modal-edithtrans #editdivision").val(o[4]);
-          $("#modal-edithtrans #edthcarton").val(o[5]);
-          $("#modal-edithtrans #eddivcarton").val(o[6]);
-          $("#modal-edithtrans #multcartonedt").val(o[7]);
-          $("#modal-edithtrans #edthcartonsillo").val(o[8]);
-          $("#modal-edithtrans #eddivcartonsillo").val(o[9]);
-          $("#modal-edithtrans #multcartonsilloedt").val(o[10]);
-          $("#modal-edithtrans #edthcaplecod").val(o[11]);
-          $("#modal-edithtrans #eddivcaple").val(o[12]);
-          $("#modal-edithtrans #multcapleedt").val(o[13]);
-          $("#modal-edithtrans #codlistonedt").val(o[14]);
-          $("#modal-edithtrans #multlistonedt").val(o[15]);
-          $("#modal-edithtrans #mingriscd").val(obj.data[D].minagris1);
-          $("#modal-edithtrans #hjminag").val(obj.data[D].canminagras);
-          $("#modal-edithtrans #catminagr").val(obj.data[D].hojasmin); //CARTON
-
-          if (obj.data[D].carton == "0") {
-            document.getElementById('cartonedt').value = "NO APLICA";
-          } else if (obj.data[D].carton == "NO APLICA") {
-            document.getElementById('cartonedt').value = "NO APLICA";
-          } else if (obj.data[D].carton == "APLICA") {
-            document.getElementById('cartonedt').value = "APLICA";
-          } //CARTONSILLO
-
-
-          if (obj.data[D].cartonsillo == "0") {
-            document.getElementById('cartonsilledith').value = "NO APLICA";
-          } else if (obj.data[D].cartonsillo == "NO APLICA") {
-            document.getElementById('cartonsilledith').value = "NO APLICA";
-          } else if (obj.data[D].cartonsillo == "APLICA") {
-            document.getElementById('cartonsilledith').value = "APLICA";
-          } //CAPLE
-
-
-          if (obj.data[D].caple == "0") {
-            document.getElementById('capleedith').value = "NO APLICA";
-          } else if (obj.data[D].caple == "NO APLICA") {
-            document.getElementById('capleedith').value = "NO APLICA";
-          } else if (obj.data[D].caple == "APLICA") {
-            document.getElementById('capleedith').value = "APLICA";
-          } //LISTON/CORDON
-
-
-          if (obj.data[D].liston_cordon == "0") {
-            document.getElementById('listonaplicedt').value = "NO APLICA";
-          } else if (obj.data[D].liston_cordon == "NO APLICA") {
-            document.getElementById('listonaplicedt').value = "NO APLICA";
-          } else if (obj.data[D].liston_cordon == "APLICA") {
-            document.getElementById('listonaplicedt').value = "APLICA";
-          } //let id = document.getElementById("edithartfin").value;
-          //data de colores
-
-
           var id = document.getElementById('edithartfin').value; //alert(id);
 
           $.ajax({
-            url: '../controller/php/addtrasfo.php',
+            url: '../controller/php/infeditinftrasf.php',
             type: 'GET',
             data: 'id=' + id
           }).done(function (resp) {
+            //alert(resp);
             obj = JSON.parse(resp);
             var res = obj.data;
             var x = 0;
-            html = '<div class="bd-gray-300 rounded table-responsive"><table disable style="width:100%; table-layout:" id="dateplusedith" name="dateplusedith" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+            html = '<div class="bd-gray-300 rounded table-responsive"><table disable style="width:100%; table-layout:" id="dateplusedith" name="dateplusedith" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>CLASE</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
 
             for (U = 0; U < res.length; U++) {
               //estatus pendiente
-              if (obj.data[U].id_articulo_final == id && obj.data[U].id_etiquetas == 'GRUPO_TRANSF') {
+              if (obj.data[U].id_articfial == id) {
                 x++;
-                $id_etiquetas = obj.data[U].id_extendido;
-                html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='deletemascolor()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
+                $id_artic = obj.data[U].id_trans;
+                html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].type_art + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].division + "</td><td>" + "<a onclick='deletemascolor(" + $id_artic + ")' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
               }
             }
 
@@ -983,75 +970,24 @@ function infolistrans(id_transform) {
 function editrasnf() {
   //alert("editusuarios");
   document.getElementById('openeditrasfo').style.display = "none";
-  document.getElementById('closetras').style.display = "";
-  document.getElementById('arsurvof').disabled = false;
-  document.getElementById('editdivision').disabled = false;
-  document.getElementById('edithojas').disabled = false;
-  document.getElementById('edithartfin').disabled = false;
-  document.getElementById('edithartext').disabled = false;
-  document.getElementById('editharetq').disabled = false;
-  document.getElementById('traeguardar').style.display = ""; //extra
-
-  document.getElementById('cartonedt').disabled = false;
-  document.getElementById('edthcarton').disabled = false;
-  document.getElementById('eddivcarton').disabled = false;
-  document.getElementById('multcartonedt').disabled = false;
-  document.getElementById('cartonsilledith').disabled = false;
-  document.getElementById('edthcartonsillo').disabled = false;
-  document.getElementById('eddivcartonsillo').disabled = false;
-  document.getElementById('multcartonsilloedt').disabled = false;
-  document.getElementById('capleedith').disabled = false;
-  document.getElementById('edthcaplecod').disabled = false;
-  document.getElementById('eddivcaple').disabled = false;
-  document.getElementById('multcapleedt').disabled = false;
-  document.getElementById('listonaplicedt').disabled = false;
-  document.getElementById('codlistonedt').disabled = false;
-  document.getElementById('multlistonedt').disabled = false;
-  document.getElementById('mingriscd').disabled = false;
-  document.getElementById('hjminag').disabled = false;
-  document.getElementById('catminagr').disabled = false; //27112022
-  // mas color 
+  document.getElementById('closetras').style.display = ""; // mas color 
 
   document.getElementById('masplus').style.display = "";
 } //FUNCION DE CERRAR EDICIÓN ARTICULO DE RASFORMACION
 
 
 function closetrans() {
-  //alert("cerrarusu");
+  //alert("editusuarios");
   document.getElementById('openeditrasfo').style.display = "";
-  document.getElementById('closetras').style.display = "none";
-  document.getElementById('editdivision').disabled = true;
-  document.getElementById('edithojas').disabled = true;
-  document.getElementById('edithartfin').disabled = true;
-  document.getElementById('edithartext').disabled = true;
-  document.getElementById('editharetq').disabled = true;
-  document.getElementById('traeguardar').style.display = "none"; //extra cartonsilloedith
+  document.getElementById('closetras').style.display = "none"; // mas color 
 
-  document.getElementById('cartonedt').disabled = true;
-  document.getElementById('edthcarton').disabled = true;
-  document.getElementById('eddivcarton').disabled = true;
-  document.getElementById('multcartonedt').disabled = true;
-  document.getElementById('cartonsilledith').disabled = true;
-  document.getElementById('edthcartonsillo').disabled = true;
-  document.getElementById('eddivcartonsillo').disabled = true;
-  document.getElementById('multcartonsilloedt').disabled = true;
-  document.getElementById('capleedith').disabled = true;
-  document.getElementById('edthcaplecod').disabled = true;
-  document.getElementById('eddivcaple').disabled = true;
-  document.getElementById('multcapleedt').disabled = true;
-  document.getElementById('listonaplicedt').disabled = true;
-  document.getElementById('codlistonedt').disabled = true;
-  document.getElementById('multlistonedt').disabled = true;
-  document.getElementById('mingriscd').disabled = true;
-  document.getElementById('hjminag').disabled = true;
-  document.getElementById('catminagr').disabled = true; //27112022
-  //mas color
-
+  document.getElementById('masplus').style.display = "none";
   document.getElementById('masplus').style.display = "none";
   document.getElementById('masplus2').style.display = "none";
   document.getElementById('masplus3').style.display = "none";
   document.getElementById('masplus4').style.display = "none";
   document.getElementById('masplusave').style.display = "none";
+  document.getElementById('mastype').style.display = "none";
 } //FUNCIÓN DE AGREGAR EN EDITAR
 
 
@@ -1062,6 +998,7 @@ function addplusedit() {
   document.getElementById('masplus3').style.display = "";
   document.getElementById('masplus4').style.display = "";
   document.getElementById('masplusave').style.display = "";
+  document.getElementById('mastype').style.display = "";
 } //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
 
 
@@ -1078,8 +1015,9 @@ function deletransf(transf) {
 
 
 function savdeletransf() {
-  var id_transformacion = document.getElementById('detrasfor').value;
-  var datos = 'id_transformacion=' + id_transformacion + '&opcion=eliminar';
+  var id_transformacion = document.getElementById('artras_dele').value;
+  var datos = 'id_transformacion=' + id_transformacion + '&opcion=eliminar'; //alert(datos);
+
   $.ajax({
     type: "POST",
     url: "../controller/php/insertransf.php",
@@ -1284,6 +1222,32 @@ function addplus() {
     document.getElementById("line").style.display = "none";
   }
 }
+/*function updateaddcolo() {
+    let id = document.getElementById("vppcodigo").value;
+    //data de colores
+    $.ajax({
+        url: '../controller/php/addtrasfo.php',
+        type: 'GET',
+        data: 'id=' + id
+    }).done(function(resp) {
+        obj = JSON.parse(resp);
+        var res = obj.data;
+        var x = 0;
+
+        html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplus" name="dateplus" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        for (U = 0; U < res.length; U++) {
+            //estatus pendiente
+            if (obj.data[U].id_articulo_final == id) {
+                x++;
+                $id_memo2 = obj.data[U].id_kax;
+                html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='deletemascolors()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
+            }
+        }
+        html += '</div></tbody></table></div></div>';
+        $("#datepluscolor").html(html);
+    });
+}*/
+
 
 function updateaddcolo() {
   var id = document.getElementById("vppcodigo").value; //data de colores
@@ -1296,14 +1260,14 @@ function updateaddcolo() {
     obj = JSON.parse(resp);
     var res = obj.data;
     var x = 0;
-    html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplus" name="dateplus" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+    html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplus" name="dateplus" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>CLASE</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
 
     for (U = 0; U < res.length; U++) {
       //estatus pendiente
-      if (obj.data[U].id_articulo_final == id) {
+      if (obj.data[U].id_articfial == id) {
         x++;
-        $id_memo2 = obj.data[U].id_kax;
-        html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='deletemascolors()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
+        $id_artcfinl = obj.data[U].id_trans;
+        html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].type_art + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].division + "</td><td>" + "<a onclick='deletemascolors(" + $id_artcfinl + ")' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
       }
     }
 
@@ -1311,6 +1275,61 @@ function updateaddcolo() {
     $("#datepluscolor").html(html);
   });
 }
+/*function saveaddplus() {
+    //alert("agreagr");
+    //alert("entra guardar cambios memeo");
+    let final = document.getElementById('vppcodigo').value;
+    let extendido = document.getElementById('vpcodigoext').value;
+    let multiplic = document.getElementById('multiplicadd').value;
+    let divicion = document.getElementById('divicionesadd').value;
+
+    let datos = 'final=' + final + '&extendido=' + extendido + '&multiplic=' + multiplic + '&divicion=' + divicion + '&opcion=addcolors';
+    //alert(datos);
+    if (final == '' || extendido == '' || multiplic == '' || divicion == '') {
+        Swal.fire({
+            type: 'warning',
+            text: 'LLENAR TODOS LOS CAMPOS OBLIGATORIOS',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertransf.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se agrego de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                updateaddcolo(); //llama a la función para actualizar la tabla ARREGLAR AQUI
+                document.getElementById('multiplicadd').value = '';
+                document.getElementById('divicionesadd').value = '';
+            } else if (respuesta == 2) {
+                Swal.fire({
+                    type: 'warning',
+                    text: 'EL ARTICULO YA ESTA AGREGADO A LA TRASFORMACIÓN',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                //alert("datos repetidos");
+            } else {
+                Swal.fire({
+                    type: 'danger',
+                    text: 'Error contactar a Soporte tecnico o levantar un ticket',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    }
+
+}*/
+
 
 function saveaddplus() {
   //alert("agreagr");
@@ -1319,9 +1338,10 @@ function saveaddplus() {
   var extendido = document.getElementById('vpcodigoext').value;
   var multiplic = document.getElementById('multiplicadd').value;
   var divicion = document.getElementById('divicionesadd').value;
-  var datos = 'final=' + _final + '&extendido=' + extendido + '&multiplic=' + multiplic + '&divicion=' + divicion + '&opcion=addcolors'; //alert(datos);
+  var tipo = document.getElementById('type_art').value;
+  var datos = 'final=' + _final + '&extendido=' + extendido + '&multiplic=' + multiplic + '&divicion=' + divicion + '&tipo=' + tipo + '&opcion=addarttrasf'; //alert(datos);
 
-  if (_final == '' || extendido == '' || multiplic == '' || divicion == '') {
+  if (_final == '' || extendido == '' || multiplic == '' || divicion == '' || tipo == '') {
     Swal.fire({
       type: 'warning',
       text: 'LLENAR TODOS LOS CAMPOS OBLIGATORIOS',
@@ -1335,6 +1355,7 @@ function saveaddplus() {
       url: "../controller/php/insertransf.php",
       data: datos
     }).done(function (respuesta) {
+      //alert(respuesta);
       if (respuesta == 0) {
         Swal.fire({
           type: 'success',
@@ -1346,6 +1367,7 @@ function saveaddplus() {
 
         document.getElementById('multiplicadd').value = '';
         document.getElementById('divicionesadd').value = '';
+        document.getElementById('214none').style.display = '';
       } else if (respuesta == 2) {
         Swal.fire({
           type: 'warning',
@@ -1372,7 +1394,8 @@ function saveaddedith() {
   var extendido = document.getElementById('edithpusadd').value;
   var multiplic = document.getElementById('mltimascolor').value;
   var divicion = document.getElementById('divmasclo').value;
-  var datos = 'final=' + _final2 + '&extendido=' + extendido + '&multiplic=' + multiplic + '&divicion=' + divicion + '&opcion=addcolors'; //alert(datos);
+  var tipo = document.getElementById('type_artedth').value;
+  var datos = 'final=' + _final2 + '&extendido=' + extendido + '&multiplic=' + multiplic + '&divicion=' + divicion + '&tipo=' + tipo + '&opcion=addarttrasedi'; //alert(datos);
 
   if (_final2 == '' || extendido == '' || multiplic == '' || divicion == '') {
     Swal.fire({
@@ -1422,21 +1445,21 @@ function updatcoloredith() {
   var id = document.getElementById("edithartfin").value; //data de colores
 
   $.ajax({
-    url: '../controller/php/addtrasfo.php',
+    url: '../controller/php/infeditinftrasf.php',
     type: 'GET',
     data: 'id=' + id
   }).done(function (resp) {
     obj = JSON.parse(resp);
     var res = obj.data;
     var x = 0;
-    html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplusedith" name="dateplusedith" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+    html = '<div class="bd-gray-300 rounded table-responsive"><table style="width:100%; table-layout:" id="dateplusedith" name="dateplusedith" class="table display dataTable"><thead class="thead-colored thead-light"><tr><th><i class="fa fa-sort-numeric-asc"></i>#</th><th><i></i>CODIGO</th><th style="width:500px"><i></i>DESCRIPCIÓN</th><th><i></i>CLASE</th><th><i></i>MULTIPLICACION</th><th><i></i>DIVICIÓN</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
 
     for (U = 0; U < res.length; U++) {
       //estatus pendiente
-      if (obj.data[U].id_articulo_final == id && obj.data[U].id_etiquetas == 'GRUPO_TRANSF') {
+      if (obj.data[U].id_articfial == id) {
         x++;
-        $id_memo2 = obj.data[U].id_kax;
-        html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_extendido + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].divicion + "</td><td>" + "<a onclick='deletemascolor()' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
+        $id_artic = obj.data[U].id_trans;
+        html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].type_art + "</td><td>" + obj.data[U].hojas + "</td><td>" + obj.data[U].division + "</td><td>" + "<a onclick='deletemascolor(" + $id_artic + ")' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>" + "</td></tr>";
       }
     }
 
@@ -1445,76 +1468,102 @@ function updatcoloredith() {
   });
 }
 
-function deletemascolor() {
+function deletemascolor($idcodiart) {
   //alert("BORRAR");
   //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
-  $("#dateplusedith tr").on('click', function () {
-    var id_colorss = "";
-    id_colorss += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
-    //alert(id_colors);
+  var id_colorss = $idcodiart;
+  var idtrans = document.getElementById('edithartfin').value;
+  var datos = 'id_colorss=' + id_colorss + '&idtrans=' + idtrans + '&opcion=eliminarcolors'; //alert(datos);
 
-    var idtrans = document.getElementById('edithartfin').value;
-    var datos = 'id_colorss=' + id_colorss + '&idtrans=' + idtrans + '&opcion=eliminarcolors'; //alert(datos);
-
-    $.ajax({
-      type: "POST",
-      url: "../controller/php/insertransf.php",
-      data: datos
-    }).done(function (respuesta) {
-      if (respuesta == 0) {
-        Swal.fire({
-          type: 'success',
-          text: 'SE ELIMINO DE FORMA CORRECTA',
-          showConfirmButton: false,
-          timer: 1000
-        });
-        updatcoloredith();
-      } else {
-        Swal.fire({
-          type: 'danger',
-          text: 'CONTACTAR A SOPORTE TECNICO O LEVANTAR UN TICKET',
-          showConfirmButton: false,
-          timer: 1000
-        });
-      }
-    }); //FIN DE AJAX
-  });
+  $.ajax({
+    type: "POST",
+    url: "../controller/php/insertransf.php",
+    data: datos
+  }).done(function (respuesta) {
+    if (respuesta == 0) {
+      Swal.fire({
+        type: 'success',
+        text: 'SE ELIMINO DE FORMA CORRECTA',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      updatcoloredith();
+    } else {
+      Swal.fire({
+        type: 'danger',
+        text: 'CONTACTAR A SOPORTE TECNICO O LEVANTAR UN TICKET',
+        showConfirmButton: false,
+        timer: 1000
+      });
+    }
+  }); //FIN DE AJAX
 }
+/*function deletemascolors() {
+    //alert("BORRAR");
+    //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
+    $("#datepluscolor tr").on('click', function() {
+        let id_colorss = "";
+        id_colorss += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
+        //alert(id_colors);
+        let idtrans = document.getElementById('vppcodigo').value;
+        let datos = 'id_colorss=' + id_colorss + '&idtrans=' + idtrans + '&opcion=eliminarcolors';
+        //alert(datos);
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertransf.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'SE ELIMINO DE FORMA CORRECTA',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                updateaddcolo()
+            } else {
+                Swal.fire({
+                    type: 'danger',
+                    text: 'CONTACTAR A SOPORTE TECNICO O LEVANTAR UN TICKET',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }
+        }); //FIN DE AJAX
+    });
+}*/
 
-function deletemascolors() {
+
+function deletemascolors($iddeletcols) {
   //alert("BORRAR");
   //FUNCION DE ELIMINAR ARTICULO DE TRANSFORMACION
-  $("#datepluscolor tr").on('click', function () {
-    var id_colorss = "";
-    id_colorss += $(this).find('td:eq(1)').html(); //Toma el id de la persona 
-    //alert(id_colors);
+  var id_colorss = $iddeletcols; //alert(id_colorss);
 
-    var idtrans = document.getElementById('vppcodigo').value;
-    var datos = 'id_colorss=' + id_colorss + '&idtrans=' + idtrans + '&opcion=eliminarcolors'; //alert(datos);
+  var idtrans = document.getElementById('vppcodigo').value;
+  var datos = 'id_colorss=' + id_colorss + '&idtrans=' + idtrans + '&opcion=eliminarcolors'; //alert(datos);
 
-    $.ajax({
-      type: "POST",
-      url: "../controller/php/insertransf.php",
-      data: datos
-    }).done(function (respuesta) {
-      if (respuesta == 0) {
-        Swal.fire({
-          type: 'success',
-          text: 'SE ELIMINO DE FORMA CORRECTA',
-          showConfirmButton: false,
-          timer: 1000
-        });
-        updateaddcolo();
-      } else {
-        Swal.fire({
-          type: 'danger',
-          text: 'CONTACTAR A SOPORTE TECNICO O LEVANTAR UN TICKET',
-          showConfirmButton: false,
-          timer: 1000
-        });
-      }
-    }); //FIN DE AJAX
-  });
+  $.ajax({
+    type: "POST",
+    url: "../controller/php/insertransf.php",
+    data: datos
+  }).done(function (respuesta) {
+    if (respuesta == 0) {
+      Swal.fire({
+        type: 'success',
+        text: 'SE ELIMINO DE FORMA CORRECTA',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      updateaddcolo();
+    } else {
+      Swal.fire({
+        type: 'danger',
+        text: 'CONTACTAR A SOPORTE TECNICO O LEVANTAR UN TICKET',
+        showConfirmButton: false,
+        timer: 1000
+      });
+    }
+  }); //FIN DE AJAX
 }
 
 function canceladd() {
@@ -1523,6 +1572,7 @@ function canceladd() {
   document.getElementById('masplus3').style.display = "none";
   document.getElementById('masplus4').style.display = "none";
   document.getElementById('masplusave').style.display = "none";
+  document.getElementById('mastype').style.display = "none";
 }
 
 function closeaddusu() {
@@ -1640,14 +1690,14 @@ function opentrans() {
     buttons: [{
       extend: 'copy',
       exportOptions: {
-        columns: [0, 1, 2, 3]
+        columns: [0, 1, 2]
       }
     }, {
       extend: 'pdfHtml5',
       text: 'Generar PDF',
       messageTop: 'RESUMEN DE TRANSFORMACIÓN',
       exportOptions: {
-        columns: [0, 1, 2, 3]
+        columns: [0, 1, 2]
       },
       download: 'open',
       header: true,
@@ -1676,7 +1726,7 @@ function opentrans() {
       extend: 'excel',
       text: 'Generar Excel',
       exportOptions: {
-        columns: [0, 1, 2, 3]
+        columns: [0, 1, 2]
       }
     }],
     "language": {

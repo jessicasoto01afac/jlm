@@ -2,7 +2,8 @@
 	include("../conexion.php");
 	session_start();
     $folio = $_POST['folio'];
-	$query = "SELECT * FROM historial WHERE registro LIKE '%$folio%' ORDER BY id_his ";
+	//$query = "SELECT * FROM historial WHERE registro LIKE '%$folio%' ORDER BY id_his ";
+	$query = "SELECT * FROM historial WHERE proceso LIKE '%VALE DE PRODUCCIÓN%' AND registro LIKE '%$folio%' ORDER BY id_his";
 	$resultado = mysqli_query($conexion, $query);
 	if(!$resultado){
 		die("error");
