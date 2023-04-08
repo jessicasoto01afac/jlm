@@ -72,7 +72,7 @@
         <div class="content">
         <h2 style="color:white">JLM PROGRAMA DE PRODUCCIÓN</h2>
         <br>
-          <h3 style="color:white">¿Olvidate tu contraseña?</h3>
+          <h3 style="color:white">¿Olvidate tu contraseña1?</h3>
           <p style="color:white">
             Has clik al siguiente botón para recuperar tu acceso !
           </p>
