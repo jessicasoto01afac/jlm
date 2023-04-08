@@ -880,7 +880,7 @@ function histvalepro() {
     //alert(folio);
     //Tabla de historial del vale de producción
     $.ajax({
-        url: '../controller/php/hisvaleprod.php',
+        url: '../controller/php/hismemos.php',
         type: 'POST',
         data: 'folio=' + folio2
     }).done(function(resp) {
