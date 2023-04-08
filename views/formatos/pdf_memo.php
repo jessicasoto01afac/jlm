@@ -203,7 +203,7 @@ position: absolute;
 
 <body>
     <br>
-    <img src="../template/img/logo1.jpg" style="" width="200" height="65" alt="">
+    <img src="../template/img/logo1.jpg" width="200" height="65" alt="">
     <p style="font-weight:bold; font-size:32px; text-align:center; padding-top: -7.5%; margin-left: 5%;"><b> JOSE LUIS MONDRAGON Y CIA SA
             DE CV
         </b></p>
@@ -369,7 +369,7 @@ position: absolute;
             $dompdf->set_paper('letter', 'portrait');
             $dompdf->load_html(ob_get_clean());
             $dompdf->render();
-            $dompdf->stream("Evaluación de Nivel I", array("Attachment" => 0));
+            $dompdf->stream("MEMO", array("Attachment" => 0));
             $pdf = $dompdf->output();
         ?>
 </body>

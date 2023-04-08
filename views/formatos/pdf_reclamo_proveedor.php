@@ -39,7 +39,7 @@ $query5 = "SELECT * FROM kardex k,articulos a where tipo='VALE_OFICINA' AND a.ar
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RECLAMO DE CLIENTE <?php echo $data['folio_recl']?></title>
+    <title>RECLAMO DE PROVEEDOR <?php echo $data['folio_recl']?></title>
     <link rel="shortcut icon" href="../template/img/logo.png" />
 </head>
 <style>
@@ -143,7 +143,7 @@ margin-left:10px;     /*To create a margin from border. When you put display inl
 
 <body>
     <br>
-    <img src="../template/img/logo1.jpg" style="" width="240" height="75" alt="">
+    <img src="../template/img/logo1.jpg" width="240" height="75" alt="">
     <p style="font-weight:bold; font-size:30px; text-align:center; padding-top: -6%; margin-left: 5%;"><b> REPORTE DE RECLAMACION Ó DEVOLUCIÓN
         </b><br>PROVEEDOR</p>
     <p class="reclamotitle" style="font-weight:bold; font-size:28px;color:#063787"><b>FOLIO No: <label style="font-weight:bold; font-size:35px;color:red">000<?php echo $data['folio_recl']?></label>
@@ -182,8 +182,8 @@ margin-left:10px;     /*To create a margin from border. When you put display inl
         ?>
     </div>
 
-    <div style="">
-       <div class="cuadrado2" style="text-align:center;font-size:22px;position: ;">REPORTE DE INCIDENCIAS DE JLM</div>
+    <div>
+       <div class="cuadrado2" style="text-align:center;font-size:22px;">REPORTE DE INCIDENCIAS DE JLM</div>
     </div>
     <div style="padding-top:-14%;">
        <p class="inf2">DEPARTAMENTO: <label style="font-weight:bold; font-size:20px;margin-left: 1.5%;"><?php echo $data['dep_resport']?></label></p>
@@ -199,8 +199,8 @@ margin-left:10px;     /*To create a margin from border. When you put display inl
             <p style="margin-left: 0%;" class="correctwrap"><?php echo $data['code_jlm']?></p>
         </div>
         <br>
-        <div style="">
-       <div class="cuadrado2" style="text-align:center;font-size:22px;position: ;">REPORTE DE INCIDENCIAS AL PROVEEDOR </div>
+        <div>
+       <div class="cuadrado2" style="text-align:center;font-size:22px;">REPORTE DE INCIDENCIAS AL PROVEEDOR </div>
     </div>
     <p class="inf7" style="margin-top:1%">DEPARTAMENTO: <label style="font-weight:bold; font-size:20px;margin-left: 1.5%;"><?php echo $data['dept_provee']?></label></p>
     <p class="inf7" style="margin-top:-1.5%">ENVIAO A: <label style="font-weight:bold; font-size:20px;margin-left: 1.5%;"><?php echo $data['evio_a']?></label></p>
@@ -214,7 +214,7 @@ margin-left:10px;     /*To create a margin from border. When you put display inl
             <p style="margin-left: 2%;"><?php echo $data['code_seguimiento']?></p>
         </div>
         <br>
-<div class="cuadrado2" style="text-align:center;font-size:22px;position: ;">RESULTADO</div>
+<div class="cuadrado2" style="text-align:center;font-size:22px;">RESULTADO</div>
          <div class="cuadrado-1">
             <p style="margin-left: 2%;"><?php echo $data['code_conclucion']?></p>
         </div>
@@ -243,7 +243,7 @@ margin-left:10px;     /*To create a margin from border. When you put display inl
             $dompdf->set_paper('letter', 'portrait');
             $dompdf->load_html(ob_get_clean());
             $dompdf->render();
-            $dompdf->stream("VALE DE OFICINA", array("Attachment" => 0));
+            $dompdf->stream("REPORTE DE RECLAMO Ó DEVOLUCIÓN PROVEEDOR", array("Attachment" => 0));
             $pdf = $dompdf->output();
         ?>
 </body>

@@ -24,7 +24,7 @@ $query1 = "SELECT * FROM historial WHERE registro LIKE '%$folio%' AND proceso LI
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REPORTE DE HSITORIAL <?php echo $data['refe_1']?></title>
+    <title>REPORTE DE HISTORIAL <?php echo $data['refe_1']?></title>
     <link rel="shortcut icon" href="../template/img/logo.png" />
 </head>
 <style>
@@ -128,7 +128,7 @@ th:last-child {
   
 tr {
   border-top: 1px solid #C1C3D1;
-  border-bottom-: 1px solid #C1C3D1;
+  border-bottom: 1px solid #C1C3D1;
   color:#676767;
   font-size:16px;
   font-weight:normal;
@@ -208,7 +208,7 @@ td.text-right {
 </style>
 
 <body>
-    <img src="../template/img/logo1.jpg" style="" width="200" height="65" alt="">
+    <img src="../template/img/logo1.jpg" width="200" height="65" alt="">
   
     <p style="font-weight:bold; font-size:28px; text-align:center;padding-top:-6%;">REPORTE DE HISTORIAL</p> 
     

@@ -3,25 +3,25 @@ ob_start();
 $folio = $_GET['data'];
 include ("../controller/conexion.php");
 //CABECERA
-$query = "SELECT k.*, p.* ,(select a.usunom FROM accesos a where a.usuario=p.id_person_autor) as usunom, (select a.usuapell FROM accesos a where a.usuario=p.id_person_autor) as usuapell FROM kardex k, productividad p where k.refe_1=p.referencia_1 AND k.estado='0' AND k.tipo='VALE_PRODUCCION' AND k.refe_1='$folio' GROUP BY refe_1 ORDER BY id_kax ASC";
+$query = "SELECT *,DATE_FORMAT(fecha,'%d/%m/%Y')as date FROM kardex where estado='0' AND tipo='PEDIDO' AND refe_1='$folio' GROUP BY refe_1 ORDER BY id_kax ASC";
       $resultado = mysqli_query($conexion, $query);
     $data = mysqli_fetch_array($resultado);
+    
+    
     //CABECERA2
 $cabec = "SELECT k.*, p.* ,(select a.usunom FROM accesos a where a.usuario=p.id_person_autor) as usunom, (select a.usuapell FROM accesos a where a.usuario=p.id_person_autor) as usuapell FROM kardex k, productividad p where k.refe_1=p.referencia_1 AND k.estado='0' AND k.tipo='VALE_PRODUCCION' AND k.refe_1='$folio' GROUP BY refe_1 ORDER BY id_kax ASC";
       $resul = mysqli_query($conexion, $cabec);
 
 //TABLA DE EXTENDIDO
-$query1 = "SELECT * FROM kardex k, articulos a where k.tipo='VALE_PRODUCCION' AND a.artcodigo=k.codigo_1 AND k.tipo_ref='EXTENDIDO' AND k.refe_1='$folio' ORDER BY k.id_kax ASC";
+$query1 = "SELECT * FROM kardex k, articulos a where k.tipo='PEDIDO' AND a.artcodigo=k.codigo_1 AND k.tipo_ref='ARTICULO' AND k.refe_1='$folio' ORDER BY k.id_kax ASC";
       $resultado1 = mysqli_query($conexion, $query1);
     //$data1 = mysqli_fetch_array($resultado1);
-//TABLA DE ETIQUETAS
-$query2 = "SELECT * FROM kardex k, articulos a where k.tipo='VALE_PRODUCCION' AND a.artcodigo=k.codigo_1 AND k.tipo_ref='ETIQUETAS' AND k.refe_1='$folio' ORDER BY k.id_kax ASC";
-      $resultado2 = mysqli_query($conexion, $query2);
-    //$data2 = mysqli_fetch_array($resultado2);
-//TABLA DE FINAL
-$query3 = "SELECT * FROM kardex k, articulos a where k.tipo='VALE_PRODUCCION' AND a.artcodigo=k.codigo_1 AND k.tipo_ref='PRODUCTO_TERMINADO' AND k.refe_1='$folio' ORDER BY k.id_kax ASC";
-      $resultado3 = mysqli_query($conexion, $query3);
-    //$data3 = mysqli_fetch_array($resultado3);
+
+//NOMBRE DEL CLIENTE
+$querycli = "SELECT c.nombre FROM kardex k, clientes c where k.estado='0' AND k.codigo_clie=c.proveedor_cliente AND k.refe_1='$folio' GROUP BY k.refe_1 ORDER BY k.id_kax ASC";
+$resultadocl = mysqli_query($conexion, $querycli);
+$datacl = mysqli_fetch_array($resultadocl);
+
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ $query3 = "SELECT * FROM kardex k, articulos a where k.tipo='VALE_PRODUCCION' AN
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FORMATO DE VALE DE PRODUCCIÓN <?php echo $data['refe_1']?></title>
+    <title>PEDIDO <?php echo $data['refe_1']?></title>
     <link rel="shortcut icon" href="../template/img/logo.png" />
 </head>
 <style>
@@ -132,98 +132,75 @@ td {
     padding: 9px;
     font-size: 17px;
 }
+footer {
+    position: fixed; 
+    bottom: -60px; 
+    left: 0px; 
+    right: 0px;
+    height: 50px; 
+    /** Extra personal styles **/
+    color: black;
+    text-align: center;
+    line-height: 35px;
+}
+.pagenum:before {
+    content: counter(page);
+}
+.vertical {
+    width: 60%;
+    height: 1px;
+    border-top: solid black 1px;
+    margin-left:20%;
+    margin-top:-1%;
+
+}
+    
+
 </style>
 
 <body>
-    <img src="../template/img/logo1.jpg" style="" width="200" height="65" alt="">
-    <p style="font-weight:bold; font-size:32px; text-align:center; padding-top: -7.5%;"><b> JOSE LUIS MONDRAGON Y CIA SA
-            DE CV
+<header>
+    <p style="font-weight:bold; font-size:24px; text-align:center; padding-top: -5%;"><b> JOSE LUIS MONDRAGON Y COMPAÑIA, S.A. DE C.V.
         </b></p>
-    <p style="font-weight:bold; font-size:23px; text-align:center;padding-top:-2.3%;">ORDEN DE PRODUCCIÓN</p>
-
-    <?php               
-        while($row = mysqli_fetch_assoc($resul)) {
-        $active = '';
-        if($row['caracter_vale'] == 'URGENTE') {
-            $active = '<p class="urgente" style="font-weight:bold; font-size:20px; padding-top:-2%;">URGENTE</p>';
-        } else {
-           $active = '';
-        }
-        
-        $ref3 = '';
-        if($row['caracter_vale'] == 'OPERADORA') {
-            $ref3 = '<p class="urgente" style="font-weight:bold; font-size:20px; padding-top:-4%;">OMX</p>';
-        } else {
-           $ref3 = '';
-        }
-        
-        echo $active;
-        echo $ref3;
-        } // Fin while 
-        // Cierra la Conexión con la BD.
-        mysqli_close($conexion);
-    ?>
-
-
-
+    <p style="font-weight:bold; font-size:20px; text-align:center;padding-top:-2.3%;">FABRICANTES, IMPORTADORES Y DISTRIBUIDORES DE PAPELERIA</p>
     <div>
-        <label style="font-size:18px;">DEPTO.SOLICITANTE:</label>
-        <label style="font-size:19px;"><?php echo $data['refe_2']?></label>
+        <label style="font-size:18px;">Alfonso Herrera No. 43</label>
+        <label style="font-size:18px; padding-left:20%;">Tels. 5566-3619</label>
+        <label style="font-size:18px; padding-left:4%;">5535-9673</label>
+        <label style="font-size:18px; padding-left:25%;">Reg. Fed. de Caus.</label>
     </div>
-    <div style="padding-top:0.5%;">
-        <label style="font-size:18px;">FECHA DE REQUISICION:</label>
-        <label style="font-size:19px;"><?php echo $data['fecha']?></label>
+    <div style="padding-top:-0.2%;">
+        <label style="font-size:18px;">Col. San Rafael C.P. 06470</label>
+        <label style="font-size:18px; padding-left:20.5%;">5535-2386</label>
+        <label style="font-size:18px; padding-left:4.2%;">5591-0347</label>
+        <label style="font-size:18px; padding-left:27%;">JLM830707FD0</label>
     </div>
-    <div style="padding-top:0.5%;">
-        <label style="font-size:18px;">FORMULA:</label>
-        <label style="font-size:19px;"><?php echo $data['id_person_creacion']?></label>
+    <div style="padding-top:-0.2%;">
+        <label style="font-size:18px;">Apartado Postal 1520</label>
+        <label style="font-size:18px; padding-left:24.5%;">5535-2344</label>
+        <label style="font-size:18px; padding-left:4.3%;">5535-4316</label>
+        <label style="font-size:18px; padding-left:20%;">Ced. de Emp. No. 774518</label>
     </div>
-    <div style="padding-top:0.5%;">
-        <label style="font-size:18px;">AUTORIZA:</label>
-        <label style="font-size:22px;"><?php echo $data['usunom'].' '.$data['usuapell']?></label>
+    <div style="padding-top:0.1%;">
+        <label style="font-size:18px;">06000 Ciudad de México</label>
+        <label style="font-size:18px; padding-left:20%;">e-mail: jlmycia@jlmycia.com.mx</label>
+        <label style="font-size:18px; padding-left:19%;">Registro Canaco No. 11111</label>
     </div>
-    <div class="nproduccion" style="padding-top:-10.1%;">
-        <label style="font-size:18px;">ORDEN DE PRODUCCIÓN No:</label>
-        <label style="font-size:38px;"><?php echo $data['referencia_1']?></label>
-    </div>
-    <div class="nproduccion2" style="padding-top:-7%;">
-        <label style="font-size:18px;">VALE DE REQUISICIÓN No:</label>
-        <label style="font-size:38px;"><?php echo $data['referencia_1']?></label>
-    </div>
-    <div class="prelacion" style="padding-top:-2%;">
-        <label style="font-size:18px;">PEDIDOS RELACIONADOS:</label>
-        <label style="font-size:18px;"><?php echo $data['ubicacion']?></label>
-    </div>
-    <!-- PARTE LATERAL -->
+    <!-- DESPUES DEL ENCABEZADO -->
+    <p style="font-weight:bold; font-size:35px; text-align:center;padding-top:0.5%;">PEDIDO No. <?php echo $data['refe_1']?></p>
+    <p style="font-size:20px; text-align:left;padding-top:-1%;margin-left:13%">FECHA: <?php echo $data['date']?></p> <div class="vertical"></div>
+    <p style="font-size:20px; text-align:left;padding-top:-1%;margin-left:13%">PEDIDO: <?php echo $datacl['nombre']?></p> <div class="vertical"></div>
+    <p style="font-size:20px; text-align:left;padding-top:-1%;margin-left:13%">FORMULADO POR: </p> <div style="margin-left:29%;width:51%;" class="vertical"></div>
+    <p style="font-size:20px; text-align:left;padding-top:-1%;margin-left:13%">ATENDIDO POR: </p> <div style="margin-left:28%;width:52%;" class="vertical"></div>
+    
+    <p style="font-size:18px; text-align:left;padding-top:0.5%;">CODIGO CLIENTE: <?php echo $data['proveedor_cliente']?> </p>
+    <p style="font-size:18px; text-align:left;padding-top:-1%;">NOMBRE: <?php echo $datacl['nombre']?> </p><div style="margin-left:8%;width:92%;" class="vertical"></div>
+    <p style="font-size:18px; text-align:left;padding-top:-1%;">DIRECCIÓN: <?php echo $data['descripcion_1']?> </p><div style="margin-left:9%;width:91%;" class="vertical"></div>
+    <p style="font-size:18px; text-align:left;padding-top:-1%;">LUGAR: <?php echo $data['ubicacion']?> </p><div style="margin-left:6%;width:94%;" class="vertical"></div>
+    <br>
+    </header>
 
-
-    <!-- DESPUES DE LA LINEA -->
-    <hr style="border: 1.5px solid #000;">
-    <div style="padding-top:-0.3%;">
-        <label style="font-size:18px;">MATERIAL SOLICITADO AL DEPARTAMENTO:</label>
-        <label style="font-size:21px;"><?php echo $data['proveedor_cliente']?></label>
-    </div>
-    <div style="padding-top:0.7%;">
-        <label style="font-size:18px;">FECHA DE SOICITUD DE MATERIAL:</label>
-        <label style="font-size:21px;"></label>
-    </div>
-    <div class="line2" style="margin-top:-.2%"></div>
-    <div style="padding-top:-1.3%;">
-        <label style="font-size:18px;">FECHA DE ENTREGA DE MATERIAL:</label>
-        <label style="font-size:21px;"></label>
-    </div>
-    <div class="line2" style="margin-top:-.2%"></div>
-    <div class="surtio" style="padding-top:-7%;">
-        <label style="font-size:18px;">SURTIO:</label>
-        <label style="font-size:21px;"></label>
-        <div class="line3" style="margin-top:0%"></div>
-    </div>
-    <div class="recibio" style="padding-top:-3.9%;">
-        <label style="font-size:18px;">RECIBIO:</label>
-        <label style="font-size:21px;"></label>
-        <div class="line3" style="margin-top:-0.5%"></div>
-    </div>
-    <p style="font-weight:bold; font-size:25px; text-align:center;padding-top:-.5%;">MATERIAL SOLICITADO</p>
+    
     <!-- MATERIAL SOLICITADO-->
     <?php               
             echo '<table class="table table-striped table-hover table-responsive cell-border" id="TabLisClientes">';
@@ -231,8 +208,10 @@ td {
                     echo '<tr style="background-color:#e6e6e6;">';
                         echo '<th>CODIGO</th>';
                         echo '<th>CANTIDAD</th>';
-                        echo '<th>DESCRIPCIÓN</th>';
-                        echo '<th>OBSERVACIONES</th>';
+                        echo '<th>DESCRIPCIÓN DEL ARTICULO</th>';
+                        echo '<th>PRECIO</th>';
+                        echo '<th>% DESC.</th>';
+                        echo '<th>IMPORTE</th>';
                     echo '</tr>';
                     echo '</thead>';
                     echo '<tbody>';
@@ -243,7 +222,9 @@ td {
                         echo '<td>'.$row['codigo_1'].'</td>';
                         echo '<td>'.$row['salida'].'</td>';
                         echo '<td>'.$row['artdescrip'].'</td>';
-                        echo '<td>'.$row['observa'].'</td>';
+                        echo '<td>'.$row['costo'].'</td>';
+                        echo '<td>'.$row['descuento'].'</td>';
+                        echo '<td>'.$row['total'].'</td>';
                     echo '</tr>';                       
                     } // Fin while 
 
@@ -253,75 +234,11 @@ td {
                     echo '</tbody>';
                 echo '</table>';
             ?>
-    <!-- MATERIAL ETIQUETAS-->
-    <p style="font-weight:bold; font-size:25px; text-align:center;padding-top:-.5%;">ETIQUETAS</p>
-    <?php               
-            echo '<table class="table table-striped table-hover table-responsive cell-border" id="TabLisClientes">';
-                echo '<thead>';
-                    echo '<tr style="background-color:#e6e6e6;">';
-                        echo '<th>CODIGO</th>';
-                        echo '<th>CANTIDAD</th>';
-                        echo '<th>DESCRIPCIÓN</th>';
-                        echo '<th>OBSERVACIONES</th>';
-                    echo '</tr>';
-                    echo '</thead>';
-                    echo '<tbody>';
+            <footer>
+            PEDIDO No. <?php echo $data['refe_1']?> pagina <span class="pagenum"></span>
 
-                    while($row2 = mysqli_fetch_assoc($resultado2)) {
-                    
-                    echo '<tr>';
-                        echo '<td>'.$row2['codigo_1'].'</td>';
-                        echo '<td>'.$row2['salida'].'</td>';
-                        echo '<td>'.$row2['artdescrip'].'</td>';
-                        echo '<td>'.$row2['observa'].'</td>';
-                    echo '</tr>';                       
-                    } // Fin while 
-
-                    // Cierra la Conexión con la BD.
-                    mysqli_close($conexion);
-
-                    echo '</tbody>';
-                echo '</table>';
-            ?>
-
-    <!-- MATERIAL FINAL-->
-    <p style="font-weight:bold; font-size:25px; text-align:center;padding-top:-.5%;">PRODUCTO TERMINADO</p>
-    <?php               
-            echo '<table class="table table-striped table-hover table-responsive cell-border" id="TabLisClientes">';
-                echo '<thead>';
-                    echo '<tr style="background-color:#e6e6e6;">';
-                        echo '<th>CODIGO</th>';
-                        echo '<th>CANTIDAD</th>';
-                        echo '<th>DESCRIPCIÓN</th>';
-                        echo '<th>OBSERVACIONES</th>';
-                    echo '</tr>';
-                    echo '</thead>';
-                    echo '<tbody>';
-
-                    while($row3 = mysqli_fetch_assoc($resultado3)) {
-                    
-                    echo '<tr>';
-                        echo '<td>'.$row3['codigo_1'].'</td>';
-                        echo '<td>'.$row3['entrada'].'</td>';
-                        echo '<td>'.$row3['artdescrip'].'</td>';
-                        echo '<td>'.$row3['observa'].'</td>';
-                    echo '</tr>';                       
-                    } // Fin while 
-
-                    // Cierra la Conexión con la BD.
-                    mysqli_close($conexion);
-
-                    echo '</tbody>';
-                echo '</table>';
-            ?>
-    <div class="entrego">
-        <p>ENTREGO:</p>
-        <p>AL DEPTO:</p>
-    </div>
-    <div class="entrego2" style="padding-top:-9.05%;">
-        <p>FECHA:</p>
-        <p>RECIBIDO:</p>
-    </div>
+        </footer>
+   
     <?php
             //require_once '../dist/dompdf/autoload.inc.php';
             require_once '../public/dompdf/autoload.inc.php';
@@ -330,8 +247,9 @@ td {
             $dompdf->set_paper('letter', 'portrait');
             $dompdf->load_html(ob_get_clean());
             $dompdf->render();
-            $dompdf->stream("Evaluación de Nivel I", array("Attachment" => 0));
+            $dompdf->stream("PEDIDO", array("Attachment" => 0));
             $pdf = $dompdf->output();
+            
         ?>
 </body>
 </html>

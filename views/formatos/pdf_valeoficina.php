@@ -8,7 +8,7 @@ $query = "SELECT k.*, p.* ,(select CONCAT(a.usunom, ' ',a.usuapell) FROM accesos
     $data = mysqli_fetch_array($resultado);
     
     //TABLA DE MATERIAL PARA TRASFORMACIÓN
-$query1 = "SELECT * FROM kardex k,articulos a where tipo='VALE_OFICINA' AND a.artcodigo=k.codigo_1 AND tipo_ref='ARTICULO' AND refe_1='$folio' ORDER BY id_kax ASC";
+$query1 = "SELECT * FROM kardex k,articulos a where tipo='VALE_OFICINA' AND a.artcodigo=k.codigo_1 AND tipo_ref='ARTICULO' AND k.refe_1='$folio' AND k.estado='0' ORDER BY id_kax ASC";
       $resultado1 = mysqli_query($conexion, $query1);
       
           //TABLA DE MATERIAL TRANSFROMADO
@@ -19,7 +19,7 @@ $query22 = "SELECT * FROM kardex k,articulos a where tipo='VALE_OFICINA' AND a.a
       $resultado3 = mysqli_query($conexion, $query3);
 
 //TABLA DE MATERIAL PARA TRASFORMACIÓN
-$query4 = "SELECT * FROM kardex k,articulos a where tipo='VALE_OFICINA' AND a.artcodigo=k.codigo_1 AND tipo_ref='ARTICULO' AND refe_1='$folio' ORDER BY id_kax ASC";
+$query4 = "SELECT * FROM kardex k,articulos a where tipo='VALE_OFICINA' AND a.artcodigo=k.codigo_1 AND tipo_ref='ARTICULO' AND k.refe_1='$folio' AND k.estado='0' ORDER BY id_kax ASC";
       $resultado4 = mysqli_query($conexion, $query4);
       
           //TABLA DE MATERIAL TRANSFROMADO
@@ -303,7 +303,7 @@ position: absolute;
             $dompdf->set_paper('letter', 'portrait');
             $dompdf->load_html(ob_get_clean());
             $dompdf->render();
-            $dompdf->stream("Evaluación de Nivel I", array("Attachment" => 0));
+            $dompdf->stream("VALE DE OFICINA", array("Attachment" => 0));
             $pdf = $dompdf->output();
         ?>
 </body>
