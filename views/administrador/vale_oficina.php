@@ -116,7 +116,7 @@ include('header.php');
                                                 class="tx-danger">*</span></label>
                                         <!-- <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingresa el Folio"> -->
                                         <label class="form-control-label" id="fvofi" name="fvofi"
-                                            style="font-size: 24px;px; color:#14128F"></label>
+                                            style="font-size: 24px;color:#14128F"></label>
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-3 mg-t--1 mg-md-t-0">

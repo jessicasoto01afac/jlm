@@ -60,7 +60,7 @@ include ("../controller/conexion.php");
                                         <input style="display:none;" disabled="" class="form-control inputalta" type="text" name="infid" id="infid">
                                         <label class="form-control-label">FOLIO: <span class="tx-danger">*</span></label>
                                         <!-- <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingresa el Folio"> -->
-                                        <label class="form-control-label" id="fvofi" name="fvofi" style="font-size: 24px;px; color:#14128F"></label>
+                                        <label class="form-control-label" id="fvofi" name="fvofi" style="font-size: 24px;color:#14128F"></label>
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-4 mg-t--1 mg-md-t-0">

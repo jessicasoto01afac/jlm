@@ -514,7 +514,8 @@ function infmemo(id_memo) {
   var finalizado = document.getElementById('btnfinaliz');
   var editar = document.getElementById('openedimem1');
   var imprimir = document.getElementById('pdfmem');
-  var folio = id_memo;
+  var folio = id_memo; //alert(folio);
+
   $.ajax({
     url: '../controller/php/memo1.php',
     type: 'GET',
@@ -572,6 +573,11 @@ function infmemo(id_memo) {
         x++;
         $id_memo2 = obj.data[U].id_kax; //estatus = "<button type='button' onclick='surtirvpf(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-surtirvprod'>SURTIR</button>"
 
+        html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida + "</td></tr>"; //AUTORIZADO/SURTIDO
+      } else if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION' && obj.data[U].status == 'AUTORIZADO' && obj.data[U].status_2 == 'SURTIDO') {
+        x++;
+        $id_memo2 = obj.data[U].id_kax; //estatus = "<button type='button' onclick='surtirvpf(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-surtirvprod'>SURTIR</button>"
+
         html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida + "</td></tr>"; //finalizado
       } else if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION' && obj.data[U].status == 'FINALIZADO') {
         x++;
@@ -580,7 +586,7 @@ function infmemo(id_memo) {
       } else if (obj.data[U].refe_1 == id_memo && obj.data[U].tipo == 'MEMO' && obj.data[U].tipo_ref == 'ARTICULO_TRANSFORMACION' && obj.data[U].status == 'SURTIDO') {
         x++;
         $id_memo2 = obj.data[U].id_kax;
-        html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida + "</td><td class='dropdown hidden-xs-down responsive'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10 responsive'><nav class='nav nav-style-1 flex-column'>" + "</td></tr>";
+        html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].observa + "</td><td>" + obj.data[U].salida + "</td></tr>";
       }
     }
 
