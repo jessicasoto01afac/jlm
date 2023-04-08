@@ -51,14 +51,14 @@ $query3 = "SELECT * FROM kardex k, articulos a where k.tipo='VALE_PRODUCCION' AN
 }
 
 .entrego2 {
-    padding: 0;
-    padding-top: 2%;
+    margin-top: -1%;
     margin-left: 66%;
+    font-size:20px;
 }
 
 .entrego {
-    padding: 0;
-    padding-top: 2%;
+    margin-top: -1%;
+    font-size:20px;
 }
 
 .nproduccion {
@@ -132,6 +132,13 @@ td {
     padding: 9px;
     font-size: 17px;
 }
+.footer {
+  position: fixed;
+  bottom: 8;
+  width: 100%;
+  text-align: left;
+}
+
 </style>
 
 <body>
@@ -314,13 +321,19 @@ td {
                     echo '</tbody>';
                 echo '</table>';
             ?>
-    <div class="entrego">
-        <p>ENTREGO:</p>
-        <p>AL DEPTO:</p>
-    </div>
-    <div class="entrego2" style="padding-top:-9.05%;">
-        <p>FECHA:</p>
-        <p>RECIBIDO:</p>
+    
+    <div class="footer">
+        <table class="default">
+            <tr>
+                <td style="text-align: left;border-color:white;font-size:18px">ENTREGO:</td>
+                <td style="text-align: left;border-color:white;font-size:18px">FECHA:</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;border-color:white;font-size:18px">AL DEPTO:</td>
+                <td style="text-align: left;border-color:white;font-size:18px">RECIBIDO:</td>
+            </tr>
+        </table>
+    
     </div>
     <?php
             //require_once '../dist/dompdf/autoload.inc.php';
