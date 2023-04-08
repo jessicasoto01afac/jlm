@@ -106,8 +106,7 @@ table {
 .cuadrado-1 {
     position: relative;
      width: 1130px; 
-     margin-left: 2%;
-     height: auto;
+     margin-left: 2%;;
      border: 2px solid #000000;
      word-wrap:break-word;
 }
@@ -128,7 +127,7 @@ margin-left:10px;     /*To create a margin from border. When you put display inl
 
 <body>
     <br>
-    <img src="../template/img/logo1.jpg" style="" width="240" height="75" alt="">
+    <img src="../template/img/logo1.jpg" width="240" height="75" alt="">
     <p style="font-weight:bold; font-size:30px; text-align:center; padding-top: -6%; margin-left: 5%;"><b> REPORTE DE RECLAMO Ó DEVOLUCIÓN
         </b><br>CLIENTES</p>
     <p class="reclamotitle" style="font-weight:bold; font-size:28px;color:#063787"><b>FOLIO No: <label style="font-weight:bold; font-size:35px;color:red">000<?php echo $data['folio_recl']?></label>
@@ -176,7 +175,7 @@ margin-left:10px;     /*To create a margin from border. When you put display inl
 
          <div class="cuadrado-1">
             <div class="cuadrado" style="text-align:center;">REPORTE DE JLM</div>
-            <p style="margin-left: 2%;"><?php echo $data['code_jlm']?></p>
+            <p style="margin-left: 2%;"class="correctwrap"><?php echo $data['code_jlm']?></p>
         </div>
         <br>
 

@@ -1,7 +1,7 @@
 <?php include ("../../controller/conexion.php");
 
     
-      $sql = "SELECT artcodigo,artdescrip,artubicac FROM articulos WHERE estado = 0";
+      $sql = "SELECT artcodigo,artdescrip,artubicac FROM `artcntrasf` where transformation is null";
       $articulo = mysqli_query($conexion,$sql);
     ?>
 

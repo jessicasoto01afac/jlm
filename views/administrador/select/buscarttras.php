@@ -1,5 +1,5 @@
 <?php include ("../../controller/conexion.php");
-      $sql = "SELECT a.artcodigo,a.artdescrip,a.artubicac, t.* FROM articulos a, transforma t WHERE t.id_articulo_final = a.artcodigo AND t.estado = 0 GROUP BY t.id_articulo_final ";
+      $sql = "SELECT a.artcodigo,a.artdescrip,a.artubicac, t.* FROM articulos a, transformation t WHERE t.id_articfial = a.artcodigo AND t.estado = 0 GROUP BY t.id_articfial ";
       $articulo = mysqli_query($conexion,$sql);
     ?>
 			<select class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" onchange="desartic1()" id="mcodigotr" name="mcodigotr" type="text" data-live-search="true" style="width: 100%" >

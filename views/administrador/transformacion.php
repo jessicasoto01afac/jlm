@@ -62,7 +62,7 @@ include('header.php');
                                 <th style="width:5%;">ID</th>
                                 <th>ARTICULO TERMINADO</th>
                                 <th>DESCRIPCIÓN</th>
-                                <th>HOJAS</th>
+                                <!-- <th>HOJAS</th> -->
                                 <th>ACCIONES</th>
                             </tr>
                         </thead>

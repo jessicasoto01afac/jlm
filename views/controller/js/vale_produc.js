@@ -373,7 +373,7 @@ function addvaleprodu() {
     }
     ubicacion = tPrfil.substr(1);
     //--------------------------
-    let datos = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&caracter=' + caracter + '&opcion=registrar';
+    let datos = 'refe_1=' + refe_1 + '&fecha=' + fecha + '&refe_2=' + refe_2 + '&refe_3=' + refe_3 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&descripcion_1=' + descripcion_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&caracter=' + caracter + '&opcion=registrarp';
 
     //alert(datos);
     if (refe_1 == '' || fecha == '' || refe_3 == '' || proveedor_cliente == '' || codigo_1 == '' || descripcion_1 == '' || cantidad_real == '') {
@@ -2336,7 +2336,7 @@ function savdelevpartdet() {
     let id_kardex = document.getElementById('del_artvpdetts').value;
     let codigo_1 = document.getElementById('deartvpdett').value;
     let datos = 'id_kardex=' + id_kardex + '&codigo_1=' + codigo_1 + '&opcion=deleartnew';
-    //alert(datos);
+    alert(datos);
     $.ajax({
         type: "POST",
         url: "../controller/php/insertvapro.php",
@@ -3017,7 +3017,7 @@ function acsurtirvpf() {
     var observa_dep = document.getElementById('surbserevpdep').value;
 
     var datos = 'id_kax=' + id_kax + '&observa_dep=' + observa_dep + '&refe_1=' + refe_1 + '&codigo_1=' + codigo_1 + '&cantidad=' + cantidad + '&descripcion=' + descripcion + '&opcion=surtir';
-    alert(datos)
+    //alert(datos)
     $.ajax({
         type: "POST",
         url: "../controller/php/insertvapro.php",

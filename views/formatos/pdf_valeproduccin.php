@@ -11,15 +11,15 @@ $cabec = "SELECT k.*, p.* ,(select a.usunom FROM accesos a where a.usuario=p.id_
       $resul = mysqli_query($conexion, $cabec);
 
 //TABLA DE EXTENDIDO
-$query1 = "SELECT * FROM kardex k, articulos a where k.tipo='VALE_PRODUCCION' AND a.artcodigo=k.codigo_1 AND k.tipo_ref='EXTENDIDO' AND k.refe_1='$folio' ORDER BY k.id_kax ASC";
+$query1 = "SELECT * FROM kardex k, articulos a where k.tipo='VALE_PRODUCCION' AND a.artcodigo=k.codigo_1 AND k.tipo_ref='EXTENDIDO' AND k.refe_1='$folio' AND k.estado=0 ORDER BY k.id_kax ASC";
       $resultado1 = mysqli_query($conexion, $query1);
     //$data1 = mysqli_fetch_array($resultado1);
 //TABLA DE ETIQUETAS
-$query2 = "SELECT * FROM kardex k, articulos a where k.tipo='VALE_PRODUCCION' AND a.artcodigo=k.codigo_1 AND k.tipo_ref='ETIQUETAS' AND k.refe_1='$folio' ORDER BY k.id_kax ASC";
+$query2 = "SELECT * FROM kardex k, articulos a where k.tipo='VALE_PRODUCCION' AND a.artcodigo=k.codigo_1 AND k.tipo_ref='ETIQUETAS' AND k.refe_1='$folio' AND k.estado=0 ORDER BY k.id_kax ASC";
       $resultado2 = mysqli_query($conexion, $query2);
     //$data2 = mysqli_fetch_array($resultado2);
 //TABLA DE FINAL
-$query3 = "SELECT * FROM kardex k, articulos a where k.tipo='VALE_PRODUCCION' AND a.artcodigo=k.codigo_1 AND k.tipo_ref='PRODUCTO_TERMINADO' AND k.refe_1='$folio' ORDER BY k.id_kax ASC";
+$query3 = "SELECT * FROM kardex k, articulos a where k.tipo='VALE_PRODUCCION' AND a.artcodigo=k.codigo_1 AND k.tipo_ref='PRODUCTO_TERMINADO' AND k.refe_1='$folio' AND k.estado=0 ORDER BY k.id_kax ASC";
       $resultado3 = mysqli_query($conexion, $query3);
     //$data3 = mysqli_fetch_array($resultado3);
 ?>
@@ -135,7 +135,7 @@ td {
 </style>
 
 <body>
-    <img src="../template/img/logo1.jpg" style="" width="200" height="65" alt="">
+    <img src="../template/img/logo1.jpg" width="200" height="65" alt="">
     <p style="font-weight:bold; font-size:32px; text-align:center; padding-top: -7.5%;"><b> JOSE LUIS MONDRAGON Y CIA SA
             DE CV
         </b></p>
@@ -330,7 +330,7 @@ td {
             $dompdf->set_paper('letter', 'portrait');
             $dompdf->load_html(ob_get_clean());
             $dompdf->render();
-            $dompdf->stream("Evaluación de Nivel I", array("Attachment" => 0));
+            $dompdf->stream("VALE DE PRODUCCIÓN", array("Attachment" => 0));
             $pdf = $dompdf->output();
         ?>
 </body>

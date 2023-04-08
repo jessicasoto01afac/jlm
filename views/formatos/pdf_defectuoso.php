@@ -137,7 +137,7 @@ td {
 </style>
 
 <body>
-    <img src="../template/img/logo1.jpg" style="" width="200" height="65" alt="">
+    <img src="../template/img/logo1.jpg" width="200" height="65" alt="">
     <p style="font-weight:bold; font-size:32px; text-align:center; padding-top: -7.5%;"><b> JOSE LUIS MONDRAGON Y CIA SA
             DE CV
         </b></p>

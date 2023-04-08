@@ -1,7 +1,8 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT * FROM transforma t, articulos a where t.estado='0' and t.id_articulo_final = a.artcodigo ORDER BY id_trans ASC";
+	//$query = "SELECT * FROM transforma t, articulos a where t.estado='0' and t.id_articulo_final = a.artcodigo ORDER BY id_trans ASC";
+	$query = "SELECT * FROM transformation t, articulos a where t.estado='0' and t.id_articfial = a.artcodigo ORDER BY id_trans ASC";
 	$resultado = mysqli_query($conexion, $query);
 
 	if(!$resultado){

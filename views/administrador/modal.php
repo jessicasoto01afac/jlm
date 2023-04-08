@@ -1787,240 +1787,20 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label label2">CODIGO ARTICULO EXTENDIDO: <span
-                                        class="tx-danger">*</span></label>
-                                <select disabled="" class="form-control" id="edithartext" name="edithartext" type="text"
-                                    data-live-search="true" style="width: 100%">
-                                    <option value="0">CODIGO</option>
-                                    <?php while($ext = mysqli_fetch_row($extendido)):?>
-                                    <option value="<?php echo $ext[0]?>"><?php echo $ext[0]?></option>
-                                    <?php endwhile; ?>
-                                </select>
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label label2">CODIGO DE ETIQUETAS<span
-                                        class="tx-danger">*</span></label>
-                                <select disabled="" class="form-control" id="editharetq" name="editharetq" type="text"
-                                    data-live-search="true" style="width: 100%">
-                                    <option value="0">CODIGO</option>
-                                    <?php while($etqu = mysqli_fetch_row($etiquetas)):?>
-                                    <option value="<?php echo $etqu[0]?>"><?php echo $etqu[0]?></option>
-                                    <?php endwhile; ?>
-                                </select>
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label class="form-control-label label2">HOJAS<span class="tx-danger">*</span></label>
-                                <input disabled="" class="form-control inputalta" type="number" name="edithojas"
-                                    id="edithojas">
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label class="form-control-label label2">DIVISIÓN<span
-                                        class="tx-danger">*</span></label>
-                                <input disabled="" class="form-control inputalta" type="number" name="editdivision"
-                                    id="editdivision">
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label label2">CODIGO DE MINAGRIS<span
-                                        class="tx-danger">*</span></label>
-                                <select disabled="" class="form-control" id="mingriscd" name="mingriscd" type="text"
-                                    data-live-search="true" style="width: 100%">
-                                    <option value="">CODIGO</option>
-                                    <option value="2000">2000</option>
-                                    <option value="2005">2005</option>
-                                    <option value="0">NO APLICA</option>
-                                </select>
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label class="form-control-label label2">HOJAS<span class="tx-danger">*</span></label>
-                                <input disabled="" class="form-control inputalta" type="number" name="hjminag"
-                                    id="hjminag">
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label class="form-control-label label2">CANTIDAD<span
-                                        class="tx-danger">*</span></label>
-                                <input disabled="" class="form-control inputalta" type="number" name="catminagr"
-                                    id="catminagr">
-                            </div>
-                        </div><!-- col-4 -->
                         <div class="col-lg-12">
-                            <label class="tx-indigo" style="font-size:20px" for="">ARTICULOS EXTRA</label>
+                            <label class="tx-indigo" style="font-size:20px" for="">ARTICULOS PARA LA
+                                TRANSFORMACIÓN</label>
                         </div>
-                        <div class="col-lg-3" id="cartonedith" name="cartonedith">
-                            <div class="form-group">
-                                <label class="form-control-label label2 tx-primary">Cartón</label>
-                                <select disabled="" class="form-control" data-placeholder="Elija si aplioca o no"
-                                    onchange="carton()" id="cartonedt" name="cartonedt" type="text"
-                                    data-live-search="true" style="width: 100%">
-                                    <option value="0">SELECCIONE</option>
-                                    <option value="APLICA">APLICA</option>
-                                    <option value="NO APLICA">NO APLICA</option>
-                                </select>
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3" id="cartoned" name="cartoned">
-                            <div class="form-group">
-                                <label class="form-control-label label2">Codigo de Carton:</label>
-                                <select disabled="" onchange="carton()" class="form-control"
-                                    data-placeholder="Seleccione" id="edthcarton" name="edthcarton" type="text"
-                                    data-live-search="true">
-                                    <option value="0">CODIGO</option>
-                                    <?php while($ided = mysqli_fetch_row($articuloedth)):?>
-                                    <option value="<?php echo $ided[0]?>"><?php echo $ided[0]?></option>
-                                    <?php endwhile; ?>
-                                </select>
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3" id="cartonedith" name="cartonedith">
-                            <div class="form-group">
-                                <label class=" form-control-label label2">División carton</label>
-                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
-                                    name="eddivcarton" id="eddivcarton" placeholder="Ingresa">
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3" id="cartonmilteed" name="cartonmilteed">
-                            <div class="form-group">
-                                <label class=" form-control-label label2">multiplica carton</label>
-                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
-                                    name="multcartonedt" id="multcartonedt" placeholder="Ingresa">
-                            </div>
-                        </div>
-                        <!-- cartonsillo -->
-                        <div class="col-lg-3" id="cartonsilloedith" name="cartonsilloedith">
-                            <div class="form-group">
-                                <label class="form-control-label label2 tx-primary">Cartonsillo</label>
-                                <select disabled="" class="form-control" data-placeholder="Elija si aplioca o no"
-                                    onchange="" id="cartonsilledith" name="cartonsilledith" type="text"
-                                    data-live-search="true" style="width: 100%">
-                                    <option value="0">SELECCIONE</option>
-                                    <option value="APLICA">APLICA</option>
-                                    <option value="NO APLICA">NO APLICA</option>
-                                </select>
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3" id="cartonsilloed" name="cartonsilloed">
-                            <div class="form-group">
-                                <label class="form-control-label label2">Codigo de cartonsillo:</label>
-                                <select disabled="" onchange="" class="form-control" data-placeholder="Seleccione"
-                                    id="edthcartonsillo" name="edthcartonsillo" type="text" data-live-search="true">
-                                    <option value="0">CODIGO</option>
-                                    <?php while($ided1 = mysqli_fetch_row($articuloedth1)):?>
-                                    <option value="<?php echo $ided1[0]?>"><?php echo $ided1[0]?></option>
-                                    <?php endwhile; ?>
-                                </select>
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3" id="carnsillodvedith" name="carnsillodvedith">
-                            <div class="form-group">
-                                <label class=" form-control-label label2">División cartonsillo</label>
-                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
-                                    name="eddivcartonsillo" id="eddivcartonsillo" placeholder="Ingresa">
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3" id="cartonsillomilteed" name="cartonsillomilteed">
-                            <div class="form-group">
-                                <label class=" form-control-label label2">multiplica cartonsillo</label>
-                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
-                                    name="multcartonsilloedt" id="multcartonsilloedt" placeholder="Ingresa">
-                            </div>
-                        </div>
-
-                        <!-- caple -->
-                        <div class="col-lg-3" id="capleedithdv" name="capleedithdv">
-                            <div class="form-group">
-                                <label class="form-control-label label2 tx-primary">Caple</label>
-                                <select disabled="" class="form-control" data-placeholder="Elija si aplioca o no"
-                                    onchange="" id="capleedith" name="capleedith" type="text" data-live-search="true"
-                                    style="width: 100%">
-                                    <option value="0">SELECCIONE</option>
-                                    <option value="APLICA">APLICA</option>
-                                    <option value="NO APLICA">NO APLICA</option>
-                                </select>
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3" id="caplecoeth" name="cartonsilloed">
-                            <div class="form-group">
-                                <label class="form-control-label label2">Codigo de caple:</label>
-                                <select disabled="" onchange="" class="form-control" data-placeholder="Seleccione"
-                                    id="edthcaplecod" name="edthcaplecod" type="text" data-live-search="true">
-                                    <option value="0">CODIGO</option>
-                                    <?php while($ided2 = mysqli_fetch_row($articuloedth2)):?>
-                                    <option value="<?php echo $ided2[0]?>"><?php echo $ided2[0]?></option>
-                                    <?php endwhile; ?>
-                                </select>
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3" id="capledvedith" name="capledvedith">
-                            <div class="form-group">
-                                <label class=" form-control-label label2">División caple</label>
-                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
-                                    name="eddivcaple" id="eddivcaple" placeholder="Ingresa">
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3" id="caplemilteed" name="caplemilteed">
-                            <div class="form-group">
-                                <label class=" form-control-label label2">multiplica caple</label>
-                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
-                                    name="multcapleedt" id="multcapleedt" placeholder="Ingresa">
-                            </div>
-                        </div>
-                        <!-- liston/cordon -->
-                        <div class="col-lg-3" id="listonarexedth" name="listonarexedth">
-                            <div class="form-group">
-                                <label class="form-control-label label2 tx-primary">Listón/Cordon</label>
-                                <select disabled="" class="form-control" data-placeholder="Elija si aplioca o no"
-                                    onchange="liston()" id="listonaplicedt" name="listonaplicedt" type="text"
-                                    data-live-search="true" style="width: 100%">
-                                    <option value="0">SELECCIONE</option>
-                                    <option value="APLICA">APLICA</option>
-                                    <option value="NO APLICA">NO APLICA</option>
-                                </select>
-                            </div>
-                        </div><!-- col-4 -->
-                        <div class="col-lg-3" id="listonedth" name="listonedth">
-                            <div class="form-group">
-                                <label class="form-control-label label2">Codigo de listón:</label>
-                                <select disabled="" onchange="" class="form-control" data-placeholder="Seleccione"
-                                    id="codlistonedt" name="codlistonedt" type="text" data-live-search="true">
-                                    <option value="0">CODIGO</option>
-                                    <?php while($ided3 = mysqli_fetch_row($articuloedth3)):?>
-                                    <option value="<?php echo $ided3[0]?>"><?php echo $ided3[0]?></option>
-                                    <?php endwhile; ?>
-                                </select>
-                            </div>
-                        </div><!-- col-4 -->
-                        <!-- col-4 -->
-                        <div class="col-lg-3" id="listonmilt" name="listonmilt">
-                            <div class="form-group">
-                                <label class=" form-control-label label2">multiplica listón</label>
-                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
-                                    name="multlistonedt" id="multlistonedt" placeholder="Ingresa">
-                            </div>
-                        </div><!-- col-3 -->
                         <br>
                         <div class="col-lg-12" id="masplus" name="masplus" style="display:none">
                             <button type="button" onclick="addplusedit()"
                                 class="btn btn-outline-purple btn-block mg-b-10"><i
-                                    class="fa fa-plus mg-r-10"></i>AGREGAR MAS
-                                COLORES</button>
+                                    class="fa fa-plus mg-r-10"></i>AGREGAR ARTICULOS</button>
                         </div><!-- col-3 -->
-                        <div id="masplus2" name="masplus2" class="col-lg-6" id="masplusext" name="masplusext"
+                        <div id="masplus2" name="masplus2" class="col-lg-4" id="masplusext" name="masplusext"
                             style="display:none">
                             <div class="form-group">
-                                <label class="form-control-label label2">CODIGO ARTICULO EXTENDIDO: <span
+                                <label class="form-control-label label2">Codigo articulo: <span
                                         class="tx-danger">*</span></label>
                                 <select class="form-control" id="edithpusadd" name="edithpusadd" type="text"
                                     data-live-search="true" style="width: 100%">
@@ -2031,14 +1811,30 @@
                                 </select>
                             </div>
                         </div><!-- col-4 -->
-                        <div id="masplus3" name="masplus3" class="col-lg-3" id="multimascolor" style="display:none">
+                        <div class="col-lg-4" id="mastype" name="mastype" style="display:none">
+                            <div class="form-group">
+                                <label class="form-control-label label2">clase: <span
+                                        class="tx-danger">*</span></label>
+                                <select class="form-control select" name="type_artedth" id="type_artedth">
+                                    <option value="">Seleccionar</option>
+                                    <option value="EXTENDIDO">EXTENDIDO</option>
+                                    <option value="ETIQUETAS">ETIQUETAS</option>
+                                    <option value="CARTON">CARTON</option>
+                                    <option value="CARTONSILLO">CARTONSILLO</option>
+                                    <option value="CAPLE">CAPLE</option>
+                                    <option value="LISTON_CORDÓN">LISTON/CORDÓN</option>
+                                    <option value="MINAGRIS">MINAGRIS</option>
+                                </select>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div id="masplus3" name="masplus3" class="col-lg-2" id="multimascolor" style="display:none">
                             <div class="form-group">
                                 <label class=" form-control-label label2">Multiplica</label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
                                     name="mltimascolor" id="mltimascolor" placeholder="Ingresa">
                             </div>
                         </div>
-                        <div id="masplus4" name="masplus4" class="col-lg-3" id="divimascolor" style="display:none">
+                        <div id="masplus4" name="masplus4" class="col-lg-2" id="divimascolor" style="display:none">
                             <div class="form-group">
                                 <label class=" form-control-label label2">División</label>
                                 <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
@@ -3410,8 +3206,8 @@
                             <div class="form-group">
                                 <label class="form-control-label label2">DESCRIPCIÓN<span
                                         class="tx-danger">*</span></label>
-                                <select disabled="" class="form-control" id="edithdesprvv" name="edithdesprvv" type="text"
-                                    data-live-search="true" style="width: 100%">
+                                <select disabled="" class="form-control" id="edithdesprvv" name="edithdesprvv"
+                                    type="text" data-live-search="true" style="width: 100%">
                                     <option value="0">CODIGO</option>
                                     <?php while($artss1 = mysqli_fetch_row($artprvv2)):?>
                                     <option value="<?php echo $artss1[0]?>"><?php echo $artss1[2]?></option>
@@ -3423,7 +3219,7 @@
                             <div class="form-group">
                                 <label class="form-control-label label2">CODIGO DEL PROVEEDOR: <span
                                         class="tx-danger">*</span></label>
-                                        <input disabled="" class="form-control inputalta" type="text" name="codprvar"
+                                <input disabled="" class="form-control inputalta" type="text" name="codprvar"
                                     id="codprvar">
                             </div>
                         </div><!-- col-4 -->
@@ -3431,7 +3227,7 @@
                             <div class="form-group">
                                 <label class="form-control-label label2">DESCRIPCIÓN PROVEEDOR<span
                                         class="tx-danger">*</span></label>
-                                        <input disabled="" class="form-control inputalta" type="text" name="desprvar"
+                                <input disabled="" class="form-control inputalta" type="text" name="desprvar"
                                     id="desprvar">
                             </div>
                         </div><!-- col-4 -->
@@ -3518,48 +3314,42 @@
                         </div><!-- col-4 -->
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <label class="form-control-label label2">DESC 1:<span
-                                        class="tx-danger">*</span></label>
+                                <label class="form-control-label label2">DESC 1:<span class="tx-danger">*</span></label>
                                 <input disabled="" class="form-control inputalta" type="number" name="edithsec1"
                                     id="edithsec1">
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <label class="form-control-label label2">DESC 2:<span
-                                        class="tx-danger">*</span></label>
+                                <label class="form-control-label label2">DESC 2:<span class="tx-danger">*</span></label>
                                 <input disabled="" class="form-control inputalta" type="number" name="edithsec2"
                                     id="edithsec2">
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <label class="form-control-label label2">DESC 3:<span
-                                        class="tx-danger">*</span></label>
+                                <label class="form-control-label label2">DESC 3:<span class="tx-danger">*</span></label>
                                 <input disabled="" class="form-control inputalta" type="number" name="edithsec3"
                                     id="edithsec3">
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <label class="form-control-label label2">DESC 4:<span
-                                        class="tx-danger">*</span></label>
+                                <label class="form-control-label label2">DESC 4:<span class="tx-danger">*</span></label>
                                 <input disabled="" class="form-control inputalta" type="number" name="edithsec4"
                                     id="edithsec4">
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <label class="form-control-label label2">DESC 5:<span
-                                        class="tx-danger">*</span></label>
+                                <label class="form-control-label label2">DESC 5:<span class="tx-danger">*</span></label>
                                 <input disabled="" class="form-control inputalta" type="number" name="edithsec5"
                                     id="edithsec5">
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <label class="form-control-label label2">DESC 6:<span
-                                        class="tx-danger">*</span></label>
+                                <label class="form-control-label label2">DESC 6:<span class="tx-danger">*</span></label>
                                 <input disabled="" class="form-control inputalta" type="number" name="edithsec6"
                                     id="edithsec6">
                             </div>
@@ -3568,14 +3358,16 @@
                             <div class="form-group">
                                 <label class="form-control-label label2">OBSERVACION:<span
                                         class="tx-danger">*</span></label>
-                                <textarea disabled="" class="form-control inputalta" name="edithobs1" id="edithobs1" cols="5" rows="5"></textarea>
+                                <textarea disabled="" class="form-control inputalta" name="edithobs1" id="edithobs1"
+                                    cols="5" rows="5"></textarea>
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label label2">OBSERVACION 2:<span
                                         class="tx-danger">*</span></label>
-                                <textarea disabled="" class="form-control inputalta" name="edithobs2" id="edithobs2" cols="5" rows="5"></textarea>
+                                <textarea disabled="" class="form-control inputalta" name="edithobs2" id="edithobs2"
+                                    cols="5" rows="5"></textarea>
                             </div>
                         </div><!-- col-4 -->
                     </div><!-- col-4 -->
@@ -3588,19 +3380,22 @@
                     CAMBIOS</button>
             </div>
             <br>
-            <div style="display:none;" id="edthdubliarprv" name="edthdubliarprv" class="alert alert-warning" role="alert">
+            <div style="display:none;" id="edthdubliarprv" name="edthdubliarprv" class="alert alert-warning"
+                role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-alert-circled alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                     <span><strong>Advertencia!</strong> El resgistro ya existe</span>
                 </div><!-- d-flex -->
             </div><!-- alert -->
-            <div style="display:none;" id="edthvaciosarprvv" name="edthvaciosarprvv" class="alert alert-info" role="alert">
+            <div style="display:none;" id="edthvaciosarprvv" name="edthvaciosarprvv" class="alert alert-info"
+                role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-information alert-icon tx-24 mg-t-5 mg-xs-t-0"></i>
                     <span><strong>Advertencia!</strong> Llenar todos los campos</span>
                 </div><!-- d-flex -->
             </div><!-- alert -->
-            <div style="display:none;" id="edtherrartprvv" name="edtherrartprvv" class="alert alert-danger" role="alert">
+            <div style="display:none;" id="edtherrartprvv" name="edtherrartprvv" class="alert alert-danger"
+                role="alert">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="icon ion-ios-close alert-icon tx-24"></i>
                     <span><strong>Advertencia!</strong>No se puedo guardar contactar a soporte tecnico o levantar un
