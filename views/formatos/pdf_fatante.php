@@ -3,16 +3,16 @@ ob_start();
 $folio = $_GET['data'];
 include ("../controller/conexion.php");
 //CABECERA
-$query = "SELECT k.*,DATE_FORMAT(fecha,'%d-%m-%Y')as date FROM kardex k where k.estado='0' AND k.tipo='MATERIAL_DEFECTUOSO' AND k.refe_1='$folio' GROUP BY refe_1 ORDER BY id_kax ASC";
+$query = "SELECT k.*,DATE_FORMAT(fecha,'%d-%m-%Y')as date FROM kardex k where k.estado='0' AND k.tipo='MATERIAL_FALTANTE' AND k.refe_1='$folio' GROUP BY refe_1 ORDER BY id_kax ASC";
       $resultado = mysqli_query($conexion, $query);
     $data = mysqli_fetch_array($resultado);
     
     //CARCTERES SELECT LEN(MyColumna) FROM MyTabla
-   $querycar = "SELECT CHAR_LENGTH(refe_1) as caracter, refe_1 FROM kardex k where k.estado='0' AND k.tipo='MATERIAL_DEFECTUOSO' AND k.refe_1='$folio' GROUP BY refe_1 ORDER BY id_kax ASC";
+   $querycar = "SELECT CHAR_LENGTH(refe_1) as caracter, refe_1 FROM kardex k where k.estado='0' AND k.tipo='MATERIAL_FALTANTE' AND k.refe_1='$folio' GROUP BY refe_1 ORDER BY id_kax ASC";
     $resucar = mysqli_query($conexion, $querycar);
 
 //TABLA DE EXTENDIDO
-$query1 = "SELECT * FROM kardex k, articulos a where k.tipo='MATERIAL_DEFECTUOSO' AND a.artcodigo=k.codigo_1 AND k.refe_1='$folio' ORDER BY k.id_kax ASC";
+$query1 = "SELECT * FROM kardex k, articulos a where k.tipo='MATERIAL_FALTANTE' AND a.artcodigo=k.codigo_1 AND k.refe_1='$folio' ORDER BY k.id_kax ASC";
       $resultado1 = mysqli_query($conexion, $query1);
     //$data1 = mysqli_fetch_array($resultado1);
 

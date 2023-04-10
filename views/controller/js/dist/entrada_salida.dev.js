@@ -2032,11 +2032,9 @@ function openewfalt() {
       onFinished: function onFinished(event, currentIndex) {
         // alert("entro");
         var refe_1 = document.getElementById('falfolio').value;
-        var fecha = document.getElementById('falfecha').value;
-        var deptamt = document.getElementById('faldeped').value;
-        var cliente = document.getElementById('faltcliente').value; //alert(datos);
+        var datos = 'refe_1=' + refe_1 + '&opcion=finaliflt'; //alert(datos);
 
-        if (refe_1 == '' || fecha == '' || deptamt == '' || cliente == '') {
+        if (refe_1 == '') {
           document.getElementById('vaciosdf').style.display = '';
           setTimeout(function () {
             document.getElementById('vaciosdf').style.display = 'none';
@@ -2044,13 +2042,32 @@ function openewfalt() {
           return;
         } else {
           //alert(respuesta);
-          Swal.fire({
-            type: 'success',
-            text: 'Se AGREGO el vale de producción de forma correcta',
-            showConfirmButton: false,
-            timer: 2000
+          $.ajax({
+            type: "POST",
+            url: "../controller/php/insertsalidentra.php",
+            data: datos
+          }).done(function (respuesta) {
+            //alert(respuesta);
+            if (respuesta == 0) {
+              Swal.fire({
+                type: 'success',
+                text: 'Se agrego de forma correcta',
+                showConfirmButton: false,
+                timer: 1500
+              });
+              setTimeout("location.href = 'matfaltante.php';", 1500);
+            } else if (respuesta == 2) {
+              document.getElementById('dublidf').style.display = '';
+              setTimeout(function () {
+                document.getElementById('dublidf').style.display = 'none';
+              }, 1000); //alert("datos repetidos");
+            } else {
+              document.getElementById('errdf').style.display = '';
+              setTimeout(function () {
+                document.getElementById('errdf').style.display = 'none';
+              }, 1000);
+            }
           });
-          setTimeout("location.href = 'matfaltante.php';", 1500);
         }
       }
     });
