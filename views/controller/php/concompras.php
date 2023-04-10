@@ -1,7 +1,7 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT *,DATE_FORMAT(fecha,'%d-%m-%Y')as date from kardex k, proveedores p where k.tipo='COMPRAS' AND k.estado=0  AND p.codigo_pro=k.proveedor_cliente group by k.refe_1 ORDER BY k.id_kax DESC";
+	$query = "SELECT * FROM compras c, proveedores p WHERE c.estado=0 and p.id_prov =c.id_proveedor group by folio_oc ORDER BY id_comp DESC";
 	$resultado = mysqli_query($conexion, $query);
 	$contador=0;
 	if(!$resultado){
@@ -9,17 +9,47 @@
 	}else{
 		while($data = mysqli_fetch_assoc($resultado)){
 			$contador++;
-				$id_kardex=$data["id_kax"];
-				$refe_1=$data["refe_1"];
-				$proceso = "<a onclick='infodevoluc($refe_1)' style='cursor:pointer;' title='Ver detalles del vale' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='deletdevolu($refe_1)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletevproduc'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";
+			if ($data["estatus"] == "PENDIENTE") {
+				$id_kardex=$data["id_proveedor"];
+				$refe_1=$data["folio_oc"];
+				$estatus="<td class='tx-12'><span class='square-8 bg-warning mg-r-5 rounded-circle'></span>PENDIENTE</td>";
+				$proceso = "<a onclick='dettcompras($refe_1)' style='cursor:pointer;' title='Ver detalles del vale' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='deletdevolu($refe_1)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletevproduc'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";
 				$cursos[] = [ 
 					$contador,
-					$data["refe_1"], 
+					$data["folio_oc"], 
 					$data["fecha"],
 					$data["nom_pro"],
-					$data["revision"],  
+					$estatus,  
 					$proceso
 				];
+			}else if ($data["estatus"] == "COMPLETADO") {
+				$id_kardex=$data["id_proveedor"];
+				$refe_1=$data["folio_oc"];
+				$estatus="<td class='tx-12'><span class='square-8 bg-success mg-r-5 rounded-circle'></span>FINALIZADO</td>";
+				$proceso = "<a onclick='dettcompras($refe_1)' style='cursor:pointer;' title='Ver detalles del vale' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='deletdevolu($refe_1)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletevproduc'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";
+				$cursos[] = [ 
+					$contador,
+					$data["folio_oc"], 
+					$data["fecha"],
+					$data["nom_pro"],
+					$estatus,  
+					$proceso
+				];
+			}else if ($data["estatus"] == "ENTREGA PARCIAL") {
+				$id_kardex=$data["id_proveedor"];
+				$refe_1=$data["folio_oc"];
+				$estatus="<td class='tx-12'><span class='square-8 bg-purple mg-r-5 rounded-circle'></span>ENTREGA PARCIAL</td>";
+				$proceso = "<a onclick='dettcompras($refe_1)' style='cursor:pointer;' title='Ver detalles del vale' class='btn btn-primary btn-icon' data-toggle='modal' data-target=''><div><i style='color:white;' class='fa fa-list-ul'></i></div></a>  <a onclick='deletdevolu($refe_1)' style='cursor:pointer;' title='Eliminar' class='btn btn-danger btn-icon' data-toggle='modal' data-target='#modal-deletevproduc'><div><i style='color:white;' class='fa fa-trash-o'></i></div></a>";
+				$cursos[] = [ 
+					$contador,
+					$data["folio_oc"], 
+					$data["fecha"],
+					$data["nom_pro"],
+					$estatus,  
+					$proceso
+				];
+			}
+				
 		}
 	}
 	if(isset($cursos)&&!empty($cursos )){

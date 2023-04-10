@@ -17,7 +17,7 @@ function opencompras() {
             {
                 extend: 'pdfHtml5',
                 text: 'Generar PDF',
-                messageTop: 'RESUMEN DE DEVOLUCIÓN',
+                messageTop: 'RESUMEN DE COMPRAS',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5]
                 },
@@ -72,7 +72,7 @@ function opencompras() {
         // "order": [
         //     [5, "asc"]
         // ],
-        "ajax": "../controller/php/condevoulucion.php",
+        "ajax": "../controller/php/concompras.php",
     });
     // CON ESTO FUNCIONA EL MULTIFILTRO//
     /*$('#inventario thead tr').clone(true).appendTo('#inventario thead');
@@ -318,4 +318,31 @@ function editarartcm(idedimp) {
             }
         }
     });
+}
+
+function dettcompras(id_produc) {
+    //alert(id_produc);
+    $("#detalles").toggle(250); //Muestra contenedor de detalles
+    $("#lista").toggle("fast"); //Oculta lista
+
+    let foliocm = document.getElementById('cnumorde').innerHTML;
+    $.ajax({
+        url: '../controller/php/infcompras.php',
+        type: 'GET',
+        data: 'folio=' + foliocm
+    }).done(function(resp) {
+        //alert(resp);
+        obj = JSON.parse(resp);
+        let res = obj.data;
+        let x = 0;
+        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="defectuoso" name="defectuoso" class="table table-bordered""><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        for (U = 0; U < res.length; U++) {
+            x++;
+            let id_valepro = obj.data[U].id_kax;
+            html += "<tr><td>" + obj.data[U].id_comp + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observación + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsmt1(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithmtdefc1'>Editar</a><a class='nav-link' onclick='deletenewart1(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearmtnew1'>Eliminar</a>" + "</td></tr>";
+        }
+        html += '</div></tbody></table></div></div>';
+        $("#listcompras").html(html);
+
+    })
 }

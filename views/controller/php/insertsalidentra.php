@@ -259,6 +259,10 @@ if(!isset($usuario)){
                 echo "1";
             }
     //Condición donde elimina usuario
+    }else if($opcion === 'finaliflt'){
+        $refe_1 = $_POST['refe_1'];
+        histfalt($usuario,$refe_1,$conexion);
+    //Condición donde elimina usuario
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -542,6 +546,16 @@ function hisdetedefc($usuario,$realizo,$folio,$conexion){
     }
 }
 
+function histfalt($usuario,$refe_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', 'GENERA MATERIAL FALTANTE', 'FOLIO:' '$refe_1','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 
 //funcion para cerrar laa conexion

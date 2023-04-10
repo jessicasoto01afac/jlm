@@ -43,7 +43,6 @@ table tr td {
 
       <div class="br-pagebody">
         <div class="br-section-wrapper">
-          <br>   
 
             <div id="listhisc">
         </div><!-- br-section-wrapper -->
@@ -85,7 +84,7 @@ table tr td {
         obj = JSON.parse(resp);
         var res = obj.data;
         var x = 0;
-        html = '<div class="table-wrapper table-responsive"><table style="width:100%; table-layout:" name="hicambios" id="hicambios" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th style="width:5%;"><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>USUARIO</th><th style="width:500px"><i></i>PROCESO</th><th><i></i>REGISTRO</th><th><i></i>FECHA</th></tr></thead><tbody>';
+        html = '<div class="table-wrapper"><table style="width:100%;" name="hicambios" id="hicambios" class="table display responsive nowrap dataTable no-footer dtr-inline"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>USUARIO</th><th style="width:500px"><i></i>PROCESO</th><th><i></i>REGISTRO</th><th><i></i>FECHA</th></tr></thead><tbody>';
         for (V = 0; V < res.length; V++) {  
                 x++;
                 html += "<tr><td>" + obj.data[V].id_his + "</td><td>" + obj.data[V].id_usu + "</td><td>" + obj.data[V].proceso + "</td><td>" + obj.data[V].registro + "</td><td>" + obj.data[V].fecha + "</td></tr>";            
@@ -94,7 +93,6 @@ table tr td {
         $("#listhisc").html(html);
         'use strict';
         $('#hicambios').DataTable({
-           responsive: true,
           language: {
             searchPlaceholder: 'Buscar...',
             sSearch: '',
@@ -112,30 +110,6 @@ table tr td {
         });
     })
 
-    $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
-    
-      $(function(){
-        'use strict';
-
-        $('#datatable1').DataTable({
-          responsive: true,
-          language: {
-            searchPlaceholder: 'Search...',
-            sSearch: '',
-            lengthMenu: '_MENU_ items/page',
-          }
-        });
-
-        $('#datatable2').DataTable({
-          bLengthChange: false,
-          searching: false,
-          responsive: true
-        });
-
-        // Select2
-        $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
-
-      });
     </script>
   </body>
 

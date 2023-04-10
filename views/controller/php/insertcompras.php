@@ -87,7 +87,7 @@ function comprobacion ($folio_oc,$id_artprove,$conexion){
 }
 //funcion para guardar el ARTICULO PARA TRASFORMACION EN LATA DE MEO 
 function registrar ($folio_oc,$fecha,$fecha_entrga,$id_proveedor,$uso_CFDI,$cond_pago,$asignado,$id_articulo,$id_artprove,$cantidad,$observación,$conexion){
-    $query="INSERT INTO compras VALUES(0,'$folio_oc','$fecha','$fecha_entrga','$id_proveedor','$uso_CFDI','$cond_pago','$asignado','$id_articulo','$id_artprove','$cantidad','$observación',0)";
+    $query="INSERT INTO compras VALUES(0,'$folio_oc','$fecha','$fecha_entrga','$id_proveedor','$uso_CFDI','$cond_pago','$asignado','$id_articulo','$id_artprove','$cantidad','$observación','PENDIENTE',0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

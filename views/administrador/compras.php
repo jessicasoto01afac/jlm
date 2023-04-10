@@ -56,7 +56,7 @@ include('header.php');
                                     <th>FOLIO</th>
                                     <th>FECHA</th>
                                     <th>PROVEEDOR</th>
-                                    <th>FOLIO JLM</th>
+                                    <th>ESTATUS</th>
                                     <th>ACCIONES</th>
                                 </tr>
                             </thead>
@@ -85,9 +85,9 @@ include('header.php');
         <div class="br-mainpanel">
             <div class="br-pageheader pd-y-15 pd-l-20">
                 <nav class="breadcrumb pd-0 mg-0 tx-12">
-                    <a class="breadcrumb-item" href="../administrador/devolution.php" onclick="cancelar();">Lista de
-                        Devolución</a>
-                    <span class="breadcrumb-item active">Devolución</span>
+                    <a class="breadcrumb-item" href="../administrador/compras.php" onclick="cancelar();">Lista de
+                        Compras</a>
+                    <span class="breadcrumb-item active">Compras</span>
                 </nav>
             </div><!-- br-pageheader -->
             <div class="br-pagebody">
@@ -98,8 +98,8 @@ include('header.php');
                         <button onclick="closedithmdef()" id="closemted" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
-                        <button onclick="pdfdv()" title="Imprimir" id="pdfvofi" name="pdfvofi"
-                            type="button" class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
+                        <button onclick="pdfdv()" title="Imprimir" id="pdfvofi" name="pdfvofi" type="button"
+                            class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
                         <button title="ver historial" onclick="histmaterdv()" data-toggle="modal"
                             data-target="#modal-mdhistorialvd" type="button" class="btn btn-primary"><i
                                 class="fa fa-history"></i></button>
@@ -107,7 +107,7 @@ include('header.php');
                 </div><!-- col-5 -->
                 <div class="br-section-wrapper">
 
-                    <h6 class="">DEVOLUCIÓN</h6>
+                    <h6 class="">COMPRAS</h6>
                     <input value="DEVOLUCIÓN" id="tipe1" name="tipe1" style="display:none" type="text">
                     <form id="info-valofi" method="POST">
 
@@ -119,44 +119,34 @@ include('header.php');
                                     <div class="form-group">
                                         <input style="display:none;" disabled="" class="form-control inputalta"
                                             type="text" name="infidmd" id="infidmd">
-                                        <label class="form-control-label" style="font-size:14px">FOLIO: <span
+                                        <label class="form-control-label" style="font-size:14px">ORDEN DE COMPRAS: <span
                                                 class="tx-danger">*</span></label>
                                         <!-- <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingresa el Folio"> -->
-                                        <label class="form-control-label" id="fmdi" name="fmdi"
+                                        <label class="form-control-label" id="cnumorde" name="cnumorde"
                                             style="font-size: 24px;color:#14128F"></label>
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-4 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label" style="font-size:14px">Fecha: <span
+                                        <label class="form-control-label" style="font-size:14px">Fecha OC: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly type="date" id="infecdf" name="infecdf"
+                                        <input class="form-control" readonly type="date" id="datecomp" name="datecomp"
                                             placeholder="Enter lastname">
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-4 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label mg-b-0-force"
-                                            style="font-size:14px; width:100%">DEPARTAMENTO:<span class="tx-danger">*</span></label>
-                                        <select id="infdepmd" disabled="" name="infdepmd" class="form-control"
-                                            data-placeholder="Choose country">
-                                            <option value="">SELECCIONA UNA OPCIÓN</option>
-                                            <option value="ALMACEN">ALMACEN</option>
-                                            <option value="BODEGA">BODEGA</option>
-                                            <option value="COMPRAS">COMPRAS</option>
-                                            <option value="EMPAQUE">EMPAQUE</option>
-                                            <option value="OFICINA">OFICINA</option>
-                                            <option value="TALLER DE CORTE">TALLER DE CORTE</option>
-                                            <option value="TALLER DE MEDICIÓN">TALLER DE MEDICIÓN</option>
-                                            <option value="VENTAS">VENTAS</option>
-                                        </select>
+                                        <label class="form-control-label" style="font-size:14px">Entrega: <span
+                                                class="tx-danger">*</span></label>
+                                        <input class="form-control" readonly type="date" id="datentrega" name="datentrega"
+                                            placeholder="Enter lastname">
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group bd-t-0-force">
-                                        <label class="form-control-label" style="font-size:14px">CLIENTE:
+                                        <label class="form-control-label" style="font-size:14px">PROVEEDOR:
                                             <span class="tx-danger">*</span></label>
-                                        <select disabled class="form-control" name="infclinte" id="infclinte"
+                                        <select disabled class="form-control" name="proveedcm" id="proveedcm"
                                             style="font-size:16px" data-placeholder="Choose country">
                                             <option label="">Selecciona</option>
                                             <?php while($clie = mysqli_fetch_row($cliente)):?>
@@ -166,29 +156,77 @@ include('header.php');
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-3">
                                     <div class="form-group bd-t-0-force">
-                                        <label class="form-control-label" style="font-size:14px">MOTIVO DE LA
-                                            DEVOLUCIÓN:
+                                        <label class="form-control-label" style="font-size:14px">USO DEL CFDI:
                                             <span class="tx-danger">*</span></label>
-                                        <textarea readonly class="form-control" name="motdf" id="motdf" cols="3"
-                                            rows="3"></textarea>
+                                        <input class="form-control" readonly id="uscfdicm" name="uscfdicm"
+                                            placeholder="Enter lastname">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-md-3">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">CONDICIONES DE PAGO
+                                            <span class="tx-danger">*</span></label>
+                                        <input class="form-control" readonly id="condcm" name="condcm"
+                                            placeholder="Enter lastname">
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
                                     <div class="form-group mg-b-10-force">
-                                        <label class="form-control-label">PEDIDOS RELACIONADOS/STOCK:</label>
-                                        <input class="form-control" readonly id="pedmatdef" name="pedmatdef"
+                                        <label class="form-control-label">CONSIGNADO A:</label>
+                                        <input class="form-control" readonly id="consignada" name="consignada"
                                             placeholder="Enter lastname">
                                         <!-- <div id="pedmatdef"></div> -->
                                     </div><!-- col-4 -->
                                 </div><!-- col-8 -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">RELACIÓN JLM/ <a
                                                 href="javascript:savereviciondv()">Guardar</a></label>
-                                        <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="relajlmdf"
-                                            id="relajlmdf" placeholder="JLM"></textarea>
+                                        <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="relajlcmp"
+                                            id="relajlcmp" placeholder="JLM"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">ACCIONES: <span
+                                                class="tx-danger">*</span></label>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button id="btnvpautoriz" name="btnvpautoriz" type="button"
+                                                style="display:none;" onclick="autorizavp()"
+                                                class="btn btn-info pd-x-30">Autorizar</button>
+                                            <button title="Dar click para liberar" id="btnvpliberar" name="btnvpliberar"
+                                                type="button" style="display:none;" onclick="liberarm()"
+                                                class="btn btn-dark pd-x-25">Liberar</button>
+                                            <button id="btnvpsurtir" name="btnvpsurtir" type="button"
+                                                style="display:none;" onclick="surtidovp()"
+                                                class="btn btn-indigo pd-x-25">Surtir</button>
+                                            <button id="btnvpfinaliz" name="btnvpfinaliz" type="button"
+                                                style="display:none;" onclick="finalizarvp()"
+                                                class="btn btn-success pd-x-25">Finalizar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">RELACIÓN JLM/ </label>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label mg-b-0-force" style="font-size:14px">ESTATUS:
+                                            <span class="tx-danger">*</span></label>
+                                        <select id="compestatus" disabled="" name="compestatus"
+                                            style="font-size:18px; color:#14128F" class="form-control">
+                                            <option value="" selected>SELECCIONA UNA OPCIÓN</option>
+                                            <option value="PENDIENTE">PENDIENTE</option>
+                                            <option value="SURTIDO">SURTIDO</option>
+                                            <option value="FINALIZADO">FINALIZADO</option>
+                                            <option value="CANCELADO">CANCELADO</option>
+                                            <option value="AUTORIZADO">AUTORIZADO</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <br>
@@ -232,7 +270,7 @@ include('header.php');
                             <h6 class="col-md-4 mg-t--1 mg-md-t-0">ARTICULOS</h6>
                             <br>
                             <div class="col-lg-12">
-                            <div id="listdefinf"></div><!-- col-12 -->
+                                <div id="listcompras"></div><!-- col-12 -->
                             </div><!-- form-layout -->
                     </form>
                 </div>
