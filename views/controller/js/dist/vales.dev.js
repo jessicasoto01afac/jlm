@@ -1894,8 +1894,8 @@ function histvaleofi() {
 }
 
 function pdfvp() {
-  var folio = document.getElementById('fvofi').innerHTML;
-  alert(folio);
+  var folio = document.getElementById('fvofi').innerHTML; //alert(folio);
+
   url = '../formatos/pdf_valeoficina.php';
   window.open(url + "?data=" + folio, '_black');
 }

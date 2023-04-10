@@ -221,7 +221,44 @@ if(!isset($usuario)){
     
             echo "2";
         }
-    //Condición donde cancela el vale de producción
+    //Condición donde cancela el vale de producción 
+    }else if($opcion === 'deleartnewftt'){
+        $id_kardex = $_POST['id_kardex'];
+        $codigo_1 = $_POST['codigo_1'];
+        if (eliminar($id_kardex,$conexion)){
+            echo "0";
+            $realizo = 'ELIMINA ARTICULO MATERIAL FALTANTE';
+            // $usuario='pruebas';
+            histdelete($usuario,$realizo,$id_kardex,$codigo_1,$conexion);
+        }else{
+            echo "1";
+        }
+    //elimina vales de producción 
+    }else if($opcion === 'revisionac3'){
+        $revision = $_POST['revision'];
+        $refe_1 = $_POST['refe_1'];
+        if (jlmrelacion3 ($revision,$refe_1,$conexion)){
+            echo "0";
+        }else{
+            echo "1";
+        }
+        //guarda edicion de entrada 
+    }else if($opcion === 'cambiocabfalt'){
+        $fecha = $_POST['fecha'];
+        $descripcion_1  = $_POST['descripcion_1'];
+        $ubicacion = $_POST['ubicacion'];
+        $refe_2 = $_POST['refe_2'];
+        $refe_1 = $_POST['refe_1'];
+        $proveedor_cliente = $_POST['proveedor_cliente'];
+            if (cambioflt($fecha,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion)){
+                echo "0";
+                //$usuario='PRUEBAS';
+                $realizo = 'EDITA INFORMACIÓN DE LA CABECERA DE MATERIAL FALTANTE';
+                histedith2($usuario,$fecha,$realizo,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion);
+            }else{
+                echo "1";
+            }
+    //Condición donde elimina usuario
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -321,6 +358,16 @@ function jlmrelacion2 ($revision,$refe_1,$conexion){
     }
     cerrar($conexion);
 }
+//funcion para actualizar JLM relacion
+function jlmrelacion3 ($revision,$refe_1,$conexion){
+    $query="UPDATE kardex SET revision='$revision' WHERE refe_1 = '$refe_1' and tipo='MATERIAL_FALTANTE'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //funcion para actualizar la cabecera desde la vista DE MATERIAL DEFECTUOSO
 function cambio ($fecha,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion){
     $query="UPDATE kardex SET fecha='$fecha', descripcion_1='$descripcion_1', ubicacion='$ubicacion',refe_2='$refe_2',proveedor_cliente='$proveedor_cliente' WHERE refe_1 = '$refe_1' AND tipo='MATERIAL_DEFECTUOSO'";
@@ -368,6 +415,16 @@ function registrardv ($refe_1,$codigo_1,$fecha,$descripcion_1,$proveedor_cliente
 //funcion para actualizar la cabecera desde la vista DE MATERIAL DEFECTUOSO
 function cambiodv ($fecha,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion){
     $query="UPDATE kardex SET fecha='$fecha', descripcion_1='$descripcion_1', ubicacion='$ubicacion',refe_2='$refe_2',proveedor_cliente='$proveedor_cliente' WHERE refe_1 = '$refe_1' AND tipo='DEVOLUCIÓN'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para actualizar la cabecera desde la vista DE MATERIAL DEFECTUOSO
+function cambioflt ($fecha,$descripcion_1,$ubicacion,$refe_2,$refe_1,$proveedor_cliente,$conexion){
+    $query="UPDATE kardex SET fecha='$fecha', descripcion_1='$descripcion_1', ubicacion='$ubicacion',refe_2='$refe_2',proveedor_cliente='$proveedor_cliente' WHERE refe_1 = '$refe_1' AND tipo='MATERIAL_FALTANTE'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

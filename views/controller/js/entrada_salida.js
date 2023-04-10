@@ -278,6 +278,38 @@ function cancelar() {
     })
 }
 
+function cancelarfalt() {
+    //alert("entra cancelar");
+    let refe_1 = document.getElementById('falfolio').value;
+    let datos = 'refe_1=' + refe_1 + '&opcion=cancelar';
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertsalidentra.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'Se cancelelo de forma correcta',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setTimeout("location.href = 'matfaltante.php';", 1500);
+        } else if (respuesta == 2) {
+            document.getElementById('dublidf').style.display = ''
+            setTimeout(function() {
+                document.getElementById('dublidf').style.display = 'none';
+            }, 1000);
+            //alert("datos repetidos");
+        } else {
+            document.getElementById('errdf').style.display = ''
+            setTimeout(function() {
+                document.getElementById('errdf').style.display = 'none';
+            }, 1000);
+        }
+    })
+}
+
 function updatedefect() {
     //BORRA LA INFORMACIÓN DE PRODUCTO FINAL
     document.getElementById('mcodigotr').value = "";
@@ -360,6 +392,54 @@ function infodefect(foliodefc) {
     })
 }
 
+//funcion para material faltante 
+function infofalt(foliodefc) {
+    //alert(foliodefc);
+    document.getElementById('fmdi').innerHTML = foliodefc;
+    $("#detalles").toggle(250); //Muestra contenedor 
+    $("#lista").toggle("fast"); //Oculta lista
+    let tipo = "MATERIAL_FALTANTE"
+    $.ajax({
+        url: '../controller/php/condefe.php',
+        type: 'GET',
+        data: 'folio=' + foliodefc + '&tipo=' + tipo
+    }).done(function(resp) {
+        //alert(resp);
+        obj = JSON.parse(resp);
+        let res = obj.data;
+        for (D = 0; D < res.length; D++) {
+            document.getElementById('infecdf').value = obj.data[D].fecha;
+            document.getElementById('infdepmd').value = obj.data[D].refe_2;
+            document.getElementById('infclinte').value = obj.data[D].proveedor_cliente;
+            document.getElementById('relajlmdf').value = obj.data[D].revision;
+            document.getElementById('pedmatdef').value = obj.data[D].ubicacion
+
+            //alert(obj.data[D].revision);
+            /*let area = obj.data[D].ubicacion; //area
+            var data1 = area.split(',');
+            $("#pedidoensal").val(data1).trigger('change.select2');*/
+            //$('#pedmatdef').load('./select/buscpedef.php');
+        }
+    })
+    $.ajax({
+        url: '../controller/php/inffaltante.php',
+        type: 'GET',
+        data: 'folio=' + foliodefc
+    }).done(function(resp) {
+        //alert(resp);
+        obj = JSON.parse(resp);
+        let res = obj.data;
+        let x = 0;
+        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="falttant" name="falttant" class="table table-bordered""><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        for (U = 0; U < res.length; U++) {
+            x++;
+            let id_valepro = obj.data[U].id_kax;
+            html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsmt1(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithmtdefc1'>Editar</a><a class='nav-link' onclick='deletenewart1(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearmtnew1'>Eliminar</a>" + "</td></tr>";
+        }
+        html += '</div></tbody></table></div></div>';
+        $("#listdefinf").html(html);
+    })
+}
 //FUNCION PARA EDITAR MATERIAL DEFCTUOSO EN VISTA DE INFORMACION
 function editmatdef() {
     //alert("EDITAR VALE");
@@ -430,6 +510,9 @@ function saveedithnewmf() {
     if (document.getElementById('tipe').value === "DEVOLUCIÓN") {
         entrada = document.getElementById('vpednewtcantid').value;
         descripcion_1 = document.getElementById('dvmotivo').value;
+    } else if (document.getElementById('tipe').value === "MATERIAL_FALTANTE") {
+        entrada = 0;
+        descripcion_1 = 0;
     } else {
         entrada = 0;
         descripcion_1 = document.getElementById('dfmotivo').value;
@@ -458,6 +541,8 @@ function saveedithnewmf() {
                 });
                 if (document.getElementById('tipe').value === "DEVOLUCIÓN") {
                     updatedefectdv();
+                } else if (document.getElementById('tipe').value === "MATERIAL_FALTANTE") {
+                    updatefaltnte();
                 } else {
                     updateedinemt();
                 }
@@ -555,6 +640,8 @@ function savdelemtart() {
     //alert(datos);
     if (document.getElementById('tipe').value === "DEVOLUCIÓN") {
         datos = 'id_kardex=' + id_kardex + '&codigo_1=' + codigo_1 + '&opcion=deleartnewdv';
+    } else if (document.getElementById('tipe').value === "MATERIAL_FALTANTE") {
+        datos = 'id_kardex=' + id_kardex + '&codigo_1=' + codigo_1 + '&opcion=deleartnewftt';
     } else {
         datos = 'id_kardex=' + id_kardex + '&codigo_1=' + codigo_1 + '&opcion=deleartnew';
     }
@@ -572,8 +659,10 @@ function savdelemtart() {
             });
             if (document.getElementById('tipe').value === "DEVOLUCIÓN") {
                 updatedefectdv();
+            } else if (document.getElementById('tipe').value === "MATERIAL_FALTANTE") {
+                updatefaltnte();
             } else {
-                updatedefect();
+                updateedinemt();
             }
             $('#modal-delearmtnew').modal('hide'); //cierra el modal
             // $('#modal-editarmemoalta').modal('hide'); //cierra el modal
@@ -591,6 +680,41 @@ function saverevicionmdf() {
     let refe_1 = document.getElementById('fmdi').innerHTML;
     let revision = document.getElementById('relajlmdf').value;
     let datos = 'revision=' + revision + '&refe_1=' + refe_1 + '&opcion=revisionac';
+    //alert(datos);
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertsalidentra.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'Se actualizo de forma correcta',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            // closevaleproinf();
+        } else if (respuesta == 2) {
+            document.getElementById('edthmmvacios').style.display = '';
+            setTimeout(function() {
+                document.getElementById('edthmmvacios').style.display = 'none';
+            }, 1000);
+            //alert("datos repetidos");
+        } else {
+            document.getElementById('edthmmerror').style.display = '';
+            setTimeout(function() {
+                document.getElementById('edthmmerror').style.display = 'none';
+            }, 2000);
+            //alert(respuesta);
+        }
+    });
+}
+
+//FUNCION QUE GUARDA LA RELACCION JLM MATE FALTANTE
+function saverevicionff() {
+    let refe_1 = document.getElementById('fmdi').innerHTML;
+    let revision = document.getElementById('relajlmdf').value;
+    let datos = 'revision=' + revision + '&refe_1=' + refe_1 + '&opcion=revisionac3';
     //alert(datos);
     $.ajax({
         type: "POST",
@@ -690,18 +814,23 @@ function editarinsmt1(idedimp) {
 }
 
 //FUNIÓN PARA GUARDAR LA EDICIÓN EN DETALLES DE MATERIAL DEFECTUOSO
-function saveedithnewmf1() {
+function saveedithnewmf1(idregster) {
     //alert("entra guardar cambios valeproducción");
     let id_kax = document.getElementById('id_exedith1').value;
     let codigo_1 = document.getElementById('cdnewvpedith1').value;
-    let descripcion_1 = document.getElementById('motdf').value;
+    let descripcion_1;
     let salida = document.getElementById('vpednewtcantid1').value;
     let observa = document.getElementById('vpobsaddnew1').value;
     let entrada;
     if (document.getElementById('tipe1').value === "DEVOLUCIÓN") {
         entrada = document.getElementById('vpednewtcantid1').value;
+        descripcion_1 = document.getElementById('motdf').value;
+    } else if (document.getElementById('tipe1').value === "MATERIAL_FALTANTE") {
+        entrada = 0;
+        descripcion_1 = 0;
     } else {
         entrada = 0;
+        descripcion_1 = document.getElementById('motdf').value;
     }
     let datos = '&descripcion_1=' + descripcion_1 + '&salida=' + salida + '&entrada=' + entrada + '&observa=' + observa + '&id_kax=' + id_kax + '&codigo_1=' + codigo_1 + '&opcion=updateartnew';
     //alert(datos);
@@ -726,6 +855,8 @@ function saveedithnewmf1() {
                 });
                 if (document.getElementById('tipe1').value === "DEVOLUCIÓN") {
                     updateedinedv1();
+                } else if (document.getElementById('tipe1').value === "MATERIAL_FALTANTE") {
+                    updatefaltnte1();
                 } else {
                     updateedinemt1();
                 }
@@ -824,6 +955,8 @@ function savdelemtart1() {
             });
             if (document.getElementById('tipe1').value === "DEVOLUCIÓN") {
                 updateedinedv1();
+            } else if (document.getElementById('tipe1').value === "MATERIAL_FALTANTE") {
+                updatefaltnte1();
             } else {
                 updateedinemt1();
             }
@@ -891,7 +1024,7 @@ function addartimd() {
     //alert("entro agregar vale de producción");
     let refe_1 = document.getElementById('fmdi').innerHTML;
     let fecha = document.getElementById('infecdf').value;
-    let descripcion_1 = document.getElementById('motdf').value;
+    let descripcion_1;
     let proveedor_cliente = document.getElementById('infclinte').value;
     let codigo_1 = document.getElementById('cdnewvpadd1').value;
     let cantidad_real = document.getElementById('mtcantidad1').value;
@@ -911,9 +1044,16 @@ function addartimd() {
      }
      ubicacion = tPrfil.substr(1);*/
     let datos;
+
     if (document.getElementById('tipe1').value === "DEVOLUCIÓN") {
+        descripcion_1 = document.getElementById('motdf').value;
         datos = 'refe_1=' + refe_1 + '&refe_2=' + refe_2 + '&fecha=' + fecha + '&descripcion_1=' + descripcion_1 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&opcion=registrardv';
+
+    } else if (document.getElementById('tipe1').value === "MATERIAL_FALTANTE") {
+        descripcion_1 = 0;
+        datos = 'refe_1=' + refe_1 + '&refe_2=' + refe_2 + '&fecha=' + fecha + '&descripcion_1=' + descripcion_1 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&opcion=registrarflt';
     } else {
+        descripcion_1 = document.getElementById('motdf').value;
         datos = 'refe_1=' + refe_1 + '&refe_2=' + refe_2 + '&fecha=' + fecha + '&descripcion_1=' + descripcion_1 + '&proveedor_cliente=' + proveedor_cliente + '&codigo_1=' + codigo_1 + '&cantidad_real=' + cantidad_real + '&salida=' + salida + '&observa=' + observa + '&ubicacion=' + ubicacion + '&opcion=registrar';
     }
 
@@ -941,6 +1081,8 @@ function addartimd() {
 
                 if (document.getElementById('tipe1').value === "DEVOLUCIÓN") {
                     updateedinedv1();
+                } else if (document.getElementById('tipe1').value === "MATERIAL_FALTANTE") {
+                    updatefaltnte1();
                 } else {
                     updateedinemt1();
                 }
@@ -1941,31 +2083,20 @@ function openewfalt() {
     });
 }
 
-//funcion para traer la informacion del material defectuoso 
+//funcion para traer la informacion del material faltante 
 function updatefaltnte(folioflt) {
     //alert(foliodefc);
-    let folio = document.getElementById('falfolio').innerHTML;
-    let tipo = "FALTANTE";
-    $(document).ready(function() {
-        //$('#pedmatdef').load('./select/buscpedef.php');
-    });
-    $.ajax({
-        url: '../controller/php/confaltante.php',
-        type: 'GET',
-        data: 'folio=' + folioflt + '&tipo=' + tipo
-    }).done(function(resp) {
-        //alert(resp);
-        obj = JSON.parse(resp);
-        let res = obj.data;
-        for (D = 0; D < res.length; D++) {
-            document.getElementById('infecdf').value = obj.data[D].fecha;
-            document.getElementById('infdepmd').value = obj.data[D].refe_2;
-            document.getElementById('motdf').value = obj.data[D].descripcion_1;
-            document.getElementById('infclinte').value = obj.data[D].proveedor_cliente;
-            document.getElementById('relajlmdf').value = obj.data[D].revision;
-            document.getElementById('pedmatdef').value = obj.data[D].ubicacion
-        }
-    });
+    //BORRA LA INFORMACIÓN DE PRODUCTO FINAL
+    document.getElementById('mcodigotr').value = "";
+    document.getElementById('mdecriptr').value = "";
+    document.getElementById('mdepart').value = "";
+    document.getElementById('vpcantidad').value = "";
+    document.getElementById('faltbservo').value = "";
+
+    //INFORMACION DE LAS TBLAS
+    let id_valeproduc = document.getElementById('falfolio').value;
+    let folio = document.getElementById('falfolio').value;
+    //alert(folio);
     $.ajax({
         url: '../controller/php/inffaltante.php',
         type: 'GET',
@@ -1975,13 +2106,117 @@ function updatefaltnte(folioflt) {
         obj = JSON.parse(resp);
         let res = obj.data;
         let x = 0;
-        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="defectuoso" name="defectuoso" class="table table-bordered""><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="faltantet" name="faltantet" class="table display dataTable"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
         for (U = 0; U < res.length; U++) {
             x++;
             let id_valepro = obj.data[U].id_kax;
-            html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].entrada + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsdv1(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithmtdefc1'>Editar</a><a class='nav-link' onclick='deletenewart1(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearmtnew1'>Eliminar</a>" + "</td></tr>";
+            html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsmt(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithmtdefc'>Editar</a><a class='nav-link' onclick='deletenewart(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearmtnew'>Eliminar</a>" + "</td></tr>";
+        }
+        html += '</div></tbody></table></div></div>';
+        $("#listartfalt").html(html);
+    })
+}
+//funcion para traer la informacion del material faltante 
+function updatefaltnte1() {
+    //alert("entra");
+    //BORRA LA INFORMACIÓN DE PRODUCTO FINAL
+    document.getElementById('cdnewvpedith1').value = "";
+    document.getElementById('vpednewtcantid1').value = "";
+    document.getElementById('vpobsaddnew1').value = "";
+    document.getElementById('vpedthdeparnew1').value = "";
+    document.getElementById('vpnewedithdes1').value = "";
+
+    //INFORMACION DE LAS TBLAS
+    let folio = document.getElementById('fmdi').innerHTML;
+    //alert(folio);
+    $.ajax({
+        url: '../controller/php/inffaltante.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(resp) {
+        //alert(resp);
+        obj = JSON.parse(resp);
+        let res = obj.data;
+        let x = 0;
+        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="falttant" name="falttant" class="table table-bordered""><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+        for (U = 0; U < res.length; U++) {
+            x++;
+            let id_valepro = obj.data[U].id_kax;
+            html += "<tr><td>" + obj.data[U].id_kax + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsmt(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithmtdefc'>Editar</a><a class='nav-link' onclick='deletenewart(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearmtnew'>Eliminar</a>" + "</td></tr>";
         }
         html += '</div></tbody></table></div></div>';
         $("#listdefinf").html(html);
     })
+}
+
+//FUNCION QUE GUARDA LA EDICIÓN DE LA CABECERA DE MATERIAL DEFECTUOSO
+function savecamfalt() {
+    var fecha = document.getElementById('infecdf').value;
+    var descripcion_1 = 0;
+    var ubicacion = document.getElementById('pedmatdef').value;
+    var refe_1 = document.getElementById('fmdi').innerHTML;
+    var refe_2 = document.getElementById('infdepmd').value;
+    var proveedor_cliente = document.getElementById('infclinte').value;
+    var datos = 'fecha=' + fecha + '&descripcion_1=' + descripcion_1 + '&refe_2=' + refe_2 + '&ubicacion=' + ubicacion + '&refe_1=' + refe_1 + '&proveedor_cliente=' + proveedor_cliente + '&opcion=cambiocabfalt';
+    //alert(datos);
+    if (document.getElementById('fmdi').value == '' || document.getElementById('infdepmd').value == '' || document.getElementById('infclinte').value == '') {
+        document.getElementById('edthvoivacios').style.display = '';
+        setTimeout(function() {
+            document.getElementById('edthvoivacios').style.display = 'none';
+        }, 2000);
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertsalidentra.php",
+            data: datos
+        }).done(function(respuesta) {
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se actualizo de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else if (respuesta == 2) {
+                document.getElementById('edthvoiexi').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthvoiexi').style.display = 'none';
+                }, 1000);
+
+            } else {
+                document.getElementById('edthvoierror').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthvoierror').style.display = 'none';
+                }, 2000);
+                //alert(respuesta);
+            }
+        });
+
+    }
+}
+
+function histmaterfalt() {
+    let folio = document.getElementById('fmdi').innerHTML;
+    let folio2 = "FOLIO:" + folio;
+    //alert(folio);
+    //Tabla de historial del vale de producción
+    $.ajax({
+        url: '../controller/php/hismatefalt.php',
+        type: 'POST',
+        data: 'folio=' + folio2
+    }).done(function(resp) {
+        obj = JSON.parse(resp);
+        var res = obj.data;
+        var x = 0;
+        //alert("folio");
+        html = '<div class="rounded table-responsive"><table style="width:100%" id="hisvalevp" name="hisvalevp" class="table display dataTable no-footer"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>Usuario</th><th><i></i>Acción</th><th><i></i>Registro</th><th><i></i>fecha</th></tr></thead><tbody>';
+        for (U = 0; U < res.length; U++) {
+            x++;
+            html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_usu + "</td><td>" + obj.data[U].proceso + "</td><td>" + obj.data[U].registro + "</td><td>" + obj.data[U].fecha + "</td></tr>";
+        }
+        html += '</div></tbody></table></div></div>';
+        $("#tabhisto").html(html);
+    });
+    //Historial del vale en productividad
 }

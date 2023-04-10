@@ -57,7 +57,7 @@
         <div class="br-pagebody">
             <div style="float: right;">
                 <a href="../administrador/vale_oficina.php" onclick="cancelarvo()" id="closememo"
-                    title="Dar clic para cancelar el memo" type="button" style="" class="btn btn-secondary"><i
+                    title="Dar clic para cancelar el memo" type="button" class="btn btn-secondary"><i
                         class="fa fa-times"></i></a>
             </div>
             <div class="br-section-wrapper">

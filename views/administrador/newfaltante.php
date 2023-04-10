@@ -49,7 +49,7 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="../administrador/matdefectuoso.php" onclick="cancelar();">Lista de
+                <a class="breadcrumb-item" href="../administrador/matdefectuoso.php" onclick="cancelarfalt();">Lista de
                     Material Defectuoso</a>
                 <span class="breadcrumb-item active">Alta de Material Faltante</span>
             </nav>
@@ -57,11 +57,11 @@
 
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
             <h4 class="tx-gray-800 mg-b-5">ALTA DE MATERIAL FALTANTE</h4>
-            <input value="MATERIAL_DEFECTUOSO" id="tipe" name="tipe" style="display:none" type="text">
+            <input value="MATERIAL_FALTANTE" id="tipe" name="tipe" style="display:none" type="text">
         </div>
         <div class="br-pagebody">
             <div style="float: right;">
-                <a href="../administrador/matdefectuoso.php" id="closememo" onclick="cancelar();"
+                <a href="../administrador/matdefectuoso.php" id="closememo" onclick="cancelarfalt();"
                     title="Dar clic para cancelar el memo" type="button" style="" class="btn btn-secondary"><i
                         class="fa fa-times"></i></a>
             </div>
@@ -111,6 +111,7 @@
                                                 class="tx-danger">*</span></label>
                                         <select class="form-control" id="faltcliente" name="faltcliente">
                                             <option value="">SELECCIONA UNA OPCIÓN</option>
+                                            <option value="NO APLICA">NO APLICA</option>
                                             <?php while($clie = mysqli_fetch_row($cliente)):?>
                                             <option value="<?php echo $clie[1]?>"><?php echo $clie[2]?></option>
                                             <?php endwhile; ?>
@@ -206,10 +207,10 @@
                             <!-- <h5 style="text-align: center"></h5> -->
                             <h5 class="tx-gray-700 mg-b-5" style="text-align:center">ARTICULOS</h5>
                             <div class="col-lg-12">
-                                <div id="listartdef"></div><!-- col-12 -->
+                                <div id="listartfalt"></div><!-- col-12 -->
                             </div><!-- form-layout -->
                     </section>
-                    <a onclick="cancelar()" class="btn btn-danger" style="float:right; color:white">CANCELAR</a>
+                    <a onclick="cancelarfalt()" class="btn btn-danger" style="float:right; color:white">CANCELAR</a>
                 </div>
                 <br>
             </div><!-- br-pagebody -->

@@ -11,7 +11,7 @@ $cabec = "SELECT k.*, p.* ,(select a.usunom FROM accesos a where a.usuario=p.id_
       $resul = mysqli_query($conexion, $cabec);
 
 //TABLA DE EXTENDIDO
-$query1 = "SELECT * FROM historial WHERE registro LIKE '%$folio%' AND proceso LIKE '%VALE OFICINA%' ORDER BY id_his ASC";
+$query1 = "SELECT * FROM historial WHERE registro LIKE '%$folio%' AND proceso LIKE '%VALE DE OFICINA%' ORDER BY id_his ASC";
       $resultado1 = mysqli_query($conexion, $query1);
     //$data1 = mysqli_fetch_array($resultado1);
 
