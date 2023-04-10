@@ -80,13 +80,13 @@ include('header.php');
         </div><!-- br-mainpanel -->
     </section>
     <!-- ########## END: MAIN PANEL ########## -->
-    <!------------------------------- ########## DETALLES DEL MATERIAL DEFECUOSO ########## -------------------------->
+    <!------------------------------- ########## DETALLES DEL MATERIAL FALTANTE ########## -------------------------->
     <section class="content" id="detalles" style="display: none;">
         <!-- ########## START: MAIN PANEL ########## -->
         <div class="br-mainpanel">
             <div class="br-pageheader pd-y-15 pd-l-20">
                 <nav class="breadcrumb pd-0 mg-0 tx-12">
-                    <a class="breadcrumb-item" href="../administrador/matdefectuoso.php" onclick="cancelar();">Lista de
+                    <a class="breadcrumb-item" href="../administrador/matfaltante.php" onclick="cancelar();">Lista de
                         Material Faltante</a>
                     <span class="breadcrumb-item active">Material Faltante</span>
                 </nav>
@@ -101,7 +101,7 @@ include('header.php');
                                 class="fa fa-times"></i></button>
                         <button onclick="pdfvp()" title="Imprimir" id="pdfvofi" name="pdfvofi"
                             type="button" class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
-                        <button title="ver historial" onclick="histmaterdef()" data-toggle="modal"
+                        <button title="ver historial" onclick="histmaterfalt()" data-toggle="modal"
                             data-target="#modal-mdhistorial" type="button" class="btn btn-primary"><i
                                 class="fa fa-history"></i></button>
                     </div>
@@ -109,7 +109,7 @@ include('header.php');
                 <div class="br-section-wrapper">
 
                     <h6 class="">MATERIAL FALTANTE</h6>
-                    <input value="MATERIAL_DEFECTUOSO" id="tipe1" name="tipe1" style="display:none" type="text">
+                    <input value="MATERIAL_FALTANTE" id="tipe1" name="tipe1" style="display:none" type="text">
                     <form id="info-valofi" method="POST">
 
                         <div class="form-layout form-layout-2">
@@ -167,16 +167,7 @@ include('header.php');
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="form-group bd-t-0-force">
-                                        <label class="form-control-label" style="font-size:14px">MOTIVO DE LA
-                                            DEVOLUCIÓN:
-                                            <span class="tx-danger">*</span></label>
-                                        <textarea readonly class="form-control" name="motdf" id="motdf" cols="3"
-                                            rows="3"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">PEDIDOS RELACIONADOS/STOCK:</label>
                                         <input class="form-control" readonly id="pedmatdef" name="pedmatdef"
@@ -184,10 +175,10 @@ include('header.php');
                                         <!-- <div id="pedmatdef"></div> -->
                                     </div><!-- col-4 -->
                                 </div><!-- col-8 -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">RELACIÓN JLM/ <a
-                                                href="javascript:saverevicionmdf()">Guardar</a></label>
+                                                href="javascript:saverevicionff()">Guardar</a></label>
                                         <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="relajlmdf"
                                             id="relajlmdf" placeholder="JLM"></textarea>
                                     </div>
@@ -195,7 +186,7 @@ include('header.php');
                                 <br>
                             </div><!-- row -->
                             <div class="modal-footer">
-                                <button type="button" onclick="savevofic()" id="mtedith" style="display:none;"
+                                <button type="button" onclick="savecamfalt()" id="mtedith" style="display:none;"
                                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
                                     CAMBIOS</button>
                             </div>
