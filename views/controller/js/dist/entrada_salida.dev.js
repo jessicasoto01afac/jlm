@@ -2201,4 +2201,12 @@ function histmaterfalt() {
     html += '</div></tbody></table></div></div>';
     $("#tabhisto").html(html);
   }); //Historial del vale en productividad
+} //FUNCIÓN PARA CREAR PDF
+
+
+function pdfvflt() {
+  var folio = document.getElementById('fmdi').innerHTML; //alert("entro");
+
+  url = '../formatos/pdf_fatante.php';
+  window.open(url + "?data=" + folio, '_black');
 }

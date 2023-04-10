@@ -99,7 +99,7 @@ include('header.php');
                         <button onclick="closedithmdef()" id="closemted" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
-                        <button onclick="pdfvp()" title="Imprimir" id="pdfvofi" name="pdfvofi"
+                        <button onclick="pdfvflt()" title="Imprimir" id="pdfvflt" name="pdfvflt"
                             type="button" class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
                         <button title="ver historial" onclick="histmaterfalt()" data-toggle="modal"
                             data-target="#modal-mdhistorial" type="button" class="btn btn-primary"><i
