@@ -5,7 +5,7 @@
 			<select class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" onchange="desartic4()" id="mprvedd" name="mprvedd" type="text" data-live-search="true" style="width: 100%" >
 			<option value="0">CODIGO</option> 
 			<?php while($idpst = mysqli_fetch_row($articulo)):?>                      
-			<option value="<?php echo $idpst[1]?>"><?php echo $idpst[1]?></option>
+			<option value="<?php echo $idpst[0]?>"><?php echo $idpst[0]?></option>
 			<?php endwhile; ?>
 			</select>
 	<script type="text/javascript">

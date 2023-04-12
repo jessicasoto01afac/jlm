@@ -302,6 +302,7 @@ function editarartcm(idedimp) {
     document.getElementById('id_exedith').value = idedimp;
     $.ajax({
 
+
     }).done(function(respuesta) {
         obj = JSON.parse(respuesta);
         var res = obj.data;
@@ -345,4 +346,8 @@ function dettcompras(id_produc) {
         $("#listcompras").html(html);
 
     })
+}
+
+function deletenewart(id_delete) {
+    alert(id_delete);
 }
