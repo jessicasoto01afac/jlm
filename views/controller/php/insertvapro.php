@@ -664,7 +664,7 @@ function registrarcolors ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$cod
 }
 //funcion para guardar los colores del articulo
 function registrarnew ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
-    $query="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_articulo,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor_cliente'),('0'),('$cantidad_real'),(hojas*$salida/division),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
+    $query="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_articulo,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor_cliente'),('0'),(hojas*$salida/division),(hojas*$salida/division),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
     FROM
     transformation 
     WHERE
