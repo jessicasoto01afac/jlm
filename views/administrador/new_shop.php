@@ -333,7 +333,7 @@
     <script src="../template/lib/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
     <script src="../template/lib/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
     <script src="../controller/js/compras.js"></script>
-    <?php include('../administrador/modal/entradassalidas.php');?>
+    <?php include('../administrador/modal/mcompras.php');?>
     <script src="../template/js/bracket.js"></script>
     <script>
     openew();

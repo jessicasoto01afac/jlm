@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <?php include ("../../controller/conexion.php");
-$sql = "SELECT codigo_clie,nombre FROM clientes WHERE estado = 0";
-$cliente = mysqli_query($conexion,$sql);
+$sql = "SELECT id_prov,nom_pro,nom_pro FROM proveedores WHERE estado = 0";
+$provedor = mysqli_query($conexion,$sql);
 
 $sql = "SELECT id_per,usunom,usuapell FROM accesos WHERE estado = 0";
 $person = mysqli_query($conexion,$sql);
@@ -122,7 +122,7 @@ include('header.php');
                                         <label class="form-control-label" style="font-size:14px">ORDEN DE COMPRAS: <span
                                                 class="tx-danger">*</span></label>
                                         <!-- <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingresa el Folio"> -->
-                                        <label class="form-control-label" id="cnumorde" name="cnumorde"
+                                        <label class="form-control-label" id="ordncompras" name="ordncompras"
                                             style="font-size: 24px;color:#14128F"></label>
                                     </div>
                                 </div><!-- col-4 -->
@@ -149,8 +149,8 @@ include('header.php');
                                         <select disabled class="form-control" name="proveedcm" id="proveedcm"
                                             style="font-size:16px" data-placeholder="Choose country">
                                             <option label="">Selecciona</option>
-                                            <?php while($clie = mysqli_fetch_row($cliente)):?>
-                                            <option value="<?php echo $clie[0]?>"><?php echo $clie[1]?></option>
+                                            <?php while($provv = mysqli_fetch_row($provedor)):?>
+                                            <option value="<?php echo $provv[0]?>"><?php echo $provv[1]?></option>
                                             <?php endwhile; ?>
 
                                         </select>

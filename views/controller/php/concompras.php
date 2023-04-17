@@ -1,7 +1,7 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT * FROM compras c, proveedores p WHERE c.estado=0 and p.id_prov =c.id_proveedor group by folio_oc ORDER BY id_comp DESC";
+	$query = "SELECT *,DATE_FORMAT(fecha,'%d-%m-%Y')as date FROM compras c, proveedores p WHERE c.estado=0 and p.codigo_pro =c.id_proveedor group by folio_oc ORDER BY id_comp DESC";
 	$resultado = mysqli_query($conexion, $query);
 	$contador=0;
 	if(!$resultado){
@@ -17,7 +17,7 @@
 				$cursos[] = [ 
 					$contador,
 					$data["folio_oc"], 
-					$data["fecha"],
+					$data["date"],
 					$data["nom_pro"],
 					$estatus,  
 					$proceso
@@ -30,7 +30,7 @@
 				$cursos[] = [ 
 					$contador,
 					$data["folio_oc"], 
-					$data["fecha"],
+					$data["date"],
 					$data["nom_pro"],
 					$estatus,  
 					$proceso
@@ -43,7 +43,7 @@
 				$cursos[] = [ 
 					$contador,
 					$data["folio_oc"], 
-					$data["fecha"],
+					$data["date"],
 					$data["nom_pro"],
 					$estatus,  
 					$proceso
