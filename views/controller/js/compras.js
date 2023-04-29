@@ -169,13 +169,20 @@ function openew() {
 
     });
     $(document).ready(function() {
-        $('#buscarticulos').load('./select/busartped.php');
-        $('#buscarticulosprv').load('./select/buscarartshop.php');
+
+
         $('#busccodigomem2').load('./select/buscarme2.php');
         $('#buspedidodef').load('./select/buscpedef.php');
         $('#dffdeped').select2();
         $('#dfcliente').select2();
         //$('#pedmatdef').load('./select/buscpedef.php');
+        $('#cmprovedd').change(function() {
+            let folio = document.getElementById('cmprovedd').value;
+            //alert(folio);
+            $('#buscarticulosprv').load('./select/buscarartshop.php?folio=' + folio);
+            $('#buscarticulos').load('./select/busartcomp.php?folio=' + folio);
+        });
+
     });
 }
 
