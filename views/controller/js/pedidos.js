@@ -534,13 +534,13 @@ function infpedido(pruebas) {
                         })
                     } else if (obj.data[D].status == 'ENTREGADO') {
                         let masivo = $("#masivo").addClass("d-none");
-                        html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">FINALIZADO</button>';
+                        html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">ENTREGADO</button>';
                         $("#button_estatus").html(html);
-                        html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-info btn-block mg-b-3">SURTIDO</button>';
-                        $("#button_estatus").html(html);
+                        /* html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-info btn-block mg-b-3">SURTIDO</button>';
+                         $("#button_estatus").html(html);
 
-                        html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
-                        $("#button_estatus").html(html);
+                         html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
+                         $("#button_estatus").html(html);*/
                         $.ajax({
                             url: '../controller/php/infpedido.php',
                             type: 'GET',

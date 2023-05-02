@@ -169,8 +169,6 @@ function openew() {
 
     });
     $(document).ready(function() {
-
-
         $('#busccodigomem2').load('./select/buscarme2.php');
         $('#buspedidodef').load('./select/buscpedef.php');
         $('#dffdeped').select2();
@@ -182,7 +180,6 @@ function openew() {
             $('#buscarticulosprv').load('./select/buscarartshop.php?folio=' + folio);
             $('#buscarticulos').load('./select/busartcomp.php?folio=' + folio);
         });
-
     });
 }
 
@@ -209,7 +206,7 @@ function updacompras() {
         for (U = 0; U < res.length; U++) {
             x++;
             let id_compras = obj.data[U].id_comp;
-            html += "<tr><td>" + obj.data[U].id_comp + "</td><td>" + obj.data[U].artcodigo + "</td><td>" + obj.data[U].id_artprove + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observación + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarartcm(" + id_compras + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithcompas'>Editar</a><a class='nav-link' onclick='deletenewartcm(" + id_compras + ");' data-toggle='modal' data-target='#modal-delearcmnew'>Eliminar</a>" + "</td></tr>";
+            html += "<tr><td>" + x + "</td><td>" + obj.data[U].artcodigo + "</td><td>" + obj.data[U].id_artprove + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observación + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarartcm(" + id_compras + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithcompas'>Editar</a><a class='nav-link' onclick='deletenewartcm(" + id_compras + ");' data-toggle='modal' data-target='#modal-delearcmnew'>Eliminar</a>" + "</td></tr>";
         }
         html += '</div></tbody></table></div></div>';
         $("#listarcomprs").html(html);
@@ -234,9 +231,9 @@ function addartcompr() {
     let datos = 'folio_oc=' + folio_oc + '&fecha=' + fecha + '&fecha_entrga=' + fecha_entrga + '&id_proveedor=' + id_proveedor + '&uso_CFDI=' + uso_CFDI + '&cond_pago=' + cond_pago + '&asignado=' + asignado + '&id_articulo=' + id_articulo + '&id_artprove=' + id_artprove + '&cantidad=' + cantidad + '&observación=' + observación + '&opcion=registrar';
     //alert(datos);
     if (folio_oc == '' || fecha == '' || id_proveedor == '' || uso_CFDI == '' || cantidad == '' || id_artprove == '' || id_articulo == '') {
-        document.getElementById('vaciosdf').style.display = ''
+        document.getElementById('cmvaciosdf').style.display = ''
         setTimeout(function() {
-            document.getElementById('vaciosdf').style.display = 'none';
+            document.getElementById('cmvaciosdf').style.display = 'none';
         }, 2000);
         return;
     } else {
@@ -335,9 +332,7 @@ function dettcompras(id_produc) {
     //alert(id_produc);
     $("#detalles").toggle(250); //Muestra contenedor de detalles
     $("#lista").toggle("fast"); //Oculta lista
-
     document.getElementById('ordncompras').innerHTML = id_produc;
-
     //INFO CABECERA DE ORDEN DE COMPRAS
     $.ajax({
         url: '../controller/php/infcabeshop.php',
@@ -350,11 +345,76 @@ function dettcompras(id_produc) {
         var x = 0;
         for (C = 0; C < res.length; C++) {
             if (obj.data[C].folio_oc == id_produc) {
-                alert("respuesta");
+                // alert("respuesta");
                 document.getElementById('datecomp').value = obj.data[C].fecha;
                 document.getElementById('datentrega').value = obj.data[C].fecha_entrga;
                 document.getElementById('proveedcm').value = obj.data[C].id_proveedor;
+                document.getElementById('uscfdicm').value = obj.data[C].uso_CFDI;
+                document.getElementById('condcm').value = obj.data[C].cond_pago;
+                document.getElementById('fact').value = obj.data[C].email_c1;
 
+                //BOTONES -----------------------------------------------
+                let autorizar = document.getElementById('btncmautoriz');
+                let liberar = document.getElementById('btncmliberar');
+                let parcial = document.getElementById('btncmparcial');
+                let finalizado = document.getElementById('btncmfinaliz');
+                let enviar = document.getElementById('btncmenviar');
+                let editar = document.getElementById('openedimt1');
+                let pdf = document.getElementById('pdfvofi');
+
+                if (obj.data[C].estatus == 'AUTORIZADO') {
+                    autorizar.style.display = 'none';
+                    liberar.style.display = '';
+                    parcial.style.display = '';
+                    finalizado.style.display = 'none';
+                    enviar.style.display = '';
+                    editar.style.display = '';
+                    pdf.style.display = '';
+                    html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
+                    $("#button_estatus").html(html);
+
+                } else if (obj.data[C].estatus == 'PENDIENTE') {
+                    autorizar.style.display = '';
+                    liberar.style.display = 'none';
+                    parcial.style.display = 'none';
+                    finalizado.style.display = 'none';
+                    enviar.style.display = 'none';
+                    editar.style.display = '';
+                    pdf.style.display = '';
+                    html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-secondary btn-block mg-b-3">PENDIDENTE</button>';
+                    $("#button_estatus").html(html);
+                    document.getElementById('rejlm').style.display = "none";
+                } else if (obj.data[C].estatus == 'FINALIZADO') {
+                    autorizar.style.display = 'none';
+                    liberar.style.display = 'none';
+                    parcial.style.display = 'none';
+                    finalizado.style.display = '';
+                    editar.style.display = 'none';
+                    enviar.style.display = 'none';
+                    pdf.style.display = '';
+                    html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">FINALIZADO</button>';
+                    $("#button_estatus").html(html);
+                } else if (obj.data[C].estatus == 'ENTREGA PARCIAL') {
+                    autorizar.style.display = 'none';
+                    liberar.style.display = '';
+                    parcial.style.display = '';
+                    finalizado.style.display = 'none';
+                    enviar.style.display = 'none';
+                    editar.style.display = 'none';
+                    pdf.style.display = '';
+                    html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-secondary btn-block mg-b-3">ENTREGA PARCIAL</button>';
+                    $("#button_estatus").html(html);
+                } else if (obj.data[C].estatus == 'ENVIADO') {
+                    autorizar.style.display = 'none';
+                    liberar.style.display = '';
+                    parcial.style.display = '';
+                    finalizado.style.display = '';
+                    editar.style.display = 'none';
+                    enviar.style.display = 'none';
+                    pdf.style.display = '';
+                    html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">FINALIZADO</button>';
+                    $("#button_estatus").html(html);
+                }
             }
         }
     });
@@ -503,4 +563,115 @@ function savadeleartcm() {
             //alert(respuesta);
         }
     });
+}
+
+function savereviciondv() {
+    let refe_1 = document.getElementById('ordncompras').innerHTML;
+    let revision = document.getElementById('relajlcmp').value;
+    let datos = 'revision=' + revision + '&refe_1=' + refe_1 + '&opcion=revisionac2';
+    //alert(datos);
+    $.ajax({
+        type: "POST",
+        url: "../controller/php/insertcompras.php",
+        data: datos
+    }).done(function(respuesta) {
+        if (respuesta == 0) {
+            Swal.fire({
+                type: 'success',
+                text: 'Se actualizo de forma correcta',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            // closevaleproinf();
+        } else if (respuesta == 2) {
+            document.getElementById('edthmmvacios').style.display = '';
+            setTimeout(function() {
+                document.getElementById('edthmmvacios').style.display = 'none';
+            }, 1000);
+            //alert("datos repetidos");
+        } else {
+            document.getElementById('edthmmerror').style.display = '';
+            setTimeout(function() {
+                document.getElementById('edthmmerror').style.display = 'none';
+            }, 2000);
+            //alert(respuesta);
+        }
+    });
+}
+//FUNCION PARA EDITAR MATERIAL DEFCTUOSO EN VISTA DE INFORMACION
+function editmatcm() {
+    //alert("EDITAR VALE");
+    $("#datecomp").removeAttr("readonly");
+    $("#datentrega").removeAttr("readonly");
+    $("#fact").removeAttr("readonly");
+    document.getElementById('proveedcm').disabled = false;
+    document.getElementById('uscfdicm').disabled = false;
+    document.getElementById('condcm').disabled = false;
+    document.getElementById('closemted').style.display = "";
+    document.getElementById('openedimt1').style.display = "none";
+    document.getElementById('mtedith').style.display = "";
+    document.getElementById('voagartic').style.display = "";
+}
+//FUNCION PARA CERRAR COMPRAS EN VISTA DE INFORMACION
+function closedithmcm() {
+    //alert("cierra VALE");
+    $("#datecomp").attr("readonly", "readonly");
+    $("#datentrega").attr("readonly", "readonly");
+    $("#fact").attr("readonly", "readonly");
+    document.getElementById('proveedcm').disabled = true;
+    document.getElementById('uscfdicm').disabled = true;
+    document.getElementById('condcm').disabled = true;
+    document.getElementById('closemted').style.display = "none";
+    document.getElementById('openedimt1').style.display = "";
+    document.getElementById('mtedith').style.display = "none";
+    document.getElementById('voagartic').style.display = "none";
+}
+//FUNCION QUE GUARDA LA EDICIÓN DE LA CABECERA DE COMPRAS
+function savecomhead() {
+    let fecha = document.getElementById('datecomp').value;
+    let fecha_entrga = document.getElementById('datentrega').value;
+    let id_proveedor = document.getElementById('proveedcm').value;
+    let uso_CFDI = document.getElementById('uscfdicm').value;
+    let cond_pago = document.getElementById('condcm').value;
+    let condcm = document.getElementById('consignada').value;
+    let refe_1 = document.getElementById('ordncompras').innerHTML;
+    let asignado = document.getElementById('consignada').value;
+    let datos = 'fecha=' + fecha + '&fecha_entrga=' + fecha_entrga + '&id_proveedor=' + id_proveedor + '&uso_CFDI=' + uso_CFDI + '&cond_pago=' + cond_pago + '&condcm=' + condcm + '&refe_1=' + refe_1 + '&asignado=' + asignado + '&opcion=cambiocabdv';
+    //alert(datos);
+    if (fecha.value == '' || fecha_entrga.value == '' || id_proveedor.value == '' || uso_CFDI.value == '' || cond_pago.value == '' || condcm.value == '') {
+        document.getElementById('edthvoivacios').style.display = '';
+        setTimeout(function() {
+            document.getElementById('edthvoivacios').style.display = 'none';
+        }, 2000);
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertcompras.php",
+            data: datos
+        }).done(function(respuesta) {
+            //alert(respuesta);
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se actualizo de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else if (respuesta == 2) {
+                document.getElementById('edthvoiexi').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthvoiexi').style.display = 'none';
+                }, 1000);
+
+            } else {
+                document.getElementById('edthvoierror').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthvoierror').style.display = 'none';
+                }, 2000);
+                //alert(respuesta);
+            }
+        });
+
+    }
 }

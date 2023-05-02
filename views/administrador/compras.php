@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <?php include ("../../controller/conexion.php");
-$sql = "SELECT id_prov,nom_pro,nom_pro FROM proveedores WHERE estado = 0";
+$sql = "SELECT codigo_pro,nom_pro,nom_pro FROM proveedores WHERE estado = 0";
 $provedor = mysqli_query($conexion,$sql);
 
 $sql = "SELECT id_per,usunom,usuapell FROM accesos WHERE estado = 0";
@@ -93,9 +93,9 @@ include('header.php');
             <div class="br-pagebody">
                 <div style="float: right;">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button onclick="editmatdef()" id="openedimt1" title="Dar clic para editar" type="button"
+                        <button onclick="editmatcm()" id="openedimt1" title="Dar clic para editar" type="button"
                             class="btn btn-secondary btn btn-secondary"><i class="fa fa-edit"></i></button>
-                        <button onclick="closedithmdef()" id="closemted" title="Dar clic para cerrar edición"
+                        <button onclick="closedithmcm()" id="closemted" title="Dar clic para cerrar edición"
                             type="button" style="display:none;" class="btn btn-secondary btn-danger"><i
                                 class="fa fa-times"></i></button>
                         <button onclick="pdfdv()" title="Imprimir" id="pdfvofi" name="pdfvofi" type="button"
@@ -108,6 +108,17 @@ include('header.php');
                 <div class="br-section-wrapper">
 
                     <h6 class="">COMPRAS</h6>
+                    <div class="form-group">
+                        <div class="row mg-b-25">
+                            <div class="col-sm-9">
+
+                            </div>
+                            <div class="col-sm-3">
+                                <div name="button_estatus" id="button_estatus"></div>
+                                <input style="display:none" name="estatus2" id="estatus2" type="text">
+                            </div>
+                        </div>
+                    </div>
                     <input value="DEVOLUCIÓN" id="tipe1" name="tipe1" style="display:none" type="text">
                     <form id="info-valofi" method="POST">
 
@@ -142,7 +153,7 @@ include('header.php');
                                             placeholder="Enter lastname">
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">PROVEEDOR:
                                             <span class="tx-danger">*</span></label>
@@ -156,83 +167,126 @@ include('header.php');
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">USO DEL CFDI:
                                             <span class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly id="uscfdicm" name="uscfdicm"
-                                            placeholder="Enter lastname">
+                                            <select disabled class="form-control" name="uscfdicm" id="uscfdicm"
+                                            style="font-size:16px" data-placeholder="Choose country">
+                                            <option value="G01 ADQUISICIÓN DE MERCANCÍAS">G01 ADQUISICIÓN DE MERCANCÍAS
+                                            </option>
+                                            <option value="G02 DEVOLUCIONES, DESCUENTOS O BONIFICACIONES">G02
+                                                DEVOLUCIONES, DESCUENTOS O BONIFICACIONES</option>
+                                            <option value="G03 GASTOS EN GENERAL">G03 GASTOS EN GENERAL</option>
+                                            <option value="I01 CONSTRUCCIONES">I01 CONSTRUCCIONES</option>
+                                            <option value="I02 MOBILARIO Y EQUIPO DE OFICINA POR INVERSIONES">I02
+                                                MOBILARIO Y EQUIPO DE OFICINA POR INVERSIONES</option>
+                                            <option value="I03 EQUIPO DE TRANSPORTE">I03 EQUIPO DE TRANSPORTE</option>
+                                            <option value="I04 EQUIPO DE COMPUTO Y ACCESORIOS">I04 EQUIPO DE COMPUTO Y
+                                                ACCESORIOS</option>
+                                            <option value="I05 DADOS, TROQUELES, MOLDES, MATRICES Y HERRAMENTAL">I05
+                                                DADOS, TROQUELES, MOLDES, MATRICES Y HERRAMENTAL</option>
+                                            <option value="I06 DADOS, COMUNICACIONES TELEFÓNICAS<">I06 DADOS,
+                                                COMUNICACIONES TELEFÓNICAS</option>
+                                            <option value="I07 COMUNICACIONES SATELITALES">I07 COMUNICACIONES
+                                                SATELITALES</option>
+                                            <option value="I08 OTRA MAQUINARIA Y EQUIPO">I08 OTRA MAQUINARIA Y EQUIPO
+                                            </option>
+                                            <option value="D01 HONORARIOS MÉDICOS, DENTALES Y GASTOS HOSPITALARIOS">D01
+                                                HONORARIOS MÉDICOS, DENTALES Y GASTOS HOSPITALARIOS</option>
+                                            <option value="D02 GASTOS MÉDICOS POR INCAPACIDAD O DISCAPACIDAD">D02 GASTOS
+                                                MÉDICOS POR INCAPACIDAD O DISCAPACIDAD</option>
+                                            <option value="D03 GASTOS FUNERALES">D03 GASTOS FUNERALES</option>
+                                            <option value="D04 DONATIVOS">D04 DONATIVOS</option>
+                                            <option
+                                                value="D05 INTERESES REALES EFECTIVAMENTE PAGADOS POR CRÉDITOS HIPOTECARIOS (CASA HABITACIÓN)">
+                                                D05 INTERESES REALES EFECTIVAMENTE PAGADOS POR CRÉDITOS HIPOTECARIOS
+                                                (CASA HABITACIÓN)</option>
+                                            <option value="D06 APORTACIONES VOLUNTARIAS AL SAR">D06 APORTACIONES
+                                                VOLUNTARIAS AL SAR</option>
+                                            <option value="D07 PRIMAS POR SEGUROS DE GASTOS MÉDICOS">D07 PRIMAS POR
+                                                SEGUROS DE GASTOS MÉDICOS</option>
+                                            <option value="D08 GASTOS DE TRANSPORTACIÓN ESCOLAR OBLIGATORIA">D08 GASTOS
+                                                DE TRANSPORTACIÓN ESCOLAR OBLIGATORIA</option>
+                                            <option
+                                                value="D09 DEPÓSITOS EN CUENTAS PARA EL AHORRO, PRIMAS QUE TENGAN COMO BASE PLANES DE PENSIONES">
+                                                D09 DEPÓSITOS EN CUENTAS PARA EL AHORRO, PRIMAS QUE TENGAN COMO BASE
+                                                PLANES DE PENSIONES</option>
+                                            <option value="D10 PAGOS POR SERVICIOS EDUCATIVOS (COLEGIATURAS)">D10 PAGOS
+                                                POR SERVICIOS EDUCATIVOS (COLEGIATURAS)</option>
+                                            <option value="P01 POR DEFINIR">P01 POR DEFINIR</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">CONDICIONES DE PAGO
                                             <span class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly id="condcm" name="condcm"
-                                            placeholder="Enter lastname">
+                                            <select disabled class="form-control" name="condcm" id="condcm"
+                                            style="font-size:16px" data-placeholder="Choose country">
+                                            <option value="">SELECCIONA UNA OPCIÓN</option>
+                                            <option value="NO APLICA">NO APLICA</option>
+                                            <option value="CONTADO">CONTADO</option>
+                                            <option value="7 DIAS">7 DIAS</option>
+                                            <option value="8 DIAS">8 DIAS</option>
+                                            <option value="15 DIAS">15 DIAS</option>
+                                            <option value="30 DIAS">30 DIAS</option>
+                                            <option value="45 DIAS">45 DIAS</option>
+                                            <option value="60 DIAS">60 DIAS</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">CONSIGNADO A:</label>
-                                        <input class="form-control" readonly id="consignada" name="consignada"
-                                            placeholder="Enter lastname">
+                                            <select disabled class="form-control" name="consignada" id="consignada"
+                                            style="font-size:16px" data-placeholder="Choose country">
+                                            <option value="CONSIGNADO">CONSIGNADO</option>
+                                        </select>
                                         <!-- <div id="pedmatdef"></div> -->
                                     </div><!-- col-4 -->
                                 </div><!-- col-8 -->
+                                <div class="col-md-8">
+                                    <div class="form-group bd-t-0-force">
+                                        <label class="form-control-label" style="font-size:14px">FACTURA ELECTRONICA ENVIAR A:</label>
+                                        <input type="text" class="form-control" readonly id="fact" name="fact">
+                                    </div>
+                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">RELACIÓN JLM/ <a
-                                                href="javascript:savereviciondv()">Guardar</a></label>
+                                                href="javascript:savereviciondv()" id="rejlm" name="rejlm">Guardar</a></label>
                                         <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="relajlcmp"
                                             id="relajlcmp" placeholder="JLM"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">ACCIONES: <span
                                                 class="tx-danger">*</span></label>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button id="btnvpautoriz" name="btnvpautoriz" type="button"
-                                                style="display:none;" onclick="autorizavp()"
+                                            <button id="btncmautoriz" name="btncmautoriz" type="button"
+                                                style="display:none;" onclick="autorizacm()"
                                                 class="btn btn-info pd-x-30">Autorizar</button>
-                                            <button title="Dar click para liberar" id="btnvpliberar" name="btnvpliberar"
+                                            <button title="Dar click para liberar" id="btncmliberar" name="btncmliberar"
                                                 type="button" style="display:none;" onclick="liberarm()"
                                                 class="btn btn-dark pd-x-25">Liberar</button>
-                                            <button id="btnvpsurtir" name="btnvpsurtir" type="button"
-                                                style="display:none;" onclick="surtidovp()"
-                                                class="btn btn-indigo pd-x-25">Surtir</button>
-                                            <button id="btnvpfinaliz" name="btnvpfinaliz" type="button"
-                                                style="display:none;" onclick="finalizarvp()"
+                                            <button id="btncmparcial" name="btncmparcial" type="button"
+                                                style="display:none;" onclick="surtidocm()"
+                                                class="btn btn-warning pd-x-25">Entrega Parcial</button>
+                                            <button id="btncmfinaliz" name="btncmfinaliz" type="button"
+                                                style="display:none;" onclick="finalizarcm()"
                                                 class="btn btn-success pd-x-25">Finalizar</button>
+                                            <button id="btncmenviar" name="btncmenviar" type="button"
+                                                style="display:none;" onclick="enviarcm()"
+                                                class="btn btn-indigo pd-x-25">ENVIAR</button>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group bd-t-0-force">
-                                        <label class="form-control-label" style="font-size:14px">RELACIÓN JLM/ </label>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group bd-t-0-force">
-                                        <label class="form-control-label mg-b-0-force" style="font-size:14px">ESTATUS:
-                                            <span class="tx-danger">*</span></label>
-                                        <select id="compestatus" disabled="" name="compestatus"
-                                            style="font-size:18px; color:#14128F" class="form-control">
-                                            <option value="" selected>SELECCIONA UNA OPCIÓN</option>
-                                            <option value="PENDIENTE">PENDIENTE</option>
-                                            <option value="SURTIDO">SURTIDO</option>
-                                            <option value="FINALIZADO">FINALIZADO</option>
-                                            <option value="CANCELADO">CANCELADO</option>
-                                            <option value="AUTORIZADO">AUTORIZADO</option>
-                                        </select>
                                     </div>
                                 </div>
                                 <br>
                             </div><!-- row -->
                             <div class="modal-footer">
-                                <button type="button" onclick="savedevhead()" id="mtedith" style="display:none;"
+                                <button type="button" onclick="savecomhead()" id="mtedith" style="display:none;"
                                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
                                     CAMBIOS</button>
                             </div>
@@ -261,7 +315,7 @@ include('header.php');
                             </div><!-- alert -->
                             <div>
                                 <button type="button" onclick="" data-toggle='modal'
-                                    style="display:none; background-color: #009C28;" data-target='#modal-editavo1'
+                                    style="display:none; background-color: #009C28;" data-target='#modal-addartcmp'
                                     onclick="" id="voagartic"
                                     class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i
                                         class="fa fa-plus"></i> AGREGAR ARTICULO</button>
@@ -303,7 +357,7 @@ include('header.php');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
-    <?php include('../administrador/modal/entradassalidas.php');?>
+    <?php include('../administrador/modal/mcompras.php');?>
     <script type="text/javascript">
     // TABLA INSPECTORES EXTERNOS//
     opencompras();

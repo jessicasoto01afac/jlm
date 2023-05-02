@@ -29,22 +29,29 @@ function desartic1(){
 //alert("eentraarticulo")
 var codivo = document.getElementById('mcodigotr').value; 
 $.ajax({
-          url: '../controller/php/conarticulos.php',
-          type: 'POST'
+          url: '../controller/php/conarprovselect.php',
+          type: 'GET',
+          data:'codigo=' + codivo
       }).done(function(respuesta) {
           obj = JSON.parse(respuesta);
           var res = obj.data;
           var x = 0;
           for (D = 0; D < res.length; D++) { 
               if (obj.data[D].artcodigo == codivo){
-                 // alert(id_persona);
+                //$("#mprvedd option[value='1'").attr("selected",true);
+                //document.getElementById('mprvedd').value =obj.data[D].codigo_proveedor;
+                //alert(obj.data[D].codigo_proveedor);
                   datos = 
                   obj.data[D].artcodigo + '*' +
                   obj.data[D].artdescrip + '*' +
-                  obj.data[D].artubicac;    
+                  obj.data[D].artubicac + '*' +
+                  obj.data[D].codigo_proveedor;    
                   var o = datos.split("*");   
+                  //alert(obj.data[D].id_arprov);
                   $("#mdecriptr").val(o[1]);   
                   $("#mdepart").val(o[2]); 
+                  $("#mprvedd").val(o[3]);
+                  $('#mprvedd').change();
               }
           }
       });

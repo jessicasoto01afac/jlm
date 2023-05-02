@@ -86,6 +86,32 @@ if(!isset($usuario)){
             echo "1";
         }
     //elimina vales de producción 
+    }else if($opcion === 'revisionac2'){
+        $revision = $_POST['revision'];
+        $refe_1 = $_POST['refe_1'];
+        if (jlmrelacion ($revision,$refe_1,$conexion)){
+            echo "0";
+        }else{
+            echo "1";
+        }
+        //guarda edicion de entrada
+    }else if($opcion === 'cambiocabdv'){
+        $fecha = $_POST['fecha'];
+        $fecha_entrga  = $_POST['fecha_entrga'];
+        $id_proveedor = $_POST['id_proveedor'];
+        $uso_CFDI = $_POST['uso_CFDI'];
+        $cond_pago = $_POST['cond_pago'];
+        $asignado = $_POST['asignado'];
+        $refe_1= $_POST['refe_1'];
+            if (cambiocmp($fecha,$fecha_entrga,$id_proveedor,$uso_CFDI,$cond_pago,$asignado,$refe_1,$conexion)){
+                echo "0";
+                //$usuario='PRUEBAS';
+                $realizo = 'EDITA INFORMACIÓN DE LA CABECERA DE COMPRAS';
+                histedith2($usuario,$realizo,$fecha,$fecha_entrga,$id_proveedor,$uso_CFDI,$cond_pago,$asignado,$refe_1,$conexion);
+            }else{
+                echo "1";
+            }
+    //Condición donde elimina usuario
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -163,7 +189,26 @@ function eliminar ($idarti,$conexion){
     }
     cerrar($conexion);
 }
-
+//funcion para actualizar JLM relacion
+function jlmrelacion ($revision,$refe_1,$conexion){
+    $query="UPDATE kardex SET revision='$revision' WHERE refe_1 = '$refe_1' and tipo='COMPRAS'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para actualizar la cabecera desde la vista DE MATERIAL DEFECTUOSO
+function cambiocmp ($fecha,$fecha_entrga,$id_proveedor,$uso_CFDI,$cond_pago,$asignado,$refe_1,$conexion){
+    $query="UPDATE compras SET fecha='$fecha', fecha_entrga='$fecha_entrga', id_proveedor='$id_proveedor',uso_CFDI='$uso_CFDI',cond_pago='$cond_pago',asignado='$asignado' WHERE folio_oc = '$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //--------------------FUNCIÓN DE HISTORIAL
 function histedartshop($usuario,$idarti,$id_articulo,$id_artprove,$cantidad,$observación,$folio_oc,$realizo,$conexion){
     ini_set('date.timezone','America/Mexico_City');
@@ -191,6 +236,18 @@ function histdelete($usuario,$realizo,$idarti,$id_articulo,$folio_oc,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'FOLIO: ' '$folio_oc' ' ID: ' '$idarti ' 'CODIGO: ' '$id_articulo','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//funciones para guardar el historico de la edicion de cabecra de COMPRAS
+function histedith2($usuario,$realizo,$fecha,$fecha_entrga,$id_proveedor,$uso_CFDI,$cond_pago,$asignado,$refe_1,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'FOLIO:' '$refe_1' ' FECHA:' '$fecha'  ' FECHA DE ENTRAGA: '  ' $fecha_entrga' ' PROVEEEDOR:' ' $id_proveedor' ' USO DEL CFDI:' ' $uso_CFDI' ' CONDICION DE PAGO:' ' $cond_pago' ' ASIGNADA:' ' $asignado' ,'$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
