@@ -339,13 +339,18 @@ function dettcompras(id_produc) {
 
     for (C = 0; C < res.length; C++) {
       if (obj.data[C].folio_oc == id_produc) {
-        // alert("respuesta");
         document.getElementById('datecomp').value = obj.data[C].fecha;
         document.getElementById('datentrega').value = obj.data[C].fecha_entrga;
         document.getElementById('proveedcm').value = obj.data[C].id_proveedor;
         document.getElementById('uscfdicm').value = obj.data[C].uso_CFDI;
         document.getElementById('condcm').value = obj.data[C].cond_pago;
-        document.getElementById('fact').value = obj.data[C].email_c1; //BOTONES -----------------------------------------------
+        document.getElementById('fact').value = obj.data[C].email_c1;
+        var folio = obj.data[C].id_proveedor; // alert(folio);
+
+        $('#buscarticulosprvm').load('./select/buscarartshop2.php?folio=' + folio);
+        $('#buscarticulosjlm').load('./select/busartcomp2.php?folio=' + folio);
+        $('#buscarticulosprvm3').load('./select/buscarartshop3.php?folio=' + folio);
+        $('#buscarticulosjlm3').load('./select/busartcomp3.php?folio=' + folio); //BOTONES -----------------------------------------------
 
         var autorizar = document.getElementById('btncmautoriz');
         var liberar = document.getElementById('btncmliberar');
@@ -353,33 +358,82 @@ function dettcompras(id_produc) {
         var finalizado = document.getElementById('btncmfinaliz');
         var enviar = document.getElementById('btncmenviar');
         var editar = document.getElementById('openedimt1');
-        var pdf = document.getElementById('pdfvofi');
+        var pdf = document.getElementById('pdfvofi'); //alert(obj.data[C].estatus);
 
-        if (obj.data[C].estatus == 'AUTORIZADO') {
+        if (obj.data[C].estatus === 'AUTORIZADO') {
           autorizar.style.display = 'none';
-          liberar.style.display = '';
-          parcial.style.display = '';
+          liberar.style.display = ''; //parcial.style.display = '';
+
           finalizado.style.display = 'none';
           enviar.style.display = '';
           editar.style.display = '';
           pdf.style.display = '';
           html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
-          $("#button_estatus").html(html);
+          $("#button_estatus").html(html); //INFO DE ARTICULOS 
+
+          $.ajax({
+            url: '../controller/php/infcompras.php',
+            type: 'GET',
+            data: 'folio=' + id_produc
+          }).done(function (resp) {
+            //alert(resp);
+            obj = JSON.parse(resp);
+            var res = obj.data;
+            var x = 0;
+            html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="defectuoso" name="defectuoso" class="table table-bordered""><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO JLM</th><th><i></i>CODIGO PROV</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+
+            for (U = 0; U < res.length; U++) {
+              x++;
+              var id_valepro = obj.data[U].id_comp;
+
+              if (obj.data[U].estatuskardex == "0") {
+                accions = "<button type='button' onclick='surtirvpf(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-surtirvprod'>ENTRADA</button>";
+              } else if (obj.data[U].estatuskardex == "1") {
+                accions = "<span style='cursor:pointer;' title='Ya fue surtido' onclick='infsurti(" + id_valepro + ")' data-toggle='modal' data-target='#modal-surtido' class='spandis'>COMPLETADO</span>";
+              }
+
+              html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].id_artprove + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observación + "</td><td>" + accions + "</td></tr>";
+            }
+
+            html += '</div></tbody></table></div></div>';
+            $("#listcompras").html(html);
+          });
         } else if (obj.data[C].estatus == 'PENDIENTE') {
           autorizar.style.display = '';
-          liberar.style.display = 'none';
-          parcial.style.display = 'none';
+          liberar.style.display = 'none'; //parcial.style.display = 'none';
+
           finalizado.style.display = 'none';
           enviar.style.display = 'none';
           editar.style.display = '';
           pdf.style.display = '';
           html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-secondary btn-block mg-b-3">PENDIDENTE</button>';
           $("#button_estatus").html(html);
-          document.getElementById('rejlm').style.display = "none";
+          document.getElementById('rejlm').style.display = "none"; //INFO DE ARTICULOS 
+
+          $.ajax({
+            url: '../controller/php/infcompras.php',
+            type: 'GET',
+            data: 'folio=' + id_produc
+          }).done(function (resp) {
+            //alert(resp);
+            obj = JSON.parse(resp);
+            var res = obj.data;
+            var x = 0;
+            html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="defectuoso" name="defectuoso" class="table table-bordered""><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO JLM</th><th><i></i>CODIGO PROV</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+
+            for (U = 0; U < res.length; U++) {
+              x++;
+              var id_valepro = obj.data[U].id_comp;
+              html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].id_artprove + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observación + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarartcminf(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edith'>Editar</a><a class='nav-link' onclick='deletenewart1(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearcmdet'>Eliminar</a>" + "</td></tr>";
+            }
+
+            html += '</div></tbody></table></div></div>';
+            $("#listcompras").html(html);
+          });
         } else if (obj.data[C].estatus == 'FINALIZADO') {
           autorizar.style.display = 'none';
-          liberar.style.display = 'none';
-          parcial.style.display = 'none';
+          liberar.style.display = 'none'; //parcial.style.display = 'none';
+
           finalizado.style.display = '';
           editar.style.display = 'none';
           enviar.style.display = 'none';
@@ -409,27 +463,6 @@ function dettcompras(id_produc) {
         }
       }
     }
-  }); //INFO DE ARTICULOS 
-
-  $.ajax({
-    url: '../controller/php/infcompras.php',
-    type: 'GET',
-    data: 'folio=' + id_produc
-  }).done(function (resp) {
-    //alert(resp);
-    obj = JSON.parse(resp);
-    var res = obj.data;
-    var x = 0;
-    html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="defectuoso" name="defectuoso" class="table table-bordered""><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
-
-    for (U = 0; U < res.length; U++) {
-      x++;
-      var id_valepro = obj.data[U].id_kax;
-      html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observación + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarinsmt1(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithmtdefc1'>Editar</a><a class='nav-link' onclick='deletenewart1(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearmtnew1'>Eliminar</a>" + "</td></tr>";
-    }
-
-    html += '</div></tbody></table></div></div>';
-    $("#listcompras").html(html);
   });
 }
 
@@ -556,10 +589,10 @@ function savadeleartcm() {
   });
 }
 
-function savereviciondv() {
+function savejlmcm() {
   var refe_1 = document.getElementById('ordncompras').innerHTML;
   var revision = document.getElementById('relajlcmp').value;
-  var datos = 'revision=' + revision + '&refe_1=' + refe_1 + '&opcion=revisionac2'; //alert(datos);
+  var datos = 'revision=' + revision + '&refe_1=' + refe_1 + '&opcion=revisionac'; //alert("datos");
 
   $.ajax({
     type: "POST",
@@ -662,4 +695,288 @@ function savecomhead() {
       }
     });
   }
+} //FUNCION DE COMPRAS AUTORIZAR
+
+
+function autorizacm() {
+  var folio = document.getElementById('ordncompras').innerHTML;
+  var datos = 'folio=' + folio + '&opcion=autorizarcm'; //alert(datos);
+
+  if (folio == '') {
+    document.getElementById('edthvoivacios').style.display = '';
+    setTimeout(function () {
+      document.getElementById('edthvoivacios').style.display = 'none';
+    }, 2000);
+    return;
+  } else {
+    $.ajax({
+      type: "POST",
+      url: "../controller/php/insertcompras.php",
+      data: datos
+    }).done(function (respuesta) {
+      //alert(respuesta);
+      if (respuesta == 0) {
+        Swal.fire({
+          type: 'success',
+          text: 'Se autoriza de forma correcta',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        setTimeout("location.href = 'compras.php';", 1500);
+      } else if (respuesta == 2) {
+        document.getElementById('edthvoiexi').style.display = '';
+        setTimeout(function () {
+          document.getElementById('edthvoiexi').style.display = 'none';
+        }, 1000);
+      } else {
+        document.getElementById('edthvoierror').style.display = '';
+        setTimeout(function () {
+          document.getElementById('edthvoierror').style.display = 'none';
+        }, 2000); //alert(respuesta);
+      }
+    });
+  }
+} //FUNCION DE COMPRAS LIBERAR
+
+
+function liberarcm() {
+  var folio = document.getElementById('ordncompras').innerHTML;
+  var datos = 'folio=' + folio + '&opcion=liberarcm'; //alert(datos);
+
+  if (folio == '') {
+    document.getElementById('edthvoivacios').style.display = '';
+    setTimeout(function () {
+      document.getElementById('edthvoivacios').style.display = 'none';
+    }, 2000);
+    return;
+  } else {
+    $.ajax({
+      type: "POST",
+      url: "../controller/php/insertcompras.php",
+      data: datos
+    }).done(function (respuesta) {
+      //alert(respuesta);
+      if (respuesta == 0) {
+        Swal.fire({
+          type: 'success',
+          text: 'Se autoriza de forma correcta',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        setTimeout("location.href = 'compras.php';", 1500);
+      } else if (respuesta == 2) {
+        document.getElementById('edthvoiexi').style.display = '';
+        setTimeout(function () {
+          document.getElementById('edthvoiexi').style.display = 'none';
+        }, 1000);
+      } else {
+        document.getElementById('edthvoierror').style.display = '';
+        setTimeout(function () {
+          document.getElementById('edthvoierror').style.display = 'none';
+        }, 2000); //alert(respuesta);
+      }
+    });
+  }
+} //AGREGA ARTICULOS DETALLES DEL CURSOS
+
+
+function addartcomprdetll() {
+  //alert("entro agregar vale de producción");
+  var folio_oc = document.getElementById('ordncompras').innerHTML;
+  var fecha = document.getElementById('datecomp').value;
+  var fecha_entrga = document.getElementById('datentrega').value;
+  var id_proveedor = document.getElementById('proveedcm').value;
+  var uso_CFDI = document.getElementById('uscfdicm').value;
+  var cond_pago = document.getElementById('condcm').value;
+  var asignado = document.getElementById('consignada').value;
+  var id_articulo = document.getElementById('mcodigotr').value;
+  var id_artprove = document.getElementById('mprvedd').value;
+  var cantidad = document.getElementById('editcacm').value;
+  var observación = document.getElementById('ediobsercm').value;
+  var datos = 'folio_oc=' + folio_oc + '&fecha=' + fecha + '&fecha_entrga=' + fecha_entrga + '&id_proveedor=' + id_proveedor + '&uso_CFDI=' + uso_CFDI + '&cond_pago=' + cond_pago + '&asignado=' + asignado + '&id_articulo=' + id_articulo + '&id_artprove=' + id_artprove + '&cantidad=' + cantidad + '&observación=' + observación + '&opcion=registrar'; //alert(datos);
+
+  if (folio_oc == '' || fecha == '' || id_proveedor == '' || uso_CFDI == '' || cantidad == '' || id_artprove == '' || id_articulo == '') {
+    document.getElementById('edthvovacios').style.display = '';
+    setTimeout(function () {
+      document.getElementById('edthvovacios').style.display = 'none';
+    }, 2000);
+    return;
+  } else {
+    $.ajax({
+      type: "POST",
+      url: "../controller/php/insertcompras.php",
+      data: datos
+    }).done(function (respuesta) {
+      //alert(respuesta);
+      if (respuesta == 0) {
+        Swal.fire({
+          type: 'success',
+          text: 'Se agrego el articulo de forma correcta',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        updatdetll();
+      } else if (respuesta == 2) {
+        document.getElementById('edthdvobli').style.display = '';
+        setTimeout(function () {
+          document.getElementById('edthdvobli').style.display = 'none';
+        }, 1000); //alert("datos repetidos");
+      } else {
+        document.getElementById('edthvoerr').style.display = '';
+        setTimeout(function () {
+          document.getElementById('edthvoerr').style.display = 'none';
+        }, 1000);
+        alert(respuesta);
+      }
+    });
+  }
+} //FUNCION DE ACTUALIZAR TALA DE DETALLES
+
+
+function updatdetll() {
+  //INFO DE ARTICULOS 
+  var folio = document.getElementById('ordncompras').innerHTML;
+  $.ajax({
+    url: '../controller/php/infcompras.php',
+    type: 'GET',
+    data: 'folio=' + folio
+  }).done(function (resp) {
+    //alert(resp);
+    obj = JSON.parse(resp);
+    var res = obj.data;
+    var x = 0;
+    html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="defectuoso" name="defectuoso" class="table table-bordered""><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO JLM</th><th><i></i>CODIGO PROV</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+
+    for (U = 0; U < res.length; U++) {
+      x++;
+      var id_valepro = obj.data[U].id_comp;
+      html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].id_artprove + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observación + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarartcminf(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edith'>Editar</a><a class='nav-link' onclick='deletenewart1(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearcmdet'>Eliminar</a>" + "</td></tr>";
+    }
+
+    html += '</div></tbody></table></div></div>';
+    $("#listcompras").html(html);
+  });
+}
+
+function editarartcminf(idedcmart) {
+  //alert(idedcmart);
+  var folio = idedcmart;
+  document.getElementById('id_artincm').value = idedcmart;
+  $.ajax({
+    url: '../controller/php/compartinf.php',
+    type: 'GET',
+    data: 'folio=' + folio
+  }).done(function (respuesta) {
+    //alert(respuesta);
+    obj = JSON.parse(respuesta);
+    var res = obj.data;
+    var x = 0;
+
+    for (C = 0; C < res.length; C++) {
+      if (obj.data[C].id_comp == idedcmart) {
+        //alert("entro");
+        document.getElementById('mcodigotr3').value = obj.data[C].id_articulo;
+        document.getElementById('mdecriptr3').value = obj.data[C].artdescrip;
+        document.getElementById('mprvedd3').value = obj.data[C].id_artprove; //codigo2
+
+        document.getElementById('mdecripprvvd3').value = obj.data[C].descrip_proveedor; //descripción
+
+        document.getElementById('editcacmp').value = obj.data[C].cantidad;
+        document.getElementById('ediobsercmp').value = obj.data[C].observación;
+      }
+    }
+  });
+}
+
+function editcomp() {
+  //alert("entra edicion");
+  document.getElementById('openedicmpp').style.display = "none";
+  document.getElementById('closeditcmpp').style.display = "";
+  document.getElementById('mcodigotr3').disabled = false;
+  document.getElementById('mprvedd3').disabled = false;
+  document.getElementById('editcacmp').disabled = false;
+  document.getElementById('ediobsercmp').disabled = false;
+  document.getElementById('cmppguardar').style.display = "";
+}
+
+function closedthcomp() {
+  //alert("entra fin edición");
+  document.getElementById('openedicmpp').style.display = "";
+  document.getElementById('closeditcmpp').style.display = "none";
+  document.getElementById('mcodigotr3').disabled = true;
+  document.getElementById('mprvedd3').disabled = true;
+  document.getElementById('editcacmp').disabled = true;
+  document.getElementById('ediobsercmp').disabled = true;
+  document.getElementById('cmppguardar').style.display = "none";
+}
+
+function saveetharcmp() {
+  //alert("enra");
+  var folio_oc = document.getElementById('ordncompras').innerHTML;
+  var idarti = document.getElementById('id_artincm').value;
+  var id_articulo = document.getElementById('mcodigotr3').value;
+  var id_artprove = document.getElementById('mprvedd3').value;
+  var cantidad = document.getElementById('editcacmp').value;
+  var observación = document.getElementById('ediobsercmp').value;
+  var datos = 'folio_oc=' + folio_oc + '&idarti=' + idarti + '&id_articulo=' + id_articulo + '&id_artprove=' + id_artprove + '&cantidad=' + cantidad + '&observación=' + observación + '&opcion=updateart'; //alert(datos);
+
+  if (folio_oc == '' || cantidad == '' || id_artprove == '' || id_articulo == '') {
+    document.getElementById('edthvovacioscm').style.display = '';
+    setTimeout(function () {
+      document.getElementById('edthvovacioscm').style.display = 'none';
+    }, 2000);
+    return;
+  } else {
+    $.ajax({
+      type: "POST",
+      url: "../controller/php/insertcompras.php",
+      data: datos
+    }).done(function (respuesta) {
+      //alert(respuesta);
+      if (respuesta == 0) {
+        Swal.fire({
+          type: 'success',
+          text: 'Se agrego el articulo de forma correcta',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        updatdetll();
+        closedthcomp();
+        $('#modal-edith').modal('hide'); //cierra el modal
+      } else if (respuesta == 2) {
+        document.getElementById('edthdvoblicm').style.display = '';
+        setTimeout(function () {
+          document.getElementById('edthdvoblicm').style.display = 'none';
+        }, 1000); //alert("datos repetidos");
+      } else {
+        document.getElementById('edthvoerrcm').style.display = '';
+        setTimeout(function () {
+          document.getElementById('edthvoerrcm').style.display = 'none';
+        }, 1000);
+        alert(respuesta);
+      }
+    });
+  }
+}
+
+function deletenewart1(idedcmart) {
+  //alert("entra");
+  var folio = idedcmart;
+  document.getElementById('del_artcmdtt').value = idedcmart;
+  $.ajax({
+    url: '../controller/php/compartinf.php',
+    type: 'GET',
+    data: 'folio=' + folio
+  }).done(function (respuesta) {
+    obj = JSON.parse(respuesta);
+    var res = obj.data;
+    var x = 0;
+
+    for (C = 0; C < res.length; C++) {
+      if (obj.data[C].id_comp == idedcmart) {
+        //alert("entro");
+        document.getElementById('deartcmdett').value = obj.data[C].id_articulo + ' / ' + obj.data[C].id_artprove;
+      }
+    }
+  });
 }

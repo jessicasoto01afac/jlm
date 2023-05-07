@@ -86,7 +86,7 @@ if(!isset($usuario)){
             echo "1";
         }
     //elimina vales de producción 
-    }else if($opcion === 'revisionac2'){
+    }else if($opcion === 'revisionac'){
         $revision = $_POST['revision'];
         $refe_1 = $_POST['refe_1'];
         if (jlmrelacion ($revision,$refe_1,$conexion)){
@@ -111,7 +111,25 @@ if(!isset($usuario)){
             }else{
                 echo "1";
             }
-    //Condición donde elimina usuario
+    //Condición donde elimina usuario  
+    }else if($opcion === 'autorizarcm'){
+        $folio = $_POST['folio'];
+        if (autorizar($folio,$conexion)){
+            echo "0";
+            $realizo='AUTORIZA ORDEN DE COMPRAS';
+            histautorizar($usuario,$realizo,$folio,$conexion);
+        }else{
+            echo "1";
+        }
+    }else if($opcion === 'liberarcm'){
+        $folio = $_POST['folio'];
+        if (liberar($folio,$conexion)){
+            echo "0";
+            $realizo='LIBERA ORDEN DE COMPRAS';
+            histautorizar($usuario,$realizo,$folio,$conexion);
+        }else{
+            echo "1";
+        }
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -143,7 +161,7 @@ function comprobacion ($folio_oc,$id_artprove,$conexion){
 }
 //funcion para guardar el ARTICULO PARA TRASFORMACION EN LATA DE MEO 
 function registrar ($folio_oc,$fecha,$fecha_entrga,$id_proveedor,$uso_CFDI,$cond_pago,$asignado,$id_articulo,$id_artprove,$cantidad,$observación,$conexion){
-    $query="INSERT INTO compras VALUES(0,'$folio_oc','$fecha','$fecha_entrga','$id_proveedor','$uso_CFDI','$cond_pago','$asignado','$id_articulo','$id_artprove','$cantidad','$observación','PENDIENTE',0)";
+    $query="INSERT INTO compras VALUES(0,'$folio_oc','$fecha','$fecha_entrga','$id_proveedor','$uso_CFDI','$cond_pago','$asignado','$id_articulo','$id_artprove','$cantidad','$observación','PENDIENTE',0,0)";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -209,6 +227,26 @@ function cambiocmp ($fecha,$fecha_entrga,$id_proveedor,$uso_CFDI,$cond_pago,$asi
     }
     cerrar($conexion);
 }
+//funcion para autorizar
+function autorizar ($folio,$conexion){
+    $query="UPDATE compras SET estatus='AUTORIZADO' WHERE folio_oc = '$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para liberar
+function liberar ($folio,$conexion){
+    $query="UPDATE compras SET estatus='PENDIENTE' WHERE folio_oc = '$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //--------------------FUNCIÓN DE HISTORIAL
 function histedartshop($usuario,$idarti,$id_articulo,$id_artprove,$cantidad,$observación,$folio_oc,$realizo,$conexion){
     ini_set('date.timezone','America/Mexico_City');
@@ -255,6 +293,17 @@ function histedith2($usuario,$realizo,$fecha,$fecha_entrga,$id_proveedor,$uso_CF
     }
 }
 
+//funcion para guarda el historico de autorización
+function histautorizar($usuario,$realizo,$folio,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'FOLIO:' '$folio','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 //funcion para cerrar laa conexion
 function cerrar($conexion){

@@ -255,7 +255,7 @@ include('header.php');
                                 <div class="col-md-4">
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">RELACIÓN JLM/ <a
-                                                href="javascript:savereviciondv()" id="rejlm" name="rejlm">Guardar</a></label>
+                                                href="javascript:savejlmcm()" id="rejlm" name="rejlm">Guardar</a></label>
                                         <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="relajlcmp"
                                             id="relajlcmp" placeholder="JLM"></textarea>
                                     </div>
@@ -269,11 +269,11 @@ include('header.php');
                                                 style="display:none;" onclick="autorizacm()"
                                                 class="btn btn-info pd-x-30">Autorizar</button>
                                             <button title="Dar click para liberar" id="btncmliberar" name="btncmliberar"
-                                                type="button" style="display:none;" onclick="liberarm()"
+                                                type="button" style="display:none;" onclick="liberarcm()"
                                                 class="btn btn-dark pd-x-25">Liberar</button>
-                                            <button id="btncmparcial" name="btncmparcial" type="button"
+                                            <!-- <button id="btncmparcial" name="btncmparcial" type="button"
                                                 style="display:none;" onclick="surtidocm()"
-                                                class="btn btn-warning pd-x-25">Entrega Parcial</button>
+                                                class="btn btn-warning pd-x-25">Entrega Parcial</button> -->
                                             <button id="btncmfinaliz" name="btncmfinaliz" type="button"
                                                 style="display:none;" onclick="finalizarcm()"
                                                 class="btn btn-success pd-x-25">Finalizar</button>
@@ -316,7 +316,7 @@ include('header.php');
                             <div>
                                 <button type="button" onclick="" data-toggle='modal'
                                     style="display:none; background-color: #009C28;" data-target='#modal-addartcmp'
-                                    onclick="" id="voagartic"
+                                    id="voagartic"
                                     class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i
                                         class="fa fa-plus"></i> AGREGAR ARTICULO</button>
                             </div>
