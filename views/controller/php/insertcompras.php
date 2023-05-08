@@ -130,6 +130,65 @@ if(!isset($usuario)){
         }else{
             echo "1";
         }
+    }else if($opcion === 'entrada'){
+        $folio = $_POST['folio'];
+        $fecha = $_POST['fecha'];
+        $fecha_entrga = $_POST['fecha_entrga'];
+        $id_proveedor = $_POST['id_proveedor'];
+        $uso_CFDI = $_POST['uso_CFDI'];
+        $cond_pago = $_POST['cond_pago'];
+        $asignado = $_POST['asignado'];
+        $id_articulo = $_POST['id_articulo'];
+        $id_artprove = $_POST['id_artprove'];
+        $cantidad = $_POST['cantidad'];
+        $observación = $_POST['observación'];
+        $id_comp = $_POST['id_comp'];
+        $comparcant = $_POST['comparcant'];
+        $estadokardex=0;
+        $estadok='';
+        $realizo='';
+        if ($cantidad < $comparcant){
+            $estadokardex=2;
+            $estadok='ENTRADA PARCIAL';
+            $realizo='INGRESA ENTRADA PARCIAL DE LA ORDEN DE COMPRA';
+        }else{
+            $estadokardex=1;
+            $estadok='ENTRADA';
+            $realizo='INGRESA ENTRADA DE LA ORDEN DE COMPRA';
+        }
+
+        if (entrada($id_comp,$id_proveedor,$id_articulo,$id_artprove,$estadokardex,$conexion)){
+            echo "0";
+            inserkardex($folio,$fecha,$fecha_entrga,$id_articulo,$cantidad,$observación,$id_comp,$id_proveedor,$estadok,$comparcant,$conexion);
+            histautorizar($usuario,$realizo,$folio,$conexion);
+        }else{
+            echo "1";
+        }
+        
+    }else if($opcion === 'entradaeth'){
+        $refe_2 = $_POST['refe_2'];
+        $refe_1 = $_POST['refe_1'];
+        $cantidad = $_POST['cantidad'];
+        $observa_dep = $_POST['observa_dep'];
+        $cantidadreal = $_POST['cantidadreal'];
+        $estadok='0';
+        if ($cantidad < $cantidadreal){
+            $estadok='ENTRADA PARCIAL';
+            $estadokardex=2;
+        }else{
+            $estadokardex=1;
+            $estadok='ENTRADA';
+            $realizo='INGRESA ENTRADA DE LA ORDEN DE COMPRA'.' '.$refe_1;
+        }
+        $folio=$_POST['refe_1'];
+        if (edisurtid($refe_2,$refe_1,$cantidad,$observa_dep,$estadok,$conexion)){
+            echo "0";
+            $realizo='EDITA ENTRADA EN ORDEN DE COMPRA'.' '.$refe_1;
+            confentrada($refe_2,$refe_1,$estadokardex,$conexion);
+            histautorizar($usuario,$realizo,$cantidad,$conexion);
+        }else{
+            echo "1";
+        }
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -247,6 +306,47 @@ function liberar ($folio,$conexion){
     }
     cerrar($conexion);
 }
+//funcion para surtir
+function entrada($id_comp,$id_proveedor,$id_articulo,$id_artprove,$estadokardex,$conexion){
+    $query="UPDATE compras SET id_proveedor='$id_proveedor',id_artprove='$id_artprove',id_articulo='$id_articulo',estatuskardex='$estadokardex' WHERE id_comp = '$id_comp'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para entrada
+function  inserkardex($folio,$fecha,$fecha_entrga,$id_articulo,$cantidad,$observación,$id_comp,$id_proveedor,$estadok,$comparcant,$conexion){
+    $query="INSERT INTO kardex VALUES (0,'$folio','$id_comp','0','$fecha','$id_articulo','0','COMPRAS','ARTICULO','$id_proveedor','0','$comparcant','$cantidad','0','0','0','0','$observación','NA','$estadok','PENDIENTE','NO','NO','0')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
+function edisurtid($refe_2,$refe_1,$cantidad,$observa_dep,$estadok,$conexion){
+    $query="UPDATE kardex SET entrada='$cantidad', observa_dep='$observa_dep',status='$estadok' WHERE refe_2 = '$refe_2' and refe_1='$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
+//funcion para surtir
+function confentrada($refe_2,$refe_1,$estadokardex,$conexion){
+    $query="UPDATE compras SET estatuskardex='$estadokardex' WHERE id_comp = '$refe_2' and folio_oc='$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //--------------------FUNCIÓN DE HISTORIAL
 function histedartshop($usuario,$idarti,$id_articulo,$id_artprove,$cantidad,$observación,$folio_oc,$realizo,$conexion){
     ini_set('date.timezone','America/Mexico_City');
@@ -298,6 +398,17 @@ function histautorizar($usuario,$realizo,$folio,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'FOLIO:' '$folio','$fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function histsurt($usuario,$realizo,$cantidad,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario', '$realizo', 'CANTIDAD:' '$cantidad','$fecha1')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

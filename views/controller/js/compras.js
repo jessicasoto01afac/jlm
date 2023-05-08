@@ -334,7 +334,6 @@ function dettcompras(id_produc) {
     $("#lista").toggle("fast"); //Oculta lista
     document.getElementById('ordncompras').innerHTML = id_produc;
     //INFO CABECERA DE ORDEN DE COMPRAS
-
     $.ajax({
         url: '../controller/php/infcabeshop.php',
         type: 'GET',
@@ -346,7 +345,6 @@ function dettcompras(id_produc) {
         var x = 0;
         for (C = 0; C < res.length; C++) {
             if (obj.data[C].folio_oc == id_produc) {
-
                 document.getElementById('datecomp').value = obj.data[C].fecha;
                 document.getElementById('datentrega').value = obj.data[C].fecha_entrga;
                 document.getElementById('proveedcm').value = obj.data[C].id_proveedor;
@@ -390,17 +388,19 @@ function dettcompras(id_produc) {
                         obj = JSON.parse(resp);
                         let res = obj.data;
                         let x = 0;
-                        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="defectuoso" name="defectuoso" class="table table-bordered""><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO JLM</th><th><i></i>CODIGO PROV</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+                        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="defectuoso" name="defectuoso" class="table table-bordered""><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO JLM</th><th><i></i>CODIGO PROV</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>ENTRADA</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
                         for (U = 0; U < res.length; U++) {
                             x++;
                             let id_valepro = obj.data[U].id_comp;
                             if (obj.data[U].estatuskardex == "0") {
-                                accions = "<button type='button' onclick='surtirvpf(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-surtirvprod'>ENTRADA</button>"
+                                accions = "<button type='button' onclick='edithsurcopr(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-entrada'>ENTRADA</button>"
 
                             } else if (obj.data[U].estatuskardex == "1") {
                                 accions = "<span style='cursor:pointer;' title='Ya fue surtido' onclick='infsurti(" + id_valepro + ")' data-toggle='modal' data-target='#modal-surtido' class='spandis'>COMPLETADO</span>"
+                            } else if (obj.data[U].estatuskardex == "2") {
+                                accions = "<button type='button' onclick='edithsurcopr(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-entradaparcial'>ENTRADA PARCIAL</button>"
                             }
-                            html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].id_artprove + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observación + "</td><td>" + accions + "</td></tr>";
+                            html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].id_artprove + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].cantidads + "</td><td>" + obj.data[U].observación + "</td><td>" + accions + "</td></tr>";
                         }
                         html += '</div></tbody></table></div></div>';
                         $("#listcompras").html(html);
@@ -991,4 +991,192 @@ function deletenewart1(idedcmart) {
             }
         }
     })
+}
+
+function edithsurcopr(idartprov) {
+    //alert("etra");
+    let folio = idartprov;
+    document.getElementById('id_surtarcm').value = idartprov;
+    $.ajax({
+        url: '../controller/php/compartinf.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(respuesta) {
+        //alert(respuesta);
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (C = 0; C < res.length; C++) {
+            if (obj.data[C].id_comp == idartprov) {
+                //alert("entro");
+                document.getElementById('codisurtjlm').value = obj.data[C].id_articulo;
+                document.getElementById('codisurtprove').value = obj.data[C].id_artprove; //codigo2
+                document.getElementById('surtartcm').value = obj.data[C].cantidad;
+                document.getElementById('surbsereped').value = obj.data[C].observación;
+                document.getElementById('surtartcm2').value = obj.data[C].cantidad;
+            }
+        }
+    });
+}
+
+function edithsurcmp() {
+    document.getElementById('surtircmpprf').style.display = "none";
+    document.getElementById('closeditcmppinf').style.display = "";
+    document.getElementById('codisurtjlm').disabled = false;
+    document.getElementById('codisurtprove').disabled = false;
+    document.getElementById('surtartcm').disabled = false;
+}
+
+function closefirmsurt() {
+    document.getElementById('surtircmpprf').style.display = "";
+    document.getElementById('closeditcmppinf').style.display = "none";
+    document.getElementById('codisurtjlm').disabled = true;
+    document.getElementById('codisurtprove').disabled = true;
+    document.getElementById('surtartcm').disabled = true;
+}
+
+function confirmsurt() {
+    //alert("pruebas");
+    let folio = document.getElementById('ordncompras').innerHTML;
+    let fecha = document.getElementById('datecomp').value;
+    let fecha_entrga = document.getElementById('datentrega').value;
+    let id_proveedor = document.getElementById('proveedcm').value;
+    let uso_CFDI = document.getElementById('uscfdicm').value;
+    let cond_pago = document.getElementById('condcm').value;
+    let asignado = document.getElementById('consignada').value;
+    let id_articulo = document.getElementById('codisurtjlm').value;
+    let id_artprove = document.getElementById('codisurtprove').value;
+    let cantidad = document.getElementById('surtartcm').value;
+    let observación = document.getElementById('surbsereped').value;
+    let id_comp = document.getElementById('id_surtarcm').value;
+    let comparcant = document.getElementById('surtartcm2').value;
+
+    let datos = 'folio=' + folio + '&id_comp=' + id_comp + '&fecha=' + fecha + '&comparcant=' + comparcant + '&fecha_entrga=' + fecha_entrga + '&id_proveedor=' + id_proveedor + '&uso_CFDI=' + uso_CFDI + '&cond_pago=' + cond_pago + '&asignado=' + asignado + '&id_articulo=' + id_articulo + '&id_artprove=' + id_artprove + '&cantidad=' + cantidad + '&observación=' + observación + '&opcion=entrada';
+    //alert(datos);
+    if (folio == '' || fecha == '' || id_proveedor == '' || uso_CFDI == '' || cantidad == '' || id_artprove == '' || id_articulo == '') {
+        document.getElementById('edthcppvaciosin').style.display = ''
+        setTimeout(function() {
+            document.getElementById('edthcppvaciosin').style.display = 'none';
+        }, 2000);
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertcompras.php",
+            data: datos
+        }).done(function(respuesta) {
+            //alert(respuesta);
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se agrego el articulo de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                closefirmsurt();
+                updatdetll();
+            } else if (respuesta == 2) {
+                document.getElementById('edthdcppblinf').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthdcppblinf').style.display = 'none';
+                }, 1000);
+                //alert("datos repetidos");
+            } else {
+                document.getElementById('edthcpperrinf').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthcpperrinf').style.display = 'none';
+                }, 1000);
+                alert(respuesta);
+            }
+        })
+    }
+}
+
+function infsurti(id_surtido) {
+    //alert(id_surtido);
+    let folio = id_surtido;
+    document.getElementById('idsurt').value = id_surtido;
+    $.ajax({
+        url: '../controller/php/compartinf.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(respuesta) {
+        //alert(respuesta);
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (C = 0; C < res.length; C++) {
+            if (obj.data[C].id_comp == id_surtido) {
+                //alert("entro");
+                document.getElementById('descsurt').innerHTML = obj.data[C].id_artprove + '/' + obj.data[C].id_articulo + '/' + obj.data[C].artdescrip;
+                document.getElementById('cartsur').innerHTML = obj.data[C].entradarel;
+                document.getElementById('cartsur2').innerHTML = obj.data[C].cantidadreal;
+                document.getElementById('opstsur').innerHTML = obj.data[C].observación;
+                //document.getElementById('cantidadreal').innerHTML = obj.data[C].cantidadreal;
+
+            }
+        }
+    });
+}
+//ABRE EDICION DE MODAL SURTIDO
+function openedithsurt() {
+    document.getElementById('editarsur').style.display = "";
+    document.getElementById('infsur').style.display = "none";
+    document.getElementById('opesurt1').style.display = "none";
+    document.getElementById('clossurt1').style.display = "";
+}
+//ABRE EDICION DE MODAL SURTIDO PRODUCTO FINAL
+function closedithsurt() {
+    document.getElementById('editarsur').style.display = "none";
+    document.getElementById('infsur').style.display = "";
+    document.getElementById('opesurt1').style.display = "";
+    document.getElementById('clossurt1').style.display = "none";
+}
+
+function savesurtcm() {
+    let refe_2 = document.getElementById('idsurt').value;
+    let refe_1 = document.getElementById('ordncompras').innerHTML;
+    let cantidad = document.getElementById('cnsurt').value;
+    let cantidadreal = document.getElementById('cartsur2').innerHTML;
+    let observa_dep = document.getElementById('obdepinf').value;
+
+    let datos = 'refe_2=' + refe_2 + '&refe_1=' + refe_1 + '&cantidad=' + cantidad + '&cantidadreal=' + cantidadreal + '&observa_dep=' + observa_dep + '&opcion=entradaeth';
+    alert(datos);
+    if (refe_2 == '' || refe_1 == '' || cantidad == '') {
+        document.getElementById('edthcppvaciosin').style.display = ''
+        setTimeout(function() {
+            document.getElementById('edthcppvaciosin').style.display = 'none';
+        }, 2000);
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertcompras.php",
+            data: datos
+        }).done(function(respuesta) {
+            //alert(respuesta);
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se agrego el articulo de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                closedithsurt();
+                updatdetll();
+            } else if (respuesta == 2) {
+                document.getElementById('edthdcppblinf').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthdcppblinf').style.display = 'none';
+                }, 1000);
+                //alert("datos repetidos");
+            } else {
+                document.getElementById('edthcpperrinf').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthcpperrinf').style.display = 'none';
+                }, 1000);
+                alert(respuesta);
+            }
+        })
+    }
 }
