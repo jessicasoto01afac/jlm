@@ -372,7 +372,7 @@ function dettcompras(id_produc) {
                     autorizar.style.display = 'none';
                     liberar.style.display = '';
                     //parcial.style.display = '';
-                    finalizado.style.display = 'none';
+                    finalizado.style.display = '';
                     enviar.style.display = '';
                     editar.style.display = '';
                     pdf.style.display = '';
@@ -448,6 +448,8 @@ function dettcompras(id_produc) {
                     pdf.style.display = '';
                     html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">FINALIZADO</button>';
                     $("#button_estatus").html(html);
+                    document.getElementById('rejlm').style.display = "none";
+
                 } else if (obj.data[C].estatus == 'ENTREGA PARCIAL') {
                     autorizar.style.display = 'none';
                     liberar.style.display = '';
@@ -1414,4 +1416,46 @@ function histmaterdv() {
         $("#tabhisto").html(html);
     });
     //Historial del vale en productividad
+}
+//FUNCION DE COMPRAS FINALIZAR
+function finalizarcm() {
+    let folio = document.getElementById('ordncompras').innerHTML;
+    let datos = 'folio=' + folio + '&opcion=finalizarcm';
+    //alert(datos);
+    if (folio == '') {
+        document.getElementById('edthvoivacios').style.display = '';
+        setTimeout(function() {
+            document.getElementById('edthvoivacios').style.display = 'none';
+        }, 2000);
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertcompras.php",
+            data: datos
+        }).done(function(respuesta) {
+            //alert(respuesta);
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se autoriza de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                setTimeout("location.href = 'compras.php';", 1500);
+            } else if (respuesta == 2) {
+                document.getElementById('edthvoiexi').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthvoiexi').style.display = 'none';
+                }, 1000);
+
+            } else {
+                document.getElementById('edthvoierror').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthvoierror').style.display = 'none';
+                }, 2000);
+                //alert(respuesta);
+            }
+        });
+    }
 }

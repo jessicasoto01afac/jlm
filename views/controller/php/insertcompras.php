@@ -215,6 +215,15 @@ if(!isset($usuario)){
             echo "1";
         }
 
+    }else if($opcion === 'finalizarcm'){
+        $folio = $_POST['folio'];
+        if (finalizar($folio,$conexion)){
+            echo "0";
+            $realizo='FINALIZA ORDEN DE COMPRAS';
+            histautorizar($usuario,$realizo,$folio,$conexion);
+        }else{
+            echo "1";
+        }
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -387,6 +396,16 @@ function entradaparc($id_comp,$estatukardex,$conexion){
 //inserkardexpar
 function inserkardexpar($folio,$id_articulo,$id_artprove,$cantidad,$observación,$id_comp,$estatukardex,$conexion){
     $query="UPDATE kardex SET entrada='$cantidad', observa_dep='$observación',status='$estatukardex' WHERE refe_2 = '$id_comp' and refe_1='$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para finalizar
+function finalizar ($folio,$conexion){
+    $query="UPDATE compras SET estatus='FINALIZADO' WHERE folio_oc = '$folio'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
