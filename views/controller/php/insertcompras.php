@@ -189,6 +189,32 @@ if(!isset($usuario)){
         }else{
             echo "1";
         }
+    }else if ($opcion === 'entradaparcial'){
+        $folio = $_POST['folio'];
+        $id_articulo = $_POST['id_articulo'];
+        $id_artprove = $_POST['id_artprove'];
+        $cantidad = $_POST['cantidad'];
+        $observación = $_POST['observación'];
+        $id_comp = $_POST['id_comp'];
+        $total = $_POST['total'];
+        $estatukardex=$_POST['estatukardex'];
+       
+        if ($estatukardex ==='2'){
+            $estadok='ENTRADA PARCIAL';
+            $realizo='INGRESA ENTRADA PARCIAL DE LA ORDEN DE COMPRA';
+        }else{
+            $estadok='ENTRADA';
+            $realizo='INGRESA ENTRADA DE LA ORDEN DE COMPRA';
+        }
+
+        if (entradaparc($id_comp,$estatukardex,$conexion)){
+            echo "0";
+            inserkardexpar($folio,$id_articulo,$id_artprove,$cantidad,$observación,$id_comp,$estatukardex,$conexion);
+            histautorizar($usuario,$realizo,$folio,$conexion);
+        }else{
+            echo "1";
+        }
+
     }
     
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
@@ -317,7 +343,7 @@ function entrada($id_comp,$id_proveedor,$id_articulo,$id_artprove,$estadokardex,
     cerrar($conexion);
 }
 //funcion para entrada
-function  inserkardex($folio,$fecha,$fecha_entrga,$id_articulo,$cantidad,$observación,$id_comp,$id_proveedor,$estadok,$comparcant,$conexion){
+function inserkardex($folio,$fecha,$fecha_entrga,$id_articulo,$cantidad,$observación,$id_comp,$id_proveedor,$estadok,$comparcant,$conexion){
     $query="INSERT INTO kardex VALUES (0,'$folio','$id_comp','0','$fecha','$id_articulo','0','COMPRAS','ARTICULO','$id_proveedor','0','$comparcant','$cantidad','0','0','0','0','$observación','NA','$estadok','PENDIENTE','NO','NO','0')";
     if(mysqli_query($conexion,$query)){
         return true;
@@ -336,10 +362,31 @@ function edisurtid($refe_2,$refe_1,$cantidad,$observa_dep,$estadok,$conexion){
     }
     cerrar($conexion);
 }
+//entradaparc($id_comp,$folio,$id_articulo,$id_artprove,$estatukardex,$conexion)
 
 //funcion para surtir
 function confentrada($refe_2,$refe_1,$estadokardex,$conexion){
     $query="UPDATE compras SET estatuskardex='$estadokardex' WHERE id_comp = '$refe_2' and folio_oc='$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para surtir parcial
+function entradaparc($id_comp,$estatukardex,$conexion){
+    $query="UPDATE compras SET estatuskardex='$estatukardex' WHERE id_comp = '$id_comp'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//inserkardexpar
+function inserkardexpar($folio,$id_articulo,$id_artprove,$cantidad,$observación,$id_comp,$estatukardex,$conexion){
+    $query="UPDATE kardex SET entrada='$cantidad', observa_dep='$observación',status='$estatukardex' WHERE refe_2 = '$id_comp' and refe_1='$folio'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

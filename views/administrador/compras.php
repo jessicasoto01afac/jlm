@@ -101,7 +101,7 @@ include('header.php');
                         <button onclick="pdfdv()" title="Imprimir" id="pdfvofi" name="pdfvofi" type="button"
                             class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button>
                         <button title="ver historial" onclick="histmaterdv()" data-toggle="modal"
-                            data-target="#modal-mdhistorialvd" type="button" class="btn btn-primary"><i
+                            data-target="#modal-cmhistorial" type="button" class="btn btn-primary"><i
                                 class="fa fa-history"></i></button>
                     </div>
                 </div><!-- col-5 -->

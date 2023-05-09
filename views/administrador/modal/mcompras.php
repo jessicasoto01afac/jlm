@@ -543,7 +543,7 @@
                     <div id="infsur" name="infsur">
                         <p class="mg-b-20 mg-x-20 tx-16 tx-blue"><b>CANTIDAD: </b></p>
                         <label class="tx-16" id="cartsur" name="cartsur"></label>
-                        <label class="tx-16" id="cartsur2" name="cartsur2"></label>
+                        <label hidden class="tx-16" id="cartsur2" name="cartsur2"></label>
                         <p class="tx-16 tx-blue"><b>OBSERVACIONES:</b></p> <label class="tx-16" id="opstsur"
                             name="opstsur"></label>
                     </div>
@@ -597,31 +597,23 @@
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">ENTRADA PARCIAL COMPRAS</h6>
-                <button type="button" onclick="closedisurvpif2()" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form id="editpedinf" class="form-horizontal" action="" method="POST">
                 <div class="modal-body pd-25">
-                    <a href="#" id="surtircmpprf2" name="surtircmpprf2" style="float: right;font-size: 16px"
-                        class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="edithsurcmp2()"
-                        title="Dar clic para editar">
-                        <div><i class="fa fa-edit"></i></div>
-                    </a>
-                    <a href="#" id="closeditcmppinf2" name="closeditcmppinf2"
-                        style="float: right;font-size: 16px;display:none;"
-                        class="btn btn-danger btn-icon rounded-circle mg-r-5 mg-b-10" onclick="closefirmsurt2()"
-                        title="Dar clic para cerrar">
-                        <div><i class="fa fa-times"></i></div>
-                    </a>
                     <input style="display:none;" disabled="" class="form-control inputalta" type="text"
                         name="id_surtarcm2" id="id_surtarcm2">
+                    <input hidden disabled="" class="form-control inputalta" type="number" name="id_surtarcm2oc"
+                        id="id_surtarcm2oc">
                     <div class="row mg-b-25">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label label2">CODIGO JLM: <span
                                         class="tx-danger">*</span></label>
-                                <input class="form-control" type="text" id="codisurtjlm2" name="codisurtjlm2">
+                                <input disabled="" class="form-control" type="text" id="codisurtjlm2"
+                                    name="codisurtjlm2">
                                 <!-- <select class="form-control" onchange="indivsurtinf()" id="codisurtjlm2"
                                     name="codisurtjlm2" type="text" disabled="" data-live-search="true"
                                     style="width: 100%">
@@ -636,7 +628,8 @@
                             <div class="form-group">
                                 <label class="form-control-label label2">CODIGO PROVEEDOR: <span
                                         class="tx-danger">*</span></label>
-                                <input class="form-control" type="text" id="codisurtprove2" name="codisurtprove2">
+                                <input disabled="" class="form-control" type="text" id="codisurtprove2"
+                                    name="codisurtprove2">
                                 <!-- <select class="form-control" onchange="indivsurtinf()" id="codisurtprove2"
                                     name="codisurtprove2" type="text" disabled="" data-live-search="true"
                                     style="width: 100%">
@@ -649,18 +642,26 @@
                         </div><!-- col-4 -->
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label class="form-control-label label2">CANTIDAD ENTRANTE:<span
+                                <label class="form-control-label label2">CANTIDAD TOTAL:<span
                                         class="tx-danger">*</span></label>
                                 <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
-                                    name="surtartcm2" id="surtartcm2">
+                                    name="surtartcm3" id="surtartcm3">
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label class="form-control-label label2">CANTIDAD REAL:<span
+                                <label class="form-control-label label2">CANTIDAD ENTRANTE:<span
                                         class="tx-danger">*</span></label>
                                 <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
-                                    name="surtartcm3" id="surtartcm3">
+                                    name="surtartcm4" id="surtartcm4">
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label label2"> <b>CANTIDAD FALTANTE:</b> <span
+                                        class="tx-danger">*</span></label>
+                                <input onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="surtartcm5" id="surtartcm5">
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-12">
@@ -671,7 +672,7 @@
                             </div>
                         </div><!-- col-4 -->
                         <div class="col-lg-4">
-                            <button type="button" title="Dar click para marcar surtir" onclick="confirmsurt2()"
+                            <button type="button" title="Dar click para marcar surtir" onclick="confirmsurtparc()"
                                 id="pedrguardarsur"
                                 class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">CONFIRAR
                                 ENTRADA</button>
@@ -704,4 +705,46 @@
             </div><!-- alert -->
         </div>
     </div><!-- modal-dialog -->
+</div><!-- modal -->
+<!-- MODAL PARA HISTORIAL-->
+<div class="modal fade" id='modal-cmhistorial'>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header pd-y-20 pd-x-25">
+                <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">VISTA DE HISTORIAL</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="col-12">
+                <div class="card bd-0 pd-30">
+                    <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Historial</h6>
+                    <p id="" name="" class="mg-b-0"><span
+                            class="square-8 rounded-circle bg-primary mg-r-10"></span>Fecha de creación:<label
+                            id="fcreacion" name="fcreacion" for=""></label></p>
+                    <p id="" name="" class="mg-b-0"><span class="square-8 rounded-circle bg-teal mg-r-10"></span>Fecha
+                        de entrega:<label id="fautoriz" name="fautoriz" for=""></label></p>
+                    <div class="col-12" align="right">
+                        <span class="square-10 bg-primary mg-r-5"></span><span id="dias1" name="dias1">1</span>
+                        <span class="square-10 bg-purple mg-r-5"></span><span id="dias2" name="dias2">2</span>
+                        <span class="square-10 bg-teal mg-r-5"></span><span id="dias3" name="dias3">3</span>
+                    </div>
+                    <div class="mg-t-20 tx-13">
+                        <a href="javascript:pdfhistory()" class="tx-gray-600 hover-info">Generar Reporte</a>
+                        <!-- <a href="" class="tx-gray-600 hover-info bd-l mg-l-10 pd-l-10">Imprimir Reporte</a> -->
+                    </div>
+                </div><!-- card -->
+            </div>
+            <div class="modal-body pd-25">
+                <h4 class="lh-3 mg-b-20"><a href="" class="tx-inverse hover-primary">Registros de movimientos</a></h4>
+                <div id="tabhisto" name="tabhisto"></div>
+            </div><!-- modal-body -->
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">Save
+                    changes</button>
+                <button type="button"
+                    class="btn btn-secondary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">Close</button>
+            </div> -->
+        </div>
+    </div>
 </div><!-- modal -->

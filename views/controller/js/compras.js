@@ -330,7 +330,7 @@ function editarartcm(idedimp) {
 
 function dettcompras(id_produc) {
     //alert(id_produc);
-    $("#detalles").toggle(250); //Muestra contenedor de detalles
+    $("#detalles").toggle(250); //Muestra contenedor de detalles 0508
     $("#lista").toggle("fast"); //Oculta lista
     document.getElementById('ordncompras').innerHTML = id_produc;
     //INFO CABECERA DE ORDEN DE COMPRAS
@@ -398,7 +398,7 @@ function dettcompras(id_produc) {
                             } else if (obj.data[U].estatuskardex == "1") {
                                 accions = "<span style='cursor:pointer;' title='Ya fue surtido' onclick='infsurti(" + id_valepro + ")' data-toggle='modal' data-target='#modal-surtido' class='spandis'>COMPLETADO</span>"
                             } else if (obj.data[U].estatuskardex == "2") {
-                                accions = "<button type='button' onclick='edithsurcopr(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-entradaparcial'>ENTRADA PARCIAL</button>"
+                                accions = "<button type='button' onclick='entradaparcial(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-entradaparcial'>ENTRADA PARCIAL</button>"
                             }
                             html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].id_artprove + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].cantidads + "</td><td>" + obj.data[U].observación + "</td><td>" + accions + "</td></tr>";
                         }
@@ -848,28 +848,147 @@ function addartcomprdetll() {
         })
     }
 }
-//FUNCION DE ACTUALIZAR TALA DE DETALLES
+//FUNCION DE ACTUALIZAR TALA DE DETALLES 0508
 function updatdetll() {
     //INFO DE ARTICULOS 
-    let folio = document.getElementById('ordncompras').innerHTML
+    let id_cmmpp = document.getElementById('ordncompras').innerHTML
     $.ajax({
         url: '../controller/php/infcompras.php',
         type: 'GET',
-        data: 'folio=' + folio
+        data: 'folio=' + id_cmmpp
     }).done(function(resp) {
         //alert(resp);
         obj = JSON.parse(resp);
         let res = obj.data;
         let x = 0;
-        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="defectuoso" name="defectuoso" class="table table-bordered""><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO JLM</th><th><i></i>CODIGO PROV</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
-        for (U = 0; U < res.length; U++) {
-            x++;
-            let id_valepro = obj.data[U].id_comp;
-            html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].id_artprove + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observación + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarartcminf(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edith'>Editar</a><a class='nav-link' onclick='deletenewart1(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearcmdet'>Eliminar</a>" + "</td></tr>";
-        }
-        html += '</div></tbody></table></div></div>';
-        $("#listcompras").html(html);
+        for (C = 0; C < res.length; C++) {
+            if (obj.data[C].folio_oc == id_cmmpp) {
+                document.getElementById('datecomp').value = obj.data[C].fecha;
+                document.getElementById('datentrega').value = obj.data[C].fecha_entrga;
+                document.getElementById('proveedcm').value = obj.data[C].id_proveedor;
+                document.getElementById('uscfdicm').value = obj.data[C].uso_CFDI;
+                document.getElementById('condcm').value = obj.data[C].cond_pago;
+                document.getElementById('fact').value = obj.data[C].email_c1;
 
+                let folio = obj.data[C].id_proveedor;
+                // alert(folio);
+                $('#buscarticulosprvm').load('./select/buscarartshop2.php?folio=' + folio);
+                $('#buscarticulosjlm').load('./select/busartcomp2.php?folio=' + folio);
+                $('#buscarticulosprvm3').load('./select/buscarartshop3.php?folio=' + folio);
+                $('#buscarticulosjlm3').load('./select/busartcomp3.php?folio=' + folio);
+
+                //BOTONES -----------------------------------------------
+                let autorizar = document.getElementById('btncmautoriz');
+                let liberar = document.getElementById('btncmliberar');
+                let parcial = document.getElementById('btncmparcial');
+                let finalizado = document.getElementById('btncmfinaliz');
+                let enviar = document.getElementById('btncmenviar');
+                let editar = document.getElementById('openedimt1');
+                let pdf = document.getElementById('pdfvofi');
+                //alert(obj.data[C].estatus);
+                if (obj.data[C].estatus === 'AUTORIZADO') {
+                    autorizar.style.display = 'none';
+                    liberar.style.display = '';
+                    //parcial.style.display = '';
+                    finalizado.style.display = 'none';
+                    enviar.style.display = '';
+                    editar.style.display = '';
+                    pdf.style.display = '';
+                    html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-purple btn-block mg-b-3">AUTORIZADO</button>';
+                    $("#button_estatus").html(html);
+                    //INFO DE ARTICULOS 
+                    $.ajax({
+                        url: '../controller/php/infcompras.php',
+                        type: 'GET',
+                        data: 'folio=' + id_cmmpp
+                    }).done(function(resp) {
+                        //alert(resp);
+                        obj = JSON.parse(resp);
+                        let res = obj.data;
+                        let x = 0;
+                        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="defectuoso" name="defectuoso" class="table table-bordered""><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO JLM</th><th><i></i>CODIGO PROV</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>ENTRADA</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+                        for (U = 0; U < res.length; U++) {
+                            x++;
+                            let id_valepro = obj.data[U].id_comp;
+                            if (obj.data[U].estatuskardex == "0") {
+                                accions = "<button type='button' onclick='edithsurcopr(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-entrada'>ENTRADA</button>"
+
+                            } else if (obj.data[U].estatuskardex == "1") {
+                                accions = "<span style='cursor:pointer;' title='Ya fue surtido' onclick='infsurti(" + id_valepro + ")' data-toggle='modal' data-target='#modal-surtido' class='spandis'>COMPLETADO</span>"
+                            } else if (obj.data[U].estatuskardex == "2") {
+                                accions = "<button type='button' onclick='entradaparcial(" + id_valepro + ");' class='btn btn-info mg-b-10' title='Dar click para surtir' data-toggle='modal' data-target='#modal-entradaparcial'>ENTRADA PARCIAL</button>"
+                            }
+                            html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].id_artprove + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].cantidads + "</td><td>" + obj.data[U].observación + "</td><td>" + accions + "</td></tr>";
+                        }
+                        html += '</div></tbody></table></div></div>';
+                        $("#listcompras").html(html);
+
+                    })
+
+                } else if (obj.data[C].estatus == 'PENDIENTE') {
+                    autorizar.style.display = '';
+                    liberar.style.display = 'none';
+                    //parcial.style.display = 'none';
+                    finalizado.style.display = 'none';
+                    enviar.style.display = 'none';
+                    editar.style.display = '';
+                    pdf.style.display = '';
+                    html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-secondary btn-block mg-b-3">PENDIDENTE</button>';
+                    $("#button_estatus").html(html);
+                    document.getElementById('rejlm').style.display = "none";
+                    //INFO DE ARTICULOS 
+                    $.ajax({
+                        url: '../controller/php/infcompras.php',
+                        type: 'GET',
+                        data: 'folio=' + id_cmmpp
+                    }).done(function(resp) {
+                        //alert(resp);
+                        obj = JSON.parse(resp);
+                        let res = obj.data;
+                        let x = 0;
+                        html = '<div class="table-wrapper rounded table-responsive"><table style="width:100%" id="defectuoso" name="defectuoso" class="table table-bordered""><thead class="thead-colored thead-purple"><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>CODIGO JLM</th><th><i></i>CODIGO PROV</th><th><i></i>DESCRIPCIÓN</th><th><i></i>CANTIDAD</th><th><i></i>OBSERVACIONES</th><th><i></i>ACCIONES</th></tr></thead><tbody>';
+                        for (U = 0; U < res.length; U++) {
+                            x++;
+                            let id_valepro = obj.data[U].id_comp;
+                            html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_articulo + "</td><td>" + obj.data[U].id_artprove + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observación + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarartcminf(" + id_valepro + ");' class='nav-link' data-toggle='modal' data-target='#modal-edith'>Editar</a><a class='nav-link' onclick='deletenewart1(" + id_valepro + ");' data-toggle='modal' data-target='#modal-delearcmdet'>Eliminar</a>" + "</td></tr>";
+                        }
+                        html += '</div></tbody></table></div></div>';
+                        $("#listcompras").html(html);
+
+                    })
+                } else if (obj.data[C].estatus == 'FINALIZADO') {
+                    autorizar.style.display = 'none';
+                    liberar.style.display = 'none';
+                    //parcial.style.display = 'none';
+                    finalizado.style.display = '';
+                    editar.style.display = 'none';
+                    enviar.style.display = 'none';
+                    pdf.style.display = '';
+                    html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">FINALIZADO</button>';
+                    $("#button_estatus").html(html);
+                } else if (obj.data[C].estatus == 'ENTREGA PARCIAL') {
+                    autorizar.style.display = 'none';
+                    liberar.style.display = '';
+                    parcial.style.display = '';
+                    finalizado.style.display = 'none';
+                    enviar.style.display = 'none';
+                    editar.style.display = 'none';
+                    pdf.style.display = '';
+                    html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-secondary btn-block mg-b-3">ENTREGA PARCIAL</button>';
+                    $("#button_estatus").html(html);
+                } else if (obj.data[C].estatus == 'ENVIADO') {
+                    autorizar.style.display = 'none';
+                    liberar.style.display = '';
+                    parcial.style.display = '';
+                    finalizado.style.display = '';
+                    editar.style.display = 'none';
+                    enviar.style.display = 'none';
+                    pdf.style.display = '';
+                    html = '<button type="button" id="estatus" name="estatus" class="btn btn-oblong btn-success btn-block mg-b-3">FINALIZADO</button>';
+                    $("#button_estatus").html(html);
+                }
+            }
+        }
     })
 }
 
@@ -1075,6 +1194,7 @@ function confirmsurt() {
                 });
                 closefirmsurt();
                 updatdetll();
+                $('#modal-entrada').modal('hide');
             } else if (respuesta == 2) {
                 document.getElementById('edthdcppblinf').style.display = '';
                 setTimeout(function() {
@@ -1179,4 +1299,119 @@ function savesurtcm() {
             }
         })
     }
+}
+
+function entradaparcial(idartprov) {
+    //alert("etra");
+    let folio = idartprov;
+    document.getElementById('id_surtarcm2').value = idartprov;
+    $.ajax({
+        url: '../controller/php/compartinf.php',
+        type: 'GET',
+        data: 'folio=' + folio
+    }).done(function(respuesta) {
+        //alert(respuesta);
+        obj = JSON.parse(respuesta);
+        var res = obj.data;
+        var x = 0;
+        for (C = 0; C < res.length; C++) {
+            if (obj.data[C].id_comp == idartprov) {
+                //alert("entro");
+                let total = obj.data[C].entradarel;
+                document.getElementById('codisurtjlm2').value = obj.data[C].id_articulo;
+                document.getElementById('codisurtprove2').value = obj.data[C].id_artprove; //codigo2
+                document.getElementById('surtartcm4').value = obj.data[C].entradarel;
+                document.getElementById('surbsereped2').value = obj.data[C].observación;
+                document.getElementById('surtartcm3').value = obj.data[C].cantidadreal;
+                document.getElementById('surtartcm5').value = obj.data[C].cantidadreal - obj.data[C].entradarel;
+                document.getElementById('id_surtarcm2oc').value = Number(total) + Number(document.getElementById('surtartcm5').value);
+
+                $('#surtartcm5').change(function() {
+                    document.getElementById('id_surtarcm2oc').value = Number(total) + Number(document.getElementById('surtartcm5').value);
+                });
+
+            }
+        }
+    });
+}
+
+function confirmsurtparc() {
+    //alert("confirmsurtparc");
+    let folio = document.getElementById('ordncompras').innerHTML;
+    let id_articulo = document.getElementById('codisurtjlm2').value;
+    let id_artprove = document.getElementById('codisurtprove2').value;
+    let cantidad = document.getElementById('id_surtarcm2oc').value;
+    let observación = document.getElementById('surbsereped2').value;
+    let id_comp = document.getElementById('id_surtarcm2').value;
+    let total = document.getElementById('surtartcm3').value;
+    let estatukardex = '';
+    if (total > cantidad) {
+        estatukardex = '2'
+    } else {
+        estatukardex = '1'
+    }
+    let datos = 'folio=' + folio + '&id_comp=' + id_comp + '&total=' + total + '&estatukardex=' + estatukardex + '&id_articulo=' + id_articulo + '&id_artprove=' + id_artprove + '&cantidad=' + cantidad + '&observación=' + observación + '&opcion=entradaparcial';
+    //alert(datos);
+    if (folio == '' || id_articulo == '' || id_artprove == '' || cantidad == '' || total == '') {
+        document.getElementById('edthcppvaciosin2').style.display = ''
+        setTimeout(function() {
+            document.getElementById('edthcppvaciosin2').style.display = 'none';
+        }, 2000);
+        return;
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "../controller/php/insertcompras.php",
+            data: datos
+        }).done(function(respuesta) {
+            //alert(respuesta);
+            if (respuesta == 0) {
+                Swal.fire({
+                    type: 'success',
+                    text: 'Se agrego el articulo de forma correcta',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                $('#modal-entradaparcial').modal('hide');
+                updatdetll();
+            } else if (respuesta == 2) {
+                document.getElementById('edthdcppblinf2').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthdcppblinf2').style.display = 'none';
+                }, 1000);
+                //alert("datos repetidos");
+            } else {
+                document.getElementById('edthcpperrinf2').style.display = '';
+                setTimeout(function() {
+                    document.getElementById('edthcpperrinf2').style.display = 'none';
+                }, 1000);
+                alert(respuesta);
+            }
+        })
+    }
+}
+
+function histmaterdv() {
+    let folio = document.getElementById('ordncompras').innerHTML;
+    let folio2 = "FOLIO:" + folio;
+    //alert(folio);
+    //Tabla de historial del vale de producción
+    $.ajax({
+        url: '../controller/php/histshop.php',
+        type: 'POST',
+        data: 'folio=' + folio2
+    }).done(function(resp) {
+        obj = JSON.parse(resp);
+        var res = obj.data;
+        var x = 0;
+        //alert("folio");
+        html = '<div class="rounded table-responsive"><table style="width:100%" id="hisvalevp" name="hisvalevp" class="table display dataTable no-footer"><thead><tr><th><i class="fa fa-sort-numeric-asc"></i>ID</th><th><i></i>Usuario</th><th><i></i>Acción</th><th><i></i>Registro</th><th><i></i>fecha</th></tr></thead><tbody>';
+        for (U = 0; U < res.length; U++) {
+            x++;
+            html += "<tr><td>" + x + "</td><td>" + obj.data[U].id_usu + "</td><td>" + obj.data[U].proceso + "</td><td>" + obj.data[U].registro + "</td><td>" + obj.data[U].fecha + "</td></tr>";
+        }
+        html += '</div></tbody></table></div></div>';
+        $("#tabhisto").html(html);
+    });
+    //Historial del vale en productividad
 }
