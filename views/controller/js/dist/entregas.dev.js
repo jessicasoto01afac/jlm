@@ -78,4 +78,10 @@ function openentregas() {
            }
        });
    });*/
+
+  $(document).ready(function () {
+    $('#select2-b').select2();
+  });
 }
+
+function saveentregas() {}

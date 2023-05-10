@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
+<?php include ("../../controller/conexion.php");
+$sql = "SELECT refe_1 FROM kardex WHERE estado = 0 and tipo='PEDIDO' group by refe_1 ORDER BY refe_1 DESC";
+$cliente = mysqli_query($conexion,$sql);
+
+?>
 
 <head>
     <!-- Required meta tags -->
@@ -12,7 +17,7 @@
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
 
-    <title>JLM|Vale_produccion</title>
+    <title>JLM|Entregas</title>
 
     <!-- vendor css -->
     <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -50,61 +55,74 @@ include('header.php');
             <div class="br-pagebody">
 
 
+                <!-- de aqui -->
 
                 <div class="br-section-wrapper">
-                    <div>
-                        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-t-20 mg-b-10">Agrega entregas</h6>
+                    <div id="accordion" class="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <h6 class="mg-b-0">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                        aria-expanded="true" aria-controls="collapseOne" class="tx-gray-800 transition">
+                                        + Entregas
+                                    </a>
+                                </h6>
+                            </div><!-- card-header -->
 
-                        <div class="form-layout form-layout-3">
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                    <select id="select2-b" class="form-control" data-placeholder="Choose country">
-                                            <option label="Choose country"></option>
-                                            <option value="USA">United States of America</option>
-                                            <option value="UK">United Kingdom</option>
-                                            <option value="China">China</option>
-                                            <option value="Japan">Japan</option>
-                                        </select>
+                            <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="card-block pd-20">
+                                    <div>
+                                        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-t-20 mg-b-10">Agrega
+                                            entregas</h6>
+
+                                        <div class="form-layout form-layout-3">
+                                            <div class="row no-gutters">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                    <select id="cliente1" name="cliente1" class="form-control select2-show-search w-full" data-placeholder="Choose country">
+                                                        <option label="">Selecciona</option>
+                                                        <?php while($provv = mysqli_fetch_row($cliente)):?>
+                                                        <option value="<?php echo $provv[0]?>"><?php echo $provv[0]?>
+                                                        </option>
+                                                        <?php endwhile; ?>
+                                                    </select>
+                                                    </div>
+                                                </div><!-- col-4 -->
+                                                <div class="col-md-4 mg-t--1 mg-md-t-0">
+                                                    <div class="form-group mg-md-l--1">
+                                                        <label for="">Fecha de entrega</label>
+                                                        <input class="form-control" type="date" id="dateentrega" name="dateentrega" 
+                                                            placeholder="Enter lastname (required)">
+                                                    </div>
+                                                </div><!-- col-4 -->
+                                                <div class="col-md-4 mg-t--1 mg-md-t-0">
+                                                    <div class="form-group mg-md-l--1">
+                                                        <label for="">Correo de notificación</label>
+                                                        <input class="form-control" type="text" name="email"
+                                                            placeholder="Enter email address">
+                                                    </div>
+                                                </div><!-- col-4 -->
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group bd-t-0-force">
+                                                        <!-- <input class="form-control" type="text" name="address"
+                                                            placeholder="Enter address"> -->
+                                                        <textarea class="form-control" placeholder="Observaciones"
+                                                            name="obserentr" id="obserentr" cols="5" rows="5"></textarea>
+                                                    </div>
+                                                </div><!-- col-8 -->
+                                            </div><!-- row -->
+                                            <div class="form-layout-footer bd pd-20 bd-t-0">
+                                                <button class="btn btn-info" onclick="">Guardar</button>
+                                            </div><!-- form-group -->
+                                        </div><!-- form-layout -->
                                     </div>
-                                </div><!-- col-4 -->
-                                <div class="col-md-4 mg-t--1 mg-md-t-0">
-                                    <div class="form-group mg-md-l--1">
-                                        <input class="form-control" type="text" name="lastname"
-                                            placeholder="Enter lastname (required)">
-                                    </div>
-                                </div><!-- col-4 -->
-                                <div class="col-md-4 mg-t--1 mg-md-t-0">
-                                    <div class="form-group mg-md-l--1">
-                                        <input class="form-control" type="text" name="email"
-                                            placeholder="Enter email address">
-                                    </div>
-                                </div><!-- col-4 -->
-                                
-                                <div class="col-md-4">
-                                    <div class="form-group mg-md-l--1 bd-t-0-force">
-                                        <select id="select2-b" class="form-control" data-placeholder="Choose country">
-                                            <option label="Choose country"></option>
-                                            <option value="USA">United States of America</option>
-                                            <option value="UK">United Kingdom</option>
-                                            <option value="China">China</option>
-                                            <option value="Japan">Japan</option>
-                                        </select>
-                                    </div>
-                                </div><!-- col-4 -->
-                                <div class="col-md-8">
-                                    <div class="form-group bd-t-0-force">
-                                        <input class="form-control" type="text" name="address"
-                                            placeholder="Enter address">
-                                    </div>
-                                </div><!-- col-8 -->
-                            </div><!-- row -->
-                            <div class="form-layout-footer bd pd-20 bd-t-0">
-                                <button class="btn btn-info">Submit Form</button>
-                                <button class="btn btn-secondary">Cancel</button>
-                            </div><!-- form-group -->
-                        </div><!-- form-layout -->
-                    </div>
+                                </div>
+                            </div>
+                        </div><!-- card -->
+                        <!-- ADD MORE CARD HERE -->
+                    </div><!-- accordion -->
+
                     <div class="ht-70 bg-gray-100 pd-x-20 d-flex align-items-center justify-content-center shadow-base">
                         <ul class="nav nav-outline active-info align-items-center flex-row" role="tablist">
                             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#posts"
@@ -116,6 +134,9 @@ include('header.php');
                                     role="tab">Finalizadas</a></li>
                         </ul>
                     </div>
+                    <!-- aqui -->
+
+
 
 
                     <div class="tab-content br-profile-body">
