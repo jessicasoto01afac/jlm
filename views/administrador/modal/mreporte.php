@@ -64,7 +64,7 @@
 </style>
 <!-- MODAL PARA EDITAR ARTICULOS DE ALTA DE RECLAMO -->
 <div class="modal fade" id='modal-editararclalta'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO DEL ALTA DE RECLAMO</h6>
@@ -74,7 +74,7 @@
             </div>
             <form id="editvoinf" class="form-horizontal" action="" method="POST">
                 <div class="modal-body pd-25">
-                    <a href="#" id="openeditarclie" style="float: right;font-size: 16px;display:;"
+                    <a href="#" id="openeditarclie" style="float: right;font-size: 16px;"
                         class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editartrecliente()"
                         title="Dar clic para editar">
                         <div><i class="fa fa-edit"></i></div>
@@ -199,7 +199,7 @@
 </div><!-- modal -->
 <!-- MODAL PARA EDITAR ARTICULOS DE ALTA DE RECLAMO -->
 <div class="modal fade" id='modal-editararclalta2'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO DE REPORTE</h6>
@@ -209,7 +209,7 @@
             </div>
             <form id="editrep" class="form-horizontal" action="" method="POST">
                 <div class="modal-body pd-25">
-                    <a href="#" id="openeditarclie2" style="float: right;font-size: 16px;display:;"
+                    <a href="#" id="openeditarclie2" style="float: right;font-size: 16px;"
                         class="btn btn-warning btn-icon rounded-circle mg-r-5 mg-b-10" onclick="editartrecliente2()"
                         title="Dar clic para editar">
                         <div><i class="fa fa-edit"></i></div>
@@ -335,7 +335,7 @@
 
 <!-- MODAL PARA AGREGAR ARTICULO INDIVIDUAL EN REPORTE  DETALLES-->
 <div class="modal fade" id='modal-addartrpinfo'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">AGREGAR ARTICULO</h6>
@@ -416,7 +416,7 @@
                 </div><!-- d-flex -->
             </div><!-- alert -->
             <div class="modal-footer">
-                <button style="display:;" type="button" onclick="editaddreport()" id="addarinpro2" name="addarinpro2"
+                <button type="button" onclick="editaddreport()" id="addarinpro2" name="addarinpro2"
                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">AGREGAR</button>
             </div>
         </div>

@@ -110,7 +110,7 @@
 
 <!-- MODAL PARA EDITAR ARTICULOS EN ALTA DE PEDIDOS-->
 <div class="modal fade" id='modal-edithaddpedit'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO</h6>
@@ -245,7 +245,7 @@
 
 <!-- MODAL PARA EDITAR ARTICULOS EXTENDIDOS EN VISTA PREVIA EN PEDIDOS-->
 <div class="modal fade" id='modal-edithdetpedi'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">EDITAR ARTICULO</h6>
@@ -379,7 +379,7 @@
 
 <!-- MODAL PARA AGREGAR ARTICULO INDIVIDUAL EN INFO DE PEDIDOS-->
 <div class="modal fade" id='modal-addartpedinfo'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">AGREGAR ARTICULO</h6>
@@ -462,7 +462,7 @@
                 </div><!-- d-flex -->
             </div><!-- alert -->
             <div class="modal-footer">
-                <button style="display:;" type="button" onclick="addarinpedinfo()" id="addarinpro2" name="addarinpro2"
+                <button type="button" onclick="addarinpedinfo()" id="addarinpro2" name="addarinpro2"
                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">AGREGAR</button>
             </div>
         </div>
@@ -517,7 +517,7 @@
 </div><!-- modal -->
 <!-- MODAL PARA SURTIR ARTICULOS DE PRODUCCIÓN-->
 <div class="modal fade" id='modal-surtirpedrod'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">SURTIR ARTICULO DE PEDIDO</h6>
@@ -588,13 +588,13 @@
                         </div><!-- col-4 -->
                         <div class="col-lg-4">
                             <button type="button" title="Dar click para marcar surtir" onclick="acsurtirpedf()"
-                                id="pedrguardarsur" style=""
+                                id="pedrguardarsur"
                                 class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">CONFIRAR
                                 SURTIR</button>
                         </div>
                         <div class="col-lg-4">
                             <button type="button" title="Dar click para marcar sin existencia" onclick="sinexisten()"
-                                id="pedrguardarsur" style=""
+                                id="pedrguardarsur"
                                 class="btn btn-danger tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">SIN
                                 EXISTENCIAS</button>
                         </div>
@@ -674,7 +674,7 @@
 
 <!-- MODAL PARA SURTIR ARTICULOS DE PRODUCCIÓN MASIVAMENTE-->
 <div class="modal fade" id='modal-surtirmasivo'>
-    <div class="modal-dialog modal-lg" role="document" style="/*margin-top: 7em;*/">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content bd-5">
             <div class="modal-header pd-y-20 pd-x-25">
                 <h6 class="tx-18 mg-b-0 tx-uppercase tx-inverse tx-bold">SURTIR MASIVAMENTE</h6>
