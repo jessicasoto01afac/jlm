@@ -172,9 +172,9 @@ $sql =
             <li class="nav-item"><a href="../administrador/hcambios.php" class="nav-link">Historial de Cambios</a></li>
         </ul>
 
-        <a href="sitemap.html" class="br-menu-link">
+        <a href="adminpickup.php" class="br-menu-link">
             <div class="br-menu-item">
-                <i class="menu-item-icon icon ion-ios-list-outline tx-22"></i>
+                <i class="menu-item-icon icon ion-navigate tx-22"></i>
                 <span class="menu-item-label">Entregas</span>
             </div><!-- menu-item -->
         </a><!-- br-menu-link -->
