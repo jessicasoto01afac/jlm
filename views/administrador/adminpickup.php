@@ -155,6 +155,7 @@ include('header.php');
                                             <th>NO. PEDIDO</th>
                                             <th>FECHA</th>
                                             <th>EMPRESA</th>
+                                            <th>NO. RASTREO</th>
                                             <th>ESTATUS</th>
                                             <th>ACCIONES</th>
                                         </tr>

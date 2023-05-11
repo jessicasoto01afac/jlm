@@ -19,6 +19,7 @@
 					$data["pedido"], 
 					$data["fecha"],
 					$data["nombre"],
+					$data["rastreo"],
 					$estatus,  
 					$proceso
 				];
@@ -32,6 +33,7 @@
 					$data["pedido"], 
 					$data["fecha"],
 					$data["nombre"],
+					$data["rastreo"],
 					$estatus,  
 					$proceso
 				];
@@ -45,6 +47,7 @@
 					$data["pedido"], 
 					$data["fecha"],
 					$data["nombre"],
+					$data["rastreo"],
 					$estatus,  
 					$proceso
 				];
