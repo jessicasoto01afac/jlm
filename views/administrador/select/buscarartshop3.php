@@ -5,7 +5,7 @@ $folio = $_GET['folio'];
       $sql = "SELECT codigo_proveedor,codigo_proveedor,descrip_proveedor FROM artproveedor a WHERE estado = 0 AND proveedor='$folio' ORDER BY id_arprov ASC";
       $articulo = mysqli_query($conexion,$sql);
 ?>
-			<select class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" onchange="desartic4()" id="mprvedd" name="mprvedd" type="text" data-live-search="true" style="width: 100%" >
+			<select class="form-control" data-placeholder="Choose one (with searchbox)" disabled onchange="desartic4()" id="mprvedd3" name="mprvedd3" type="text" data-live-search="true" style="width: 100%" >
 			<option value="0">CODIGO</option> 
 			<?php while($idpst = mysqli_fetch_row($articulo)):?>                      
 			<option value="<?php echo $idpst[0]?>"><?php echo $idpst[1]?></option>
@@ -16,12 +16,12 @@ $folio = $_GET['folio'];
 
 	<script type="text/javascript">
         $(document).ready(function(){
-			$('#mprvedd').select2();
+			//$('#mprvedd').select2();
 
-			$('#mprvedd').change(function(){
+			$('#mprvedd3').change(function(){
 				$.ajax({
 					type:"post",
-					data:'valor=' + $('#mprvedd').val(),
+					data:'valor=' + $('#mprvedd3').val(),
 					url:'session/',
 					success:function(r){
 					}
@@ -31,7 +31,7 @@ $folio = $_GET['folio'];
         //funcion para BUSCAR EL ARTICULO
         function desartic4(){
             //alert("eentraarticulo")
-            var codico =  document.getElementById('mprvedd').value; 
+            var codico =  document.getElementById('mprvedd3').value; 
             //alert(codico);
             $.ajax({
                 url: '../controller/php/conprvart.php',
@@ -49,9 +49,9 @@ $folio = $_GET['folio'];
                         obj.data[D].descrip_proveedor + '*' +
                         obj.data[D].artcodigo;    
                         var o = datos.split("*");   
-                        $("#mdecripprvvd").val(o[2]);   
+                        $("#mdecripprvvd3").val(o[2]);   
 
-                        $("#mcodigotr").val(o[3]);
+                        $("#mcodigotr3").val(o[3]);
                        // $('#mcodigotr').change();
                     }
                 }

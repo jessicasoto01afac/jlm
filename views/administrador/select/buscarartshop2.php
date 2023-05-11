@@ -5,7 +5,7 @@ $folio = $_GET['folio'];
       $sql = "SELECT codigo_proveedor,codigo_proveedor,descrip_proveedor FROM artproveedor a WHERE estado = 0 AND proveedor='$folio' ORDER BY id_arprov ASC";
       $articulo = mysqli_query($conexion,$sql);
 ?>
-			<select class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" onchange="desartic4()" id="mprvedd" name="mprvedd" type="text" data-live-search="true" style="width: 100%" >
+			<select class="form-control" data-placeholder="Choose one (with searchbox)" onchange="desartic4()" id="mprvedd" name="mprvedd" type="text" data-live-search="true" style="width: 100%" >
 			<option value="0">CODIGO</option> 
 			<?php while($idpst = mysqli_fetch_row($articulo)):?>                      
 			<option value="<?php echo $idpst[0]?>"><?php echo $idpst[1]?></option>
@@ -16,7 +16,7 @@ $folio = $_GET['folio'];
 
 	<script type="text/javascript">
         $(document).ready(function(){
-			$('#mprvedd').select2();
+			//$('#mprvedd').select2();
 
 			$('#mprvedd').change(function(){
 				$.ajax({

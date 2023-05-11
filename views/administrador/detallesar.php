@@ -46,7 +46,7 @@ include('header.php');
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="br-mainpanel">
 
-        <input style="" id="idartic" name="idartic" type="text">
+        <input id="idartic" name="idartic" type="text">
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
             <h3 id="noartdell" name="noartdell" class="tx-gray-800 mg-b-5"></h3>
         </div>
@@ -169,7 +169,7 @@ include('header.php');
     <script src="../controller/datatables.net/js/jquery.dataTables.js"></script>
     <script src="../controller/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../controller/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
     <script src="../template/js/ResizeSensor.js"></script>
     <script src="../template/js/widgets.js"></script>
