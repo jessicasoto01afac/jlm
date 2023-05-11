@@ -32,9 +32,17 @@ $cliente = mysqli_query($conexion,$sql);
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
     <script src="../controller/js/vale_produc.js"></script>
+    <link href="../template/css/sweetalert2.min.css" type="text/css" rel="stylesheet">
+<script src="../template/js/sweetalert2.all.min.js"></script>
+
 
 </head>
-
+<style>
+.swal-wide {
+    width: 500px !important;
+    font-size: 16px !important;
+}
+</style>
 <body class="collapsed-menu">
 
 
@@ -43,9 +51,6 @@ $cliente = mysqli_query($conexion,$sql);
 include('header.php');
 ?>
     <!------------------------------- ########## LISTA DE VALES ########## -------------------------->
-    <style>
-
-    </style>
     <section class="content" id="lista">
         <!-- ########## START: MAIN PANEL ########## -->
         <div class="br-mainpanel">
@@ -79,7 +84,7 @@ include('header.php');
                                             <div class="row no-gutters">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                    <select id="cliente1" name="cliente1" class="form-control select2-show-search w-full" data-placeholder="Choose country">
+                                                    <select id="cliente1" name="cliente1" class="form-control select2-show-search" style="width: 100%" data-placeholder="Choose country">
                                                         <option label="">Selecciona</option>
                                                         <?php while($provv = mysqli_fetch_row($cliente)):?>
                                                         <option value="<?php echo $provv[0]?>"><?php echo $provv[0]?>
@@ -113,7 +118,7 @@ include('header.php');
                                                 </div><!-- col-8 -->
                                             </div><!-- row -->
                                             <div class="form-layout-footer bd pd-20 bd-t-0">
-                                                <button class="btn btn-info" onclick="">Guardar</button>
+                                                <button class="btn btn-info" onclick="saveentregas()">Guardar</button>
                                             </div><!-- form-group -->
                                         </div><!-- form-layout -->
                                     </div>
@@ -176,7 +181,7 @@ include('header.php');
     </section>
     <!-- ########## END: MAIN PANEL ########## -->
 
-    <?php include('../administrador/modal.php');?>
+    <?php include('../administrador/modal/mentregas.php');?>
 
     <script src="../template/lib/jquery/jquery.js"></script>
     <script src="../template/lib/popper.js/popper.js"></script>

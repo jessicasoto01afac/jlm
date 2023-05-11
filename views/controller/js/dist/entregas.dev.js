@@ -80,8 +80,108 @@ function openentregas() {
    });*/
 
   $(document).ready(function () {
-    $('#select2-b').select2();
+    $('#cliente1').select2();
   });
 }
 
-function saveentregas() {}
+function saveentregas() {
+  //alert("saveentregas");
+  var folio = document.getElementById('cliente1').value;
+  var date = document.getElementById('dateentrega').value;
+  var obserba = document.getElementById('obserentr').value;
+  var d = new Date().getTime();
+  var uuid = folio + 'xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+    return (c == 'x' ? r : r & 0x3 | 0x8).toString(16);
+  });
+  var datos = 'folio=' + folio + '&date=' + date + '&uuid=' + uuid + '&obserba=' + obserba + '&opcion=insert'; //alert(datos);
+
+  $.ajax({
+    type: "POST",
+    url: "../controller/php/insertpedidos.php",
+    data: datos
+  }).done(function (respuesta) {
+    //alert(respuesta);
+    if (respuesta == 0) {
+      Swal.fire({
+        type: 'success',
+        text: 'Se agrega entrega de forma correcta',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } else if (respuesta == 2) {
+      Swal.fire({
+        type: 'warning',
+        text: 'EL pedido ya esta ingresado',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } else {
+      Swal.fire({
+        type: 'warning',
+        text: 'Error contactar a soporte tecnico',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  });
+}
+
+function encamino(id_entregas) {
+  //alert(id_entregas);
+  var identregas = id_entregas;
+  var datos = 'identregas=' + identregas + '&opcion=encamino'; //alert(datos);
+
+  $.ajax({
+    type: "POST",
+    url: "../controller/php/insertpedidos.php",
+    data: datos
+  }).done(function (respuesta) {
+    //alert(respuesta);
+    if (respuesta == 0) {
+      Swal.fire({
+        type: 'success',
+        text: 'El pedido esta en camino',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } else {
+      Swal.fire({
+        type: 'warning',
+        text: 'Error contactar a soporte tecnico',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  });
+}
+
+function entregado(id_entregas) {
+  var identregas = id_entregas;
+  var datos = 'identregas=' + identregas + '&opcion=finalizado'; //alert(datos);
+
+  $.ajax({
+    type: "POST",
+    url: "../controller/php/insertpedidos.php",
+    data: datos
+  }).done(function (respuesta) {
+    // alert(respuesta);
+    if (respuesta == 0) {
+      Swal.fire({
+        type: 'success',
+        text: 'Pedido completado',
+        showConfirmButton: false,
+        timer: 1500
+      }); // $("#example").dataTable().fnDestroy()
+      //table = $("#example").DataTable({ responsive: true });
+    } else {
+      Swal.fire({
+        type: 'warning',
+        text: 'Error contactar a soporte tecnico',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  });
+}

@@ -104,7 +104,7 @@ include('header.php');
                 </nav>
             </div><!-- br-pageheader -->
             <div style="float: right;">
-                <a href="../administrador/memos.php" id="closememo" title="Dar clic para cerrar" type="button" style=""
+                <a href="../administrador/memos.php" id="closememo" title="Dar clic para cerrar" type="button"
                     class="btn btn-secondary"><i class="fa fa-times"></i></a>
             </div>
             <br>
@@ -137,7 +137,7 @@ include('header.php');
                                                 class="tx-danger">*</span></label>
                                         <!-- <input class="form-control" type="text" id="folio" name="folio" placeholder="Ingresa el Folio"> -->
                                         <label class="form-control-label" id="folmemo" name="folmemo"
-                                            style="font-size: 24px;px; color:#14128F"></label>
+                                            style="font-size: 24px;color:#14128F"></label>
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-3 mg-t--1 mg-md-t-0">
@@ -350,7 +350,7 @@ include('header.php');
     <script src="../controller/datatables.net/js/jquery.dataTables.js"></script>
     <script src="../controller/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../controller/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>

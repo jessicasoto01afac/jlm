@@ -325,7 +325,7 @@ include('header.php');
     <script src="../controller/datatables.net/js/jquery.dataTables.js"></script>
     <script src="../controller/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../controller/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="../template/js/ResizeSensor.js"></script>
     <script src="../template/js/widgets.js"></script>
     <script src="../template/lib/d3/d3.js"></script>
