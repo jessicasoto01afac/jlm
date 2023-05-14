@@ -247,7 +247,7 @@
                         </div>
                         <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
                             <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">En camino</h2>
-                            <p class="leading-relaxed">El pedido ya se encuentra en ruta</p>
+                            <p class="leading-relaxed">El pedido se encuentra en proceso de ruta</p>
                         </div>
                     </div>
                 </div>
