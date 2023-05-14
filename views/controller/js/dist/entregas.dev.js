@@ -84,6 +84,73 @@ function openentregas() {
   });
 }
 
+function updatepickup() {
+  var table1 = $('#example').DataTable({
+    paging: false
+  });
+  table1.destroy();
+  var table = $('#example').DataTable({
+    dom: 'Bfrtip',
+    buttons: [{
+      extend: 'copy',
+      exportOptions: {
+        columns: [0, 1, 2, 3, 4, 5, 6]
+      }
+    }, {
+      extend: 'pdfHtml5',
+      text: 'Generar PDF',
+      messageTop: 'RESUMEN DE MEMOS',
+      exportOptions: {
+        columns: [0, 1, 2, 3, 4, 5, 6]
+      },
+      download: 'open',
+      header: true,
+      title: '',
+      customize: function customize(doc) {
+        doc.defaultStyle.fontSize = 12;
+        doc.styles.tableHeader.fontSize = 12;
+
+        doc['footer'] = function (page, pages) {
+          return {
+            columns: [datetime, {
+              alignment: 'right',
+              text: [{
+                text: page.toString(),
+                italics: false
+              }, ' de ', {
+                text: pages.toString(),
+                italics: false
+              }]
+            }],
+            margin: [25, 0]
+          };
+        };
+      }
+    }, {
+      extend: 'excel',
+      text: 'Generar Excel',
+      exportOptions: {
+        columns: [0, 1, 2, 3, 4, 5, 6]
+      }
+    }],
+    "language": {
+      buttons: {
+        copyTitle: 'Registros copiados',
+        copySuccess: {
+          _: '%d registros copiados',
+          1: '1 registro copiado'
+        }
+      },
+      "searchPlaceholder": "Buscar datos...",
+      "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+    },
+    // "order": [
+    //     [5, "asc"]
+    // ],
+    "ajax": "../controller/php/conentregas.php"
+  });
+}
+
 function saveentregas() {
   //alert("saveentregas");
   var folio = document.getElementById('cliente1').value;
@@ -97,35 +164,46 @@ function saveentregas() {
   });
   var datos = 'folio=' + folio + '&date=' + date + '&uuid=' + uuid + '&obserba=' + obserba + '&opcion=insert'; //alert(datos);
 
-  $.ajax({
-    type: "POST",
-    url: "../controller/php/insertpedidos.php",
-    data: datos
-  }).done(function (respuesta) {
-    //alert(respuesta);
-    if (respuesta == 0) {
-      Swal.fire({
-        type: 'success',
-        text: 'Se agrega entrega de forma correcta',
-        showConfirmButton: false,
-        timer: 1500
-      });
-    } else if (respuesta == 2) {
-      Swal.fire({
-        type: 'warning',
-        text: 'EL pedido ya esta ingresado',
-        showConfirmButton: false,
-        timer: 1500
-      });
-    } else {
-      Swal.fire({
-        type: 'warning',
-        text: 'Error contactar a soporte tecnico',
-        showConfirmButton: false,
-        timer: 1500
-      });
-    }
-  });
+  if (folio == '' || date == '') {
+    Swal.fire({
+      type: 'info',
+      text: 'llenar los campos obligatorios',
+      showConfirmButton: false,
+      timer: 1500
+    });
+  } else {
+    $.ajax({
+      type: "POST",
+      url: "../controller/php/insertpedidos.php",
+      data: datos
+    }).done(function (respuesta) {
+      //alert(respuesta);
+      if (respuesta == 0) {
+        Swal.fire({
+          type: 'success',
+          text: 'Se agrega entrega de forma correcta',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        $('#example').DataTable().clear().destroy();
+        openentregas();
+      } else if (respuesta == 2) {
+        Swal.fire({
+          type: 'warning',
+          text: 'EL pedido ya esta ingresado',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      } else {
+        Swal.fire({
+          type: 'warning',
+          text: 'Error contactar a soporte tecnico',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    });
+  }
 }
 
 function encamino(id_entregas) {
@@ -146,6 +224,8 @@ function encamino(id_entregas) {
         showConfirmButton: false,
         timer: 1500
       });
+      $('#example').DataTable().clear().destroy();
+      openentregas();
     } else {
       Swal.fire({
         type: 'warning',
@@ -175,6 +255,9 @@ function entregado(id_entregas) {
         timer: 1500
       }); // $("#example").dataTable().fnDestroy()
       //table = $("#example").DataTable({ responsive: true });
+
+      $('#example').DataTable().clear().destroy();
+      openentregas();
     } else {
       Swal.fire({
         type: 'warning',
