@@ -1,4 +1,3 @@
-
 <!-- MODAL PARA ELIMINAR VALE DE PRODUCCIÓN-->
 <div class="modal fade" id='modal-deletevproduc'>
     <div class="modal-dialog modal-md" role="document">
@@ -29,5 +28,23 @@
                 </div><!-- d-flex -->
             </div><!-- alert -->
         </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+<div class="modal fade" id='modal-finish'>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body tx-center pd-y-20 pd-x-20">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <i class="icon ion-ios-checkmark-outline tx-100 tx-success lh-1 mg-t-20 d-inline-block"></i>
+                <h4 class="tx-success mg-b-20">Completado!</h4>
+                <div id="hsentr" name="hsentr">
+                </div>
+                <button type="button" data-dismiss="modal" aria-label="Close"
+                    class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">
+                    Cerrar</button>
+            </div><!-- modal-body -->
+        </div><!-- modal-content -->
     </div><!-- modal-dialog -->
 </div><!-- modal -->

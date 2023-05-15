@@ -26,8 +26,9 @@
 			}else if ($data["estatus"] == "COMPLETADO") {
 				//$id_kardex=$data["id_proveedor"];
 				$refe_1=$data["id_entregas"];
+				$folio=$data["pedido"];
 				$estatus="<td class='tx-12'><span class='square-8 bg-success mg-r-5 rounded-circle'></span>COMPLETADO</td>";
-				$proceso = "<a href='#' class='btn btn-success btn-icon rounded-circle mg-b-10'><div><i class='fa  fa-check'></i></div></a>";
+				$proceso = "<a href='' onclick='hisentrega($folio)' class='btn btn-success btn-icon rounded-circle mg-b-10' data-toggle='modal' data-target='#modal-finish'><div><i class='fa  fa-check'></i></div></a>";
 				$cursos[] = [ 
 					$contador,
 					$data["pedido"], 

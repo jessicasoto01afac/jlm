@@ -31,7 +31,6 @@ $cliente = mysqli_query($conexion,$sql);
 
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
-    <script src="../controller/js/vale_produc.js"></script>
     <link href="../template/css/sweetalert2.min.css" type="text/css" rel="stylesheet">
 <script src="../template/js/sweetalert2.all.min.js"></script>
 

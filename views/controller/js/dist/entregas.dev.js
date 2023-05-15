@@ -268,3 +268,27 @@ function entregado(id_entregas) {
     }
   });
 }
+
+function hisentrega(folio) {
+  //alert(folio);
+  $.ajax({
+    url: '../controller/php/hisentrega.php',
+    type: 'POST',
+    data: 'folio=' + folio
+  }).done(function (resp) {
+    obj = JSON.parse(resp);
+    var res = obj.data;
+    var x = 0; //alert("folio");
+
+    html = '';
+
+    for (U = 0; U < res.length; U++) {
+      x++;
+      html += "<div><div class='media-list bg-white rounded shadow-base'><div class='media pd-10 pd-xs-20'><div class='media-body mg-l-20'><div class='d-flex justify-content-between mg-b-10'><div><h6 class='mg-b-2 tx-inverse tx-14'>" + obj.data[U].id_usu + "</h6></div><span class='tx-12'>" + obj.data[U].fecha + "</span></div>" + obj.data[U].proceso + "<p class = 'mg-b-20'></p></div></div></div></div>"; //html = "<div class='media align-items-center pd-b-10'><img src='http://via.placeholder.com/280x280' class='wd-45 rounded-circle' alt=''><div class='media-body mg-x-15 mg-xs-x-20'><h6 class='mg-b-2 tx-inverse tx-14'>" + obj.data[U].id_usu + "</h6><p class='mg-b-0 tx-12'>" + obj.data[U].proceso + "</p></div>";
+      //html += "<div class='col-lg-12'>" + obj.data[U].id_usu;
+    }
+
+    html += '<br>';
+    $("#hsentr").html(html);
+  });
+}
