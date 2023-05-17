@@ -65,6 +65,7 @@ if(!isset($usuario)){
 
                 registrarnew ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
                 registrarnewetiq ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
+                actualizarmina($refe_1,$refe_2,$conexion);
             }else{
                 echo "1";
             }
@@ -733,6 +734,16 @@ function extendido ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,
     cerrar($conexion);
 }
 //minagirssss 
+function actualizarmina($refe_1,$refe_2,$conexion){
+    $query="UPDATE kardex SET salida='1' where refe_1='$refe_1' and codigo_1 in ('2000','2005') AND salida=0 AND tipo='VALE_PRODUCCIÓN' AND tipo_ref='EXTENDIDO'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+
+}
 
 //funcion para guardar el minagriss de articulo de trasformación
 function minagriss ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
