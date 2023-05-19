@@ -179,7 +179,7 @@ $sql =
             </div><!-- menu-item -->
         </a><!-- br-menu-link -->
 
-        <a href="sitemap.html" class="br-menu-link">
+        <a href="../manuales/Manual JLM administrador.pdf" target="_blank" class="br-menu-link">
             <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-ios-list-outline tx-22"></i>
                 <span class="menu-item-label">Manual</span>
