@@ -17,12 +17,16 @@ if(!isset($usuario)){
         //se pone los valores que se van a comparar
         $artcodigo = $_POST['artcodigo'];
         $artdescrip = $_POST['artdescrip'];
+        $stockinici = $_POST['stockinici'];
+        
         
         if (comprobacion ($artcodigo,$artdescrip,$conexion)){
             $artubicac = $_POST['artubicac'];
             $artunidad = $_POST['artunidad'];
             $artgrupo = $_POST['artgrupo'];
             if (registrar($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$conexion)){
+
+                inventario($artcodigo,$stockinici,$artubicac,$artunidad,$artgrupo,$conexion);
                 echo "0";
                // $usuario='pruebas';
                 historial($usuario,$artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$conexion);
@@ -41,7 +45,9 @@ if(!isset($usuario)){
         $artunidad = $_POST['artunidad'];
         $artgrupo = $_POST['artgrupo'];
         $id_art = $_POST['id_art'];
+        $edistockini = $_POST['edistockini'];
         if (actualizar($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$id_art,$conexion)){
+            actinvent($artcodigo,$edistockini,$conexion);
             echo "0";
             $realizo = 'ACTUALIZO INFORMACION DEL ARTICULO';
            // $usuario='pruebas';
@@ -85,6 +91,16 @@ function registrar ($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$cone
     }
     cerrar($conexion);
 }
+//funcion para guardar articulo inventario
+function inventario ($artcodigo,$stockinici,$artubicac,$artunidad,$artgrupo,$conexion){
+    $query="INSERT INTO inventario VALUES(0,'$artcodigo','$stockinici',0,0,0,0,0)";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //funcion para actualizar el registro
 function actualizar ($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$id_art,$conexion){
     $query="UPDATE articulos SET artcodigo='$artcodigo', artdescrip='$artdescrip', artubicac='$artubicac', artunidad='$artunidad', artgrupo='$artgrupo' WHERE id_art = '$id_art'";
@@ -96,6 +112,15 @@ function actualizar ($artcodigo,$artdescrip,$artubicac,$artunidad,$artgrupo,$id_
     cerrar($conexion);
 }
 
+function actinvent($artcodigo,$edistockini,$conexion){
+    $query="UPDATE inventario SET stock_inicial='$edistockini' WHERE id_articulos = '$artcodigo' and estado=0";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 //funcion para actualizar el registro
 function eliminar ($id_art,$conexion){
     $query="UPDATE articulos SET estado='1' WHERE id_art = '$id_art'";

@@ -107,6 +107,13 @@
                                     name="edicod" id="edicod">
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label label2">STOCK INICIAL<span class="tx-danger">*</span></label>
+                                <input disabled="" onkeyup="mayus(this);" class="form-control inputalta" type="number"
+                                    name="edistockini" id="edistockini">
+                            </div>
+                        </div>
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label label2">DESCRIPCIÓN<span

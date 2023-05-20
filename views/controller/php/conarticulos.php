@@ -1,7 +1,7 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT * FROM articulos where estado='0' ORDER BY artcodigo ASC";
+	$query = "SELECT * FROM articulos a, inventario i where a.artcodigo=i.id_articulos and a.estado='0' and i.estado='0' ORDER BY artcodigo ASC";
 	$resultado = mysqli_query($conexion, $query);
 
 	if(!$resultado){

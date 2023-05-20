@@ -233,7 +233,62 @@ function savedelusu() {
     }
   });
 } //--------------------------------ARTICULOS---------------------------------------------------------------------
-//Funcion para habilitar los input de edición de articulos
+//agrega a base de datos de articulos
+
+
+function addarticull() {
+  // alert("entra agregar articulos");
+  var artcodigo = document.getElementById('artcodigo').value;
+  var artdescrip = document.getElementById('artdescrip').value;
+  var artubicac = document.getElementById('artubicac').value;
+  var artunidad = document.getElementById('artunidad').value;
+  var artgrupo = document.getElementById('artgrupo').value;
+  var stockinici = document.getElementById('stockini').value;
+  var datos = 'artcodigo=' + artcodigo + '&stockinici=' + stockinici + '&artdescrip=' + artdescrip + '&artubicac=' + artubicac + '&artunidad=' + artunidad + '&artgrupo=' + artgrupo + '&opcion=registrar'; //alert(datos);
+
+  if (document.getElementById('artcodigo').value == '' || document.getElementById('artdescrip').value == '' || document.getElementById('artubicac').value == '' || document.getElementById('artunidad').value == '' || document.getElementById('artgrupo').value == '' || document.getElementById('stockini').value == '') {
+    document.getElementById('vaciosar').style.display = '';
+    setTimeout(function () {
+      document.getElementById('vaciosar').style.display = 'none';
+    }, 1500);
+    return;
+  } else {
+    $.ajax({
+      type: "POST",
+      url: "../controller/php/insertarticul.php",
+      data: datos
+    }).done(function (respuesta) {
+      if (respuesta == 0) {
+        Swal.fire({
+          type: 'success',
+          title: 'JLM INFORMA',
+          text: 'EL ARTICULO SE AGREGO CORRECTAMENTE',
+          showCloseButton: false,
+          showCancelButton: true,
+          focusConfirm: false,
+          confirmButtonColor: "#1774D8",
+          customClass: 'swal-wide',
+          confirmButtonText: '<span style="color: white;"><a class="a-alert" href="newarticul">¿Deseas agregar otro articulo?</a></span>',
+          confirmButtonAriaLabel: 'Thumbs up, great!',
+          cancelButtonText: '<a  class="a-alert" href="articulos.php"><span style="color: white;">Cerrar</span></a>',
+          cancelButtonAriaLabel: 'Thumbs down' // timer: 2900
+
+        });
+      } else if (respuesta == 2) {
+        document.getElementById('dubliar').style.display = '';
+        setTimeout(function () {
+          document.getElementById('dubliar').style.display = 'none';
+        }, 1000);
+      } else {
+        document.getElementById('errar').style.display = '';
+        setTimeout(function () {
+          document.getElementById('errar').style.display = 'none';
+        }, 2000);
+        alert(respuesta);
+      }
+    }); //FIN DE AJAX
+  }
+} //Funcion para habilitar los input de edición de articulos
 
 
 function editart() {
@@ -245,6 +300,7 @@ function editart() {
   document.getElementById('editubi').disabled = false;
   document.getElementById('edituni').disabled = false;
   document.getElementById('editgrup').disabled = false;
+  document.getElementById('edistockini').disabled = false;
   document.getElementById('artguardar').style.display = "";
 } //Funcion para deshabilitar los input de edición de articulos
 
@@ -258,6 +314,7 @@ function closedthart() {
   document.getElementById('editubi').disabled = true;
   document.getElementById('edituni').disabled = true;
   document.getElementById('editgrup').disabled = true;
+  document.getElementById('edistockini').disabled = true;
   document.getElementById('artguardar').style.display = "none";
 } //Funcion que trae los datos al modal editar articulo
 
@@ -275,6 +332,7 @@ function artedith(id_art) {
 
     for (A = 0; A < res.length; A++) {
       if (obj.data[A].id_art == id_art) {
+        document.getElementById('edistockini').value = obj.data[A].stock_inicial;
         datos = obj.data[A].artcodigo + '*' + obj.data[A].artdescrip + '*' + obj.data[A].artubicac + '*' + obj.data[A].artunidad + '*' + obj.data[A].artgrupo;
         var d = datos.split("*");
         $("#modal-editarticul #edicod").val(d[0]);
@@ -289,15 +347,17 @@ function artedith(id_art) {
 
 
 function savearedith() {
+  //alert("deded");
   var artcodigo = document.getElementById('edicod').value;
   var artdescrip = document.getElementById('edides').value;
   var artubicac = document.getElementById('editubi').value;
   var artunidad = document.getElementById('edituni').value;
   var artgrupo = document.getElementById('editgrup').value;
   var id_art = document.getElementById('id_art').value;
-  var datos = 'artcodigo=' + artcodigo + '&artdescrip=' + artdescrip + '&artubicac=' + artubicac + '&artunidad=' + artunidad + '&artgrupo=' + artgrupo + '&id_art=' + id_art + '&opcion=actualizara'; //alert(datos);
+  var edistockini = document.getElementById('edistockini').value;
+  var datos = 'artcodigo=' + artcodigo + '&edistockini=' + edistockini + '&artdescrip=' + artdescrip + '&artubicac=' + artubicac + '&artunidad=' + artunidad + '&artgrupo=' + artgrupo + '&id_art=' + id_art + '&opcion=actualizara'; //alert(datos);
 
-  if (document.getElementById('edicod').value == '' || document.getElementById('edides').value == '' || document.getElementById('editubi').value == '' || document.getElementById('edituni').value == '' || document.getElementById('editgrup').value == '') {
+  if (document.getElementById('edicod').value == '' || document.getElementById('edides').value == '' || document.getElementById('editubi').value == '' || document.getElementById('edituni').value == '' || document.getElementById('editgrup').value == '' || document.getElementById('edistockini').value == '') {
     document.getElementById('edthvaciar').style.display = '';
     setTimeout(function () {
       document.getElementById('edthvaciar').style.display = 'none';
@@ -309,6 +369,7 @@ function savearedith() {
       url: "../controller/php/insertarticul.php",
       data: datos
     }).done(function (respuesta) {
+      //alert(respuesta);
       if (respuesta == 0) {
         Swal.fire({
           type: 'success',
@@ -316,6 +377,7 @@ function savearedith() {
           showConfirmButton: false,
           timer: 1500
         });
+        closedthart();
         setTimeout("location.href = 'articulos.php';", 1500);
       } else if (respuesta == 2) {
         document.getElementById('edthdubli').style.display = '';
