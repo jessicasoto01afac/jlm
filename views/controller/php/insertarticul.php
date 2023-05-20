@@ -59,6 +59,7 @@ if(!isset($usuario)){
 }else if($opcion === 'eliminar'){
     $id_art = $_POST['id_art'];
         if (eliminar($id_art,$conexion)){
+            eliminarinv ($id_art,$conexion);
             echo "0";
             $realizo = 'ELIMINA A ARTICULO';
            // $usuario='pruebas';
@@ -124,6 +125,15 @@ function actinvent($artcodigo,$edistockini,$conexion){
 //funcion para actualizar el registro
 function eliminar ($id_art,$conexion){
     $query="UPDATE articulos SET estado='1' WHERE id_art = '$id_art'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+function eliminarinv ($id_art,$conexion){
+    $query="UPDATE inventario SET estado='1' WHERE id_articulos = '$id_art'";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
