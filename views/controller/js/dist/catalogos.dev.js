@@ -323,8 +323,9 @@ function artedith(id_art) {
   //alert(id_art)
   document.getElementById('id_art').value = id_art;
   $.ajax({
-    url: '../controller/php/conarticulos.php',
-    type: 'POST'
+    url: '../controller/php/conartindi.php',
+    type: 'GET',
+    data: 'folio=' + id_art
   }).done(function (respuesta) {
     obj = JSON.parse(respuesta);
     var res = obj.data;
