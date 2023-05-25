@@ -155,6 +155,7 @@ $cliente = mysqli_query($conexion,$sql);
                                             <option value="MATERIAL DEFECTUOSO">MATERIAL DEFECTUOSO</option>
                                             <option value="MATERIAL INCORRECTO">MATERIAL INCORRECTO</option>
                                             <option value="MATERIAL NO ENVIADO">MATERIAL NO ENVIADO</option>
+                                            <option value="CANTIDAD INCORRECTA">CANTIDAD INCORRECTA</option>
                                             <option value="ERROR DE FACTURACIÓN">ERROR DE FACTURACIÓN</option>
                                             <option value="OTROS">OTROS</option>
                                         </select>
@@ -214,8 +215,8 @@ $cliente = mysqli_query($conexion,$sql);
                                             <option value="EMPAQUE">EMPAQUE</option>
                                             <option value="DISEÑO">DISEÑO</option>
                                             <option value="FACTURACIÓN">FACTURACIÓN</option>
-                                            <option value="TALLER DE CORTE">SISTEMAS</option>
-                                            <option value="TALLER DE MEDICIÓN">TALLER DE CORTE</option>
+                                            <option value="SISTEMAS">SISTEMAS</option>
+                                            <option value="TALLER DE CORTE">TALLER DE CORTE</option>
                                             <option value="TALLER DE MEDICIÓN">TALLER DE MEDICIÓN</option>
                                             <option value="VENTAS">VENTAS</option>
                                         </select>
