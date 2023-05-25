@@ -115,6 +115,7 @@
                                             <option value="MATERIAL INCORRECTO">MATERIAL INCORRECTO</option>
                                             <option value="MATERIAL NO ENVIADO">MATERIAL NO ENVIADO</option>
                                             <option value="ERROR DE FACTURACIÓN">ERROR DE FACTURACIÓN</option>
+                                            <option value="CANTIDAD INCORRECTA">CANTIDAD INCORRECTA</option>
                                             <option value="OTROS">OTROS</option>
                                         </select>
                                     </div>
