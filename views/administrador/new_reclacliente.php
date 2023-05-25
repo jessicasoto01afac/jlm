@@ -167,10 +167,11 @@
                                             <option value="EMPAQUE">EMPAQUE</option>
                                             <option value="DISEÑO">DISEÑO</option>
                                             <option value="FACTURACIÓN">FACTURACIÓN</option>
-                                            <option value="TALLER DE CORTE">SISTEMAS</option>
-                                            <option value="TALLER DE MEDICIÓN">TALLER DE CORTE</option>
+                                            <option value="SISTEMAS">SISTEMAS</option>
+                                            <option value="TALLER DE CORTE">TALLER DE CORTE</option>
                                             <option value="TALLER DE MEDICIÓN">TALLER DE MEDICIÓN</option>
                                             <option value="VENTAS">VENTAS</option>
+                                            <option value="AGENTE DE VENTAS">AGENTE DE VENTAS</option>
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
