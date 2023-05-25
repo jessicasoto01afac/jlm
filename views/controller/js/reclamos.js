@@ -51,7 +51,7 @@ function openrepclient() {
                 let pedido2 = tPrfil.substr(1);
                 //--------------------------
                 let datos = 'folio=' + folio + '&fecha_recl=' + fecha_recl + '&tipo_reporte=' + tipo_reporte + '&tipo_incidencia=' + tipo_incidencia + '&remision=' + remision + '&factura=' + factura + '&deprechaclie=' + deprechaclie + '&dep_responsa=' + dep_responsa + '&rep_cliente=' + rep_cliente + '&code_cliente=' + code_cliente + '&rep_jlm=' + rep_jlm + '&code_jlm=' + code_jlm + '&seguimiento=' + seguimiento + '&code_seguimiento=' + code_seguimiento + '&conclusion=' + conclusion + '&code_conclucion=' + code_conclucion + '&pedido2=' + pedido2 + '&opcion=savereport';
-                //alert(datos);
+                alert(rep_cliente);
                 if (folio == '' || fecha_recl == '' || code_cliente == '' || factura == '' || remision == '' || rep_cliente == '') {
                     Swal.fire({
                         type: 'info',
