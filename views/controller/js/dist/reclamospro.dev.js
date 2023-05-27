@@ -114,7 +114,8 @@ function openrepclient() {
                 text: 'LLENAR LOS CAMPOS OBLIGOTARIOS',
                 showConfirmButton: false,
                 timer: 1500
-              }); //alert("datos repetidos");
+              });
+              alert(respuesta);
             } else {
               Swal.fire({
                 type: 'danger',
