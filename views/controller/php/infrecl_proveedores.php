@@ -1,7 +1,7 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT * FROM reclamoproveedor r, proveedores p where r.estado='0' and r.proveedor=p.id_prov ORDER BY id_reclaprove DESC";
+	$query = "SELECT * FROM reclamoproveedor r, proveedores p where r.estado='0' and r.proveedor=p.codigo_pro ORDER BY id_reclaprove DESC";
 	$resultado = mysqli_query($conexion, $query);
 	$contador=0;
 	if(!$resultado){
