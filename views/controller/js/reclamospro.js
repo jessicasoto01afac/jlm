@@ -106,7 +106,7 @@ function openrepclient() {
         $('#busccodimem').load('./select/buscarme.php');
         $('#busccodigomem2').load('./select/buscarme2.php');
         $('#medionot').load('./select/notifica.php');
-        $('#repprovee').select2();
+        //$('#repprovee').select2();
     });
 }
 //FUNCION PARA AGREGAR UN NUEVO FOLIO
