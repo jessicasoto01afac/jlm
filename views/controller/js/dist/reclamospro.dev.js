@@ -131,7 +131,8 @@ function openrepclient() {
   $(document).ready(function () {
     $('#busccodimem').load('./select/buscarme.php');
     $('#busccodigomem2').load('./select/buscarme2.php');
-    $('#medionot').load('./select/notifica.php'); //$('#repprovee').select2();
+    $('#medionot').load('./select/notifica.php');
+    $('#deprechaclie').select2();
   });
 } //FUNCION PARA AGREGAR UN NUEVO FOLIO
 
