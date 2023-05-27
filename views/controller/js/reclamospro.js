@@ -56,7 +56,7 @@ function openrepclient() {
                 let medios = medio.substr(1);
                 //--------------------------
                 let datos = 'folio=' + folio + '&fecha_recl=' + fecha_recl + '&tipo_reporte=' + tipo_reporte + '&tipo_incidencia=' + tipo_incidencia + '&orden_compra=' + orden_compra + '&factura=' + factura + '&proveedor=' + proveedor + '&dep_report=' + dep_report + '&pers_report=' + pers_report + '&rep_jlm=' + rep_jlm + '&code_jlm=' + code_jlm + '&date_send=' + date_send + '&dept_provee=' + dept_provee + '&evio_a=' + evio_a + '&email=' + email + '&telefono=' + telefono + '&medios=' + medios + '&seguimiento=' + seguimiento + '&code_seguimiento=' + code_seguimiento + '&conclusion=' + conclusion + '&code_conclucion=' + code_conclucion + '&opcion=savereport';
-                //alert(datos);
+                alert(datos);
                 if (folio == '' || fecha_recl == '' || factura == '' || orden_compra == '' || proveedor == '') {
                     Swal.fire({
                         type: 'info',

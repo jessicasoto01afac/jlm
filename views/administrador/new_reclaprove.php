@@ -91,8 +91,7 @@
                                     <div class="form-group">
                                         <label style="font-size:16px" class="form-control-label">FECHA: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" type="date" id="fecharepprove" name="fecharepprove"
-                                            value="" placeholder="">
+                                        <input class="form-control" type="date" id="fecharepprove" name="fecharepprove">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
                                 <div class="col-lg-3">
@@ -127,8 +126,7 @@
                                         <label style="font-size:14px" class="form-control-label">ORDEN DE COMPRA: <span
                                                 class="tx-danger">*</span></label>
                                         <input onkeyup="mayus(this);" style="font-size:18px; color:#1F618D"
-                                            class="form-control" type="text" id="ordcproveed" name="ordcproveed"
-                                            value="" placeholder="">
+                                            class="form-control" type="text" id="ordcproveed" name="ordcproveed">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
                                 <div class="col-lg-3">
@@ -136,7 +134,7 @@
                                         <label style="font-size:14px" class="form-control-label">FACTURA: <span
                                                 class="tx-danger">*</span></label>
                                         <input onkeyup="mayus(this);" style="font-size:18px; color:#1F618D"
-                                            class="form-control" type="text" id="factprove" name="factprove" value=""
+                                            class="form-control" type="text" id="factprove" name="factprove"
                                             placeholder="">
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
