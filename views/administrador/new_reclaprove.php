@@ -69,7 +69,7 @@
         <div class="br-pagebody">
             <div style="float: right;">
                 <a href="../administrador/new_reclacliente.php" onclick="cancealmemo()" id="cerrprov"
-                    title="Dar clic para cancelar el memo" type="button" style="" class="btn btn-secondary"><i
+                    title="Dar clic para cancelar el memo" type="button" class="btn btn-secondary"><i
                         class="fa fa-times"></i></a>
             </div>
             <div class="br-section-wrapper">
@@ -141,7 +141,7 @@
                                     </div><!-- form-group -->
                                 </div><!-- form-group -->
 
-                                <div class="col-lg-6" id="departamento" style="">
+                                <div class="col-lg-6" id="departamento">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">PROVEEDOR: <span
                                                 class="tx-danger">*</span></label>
@@ -154,7 +154,7 @@
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-lg-4" id="departamento" style="">
+                                <div class="col-lg-4" id="departamento">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">DEPARTAMENTO REPORTANTE</label>
                                         <select class="form-control" id="repprovedd" name="repprovedd">
@@ -172,10 +172,10 @@
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-lg-6" id="departamento" style="">
+                                <div class="col-lg-6" id="departamento">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">REPORTA</label>
-                                        <select class="form-control" id="repprovee" name="repprovee">
+                                        <select class="form-control select2-show-search" id="repprovee" name="repprovee">
                                             <option label="">Selecciona</option>
                                             <?php while($per1 = mysqli_fetch_row($personak)):?>
                                             <option value="<?php echo $per1[0]?>"><?php echo $per1[1].' '.$per1[2] ?>
