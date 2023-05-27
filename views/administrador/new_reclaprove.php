@@ -145,7 +145,7 @@
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">PROVEEDOR: <span
                                                 class="tx-danger">*</span></label>
-                                        <select class="form-control select2-show-search" id="deprechaclie" name="deprechaclie">
+                                        <select class="form-control" id="deprechaclie" name="deprechaclie">
                                             <option value="">SELECCIONA AL PROVEEDOR
                                             </option>
                                             <?php while($provee = mysqli_fetch_row($proveedor)):?>
