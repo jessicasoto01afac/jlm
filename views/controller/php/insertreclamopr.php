@@ -196,7 +196,7 @@ function comprobacion ($folio,$id_articulo,$conexion){
 }
 //funcion de comprobación para ver si el vale ya se encuentra en la base
 function comprobacion2 ($folio,$conexion){
-    $query="SELECT * FROM reclamoclient WHERE folio_recl = '$folio' AND estado = 0 ";
+    $query="SELECT * FROM reclamoproveedor WHERE folio_recl = '$folio' AND estado = 0 ";
     $resultado= mysqli_query($conexion,$query);
     if($resultado->num_rows==0){
         return true;
