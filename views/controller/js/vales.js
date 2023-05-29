@@ -431,6 +431,9 @@ function infvale(foliovale) {
             $("#detalles #inftipevo").val(o[1]);
             $("#detalles #infsolivo").val(o[2]);
             $("#detalles #infestavo").val(o[3]);
+            document.getElementById('memoform').value = obj.data[U].FORMULO;
+            document.getElementById('memoautor').value = obj.data[U].AUTORIZA;
+            document.getElementById('memosurt').value = obj.data[U].SURTIO;
             //---------------------------------ESTATUS-------------------------
             if (obj.data[U].status == 'PENDIENTE') {
                 $.ajax({
