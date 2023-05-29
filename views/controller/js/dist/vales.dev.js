@@ -452,19 +452,19 @@ function infvale(foliovale) {
               idkardex = obj.data[D].id_kax;
               estatus = "<span title='Pendiente de autorizar' class=''>PENDIENTES</span>";
               acciones = "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf(" + idkardex + ");' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf(" + idkardex + ");'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>";
-              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].descripcion_1 + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + estatus + "</td><td class='dropdown hidden-xs-down'>" + acciones + "</td></tr>";
+              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].artdescrip + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + estatus + "</td><td class='dropdown hidden-xs-down'>" + acciones + "</td></tr>";
             } else if (obj.data[D].status_2 == 'SURTIDO') {
               var id_kardex = obj.data[D].id_kax;
               idkardex = obj.data[D].id_kax;
               estatus = "<span title='Ya fue surtido' onclick='infsurti(" + id_kardex + ")' title='Ya fue surtido' class='spandis' data-toggle='modal' data-target='#modal-surtido'>SURTIDO</span>";
               acciones = "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf(" + idkardex + ");' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf(" + idkardex + ");'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>";
-              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].descripcion_1 + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + estatus + "</td><td class='dropdown hidden-xs-down'>" + acciones + "</td></tr>";
+              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].artdescrip + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + estatus + "</td><td class='dropdown hidden-xs-down'>" + acciones + "</td></tr>";
             } else if (obj.data[D].status_2 == 'SIN EXISTENCIAS') {
               var _id_kardex = obj.data[D].id_kax;
               idkardex = obj.data[D].id_kax;
               estatus = "<span title='Ver detalles' onclick='infonosur(" + _id_kardex + ")' data-toggle='modal' data-target='#modal-sinexivp' class='sinexisten' style='font-size:12px;cursor: pointer;'>SIN EXISTENCIA</span>";
               acciones = "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarvoinf(" + idkardex + ");' class='nav-link' data-toggle='modal' data-target='#modal-editavoinf'>Editar</a><a href='' onclick='delartvoinf(" + idkardex + ");'  class='nav-link' data-toggle='modal' data-target='#modal-deleteartvo'>Eliminar</a>";
-              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].descripcion_1 + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + estatus + "</td><td class='dropdown hidden-xs-down'>" + acciones + "</td></tr>";
+              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].artdescrip + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + estatus + "</td><td class='dropdown hidden-xs-down'>" + acciones + "</td></tr>";
             }
           }
 
@@ -496,17 +496,17 @@ function infvale(foliovale) {
               idkardex = obj.data[D].id_kax;
               estatus = "<button onclick='surtirvof(" + idkardex + ");' data-toggle='modal' data-target='#modal-surtirvof' type='button' title='Dar click para surtir' style='font-size:12px;cursor: pointer;' class='btn btn-info mg-b-10'>SURTIR</button>"; //acciones = "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>"
 
-              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].descripcion_1 + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
+              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].artdescrip + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
             } else if (obj.data[D].status_2 == 'SURTIDO') {
               var id_kardex = obj.data[D].id_kax;
               estatus = "<span title='Ya fue surtido' onclick='infsurti(" + id_kardex + ")' title='Ya fue surtido' class='spandis' data-toggle='modal' style='font-size:12px;cursor: pointer;' data-target='#modal-surtido'>SURTIDO</span>"; //acciones = "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>"
 
-              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].descripcion_1 + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
+              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].artdescrip + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
             } else if (obj.data[D].status_2 == 'SIN EXISTENCIAS') {
               var _id_kardex2 = obj.data[D].id_kax;
               estatus = "<span title='Ver detalles' onclick='infonosur(" + _id_kardex2 + ")' data-toggle='modal' data-target='#modal-sinexivp' class='sinexisten' style='font-size:12px;cursor: pointer;'>SIN EXISTENCIA</span>"; //acciones = "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>"
 
-              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].descripcion_1 + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
+              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].artdescrip + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
             }
           }
 
@@ -537,17 +537,17 @@ function infvale(foliovale) {
             if (obj.data[D].status_2 == "PENDIENTE") {
               estatus = "<span title='ya fue surtido no puede hacer ninguna accion' class=''>PENDIENTE</span>";
               acciones = "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>";
-              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].descripcion_1 + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
+              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].artdescrip + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
             } else if (obj.data[D].status_2 == 'SURTIDO') {
               var id_kardex = obj.data[D].id_kax;
               estatus = "<span title='Ya fue surtido' onclick='infsurti(" + id_kardex + ")' title='Ya fue surtido' class='spandis' data-toggle='modal' data-target='#modal-surtido'>SURTIDO</span>";
               acciones = "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>";
-              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].descripcion_1 + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
+              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].artdescrip + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
             } else if (obj.data[D].status_2 == 'SIN EXISTENCIAS') {
               var _id_kardex3 = obj.data[D].id_kax;
               estatus = "<span title='Ver detalles' onclick='infonosur(" + _id_kardex3 + ")' data-toggle='modal' data-target='#modal-sinexivp' class='sinexisten' style='font-size:12px;cursor: pointer;'>SIN EXISTENCIA</span>";
               acciones = "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>";
-              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].descripcion_1 + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
+              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].artdescrip + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
             }
           }
 
@@ -577,18 +577,18 @@ function infvale(foliovale) {
             if (obj.data[D].status_2 == "PENDIENTE") {
               estatus = "<span title='ya fue finalizado no puede hacer ninguna accion' class=''>PENDIENTE</span>";
               acciones = "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>";
-              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].descripcion_1 + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
+              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].artdescrip + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
             } else if (obj.data[D].status_2 == 'SURTIDO') {
               var id_kardex = obj.data[D].id_kax;
               estatus = "<span title='Ya fue surtido' onclick='infsurti(" + id_kardex + ")' title='Ya fue surtido' class='spandis' data-toggle='modal' data-target='#modal-surtido'>SURTIDO</span>";
               acciones = "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>";
-              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].descripcion_1 + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
+              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].artdescrip + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
             } else if (obj.data[D].status_2 == 'SIN EXISTENCIAS') {
               var _id_kardex4 = obj.data[D].id_kax;
               idkardex = obj.data[D].id_kax;
               estatus = "<span title='Ver detalles' onclick='infonosur(" + _id_kardex4 + ")' data-toggle='modal' data-target='#modal-sinexivp' class='sinexisten' style='font-size:12px;cursor: pointer;'>SIN EXISTENCIA</span>";
               acciones = "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'>";
-              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].descripcion_1 + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
+              html += "<tr><td>" + x + "</td><td>" + obj.data[D].codigo_1 + "</td><td>" + obj.data[D].artdescrip + "</td><td>" + obj.data[D].observa + "</td><td>" + obj.data[D].cantidad_real + "</td><td>" + obj.data[D].salida + "</td><td>" + estatus + "</td></tr>";
             }
           }
 
