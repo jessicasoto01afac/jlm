@@ -419,15 +419,15 @@ function infvale(foliovale) {
 
     for (U = 0; U < res.length; U++) {
       document.getElementById('relajlvof').value = obj.data[U].revision;
-      document.getElementById('memoform').value = obj.data[U].FORMULO;
-      document.getElementById('memoautor').value = obj.data[U].AUTORIZA;
-      document.getElementById('memosurt').value = obj.data[U].SURTIO;
       datos = obj.data[U].fecha + '*' + obj.data[U].refe_3 + '*' + obj.data[U].proveedor_cliente + '*' + obj.data[U].status + '*' + obj.data[U].codigo_1;
       var o = datos.split("*");
       $("#detalles #infecvo").val(o[0]);
       $("#detalles #inftipevo").val(o[1]);
       $("#detalles #infsolivo").val(o[2]);
-      $("#detalles #infestavo").val(o[3]); //---------------------------------ESTATUS-------------------------
+      $("#detalles #infestavo").val(o[3]);
+      document.getElementById('memoform').value = obj.data[U].FORMULO;
+      document.getElementById('memoautor').value = obj.data[U].AUTORIZA;
+      document.getElementById('memosurt').value = obj.data[U].SURTIO; //---------------------------------ESTATUS-------------------------
 
       if (obj.data[U].status == 'PENDIENTE') {
         $.ajax({

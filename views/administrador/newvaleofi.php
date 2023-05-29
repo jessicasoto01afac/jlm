@@ -102,7 +102,7 @@
                                             name="vprove" placeholder="Ingrese el Nombre">
                                     </div>
                                 </div><!-- col-8 -->
-                                <div class="col-lg-6" id="departamento" style="">
+                                <div class="col-lg-6" id="departamento">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">DEPARTAMENTO SOLICITANTE: <span
                                                 class="tx-danger">*</span></label>
@@ -115,6 +115,7 @@
                                             <option value="OFICINA">OFICINA</option>
                                             <option value="TALLER DE CORTE">TALLER DE CORTE</option>
                                             <option value="TALLER DE MEDICIÓN">TALLER DE MEDICIÓN</option>
+                                            <option value="SISTEMAS">SISTEMAS</option>
                                             <option value="VENTAS">VENTAS</option>
                                         </select>
                                     </div>
