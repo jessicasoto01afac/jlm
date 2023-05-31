@@ -34,7 +34,7 @@ if(!isset($usuario)){
                 extendido($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
                 etiqueta($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
                 //poductividad($refe_1,$caracter,$conexion);
-                minagriss($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
+                //minagriss1($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
                 historial($usuario,$refe_1,$codigo_1,$conexion);
                 registrarcolors ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
             }else{
@@ -62,10 +62,12 @@ if(!isset($usuario)){
             
             if (registrar($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion)){
                 echo "0";
-
                 registrarnew ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
-                registrarnewetiq ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
-                actualizarmina($refe_1,$refe_2,$conexion);
+                registrarnewetiq ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion); 
+                //el bueno actualiza minagris
+                registrarminagris ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion);
+                //si el minagris es 0 se actualiza a 1
+                //actualizarmina($refe_1,$refe_2,$conexion);
             }else{
                 echo "1";
             }
@@ -669,7 +671,7 @@ function registrarnew ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo
     FROM
     transformation 
     WHERE
-    id_articfial = '$codigo_1' AND type_art='EXTENDIDO' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='CARTONSILLO' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='CARTON' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='CAPLE' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='MINAGRIS' AND estado=0";
+    id_articfial = '$codigo_1' AND type_art='EXTENDIDO' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='CARTONSILLO' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='CARTON' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='CAPLE' AND estado=0";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -677,6 +679,74 @@ function registrarnew ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo
     }
     cerrar($conexion);
 }
+
+function minagris ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
+    $query="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_articulo,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor_cliente'),('0'),(hojas*$salida/division),(hojas*$salida/division),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
+    FROM
+    transformation 
+    WHERE
+    id_articfial = '$codigo_1' AND type_art='EXTENDIDO' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='CARTONSILLO' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='CARTON' AND estado=0 OR id_articfial = '$codigo_1' AND type_art='CAPLE' AND estado=0";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
+//funcion para guardar minagris
+function registrarminagris ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
+    $query="SELECT * FROM kardex WHERE refe_1='$refe_1' AND tipo='VALE_PRODUCCIÓN' AND tipo_ref='EXTENDIDO' AND codigo_1='2000' OR refe_1='$refe_1' AND tipo='VALE_PRODUCCIÓN' AND tipo_ref='EXTENDIDO' AND codigo_1='2005'";
+    $resultado= mysqli_query($conexion,$query);
+    if($resultado->num_rows==0){
+        //INSERTER SI NO HAY ARTICULO
+        $busc="select (hojas*(SELECT (t.hojas*$salida/t.division) from transformation t where t.id_articfial = '$codigo_1' AND t.type_art='EXTENDIDO' AND t.estado=0)/division) as resultt FROM transformation WHERE id_articfial = '$codigo_1' AND type_art='MINAGRIS' AND estado=0";
+        $resul = mysqli_query($conexion, $busc);
+        if(!$resul){
+            die("error");
+        }else{
+            while($data = mysqli_fetch_assoc($resul)){
+                if ($data["resultt"] > 0) {
+                    $query="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_articulo,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor_cliente'),('0'),('1'),('1'),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
+                    FROM
+                    transformation 
+                    WHERE
+                    id_articfial = '$codigo_1' AND type_art='MINAGRIS' AND estado=0";
+                    if(mysqli_query($conexion,$query)){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                    cerrar($conexion);
+                }else{
+                    $query="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_articulo,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor_cliente'),('0'),(hojas*(SELECT (t.hojas*$salida/t.division) from transformation t where t.id_articfial = '$codigo_1' AND t.type_art='EXTENDIDO' AND t.estado=0)/division),(hojas*(SELECT (t.hojas*$salida/t.division) from transformation t where t.id_articfial = '$codigo_1' AND t.type_art='EXTENDIDO' AND t.estado=0)/division),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
+                    FROM
+                    transformation 
+                    WHERE
+                    id_articfial = '$codigo_1' AND type_art='MINAGRIS' AND estado=0";
+                    if(mysqli_query($conexion,$query)){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                    cerrar($conexion);
+                }
+
+            }
+        }
+       
+    }else{
+        $query2="UPDATE kardex SET salida = salida+(select hojas*(SELECT (t.hojas*$salida/t.division) from transformation t where t.id_articfial = '$codigo_1' AND t.type_art='EXTENDIDO' AND t.estado=0)/division FROM transformation WHERE id_articfial = '$codigo_1' AND type_art='MINAGRIS' AND estado=0)";
+        if(mysqli_query($conexion,$query2)){
+            return true;
+        }else{
+            return false;
+        }
+        cerrar($conexion);
+    }
+    cerrar($conexion);
+}
+
 function registrarnewetiq ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
     $query="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_articulo,( 'VALE_PRODUCCIÓN' ),( 'ETIQUETAS' ),('$proveedor_cliente'),('0'),('$cantidad_real'),(hojas*$salida/division),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
     FROM
@@ -735,7 +805,7 @@ function extendido ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,
 }
 //minagirssss 
 function actualizarmina($refe_1,$refe_2,$conexion){
-    $query="UPDATE kardex SET salida='1' where refe_1='$refe_1' and codigo_1 in ('2000','2005') AND salida=0 AND tipo='VALE_PRODUCCIÓN' AND tipo_ref='EXTENDIDO'";
+    $query="UPDATE kardex SET salida='1' where refe_1='$refe_1' and codigo_1 in ('2000','2005') AND salida=0 AND tipo='VALE_PRODUCCIÓN' AND tipo_ref='EXTENDIDO' AND estatus=0";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
@@ -746,8 +816,12 @@ function actualizarmina($refe_1,$refe_2,$conexion){
 }
 
 //funcion para guardar el minagriss de articulo de trasformación
-function minagriss ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
-    $query="INSERT INTO kardex SELECT 0,'$refe_1','$refe_2','$refe_3','$fecha',concat((select minagris1 from transforma where id_articulo_final = '$codigo_1')),concat((select artdescrip from articulos where artcodigo = (select minagris1 from transforma where id_articulo_final = '$codigo_1'))),'VALE_PRODUCCION','EXTENDIDO','$proveedor_cliente','$ubicacion',concat((select $cantidad_real * hojasmin / canminagras from transforma where id_articulo_final = '$codigo_1')),0,concat((select $cantidad_real * hojasmin / canminagras from transforma where id_articulo_final = '$codigo_1')),'0',0,'0','','NA','PENDIENTE','PENDIENTE','NO','NO',0";
+function minagriss1 ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
+    $query="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_articulo,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor_cliente'),('0'),(hojas*(SELECT (t.hojas*$salida/t.division) from transformation t where t.id_articfial = '$codigo_1' AND t.type_art='EXTENDIDO' AND t.estado=0)/division),(hojas*(SELECT (t.hojas*$salida/t.division) from transformation t where t.id_articfial = '$codigo_1' AND t.type_art='EXTENDIDO' AND t.estado=0)/division),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
+    FROM
+    transformation 
+    WHERE
+    id_articfial = '$codigo_1' AND type_art='MINAGRIS' AND estado=0";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
