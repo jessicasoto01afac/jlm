@@ -706,7 +706,7 @@ function registrarminagris ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$c
             die("error");
         }else{
             while($data = mysqli_fetch_assoc($resul)){
-                if ($data["resultt"] > 0) {
+                if ($data["resultt"] < 0) {
                     $query="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_articulo,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor_cliente'),('0'),('1'),('1'),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
                     FROM
                     transformation 
