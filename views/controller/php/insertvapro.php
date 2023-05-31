@@ -706,7 +706,7 @@ function registrarminagris ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$c
             die("error");
         }else{
             while($data = mysqli_fetch_assoc($resul)){
-                if ($data["resultt"] < 0) {
+                if ($data["resultt"] < 1) {
                     $query="INSERT INTO kardex (refe_1,refe_2,refe_3,fecha, codigo_1, tipo, tipo_ref,proveedor_cliente,ubicacion,cantidad_real,salida,costo,descuento,total,observa,observa_dep,status,status_2,entrega,revision, estado ) SELECT ('$refe_1'),('$refe_2'),('$refe_3'),('$fecha'), id_articulo,( 'VALE_PRODUCCIÓN' ),( 'EXTENDIDO' ),('$proveedor_cliente'),('0'),('1'),('1'),('0'),('0'),('0'),('$observa'), ('NA'),('PENDIENTE'),('PENDIENTE'),('NO'),('NO'),('0')
                     FROM
                     transformation 
@@ -734,7 +734,7 @@ function registrarminagris ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$c
 
             }
         }
-       
+
     }else{
         $query2="UPDATE kardex SET salida = salida+(select hojas*(SELECT (t.hojas*$salida/t.division) from transformation t where t.id_articfial = '$codigo_1' AND t.type_art='EXTENDIDO' AND t.estado=0)/division FROM transformation WHERE id_articfial = '$codigo_1' AND type_art='MINAGRIS' AND estado=0)";
         if(mysqli_query($conexion,$query2)){
