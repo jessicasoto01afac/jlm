@@ -2302,7 +2302,7 @@ function editarprtermin(valprd) {
                 document.getElementById('vpeddettcantid').value = obj.data[C].entrada;
                 document.getElementById('vpobsadddetll').value = obj.data[C].observa;
                 document.getElementById('posicionextdell').value = obj.data[C].tipo_ref;
-                document.getElementById('vpdettedithdes').value = obj.data[C].artcodigo;
+                document.getElementById('vpdettedithdes').value = obj.data[C].artdescrip;
                 document.getElementById('vpedthdepardell').value = obj.data[C].artubicac;
             }
         }
