@@ -1,7 +1,7 @@
 <?php
 	include("../conexion.php");
 	session_start();
-	$query = "SELECT *,DATE_FORMAT(fecha,'%d-%m-%Y')as date FROM compras c, proveedores p WHERE c.estado=0 and p.codigo_pro =c.id_proveedor group by folio_oc ORDER BY id_comp DESC";
+	$query = "SELECT *,DATE_FORMAT(fecha,'%d-%m-%Y')as date,(SELECT revision from kardex where refe_1=c.folio_oc GROUP by refe_1) as revision  FROM compras c, proveedores p WHERE c.estado=0 and p.codigo_pro =c.id_proveedor group by folio_oc ORDER BY id_comp DESC";
 	$resultado = mysqli_query($conexion, $query);
 	$contador=0;
 	if(!$resultado){
@@ -19,10 +19,11 @@
 					$data["folio_oc"], 
 					$data["date"],
 					$data["nom_pro"],
+					$data["revision"],
 					$estatus,  
 					$proceso
 				];
-			}else if ($data["estatus"] == "COMPLETADO") {
+			}else if ($data["estatus"] == "FINALIZADO") {
 				$id_kardex=$data["id_proveedor"];
 				$refe_1=$data["folio_oc"];
 				$estatus="<td class='tx-12'><span class='square-8 bg-success mg-r-5 rounded-circle'></span>FINALIZADO</td>";
@@ -32,6 +33,7 @@
 					$data["folio_oc"], 
 					$data["date"],
 					$data["nom_pro"],
+					$data["revision"],
 					$estatus,  
 					$proceso
 				];
@@ -45,6 +47,7 @@
 					$data["folio_oc"], 
 					$data["date"],
 					$data["nom_pro"],
+					$data["revision"],
 					$estatus,  
 					$proceso
 				];
@@ -58,6 +61,7 @@
 					$data["folio_oc"], 
 					$data["date"],
 					$data["nom_pro"],
+					$data["revision"],
 					$estatus,  
 					$proceso
 				];

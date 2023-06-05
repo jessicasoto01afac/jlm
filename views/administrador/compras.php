@@ -56,6 +56,7 @@ include('header.php');
                                     <th>FOLIO</th>
                                     <th>FECHA</th>
                                     <th>PROVEEDOR</th>
+                                    <th>FOLIO JLM</th>
                                     <th>ESTATUS</th>
                                     <th>ACCIONES</th>
                                 </tr>

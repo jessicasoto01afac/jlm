@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
+<?php 
+include ("../controller/conexion.php");
+session_start();
+      $allvp= "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='VALE_PRODUCCION' GROUP BY refe_1) AS Total";
+      $resulall = mysqli_query($conexion,$allvp);
+      $allvp = mysqli_fetch_assoc($resulall);
 
+      $pendievp= "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='VALE_PRODUCCION' AND status='PENDIENTE' GROUP BY refe_1) AS Total";
+      $resulpedidvp = mysqli_query($conexion,$pendievp);
+      $pendientesvp = mysqli_fetch_assoc($resulpedidvp);
+
+      $buspedfinvp = "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='VALE_PRODUCCION' AND status='FINALIZADO' GROUP BY refe_1) AS Total";
+      $resulfinvp = mysqli_query($conexion,$buspedfinvp);
+      $finalizadosvp = mysqli_fetch_assoc($resulfinvp);
+
+      $buspedsurtvp = "SELECT count(*) as result FROM (SELECT tipo FROM kardex where estado='0' AND tipo ='VALE_PRODUCCION' AND status='SURTIDO' GROUP BY refe_1) AS Total";
+      $resulsurvp = mysqli_query($conexion,$buspedsurtvp);
+      $surtidosvp = mysqli_fetch_assoc($resulsurvp);
+?>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -49,6 +67,31 @@ include('header.php');
             </div>
 
             <div class="br-pagebody">
+                <div
+                    class="d-flex align-items-center justify-content-start pd-x-20 pd-sm-x-2 pd-t-6 mg-b-20 mg-sm-b-30">
+                    <div class="btn-group mg-l-auto hidden-sm-down">
+                        <a href="#" class="btn btn-outline-primary active">Todos <span><span class="pd-l-6 pd-r-6 pd-t-2 pd-b-2 square-12 bg-info mg-r-12 rounded-circle text-white center"><?php echo $allvp['result']?></span></span></a>
+                        <a href="#" class="btn btn-outline-primary">Pendiente <span class="pd-l-6 pd-r-6 pd-t-2 pd-b-2 square-12 bg-info mg-r-12 rounded-circle text-white center"><?php echo $pendientesvp['result']?></span></a>
+                        <a href="#" class="btn btn-outline-primary">Surtidos <span class="pd-l-6 pd-r-6 pd-t-2 pd-b-2 square-12 bg-info mg-r-12 rounded-circle text-white center"><?php echo $surtidosvp['result']?></span></a>
+                        <a href="#" class="btn btn-outline-primary">Finalizados <span class="pd-l-6 pd-r-6 pd-t-2 pd-b-2 square-12 bg-info mg-r-12 rounded-circle text-white center"><?php echo $finalizadosvp['result']?></span></a>
+                        <a href="#" class="btn btn-outline-primary">Enviados</a>
+                    </div><!-- btn-group -->
+
+                    <!-- START: DISPLAYED FOR MOBILE ONLY -->
+                    <div class="dropdown mg-l-auto hidden-md-up">
+                        <a href="#" class="btn btn-outline-secondary" data-toggle="dropdown">All<i
+                                class="fa fa-angle-down mg-l-5"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right pd-10">
+                            <nav class="nav nav-style-1 flex-column">
+                                <a href="" class="nav-link">Todos <span><?php echo $allvp['result']?></span></a>
+                                <a href="" class="nav-link">Pendiente<span> <?php echo $pendientes['result']?></span></a>
+                                <a href="" class="nav-link">Surtidos <span><?php echo $surtidosvp['result']?></span></a>
+                                <a href="" class="nav-link">Finalizados <span><?php echo $finalizadosvp['result']?></span></a>
+                                <a href="" class="nav-link">Enviados</a>
+                            </nav>
+                        </div><!-- dropdown-menu -->
+                    </div><!-- dropdown -->
+                </div>
                 <div class="br-section-wrapper">
                     <a class="btn btn-primary text-white" onclick="foliovp()" style="float:right; cursor:pointer"><i
                             class="fa fa-list-alt mg-r-10"></i>Agregar vale de producción</a>
@@ -279,9 +322,10 @@ include('header.php');
                                 </div><!-- col-6 -->
                                 <div class="col-md-3">
                                     <div class="form-group bd-t-0-force">
-                                        <label class="form-control-label" style="font-size:14px">RELACIÓN JLM/ <a href="javascript:savevrevicion()">Guardar</a></label>
-                                        <textarea onkeyup="mayus(this);" rows="2" class="form-control"
-                                            name="relajlm" id="relajlm" placeholder="JLM"></textarea>
+                                        <label class="form-control-label" style="font-size:14px">RELACIÓN JLM/ <a
+                                                href="javascript:savevrevicion()">Guardar</a></label>
+                                        <textarea onkeyup="mayus(this);" rows="2" class="form-control" name="relajlm"
+                                            id="relajlm" placeholder="JLM"></textarea>
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-md-3">

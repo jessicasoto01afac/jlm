@@ -2,7 +2,7 @@
 	include("../conexion.php");
 	session_start();
     $folio = $_GET["folio"];
-	$query = "SELECT * FROM compras c, proveedores p WHERE c.estado=0 and p.codigo_pro =c.id_proveedor AND folio_oc='$folio' group by folio_oc ORDER BY id_comp DESC";
+	$query = "SELECT *,(SELECT revision from kardex where refe_1=c.folio_oc GROUP by refe_1) as revision FROM compras c, proveedores p WHERE c.estado=0 and p.codigo_pro =c.id_proveedor AND folio_oc='$folio' group by folio_oc ORDER BY id_comp DESC";
 	$resultado = mysqli_query($conexion, $query);
 
 	if(!$resultado){

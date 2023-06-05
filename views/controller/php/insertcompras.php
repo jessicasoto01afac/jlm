@@ -353,7 +353,7 @@ function entrada($id_comp,$id_proveedor,$id_articulo,$id_artprove,$estadokardex,
 }
 //funcion para entrada
 function inserkardex($folio,$fecha,$fecha_entrga,$id_articulo,$cantidad,$observación,$id_comp,$id_proveedor,$estadok,$comparcant,$conexion){
-    $query="INSERT INTO kardex VALUES (0,'$folio','$id_comp','0','$fecha','$id_articulo','0','COMPRAS','ARTICULO','$id_proveedor','0','$comparcant','$cantidad','0','0','0','0','$observación','NA','$estadok','PENDIENTE','NO','NO','0')";
+    $query="INSERT INTO kardex VALUES (0,'$folio','$id_comp','0','$fecha','$id_articulo','0','COMPRAS','ARTICULO','$id_proveedor','0','$comparcant','$cantidad','0','0','0','0','$observación','NA','$estadok','PENDIENTE','NO','','0')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{
