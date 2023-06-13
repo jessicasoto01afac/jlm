@@ -289,6 +289,41 @@ if(!isset($usuario)){
             echo "1";
         }
     //Actualiza la informacion de no surtir producto final
+    }else if ($opcion === 'registrarpre'){
+        $referencia = $_POST['referencia'];
+        $codigo = $_POST['codigo'];
+        if (comprobacionpre ($referencia,$codigo,$conexion)){
+            $fecha = $_POST['fecha'];
+            $atendio = $_POST['atendio'];
+            $cliente = $_POST['cliente'];
+            $caracter = $_POST['caracter'];
+            $codigo = $_POST['codigo'];
+            $cantidad = $_POST['cantidad'];
+            $observa = $_POST['observa'];
+            $descripcion_1 = $_POST['descripcion_1'];
+            $lugar = $_POST['lugar'];
+            $direccion = $_POST['direccion'];
+            
+            if (registrarpre($referencia,$fecha,$atendio,$cliente,$caracter,$codigo,$cantidad,$observa,$descripcion_1,$lugar,$direccion,$conexion)){
+                echo "0";
+                //poductividad($refe_1,$caracter,$usuario,$conexion);
+                historialpre($usuario,$referencia,$codigo,$conexion);
+            }else{
+                echo "1";
+            }
+        }else{
+
+            echo "2";
+        }
+    //Condición donde cancela el vale de producción
+    }else if($opcion === 'cancelarpre'){
+        $refe_1 = $_POST['refe_1'];
+            if (cancelar($refe_1,$conexion)){
+                echo "0";
+            }else{
+                echo "1";
+            }
+    //Condición donde agrega un articulo individualmente
     }
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -301,7 +336,7 @@ function comprobacion ($refe_1,$codigo_1,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion de comprobación para ver si el vale ya se encuentra en la base
 function comprobacionfin ($refe_1,$usuario,$conexion){
@@ -312,7 +347,7 @@ function comprobacionfin ($refe_1,$usuario,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para guardar el articulo de producción
 function registrar ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,$descripcion_1,$cantidad_real,$salida,$observa,$ubicacion,$conexion){
@@ -322,7 +357,7 @@ function registrar ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo_1,
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para registrar la productividad
 function poductividad ($refe_1,$caracter,$usuario,$conexion){
@@ -334,7 +369,7 @@ function poductividad ($refe_1,$caracter,$usuario,$conexion){
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para actualizar el registro
 function finaliadd ($refe_1,$conexion){
@@ -394,7 +429,7 @@ function registrarind ($refe_1,$refe_2,$refe_3,$fecha,$proveedor_cliente,$codigo
     }else{
         return false;
     }
-    $this->conexion->cerrar();
+    cerrar($conexion);
 }
 //funcion para autorizar+++++++++++++++++++++++++++++++++++++++++
 function autorizar1 ($folio,$conexion){
@@ -544,6 +579,39 @@ function updatehadercar($refe_1,$pedidcaracter,$conexion){
 	cerrar($conexion);
 }
 
+//FUNCIONES PARA PREPEDIDOS
+//funcion de comprobación para ver si el vale ya se encuentra en la base
+function comprobacionpre ($referencia,$codigo,$conexion){
+    $query="SELECT * FROM prepedidos WHERE referencia = '$referencia' AND  codigo='$codigo' AND estado = 0 ";
+    $resultado= mysqli_query($conexion,$query);
+    if($resultado->num_rows==0){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
+//funcion para guardar el articulo de producción
+function registrarpre($referencia,$fecha,$atendio,$cliente,$caracter,$codigo,$cantidad,$observa,$descripcion_1,$lugar,$direccion,$conexion){
+    $query="INSERT INTO prepedidos VALUES(0,'$referencia','$fecha','$cliente','$atendio','$caracter','$codigo','$cantidad','$observa','$lugar','$direccion','PENDIENTE',0)";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+//funcion para cancelar el vale de producción
+function cancelarpre ($refe_1,$conexion){
+    $query="UPDATE prepedidos SET estado=1 WHERE refe_1 = '$refe_1'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
 
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
@@ -696,6 +764,18 @@ function hisurtmasiv($usuario,$folio,$conexion){
     ini_set('date.timezone','America/Mexico_City');
     $fecha1 = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
     $query = "INSERT INTO historial VALUES (0,'$usuario', 'SURTE MASIVAMENTE PEDIDO', 'FOLIO:' '$folio',' $fecha1')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//funcion para registra cambios
+function historialpre($usuario,$referencia,$codigo,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario','AGREGA UN PREPEDIDO', 'FOLIO:' '$referencia' ' ARTICULO:' ' $codigo','$fecha')";
     if(mysqli_query($conexion,$query)){
         return true;
     }else{

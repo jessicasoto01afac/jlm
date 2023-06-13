@@ -55,7 +55,7 @@ $porpedid2 = mysqli_fetch_assoc($resulped2);
     <link rel="stylesheet" href="../template/css/bracket.css">
   </head>
 
-  <body class="collapsed-menu">
+  <body class="collapsed-menu with-subleft">
     <?php
 
     include('header.php');

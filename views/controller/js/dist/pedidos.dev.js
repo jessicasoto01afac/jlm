@@ -72,7 +72,8 @@ $(document).ready(function () {
   });
 });
 $(document).ready(function () {
-  $('#busccodimem').load('./select/busartped.php'); //$('#busccodigomem2').load('./select/buscarme2.php');
+  $('#busccodimem').load('./select/busartped.php');
+  $('#busccodipreped').load('./select/buscarartpre.php'); //$('#busccodigomem2').load('./select/buscarme2.php');
   //$('#buscpedido').load('./select/buspedi.php');
 });
 

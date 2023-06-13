@@ -63,15 +63,15 @@ $sql =
 <link rel="stylesheet" href="../template/css/bracket.css">
 
 <!-- ########## START: LEFT PANEL ########## -->
-<div class="br-logo"><a href="../administrador/inicio.php"><span>[</span>JLM<span>]</span></a></div>
+<div class="br-logo"><a href="inicio.php"><span>[</span>JLM<span>]</span></a></div>
 
 <div class="br-sideleft overflow-y-auto">
     <label class="sidebar-label pd-x-15 mg-t-20">MENÚ PRINCIPAL</label>
     <div class="br-sideleft-menu">
-        <a href="../administrador/inicio.php" class="br-menu-link">
+        <a href="inicio.php" class="br-menu-link">
             <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-                <span href="../administrador/inicio.php" class="menu-item-label">Dashboard</span>
+                <span href="inicio.php" class="menu-item-label">Dashboard</span>
             </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <a href="#" class="br-menu-link">
@@ -82,12 +82,12 @@ $sql =
             </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="../administrador/usuarios.php" class="nav-link">Accesos</a></li>
-            <li class="nav-item"><a href="../administrador/articulos.php" class="nav-link">Articulos</a></li>
-            <li class="nav-item"><a href="../administrador/transformacion.php" class="nav-link">Transformación</a></li>
-            <li class="nav-item"><a href="../administrador/clientes.php" class="nav-link">Clientes</a></li>
-            <li class="nav-item"><a href="../administrador/provedores.php" class="nav-link">Proveedores</a></li>
-            <li class="nav-item"><a href="../administrador/artiprove.php" class="nav-link">Articulos Proveedor</a></li>
+            <li class="nav-item"><a href="usuarios.php" class="nav-link">Accesos</a></li>
+            <li class="nav-item"><a href="articulos.php" class="nav-link">Articulos</a></li>
+            <li class="nav-item"><a href="transformacion.php" class="nav-link">Transformación</a></li>
+            <li class="nav-item"><a href="clientes.php" class="nav-link">Clientes</a></li>
+            <li class="nav-item"><a href="provedores.php" class="nav-link">Proveedores</a></li>
+            <li class="nav-item"><a href="artiprove.php" class="nav-link">Articulos Proveedor</a></li>
         </ul>
         <a href="#" class="br-menu-link">
             <div class="br-menu-item">
@@ -97,9 +97,9 @@ $sql =
             </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="../administrador/vale_produccion.php" class="nav-link">Producción</a></li>
-            <li class="nav-item"><a href="../administrador/memos.php" class="nav-link">Memos</a></li>
-            <li class="nav-item"><a href="../administrador/vale_oficina.php" class="nav-link">Vales de oficina</a></li>
+            <li class="nav-item"><a href="vale_produccion.php" class="nav-link">Producción</a></li>
+            <li class="nav-item"><a href="memos.php" class="nav-link">Memos</a></li>
+            <li class="nav-item"><a href="vale_oficina.php" class="nav-link">Vales de oficina</a></li>
         </ul>
 
         <a href="#" class="br-menu-link">
@@ -110,9 +110,9 @@ $sql =
             </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="../administrador/devolution.php" class="nav-link">Devolución</a></li>
-            <li class="nav-item"><a href="../administrador/matdefectuoso.php" class="nav-link">Defectuso</a></li>
-            <li class="nav-item"><a href="../administrador/matfaltante.php" class="nav-link">Faltante</a></li>
+            <li class="nav-item"><a href="devolution.php" class="nav-link">Devolución</a></li>
+            <li class="nav-item"><a href="matdefectuoso.php" class="nav-link">Defectuso</a></li>
+            <li class="nav-item"><a href="matfaltante.php" class="nav-link">Faltante</a></li>
             <li class="nav-item"><a href="" class="nav-link">Sobrante</a></li>
             <li class="nav-item"><a href="" class="nav-link">Reacondicionado</a></li>
         </ul>
@@ -124,8 +124,9 @@ $sql =
             </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="../administrador/pedidos.php" class="nav-link">Agregar layout</a></li>
-            <li class="nav-item"><a href="../administrador/listpedido.php" class="nav-link">Pedidos</a></li>
+            <li class="nav-item"><a href="pedidos.php" class="nav-link">Agregar layout</a></li>
+            <li class="nav-item"><a href="listpedido.php" class="nav-link">Pedidos</a></li>
+            <li class="nav-item"><a href="prepedidos.php" class="nav-link">Prepedidos</a></li>
         </ul>
         <a href="#" class="br-menu-link">
             <div class="br-menu-item">
@@ -135,7 +136,7 @@ $sql =
             </div><!-- menu-item -->
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="../administrador/compras.php" class="nav-link">Lista de Compras</a></li>
+            <li class="nav-item"><a href="compras.php" class="nav-link">Lista de Compras</a></li>
             <li class="nav-item"><a href="chart-morris.html" class="nav-link">Pronostico de Compras</a></li>
         </ul>
         <a href="#" class="br-menu-link">
@@ -169,7 +170,7 @@ $sql =
         <ul class="br-menu-sub nav flex-column">
             <li class="nav-item"><a href="form-elements.html" class="nav-link">Falta de material</a></li>
             <li class="nav-item"><a href="form-layouts.html" class="nav-link">ventas mensuales</a></li>
-            <li class="nav-item"><a href="../administrador/hcambios.php" class="nav-link">Historial de Cambios</a></li>
+            <li class="nav-item"><a href="hcambios.php" class="nav-link">Historial de Cambios</a></li>
         </ul>
 
         <a href="adminpickup.php" class="br-menu-link">

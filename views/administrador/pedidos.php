@@ -146,7 +146,7 @@ include('header.php');
       <div class="br-pagebody">
         <div class="br-section-wrapper">
         <div class="box">
-           <div class="box-header" style="">
+           <div class="box-header">
            
               <a href="../../docs/layout_pedidos.csv" download="Layout_masivo" class="btn btn-primary" style="float:right"><i class="fa fa-download mg-r-10"></i>Descargar archivo cvs</a>
              
