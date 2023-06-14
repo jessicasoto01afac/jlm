@@ -1,5 +1,6 @@
 <?php
 	include("../conexion.php");
+	//cambios
 	session_start();
 	$folio = $_GET["folio"];
 	$query = "SELECT * FROM prepedidos p, articulos a where p.estado='0' AND a.artcodigo=p.codigo AND p.referencia='$folio' ORDER BY p.id_pre ASC";
