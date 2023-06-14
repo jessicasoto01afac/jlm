@@ -43,7 +43,7 @@ $person = mysqli_query($conexion,$sql);
 
 </style>
 
-<body class="collapsed-menu">
+
 
     <?php
 
