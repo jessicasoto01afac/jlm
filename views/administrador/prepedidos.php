@@ -37,7 +37,6 @@ $person = mysqli_query($conexion,$sql);
     <link href="../template/css/diseno.css" rel="stylesheet">
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
-    <script src="../controller/js/pedidos.js"></script>
 </head>
 <style>
 
@@ -50,7 +49,7 @@ $person = mysqli_query($conexion,$sql);
 
 include('header.php');
 ?>
-    <section class="content" id="listaped">
+    <section class="content" id="listapred">
         <!-- ########## START: MAIN PANEL ########## -->
         <div class="br-mainpanel">
             <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
@@ -98,13 +97,13 @@ include('header.php');
     </section>
     <!-- ########## END: MAIN PANEL ########## -->
     <!------------------------------- ########## DETALLES DEL PEDIDO ########## -------------------------->
-    <section class="content" id="dettpedido" style="display: none;">
+    <section class="content" id="dettpredido" style="display: none;">
         <!-- ########## START: MAIN PANEL ########## -->
         <div class="br-mainpanel">
             <div class="br-pageheader pd-y-15 pd-l-20">
                 <nav class="breadcrumb pd-0 mg-0 tx-12">
-                    <a class="breadcrumb-item" href="../administrador/listpedido.php">Lista de pedidos</a>
-                    <span class="breadcrumb-item active">Info de pedido</span>
+                    <a class="breadcrumb-item" href="prepedidos.php">Lista de prepedidos</a>
+                    <span class="breadcrumb-item active">Info de prepedido</span>
                 </nav>
             </div><!-- br-pageheader -->
             <div class="br-pagebody">
@@ -118,12 +117,12 @@ include('header.php');
                         <button onclick="pdfvp()" style="display:none;" title="Imprimir" id="pdfpedrod" name="pdfpedrod"
                             type="button" class="btn btn-info"><i class="fa fa-file-pdf-o"></i></button>
                         <button title="ver historial" onclick="histvalepro()" data-toggle="modal"
-                            data-target="#modal-pedhistorial" type="button" class="btn btn-primary"><i
+                            data-target="#modal-predhistorial" type="button" class="btn btn-primary"><i
                                 class="fa fa-history"></i></button>
                     </div>
                 </div><!-- col-5 -->
                 <div class="br-section-wrapper">
-                    <h6 class="">INFORMACIÓN DEL PEDIDO:</h6>
+                    <h6 class="">INFORMACIÓN DEL PREPEDIDO:</h6>
                     <div class="form-group">
                         <div class="row mg-b-25">
                             <div class="col-sm-9">
@@ -138,25 +137,31 @@ include('header.php');
                     <form id="info-valofi" method="POST">
                         <div class="form-layout form-layout-2">
                             <div class="row no-gutters">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="form-control-label" style="font-size:14px">NUMERO DE PEDIDO: <span
+                                        <label class="form-control-label" style="font-size:14px">NUMERO DE PREPEDIDO: <span
                                                 class="tx-danger" style="font-size:14px">*</span></label>
                                         <h3><label for="" id="idinped" readonly name="idinped"
                                                 style="color:#14128F"></label>
                                         </h3>
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-4 mg-t--1 mg-md-t-0">
+                                <div class="col-md-6">
                                     <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label" style="font-size:14px">REMISIÓN DE PEDIDO:
-                                            <span class="tx-danger" style="font-size:14px">*</span></label>
-                                        <input class="form-control" style="color:#14128F;font-size:18px" readonly=""
-                                            type="text" id="remisioninf" name="remisioninf"
-                                            placeholder="Ingresar la remisión">
+                                        <label class="form-control-label">ANTENDIO:<span
+                                                class="tx-danger">*</span></label>
+                                        <select disabled class="form-control" name="atendioinf" id="atendioinf"
+                                            style="font-size:14px" data-placeholder="Choose country">
+                                            <option label="">Selecciona</option>
+                                            <?php while($per = mysqli_fetch_row($person)):?>
+                                            <option value="<?php echo $per[0]?>"><?php echo $per[1]?>
+                                                <?php echo $per[2]?></option>
+                                            <?php endwhile; ?>
+
+                                        </select>
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-4 mg-t--1 mg-md-t-0">
+                                <div class="col-md-3 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
                                         <label class="form-control-label" style="font-size:14px">FECHA DE INGRESO: <span
                                                 class="tx-danger">*</span></label>
@@ -164,7 +169,7 @@ include('header.php');
                                             name="infvpdate" placeholder="Enter lastname">
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                     <div class="form-group bd-t-0-force">
                                         <label class="form-control-label" style="font-size:14px">CLIENTE: <span
                                                 class="tx-danger">*</span></label>
@@ -180,21 +185,7 @@ include('header.php');
                                         </select>
                                     </div>
                                 </div><!-- col-8 -->
-                                <div class="col-md-4">
-                                    <div class="form-group mg-md-l--1 bd-t-0-force">
-                                        <label class="form-control-label">ANTENDIO:<span
-                                                class="tx-danger">*</span></label>
-                                        <select disabled class="form-control" name="atendioinf" id="atendioinf"
-                                            style="font-size:14px" data-placeholder="Choose country">
-                                            <option label="">Selecciona</option>
-                                            <?php while($per = mysqli_fetch_row($person)):?>
-                                            <option value="<?php echo $per[0]?>"><?php echo $per[1]?>
-                                                <?php echo $per[2]?></option>
-                                            <?php endwhile; ?>
-
-                                        </select>
-                                    </div>
-                                </div><!-- col-4 -->
+                               
                                 <div class="col-md-4 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
                                         <label class="form-control-label" style="font-size:14px">LUGAR: <span
@@ -223,81 +214,15 @@ include('header.php');
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-md-3 mg-t--1 mg-md-t-0">
-                                    <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label" style="font-size:12px">CREACIÓN: <span
-                                                class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly type="text" name="creapedid" id="creapedid"
-                                            value="" placeholder="Creación" style="font-size:14px">
-                                    </div>
-                                </div><!-- col-4 -->
-                                <div class="col-md-3 mg-t--1 mg-md-t-0">
-                                    <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label" style="font-size:14px">FECHA DE AUTORIZACIÓN:
-                                            <span class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly="" type="date" id="fecreaped"
-                                            name="fecreaped" placeholder="Enter lastname">
-                                    </div>
-                                </div><!-- col-4 -->
-                                <div class="col-md-3 mg-t--1 mg-md-t-0">
-                                    <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label" style="font-size:14px">AUTORIZA: <span
-                                                class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly type="text" name="auropedid" id="auropedid"
-                                            value="" placeholder="Autoriza" style="font-size:14px">
-                                    </div>
-                                </div><!-- col-4 -->
-                                <div class="col-md-3 mg-t--1 mg-md-t-0">
-                                    <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label" style="font-size:14px">FECHA DE AUTORIZACIÓN:
-                                            <span class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly="" type="date" id="feautoped"
-                                            name="feautoped" placeholder="Enter lastname">
-                                    </div>
-                                </div><!-- col-4 -->
-                                <div class="col-md-3 mg-t--1 mg-md-t-0">
-                                    <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label" style="font-size:14px">SURTIO: <span
-                                                class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly type="text" name="sutpedid" id="sutpedid"
-                                            value="" placeholder="Surtio" style="font-size:14px">
-                                    </div>
-                                </div><!-- col-4 -->
-                                <div class="col-md-3 mg-t--1 mg-md-t-0">
-                                    <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label" style="font-size:14px">FECHA DE SURTIDO: <span
-                                                class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly="" type="date" id="fesurtped"
-                                            name="fesurtped" placeholder="Enter lastname">
-                                    </div>
-                                </div><!-- col-4 -->
-                                <div class="col-md-3 mg-t--1 mg-md-t-0">
-                                    <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label" style="font-size:14px">FINALIZA: <span
-                                                class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly type="text" name="finalizpedid"
-                                            id="finalizpedid" value="" placeholder="Entrega" style="font-size:14px">
-                                    </div>
-                                </div><!-- col-4 -->
-                                <div class="col-md-3 mg-t--1 mg-md-t-0">
-                                    <div class="form-group mg-md-l--1">
-                                        <label class="form-control-label" style="font-size:14px">FECHA DE FINALIZACIÓN:
-                                            <span class="tx-danger">*</span></label>
-                                        <input class="form-control" readonly="" type="date" id="fecentrega"
-                                            name="fecentrega" placeholder="Enter lastname">
-                                    </div>
-                                </div><!-- col-4 -->
-
+                            
                             </div><!-- row -->
                             <div class="form-layout-footer bd pd-20 bd-t-0">
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <button id="btnpedautoriz" name="btnpedautoriz" type="button" style="display:none;"
-                                        onclick="autorizaped()" class="btn btn-info pd-x-30">Autorizar</button>
+                                        onclick="autorizaped()" class="btn btn-indigo pd-x-30">Volver Pedido</button>
                                     <button title="Dar click para liberar" id="btnpedliberar" name="btnpedliberar"
                                         type="button" style="display:none;" onclick="liberarped()"
                                         class="btn btn-dark pd-x-25">Liberar</button>
-                                    <button id="btnpedsurtir" name="btnpedsurtir" type="button" style="display:none;"
-                                        onclick="surtidoped()" class="btn btn-indigo pd-x-25">Surtir</button>
                                     <button id="btnpedfinaliz" name="btnpedfinaliz" type="button" style="display:none;"
                                         onclick="finalizarvp()" class="btn btn-success pd-x-25">Finalizar</button>
                                 </div>
@@ -306,7 +231,7 @@ include('header.php');
                     </form>
                     <br>
                     <div class="modal-footer">
-                        <button type="button" onclick="savepedcabe()" id="saveinped" style="display:none;"
+                        <button type="button" onclick="savepredcabe()" id="saveinped" style="display:none;"
                             class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">GUARDAR
                             CAMBIOS</button>
                         <br>
@@ -392,7 +317,7 @@ include('header.php');
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
 
-    <?php include('modal/mpedido.php');?>
+    <?php include('modal/mprepedido.php');?>
     <script>
     openprepedidos();
     </script>

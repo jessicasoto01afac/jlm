@@ -300,11 +300,10 @@ if(!isset($usuario)){
             $codigo = $_POST['codigo'];
             $cantidad = $_POST['cantidad'];
             $observa = $_POST['observa'];
-            $descripcion_1 = $_POST['descripcion_1'];
             $lugar = $_POST['lugar'];
             $direccion = $_POST['direccion'];
             
-            if (registrarpre($referencia,$fecha,$atendio,$cliente,$caracter,$codigo,$cantidad,$observa,$descripcion_1,$lugar,$direccion,$conexion)){
+            if (registrarpre($referencia,$fecha,$atendio,$cliente,$caracter,$codigo,$cantidad,$observa,$lugar,$direccion,$conexion)){
                 echo "0";
                 //poductividad($refe_1,$caracter,$usuario,$conexion);
                 historialpre($usuario,$referencia,$codigo,$conexion);
@@ -315,7 +314,7 @@ if(!isset($usuario)){
 
             echo "2";
         }
-    //Condición donde cancela el vale de producción
+    //Condición donde cancela el prepedido
     }else if($opcion === 'cancelarpre'){
         $refe_1 = $_POST['refe_1'];
             if (cancelar($refe_1,$conexion)){
@@ -323,7 +322,83 @@ if(!isset($usuario)){
             }else{
                 echo "1";
             }
-    //Condición donde agrega un articulo individualmente
+    //Condición donde se actualiza articulo de prepedido
+    }else if($opcion === 'updatearprepinfo'){
+        $id_pre = $_POST['id_pre'];
+        $codigo = $_POST['codigo'];
+        $cantidad = $_POST['cantidad'];
+        $observa = $_POST['observa'];
+
+            if (updateprepedido($id_pre,$codigo,$cantidad,$observa,$conexion)){
+                echo "0";
+                $realizo = 'ACTUALIZA ARTICULO DEL PREPEDIDO';
+                histcambiospre($usuario,$realizo,$id_pre,$codigo,$conexion);
+            }else{
+                echo "1";
+            }
+    //Condición donde agrega un articulo  
+    }else if($opcion === 'deleartprenew'){
+        $id_pre = $_POST['id_pre'];
+        $codigo = $_POST['codigo'];
+            if (eliminarpreart($id_pre,$conexion)){
+                echo "0";
+                $realizo = 'ELIMINA ARTICULO DEL PEDIDO';
+                histcambiospre($usuario,$realizo,$id_pre,$codigo,$conexion);
+            }else{
+                echo "1";
+            }
+    //Condición donde agrega un articulo deleartprenew 
+    }else if($opcion === 'registrarindpre'){
+        $referencia = $_POST['referencia'];
+        $codigo = $_POST['codigo'];
+    
+        if (comprobacionpre ($referencia,$codigo,$conexion)){
+            $fecha = $_POST['fecha'];
+            $atendio = $_POST['atendio'];
+            $cliente = $_POST['cliente'];
+            $caracter = $_POST['caracter'];
+            $codigo = $_POST['codigo'];
+            $cantidad = $_POST['cantidad'];
+            $observa = $_POST['observa'];
+            $lugar = $_POST['lugar'];
+            $direccion = $_POST['direccion'];
+            
+            if (registrarpre($referencia,$fecha,$atendio,$cliente,$caracter,$codigo,$cantidad,$observa,$lugar,$direccion,$conexion)){
+                echo "0";
+                //poductividad($refe_1,$caracter,$usuario,$conexion); 
+                historialpre($usuario,$referencia,$codigo,$conexion);
+            }else{
+                echo "1";
+            }
+        }else{
+
+            echo "2";
+        }
+    }else if($opcion === 'conpedido'){
+        $folio = $_POST['folio'];
+            if (converpedido($folio,$conexion)){
+                echo "0";
+                $realizo = 'SE CONVIERTE EN PEDIDO';
+                histcambiospre($usuario,$realizo,$id_pre,$codigo,$conexion);
+            }else{
+                echo "1";
+            }
+    //Condición donde agrega un articulo   
+    }else if($opcion === 'savecabezpre'){
+        $referencia = $_POST['referencia'];
+        $atendio = $_POST['atendio'];
+        $fecha = $_POST['fecha'];
+        $cliente = $_POST['cliente'];
+        $lugar = $_POST['lugar'];
+        $direccion = $_POST['direccion'];
+        $pedidcaracter = $_POST['pedidcaracter'];
+        if (updatehaderpre($referencia,$atendio,$fecha,$cliente,$lugar,$direccion,$pedidcaracter,$conexion)){
+            echo "0";
+            //$usuario='PRUEBAS';
+
+        }else{
+            echo "1";
+        }
     }
 //FUNCIONES  -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -593,7 +668,7 @@ function comprobacionpre ($referencia,$codigo,$conexion){
 }
 
 //funcion para guardar el articulo de producción
-function registrarpre($referencia,$fecha,$atendio,$cliente,$caracter,$codigo,$cantidad,$observa,$descripcion_1,$lugar,$direccion,$conexion){
+function registrarpre($referencia,$fecha,$atendio,$cliente,$caracter,$codigo,$cantidad,$observa,$lugar,$direccion,$conexion){
     $query="INSERT INTO prepedidos VALUES(0,'$referencia','$fecha','$cliente','$atendio','$caracter','$codigo','$cantidad','$observa','$lugar','$direccion','PENDIENTE',0)";
     if(mysqli_query($conexion,$query)){
         return true;
@@ -612,6 +687,47 @@ function cancelarpre ($refe_1,$conexion){
     }
     cerrar($conexion);
 }
+//funcion para actualizar el articulo de prepedidos
+function updateprepedido($id_pre,$codigo,$cantidad,$observa,$conexion){
+    $query="UPDATE prepedidos SET codigo='$codigo', cantidad='$cantidad', observa='$observa' WHERE id_pre='$id_pre'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
+function eliminarpreart($id_pre,$conexion){
+    $query="UPDATE prepedidos SET estado=1 WHERE id_pre='$id_pre'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
+function converpedido($folio,$conexion){
+    $query="UPDATE prepedidos SET status='PEDIDO' WHERE referencia='$folio'";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+    cerrar($conexion);
+}
+
+function updatehaderpre($referencia,$atendio,$fecha,$cliente,$lugar,$direccion,$pedidcaracter,$conexion){
+    $query="UPDATE prepedidos SET referencia='$referencia', fecha='$fecha',atendio='$atendio',cliente='$cliente',lugar='$lugar',direccion='$direccion',caracter='$pedidcaracter' WHERE referencia='$referencia'";
+    if(mysqli_query($conexion,$query)){
+		return true;
+	}else{
+		return false;
+	}
+	cerrar($conexion);
+}
+
 
 //-------------------------------------------------------------------------------------------------------------------
 //funcion para registra cambios
@@ -782,3 +898,19 @@ function historialpre($usuario,$referencia,$codigo,$conexion){
         return false;
     }
 }
+
+//funcion para registra cambios
+function histcambiospre($usuario,$realizo,$id_pre,$codigo,$conexion){
+    ini_set('date.timezone','America/Mexico_City');
+    $fecha = date('Y').'/'.date('m').'/'.date('d').' '.date('H:i:s'); //fecha de realización
+    $query = "INSERT INTO historial VALUES (0,'$usuario','$realizo', 'ID REGISTRO:' '$id_pre' ' ARTICULO:' ' $codigo','$fecha')";
+    if(mysqli_query($conexion,$query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
+
+
