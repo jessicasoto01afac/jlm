@@ -133,6 +133,7 @@ include ("../controller/conexion.php");
                                             <option value="TALLER DE CORTE">TALLER DE CORTE</option>
                                             <option value="TALLER DE MEDICIÓN">TALLER DE MEDICIÓN</option>
                                             <option value="VENTAS">VENTAS</option>
+                                            <option value="AGENTE">AGENTE</option>
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
