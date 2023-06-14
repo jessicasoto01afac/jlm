@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
-<?php include ("../../controller/conexion.php");
+<?php include ("../controller/conexion.php");
 
     
 $sql = "SELECT codigo_clie,nombre FROM clientes WHERE estado = 0";
@@ -11,6 +10,8 @@ $person = mysqli_query($conexion,$sql);
 
 
 ?>
+<html lang="es">
+
 
 <head>
     <!-- Required meta tags -->
@@ -25,24 +26,25 @@ $person = mysqli_query($conexion,$sql);
 
     <title>JLM|Info de prepedido</title>
 
-    <!-- vendor css -->
-    <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+     <!-- vendor css -->
+     <link href="../template/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../template/lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="../template/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
     <link href="../template/lib/jquery-switchbutton/jquery.switchButton.css" rel="stylesheet">
     <link href="../template/lib/highlightjs/github.css" rel="stylesheet">
     <link href="../template/lib/datatables/jquery.dataTables.css" rel="stylesheet">
     <link href="../template/lib/select2/css/select2.min.css" rel="stylesheet">
-
     <link href="../template/css/diseno.css" rel="stylesheet">
+
+    <script src="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css"></script>
+    <script src="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"></script>
+
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="../template/css/bracket.css">
+
 </head>
-<style>
 
-
-</style>
-
+<body class="collapsed-menu">
 
 
     <?php
@@ -139,8 +141,8 @@ include('header.php');
                             <div class="row no-gutters">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="form-control-label" style="font-size:14px">NUMERO DE PREPEDIDO: <span
-                                                class="tx-danger" style="font-size:14px">*</span></label>
+                                        <label class="form-control-label" style="font-size:14px">NUMERO DE PREPEDIDO:
+                                            <span class="tx-danger" style="font-size:14px">*</span></label>
                                         <h3><label for="" id="idinped" readonly name="idinped"
                                                 style="color:#14128F"></label>
                                         </h3>
@@ -185,7 +187,7 @@ include('header.php');
                                         </select>
                                     </div>
                                 </div><!-- col-8 -->
-                               
+
                                 <div class="col-md-4 mg-t--1 mg-md-t-0">
                                     <div class="form-group mg-md-l--1">
                                         <label class="form-control-label" style="font-size:14px">LUGAR: <span
@@ -214,7 +216,7 @@ include('header.php');
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
-                            
+
                             </div><!-- row -->
                             <div class="form-layout-footer bd pd-20 bd-t-0">
                                 <div class="btn-group" role="group" aria-label="Basic example">
@@ -318,7 +320,7 @@ include('header.php');
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
 
     <?php include('modal/mprepedido.php');?>
-    <script>
+    <script type="text/javascript">
     openprepedidos();
     </script>
 

@@ -1,6 +1,6 @@
 "use strict";
 
-$(document).ready(function () {
+function wizzar() {
   'use strict';
 
   $('#wizard5').steps({
@@ -69,10 +69,10 @@ $(document).ready(function () {
       }
     }
   });
-});
-$(document).ready(function () {
   $('#busccodipreped').load('./select/buscarartpre.php');
-});
+}
+
+$(document).ready(function () {});
 
 function openprepedidos() {
   var currentdate = new Date();
@@ -479,7 +479,7 @@ function infpredido(pruebas) {
               }
             }
 
-            html += '</tbody></table></div>';
+            html += '</div></tbody></table></div></div>';
             $("#listpedidinf").html(html);
             $('#lispedidoinf').DataTable({
               pageLength: 100,
@@ -538,7 +538,7 @@ function infpredido(pruebas) {
               }
             }
 
-            html += '</tbody></table></div>';
+            html += '</div></tbody></table></div></div>';
             $("#listpedidinf").html(html);
             $('#lispedidoinf').DataTable({
               pageLength: 100,
@@ -593,7 +593,7 @@ function updateprepedido2() {
       }
     }
 
-    html += '</tbody></table></div>';
+    html += '</div></tbody></table></div></div>';
     $("#listpedidinf").html(html);
     'use strict';
 

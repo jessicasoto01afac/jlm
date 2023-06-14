@@ -269,6 +269,7 @@
     <?php include('modal/mprepedido.php');?>
     <script src="../template/js/bracket.js"></script>
     <script>
+        wizzar();
     </script>
 </body>
 

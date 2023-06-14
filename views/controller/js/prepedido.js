@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function wizzar() {
     'use strict';
     $('#wizard5').steps({
         headerTag: 'h3',
@@ -67,10 +67,11 @@ $(document).ready(function() {
             }
         }
     });
-
-});
-$(document).ready(function() {
     $('#busccodipreped').load('./select/buscarartpre.php');
+}
+
+$(document).ready(function() {
+
 });
 
 function openprepedidos() {
@@ -489,7 +490,7 @@ function infpredido(pruebas) {
                                 html += "<tr><td style='display:none'>" + obj.data[U].id_pre + "</td><td>" + x + "</td><td>" + obj.data[U].codigo + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observa + "</td><td class=''>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarpreartinf(" + id_kardex + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetprepedinf'>Editar</a><a href='' onclick='delartpedinf(" + id_kardex + ");'  class='nav-link' data-toggle='modal' data-target='#modal-delearpredinf'>Eliminar</a>" + "</td></tr>";
                             }
                         }
-                        html += '</tbody></table></div>';
+                        html += '</div></tbody></table></div></div>';
                         $("#listpedidinf").html(html);
                         $('#lispedidoinf').DataTable({
                             pageLength: 100,
@@ -545,7 +546,7 @@ function infpredido(pruebas) {
                                 html += "<tr><td style='display:none'>" + obj.data[U].id_kax + "</td><td>" + x + "</td><td>" + obj.data[U].codigo_1 + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad_real + "</td><td>" + obj.data[U].salida + "</td><td>" + obj.data[U].observa + "</td><td>" + status + "</td></tr>";
                             }
                         }
-                        html += '</tbody></table></div>';
+                        html += '</div></tbody></table></div></div>';
                         $("#listpedidinf").html(html);
                         $('#lispedidoinf').DataTable({
                             pageLength: 100,
@@ -599,7 +600,7 @@ function updateprepedido2() {
                 html += "<tr><td>" + x + "</td><td>" + obj.data[U].codigo + "</td><td>" + obj.data[U].artdescrip + "</td><td>" + obj.data[U].cantidad + "</td><td>" + obj.data[U].observa + "</td><td class='dropdown hidden-xs-down'>" + "<a data-toggle='dropdown' class='btn pd-y-3 tx-gray-500 hover-info'><i class='icon ion-more'></i></a><div class='dropdown-menu dropdown-menu-right pd-10'><nav class='nav nav-style-1 flex-column'><a onclick='editarpreartinf(" + id_prepedidd + ");' class='nav-link' data-toggle='modal' data-target='#modal-edithdetprepedinf'>Editar</a><a class='nav-link' onclick='delartpedinf(" + id_prepedidd + ");' data-toggle='modal' data-target='#modal-delearpredinf'>Eliminar</a>" + "</td></tr>";
             }
         }
-        html += '</tbody></table></div>';
+        html += '</div></tbody></table></div></div>';
         $("#listpedidinf").html(html);
         'use strict';
         $('#prepedadd').DataTable({
